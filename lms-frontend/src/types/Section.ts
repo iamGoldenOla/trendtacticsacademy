@@ -1,0 +1,1 @@
+export type Section = 'dashboard' | 'profile' | 'courses' | 'todo' | 'planner' | 'calendar' | 'signout' | 'certificates';

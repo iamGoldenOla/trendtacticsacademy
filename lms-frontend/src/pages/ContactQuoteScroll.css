@@ -1,0 +1,10 @@
+@keyframes scroll-quote {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-scroll-quote {
+  display: inline-block;
+  animation: scroll-quote 90s linear infinite;
+  will-change: transform;
+} 

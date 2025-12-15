@@ -1,0 +1,63 @@
+/* Custom App Styles */
+.App {
+  text-align: left;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid #06b6d4;
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #06b6d4;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0891b2;
+}
+
+.lesson-3d-card {
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10), 0 1.5px 4px rgba(0,0,0,0.08);
+  transition: transform 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.2s;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  will-change: transform;
+  color: #fff;
+}
+.lesson-3d-card.duration {
+  background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+}
+.lesson-3d-card.progress {
+  background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+  color: #333;
+}
+.lesson-3d-card.lesson {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+.lesson-3d-card.status {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  color: #333;
+}
+.lesson-3d-card:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.16), 0 3px 8px rgba(0,0,0,0.12);
+  filter: brightness(1.08);
+}
