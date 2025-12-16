@@ -35,18 +35,18 @@ const Header = ({ user, onLogin, onSignup, onLogout }) => {
         <header className="bg-white shadow-sm border-b border-gray-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
-                    {/* Logo */}
+                    {/* Logo - Reduced size for mobile */}
                     <div className="flex items-center">
                         <div className="flex-shrink-0 flex items-center">
-                            {/* Graduation Cap Badge Icon */}
-                            <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-brand-navy shadow-md mr-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
+                            {/* Graduation Cap Badge Icon - Even smaller on mobile for better responsiveness */}
+                            <span className="inline-flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-brand-navy shadow-md mr-1 sm:mr-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6" aria-hidden="true">
                                     <path d="M2 7.5L12 3l10 4.5-10 4.5L2 7.5z" fill="white"/>
                                     <path d="M22 10.5v3c0 2.5-4.48 4.5-10 4.5S2 16 2 13.5v-3" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
                                     <path d="M6 17.5v2c0 .28.22.5.5.5h11a.5.5 0 0 0 .5-.5v-2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
                                 </svg>
                             </span>
-                            <Link to="/" className="text-2xl font-heading font-bold text-brand-navy hover:text-brand-cyan transition-colors">
+                            <Link to="/" className="text-sm sm:text-lg md:text-2xl font-heading font-bold text-brand-navy hover:text-brand-cyan transition-colors">
                                 Trendtactics Academy
                             </Link>
                         </div>
@@ -115,7 +115,6 @@ const Header = ({ user, onLogin, onSignup, onLogout }) => {
                         >
                             Digital Services
                         </a>
-                        {/* Sign In and Get Started buttons remain on the right */}
                     </nav>
 
                     {/* User Menu */}
@@ -129,7 +128,7 @@ const Header = ({ user, onLogin, onSignup, onLogout }) => {
                                     }} 
                                     className="flex items-center space-x-2 text-gray-700 hover:text-brand-navy focus:outline-none"
                                 >
-                                    <div className="w-9 h-9 bg-brand-cyan rounded-full flex items-center justify-center text-white font-bold shadow-md border-2 border-white">
+                                    <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-brand-cyan rounded-full flex items-center justify-center text-white font-bold shadow-md border-2 border-white text-xs sm:text-sm">
                                         {user.name.charAt(0).toUpperCase()}
                                     </div>
                                     <span className="hidden md:block text-sm font-medium">{user.name}</span>
@@ -164,19 +163,14 @@ const Header = ({ user, onLogin, onSignup, onLogout }) => {
                                 )}
                             </div>
                         ) : (
-                            <div className="flex items-center space-x-4">
+                            <div className="hidden md:flex items-center space-x-4">
                                 <button 
                                     onClick={onLogin} 
                                     className="text-gray-700 hover:text-brand-navy px-3 py-2 text-sm font-medium transition-colors duration-200"
                                 >
                                     Sign In
                                 </button>
-                                <button 
-                                    onClick={onSignup} 
-                                    className="btn-secondary"
-                                >
-                                    Get Started
-                                </button>
+                                {/* Get Started button moved to mobile menu only for better responsiveness */}
                             </div>
                         )}
 
@@ -255,7 +249,7 @@ const Header = ({ user, onLogin, onSignup, onLogout }) => {
                                 </>
                             )}
                             {!user && (
-                                <>
+                                <div className="pt-4 border-t border-gray-200">
                                     <button 
                                         onClick={() => {
                                             onLogin?.();
@@ -270,11 +264,11 @@ const Header = ({ user, onLogin, onSignup, onLogout }) => {
                                             onSignup?.();
                                             setIsMobileMenuOpen(false);
                                         }} 
-                                        className="btn-secondary block w-full text-center"
+                                        className="btn-secondary block w-full text-center mt-2"
                                     >
                                         Get Started
                                     </button>
-                                </>
+                                </div>
                             )}
                         </div>
                     </div>
