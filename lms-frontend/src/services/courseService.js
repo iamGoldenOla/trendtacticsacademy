@@ -7,6 +7,9 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.REACT_APP_SUPABASE_URL || 'https://your-project.supabase.co';
 const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY || 'your-anon-key';
 
+console.log('Supabase URL:', supabaseUrl);
+console.log('Supabase Anon Key exists:', !!supabaseAnonKey);
+
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 class CourseService {
@@ -19,13 +22,21 @@ class CourseService {
   // Get all courses (for student browsing)
   async getAllCourses() {
     try {
+      console.log('Fetching courses from Supabase...');
       const { data, error } = await supabase
         .from('courses')
         .select('*')
         .eq('is_published', true)
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      console.log('Supabase response:', { data, error });
+
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
+      
+      console.log('Courses fetched successfully:', data);
       return data;
     } catch (error) {
       console.error('Error fetching courses:', error);

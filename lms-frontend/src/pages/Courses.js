@@ -19,21 +19,68 @@ const Courses = () => {
         { value: 'rating', label: 'Highest Rated' }
     ];
 
+    // Mock data as fallback
+    const mockCourses = [
+        {
+            id: '1',
+            title: 'Complete Web Development Masterclass',
+            description: 'Learn full-stack web development with HTML, CSS, JavaScript, React, Node.js, and more.',
+            level: 'beginner',
+            duration: '8 weeks',
+            price: 99,
+            thumbnail_url: 'https://placehold.co/400x200/2563eb/white?text=Web+Development',
+            created_at: '2023-01-15T00:00:00Z'
+        },
+        {
+            id: '2',
+            title: 'Mobile App Development with React Native',
+            description: 'Build cross-platform mobile apps for iOS and Android using React Native.',
+            level: 'intermediate',
+            duration: '6 weeks',
+            price: 129,
+            thumbnail_url: 'https://placehold.co/400x200/2563eb/white?text=App+Development',
+            created_at: '2023-02-20T00:00:00Z'
+        },
+        {
+            id: '3',
+            title: 'Digital Marketing Complete Course',
+            description: 'Master digital marketing strategies including SEO, social media, email marketing, and more.',
+            level: 'beginner',
+            duration: '5 weeks',
+            price: 79,
+            thumbnail_url: 'https://placehold.co/400x200/2563eb/white?text=Digital+Marketing',
+            created_at: '2023-03-10T00:00:00Z'
+        }
+    ];
+
     // Fetch courses from API
     useEffect(() => {
         const fetchCourses = async () => {
             try {
                 setIsLoading(true);
                 setError(null);
+                
+                // Try to fetch from Supabase
                 const data = await courseService.getAllCourses();
-                setCourses(data);
+                
+                // If we get data, use it
+                if (data && data.length > 0) {
+                    setCourses(data);
+                } else {
+                    // Fallback to mock data if no courses from API
+                    console.warn('No courses from API, using mock data');
+                    setCourses(mockCourses);
+                }
             } catch (err) {
                 console.error('Error fetching courses:', err);
-                setError('Failed to load courses. Please try again later.');
+                // Fallback to mock data on error
+                setCourses(mockCourses);
+                setError('Failed to load courses. Showing sample data.');
             } finally {
                 setIsLoading(false);
             }
         };
+        
         fetchCourses();
     }, []);
 
@@ -128,20 +175,17 @@ const Courses = () => {
               <p className="mt-4 text-gray-600">Loading courses...</p>
             </div>)}
 
-          {/* Error State */}
-          {error && !isLoading && (<div className="text-center py-12">
-              <div className="text-6xl mb-4">⚠️</div>
+          {/* Error State with fallback to mock data */}
+          {error && !isLoading && (<div className="text-center py-12 bg-yellow-50 rounded-lg p-6">
+              <div className="text-2xl mb-4">⚠️</div>
               <h3 className="text-xl font-heading font-semibold text-gray-900 mb-2">
-                Error Loading Courses
+                {error}
               </h3>
-              <p className="text-gray-600 mb-6">{error}</p>
-              <button onClick={() => window.location.reload()} className="btn-secondary">
-                Try Again
-              </button>
+              <p className="text-gray-600 mb-6">Displaying sample courses while we resolve the issue.</p>
             </div>)}
 
           {/* Courses Grid */}
-          {!isLoading && !error && filteredCourses.length > 0 ? (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {!isLoading && filteredCourses.length > 0 ? (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredCourses.map((course) => {
                 return (<div key={course.id} className="stats-card bg-white rounded-lg shadow-md p-6 flex flex-col hover:shadow-xl transition-shadow border border-gray-100">
                   <div className="relative mb-4">
