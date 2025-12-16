@@ -3,17 +3,15 @@ name: Deploy Frontend to Academy Subdomain
 on:
   push:
     branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     env:
       REACT_APP_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       REACT_APP_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-    
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -41,5 +39,5 @@ jobs:
         server: ${{ secrets.FTP_HOST }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /public_html/academy/
+        server-dir: /public_html/academy.trendtacticsdigital.com/
         local-dir: lms-frontend/build/
