@@ -19,7 +19,7 @@ const Courses = () => {
         { value: 'rating', label: 'Highest Rated' }
     ];
 
-    // Mock data as fallback
+    // Mock data as fallback with modules and lessons
     const mockCourses = [
         {
             id: '1',
@@ -29,7 +29,31 @@ const Courses = () => {
             duration: '8 weeks',
             price: 99,
             thumbnail_url: 'https://placehold.co/400x200/2563eb/white?text=Web+Development',
-            created_at: '2023-01-15T00:00:00Z'
+            created_at: '2023-01-15T00:00:00Z',
+            modules: [
+                {
+                    id: 'm1',
+                    title: 'HTML & CSS Basics',
+                    description: 'Learn the fundamentals of web development',
+                    ordering: 1,
+                    duration: '2 weeks',
+                    lessons: [
+                        { id: 'l1', title: 'Introduction to HTML', ordering: 1, duration: '30 mins' },
+                        { id: 'l2', title: 'CSS Styling', ordering: 2, duration: '45 mins' }
+                    ]
+                },
+                {
+                    id: 'm2',
+                    title: 'JavaScript Fundamentals',
+                    description: 'Master JavaScript for interactive websites',
+                    ordering: 2,
+                    duration: '3 weeks',
+                    lessons: [
+                        { id: 'l3', title: 'Variables and Data Types', ordering: 1, duration: '40 mins' },
+                        { id: 'l4', title: 'Functions and Scope', ordering: 2, duration: '50 mins' }
+                    ]
+                }
+            ]
         },
         {
             id: '2',
@@ -39,7 +63,20 @@ const Courses = () => {
             duration: '6 weeks',
             price: 129,
             thumbnail_url: 'https://placehold.co/400x200/2563eb/white?text=App+Development',
-            created_at: '2023-02-20T00:00:00Z'
+            created_at: '2023-02-20T00:00:00Z',
+            modules: [
+                {
+                    id: 'm3',
+                    title: 'React Native Basics',
+                    description: 'Introduction to React Native framework',
+                    ordering: 1,
+                    duration: '3 weeks',
+                    lessons: [
+                        { id: 'l5', title: 'Setting up Environment', ordering: 1, duration: '35 mins' },
+                        { id: 'l6', title: 'Components and Props', ordering: 2, duration: '45 mins' }
+                    ]
+                }
+            ]
         },
         {
             id: '3',
@@ -49,7 +86,20 @@ const Courses = () => {
             duration: '5 weeks',
             price: 79,
             thumbnail_url: 'https://placehold.co/400x200/2563eb/white?text=Digital+Marketing',
-            created_at: '2023-03-10T00:00:00Z'
+            created_at: '2023-03-10T00:00:00Z',
+            modules: [
+                {
+                    id: 'm4',
+                    title: 'SEO Fundamentals',
+                    description: 'Learn search engine optimization basics',
+                    ordering: 1,
+                    duration: '2 weeks',
+                    lessons: [
+                        { id: 'l7', title: 'Keyword Research', ordering: 1, duration: '40 mins' },
+                        { id: 'l8', title: 'On-page Optimization', ordering: 2, duration: '50 mins' }
+                    ]
+                }
+            ]
         }
     ];
 
@@ -75,7 +125,7 @@ const Courses = () => {
                 console.error('Error fetching courses:', err);
                 // Fallback to mock data on error
                 setCourses(mockCourses);
-                setError('Failed to load courses. Showing sample data.');
+                setError('Failed to load courses. Showing sample data. Please check your internet connection or try again later.');
             } finally {
                 setIsLoading(false);
             }
@@ -176,7 +226,7 @@ const Courses = () => {
             </div>)}
 
           {/* Error State with fallback to mock data */}
-          {error && !isLoading && (<div className="text-center py-12 bg-yellow-50 rounded-lg p-6">
+          {error && !isLoading && (<div className="text-center py-8 bg-yellow-50 rounded-lg p-6 mb-8">
               <div className="text-2xl mb-4">⚠️</div>
               <h3 className="text-xl font-heading font-semibold text-gray-900 mb-2">
                 {error}

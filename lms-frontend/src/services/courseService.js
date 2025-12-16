@@ -7,9 +7,6 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.REACT_APP_SUPABASE_URL || 'https://your-project.supabase.co';
 const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY || 'your-anon-key';
 
-console.log('Supabase URL:', supabaseUrl);
-console.log('Supabase Anon Key exists:', !!supabaseAnonKey);
-
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 class CourseService {
@@ -23,21 +20,56 @@ class CourseService {
   async getAllCourses() {
     try {
       console.log('Fetching courses from Supabase...');
+      
       const { data, error } = await supabase
         .from('courses')
-        .select('*')
+        .select(`
+          *,
+          modules (
+            id,
+            title,
+            description,
+            ordering,
+            duration,
+            lessons (
+              id,
+              title,
+              ordering,
+              duration
+            )
+          )
+        `)
         .eq('is_published', true)
         .order('created_at', { ascending: false });
 
-      console.log('Supabase response:', { data, error });
-
       if (error) {
-        console.error('Supabase error:', error);
+        console.error('Supabase query error:', error);
         throw error;
       }
       
-      console.log('Courses fetched successfully:', data);
-      return data;
+      // Process the data to ensure proper structure
+      if (data && Array.isArray(data)) {
+        const processedData = data.map(course => {
+          // Ensure modules exist and are sorted
+          if (course.modules && Array.isArray(course.modules)) {
+            course.modules.sort((a, b) => (a.ordering || 0) - (b.ordering || 0));
+            
+            // Ensure lessons within each module are sorted
+            course.modules.forEach(module => {
+              if (module.lessons && Array.isArray(module.lessons)) {
+                module.lessons.sort((a, b) => (a.ordering || 0) - (b.ordering || 0));
+              }
+            });
+          }
+          return course;
+        });
+        
+        console.log('Successfully fetched courses:', processedData.length);
+        return processedData;
+      }
+      
+      console.log('No courses found');
+      return [];
     } catch (error) {
       console.error('Error fetching courses:', error);
       throw error;
@@ -47,54 +79,62 @@ class CourseService {
   // Get course by ID (for course detail page)
   async getCourseById(courseId) {
     try {
+      console.log('Fetching course by ID:', courseId);
+      
+      // Validate input
+      if (!courseId) {
+        throw new Error('Course ID is required');
+      }
+      
       // First, get the course data
       const { data: courseData, error: courseError } = await supabase
         .from('courses')
-        .select('*')
+        .select(`
+          *,
+          modules (
+            id,
+            title,
+            description,
+            ordering,
+            duration,
+            lessons (
+              id,
+              title,
+              ordering,
+              duration
+            )
+          )
+        `)
         .eq('id', courseId)
         .eq('is_published', true)
         .single();
 
-      if (courseError) throw courseError;
-      if (!courseData) throw new Error('Course not found');
-
-      // Then, get modules for this course
-      const { data: modulesData, error: modulesError } = await supabase
-        .from('modules')
-        .select('*')
-        .eq('course_id', courseId)
-        .order('ordering', { ascending: true });
-
-      if (modulesError) {
-        console.warn('Error fetching modules:', modulesError);
-        // Continue without modules if there's an error
-        courseData.modules = [];
-      } else {
-        // For each module, get its lessons
-        const modulesWithLessons = [];
-        for (const module of modulesData || []) {
-          const { data: lessonsData, error: lessonsError } = await supabase
-            .from('lessons')
-            .select('id, title, ordering, duration')
-            .eq('module_id', module.id)
-            .order('ordering', { ascending: true });
-            
-          if (lessonsError) {
-            console.warn(`Error fetching lessons for module ${module.id}:`, lessonsError);
-            module.lessons = [];
-          } else {
-            module.lessons = lessonsData || [];
-          }
-          
-          modulesWithLessons.push(module);
-        }
-        
-        courseData.modules = modulesWithLessons;
+      if (courseError) {
+        console.error('Course fetch error for ID', courseId, ':', courseError);
+        throw courseError;
+      }
+      
+      if (!courseData) {
+        console.warn('Course not found for ID:', courseId);
+        throw new Error('Course not found');
       }
 
+      // Ensure modules are sorted by ordering
+      if (courseData.modules && Array.isArray(courseData.modules)) {
+        courseData.modules.sort((a, b) => (a.ordering || 0) - (b.ordering || 0));
+        
+        // Ensure lessons within each module are sorted by ordering
+        courseData.modules.forEach(module => {
+          if (module.lessons && Array.isArray(module.lessons)) {
+            module.lessons.sort((a, b) => (a.ordering || 0) - (b.ordering || 0));
+          }
+        });
+      }
+
+      console.log('Successfully fetched course:', courseData.title);
       return courseData;
     } catch (error) {
-      console.error('Error fetching course:', error);
+      console.error('Error fetching course by ID', courseId, ':', error);
       throw error;
     }
   }
@@ -191,7 +231,7 @@ class CourseService {
         course_id: courseId,
         title: module.title,
         description: module.description,
-        order: index + 1,
+        ordering: index + 1,
         duration: module.duration || '1 week',
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
@@ -217,7 +257,7 @@ class CourseService {
         module_id: moduleId,
         title: lesson.title,
         content: lesson.content,
-        order: index + 1,
+        ordering: index + 1,
         duration: lesson.duration || '1 hour',
         video_url: lesson.video_url || null,
         resources: lesson.resources || [],
@@ -249,7 +289,7 @@ class CourseService {
         passing_score: assessment.passing_score || 70,
         attempts_allowed: assessment.attempts_allowed || 3,
         time_limit: assessment.time_limit || null,
-        order: index + 1,
+        ordering: index + 1,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
       }));
