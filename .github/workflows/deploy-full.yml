@@ -1,0 +1,74 @@
+name: Full Deployment to Academy Subdomain
+
+on:
+  push:
+    branches: [ main, master ]
+  release:
+    types: [ published ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    env:
+      REACT_APP_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      REACT_APP_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+      REACT_APP_API_URL: ${{ secrets.API_URL }}
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Frontend Deployment
+    - name: Setup Node.js for Frontend
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: 'lms-frontend/package-lock.json'
+
+    - name: Install frontend dependencies
+      working-directory: lms-frontend
+      run: npm ci
+
+    - name: Build frontend
+      working-directory: lms-frontend
+      run: npm run build
+      env:
+        CI: false
+
+    # Backend Deployment
+    - name: Setup Node.js for Backend
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: 'lms-backend/package-lock.json'
+
+    - name: Install backend dependencies
+      working-directory: lms-backend
+      run: npm ci
+
+    - name: Run backend tests
+      working-directory: lms-backend
+      run: npm test
+
+    # Deploy Frontend via FTP
+    - name: Deploy Frontend via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: /public_html/academy/
+        local-dir: lms-frontend/build/
+
+    # Deploy Backend via FTP
+    - name: Deploy Backend via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: /public_html/api/
+        local-dir: lms-backend/
