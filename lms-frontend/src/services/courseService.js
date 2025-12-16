@@ -36,29 +36,52 @@ class CourseService {
   // Get course by ID (for course detail page)
   async getCourseById(courseId) {
     try {
-      const { data, error } = await supabase
+      // First, get the course data
+      const { data: courseData, error: courseError } = await supabase
         .from('courses')
-        .select(`
-          *,
-          modules (
-            id,
-            title,
-            description,
-            order,
-            lessons (
-              id,
-              title,
-              order,
-              duration
-            )
-          )
-        `)
+        .select('*')
         .eq('id', courseId)
         .eq('is_published', true)
         .single();
 
-      if (error) throw error;
-      return data;
+      if (courseError) throw courseError;
+      if (!courseData) throw new Error('Course not found');
+
+      // Then, get modules for this course
+      const { data: modulesData, error: modulesError } = await supabase
+        .from('modules')
+        .select('*')
+        .eq('course_id', courseId)
+        .order('ordering', { ascending: true });
+
+      if (modulesError) {
+        console.warn('Error fetching modules:', modulesError);
+        // Continue without modules if there's an error
+        courseData.modules = [];
+      } else {
+        // For each module, get its lessons
+        const modulesWithLessons = [];
+        for (const module of modulesData || []) {
+          const { data: lessonsData, error: lessonsError } = await supabase
+            .from('lessons')
+            .select('id, title, ordering, duration')
+            .eq('module_id', module.id)
+            .order('ordering', { ascending: true });
+            
+          if (lessonsError) {
+            console.warn(`Error fetching lessons for module ${module.id}:`, lessonsError);
+            module.lessons = [];
+          } else {
+            module.lessons = lessonsData || [];
+          }
+          
+          modulesWithLessons.push(module);
+        }
+        
+        courseData.modules = modulesWithLessons;
+      }
+
+      return courseData;
     } catch (error) {
       console.error('Error fetching course:', error);
       throw error;
