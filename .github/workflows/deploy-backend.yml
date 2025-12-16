@@ -1,0 +1,43 @@
+name: Deploy Backend to Academy Subdomain
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'lms-backend/**'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'lms-backend/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: 'lms-backend/package-lock.json'
+
+    - name: Install backend dependencies
+      working-directory: lms-backend
+      run: npm ci
+
+    - name: Run tests
+      working-directory: lms-backend
+      run: npm test
+
+    - name: Deploy via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: /public_html/api/
+        local-dir: lms-backend/
