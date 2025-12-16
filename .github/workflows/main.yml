@@ -1,0 +1,56 @@
+name: Deploy Frontend to Academy Subdomain
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    env:
+      REACT_APP_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      REACT_APP_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+      REACT_APP_API_URL: ${{ secrets.API_URL }}
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: 'lms-frontend/package-lock.json'
+
+    - name: Install frontend dependencies
+      working-directory: lms-frontend
+      run: npm ci
+
+    - name: Build frontend
+      working-directory: lms-frontend
+      run: npm run build
+      env:
+        CI: false
+
+    - name: Deploy to Academy Subdomain
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        source: "lms-frontend/build/*"
+        target: "/var/www/academy.trendtacticsdigital.com"
+        strip_components: 3
+
+    - name: Reload Nginx
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          sudo systemctl reload nginx
