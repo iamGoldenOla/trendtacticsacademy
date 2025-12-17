@@ -67,7 +67,6 @@ const Courses = () => {
                 console.error('Error fetching courses:', err);
                 // Use local data on error
                 setCourses(digitalMarketingCourses);
-                setError('Showing local course data. Online data unavailable.');
             } finally {
                 setIsLoading(false);
             }
@@ -167,14 +166,7 @@ const Courses = () => {
               <p className="mt-4 text-gray-600">Loading courses...</p>
             </div>)}
 
-          {/* Error State with fallback to mock data */}
-          {error && !isLoading && (<div className="text-center py-8 bg-yellow-50 rounded-lg p-6 mb-8">
-              <div className="text-2xl mb-4">⚠️</div>
-              <h3 className="text-xl font-heading font-semibold text-gray-900 mb-2">
-                {error}
-              </h3>
-              <p className="text-gray-600 mb-6">Displaying sample courses while we resolve the issue.</p>
-            </div>)}
+
 
           {/* Courses Grid */}
           {!isLoading && filteredCourses.length > 0 ? (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

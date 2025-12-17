@@ -53,7 +53,7 @@ const Header = ({ user, onLogin, onSignup, onLogout }) => {
                     </div>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden md:flex items-center ml-auto space-x-6">
+                    <nav className="hidden md:flex items-center ml-auto space-x-4">
                         <Link to="/" className="transition-colors duration-200 hover:text-brand-cyan hover:font-bold hover:underline underline-offset-4">Home</Link>
                         <Link to="/about" className="transition-colors duration-200 hover:text-brand-cyan hover:font-bold hover:underline underline-offset-4">About</Link>
                         <Link to="/courses" className="transition-colors duration-200 hover:text-brand-cyan hover:font-bold hover:underline underline-offset-4">Courses</Link>
