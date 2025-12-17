@@ -37,6 +37,9 @@ import CertificatePreview from "./pages/CertificatePreview";
 import NotificationBell from "./components/NotificationBell";
 import TrendyAssistant from "./components/TrendyAssistant";
 import CourseCreator from "./pages/CourseCreator";
+import Cart from "./pages/Cart";
+import AdminDashboard from "./pages/AdminDashboard";
+import AnalyticsDashboard from "./pages/AnalyticsDashboard";
 
 function App() {
     const [user, setUser] = useState(null);
@@ -206,6 +209,9 @@ function App() {
                     <Route path="/conversational-demo" element={<ConversationalDemo />} />
                     <Route path="/super-intelligent-demo" element={<SuperIntelligentTrendyDemo />} />
                     <Route path="/function-calling-demo" element={<FunctionCallingDemo />} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/admin-dashboard" element={<AdminDashboard />} />
+                    <Route path="/analytics" element={<AnalyticsDashboard />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>

@@ -53,7 +53,7 @@ const Header = ({ user, onLogin, onSignup, onLogout }) => {
                     </div>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden md:flex items-center ml-auto space-x-8">
+                    <nav className="hidden md:flex items-center ml-auto space-x-6">
                         <Link to="/" className="transition-colors duration-200 hover:text-brand-cyan hover:font-bold hover:underline underline-offset-4">Home</Link>
                         <Link to="/about" className="transition-colors duration-200 hover:text-brand-cyan hover:font-bold hover:underline underline-offset-4">About</Link>
                         <Link to="/courses" className="transition-colors duration-200 hover:text-brand-cyan hover:font-bold hover:underline underline-offset-4">Courses</Link>
@@ -101,6 +101,22 @@ const Header = ({ user, onLogin, onSignup, onLogout }) => {
                                         >
                                             🤖 AI Tutor
                                         </Link>
+                                        <Link 
+                                            to="/analytics" 
+                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" 
+                                            onClick={() => setIsDashboardMenuOpen(false)}
+                                        >
+                                            Analytics
+                                        </Link>
+                                        {user && user.role === 'admin' && (
+                                            <Link 
+                                                to="/admin-dashboard" 
+                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" 
+                                                onClick={() => setIsDashboardMenuOpen(false)}
+                                            >
+                                                Admin Dashboard
+                                            </Link>
+                                        )}
                                     </div>
                                 )}
                             </div>
@@ -120,22 +136,33 @@ const Header = ({ user, onLogin, onSignup, onLogout }) => {
                     {/* User Menu */}
                     <div className="flex items-center space-x-4">
                         {user ? (
-                            <div className="relative" ref={userMenuRef}>
-                                <button 
-                                    onClick={() => {
-                                        console.log('User menu clicked, current state:', isUserMenuOpen);
-                                        setIsUserMenuOpen(!isUserMenuOpen);
-                                    }} 
-                                    className="flex items-center space-x-2 text-gray-700 hover:text-brand-navy focus:outline-none"
-                                >
-                                    <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-brand-cyan rounded-full flex items-center justify-center text-white font-bold shadow-md border-2 border-white text-xs sm:text-sm">
-                                        {user.name.charAt(0).toUpperCase()}
-                                    </div>
-                                    <span className="hidden md:block text-sm font-medium">{user.name}</span>
-                                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/>
+                            <div className="flex items-center space-x-4">
+                                {/* Cart Icon */}
+                                <Link to="/cart" className="text-gray-700 hover:text-brand-navy relative">
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                     </svg>
-                                </button>
+                                    {/* Badge - in a real implementation, this would show actual cart count */}
+                                    <span className="absolute -top-2 -right-2 bg-brand-cyan text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                                </Link>
+
+                                {/* User Menu */}
+                                <div className="relative" ref={userMenuRef}>
+                                    <button 
+                                        onClick={() => {
+                                            console.log('User menu clicked, current state:', isUserMenuOpen);
+                                            setIsUserMenuOpen(!isUserMenuOpen);
+                                        }} 
+                                        className="flex items-center space-x-2 text-gray-700 hover:text-brand-navy focus:outline-none"
+                                    >
+                                        <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 bg-brand-cyan rounded-full flex items-center justify-center text-white font-bold shadow-md border-2 border-white text-xs sm:text-sm">
+                                            {user.name.charAt(0).toUpperCase()}
+                                        </div>
+                                        <span className="hidden md:block text-sm font-medium">{user.name}</span>
+                                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/>
+                                        </svg>
+                                    </button>
 
                                 {isUserMenuOpen && (
                                     <div 
@@ -162,6 +189,7 @@ const Header = ({ user, onLogin, onSignup, onLogout }) => {
                                     </div>
                                 )}
                             </div>
+                        </div>
                         ) : (
                             <div className="hidden md:flex items-center space-x-4">
                                 <button 
@@ -251,6 +279,22 @@ const Header = ({ user, onLogin, onSignup, onLogout }) => {
                                     >
                                         🤖 AI Tutor
                                     </Link>
+                                    <Link 
+                                        to="/analytics" 
+                                        className="text-gray-700 transition-colors duration-200 hover:text-brand-cyan hover:font-bold hover:underline underline-offset-4 block px-6 py-2 text-base font-medium" 
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        Analytics
+                                    </Link>
+                                    {user && user.role === 'admin' && (
+                                        <Link 
+                                            to="/admin-dashboard" 
+                                            className="text-gray-700 transition-colors duration-200 hover:text-brand-cyan hover:font-bold hover:underline underline-offset-4 block px-6 py-2 text-base font-medium" 
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                        >
+                                            Admin Dashboard
+                                        </Link>
+                                    )}
                                 </>
                             )}
                             {!user && (
