@@ -101,38 +101,7 @@ export const digitalMarketingCourses = [
         createdAt: new Date(),
         category: 'Digital Marketing',
     },
-    // 24. Strategic Digital Marketing for Enterprises
-    {
-        id: 'dm-24',
-        title: 'Strategic Digital Marketing for Enterprises',
-        level: 'advanced',
-        description: 'Enterprise-level strategy, cross-channel marketing, budgeting, and business impact.',
-        topics: [
-            'Enterprise marketing strategy',
-            'Cross-channel campaigns',
-            'Large-scale budgeting',
-            'Aligning with company goals',
-            'Measuring business impact',
-        ],
-        instructor: {
-            _id: 'i24',
-            name: 'Samuel Green',
-            email: 'samuel@example.com',
-            role: 'instructor',
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-        },
-        thumbnail: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=400&h=250&fit=crop',
-        price: 155,
-        duration: '5 weeks',
-        lessons: [
-            { id: 'l24', title: 'Enterprise Digital Marketing', description: 'Enterprise marketing', duration: 50, order: 1, isCompleted: false, content: '' },
-        ],
-        enrolledStudents: 75,
-        rating: 4.9,
-        createdAt: new Date(),
-        category: 'Digital Marketing',
-    },
+
     // AI Automation
     {
         id: 'ai-1',
