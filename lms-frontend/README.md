@@ -176,6 +176,32 @@ npm run build
 - **Vercel**: Connect GitHub repository
 - **AWS S3**: Upload `build` folder
 - **cPanel**: Upload via File Manager
+- **GitHub Actions**: Automatic FTP deployment to academy.trendtacticsdigital.com
+
+### GitHub Actions Deployment
+
+The project includes a GitHub Actions workflow for automatic FTP deployment of the frontend:
+
+1. **Frontend Deployment** (`deploy-frontend.yml`): Deploys frontend only via FTP on every push to main branch
+
+To set up automatic deployment:
+
+1. Configure the required secrets in your GitHub repository:
+   - `FTP_HOST`: Your FTP server address
+   - `FTP_USERNAME`: Your FTP username
+   - `FTP_PASSWORD`: Your FTP password
+   - `SUPABASE_URL`: Your Supabase project URL
+   - `SUPABASE_ANON_KEY`: Your Supabase anon key
+
+2. Ensure your server has the proper directory structure:
+   ```
+   /public_html/
+   └── academy/     # Frontend static files
+   ```
+
+3. Configure your web server to serve the subdomain
+
+See `DEPLOYMENT.md` in the root directory for detailed setup instructions.
 
 ## 🔍 SEO Features
 
