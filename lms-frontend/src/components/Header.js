@@ -166,11 +166,16 @@ const Header = ({ user, onLogin, onSignup, onLogout }) => {
                             <div className="hidden md:flex items-center space-x-4">
                                 <button 
                                     onClick={onLogin} 
-                                    className="text-gray-700 hover:text-brand-navy px-3 py-2 text-sm font-medium transition-colors duration-200"
+                                    className="bg-brand-cyan text-white px-4 py-2 rounded-lg font-medium hover:bg-brand-navy transition-colors duration-200 text-sm"
                                 >
                                     Sign In
                                 </button>
-                                {/* Get Started button moved to mobile menu only for better responsiveness */}
+                                <button 
+                                    onClick={onSignup} 
+                                    className="bg-brand-navy text-white px-4 py-2 rounded-lg font-medium hover:bg-brand-cyan transition-colors duration-200 text-sm"
+                                >
+                                    Get Started
+                                </button>
                             </div>
                         )}
 
