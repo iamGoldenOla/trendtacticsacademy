@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { courseService } from "../services";
+import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
+import cartService from "../services/cartService";
 
 const Courses = () => {
     const [courses, setCourses] = useState([]);
@@ -9,6 +11,7 @@ const Courses = () => {
     const [sortBy, setSortBy] = useState('popular');
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [cartItems, setCartItems] = useState(new Set());
 
     const levels = ['all', 'beginner', 'intermediate', 'advanced'];
     const sortOptions = [
@@ -19,89 +22,19 @@ const Courses = () => {
         { value: 'rating', label: 'Highest Rated' }
     ];
 
-    // Mock data as fallback with modules and lessons
-    const mockCourses = [
-        {
-            id: '1',
-            title: 'Complete Web Development Masterclass',
-            description: 'Learn full-stack web development with HTML, CSS, JavaScript, React, Node.js, and more.',
-            level: 'beginner',
-            duration: '8 weeks',
-            price: 99,
-            thumbnail_url: 'https://placehold.co/400x200/2563eb/white?text=Web+Development',
-            created_at: '2023-01-15T00:00:00Z',
-            modules: [
-                {
-                    id: 'm1',
-                    title: 'HTML & CSS Basics',
-                    description: 'Learn the fundamentals of web development',
-                    ordering: 1,
-                    duration: '2 weeks',
-                    lessons: [
-                        { id: 'l1', title: 'Introduction to HTML', ordering: 1, duration: '30 mins' },
-                        { id: 'l2', title: 'CSS Styling', ordering: 2, duration: '45 mins' }
-                    ]
-                },
-                {
-                    id: 'm2',
-                    title: 'JavaScript Fundamentals',
-                    description: 'Master JavaScript for interactive websites',
-                    ordering: 2,
-                    duration: '3 weeks',
-                    lessons: [
-                        { id: 'l3', title: 'Variables and Data Types', ordering: 1, duration: '40 mins' },
-                        { id: 'l4', title: 'Functions and Scope', ordering: 2, duration: '50 mins' }
-                    ]
-                }
-            ]
-        },
-        {
-            id: '2',
-            title: 'Mobile App Development with React Native',
-            description: 'Build cross-platform mobile apps for iOS and Android using React Native.',
-            level: 'intermediate',
-            duration: '6 weeks',
-            price: 129,
-            thumbnail_url: 'https://placehold.co/400x200/2563eb/white?text=App+Development',
-            created_at: '2023-02-20T00:00:00Z',
-            modules: [
-                {
-                    id: 'm3',
-                    title: 'React Native Basics',
-                    description: 'Introduction to React Native framework',
-                    ordering: 1,
-                    duration: '3 weeks',
-                    lessons: [
-                        { id: 'l5', title: 'Setting up Environment', ordering: 1, duration: '35 mins' },
-                        { id: 'l6', title: 'Components and Props', ordering: 2, duration: '45 mins' }
-                    ]
-                }
-            ]
-        },
-        {
-            id: '3',
-            title: 'Digital Marketing Complete Course',
-            description: 'Master digital marketing strategies including SEO, social media, email marketing, and more.',
-            level: 'beginner',
-            duration: '5 weeks',
-            price: 79,
-            thumbnail_url: 'https://placehold.co/400x200/2563eb/white?text=Digital+Marketing',
-            created_at: '2023-03-10T00:00:00Z',
-            modules: [
-                {
-                    id: 'm4',
-                    title: 'SEO Fundamentals',
-                    description: 'Learn search engine optimization basics',
-                    ordering: 1,
-                    duration: '2 weeks',
-                    lessons: [
-                        { id: 'l7', title: 'Keyword Research', ordering: 1, duration: '40 mins' },
-                        { id: 'l8', title: 'On-page Optimization', ordering: 2, duration: '50 mins' }
-                    ]
-                }
-            ]
+    // Add course to cart
+    const addToCart = async (courseId) => {
+        try {
+            await cartService.addToCart(courseId);
+            // Update local cart state
+            setCartItems(prev => new Set([...prev, courseId]));
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+            alert('Failed to add course to cart. Please try again.');
         }
-    ];
+    };
+
+
 
     // Fetch courses from API
     useEffect(() => {
@@ -110,22 +43,31 @@ const Courses = () => {
                 setIsLoading(true);
                 setError(null);
                 
-                // Try to fetch from Supabase
+                // Use local course data as primary source
+                setCourses(digitalMarketingCourses);
+                
+                // Try to fetch from Supabase as enhancement
                 const data = await courseService.getAllCourses();
                 
-                // If we get data, use it
+                // If we get data from Supabase, merge it with local data
                 if (data && data.length > 0) {
-                    setCourses(data);
-                } else {
-                    // Fallback to mock data if no courses from API
-                    console.warn('No courses from API, using mock data');
-                    setCourses(mockCourses);
+                    // Combine local and remote courses, avoiding duplicates
+                    const combinedCourses = [...digitalMarketingCourses];
+                    const localIds = new Set(digitalMarketingCourses.map(course => course.id));
+                    
+                    data.forEach(remoteCourse => {
+                        if (!localIds.has(remoteCourse.id)) {
+                            combinedCourses.push(remoteCourse);
+                        }
+                    });
+                    
+                    setCourses(combinedCourses);
                 }
             } catch (err) {
                 console.error('Error fetching courses:', err);
-                // Fallback to mock data on error
-                setCourses(mockCourses);
-                setError('Failed to load courses. Showing sample data. Please check your internet connection or try again later.');
+                // Use local data on error
+                setCourses(digitalMarketingCourses);
+                setError('Showing local course data. Online data unavailable.');
             } finally {
                 setIsLoading(false);
             }
@@ -239,7 +181,7 @@ const Courses = () => {
               {filteredCourses.map((course) => {
                 return (<div key={course.id} className="stats-card bg-white rounded-lg shadow-md p-6 flex flex-col hover:shadow-xl transition-shadow border border-gray-100">
                   <div className="relative mb-4">
-                    <img src={course.thumbnail_url || 'https://placehold.co/400x200'} alt={course.title} className="w-full h-48 object-cover rounded-lg"/>
+                    <img src={course.thumbnail || 'https://placehold.co/400x200'} alt={course.title} className="w-full h-48 object-cover rounded-lg"/>
                     <div className="absolute top-3 right-3 bg-brand-cyan text-white px-2 py-1 rounded text-sm font-medium">
                       {course.level}
                     </div>
@@ -259,10 +201,17 @@ const Courses = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-center justify-between">
-                    <Link to={`/course/${course.id}`} className="btn-primary">
-                      View Course
+                  <div className="flex items-center justify-between space-x-2">
+                    <Link to={`/course/${course.id}`} className="btn-secondary flex-1 text-center">
+                      View Details
                     </Link>
+                    <button 
+                      onClick={() => addToCart(course.id)}
+                      disabled={cartItems.has(course.id)}
+                      className={`flex-1 btn-primary ${cartItems.has(course.id) ? 'opacity-75 cursor-not-allowed' : ''}`}
+                    >
+                      {cartItems.has(course.id) ? 'Added to Cart' : 'Add to Cart'}
+                    </button>
                   </div>
                 </div>);
             })}
