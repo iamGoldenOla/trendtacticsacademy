@@ -14,11 +14,26 @@ const CourseDetail = () => {
     const fetchCourse = async () => {
       try {
         setLoading(true);
+        
+        // Validate course ID format before making request
+        if (!courseId) {
+          setError('No course ID provided');
+          return;
+        }
+        
+        // Check if courseId looks like a valid UUID
+        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        if (!uuidRegex.test(courseId)) {
+          setError(`Invalid course ID format: ${courseId}`);
+          console.warn('Invalid course ID detected:', courseId);
+          return;
+        }
+        
         const courseData = await getCourseById(courseId);
         setCourse(courseData);
       } catch (err) {
         console.error('Error fetching course:', err);
-        setError('Failed to load course. Please try again later.');
+        setError(err.message || 'Failed to load course. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -58,6 +73,7 @@ const CourseDetail = () => {
               <li>The course doesn't exist or was removed</li>
               <li>There's a connection issue with our database</li>
               <li>You don't have permission to view this course</li>
+              <li>An invalid course ID was provided</li>
             </ul>
           </div>
           <button 
