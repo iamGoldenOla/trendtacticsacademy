@@ -1,0 +1,42 @@
+name: Add Sample Lessons to Database
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/add-sample-lessons.yml'
+
+jobs:
+  add-lessons:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: lms-backend/package-lock.json
+        
+    - name: Install dependencies
+      run: |
+        cd lms-backend
+        npm ci
+        
+    - name: Add sample lessons
+      run: |
+        cd lms-backend
+        node ../add-sample-lessons.js
+      env:
+        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        
+    - name: Report completion
+      run: |
+        echo "✅ Sample lessons have been added to the database"
+        echo "🔄 Refresh your course page to see the new content"
