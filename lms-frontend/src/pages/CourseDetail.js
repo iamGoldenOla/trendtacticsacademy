@@ -52,9 +52,17 @@ const CourseDetail = () => {
           <div className="text-2xl mb-4 text-red-500">⚠️</div>
           <h3 className="text-xl font-medium text-gray-900 mb-2">Error Loading Course</h3>
           <p className="text-gray-600 mb-4">{error}</p>
+          <div className="mt-4 text-xs text-gray-500 bg-gray-100 p-2 rounded">
+            <p>This usually happens when:</p>
+            <ul className="list-disc text-left mt-1 ml-4 space-y-1">
+              <li>The course doesn't exist or was removed</li>
+              <li>There's a connection issue with our database</li>
+              <li>You don't have permission to view this course</li>
+            </ul>
+          </div>
           <button 
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-brand-cyan text-white rounded-lg font-medium hover:bg-brand-navy"
+            className="mt-4 px-4 py-2 bg-brand-cyan text-white rounded-lg font-medium hover:bg-brand-navy"
           >
             Try Again
           </button>

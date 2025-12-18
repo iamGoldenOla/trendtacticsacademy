@@ -20,6 +20,14 @@ const CourseLearningBoard = ({ course, user, onLessonComplete }) => {
       else if (course.lessons && course.lessons.length > 0) {
         setCurrentLesson(course.lessons[0]);
       }
+      // If no lessons found, set a placeholder lesson
+      else {
+        setCurrentLesson({
+          id: 'placeholder',
+          title: 'No Lessons Available',
+          content: '<h2>No Lessons Available</h2><p>This course does not currently have any lessons. Please check back later as new content is being added regularly.</p>'
+        });
+      }
       setLoading(false);
     }
   }, [course]);

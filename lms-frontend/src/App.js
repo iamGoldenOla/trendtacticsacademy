@@ -39,9 +39,11 @@ import TrendyAssistant from "./components/TrendyAssistant";
 import CourseCreator from "./pages/CourseCreator";
 import CourseDebug from "./pages/CourseDebug";
 import TestInteractiveWorkspace from "./pages/TestInteractiveWorkspace";
+import TestCourseBoard from "./pages/TestCourseBoard";
 import Cart from "./pages/Cart";
 import AdminDashboard from "./pages/AdminDashboard";
 import AnalyticsDashboard from "./pages/AnalyticsDashboard";
+import TestSupabaseConnection from "./test-supabase-connection";
 
 function App() {
     const [user, setUser] = useState(null);
@@ -217,6 +219,7 @@ function App() {
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/admin-dashboard" element={<AdminDashboard />} />
                     <Route path="/analytics" element={<AnalyticsDashboard />} />
+                    <Route path="/test-supabase" element={<div><h1>Check console for Supabase test results</h1></div>} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>
