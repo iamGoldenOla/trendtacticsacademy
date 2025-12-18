@@ -37,6 +37,7 @@ import CertificatePreview from "./pages/CertificatePreview";
 import NotificationBell from "./components/NotificationBell";
 import TrendyAssistant from "./components/TrendyAssistant";
 import CourseCreator from "./pages/CourseCreator";
+import CourseDebug from "./pages/CourseDebug";
 import Cart from "./pages/Cart";
 import AdminDashboard from "./pages/AdminDashboard";
 import AnalyticsDashboard from "./pages/AnalyticsDashboard";
@@ -205,6 +206,7 @@ function App() {
                     <Route path="/certificates" element={<CertificateDashboard />} />
                     <Route path="/certificate-preview" element={<CertificatePreview />} />
                     <Route path="/course-creator" element={<CourseCreator />} />
+                    <Route path="/course-debug/:courseId" element={<CourseDebug />} />
                     <Route path="/conversational-course-test" element={<ConversationalCourseTest />} />
                     <Route path="/conversational-demo" element={<ConversationalDemo />} />
                     <Route path="/super-intelligent-demo" element={<SuperIntelligentTrendyDemo />} />
