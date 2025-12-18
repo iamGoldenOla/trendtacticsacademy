@@ -21,17 +21,45 @@ const CourseCreator = () => {
   const [modules, setModules] = useState([
     { id: 1, title: '', description: '', lessons: [{ id: 1, title: '', content: '' }] }
   ]);
+  const [aiSuggestions, setAiSuggestions] = useState([]);
 
   const handleGenerateContent = async () => {
     if (!courseTopic.trim()) return;
 
     setIsLoading(true);
     try {
+      // Add user message to conversation
+      const userMessage = {
+        id: Date.now(),
+        text: `Generate course content for: ${courseTopic}`,
+        sender: 'user',
+        timestamp: new Date()
+      };
+      
+      setConversation(prev => [...prev, userMessage]);
+      
       const content = await puterService.generateCourseContent(courseTopic, userDetails);
       setGeneratedContent(content);
       setCreationStep('outline');
+      
+      // Add AI response to conversation
+      const aiMessage = {
+        id: Date.now() + 1,
+        text: content,
+        sender: 'ai',
+        timestamp: new Date()
+      };
+      
+      setConversation(prev => [...prev, aiMessage]);
     } catch (error) {
       console.error('Failed to generate content:', error);
+      const errorMessage = {
+        id: Date.now(),
+        text: 'Sorry, I encountered an error generating the course content. Please try again.',
+        sender: 'system',
+        timestamp: new Date()
+      };
+      setConversation(prev => [...prev, errorMessage]);
       setGeneratedContent('Sorry, I encountered an error generating the course content. Please try again.');
     } finally {
       setIsLoading(false);
@@ -43,11 +71,42 @@ const CourseCreator = () => {
 
     setIsLoading(true);
     try {
+      // Add user message to conversation
+      const userMessage = {
+        id: Date.now(),
+        text: `Create detailed outline for: ${courseTopic}`,
+        sender: 'user',
+        timestamp: new Date()
+      };
+      
+      setConversation(prev => [...prev, userMessage]);
+      
       const outline = await puterService.createDetailedCourseOutline(courseTopic, userDetails);
       setGeneratedContent(outline);
       setCreationStep('outline');
+      
+      // Add AI response to conversation
+      const aiMessage = {
+        id: Date.now() + 1,
+        text: outline,
+        sender: 'ai',
+        timestamp: new Date()
+      };
+      
+      setConversation(prev => [...prev, aiMessage]);
+      
+      // Generate AI suggestions for improvement
+      const suggestions = await puterService.generateCourseSuggestions(courseTopic);
+      setAiSuggestions(suggestions);
     } catch (error) {
       console.error('Failed to create detailed outline:', error);
+      const errorMessage = {
+        id: Date.now(),
+        text: 'Sorry, I encountered an error creating the course outline. Please try again.',
+        sender: 'system',
+        timestamp: new Date()
+      };
+      setConversation(prev => [...prev, errorMessage]);
       setGeneratedContent('Sorry, I encountered an error creating the course outline. Please try again.');
     } finally {
       setIsLoading(false);
@@ -190,21 +249,38 @@ Students will be able to access this course when they enroll.`,
 
     setIsLoading(true);
     try {
+      // Add user feedback to conversation
+      const feedbackMessage = {
+        id: Date.now(),
+        text: `Feedback: ${feedback}`,
+        sender: 'user',
+        timestamp: new Date()
+      };
+      
+      setConversation(prev => [...prev, feedbackMessage]);
+      
       // Process feedback with AI
       const updatedContent = await puterService.processFeedback(generatedContent, feedback);
       setGeneratedContent(updatedContent);
       setFeedback(''); // Clear feedback input
       
-      const feedbackMessage = {
-        id: Date.now(),
+      const aiResponse = {
+        id: Date.now() + 1,
         text: '✅ Your feedback has been incorporated into the course content!',
-        sender: 'system',
+        sender: 'ai',
         timestamp: new Date()
       };
       
-      setConversation(prev => [...prev, feedbackMessage]);
+      setConversation(prev => [...prev, aiResponse]);
     } catch (error) {
       console.error('Failed to process feedback:', error);
+      const errorMessage = {
+        id: Date.now(),
+        text: 'Sorry, I had trouble processing your feedback. Please try rephrasing.',
+        sender: 'system',
+        timestamp: new Date()
+      };
+      setConversation(prev => [...prev, errorMessage]);
       setGeneratedContent(generatedContent + '\n\n[Sorry, I had trouble processing your feedback. Please try rephrasing.]');
     } finally {
       setIsLoading(false);
@@ -220,6 +296,8 @@ Students will be able to access this course when they enroll.`,
       return 'App Development';
     } else if (lowerTopic.includes('market') || lowerTopic.includes('social') || lowerTopic.includes('seo') || lowerTopic.includes('ads')) {
       return 'Digital Marketing';
+    } else if (lowerTopic.includes('ai') || lowerTopic.includes('machine learning') || lowerTopic.includes('prompt')) {
+      return 'Artificial Intelligence';
     } else {
       return 'General';
     }
@@ -243,6 +321,7 @@ Students will be able to access this course when they enroll.`,
       expertise: 'Beginner',
       experience: '0-1 years'
     });
+    setAiSuggestions([]);
   };
 
   // Add a new module
@@ -399,9 +478,14 @@ Students will be able to access this course when they enroll.`,
     }
   };
 
+  // Apply AI suggestion
+  const applySuggestion = (suggestion) => {
+    setGeneratedContent(prev => prev + '\n\n' + suggestion);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Create REAL Courses with Trendy</h1>
           <p className="text-lg text-gray-600">
@@ -475,44 +559,44 @@ Students will be able to access this course when they enroll.`,
             <button
               onClick={handleGenerateContent}
               disabled={isLoading || !courseTopic.trim()}
-              className="px-6 py-3 bg-brand-cyan text-white font-medium rounded-lg hover:bg-brand-navy transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-3 bg-brand-cyan text-white font-medium rounded-lg hover:bg-brand-navy transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
             >
-              {isLoading ? 'Generating...' : 'Generate with AI'}
+              {isLoading ? (
+                <>
+                  <span className="mr-2">🔄</span> Generating...
+                </>
+              ) : (
+                <>
+                  <span className="mr-2">🤖</span> Generate with AI
+                </>
+              )}
             </button>
             
             <button
               onClick={handleCreateDetailedOutline}
               disabled={isLoading || !courseTopic.trim()}
-              className="px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
             >
-              Detailed Outline
+              <span className="mr-2">📋</span> Detailed Outline
             </button>
             
             <button
               onClick={handleCreateManualCourse}
               disabled={isLoading || !courseTopic.trim()}
-              className="px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
             >
-              Create Manual Course
+              <span className="mr-2">✍️</span> Create Manual Course
             </button>
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <button
-              onClick={handleCreateDetailedOutline}
-              disabled={isLoading || !courseTopic.trim()}
-              className="px-4 py-2 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Detailed Outline
-            </button>
-            
             {generatedContent && creationStep === 'outline' && (
               <button
                 onClick={handleSaveToSupabase}
                 disabled={isLoading}
-                className="px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
               >
-                Save AI Content to Supabase
+                <span className="mr-2">💾</span> Save AI Content to Supabase
               </button>
             )}
             
@@ -520,9 +604,9 @@ Students will be able to access this course when they enroll.`,
               <button
                 onClick={handlePublishCourse}
                 disabled={isLoading}
-                className="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
               >
-                Publish Course
+                <span className="mr-2">🚀</span> Publish Course
               </button>
             )}
           </div>
@@ -530,30 +614,59 @@ Students will be able to access this course when they enroll.`,
 
         {conversation.length > 0 && (
           <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">System Updates</h2>
-            <div className="space-y-4">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Conversation History</h2>
+            <div className="space-y-4 max-h-96 overflow-y-auto">
               {conversation.map((message) => (
                 <div
                   key={message.id}
                   className={`p-4 rounded-lg ${
                     message.sender === 'system'
                       ? 'bg-green-50 border border-green-200'
-                      : 'bg-gray-50 border border-gray-200'
+                      : message.sender === 'user'
+                        ? 'bg-blue-50 border border-blue-200'
+                        : message.sender === 'ai'
+                          ? 'bg-purple-50 border border-purple-200'
+                          : 'bg-gray-50 border border-gray-200'
                   }`}
                 >
                   <div className="flex justify-between items-start">
-                    <div>
+                    <div className="flex-1">
                       <span className={`font-medium ${
-                        message.sender === 'system' ? 'text-green-700' : 'text-gray-700'
+                        message.sender === 'system' ? 'text-green-700' : 
+                        message.sender === 'user' ? 'text-blue-700' : 
+                        message.sender === 'ai' ? 'text-purple-700' : 'text-gray-700'
                       }`}>
-                        {message.sender === 'system' ? '✅ System' : 'Trendy'}
+                        {message.sender === 'system' ? '✅ System' : 
+                         message.sender === 'user' ? '👤 You' : 
+                         message.sender === 'ai' ? '🤖 Trendy AI' : 'Participant'}
                       </span>
                       <p className="mt-2 text-gray-800 whitespace-pre-wrap">{message.text}</p>
                     </div>
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-gray-500 ml-4">
                       {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {aiSuggestions.length > 0 && (
+          <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+              <span className="mr-2">💡</span> AI Suggestions
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {aiSuggestions.map((suggestion, index) => (
+                <div key={index} className="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                  <p className="text-gray-800 mb-3">{suggestion}</p>
+                  <button
+                    onClick={() => applySuggestion(suggestion)}
+                    className="px-3 py-1 bg-brand-cyan text-white text-sm rounded hover:bg-brand-navy"
+                  >
+                    Apply Suggestion
+                  </button>
                 </div>
               ))}
             </div>
@@ -581,7 +694,7 @@ Students will be able to access this course when they enroll.`,
         )}
 
         {(generatedContent || creationStep === 'topic') && (
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold text-gray-900">Course Content</h2>
               <div className="flex gap-2">
@@ -589,15 +702,15 @@ Students will be able to access this course when they enroll.`,
                   <>
                     <button
                       onClick={() => navigator.clipboard.writeText(generatedContent)}
-                      className="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
+                      className="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors flex items-center"
                     >
-                      Copy
+                      <span className="mr-1">📋</span> Copy
                     </button>
                     <button
                       onClick={() => setGeneratedContent('')}
-                      className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors"
+                      className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors flex items-center"
                     >
-                      Clear
+                      <span className="mr-1">🗑️</span> Clear
                     </button>
                   </>
                 )}
@@ -605,7 +718,7 @@ Students will be able to access this course when they enroll.`,
             </div>
             
             {generatedContent ? (
-              <div className="bg-gray-50 p-4 rounded-lg whitespace-pre-wrap text-gray-800 border border-gray-200 mb-4">
+              <div className="bg-gray-50 p-4 rounded-lg whitespace-pre-wrap text-gray-800 border border-gray-200 mb-4 font-mono text-sm">
                 {generatedContent}
               </div>
             ) : (
@@ -637,9 +750,9 @@ Students will be able to access this course when they enroll.`,
                 <button
                   onClick={handleProvideFeedback}
                   disabled={isLoading || !feedback.trim()}
-                  className="mt-2 px-4 py-2 bg-yellow-600 text-white font-medium rounded-lg hover:bg-yellow-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="mt-2 px-4 py-2 bg-yellow-600 text-white font-medium rounded-lg hover:bg-yellow-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                 >
-                  Improve Content
+                  <span className="mr-2">✨</span> Improve Content
                 </button>
               )}
             </div>
@@ -654,7 +767,7 @@ Students will be able to access this course when they enroll.`,
             
             <div className="space-y-6">
               {modules.map((module, index) => (
-                <div key={module.id} className="border border-gray-200 rounded-lg p-4">
+                <div key={module.id} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
                   <h3 className="font-medium text-gray-900 mb-3">Module {index + 1}</h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -684,7 +797,7 @@ Students will be able to access this course when they enroll.`,
                   <h4 className="font-medium text-gray-900 mb-3">Lessons</h4>
                   <div className="space-y-4">
                     {module.lessons.map((lesson, lessonIndex) => (
-                      <div key={lesson.id} className="border border-gray-100 rounded-lg p-3 bg-gray-50">
+                      <div key={lesson.id} className="border border-gray-100 rounded-lg p-3 bg-white">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Lesson Title</label>
@@ -711,9 +824,9 @@ Students will be able to access this course when they enroll.`,
                     
                     <button
                       onClick={() => addLesson(module.id)}
-                      className="px-3 py-2 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
+                      className="px-3 py-2 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors flex items-center"
                     >
-                      + Add Another Lesson
+                      <span className="mr-1">➕</span> Add Another Lesson
                     </button>
                   </div>
                 </div>
@@ -721,18 +834,26 @@ Students will be able to access this course when they enroll.`,
               
               <button
                 onClick={addModule}
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors flex items-center"
               >
-                + Add Another Module
+                <span className="mr-1">➕</span> Add Another Module
               </button>
               
               <div className="pt-4">
                 <button
                   onClick={handleSaveModules}
                   disabled={isLoading}
-                  className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
                 >
-                  {isLoading ? 'Saving...' : 'Save Modules to Supabase'}
+                  {isLoading ? (
+                    <>
+                      <span className="mr-2">💾</span> Saving...
+                    </>
+                  ) : (
+                    <>
+                      <span className="mr-2">💾</span> Save Modules to Supabase
+                    </>
+                  )}
                 </button>
               </div>
             </div>
@@ -740,7 +861,9 @@ Students will be able to access this course when they enroll.`,
         )}
 
         <div className="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
-          <h3 className="text-lg font-semibold text-blue-900 mb-2">How This Creates REAL Courses</h3>
+          <h3 className="text-lg font-semibold text-blue-900 mb-2 flex items-center">
+            <span className="mr-2">🎓</span> How This Creates REAL Courses
+          </h3>
           <ul className="list-disc pl-5 space-y-2 text-blue-800">
             <li>Generate professional course content with AI assistance</li>
             <li>Save courses directly to your Supabase database</li>
