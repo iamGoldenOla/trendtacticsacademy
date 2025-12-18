@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import puterService from '../services/puterService';
 import courseService from '../services/courseService';
+import RichTextEditor from '../components/RichTextEditor';
 
 const CourseCreator = () => {
   const [courseTopic, setCourseTopic] = useState('');
   const [generatedContent, setGeneratedContent] = useState('');
+  const [manualContent, setManualContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [conversation, setConversation] = useState([]);
   const [userDetails, setUserDetails] = useState({
@@ -16,6 +18,9 @@ const CourseCreator = () => {
   const [courseId, setCourseId] = useState(null);
   const [creationStep, setCreationStep] = useState('topic'); // topic, outline, modules, publish
   const [createdCourse, setCreatedCourse] = useState(null);
+  const [modules, setModules] = useState([
+    { id: 1, title: '', description: '', lessons: [{ id: 1, title: '', content: '' }] }
+  ]);
 
   const handleGenerateContent = async () => {
     if (!courseTopic.trim()) return;
@@ -224,16 +229,174 @@ Students will be able to access this course when they enroll.`,
   const handleClearAll = () => {
     setCourseTopic('');
     setGeneratedContent('');
+    setManualContent('');
     setConversation([]);
     setFeedback('');
     setCourseId(null);
     setCreationStep('topic');
     setCreatedCourse(null);
+    setModules([
+      { id: 1, title: '', description: '', lessons: [{ id: 1, title: '', content: '' }] }
+    ]);
     setUserDetails({
       name: '',
       expertise: 'Beginner',
       experience: '0-1 years'
     });
+  };
+
+  // Add a new module
+  const addModule = () => {
+    const newModule = {
+      id: modules.length + 1,
+      title: '',
+      description: '',
+      lessons: [{ id: 1, title: '', content: '' }]
+    };
+    setModules([...modules, newModule]);
+  };
+
+  // Add a new lesson to a module
+  const addLesson = (moduleId) => {
+    setModules(modules.map(module => {
+      if (module.id === moduleId) {
+        const newLesson = {
+          id: module.lessons.length + 1,
+          title: '',
+          content: ''
+        };
+        return {
+          ...module,
+          lessons: [...module.lessons, newLesson]
+        };
+      }
+      return module;
+    }));
+  };
+
+  // Update module data
+  const updateModule = (moduleId, field, value) => {
+    setModules(modules.map(module => 
+      module.id === moduleId ? { ...module, [field]: value } : module
+    ));
+  };
+
+  // Update lesson data
+  const updateLesson = (moduleId, lessonId, field, value) => {
+    setModules(modules.map(module => {
+      if (module.id === moduleId) {
+        return {
+          ...module,
+          lessons: module.lessons.map(lesson =>
+            lesson.id === lessonId ? { ...lesson, [field]: value } : lesson
+          )
+        };
+      }
+      return module;
+    }));
+  };
+
+  // Handle manual content creation
+  const handleCreateManualCourse = async () => {
+    if (!courseTopic.trim()) return;
+
+    setIsLoading(true);
+    try {
+      // Create course in Supabase
+      const courseData = {
+        title: courseTopic,
+        description: manualContent.substring(0, 200) + '...',
+        category: getCourseCategory(courseTopic),
+        level: userDetails.expertise,
+        duration: '4 weeks',
+        objectives: [],
+        prerequisites: []
+      };
+
+      const createdCourse = await courseService.createCourse(courseData);
+      setCreatedCourse(createdCourse);
+      setCourseId(createdCourse.id);
+      
+      // Add to conversation
+      const saveMessage = {
+        id: Date.now(),
+        text: `✅ Course "${courseTopic}" has been saved to Supabase!
+Course ID: ${createdCourse.id}
+Status: ${createdCourse.status}
+
+Students will be able to access this course when they enroll.`,
+        sender: 'system',
+        timestamp: new Date()
+      };
+      
+      setConversation(prev => [...prev, saveMessage]);
+      setCreationStep('modules');
+      
+    } catch (error) {
+      console.error('Failed to save to Supabase:', error);
+      const errorMessage = {
+        id: Date.now(),
+        text: `❌ Failed to save course to Supabase: ${error.message}\n\nPlease check your Supabase configuration and try again.`,
+        sender: 'system',
+        timestamp: new Date()
+      };
+      setConversation(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Save modules and lessons to Supabase
+  const handleSaveModules = async () => {
+    if (!courseId || modules.length === 0) return;
+
+    setIsLoading(true);
+    try {
+      // Create modules in Supabase
+      for (const module of modules) {
+        const moduleData = {
+          title: module.title,
+          description: module.description,
+          duration: '1 week'
+        };
+        
+        const createdModule = await courseService.createModules(courseId, [moduleData]);
+        
+        // Create lessons for this module
+        if (module.lessons && module.lessons.length > 0) {
+          const lessonsData = module.lessons.map(lesson => ({
+            title: lesson.title,
+            content: lesson.content,
+            duration: '1 hour'
+          }));
+          
+          await courseService.createLessons(createdModule[0].id, lessonsData);
+        }
+      }
+      
+      // Add to conversation
+      const modulesMessage = {
+        id: Date.now(),
+        text: `✅ ${modules.length} modules with their lessons have been created for your course in Supabase!\n\nStudents will progress through these modules sequentially when taking the course.`,
+        sender: 'system',
+        timestamp: new Date()
+      };
+      
+      setConversation(prev => [...prev, modulesMessage]);
+      setCreationStep('publish');
+      
+    } catch (error) {
+      console.error('Failed to create modules:', error);
+      const errorMessage = {
+        id: Date.now(),
+        text: `❌ Failed to create modules in Supabase: ${error.message}\n\nPlease try again.`,
+        sender: 'system',
+        timestamp: new Date()
+      };
+      setConversation(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -297,20 +460,40 @@ Students will be able to access this course when they enroll.`,
           </div>
 
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Create a Course for Students to TAKE</h2>
-          <div className="flex flex-col sm:flex-row gap-4 mb-6">
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Course Topic</label>
             <input
               type="text"
               value={courseTopic}
               onChange={(e) => setCourseTopic(e.target.value)}
-              className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-cyan"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-cyan"
               placeholder="What topic would you like to create a course about?"
             />
+          </div>
+          
+          <div className="flex flex-wrap gap-3 mb-6">
             <button
               onClick={handleGenerateContent}
               disabled={isLoading || !courseTopic.trim()}
               className="px-6 py-3 bg-brand-cyan text-white font-medium rounded-lg hover:bg-brand-navy transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? 'Generating...' : 'Generate Course'}
+              {isLoading ? 'Generating...' : 'Generate with AI'}
+            </button>
+            
+            <button
+              onClick={handleCreateDetailedOutline}
+              disabled={isLoading || !courseTopic.trim()}
+              className="px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Detailed Outline
+            </button>
+            
+            <button
+              onClick={handleCreateManualCourse}
+              disabled={isLoading || !courseTopic.trim()}
+              className="px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Create Manual Course
             </button>
           </div>
 
@@ -329,17 +512,7 @@ Students will be able to access this course when they enroll.`,
                 disabled={isLoading}
                 className="px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Save to Supabase
-              </button>
-            )}
-            
-            {courseId && creationStep === 'modules' && (
-              <button
-                onClick={handleCreateModules}
-                disabled={isLoading}
-                className="px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Create Modules
+                Save AI Content to Supabase
               </button>
             )}
             
@@ -350,16 +523,6 @@ Students will be able to access this course when they enroll.`,
                 className="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Publish Course
-              </button>
-            )}
-            
-            {generatedContent && (
-              <button
-                onClick={handleProvideFeedback}
-                disabled={isLoading || !feedback.trim()}
-                className="px-4 py-2 bg-yellow-600 text-white font-medium rounded-lg hover:bg-yellow-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Improve Content
               </button>
             )}
           </div>
@@ -417,29 +580,46 @@ Students will be able to access this course when they enroll.`,
           </div>
         )}
 
-        {generatedContent && (
+        {(generatedContent || creationStep === 'topic') && (
           <div className="bg-white rounded-xl shadow-lg p-6">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold text-gray-900">Generated Course Content</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Course Content</h2>
               <div className="flex gap-2">
-                <button
-                  onClick={() => navigator.clipboard.writeText(generatedContent)}
-                  className="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
-                >
-                  Copy
-                </button>
-                <button
-                  onClick={() => setGeneratedContent('')}
-                  className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors"
-                >
-                  Clear
-                </button>
+                {generatedContent && (
+                  <>
+                    <button
+                      onClick={() => navigator.clipboard.writeText(generatedContent)}
+                      className="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
+                    >
+                      Copy
+                    </button>
+                    <button
+                      onClick={() => setGeneratedContent('')}
+                      className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors"
+                    >
+                      Clear
+                    </button>
+                  </>
+                )}
               </div>
             </div>
             
-            <div className="bg-gray-50 p-4 rounded-lg whitespace-pre-wrap text-gray-800 border border-gray-200 mb-4">
-              {generatedContent}
-            </div>
+            {generatedContent ? (
+              <div className="bg-gray-50 p-4 rounded-lg whitespace-pre-wrap text-gray-800 border border-gray-200 mb-4">
+                {generatedContent}
+              </div>
+            ) : (
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Course Description
+                </label>
+                <RichTextEditor
+                  value={manualContent}
+                  onChange={setManualContent}
+                  placeholder="Enter a brief description of your course..."
+                />
+              </div>
+            )}
             
             {/* Feedback section */}
             <div className="mt-4">
@@ -453,6 +633,108 @@ Students will be able to access this course when they enroll.`,
                 rows="3"
                 placeholder="e.g., Add more examples, Focus on beginner level, Include hands-on projects..."
               />
+              {generatedContent && (
+                <button
+                  onClick={handleProvideFeedback}
+                  disabled={isLoading || !feedback.trim()}
+                  className="mt-2 px-4 py-2 bg-yellow-600 text-white font-medium rounded-lg hover:bg-yellow-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Improve Content
+                </button>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Manual Course Builder */}
+        {creationStep === 'modules' && (
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Course Structure</h2>
+            <p className="text-gray-600 mb-6">Define the modules and lessons for your course.</p>
+            
+            <div className="space-y-6">
+              {modules.map((module, index) => (
+                <div key={module.id} className="border border-gray-200 rounded-lg p-4">
+                  <h3 className="font-medium text-gray-900 mb-3">Module {index + 1}</h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Module Title</label>
+                      <input
+                        type="text"
+                        value={module.title}
+                        onChange={(e) => updateModule(module.id, 'title', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-cyan"
+                        placeholder="e.g., Introduction to the Topic"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                      <input
+                        type="text"
+                        value={module.description}
+                        onChange={(e) => updateModule(module.id, 'description', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-cyan"
+                        placeholder="Brief description of this module"
+                      />
+                    </div>
+                  </div>
+                  
+                  <h4 className="font-medium text-gray-900 mb-3">Lessons</h4>
+                  <div className="space-y-4">
+                    {module.lessons.map((lesson, lessonIndex) => (
+                      <div key={lesson.id} className="border border-gray-100 rounded-lg p-3 bg-gray-50">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Lesson Title</label>
+                            <input
+                              type="text"
+                              value={lesson.title}
+                              onChange={(e) => updateLesson(module.id, lesson.id, 'title', e.target.value)}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-cyan"
+                              placeholder="e.g., Getting Started"
+                            />
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Lesson Content</label>
+                          <RichTextEditor
+                            value={lesson.content}
+                            onChange={(value) => updateLesson(module.id, lesson.id, 'content', value)}
+                            placeholder="Enter lesson content with rich formatting..."
+                          />
+                        </div>
+                      </div>
+                    ))}
+                    
+                    <button
+                      onClick={() => addLesson(module.id)}
+                      className="px-3 py-2 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
+                    >
+                      + Add Another Lesson
+                    </button>
+                  </div>
+                </div>
+              ))}
+              
+              <button
+                onClick={addModule}
+                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+              >
+                + Add Another Module
+              </button>
+              
+              <div className="pt-4">
+                <button
+                  onClick={handleSaveModules}
+                  disabled={isLoading}
+                  className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isLoading ? 'Saving...' : 'Save Modules to Supabase'}
+                </button>
+              </div>
             </div>
           </div>
         )}
