@@ -25,13 +25,13 @@ class CourseService {
         .from('courses')
         .select(`
           *,
-          modules (
+          modules!fk_modules_course_id (
             id,
             title,
             description,
             ordering,
             duration,
-            lessons (
+            lessons!fk_lessons_module_id (
               id,
               title,
               ordering,
@@ -91,13 +91,13 @@ class CourseService {
         .from('courses')
         .select(`
           *,
-          modules (
+          modules!fk_modules_course_id (
             id,
             title,
             description,
             ordering,
             duration,
-            lessons (
+            lessons!fk_lessons_module_id (
               id,
               title,
               ordering,
