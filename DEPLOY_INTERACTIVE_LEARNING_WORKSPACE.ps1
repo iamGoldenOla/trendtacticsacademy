@@ -1,40 +1,40 @@
 # Deployment Script for Interactive Learning Workspace
 # This script commits and pushes all changes to GitHub
 
-# Navigate to the project directory
-cd "c:\Users\Akinola Olujobi\Documents\Trendtactics Academy"
+# Navigate to the project root directory
+Set-Location -Path "C:\Users\Akinola Olujobi\Documents\Trendtactics Academy"
 
-# Add all new and modified files
-Write-Host "Adding files to git..." -ForegroundColor Green
+# Add all changes to git
+Write-Host "Adding all changes to git..." -ForegroundColor Green
 git add .
 
 # Commit the changes with a descriptive message
 Write-Host "Committing changes..." -ForegroundColor Green
-git commit -m "Implement Interactive Learning Workspace: Enhanced course experience with three-panel layout, sandboxed playground, and AI-assisted course creation"
+git commit -m "Implement Interactive Learning Workspace: Enhanced course dashboard with three-panel layout, improved navigation, rich content support, and interactive playground. Also enhanced admin course creator with AI-powered content generation and rich text editing."
 
-# Push to GitHub
-Write-Host "Pushing to GitHub..." -ForegroundColor Green
+# Push changes to GitHub
+Write-Host "Pushing changes to GitHub..." -ForegroundColor Green
 git push origin master
 
-# Also push the frontend submodule if it exists
-if (Test-Path "lms-frontend\.git") {
-    Write-Host "Updating frontend submodule..." -ForegroundColor Green
-    cd "lms-frontend"
-    git add .
-    git commit -m "Update frontend for Interactive Learning Workspace"
-    git push origin master
-    cd ..
-}
+# Update the frontend submodule
+Write-Host "Updating frontend submodule..." -ForegroundColor Green
+Set-Location -Path "lms-frontend"
+git add .
+git commit -m "Update frontend with Interactive Learning Workspace components"
+git push origin master
 
-# Also push the backend submodule if it exists
-if (Test-Path "lms-backend\.git") {
-    Write-Host "Updating backend submodule..." -ForegroundColor Green
-    cd "lms-backend"
-    git add .
-    git commit -m "Update backend for Interactive Learning Workspace"
-    git push origin master
-    cd ..
-}
+# Return to main directory
+Set-Location -Path ".."
 
-Write-Host "Deployment complete!" -ForegroundColor Green
-Write-Host "The Interactive Learning Workspace has been successfully deployed to GitHub." -ForegroundColor Yellow
+# Update the backend submodule
+Write-Host "Updating backend submodule..." -ForegroundColor Green
+Set-Location -Path "lms-backend"
+git add .
+git commit -m "Update backend with Interactive Learning Workspace APIs"
+git push origin master
+
+# Return to main directory
+Set-Location -Path ".."
+
+Write-Host "Deployment complete! All changes have been pushed to GitHub." -ForegroundColor Yellow
+Write-Host "The Interactive Learning Workspace is now live." -ForegroundColor Yellow
