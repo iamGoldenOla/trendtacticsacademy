@@ -1,11 +1,25 @@
 // Script to add sample lessons to existing modules
+require('dotenv').config();
 const { createClient } = require('@supabase/supabase-js');
 
 // Supabase configuration
-const supabaseUrl = 'https://uimdbodamoeyukrghchb.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc';
+const supabaseUrl = process.env.SUPABASE_URL || 'https://uimdbodamoeyukrghchb.supabase.co';
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Check if service role key is available
+if (!supabaseServiceRoleKey) {
+  console.error('❌ SUPABASE_SERVICE_ROLE_KEY not found in environment variables');
+  console.log('This script needs to run with service role key permissions.');
+  console.log('Make sure to run this through GitHub Actions or with proper env vars.');
+  process.exit(1);
+}
+
+const supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
+  auth: {
+    persistSession: false,
+    autoRefreshToken: false
+  }
+});
 
 async function addSampleLessons() {
   console.log('=== Adding Sample Lessons ===');
