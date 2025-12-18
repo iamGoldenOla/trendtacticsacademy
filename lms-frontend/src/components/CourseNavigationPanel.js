@@ -53,23 +53,24 @@ const CourseNavigationPanel = ({ course, currentLesson, completedLessons, onSele
             </div>
             
             <div className="py-2">
-              {module.lessons.map((lesson) => {
-                const isCurrent = currentLesson && currentLesson.id === lesson.id;
-                const isCompleted = completedLessons.includes(lesson.id);
-                
-                return (
-                  <button
-                    key={lesson.id}
-                    onClick={() => onSelectLesson(lesson)}
-                    className={`w-full text-left px-4 py-3 flex items-center transition-colors ${
-                      isCurrent 
-                        ? 'bg-brand-cyan text-white shadow-sm' 
-                        : isCompleted
-                          ? 'bg-green-50 text-green-700 hover:bg-green-100'
-                          : 'hover:bg-gray-50'
-                    }`}
-                  >
-                    <div className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mr-3 border ${
+              {module.lessons && module.lessons.length > 0 ? (
+                module.lessons.map((lesson) => {
+                  const isCurrent = currentLesson && currentLesson.id === lesson.id;
+                  const isCompleted = completedLessons.includes(lesson.id);
+                  
+                  return (
+                    <button
+                      key={lesson.id}
+                      onClick={() => onSelectLesson(lesson)}
+                      className={`w-full text-left px-4 py-3 flex items-center transition-colors ${
+                        isCurrent 
+                          ? 'bg-brand-cyan text-white shadow-sm' 
+                          : isCompleted
+                            ? 'bg-green-50 text-green-700 hover:bg-green-100'
+                            : 'hover:bg-gray-50'
+                      }`}
+                    >
+                    <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mr-3 border $
                       isCompleted 
                         ? 'bg-green-500 border-green-500 text-white' 
                         : isCurrent 
@@ -97,7 +98,13 @@ const CourseNavigationPanel = ({ course, currentLesson, completedLessons, onSele
                     )}
                   </button>
                 );
-              })}
+              })
+              ) : (
+                <div className="px-4 py-3 text-gray-500 text-sm">
+                  <p>No lessons available for this module yet.</p>
+                  <p className="text-xs mt-1">New content is being added regularly.</p>
+                </div>
+              )}
             </div>
           </div>
         ))}

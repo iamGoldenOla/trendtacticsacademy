@@ -109,9 +109,11 @@ class CourseService {
         .eq('is_published', true)
         .single();
 
+      console.log('Supabase response:', { courseData, courseError });
+
       if (courseError) {
         console.error('Course fetch error for ID', courseId, ':', courseError);
-        throw courseError;
+        throw new Error(`Failed to fetch course: ${courseError.message || courseError}`);
       }
       
       if (!courseData) {
@@ -135,7 +137,7 @@ class CourseService {
       return courseData;
     } catch (error) {
       console.error('Error fetching course by ID', courseId, ':', error);
-      throw error;
+      throw new Error(`Failed to load course: ${error.message || 'Unknown error'}. Please try again later.`);
     }
   }
 
