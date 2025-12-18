@@ -1,21 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
+// Removed mock data import to prevent using invalid course IDs
 import { courseService } from "../services";
 
 const Home = () => {
-    // Instead of mock featuredCourses, use the shared data
-    const featuredCourses = digitalMarketingCourses.slice(0, 3); // Show first 3 as featured
     const [realCourses, setRealCourses] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchRealCourses = async () => {
             try {
+                setLoading(true);
+                setError(null);
+                
+                // Always try to fetch real courses first
                 const courses = await courseService.getAllCourses();
-                setRealCourses(courses.slice(0, 3)); // Get first 3 real courses
+                
+                // Validate that we got real courses with proper UUIDs
+                if (courses && Array.isArray(courses) && courses.length > 0) {
+                    // Filter out any courses without proper UUIDs
+                    const validCourses = courses.filter(course => {
+                        // Check if course.id looks like a UUID
+                        return course.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(course.id);
+                    });
+                    
+                    setRealCourses(validCourses.slice(0, 3)); // Get first 3 real courses
+                } else {
+                    console.warn('No valid courses found in Supabase');
+                    setRealCourses([]); // Show empty state instead of mock data
+                }
             } catch (error) {
-                console.error('Error fetching real courses:', error);
+                console.error('Error fetching real courses from Supabase:', error);
+                setError(error.message);
+                setRealCourses([]); // Show empty state instead of mock data
             } finally {
                 setLoading(false);
             }
@@ -23,6 +41,9 @@ const Home = () => {
 
         fetchRealCourses();
     }, []);
+
+    // Only show courses if we have real ones from Supabase
+    const coursesToShow = realCourses.length > 0 ? realCourses : [];
 
     const features = [
         {
@@ -63,8 +84,16 @@ const Home = () => {
         }
     ];
 
-    // Use real courses if available, otherwise fallback to mock courses
-    const coursesToShow = realCourses.length > 0 ? realCourses : featuredCourses;
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-white flex items-center justify-center">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-cyan mx-auto mb-4"></div>
+                    <p className="text-gray-600">Loading courses...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-white">
@@ -149,68 +178,76 @@ const Home = () => {
                         </p>
                     </div>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {coursesToShow.map((course) => (
-                            <div key={course.id} className="card hover:shadow-xl transition-shadow duration-300">
-                                <div className="relative mb-4">
-                                    <img 
-                                        src={course.thumbnail || course.thumbnail_url || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop'} 
-                                        alt={course.title} 
-                                        className="w-full h-48 object-cover rounded-lg"
-                                    />
-                                    <div className="absolute top-3 right-3 bg-brand-cyan text-white px-2 py-1 rounded text-sm font-medium">
-                                        {course.level}
-                                    </div>
-                                </div>
-                                
-                                <div className="mb-4">
-                                    <h3 className="text-xl font-heading font-semibold text-gray-900 mb-2">
-                                        {course.title}
-                                    </h3>
-                                    <p className="text-gray-600 text-sm mb-3">
-                                        {course.description}
-                                    </p>
-                                    
-                                    <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                                        <span>By {course.instructor?.name || 'Instructor'}</span>
-                                        <span>{course.duration}</span>
-                                    </div>
-                                    
-                                    <div className="flex items-center justify-between mb-4">
-                                        <div className="flex items-center">
-                                            <div className="flex text-yellow-400">
-                                                {[...Array(5)].map((_, i) => (
-                                                    <svg 
-                                                        key={i} 
-                                                        className={`w-4 h-4 ${i < Math.floor(course.rating || 4.5) ? 'fill-current' : 'fill-gray-300'}`} 
-                                                        viewBox="0 0 20 20"
-                                                    >
-                                                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                                                    </svg>
-                                                ))}
-                                            </div>
-                                            <span className="ml-2 text-sm text-gray-600">({course.rating || 4.5})</span>
+                    {coursesToShow.length > 0 ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {coursesToShow.map((course) => (
+                                <div key={course.id} className="card hover:shadow-xl transition-shadow duration-300">
+                                    <div className="relative mb-4">
+                                        <img 
+                                            src={course.thumbnail || course.thumbnail_url || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop'} 
+                                            alt={course.title} 
+                                            className="w-full h-48 object-cover rounded-lg"
+                                        />
+                                        <div className="absolute top-3 right-3 bg-brand-cyan text-white px-2 py-1 rounded text-sm font-medium">
+                                            {course.level}
                                         </div>
-                                        <span className="text-sm text-gray-500">
-                                            {course.enrolledStudents || course.enrolled_students || 0} students
+                                    </div>
+                                    
+                                    <div className="mb-4">
+                                        <h3 className="text-xl font-heading font-semibold text-gray-900 mb-2">
+                                            {course.title}
+                                        </h3>
+                                        <p className="text-gray-600 text-sm mb-3">
+                                            {course.description}
+                                        </p>
+                                        
+                                        <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                                            <span>By {course.instructor?.name || 'Instructor'}</span>
+                                            <span>{course.duration}</span>
+                                        </div>
+                                        
+                                        <div className="flex items-center justify-between mb-4">
+                                            <div className="flex items-center">
+                                                <div className="flex text-yellow-400">
+                                                    {[...Array(5)].map((_, i) => (
+                                                        <svg 
+                                                            key={i} 
+                                                            className={`w-4 h-4 ${i < Math.floor(course.rating || 4.5) ? 'fill-current' : 'fill-gray-300'}`} 
+                                                            viewBox="0 0 20 20"
+                                                        >
+                                                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                                        </svg>
+                                                    ))}
+                                                </div>
+                                                <span className="ml-2 text-sm text-gray-600">({course.rating || 4.5})</span>
+                                            </div>
+                                            <span className="text-sm text-gray-500">
+                                                {course.enrolledStudents || course.enrolled_students || 0} students
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-2xl font-heading font-bold text-brand-navy">
+                                            ${course.price || 0}
                                         </span>
+                                        <Link 
+                                            to={`/course/${course.id}`} 
+                                            className="btn-primary"
+                                        >
+                                            View Course
+                                        </Link>
                                     </div>
                                 </div>
-                                
-                                <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-heading font-bold text-brand-navy">
-                                        ${course.price || 0}
-                                    </span>
-                                    <Link 
-                                        to={`/course/${course.id}`} 
-                                        className="btn-primary"
-                                    >
-                                        View Course
-                                    </Link>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="text-center py-12">
+                            <div className="text-4xl mb-4">📚</div>
+                            <h3 className="text-xl font-medium text-gray-900 mb-2">No Courses Available</h3>
+                            <p className="text-gray-600">We're working on adding new courses. Please check back soon!</p>
+                        </div>
+                    )}
                     
                     <div className="text-center mt-12">
                         <Link to="/courses" className="btn-secondary">
