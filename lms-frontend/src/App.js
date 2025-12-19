@@ -26,7 +26,7 @@ import ConversationalCourseTest from "./pages/ConversationalCourseTest";
 import ConversationalDemo from "./pages/ConversationalDemo";
 import SuperIntelligentTrendyDemo from "./demo/SuperIntelligentTrendyDemo";
 import FunctionCallingDemo from "./demo/FunctionCallingDemo";
-import { digitalMarketingCourses } from "./data/digitalMarketingCourses";
+// import { digitalMarketingCourses } from "./data/digitalMarketingCourses";
 import { login, signup, logout, getCurrentUser } from "./services/authService";
 import "./App.css";
 import AdminPage from "./pages/AdminPage";
@@ -161,11 +161,12 @@ function App() {
     // Wrapper to use useParams for lesson route
     const LessonViewerWrapper = () => {
         const { id, lessonId } = useParams();
-        // TODO: Replace with API call to get course
-        const course = digitalMarketingCourses.find(c => c.id === id);
-        if (!course) return <div>Course Not Found</div>;
-        // Pass lessonId as prop to LessonViewer
-        return <LessonViewer key={lessonId} course={course} lessonId={lessonId} />;
+        // TODO: Replace with API call to get course from Supabase
+        // For now, redirect to course detail page which will handle real data
+        useEffect(() => {
+            window.location.href = `/course/${id}`;
+        }, [id]);
+        return <div>Loading course...</div>;
     };
 
     return (
