@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import StudentDashboardLayout from "../components/StudentDashboardLayout";
 import Profile from "./Profile";
 import { Link, useNavigate } from 'react-router-dom';
-import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
+// Removed mock data import to prevent using invalid course IDs
+// import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
 import { isAuthenticated } from '../services/authService';
 import TodoList from "../components/TodoList";
 import PlannerPage from "./PlannerPage";
@@ -14,7 +15,8 @@ const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("dashboard");
   // Restore mock user and course data
   const user = { name: userName || "John Doe" };
-  const enrolledCourses = digitalMarketingCourses.filter(course => ["dm-1", "dm-2"].includes(course.id));
+  // Using empty array instead of mock data
+  const enrolledCourses = [];
   const assignments = [
     { title: "UI Design", status: "Upcoming" },
     { title: "Node.js Project", status: "In Progress" },

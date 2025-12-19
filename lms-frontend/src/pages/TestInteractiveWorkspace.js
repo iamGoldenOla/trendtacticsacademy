@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { digitalMarketingCourses } from '../data/digitalMarketingCourses';
+// Removed mock data import to prevent using invalid course IDs
+// import { digitalMarketingCourses } from '../data/digitalMarketingCourses';
 
 const TestInteractiveWorkspace = () => {
   return (
@@ -24,7 +25,8 @@ const TestInteractiveWorkspace = () => {
           <div className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Available Courses</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {digitalMarketingCourses.map((course) => (
+              {/* Using empty array instead of mock data */}
+              {[].map((course) => (
                 <div key={course.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">{course.title}</h3>
                   <p className="text-gray-600 mb-4">{course.description.substring(0, 100)}...</p>

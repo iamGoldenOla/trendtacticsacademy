@@ -26,7 +26,8 @@ import ConversationalCourseTest from "./pages/ConversationalCourseTest";
 import ConversationalDemo from "./pages/ConversationalDemo";
 import SuperIntelligentTrendyDemo from "./demo/SuperIntelligentTrendyDemo";
 import FunctionCallingDemo from "./demo/FunctionCallingDemo";
-import { digitalMarketingCourses } from "./data/digitalMarketingCourses";
+// Removed mock data import to prevent using invalid course IDs
+// import { digitalMarketingCourses } from "./data/digitalMarketingCourses";
 import { login, signup, logout, getCurrentUser } from "./services/authService";
 import "./App.css";
 import AdminPage from "./pages/AdminPage";
@@ -169,10 +170,10 @@ function App() {
     const LessonViewerWrapper = () => {
         const { id, lessonId } = useParams();
         // TODO: Replace with API call to get course
-        const course = digitalMarketingCourses.find(c => c.id === id);
-        if (!course) return <div>Course Not Found</div>;
+        // const course = digitalMarketingCourses.find(c => c.id === id);
+        // if (!course) return <div>Course Not Found</div>;
         // Pass lessonId as prop to LessonViewer
-        return <LessonViewer key={lessonId} course={course} lessonId={lessonId} />;
+        return <LessonViewer key={lessonId} courseId={id} lessonId={lessonId} />;
     };
 
     return (
