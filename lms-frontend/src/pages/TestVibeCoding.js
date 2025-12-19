@@ -37,7 +37,7 @@ const TestVibeCoding = () => {
                   </span>
                 </div>
                 <Link
-                  to="/vibe-coding/vibe-coding-course-id-001"
+                  to="/vibe-coding/a1b2c3d4-e5f6-7890-abcd-ef1234567890"
                   className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium py-3 px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
                 >
                   Start Learning Vibe Coding
@@ -107,7 +107,7 @@ const TestVibeCoding = () => {
           
           <div className="mt-8 text-center">
             <Link
-              to="/vibe-coding/vibe-coding-course-id-001"
+              to="/vibe-coding/a1b2c3d4-e5f6-7890-abcd-ef1234567890"
               className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium py-3 px-8 rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
             >
               Begin Your Vibe Coding Journey

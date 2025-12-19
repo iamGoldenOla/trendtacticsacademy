@@ -6,7 +6,7 @@ const testVibeCodingFetch = async () => {
     console.log('Testing Vibe Coding course fetch...');
     
     // Simulate the Supabase query that the frontend uses
-    const response = await fetch('https://uimdbodamoeyukrghchb.supabase.co/rest/v1/courses?select=*,modules(*,lessons(*))&id=eq.vibe-coding-course-id-001&is_published=eq.true', {
+    const response = await fetch('https://uimdbodamoeyukrghchb.supabase.co/rest/v1/courses?select=*,modules(*,lessons(*))&id=eq.a1b2c3d4-e5f6-7890-abcd-ef1234567890&is_published=eq.true', {
       method: 'GET',
       headers: {
         'apikey': 'YOUR_SUPABASE_ANON_KEY_HERE',
