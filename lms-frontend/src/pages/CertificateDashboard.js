@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-// Removed mock data import to prevent using invalid course IDs
-// import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
+import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
 import { useNavigate } from "react-router-dom";
 import StudentDashboardLayout from "../components/StudentDashboardLayout";
 import CertificateTemplate from "../components/CertificateTemplate";
@@ -13,8 +12,7 @@ const CertificateDashboard = () => {
     useEffect(() => {
         // Simulate fetching progress data for enrolled courses
         // In real app, replace with API call
-        // Using empty array instead of mock data
-        const enrolledCourses = [];
+        const enrolledCourses = digitalMarketingCourses.filter(course => ["dm-1", "dm-2"].includes(course.id));
         const progressData = enrolledCourses.map(course => {
             // Remove score property since it's not present in course data
             const totalLessons = course.lessons ? course.lessons.length : 0;

@@ -26,8 +26,7 @@ import ConversationalCourseTest from "./pages/ConversationalCourseTest";
 import ConversationalDemo from "./pages/ConversationalDemo";
 import SuperIntelligentTrendyDemo from "./demo/SuperIntelligentTrendyDemo";
 import FunctionCallingDemo from "./demo/FunctionCallingDemo";
-// Removed mock data import to prevent using invalid course IDs
-// import { digitalMarketingCourses } from "./data/digitalMarketingCourses";
+import { digitalMarketingCourses } from "./data/digitalMarketingCourses";
 import { login, signup, logout, getCurrentUser } from "./services/authService";
 import "./App.css";
 import AdminPage from "./pages/AdminPage";
@@ -38,13 +37,6 @@ import CertificatePreview from "./pages/CertificatePreview";
 import NotificationBell from "./components/NotificationBell";
 import TrendyAssistant from "./components/TrendyAssistant";
 import CourseCreator from "./pages/CourseCreator";
-import CourseDebug from "./pages/CourseDebug";
-import TestInteractiveWorkspace from "./pages/TestInteractiveWorkspace";
-import TestCourseBoard from "./pages/TestCourseBoard";
-import Cart from "./pages/Cart";
-import AdminDashboard from "./pages/AdminDashboard";
-import AnalyticsDashboard from "./pages/AnalyticsDashboard";
-import TestSupabaseConnection from "./test-supabase-connection";
 
 function App() {
     const [user, setUser] = useState(null);
@@ -170,10 +162,10 @@ function App() {
     const LessonViewerWrapper = () => {
         const { id, lessonId } = useParams();
         // TODO: Replace with API call to get course
-        // const course = digitalMarketingCourses.find(c => c.id === id);
-        // if (!course) return <div>Course Not Found</div>;
+        const course = digitalMarketingCourses.find(c => c.id === id);
+        if (!course) return <div>Course Not Found</div>;
         // Pass lessonId as prop to LessonViewer
-        return <LessonViewer key={lessonId} courseId={id} lessonId={lessonId} />;
+        return <LessonViewer key={lessonId} course={course} lessonId={lessonId} />;
     };
 
     return (
@@ -189,8 +181,8 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/courses" element={<Courses />} />
-                    <Route path="/course/:courseId/*" element={<CourseDetail />} />
-                    <Route path="/course/:courseId/lesson/:lessonId" element={<CourseDetail />} />
+                    <Route path="/course/:id/*" element={<CourseDetail user={user} onLogin={handleLogin} onSignup={handleSignup} />} />
+                    <Route path="/course/:id/lesson/:lessonId" element={<LessonViewerWrapper />} />
                     <Route path="/course/:id/module-quiz" element={<ModuleQuiz />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/profile" element={<Profile user={user} />} />
@@ -210,17 +202,10 @@ function App() {
                     <Route path="/certificates" element={<CertificateDashboard />} />
                     <Route path="/certificate-preview" element={<CertificatePreview />} />
                     <Route path="/course-creator" element={<CourseCreator />} />
-                    <Route path="/course-debug/:courseId" element={<CourseDebug />} />
-                    <Route path="/test-interactive-workspace" element={<TestInteractiveWorkspace />} />
-                    <Route path="/test-course-board" element={<TestCourseBoard />} />
                     <Route path="/conversational-course-test" element={<ConversationalCourseTest />} />
                     <Route path="/conversational-demo" element={<ConversationalDemo />} />
                     <Route path="/super-intelligent-demo" element={<SuperIntelligentTrendyDemo />} />
                     <Route path="/function-calling-demo" element={<FunctionCallingDemo />} />
-                    <Route path="/cart" element={<Cart />} />
-                    <Route path="/admin-dashboard" element={<AdminDashboard />} />
-                    <Route path="/analytics" element={<AnalyticsDashboard />} />
-                    <Route path="/test-supabase" element={<div><h1>Check console for Supabase test results</h1></div>} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>

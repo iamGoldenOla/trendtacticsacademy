@@ -25,13 +25,13 @@ class CourseService {
         .from('courses')
         .select(`
           *,
-          modules!fk_modules_course_id (
+          modules (
             id,
             title,
             description,
             ordering,
             duration,
-            lessons!fk_lessons_module_id (
+            lessons (
               id,
               title,
               ordering,
@@ -91,13 +91,13 @@ class CourseService {
         .from('courses')
         .select(`
           *,
-          modules!fk_modules_course_id (
+          modules (
             id,
             title,
             description,
             ordering,
             duration,
-            lessons!fk_lessons_module_id (
+            lessons (
               id,
               title,
               ordering,
@@ -109,11 +109,9 @@ class CourseService {
         .eq('is_published', true)
         .single();
 
-      console.log('Supabase response:', { courseData, courseError });
-
       if (courseError) {
         console.error('Course fetch error for ID', courseId, ':', courseError);
-        throw new Error(`Failed to fetch course: ${courseError.message || courseError}`);
+        throw courseError;
       }
       
       if (!courseData) {
@@ -137,7 +135,7 @@ class CourseService {
       return courseData;
     } catch (error) {
       console.error('Error fetching course by ID', courseId, ':', error);
-      throw new Error(`Failed to load course: ${error.message || 'Unknown error'}. Please try again later.`);
+      throw error;
     }
   }
 
