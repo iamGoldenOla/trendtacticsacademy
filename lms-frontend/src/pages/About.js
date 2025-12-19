@@ -144,14 +144,23 @@ const About = () => {
     }, []);
     
     return (<div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-brand-navy py-16 px-4 text-center">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">About Trendtactics Academy</h1>
-        <p className="text-lg md:text-xl text-cyan-100 max-w-2xl mx-auto">
-          Empowering the next generation of digital marketers with world-class, practical, and accessible education in digital marketing, growth, and strategy.
-        </p>
+      {/* Hero Section with Parallax */}
+      <section className="relative h-96 flex items-center justify-center overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          style={{ 
+            backgroundImage: "url('/images/aboutpage-parallex.jpg')",
+            backgroundAttachment: 'fixed'
+          }}
+        ></div>
+        <div className="absolute inset-0 bg-black opacity-70"></div>
+        <div className="relative px-4 text-center z-10">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">About Trendtactics Academy</h1>
+          <p className="text-lg md:text-xl text-cyan-100 max-w-2xl mx-auto">
+            Empowering the next generation of digital marketers with world-class, practical, and accessible education in digital marketing, growth, and strategy.
+          </p>
+        </div>
       </section>
-
       {/* Our Story Section (upgraded) */}
       <section className="max-w-4xl mx-auto px-4 py-12">
         <h2 className="text-3xl font-extrabold text-brand-navy text-center mb-6">How It All Began</h2>

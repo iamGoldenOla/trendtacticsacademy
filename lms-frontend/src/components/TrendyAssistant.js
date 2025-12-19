@@ -13,7 +13,7 @@ const TrendyAssistant = () => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isPuterInitialized, setIsPuterInitialized] = useState(false);
-  const [isVisible, setIsVisible] = useState(true); // New state for visibility
+  const [isVisible, setIsVisible] = useState(false); // Hidden by default - only show when clicked
   const [conversationHistory, setConversationHistory] = useState([]); // Track conversation context
   const messagesEndRef = useRef(null);
 

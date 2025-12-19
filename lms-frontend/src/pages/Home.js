@@ -97,31 +97,35 @@ const Home = () => {
 
     return (
         <div className="min-h-screen bg-white">
-            {/* Hero Section */}
-            <section className="relative bg-gradient-to-br from-brand-navy via-blue-900 to-brand-navy text-white">
-                <div className="absolute inset-0 bg-black opacity-20"></div>
-                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-                    <div className="text-center">
-                        <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6 leading-tight">
-                            Transform Your Career with
-                            <span className="text-brand-cyan block">Digital Excellence</span>
-                        </h1>
-                        <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
-                            Master in-demand digital skills with expert-led courses designed for the modern workforce. 
-                            Start your journey to success today.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Link to="/courses" className="btn-secondary text-lg px-8 py-4 inline-block text-center">
-                                Explore Courses
-                            </Link>
-                            <button className="bg-white text-brand-navy px-8 py-4 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200 text-lg">
-                                Watch Demo
-                            </button>
-                        </div>
+            {/* Hero Section with Parallax */}
+            <section className="relative h-screen flex items-center justify-center overflow-hidden">
+                <div 
+                    className="absolute inset-0 bg-cover bg-center bg-fixed"
+                    style={{ 
+                        backgroundImage: "url('/images/homepage-parallex.jpg')",
+                        backgroundAttachment: 'fixed'
+                    }}
+                ></div>
+                <div className="absolute inset-0 bg-black opacity-60"></div>
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 text-center">
+                    <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6 leading-tight text-white">
+                        Transform Your Career with
+                        <span className="text-brand-cyan block">Digital Excellence</span>
+                    </h1>
+                    <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
+                        Master in-demand digital skills with expert-led courses designed for the modern workforce. 
+                        Start your journey to success today.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <Link to="/courses" className="btn-secondary text-lg px-8 py-4 inline-block text-center">
+                            Explore Courses
+                        </Link>
+                        <button className="bg-white text-brand-navy px-8 py-4 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200 text-lg">
+                            Watch Demo
+                        </button>
                     </div>
                 </div>
             </section>
-
             {/* Stats Section */}
             <div className="my-12">
                 <div className="overflow-x-hidden pb-4 relative">

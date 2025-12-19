@@ -161,17 +161,23 @@ const Courses = () => {
     });
 
     return (<div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-brand-navy text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-              Explore Our Courses
-            </h1>
-            <p className="text-xl text-gray-200 max-w-2xl mx-auto">
-              Discover expert-led courses designed to accelerate your career in the digital economy
-            </p>
-          </div>
+      {/* Hero Section with Parallax */}
+      <section className="relative h-96 flex items-center justify-center overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          style={{ 
+            backgroundImage: "url('/images/coursespage-parallex.jpg')",
+            backgroundAttachment: 'fixed'
+          }}
+        ></div>
+        <div className="absolute inset-0 bg-black opacity-70"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+          <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6 text-white">
+            Explore Our Courses
+          </h1>
+          <p className="text-xl text-gray-200 max-w-2xl mx-auto">
+            Discover expert-led courses designed to accelerate your career in the digital economy
+          </p>
         </div>
       </section>
 

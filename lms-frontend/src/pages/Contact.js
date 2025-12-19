@@ -48,9 +48,17 @@ const Contact = () => {
         setTimeout(() => setCopied(prev => ({ ...prev, [type]: false })), 1500);
     };
     return (<main className="min-h-screen bg-gray-50 dark:bg-brand-navy flex flex-col items-center justify-center py-8 px-2">
-      {/* HERO SECTION */}
-      <section className="w-full bg-gradient-to-br from-brand-navy via-blue-900 to-brand-cyan py-12 px-4 mb-8 rounded-2xl shadow-md">
-        <div className="max-w-3xl mx-auto text-center">
+      {/* HERO SECTION with Parallax */}
+      <section className="relative h-96 flex items-center justify-center overflow-hidden rounded-2xl shadow-md mb-8">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          style={{ 
+            backgroundImage: "url('/images/contactpage-parallex.jpg')",
+            backgroundAttachment: 'fixed'
+          }}
+        ></div>
+        <div className="absolute inset-0 bg-black opacity-70"></div>
+        <div className="relative max-w-3xl mx-auto text-center z-10 px-4">
           <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">Contact Trendtactics Academy</h1>
           <p className="text-lg md:text-xl text-cyan-100 mb-2">We're here to help! Reach out for support, partnership, or general inquiries.</p>
         </div>
