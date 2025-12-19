@@ -36,7 +36,7 @@ INSERT INTO courses (
     'Test Course',
     'Test description',
     'Test Category',
-    'Beginner',
+    'beginner',
     '1 week',
     0,
     true
