@@ -163,9 +163,7 @@ function App() {
         const { id, lessonId } = useParams();
         // TODO: Replace with API call to get course from Supabase
         // For now, redirect to course detail page which will handle real data
-        useEffect(() => {
-            window.location.href = `/course/${id}`;
-        }, [id]);
+        window.location.href = `/course/${id}`;
         return <div>Loading course...</div>;
     };
 
