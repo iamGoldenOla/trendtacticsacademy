@@ -16,7 +16,7 @@ class CourseService {
     return localStorage.getItem('user_id') || 'demo_instructor_id';
   }
 
-  // Get all courses (for student browsing)
+  // Get all courses (for student browsing) - Only show Vibe Coding course
   async getAllCourses() {
     try {
       console.log('Fetching courses from Supabase...');
@@ -40,6 +40,7 @@ class CourseService {
           )
         `)
         .eq('is_published', true)
+        .eq('id', 'a1b2c3d4-e5f6-7890-abcd-ef1234567890') // Only fetch Vibe Coding course
         .order('created_at', { ascending: false });
 
       if (error) {
@@ -75,8 +76,7 @@ class CourseService {
       throw error;
     }
   }
-
-  // Get course by ID (for course detail page)
+  // Get course by ID (for course detail page) - Only allow Vibe Coding course
   async getCourseById(courseId) {
     try {
       console.log('Fetching course by ID:', courseId);
@@ -84,6 +84,12 @@ class CourseService {
       // Validate input
       if (!courseId) {
         throw new Error('Course ID is required');
+      }
+      
+      // Only allow Vibe Coding course
+      if (courseId !== 'a1b2c3d4-e5f6-7890-abcd-ef1234567890') {
+        console.warn('Access denied to course ID:', courseId);
+        throw new Error('Course not found');
       }
       
       // First, get the course data
@@ -138,7 +144,6 @@ class CourseService {
       throw error;
     }
   }
-
   // Enroll user in course
   async enrollInCourse(courseId, userId) {
     try {
