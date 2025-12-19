@@ -32,6 +32,8 @@ import TestAI from "./pages/TestAI";
 import ConversationalCourseTest from "./pages/ConversationalCourseTest";
 import ConversationalDemo from "./pages/ConversationalDemo";
 import SuperIntelligentTrendyDemo from "./demo/SuperIntelligentTrendyDemo";
+import VibeCodingCourse from "./pages/VibeCodingCourse";
+import TestVibeCoding from "./pages/TestVibeCoding";
 import FunctionCallingDemo from "./demo/FunctionCallingDemo";
 // import { digitalMarketingCourses } from "./data/digitalMarketingCourses";
 import { login, signup, logout, getCurrentUser } from "./services/authService";
@@ -220,6 +222,8 @@ function App() {
                     <Route path="/super-intelligent-demo" element={<SuperIntelligentTrendyDemo />} />
                     <Route path="/function-calling-demo" element={<FunctionCallingDemo />} />
                     <Route path="/debug-course/:id" element={<DebugCourse />} />
+                    <Route path="/vibe-coding/:id" element={<VibeCodingCourse />} />
+                    <Route path="/test-vibe-coding" element={<TestVibeCoding />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>
