@@ -31,7 +31,7 @@ INSERT INTO courses (
     'Advanced React Development',
     'Master advanced React concepts including hooks, context, and performance optimization',
     'Web Development',
-    'intermediate',
+    'advanced',
     '6 weeks',
     49.99,
     true,
@@ -65,7 +65,7 @@ INSERT INTO modules (
 ) VALUES 
 -- Modules for Introduction to Web Development
 (
-    'd3aadf22-cf3e-7ai1-ee9a-9ee2ea613d44',
+    'd3aadf22-cf3e-7a11-ee9a-9ee2ea613d44',
     'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
     'HTML Fundamentals',
     'Learn the basics of HTML structure and semantics',
@@ -75,7 +75,7 @@ INSERT INTO modules (
     NOW()
 ),
 (
-    'e4bbea33-dg4f-8bj2-ff0b-0ff3fb724e55',
+    'e4bbea33-dg4f-8b22-ff0b-0ff3fb724e55',
     'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
     'CSS Styling',
     'Master CSS styling techniques and responsive design',
@@ -85,7 +85,7 @@ INSERT INTO modules (
     NOW()
 ),
 (
-    'f5ccfb44-eh5g-9ck3-gg1c-1gg4gc835f66',
+    'f5ccfb44-eh5g-9c33-gg1c-1gg4gc835f66',
     'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
     'JavaScript Basics',
     'Introduction to JavaScript programming',
@@ -109,8 +109,8 @@ INSERT INTO lessons (
 ) VALUES 
 -- Lessons for HTML Fundamentals
 (
-    '06aafi55-fi6h-0al4-hh2a-2hh5ha946g77',
-    'd3aadf22-cf3e-7ai1-ee9a-9ee2ea613d44',
+    '06aaf155-f16h-0a14-hh2a-2hh5ha946g77',
+    'd3aadf22-cf3e-7a11-ee9a-9ee2ea613d44',
     'HTML Document Structure',
     'Learn about the basic structure of an HTML document including DOCTYPE, html, head, and body tags.',
     1,
@@ -119,8 +119,8 @@ INSERT INTO lessons (
     NOW()
 ),
 (
-    '17bbgj66-gj7i-1bm5-ii3b-3ii6ib057h88',
-    'd3aadf22-cf3e-7ai1-ee9a-9ee2ea613d44',
+    '17bbg266-g27i-1b25-ii3b-3ii6ib057h88',
+    'd3aadf22-cf3e-7a11-ee9a-9ee2ea613d44',
     'Common HTML Elements',
     'Explore commonly used HTML elements such as headings, paragraphs, lists, and links.',
     2,
@@ -130,8 +130,8 @@ INSERT INTO lessons (
 ),
 -- Lessons for CSS Styling
 (
-    '28cchk77-hk8j-2cn6-jj4c-4jj7jc168i99',
-    'e4bbea33-dg4f-8bj2-ff0b-0ff3fb724e55',
+    '28cch377-h38j-2c36-jj4c-4jj7jc168i99',
+    'e4bbea33-dg4f-8b22-ff0b-0ff3fb724e55',
     'CSS Selectors',
     'Learn how to select and style HTML elements using various CSS selectors.',
     1,
@@ -140,8 +140,8 @@ INSERT INTO lessons (
     NOW()
 ),
 (
-    '39ddil88-il9k-3do7-kk5d-5kk8kd279j00',
-    'e4bbea33-dg4f-8bj2-ff0b-0ff3fb724e55',
+    '39ddi488-i49k-3d47-kk5d-5kk8kd279j00',
+    'e4bbea33-dg4f-8b22-ff0b-0ff3fb724e55',
     'Responsive Design',
     'Understand how to create responsive designs that work on different screen sizes.',
     2,
