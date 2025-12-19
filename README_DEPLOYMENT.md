@@ -1,208 +1,174 @@
-# Trendtactics Academy Deployment Guide
+# Automatic Deployment Setup for Trendtactics Academy
 
-## 🚀 Quick Deployment
+This guide explains how to set up automatic deployment for your `academy.trendtacticsdigital.com` subdomain using GitHub Actions.
 
-To deploy the Trendtactics Academy platform, follow these steps:
+## Prerequisites
 
-### 1. GitHub Repository Setup
-```bash
-# Initialize git repository
-git init
+1. A server with SSH access
+2. Node.js 18+ installed on the server
+3. PM2 process manager installed globally (`npm install -g pm2`)
+4. Nginx configured for your subdomains
 
-# Add all files
-git add .
+## Setting Up GitHub Secrets
 
-# Initial commit
-git commit -m "Initial commit: Interactive Learning Workspace"
-
-# Add your GitHub repository (replace with your actual URL)
-git remote add origin https://github.com/your-username/trendtactics-academy.git
-
-# Push to GitHub
-git branch -M main
-git push -u origin main
-```
-
-### 2. Environment Variables Setup
-You need to configure the following environment variables in your deployment platforms:
-
-#### Frontend (Vercel/Netlify)
-- `REACT_APP_SUPABASE_URL` - Your Supabase project URL
-- `REACT_APP_SUPABASE_ANON_KEY` - Your Supabase anonymous key
-
-#### Backend (Render/Heroku)
-- `SUPABASE_URL` - Your Supabase project URL
-- `SUPABASE_ANON_KEY` - Your Supabase anonymous key
-- `SUPABASE_SERVICE_ROLE_KEY` - Your Supabase service role key (stored in GitHub Secrets)
-- `MONGO_URI` - Your MongoDB connection string
-- `JWT_SECRET` - Your JWT secret key
-- `PORT` - Port number (typically 5000)
-
-### 3. GitHub Secrets Configuration
-Store the following sensitive information in GitHub Secrets:
+To enable automatic deployment, you need to configure the following secrets in your GitHub repository:
 
 1. Go to your GitHub repository
-2. Settings → Secrets and variables → Actions
-3. Add the following secrets:
-   - `SUPABASE_SERVICE_ROLE_KEY` - Your Supabase service role key
-   - `MONGO_URI` - Your MongoDB connection string
-   - `JWT_SECRET` - Your JWT secret
-   - `VERCEL_TOKEN` - Your Vercel token (for automated deployments)
-   - `SUPABASE_ACCESS_TOKEN` - Your Supabase access token
+2. Click on "Settings" tab
+3. Click on "Secrets and variables" → "Actions" in the left sidebar
+4. Click "New repository secret" and add each of the following:
 
-## ☁️ Deployment Platforms
+| Secret Name | Description | Example Value |
+|-------------|-------------|---------------|
+| `HOST` | Your server IP address or hostname | `123.123.123.123` |
+| `USERNAME` | SSH username for your server | `deploy` |
+| `SSH_KEY` | Private SSH key for deployment | `-----BEGIN OPENSSH PRIVATE KEY-----...` |
+| `SUPABASE_URL` | Your Supabase project URL | `https://your-project.supabase.co` |
+| `SUPABASE_ANON_KEY` | Your Supabase anon key | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...` |
+| `API_URL` | Your backend API URL | `https://api.academy.trendtacticsdigital.com` |
 
-### Frontend Deployment Options
+## Server Setup
 
-#### Vercel (Recommended)
-1. Go to [Vercel](https://vercel.com/)
-2. Sign in with GitHub
-3. Click "New Project"
-4. Import your GitHub repository
-5. Configure environment variables
-6. Deploy!
+### Directory Structure
 
-#### Netlify
-1. Go to [Netlify](https://netlify.com/)
-2. Sign in with GitHub
-3. Click "New site from Git"
-4. Select your repository
-5. Configure build settings:
-   - Build command: `npm run build`
-   - Publish directory: `lms-frontend/build`
-6. Add environment variables
-7. Deploy!
-
-### Backend Deployment Options
-
-#### Render (Recommended)
-1. Go to [Render](https://render.com/)
-2. Sign up/in with GitHub
-3. Click "New Web Service"
-4. Connect your GitHub repository
-5. Configure settings:
-   - Name: trendtactics-academy-backend
-   - Region: Choose closest to your users
-   - Branch: main
-   - Root Directory: lms-backend
-   - Environment: Node
-   - Build command: `npm install`
-   - Start command: `npm start`
-6. Add environment variables
-7. Deploy!
-
-#### Heroku
-1. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
-2. Login: `heroku login`
-3. Create app: `heroku create trendtactics-academy-backend`
-4. Set environment variables:
-   ```bash
-   heroku config:set SUPABASE_URL=your_supabase_url
-   heroku config:set SUPABASE_ANON_KEY=your_anon_key
-   heroku config:set SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-   heroku config:set MONGO_URI=your_mongo_uri
-   heroku config:set JWT_SECRET=your_jwt_secret
-   heroku config:set PORT=5000
-   ```
-5. Deploy: `git push heroku main`
-
-## ⚡ Supabase Functions Deployment
-
-### Manual Deployment
-```bash
-# Install Supabase CLI
-npm install -g supabase
-
-# Login to Supabase
-supabase login
-
-# Navigate to supabase directory
-cd supabase
-
-# Deploy all functions
-supabase functions deploy
-
-# Or deploy specific function
-supabase functions deploy send-email
-```
-
-### Automated Deployment (GitHub Actions)
-The workflow is already configured in `.github/workflows/deploy.yml`. It will automatically deploy functions when you push to the main branch.
-
-## 🔧 Post-Deployment Verification
-
-After deployment, verify that:
-
-1. ✅ Frontend loads without errors
-2. ✅ Courses display correctly
-3. ✅ User authentication works
-4. ✅ Database connections are functioning
-5. ✅ Email functions operate properly
-6. ✅ API endpoints respond correctly
-
-## 🛠️ Troubleshooting
-
-### Common Issues
-
-1. **Environment Variables Not Loading**
-   - Double-check that all environment variables are set in your deployment platform
-   - Ensure variable names match exactly
-
-2. **CORS Errors**
-   - Add your frontend URL to Supabase CORS settings
-   - Check that API URLs are correctly configured
-
-3. **Database Connection Failures**
-   - Verify MongoDB connection string
-   - Check Supabase credentials
-   - Ensure network access is allowed
-
-4. **Authentication Issues**
-   - Confirm JWT secret consistency between frontend and backend
-   - Check Supabase auth settings
-
-### Useful Commands
+Create the following directory structure on your server:
 
 ```bash
-# Check git status
-git status
-
-# View commit history
-git log --oneline
-
-# Check remote repositories
-git remote -v
-
-# Test locally
-cd lms-frontend
-npm start
-
-# Test backend locally
-cd ../lms-backend
-npm start
+sudo mkdir -p /var/www/academy.trendtacticsdigital.com
+sudo mkdir -p /var/www/api.academy.trendtacticsdigital.com
 ```
 
-## 📋 Deployment Checklist
+### Nginx Configuration
 
-- [ ] GitHub repository created and code pushed
-- [ ] Environment variables configured in deployment platforms
-- [ ] GitHub Secrets set up for sensitive data
-- [ ] Frontend deployed and accessible
-- [ ] Backend deployed and API responding
-- [ ] Supabase functions deployed
-- [ ] Database connections verified
-- [ ] User authentication tested
-- [ ] Course loading functionality confirmed
-- [ ] Email functions operational
+Create Nginx configuration files:
 
-## 🆘 Need Help?
+1. Frontend configuration (`/etc/nginx/sites-available/academy.trendtacticsdigital.com`):
 
-If you encounter issues during deployment:
+```nginx
+server {
+    listen 80;
+    server_name academy.trendtacticsdigital.com;
 
-1. Check the console logs in your deployment platform
-2. Verify all environment variables are correctly set
-3. Ensure your Supabase project is properly configured
-4. Confirm MongoDB connection is working
-5. Reach out to support channels for your deployment platform
+    location / {
+        root /var/www/academy.trendtacticsdigital.com;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
 
-For additional assistance with Trendtactics Academy, please contact the development team.
+    location /api {
+        proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+2. Backend configuration (`/etc/nginx/sites-available/api.academy.trendtacticsdigital.com`):
+
+```nginx
+server {
+    listen 80;
+    server_name api.academy.trendtacticsdigital.com;
+
+    location / {
+        proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+Enable the sites:
+
+```bash
+sudo ln -s /etc/nginx/sites-available/academy.trendtacticsdigital.com /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/api.academy.trendtacticsdigital.com /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+## How It Works
+
+The deployment workflow is triggered automatically on every push to the `main` or `master` branch. It performs the following steps:
+
+1. Checks out the code from the repository
+2. Sets up Node.js environment
+3. Installs dependencies for both frontend and backend
+4. Runs tests for the backend
+5. Builds the frontend React application
+6. Deploys both frontend and backend to your server
+7. Restarts the backend service using PM2
+8. Reloads Nginx to apply any configuration changes
+
+## Manual Deployment
+
+If you need to deploy manually, you can use the provided scripts:
+
+### On Windows
+```powershell
+# Set environment variables
+$env:DEPLOY_HOST="your-server-ip"
+$env:DEPLOY_USER="your-username"
+$env:DEPLOY_KEY="C:\path\to\your\private\key"
+
+# Run the deployment script
+.\deploy.ps1
+```
+
+### On Linux/Mac
+```bash
+# Set environment variables
+export DEPLOY_HOST=your-server-ip
+export DEPLOY_USER=your-username
+export DEPLOY_KEY=/path/to/your/private/key
+
+# Make the script executable
+chmod +x deploy.sh
+
+# Run the deployment script
+./deploy.sh
+```
+
+## Adding SSL Certificate
+
+For production use, secure your subdomains with SSL certificates using Let's Encrypt:
+
+```bash
+sudo certbot --nginx -d academy.trendtacticsdigital.com -d api.academy.trendtacticsdigital.com
+```
+
+## Monitoring
+
+Monitor your deployed applications:
+
+```bash
+# Check running processes
+pm2 list
+
+# View logs
+pm2 logs academy-api
+
+# Check Nginx status
+sudo systemctl status nginx
+```
+
+## Troubleshooting
+
+1. **Deployment fails**: Check GitHub Actions logs in the repository's Actions tab
+2. **Frontend not loading**: Verify Nginx configuration and file permissions
+3. **API not responding**: Check if the backend service is running with `pm2 list`
+4. **Permission denied**: Ensure your SSH user has write permissions to the deployment directories
+
+## Customization
+
+You can customize the deployment workflows by modifying the files in `.github/workflows/`:
+
+- `deploy-frontend.yml`: Frontend-only deployment
+- `deploy-backend.yml`: Backend-only deployment
+- `deploy-full.yml`: Full deployment of both frontend and backend
