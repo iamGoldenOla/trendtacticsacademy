@@ -34,6 +34,7 @@ import ConversationalDemo from "./pages/ConversationalDemo";
 import SuperIntelligentTrendyDemo from "./demo/SuperIntelligentTrendyDemo";
 import VibeCodingCourse from "./pages/VibeCodingCourse";
 import TestVibeCoding from "./pages/TestVibeCoding";
+import AdminDashboard from "./pages/AdminDashboard";
 import FunctionCallingDemo from "./demo/FunctionCallingDemo";
 // import { digitalMarketingCourses } from "./data/digitalMarketingCourses";
 import { login, signup, logout, getCurrentUser } from "./services/authService";
@@ -224,6 +225,7 @@ function App() {
                     <Route path="/debug-course/:id" element={<DebugCourse />} />
                     <Route path="/vibe-coding/:id" element={<VibeCodingCourse />} />
                     <Route path="/test-vibe-coding" element={<TestVibeCoding />} />
+                    <Route path="/admin-dashboard" element={<AdminDashboard />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>
