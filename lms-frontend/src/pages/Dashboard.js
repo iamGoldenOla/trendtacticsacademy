@@ -78,15 +78,7 @@ const Dashboard = () => {
                 <div className="z-10">
                   <h1 className="text-3xl font-bold mb-1">Welcome back, {user.name}!</h1>
                   <p className="text-gray-600 mb-4">Continue your learning journey and track your progress.</p>
-                  {enrolledCourses.length > 0 ? (
-                    <div className="flex items-center gap-4">
-                      <div>
-                        <div className="font-semibold">{enrolledCourses[0].title}</div>
-                        <div className="text-sm text-gray-500">Next lesson: {enrolledCourses[0].nextLesson}</div>
-                      </div>
-                      <Link to={`/course/${enrolledCourses[0].id}/lesson/l1`} className="btn-primary" state={{ fromDashboard: true }} onClick={() => { sessionStorage.setItem('fromDashboard', 'true'); }}>Resume</Link>
-                    </div>
-                  ) : <div>No courses to resume.</div>}
+                  <div>No courses to resume. Visit the <Link to="/courses" className="text-blue-600 hover:underline">Courses page</Link> to enroll in available courses.</div>
                 </div>
                 <div className="absolute right-0 bottom-0 w-40 h-40 bg-gradient-to-tr from-blue-200 to-purple-200 opacity-40 rounded-full blur-2xl z-0"></div>
               </div>
