@@ -51,8 +51,16 @@ jobs:
             echo "❌ index.html NOT found"
             exit 1
           fi
+          echo "📄 _headers file exists:"
+          if [ -f "build/_headers" ]; then
+            echo "✅ _headers found"
+            echo "📄 _headers contents:"
+            cat build/_headers
+          else
+            echo "❌ _headers NOT found"
+          fi
 
-      # Step 6: Deploy via FTP
+      # Step 6: Deploy via FTP with better error handling
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -64,6 +72,8 @@ jobs:
           exclude: |
             .git
             .git/**
+          dry-run: false
+          log-level: verbose
 
       # Step 7: Success notification
       - name: Deployment Success
