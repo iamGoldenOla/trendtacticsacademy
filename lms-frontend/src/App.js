@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
 import InteractiveCourseDetail from "./pages/InteractiveCourseDetail";
+import DebugCourse from "./pages/DebugCourse";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
@@ -206,6 +207,7 @@ function App() {
                     <Route path="/conversational-demo" element={<ConversationalDemo />} />
                     <Route path="/super-intelligent-demo" element={<SuperIntelligentTrendyDemo />} />
                     <Route path="/function-calling-demo" element={<FunctionCallingDemo />} />
+                    <Route path="/debug-course/:id" element={<DebugCourse />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>
