@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import puterService from '../services/puterService';
 import courseService from '../services/courseService';
+import AICourseCreator from '../components/admin/AICourseCreator';
 
 const CourseCreator = () => {
   const [courseTopic, setCourseTopic] = useState('');
@@ -457,6 +458,20 @@ Students will be able to access this course when they enroll.`,
           </div>
         )}
 
+        <div className="mt-8">
+          <AICourseCreator courseId={courseId} onLessonCreated={(lesson) => {
+            console.log('Lesson created:', lesson);
+            // In a real implementation, you would add this to the conversation
+            const lessonMessage = {
+              id: Date.now(),
+              text: `✅ New lesson "${lesson.title}" has been created!\n\nStudents will be able to access this lesson in the course.`,
+              sender: 'system',
+              timestamp: new Date()
+            };
+            setConversation(prev => [...prev, lessonMessage]);
+          }} />
+        </div>
+        
         <div className="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
           <h3 className="text-lg font-semibold text-blue-900 mb-2">How This Creates REAL Courses</h3>
           <ul className="list-disc pl-5 space-y-2 text-blue-800">

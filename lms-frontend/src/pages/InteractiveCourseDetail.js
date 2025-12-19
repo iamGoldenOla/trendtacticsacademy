@@ -1,0 +1,301 @@
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import CourseLearningBoard from "../components/CourseLearningBoard";
+import { courseService, progressService, authService } from "../services";
+import LoadingSpinner from "../components/LoadingSpinner";
+
+const InteractiveCourseDetail = ({ user, onLogin, onSignup }) => {
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const [isEnrolled, setIsEnrolled] = useState(false);
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    const [course, setCourse] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [progress, setProgress] = useState(0);
+    const [completedLessons, setCompletedLessons] = useState([]);
+    const [activeView, setActiveView] = useState('learning'); // 'learning' or 'overview'
+
+    useEffect(() => {
+        const fetchCourseData = async () => {
+            try {
+                setLoading(true);
+                setError(null);
+                if (!id) {
+                    setError('Course ID is missing');
+                    setLoading(false);
+                    return;
+                }
+                
+                // Fetch course details
+                const courseData = await courseService.getCourseById(id);
+                setCourse(courseData);
+                
+                // Check if user is enrolled
+                if (user && user.enrolledCourses && user.enrolledCourses.includes(courseData.id)) {
+                    setIsEnrolled(true);
+                }
+            } catch (err) {
+                console.error('Error fetching course:', err);
+                setError('Failed to load course details. Please check your internet connection or try again later.');
+            } finally {
+                setLoading(false);
+            }
+        };
+        
+        fetchCourseData();
+    }, [id, user]);
+
+    const handleEnroll = async () => {
+        if (!user) {
+            if (onLogin) onLogin();
+            return;
+        }
+        
+        // If the course is free, enroll directly
+        if (course.price === 0) {
+            try {
+                await courseService.enrollInCourse(course.id);
+                setIsEnrolled(true);
+                setShowSuccessMessage(true);
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    setShowSuccessMessage(false);
+                }, 5000);
+            } catch (err) {
+                console.error('Enrollment error:', err);
+            }
+        } else {
+            // For paid courses, redirect to payment or show payment modal
+            alert('Redirecting to payment...');
+        }
+    };
+
+    if (loading) {
+        return (
+            <div className="container mx-auto px-4 py-16 text-center">
+                <LoadingSpinner size="large"/>
+                <p className="mt-4 text-gray-600">Loading course details...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="container mx-auto px-4 py-16 text-center">
+                <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-2xl mx-auto">
+                    <h2 className="text-xl font-semibold text-red-800 mb-2">Error Loading Course</h2>
+                    <p className="text-red-600 mb-4">{error}</p>
+                    <button 
+                        onClick={() => window.location.reload()}
+                        className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                    >
+                        Try Again
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
+    if (!course) {
+        return (
+            <div className="container mx-auto px-4 py-16 text-center">
+                <p className="text-gray-600">Course not found.</p>
+            </div>
+        );
+    }
+
+    // If user is enrolled, show the learning board
+    if (isEnrolled) {
+        return (
+            <div className="min-h-screen bg-gray-50">
+                {/* Success Message */}
+                {showSuccessMessage && (
+                    <div className="fixed top-4 right-4 z-50 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg">
+                        <div className="flex items-center space-x-3">
+                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                            </svg>
+                            <div>
+                                <h4 className="font-semibold">Successfully Enrolled!</h4>
+                                <p className="text-sm">You can now start learning {course.title}</p>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Header */}
+                <div className="bg-white border-b border-gray-200">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex justify-between items-center py-4">
+                            <div>
+                                <h1 className="text-2xl font-bold text-gray-900">{course.title}</h1>
+                                <p className="text-gray-600 text-sm">Continue your learning journey</p>
+                            </div>
+                            <div className="flex space-x-3">
+                                <button
+                                    onClick={() => setActiveView('overview')}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium ${
+                                        activeView === 'overview'
+                                            ? 'bg-brand-cyan text-white'
+                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                    }`}
+                                >
+                                    Course Overview
+                                </button>
+                                <button
+                                    onClick={() => setActiveView('learning')}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium ${
+                                        activeView === 'learning'
+                                            ? 'bg-brand-cyan text-white'
+                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                    }`}
+                                >
+                                    Learning Board
+                                </button>
+                                <Link 
+                                    to="/dashboard" 
+                                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm font-medium"
+                                >
+                                    Back to Dashboard
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Content */}
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 h-[calc(100vh-140px)]">
+                    {activeView === 'overview' ? (
+                        <div className="bg-white rounded-lg shadow p-6">
+                            <h2 className="text-xl font-bold text-gray-900 mb-4">Course Overview</h2>
+                            <p className="text-gray-700 mb-6">{course.description}</p>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h3 className="font-semibold text-gray-900 mb-2">Course Details</h3>
+                                    <ul className="space-y-2 text-sm text-gray-600">
+                                        <li><span className="font-medium">Level:</span> {course.level}</li>
+                                        <li><span className="font-medium">Duration:</span> {course.duration}</li>
+                                        <li><span className="font-medium">Modules:</span> {course.modules?.length || 0}</li>
+                                        <li><span className="font-medium">Lessons:</span> {
+                                            course.modules?.reduce((total, module) => total + (module.lessons?.length || 0), 0) || 0
+                                        }</li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h3 className="font-semibold text-gray-900 mb-2">Your Progress</h3>
+                                    <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                                        <div 
+                                            className="bg-brand-cyan h-2 rounded-full transition-all duration-300" 
+                                            style={{ width: `${progress}%` }}
+                                        ></div>
+                                    </div>
+                                    <p className="text-sm text-gray-600">{Math.round(progress)}% complete</p>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <CourseLearningBoard course={course} />
+                    )}
+                </div>
+            </div>
+        );
+    }
+
+    // If user is not enrolled, show enrollment page
+    return (
+        <div className="min-h-screen bg-gray-50">
+            {/* Header */}
+            <div className="bg-white border-b border-gray-200">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                    <h1 className="text-2xl font-bold text-gray-900">{course.title}</h1>
+                </div>
+            </div>
+
+            {/* Main Content */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    {/* Course Description */}
+                    <div className="lg:col-span-2">
+                        <div className="bg-white rounded-lg shadow p-6 mb-6">
+                            <h2 className="text-xl font-bold text-gray-900 mb-4">About This Course</h2>
+                            <p className="text-gray-700 mb-6">{course.description}</p>
+                            
+                            <h3 className="font-semibold text-gray-900 mb-2">What You'll Learn</h3>
+                            <ul className="list-disc pl-5 space-y-1 text-gray-700 mb-6">
+                                <li>Complete course curriculum with hands-on projects</li>
+                                <li>Interactive learning environment with real-time feedback</li>
+                                <li>Access to AI-powered coding assistant</li>
+                                <li>Certificate of completion</li>
+                                <li>Lifetime access to course materials</li>
+                            </ul>
+                            
+                            <h3 className="font-semibold text-gray-900 mb-2">Course Structure</h3>
+                            <div className="space-y-4">
+                                {course.modules?.map((module) => (
+                                    <div key={module.id} className="border border-gray-200 rounded-lg p-4">
+                                        <h4 className="font-medium text-gray-900">{module.title}</h4>
+                                        <p className="text-gray-600 text-sm mb-2">{module.description}</p>
+                                        <p className="text-gray-500 text-xs">{module.lessons?.length || 0} lessons • {module.duration}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Enrollment Card */}
+                    <div>
+                        <div className="bg-white rounded-lg shadow p-6 sticky top-4">
+                            <div className="bg-gray-200 border-2 border-dashed rounded-xl w-full h-48 mb-4" />
+                            
+                            <div className="text-3xl font-bold text-gray-900 mb-4">
+                                ${course.price}
+                            </div>
+                            
+                            <button 
+                                onClick={handleEnroll}
+                                className="w-full btn-primary mb-4"
+                            >
+                                Enroll Now
+                            </button>
+                            
+                            <div className="border-t border-gray-200 pt-4">
+                                <h4 className="font-semibold text-gray-900 mb-3">This course includes:</h4>
+                                <ul className="space-y-2 text-sm text-gray-600">
+                                    <li className="flex items-center">
+                                        <svg className="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                                        </svg>
+                                        Full course access
+                                    </li>
+                                    <li className="flex items-center">
+                                        <svg className="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                                        </svg>
+                                        Interactive learning workspace
+                                    </li>
+                                    <li className="flex items-center">
+                                        <svg className="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                                        </svg>
+                                        Certificate of completion
+                                    </li>
+                                    <li className="flex items-center">
+                                        <svg className="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                                        </svg>
+                                        Lifetime access
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default InteractiveCourseDetail;
