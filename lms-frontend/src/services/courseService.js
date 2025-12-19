@@ -21,55 +21,65 @@ class CourseService {
     try {
       console.log('Fetching courses from Supabase...');
       
-      const { data, error } = await supabase
+      // First, get all published courses
+      const { data: courses, error: coursesError } = await supabase
         .from('courses')
-        .select(`
-          *,
-          modules!course_id (
-            id,
-            title,
-            description,
-            ordering,
-            duration,
-            lessons!module_id (
-              id,
-              title,
-              ordering,
-              duration
-            )
-          )
-        `)
+        .select('*')
         .eq('is_published', true)
         .order('created_at', { ascending: false });
 
-      if (error) {
-        console.error('Supabase query error:', error);
-        throw error;
+      if (coursesError) {
+        console.error('Supabase courses query error:', coursesError);
+        throw coursesError;
       }
       
-      // Process the data to ensure proper structure
-      if (data && Array.isArray(data)) {
-        const processedData = data.map(course => {
-          // Ensure modules exist and are sorted
-          if (course.modules && Array.isArray(course.modules)) {
-            course.modules.sort((a, b) => (a.ordering || 0) - (b.ordering || 0));
-            
-            // Ensure lessons within each module are sorted
-            course.modules.forEach(module => {
-              if (module.lessons && Array.isArray(module.lessons)) {
-                module.lessons.sort((a, b) => (a.ordering || 0) - (b.ordering || 0));
-              }
-            });
-          }
+      // If no courses found, return empty array
+      if (!courses || !Array.isArray(courses) || courses.length === 0) {
+        console.log('No courses found');
+        return [];
+      }
+      
+      // For each course, fetch its modules
+      const coursesWithModules = await Promise.all(courses.map(async (course) => {
+        // Fetch modules for this course
+        const { data: modules, error: modulesError } = await supabase
+          .from('modules')
+          .select('*')
+          .eq('course_id', course.id)
+          .order('ordering');
+          
+        if (modulesError) {
+          console.error('Error fetching modules for course', course.id, ':', modulesError);
+          // Continue with empty modules array
+          course.modules = [];
           return course;
-        });
+        }
         
-        console.log('Successfully fetched courses:', processedData.length);
-        return processedData;
-      }
+        // For each module, fetch its lessons
+        const modulesWithLessons = await Promise.all((modules || []).map(async (module) => {
+          const { data: lessons, error: lessonsError } = await supabase
+            .from('lessons')
+            .select('*')
+            .eq('module_id', module.id)
+            .order('ordering');
+            
+          if (lessonsError) {
+            console.error('Error fetching lessons for module', module.id, ':', lessonsError);
+            // Continue with empty lessons array
+            module.lessons = [];
+            return module;
+          }
+          
+          module.lessons = lessons || [];
+          return module;
+        }));
+        
+        course.modules = modulesWithLessons || [];
+        return course;
+      }));
       
-      console.log('No courses found');
-      return [];
+      console.log('Successfully fetched courses:', coursesWithModules.length);
+      return coursesWithModules;
     } catch (error) {
       console.error('Error fetching courses:', error);
       throw error;
@@ -89,22 +99,7 @@ class CourseService {
       // First, get the course data
       const { data: courseData, error: courseError } = await supabase
         .from('courses')
-        .select(`
-          *,
-          modules!course_id (
-            id,
-            title,
-            description,
-            ordering,
-            duration,
-            lessons!module_id (
-              id,
-              title,
-              ordering,
-              duration
-            )
-          )
-        `)
+        .select('*')
         .eq('id', courseId)
         .eq('is_published', true)
         .single();
@@ -119,16 +114,38 @@ class CourseService {
         throw new Error('Course not found');
       }
 
-      // Ensure modules are sorted by ordering
-      if (courseData.modules && Array.isArray(courseData.modules)) {
-        courseData.modules.sort((a, b) => (a.ordering || 0) - (b.ordering || 0));
+      // Fetch modules for this course
+      const { data: modules, error: modulesError } = await supabase
+        .from('modules')
+        .select('*')
+        .eq('course_id', courseData.id)
+        .order('ordering');
         
-        // Ensure lessons within each module are sorted by ordering
-        courseData.modules.forEach(module => {
-          if (module.lessons && Array.isArray(module.lessons)) {
-            module.lessons.sort((a, b) => (a.ordering || 0) - (b.ordering || 0));
+      if (modulesError) {
+        console.error('Error fetching modules for course', courseData.id, ':', modulesError);
+        // Continue with empty modules array
+        courseData.modules = [];
+      } else {
+        // For each module, fetch its lessons
+        const modulesWithLessons = await Promise.all((modules || []).map(async (module) => {
+          const { data: lessons, error: lessonsError } = await supabase
+            .from('lessons')
+            .select('*')
+            .eq('module_id', module.id)
+            .order('ordering');
+            
+          if (lessonsError) {
+            console.error('Error fetching lessons for module', module.id, ':', lessonsError);
+            // Continue with empty lessons array
+            module.lessons = [];
+            return module;
           }
-        });
+          
+          module.lessons = lessons || [];
+          return module;
+        }));
+        
+        courseData.modules = modulesWithLessons || [];
       }
 
       console.log('Successfully fetched course:', courseData.title);
