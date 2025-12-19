@@ -1,10 +1,11 @@
 import React from 'react';
 import CourseLearningBoard from '../components/CourseLearningBoard';
-import { digitalMarketingCourses } from '../data/digitalMarketingCourses';
+// Removed mock data import to prevent using invalid course IDs
+// import { digitalMarketingCourses } from '../data/digitalMarketingCourses';
 
 const TestCourseBoard = () => {
-  // Use the first course as a test
-  const testCourse = digitalMarketingCourses[0];
+  // TODO: Use a real course for testing
+  const testCourse = null;
   
   const handleLessonComplete = (lessonId, completionData) => {
     console.log(`Lesson ${lessonId} completed`, completionData);

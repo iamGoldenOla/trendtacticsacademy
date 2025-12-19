@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
+// Removed mock data import to prevent using invalid course IDs
+// import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
 
 const ModuleQuiz = () => {
     const { id } = useParams();
-    const course = digitalMarketingCourses.find(c => c.id === id);
+    // TODO: Fetch real course data from API
+    const course = null;
     const questions = course?.moduleQuiz || [];
     const [quizStep, setQuizStep] = useState(0);
     const [quizAnswers, setQuizAnswers] = useState([]);

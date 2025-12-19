@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { courseService } from "../services";
-import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
+// Removed mock data import to prevent using invalid course IDs
+// import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
 import cartService from "../services/cartService";
 
 const Courses = () => {
@@ -43,30 +44,26 @@ const Courses = () => {
                 setIsLoading(true);
                 setError(null);
                 
-                // Use local course data as primary source
-                setCourses(digitalMarketingCourses);
-                
-                // Try to fetch from Supabase as enhancement
+                // Always try to fetch real courses first
                 const data = await courseService.getAllCourses();
                 
-                // If we get data from Supabase, merge it with local data
-                if (data && data.length > 0) {
-                    // Combine local and remote courses, avoiding duplicates
-                    const combinedCourses = [...digitalMarketingCourses];
-                    const localIds = new Set(digitalMarketingCourses.map(course => course.id));
-                    
-                    data.forEach(remoteCourse => {
-                        if (!localIds.has(remoteCourse.id)) {
-                            combinedCourses.push(remoteCourse);
-                        }
+                // Validate that we got real courses with proper UUIDs
+                if (data && Array.isArray(data) && data.length > 0) {
+                    // Filter out any courses without proper UUIDs
+                    const validCourses = data.filter(course => {
+                        // Check if course.id looks like a UUID
+                        return course.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(course.id);
                     });
                     
-                    setCourses(combinedCourses);
+                    setCourses(validCourses);
+                } else {
+                    console.warn('No valid courses found in Supabase');
+                    setCourses([]); // Show empty state instead of mock data
                 }
             } catch (err) {
                 console.error('Error fetching courses:', err);
-                // Use local data on error
-                setCourses(digitalMarketingCourses);
+                setError(err.message);
+                setCourses([]); // Show empty state instead of mock data
             } finally {
                 setIsLoading(false);
             }
