@@ -96,6 +96,13 @@ class CourseService {
         throw new Error('Course ID is required');
       }
       
+      // Check if courseId looks like a UUID
+      const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+      if (!uuidRegex.test(courseId)) {
+        console.error('Invalid UUID format:', courseId);
+        throw new Error('Invalid course ID format. Expected a UUID.');
+      }
+      
       // First, get the course data
       const { data: courseData, error: courseError } = await supabase
         .from('courses')
