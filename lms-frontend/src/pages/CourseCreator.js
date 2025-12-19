@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import puterService from '../services/puterService';
 import courseService from '../services/courseService';
-import RichTextEditor from '../components/RichTextEditor';
 
 const CourseCreator = () => {
   const [courseTopic, setCourseTopic] = useState('');
   const [generatedContent, setGeneratedContent] = useState('');
-  const [manualContent, setManualContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [conversation, setConversation] = useState([]);
   const [userDetails, setUserDetails] = useState({
@@ -18,48 +16,17 @@ const CourseCreator = () => {
   const [courseId, setCourseId] = useState(null);
   const [creationStep, setCreationStep] = useState('topic'); // topic, outline, modules, publish
   const [createdCourse, setCreatedCourse] = useState(null);
-  const [modules, setModules] = useState([
-    { id: 1, title: '', description: '', lessons: [{ id: 1, title: '', content: '' }] }
-  ]);
-  const [aiSuggestions, setAiSuggestions] = useState([]);
 
   const handleGenerateContent = async () => {
     if (!courseTopic.trim()) return;
 
     setIsLoading(true);
     try {
-      // Add user message to conversation
-      const userMessage = {
-        id: Date.now(),
-        text: `Generate course content for: ${courseTopic}`,
-        sender: 'user',
-        timestamp: new Date()
-      };
-      
-      setConversation(prev => [...prev, userMessage]);
-      
       const content = await puterService.generateCourseContent(courseTopic, userDetails);
       setGeneratedContent(content);
       setCreationStep('outline');
-      
-      // Add AI response to conversation
-      const aiMessage = {
-        id: Date.now() + 1,
-        text: content,
-        sender: 'ai',
-        timestamp: new Date()
-      };
-      
-      setConversation(prev => [...prev, aiMessage]);
     } catch (error) {
       console.error('Failed to generate content:', error);
-      const errorMessage = {
-        id: Date.now(),
-        text: 'Sorry, I encountered an error generating the course content. Please try again.',
-        sender: 'system',
-        timestamp: new Date()
-      };
-      setConversation(prev => [...prev, errorMessage]);
       setGeneratedContent('Sorry, I encountered an error generating the course content. Please try again.');
     } finally {
       setIsLoading(false);
@@ -71,42 +38,11 @@ const CourseCreator = () => {
 
     setIsLoading(true);
     try {
-      // Add user message to conversation
-      const userMessage = {
-        id: Date.now(),
-        text: `Create detailed outline for: ${courseTopic}`,
-        sender: 'user',
-        timestamp: new Date()
-      };
-      
-      setConversation(prev => [...prev, userMessage]);
-      
       const outline = await puterService.createDetailedCourseOutline(courseTopic, userDetails);
       setGeneratedContent(outline);
       setCreationStep('outline');
-      
-      // Add AI response to conversation
-      const aiMessage = {
-        id: Date.now() + 1,
-        text: outline,
-        sender: 'ai',
-        timestamp: new Date()
-      };
-      
-      setConversation(prev => [...prev, aiMessage]);
-      
-      // Generate AI suggestions for improvement
-      const suggestions = await puterService.generateCourseSuggestions(courseTopic);
-      setAiSuggestions(suggestions);
     } catch (error) {
       console.error('Failed to create detailed outline:', error);
-      const errorMessage = {
-        id: Date.now(),
-        text: 'Sorry, I encountered an error creating the course outline. Please try again.',
-        sender: 'system',
-        timestamp: new Date()
-      };
-      setConversation(prev => [...prev, errorMessage]);
       setGeneratedContent('Sorry, I encountered an error creating the course outline. Please try again.');
     } finally {
       setIsLoading(false);
@@ -249,38 +185,21 @@ Students will be able to access this course when they enroll.`,
 
     setIsLoading(true);
     try {
-      // Add user feedback to conversation
-      const feedbackMessage = {
-        id: Date.now(),
-        text: `Feedback: ${feedback}`,
-        sender: 'user',
-        timestamp: new Date()
-      };
-      
-      setConversation(prev => [...prev, feedbackMessage]);
-      
       // Process feedback with AI
       const updatedContent = await puterService.processFeedback(generatedContent, feedback);
       setGeneratedContent(updatedContent);
       setFeedback(''); // Clear feedback input
       
-      const aiResponse = {
-        id: Date.now() + 1,
-        text: '✅ Your feedback has been incorporated into the course content!',
-        sender: 'ai',
-        timestamp: new Date()
-      };
-      
-      setConversation(prev => [...prev, aiResponse]);
-    } catch (error) {
-      console.error('Failed to process feedback:', error);
-      const errorMessage = {
+      const feedbackMessage = {
         id: Date.now(),
-        text: 'Sorry, I had trouble processing your feedback. Please try rephrasing.',
+        text: '✅ Your feedback has been incorporated into the course content!',
         sender: 'system',
         timestamp: new Date()
       };
-      setConversation(prev => [...prev, errorMessage]);
+      
+      setConversation(prev => [...prev, feedbackMessage]);
+    } catch (error) {
+      console.error('Failed to process feedback:', error);
       setGeneratedContent(generatedContent + '\n\n[Sorry, I had trouble processing your feedback. Please try rephrasing.]');
     } finally {
       setIsLoading(false);
@@ -296,8 +215,6 @@ Students will be able to access this course when they enroll.`,
       return 'App Development';
     } else if (lowerTopic.includes('market') || lowerTopic.includes('social') || lowerTopic.includes('seo') || lowerTopic.includes('ads')) {
       return 'Digital Marketing';
-    } else if (lowerTopic.includes('ai') || lowerTopic.includes('machine learning') || lowerTopic.includes('prompt')) {
-      return 'Artificial Intelligence';
     } else {
       return 'General';
     }
@@ -307,185 +224,21 @@ Students will be able to access this course when they enroll.`,
   const handleClearAll = () => {
     setCourseTopic('');
     setGeneratedContent('');
-    setManualContent('');
     setConversation([]);
     setFeedback('');
     setCourseId(null);
     setCreationStep('topic');
     setCreatedCourse(null);
-    setModules([
-      { id: 1, title: '', description: '', lessons: [{ id: 1, title: '', content: '' }] }
-    ]);
     setUserDetails({
       name: '',
       expertise: 'Beginner',
       experience: '0-1 years'
     });
-    setAiSuggestions([]);
-  };
-
-  // Add a new module
-  const addModule = () => {
-    const newModule = {
-      id: modules.length + 1,
-      title: '',
-      description: '',
-      lessons: [{ id: 1, title: '', content: '' }]
-    };
-    setModules([...modules, newModule]);
-  };
-
-  // Add a new lesson to a module
-  const addLesson = (moduleId) => {
-    setModules(modules.map(module => {
-      if (module.id === moduleId) {
-        const newLesson = {
-          id: module.lessons.length + 1,
-          title: '',
-          content: ''
-        };
-        return {
-          ...module,
-          lessons: [...module.lessons, newLesson]
-        };
-      }
-      return module;
-    }));
-  };
-
-  // Update module data
-  const updateModule = (moduleId, field, value) => {
-    setModules(modules.map(module => 
-      module.id === moduleId ? { ...module, [field]: value } : module
-    ));
-  };
-
-  // Update lesson data
-  const updateLesson = (moduleId, lessonId, field, value) => {
-    setModules(modules.map(module => {
-      if (module.id === moduleId) {
-        return {
-          ...module,
-          lessons: module.lessons.map(lesson =>
-            lesson.id === lessonId ? { ...lesson, [field]: value } : lesson
-          )
-        };
-      }
-      return module;
-    }));
-  };
-
-  // Handle manual content creation
-  const handleCreateManualCourse = async () => {
-    if (!courseTopic.trim()) return;
-
-    setIsLoading(true);
-    try {
-      // Create course in Supabase
-      const courseData = {
-        title: courseTopic,
-        description: manualContent.substring(0, 200) + '...',
-        category: getCourseCategory(courseTopic),
-        level: userDetails.expertise,
-        duration: '4 weeks',
-        objectives: [],
-        prerequisites: []
-      };
-
-      const createdCourse = await courseService.createCourse(courseData);
-      setCreatedCourse(createdCourse);
-      setCourseId(createdCourse.id);
-      
-      // Add to conversation
-      const saveMessage = {
-        id: Date.now(),
-        text: `✅ Course "${courseTopic}" has been saved to Supabase!
-Course ID: ${createdCourse.id}
-Status: ${createdCourse.status}
-
-Students will be able to access this course when they enroll.`,
-        sender: 'system',
-        timestamp: new Date()
-      };
-      
-      setConversation(prev => [...prev, saveMessage]);
-      setCreationStep('modules');
-      
-    } catch (error) {
-      console.error('Failed to save to Supabase:', error);
-      const errorMessage = {
-        id: Date.now(),
-        text: `❌ Failed to save course to Supabase: ${error.message}\n\nPlease check your Supabase configuration and try again.`,
-        sender: 'system',
-        timestamp: new Date()
-      };
-      setConversation(prev => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Save modules and lessons to Supabase
-  const handleSaveModules = async () => {
-    if (!courseId || modules.length === 0) return;
-
-    setIsLoading(true);
-    try {
-      // Create modules in Supabase
-      for (const module of modules) {
-        const moduleData = {
-          title: module.title,
-          description: module.description,
-          duration: '1 week'
-        };
-        
-        const createdModule = await courseService.createModules(courseId, [moduleData]);
-        
-        // Create lessons for this module
-        if (module.lessons && module.lessons.length > 0) {
-          const lessonsData = module.lessons.map(lesson => ({
-            title: lesson.title,
-            content: lesson.content,
-            duration: '1 hour'
-          }));
-          
-          await courseService.createLessons(createdModule[0].id, lessonsData);
-        }
-      }
-      
-      // Add to conversation
-      const modulesMessage = {
-        id: Date.now(),
-        text: `✅ ${modules.length} modules with their lessons have been created for your course in Supabase!\n\nStudents will progress through these modules sequentially when taking the course.`,
-        sender: 'system',
-        timestamp: new Date()
-      };
-      
-      setConversation(prev => [...prev, modulesMessage]);
-      setCreationStep('publish');
-      
-    } catch (error) {
-      console.error('Failed to create modules:', error);
-      const errorMessage = {
-        id: Date.now(),
-        text: `❌ Failed to create modules in Supabase: ${error.message}\n\nPlease try again.`,
-        sender: 'system',
-        timestamp: new Date()
-      };
-      setConversation(prev => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Apply AI suggestion
-  const applySuggestion = (suggestion) => {
-    setGeneratedContent(prev => prev + '\n\n' + suggestion);
   };
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Create REAL Courses with Trendy</h1>
           <p className="text-lg text-gray-600">
@@ -544,59 +297,49 @@ Students will be able to access this course when they enroll.`,
           </div>
 
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Create a Course for Students to TAKE</h2>
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Course Topic</label>
+          <div className="flex flex-col sm:flex-row gap-4 mb-6">
             <input
               type="text"
               value={courseTopic}
               onChange={(e) => setCourseTopic(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-cyan"
+              className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-cyan"
               placeholder="What topic would you like to create a course about?"
             />
-          </div>
-          
-          <div className="flex flex-wrap gap-3 mb-6">
             <button
               onClick={handleGenerateContent}
               disabled={isLoading || !courseTopic.trim()}
-              className="px-6 py-3 bg-brand-cyan text-white font-medium rounded-lg hover:bg-brand-navy transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+              className="px-6 py-3 bg-brand-cyan text-white font-medium rounded-lg hover:bg-brand-navy transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? (
-                <>
-                  <span className="mr-2">🔄</span> Generating...
-                </>
-              ) : (
-                <>
-                  <span className="mr-2">🤖</span> Generate with AI
-                </>
-              )}
-            </button>
-            
-            <button
-              onClick={handleCreateDetailedOutline}
-              disabled={isLoading || !courseTopic.trim()}
-              className="px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
-            >
-              <span className="mr-2">📋</span> Detailed Outline
-            </button>
-            
-            <button
-              onClick={handleCreateManualCourse}
-              disabled={isLoading || !courseTopic.trim()}
-              className="px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
-            >
-              <span className="mr-2">✍️</span> Create Manual Course
+              {isLoading ? 'Generating...' : 'Generate Course'}
             </button>
           </div>
 
           <div className="flex flex-wrap gap-3">
+            <button
+              onClick={handleCreateDetailedOutline}
+              disabled={isLoading || !courseTopic.trim()}
+              className="px-4 py-2 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Detailed Outline
+            </button>
+            
             {generatedContent && creationStep === 'outline' && (
               <button
                 onClick={handleSaveToSupabase}
                 disabled={isLoading}
-                className="px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                className="px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span className="mr-2">💾</span> Save AI Content to Supabase
+                Save to Supabase
+              </button>
+            )}
+            
+            {courseId && creationStep === 'modules' && (
+              <button
+                onClick={handleCreateModules}
+                disabled={isLoading}
+                className="px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Create Modules
               </button>
             )}
             
@@ -604,9 +347,19 @@ Students will be able to access this course when they enroll.`,
               <button
                 onClick={handlePublishCourse}
                 disabled={isLoading}
-                className="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+                className="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span className="mr-2">🚀</span> Publish Course
+                Publish Course
+              </button>
+            )}
+            
+            {generatedContent && (
+              <button
+                onClick={handleProvideFeedback}
+                disabled={isLoading || !feedback.trim()}
+                className="px-4 py-2 bg-yellow-600 text-white font-medium rounded-lg hover:bg-yellow-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Improve Content
               </button>
             )}
           </div>
@@ -614,59 +367,30 @@ Students will be able to access this course when they enroll.`,
 
         {conversation.length > 0 && (
           <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Conversation History</h2>
-            <div className="space-y-4 max-h-96 overflow-y-auto">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">System Updates</h2>
+            <div className="space-y-4">
               {conversation.map((message) => (
                 <div
                   key={message.id}
                   className={`p-4 rounded-lg ${
                     message.sender === 'system'
                       ? 'bg-green-50 border border-green-200'
-                      : message.sender === 'user'
-                        ? 'bg-blue-50 border border-blue-200'
-                        : message.sender === 'ai'
-                          ? 'bg-purple-50 border border-purple-200'
-                          : 'bg-gray-50 border border-gray-200'
+                      : 'bg-gray-50 border border-gray-200'
                   }`}
                 >
                   <div className="flex justify-between items-start">
-                    <div className="flex-1">
+                    <div>
                       <span className={`font-medium ${
-                        message.sender === 'system' ? 'text-green-700' : 
-                        message.sender === 'user' ? 'text-blue-700' : 
-                        message.sender === 'ai' ? 'text-purple-700' : 'text-gray-700'
+                        message.sender === 'system' ? 'text-green-700' : 'text-gray-700'
                       }`}>
-                        {message.sender === 'system' ? '✅ System' : 
-                         message.sender === 'user' ? '👤 You' : 
-                         message.sender === 'ai' ? '🤖 Trendy AI' : 'Participant'}
+                        {message.sender === 'system' ? '✅ System' : 'Trendy'}
                       </span>
                       <p className="mt-2 text-gray-800 whitespace-pre-wrap">{message.text}</p>
                     </div>
-                    <span className="text-xs text-gray-500 ml-4">
+                    <span className="text-xs text-gray-500">
                       {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {aiSuggestions.length > 0 && (
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-              <span className="mr-2">💡</span> AI Suggestions
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {aiSuggestions.map((suggestion, index) => (
-                <div key={index} className="p-4 border border-gray-200 rounded-lg bg-gray-50">
-                  <p className="text-gray-800 mb-3">{suggestion}</p>
-                  <button
-                    onClick={() => applySuggestion(suggestion)}
-                    className="px-3 py-1 bg-brand-cyan text-white text-sm rounded hover:bg-brand-navy"
-                  >
-                    Apply Suggestion
-                  </button>
                 </div>
               ))}
             </div>
@@ -693,46 +417,29 @@ Students will be able to access this course when they enroll.`,
           </div>
         )}
 
-        {(generatedContent || creationStep === 'topic') && (
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+        {generatedContent && (
+          <div className="bg-white rounded-xl shadow-lg p-6">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold text-gray-900">Course Content</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Generated Course Content</h2>
               <div className="flex gap-2">
-                {generatedContent && (
-                  <>
-                    <button
-                      onClick={() => navigator.clipboard.writeText(generatedContent)}
-                      className="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors flex items-center"
-                    >
-                      <span className="mr-1">📋</span> Copy
-                    </button>
-                    <button
-                      onClick={() => setGeneratedContent('')}
-                      className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors flex items-center"
-                    >
-                      <span className="mr-1">🗑️</span> Clear
-                    </button>
-                  </>
-                )}
+                <button
+                  onClick={() => navigator.clipboard.writeText(generatedContent)}
+                  className="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
+                >
+                  Copy
+                </button>
+                <button
+                  onClick={() => setGeneratedContent('')}
+                  className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors"
+                >
+                  Clear
+                </button>
               </div>
             </div>
             
-            {generatedContent ? (
-              <div className="bg-gray-50 p-4 rounded-lg whitespace-pre-wrap text-gray-800 border border-gray-200 mb-4 font-mono text-sm">
-                {generatedContent}
-              </div>
-            ) : (
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Course Description
-                </label>
-                <RichTextEditor
-                  value={manualContent}
-                  onChange={setManualContent}
-                  placeholder="Enter a brief description of your course..."
-                />
-              </div>
-            )}
+            <div className="bg-gray-50 p-4 rounded-lg whitespace-pre-wrap text-gray-800 border border-gray-200 mb-4">
+              {generatedContent}
+            </div>
             
             {/* Feedback section */}
             <div className="mt-4">
@@ -746,124 +453,12 @@ Students will be able to access this course when they enroll.`,
                 rows="3"
                 placeholder="e.g., Add more examples, Focus on beginner level, Include hands-on projects..."
               />
-              {generatedContent && (
-                <button
-                  onClick={handleProvideFeedback}
-                  disabled={isLoading || !feedback.trim()}
-                  className="mt-2 px-4 py-2 bg-yellow-600 text-white font-medium rounded-lg hover:bg-yellow-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
-                >
-                  <span className="mr-2">✨</span> Improve Content
-                </button>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* Manual Course Builder */}
-        {creationStep === 'modules' && (
-          <div className="bg-white rounded-xl shadow-lg p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Course Structure</h2>
-            <p className="text-gray-600 mb-6">Define the modules and lessons for your course.</p>
-            
-            <div className="space-y-6">
-              {modules.map((module, index) => (
-                <div key={module.id} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
-                  <h3 className="font-medium text-gray-900 mb-3">Module {index + 1}</h3>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Module Title</label>
-                      <input
-                        type="text"
-                        value={module.title}
-                        onChange={(e) => updateModule(module.id, 'title', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-cyan"
-                        placeholder="e.g., Introduction to the Topic"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                      <input
-                        type="text"
-                        value={module.description}
-                        onChange={(e) => updateModule(module.id, 'description', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-cyan"
-                        placeholder="Brief description of this module"
-                      />
-                    </div>
-                  </div>
-                  
-                  <h4 className="font-medium text-gray-900 mb-3">Lessons</h4>
-                  <div className="space-y-4">
-                    {module.lessons.map((lesson, lessonIndex) => (
-                      <div key={lesson.id} className="border border-gray-100 rounded-lg p-3 bg-white">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Lesson Title</label>
-                            <input
-                              type="text"
-                              value={lesson.title}
-                              onChange={(e) => updateLesson(module.id, lesson.id, 'title', e.target.value)}
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-cyan"
-                              placeholder="e.g., Getting Started"
-                            />
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Lesson Content</label>
-                          <RichTextEditor
-                            value={lesson.content}
-                            onChange={(value) => updateLesson(module.id, lesson.id, 'content', value)}
-                            placeholder="Enter lesson content with rich formatting..."
-                          />
-                        </div>
-                      </div>
-                    ))}
-                    
-                    <button
-                      onClick={() => addLesson(module.id)}
-                      className="px-3 py-2 text-sm bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors flex items-center"
-                    >
-                      <span className="mr-1">➕</span> Add Another Lesson
-                    </button>
-                  </div>
-                </div>
-              ))}
-              
-              <button
-                onClick={addModule}
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors flex items-center"
-              >
-                <span className="mr-1">➕</span> Add Another Module
-              </button>
-              
-              <div className="pt-4">
-                <button
-                  onClick={handleSaveModules}
-                  disabled={isLoading}
-                  className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
-                >
-                  {isLoading ? (
-                    <>
-                      <span className="mr-2">💾</span> Saving...
-                    </>
-                  ) : (
-                    <>
-                      <span className="mr-2">💾</span> Save Modules to Supabase
-                    </>
-                  )}
-                </button>
-              </div>
             </div>
           </div>
         )}
 
         <div className="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
-          <h3 className="text-lg font-semibold text-blue-900 mb-2 flex items-center">
-            <span className="mr-2">🎓</span> How This Creates REAL Courses
-          </h3>
+          <h3 className="text-lg font-semibold text-blue-900 mb-2">How This Creates REAL Courses</h3>
           <ul className="list-disc pl-5 space-y-2 text-blue-800">
             <li>Generate professional course content with AI assistance</li>
             <li>Save courses directly to your Supabase database</li>
