@@ -5,7 +5,7 @@ const TrendyAssistant = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Hello! I'm Trendy, your AI-powered assistant. I can help you with our courses, pricing, or any questions about Trendtactics Academy. How can I assist you today?",
+      text: "Hi! I'm Trendy, your friendly customer service assistant. How can I help you today?",
       sender: 'bot',
       timestamp: new Date()
     }
@@ -13,7 +13,7 @@ const TrendyAssistant = () => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isPuterInitialized, setIsPuterInitialized] = useState(false);
-  const [isVisible, setIsVisible] = useState(false); // New state for visibility
+  const [isVisible, setIsVisible] = useState(true); // New state for visibility
   const [conversationHistory, setConversationHistory] = useState([]); // Track conversation context
   const messagesEndRef = useRef(null);
 
@@ -167,7 +167,7 @@ You can browse all courses on our Courses page. Would you like me to tell you mo
     setMessages([
       {
         id: Date.now(),
-        text: "Hello again! I'm Trendy, your AI-powered assistant. How can I assist you today?",
+        text: "Hi again! I'm Trendy, your customer service assistant. How can I help you today?",
         sender: 'bot',
         timestamp: new Date()
       }
@@ -182,7 +182,6 @@ You can browse all courses on our Courses page. Would you like me to tell you mo
           onClick={toggleVisibility}
           className="bg-brand-cyan text-white rounded-full p-3 shadow-lg hover:bg-brand-navy transition-colors"
           aria-label="Open Trendy Assistant"
-          title="Click to chat with Trendy Assistant"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
