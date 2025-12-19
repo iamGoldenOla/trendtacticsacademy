@@ -138,6 +138,10 @@ class AICourseService {
       const r = Math.random() * 16 | 0;
       const v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
+    }).replace(/[g-z]/g, function(c) {
+      // Ensure only valid hex characters (0-9, a-f)
+      const hexChars = '0123456789abcdef';
+      return hexChars[Math.floor(Math.random() * 16)];
     });
   }
 }
