@@ -48,6 +48,8 @@ function App() {
     // Move useNavigate inside the App function
     const navigate = useNavigate();
 
+    // Force rebuild to trigger deployment
+
     const handleLogin = () => {
         setIsLoginModalOpen(true);
     };
