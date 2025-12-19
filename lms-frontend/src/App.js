@@ -12,6 +12,8 @@ import InteractiveCourseDetail from './pages/InteractiveCourseDetail';
 import TestCourses from './pages/TestCourses';
 import AICourseGenerator from './pages/AICourseGenerator';
 import FindValidCourses from './pages/FindValidCourses';
+import TestInteractiveWorkspace from './pages/TestInteractiveWorkspace';
+import DebugInteractiveCourse from './pages/DebugInteractiveCourse';
 import DebugCourse from "./pages/DebugCourse";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
@@ -211,6 +213,8 @@ function App() {
                     <Route path="/course-creator" element={<CourseCreator />} />
                     <Route path="/ai-course-generator" element={<AICourseGenerator />} />
                     <Route path="/find-valid-courses" element={<FindValidCourses />} />
+                    <Route path="/test-interactive-workspace" element={<TestInteractiveWorkspace />} />
+                    <Route path="/debug-interactive-course/:id" element={<DebugInteractiveCourse />} />
                     <Route path="/conversational-course-test" element={<ConversationalCourseTest />} />
                     <Route path="/conversational-demo" element={<ConversationalDemo />} />
                     <Route path="/super-intelligent-demo" element={<SuperIntelligentTrendyDemo />} />
