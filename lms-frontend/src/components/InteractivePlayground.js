@@ -1,116 +1,122 @@
 import React, { useState } from 'react';
 
-const InteractivePlayground = ({ lesson }) => {
-  const [activeTab, setActiveTab] = useState('editor');
+const InteractivePlayground = ({ activeTab, onTabChange, lesson }) => {
   const [code, setCode] = useState('// Write your code here\nconsole.log("Hello, Vibe Coding!");');
+  const [prompt, setPrompt] = useState('');
   const [output, setOutput] = useState('');
-  const [isRunning, setIsRunning] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
 
-  const runCode = () => {
-    setIsRunning(true);
-    // Simulate code execution
+  const handleGenerate = async () => {
+    if (!prompt.trim()) return;
+    
+    setIsGenerating(true);
+    setOutput('Generating response...');
+    
+    // Simulate AI response
     setTimeout(() => {
-      setOutput('Hello, Vibe Coding!\n> Program finished');
-      setIsRunning(false);
-    }, 1000);
+      setOutput(`AI Response to: "${prompt}"
+
+This is a simulated response. In a real implementation, this would connect to an AI service to generate code or content based on your prompt.
+
+For example, if you asked for a function to calculate factorial, it might generate:
+
+function factorial(n) {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+
+console.log(factorial(5)); // Output: 120`);
+      setIsGenerating(false);
+    }, 1500);
   };
 
-  const clearOutput = () => {
-    setOutput('');
+  const handleRunCode = () => {
+    setOutput('Running code...\n\nThis is a simulation. In a real implementation, this would execute your code in a secure environment.\n\nCode executed successfully!');
   };
 
   return (
-    <div className="border-t border-gray-200 h-80 flex flex-col">
+    <div className="h-96 border-t border-gray-200 flex flex-col">
       <div className="flex border-b border-gray-200">
         <button
-          className={`px-4 py-2 text-sm font-medium ${
-            activeTab === 'editor' 
-              ? 'text-brand-cyan border-b-2 border-brand-cyan' 
+          onClick={() => onTabChange('code')}
+          className={`px-4 py-2 font-medium text-sm ${
+            activeTab === 'code'
+              ? 'text-brand-cyan border-b-2 border-brand-cyan'
               : 'text-gray-500 hover:text-gray-700'
           }`}
-          onClick={() => setActiveTab('editor')}
         >
           Code Editor
         </button>
         <button
-          className={`px-4 py-2 text-sm font-medium ${
-            activeTab === 'prompt' 
-              ? 'text-brand-cyan border-b-2 border-brand-cyan' 
+          onClick={() => onTabChange('ai')}
+          className={`px-4 py-2 font-medium text-sm ${
+            activeTab === 'ai'
+              ? 'text-brand-cyan border-b-2 border-brand-cyan'
               : 'text-gray-500 hover:text-gray-700'
           }`}
-          onClick={() => setActiveTab('prompt')}
         >
           AI Prompt Playground
         </button>
         <button
-          className={`px-4 py-2 text-sm font-medium ${
-            activeTab === 'output' 
-              ? 'text-brand-cyan border-b-2 border-brand-cyan' 
+          onClick={() => onTabChange('output')}
+          className={`px-4 py-2 font-medium text-sm ${
+            activeTab === 'output'
+              ? 'text-brand-cyan border-b-2 border-brand-cyan'
               : 'text-gray-500 hover:text-gray-700'
           }`}
-          onClick={() => setActiveTab('output')}
         >
           Output
         </button>
       </div>
 
       <div className="flex-1 overflow-hidden">
-        {activeTab === 'editor' && (
+        {activeTab === 'code' && (
           <div className="h-full flex flex-col">
-            <div className="flex-1 relative">
+            <div className="flex-1 p-4">
               <textarea
-                className="w-full h-full font-mono text-sm p-4 resize-none focus:outline-none"
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
+                className="w-full h-full font-mono text-sm p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-cyan focus:border-brand-cyan"
                 placeholder="Write your code here..."
               />
             </div>
-            <div className="border-t border-gray-200 p-2 flex justify-end">
+            <div className="p-4 border-t border-gray-200">
               <button
-                className="px-4 py-1 bg-red-500 text-white rounded text-sm mr-2"
-                onClick={clearOutput}
+                onClick={handleRunCode}
+                className="btn-primary"
               >
-                Clear
-              </button>
-              <button
-                className={`px-4 py-1 text-white rounded text-sm ${
-                  isRunning ? 'bg-gray-400' : 'bg-green-500 hover:bg-green-600'
-                }`}
-                onClick={runCode}
-                disabled={isRunning}
-              >
-                {isRunning ? 'Running...' : 'Run Code'}
+                Run Code
               </button>
             </div>
           </div>
         )}
 
-        {activeTab === 'prompt' && (
-          <div className="h-full p-4">
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                AI Prompt
-              </label>
+        {activeTab === 'ai' && (
+          <div className="h-full flex flex-col">
+            <div className="flex-1 p-4">
               <textarea
-                className="w-full h-32 border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan"
-                placeholder="Enter your prompt for the AI assistant..."
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                className="w-full h-full font-mono text-sm p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-cyan focus:border-brand-cyan"
+                placeholder="Ask the AI to help you with your project. For example: 'Create a function that sorts an array of numbers' or 'Help me design a user interface for a todo app'"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                AI Response
-              </label>
-              <div className="border border-gray-300 rounded-md p-2 h-32 text-sm text-gray-500">
-                AI response will appear here...
-              </div>
+            <div className="p-4 border-t border-gray-200">
+              <button
+                onClick={handleGenerate}
+                disabled={isGenerating || !prompt.trim()}
+                className="btn-primary disabled:opacity-50"
+              >
+                {isGenerating ? 'Generating...' : 'Ask AI'}
+              </button>
             </div>
           </div>
         )}
 
         {activeTab === 'output' && (
           <div className="h-full p-4">
-            <pre className="bg-gray-800 text-green-400 p-4 h-full overflow-y-auto text-sm rounded">
-              {output || 'No output yet. Run your code to see results.'}
+            <pre className="w-full h-full bg-gray-900 text-green-400 font-mono text-sm p-4 rounded-lg overflow-auto whitespace-pre-wrap">
+              {output || 'Output will appear here after running code or asking AI...'}
             </pre>
           </div>
         )}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import StudentDashboardLayout from "../components/StudentDashboardLayout";
 import Profile from "./Profile";
 import { Link, useNavigate } from 'react-router-dom';
-// import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
+import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
 import { isAuthenticated } from '../services/authService';
 import TodoList from "../components/TodoList";
 import PlannerPage from "./PlannerPage";
@@ -12,9 +12,9 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [activeSection, setActiveSection] = useState("dashboard");
-  // Use real user and course data
-  const user = { name: userName || "Student" };
-  // enrolledCourses will be populated from Supabase
+  // Restore mock user and course data
+  const user = { name: userName || "John Doe" };
+  const enrolledCourses = digitalMarketingCourses.filter(course => ["dm-1", "dm-2"].includes(course.id));
   const assignments = [
     { title: "UI Design", status: "Upcoming" },
     { title: "Node.js Project", status: "In Progress" },
@@ -44,8 +44,8 @@ const Dashboard = () => {
     }
   }, []);
 
-  // Calculate overall progress (placeholder)
-  const overallProgress = 0;
+  // Calculate overall progress
+  const overallProgress = enrolledCourses.length ? Math.round(enrolledCourses.reduce((acc, c) => acc + c.progress, 0) / enrolledCourses.length) : 0;
 
   // TodoList state and handlers
   const [tasks, setTasks] = useState([]);
@@ -78,7 +78,15 @@ const Dashboard = () => {
                 <div className="z-10">
                   <h1 className="text-3xl font-bold mb-1">Welcome back, {user.name}!</h1>
                   <p className="text-gray-600 mb-4">Continue your learning journey and track your progress.</p>
-                  <div>No courses to resume. Visit the <Link to="/courses" className="text-blue-600 hover:underline">Courses page</Link> to enroll in available courses.</div>
+                  {enrolledCourses.length > 0 ? (
+                    <div className="flex items-center gap-4">
+                      <div>
+                        <div className="font-semibold">{enrolledCourses[0].title}</div>
+                        <div className="text-sm text-gray-500">Next lesson: {enrolledCourses[0].nextLesson}</div>
+                      </div>
+                      <Link to={`/course/${enrolledCourses[0].id}/lesson/l1`} className="btn-primary" state={{ fromDashboard: true }} onClick={() => { sessionStorage.setItem('fromDashboard', 'true'); }}>Resume</Link>
+                    </div>
+                  ) : <div>No courses to resume.</div>}
                 </div>
                 <div className="absolute right-0 bottom-0 w-40 h-40 bg-gradient-to-tr from-blue-200 to-purple-200 opacity-40 rounded-full blur-2xl z-0"></div>
               </div>
@@ -96,7 +104,14 @@ const Dashboard = () => {
               <div className="col-span-1 md:col-span-1 row-span-1 rounded-2xl shadow-xl bg-white bento-card flex flex-col p-6">
                 <h2 className="text-lg font-semibold mb-2">Your Courses</h2>
                 <div className="flex flex-col gap-3">
-                  <div className="text-gray-500 italic">Your enrolled courses will appear here after you enroll in real courses.</div>
+                  {enrolledCourses.map(course => (
+                    <div key={course.id} className="bg-blue-50 rounded-lg p-3 flex flex-col shadow-sm">
+                      <div className="font-semibold mb-1">{course.title}</div>
+                      <div className="text-xs text-gray-500 mb-2">Progress: {course.progress}%</div>
+                      {/* Only show the working Go to Course link */}
+                      <Link to={`/course/${course.id}/lesson/${course.id === 'dm-2' ? 'l2' : 'l1'}`} className="btn-primary w-full text-center" state={{ fromDashboard: true }} onClick={() => { sessionStorage.setItem('fromDashboard', 'true'); }}>Go to Course</Link>
+                    </div>
+                  ))}
                 </div>
               </div>
   
@@ -156,7 +171,24 @@ const Dashboard = () => {
           <div className="container mx-auto py-8">
             <h2 className="text-2xl font-bold mb-4">My Courses</h2>
             <div className="bg-white rounded shadow p-6">
-              <p>You are not enrolled in any courses yet. Visit the <Link to="/courses" className="text-blue-600 hover:underline">Courses page</Link> to enroll in available courses.</p>}
+              {enrolledCourses.length === 0 ? (
+                <p>You are not enrolled in any courses yet.</p>
+              ) : (
+                <ul className="list-disc pl-6">
+                  {enrolledCourses.map((course) => (
+                    <li key={course.id} className="mb-3">
+                      <div className="p-4 bg-gradient-to-br from-blue-900 via-cyan-700 to-cyan-400 rounded-2xl shadow-2xl flex flex-col md:flex-row md:items-center md:justify-between transform hover:scale-105 transition-transform duration-300 border-4 border-cyan-200" style={{boxShadow:'0 8px 32px rgba(0,40,120,0.18), 0 1.5px 8px rgba(0,255,255,0.08)'}}>
+                        <div>
+                          <span className="font-semibold text-lg text-white drop-shadow">{course.title}</span>
+                          <span className="block text-cyan-100">Progress: {course.progress}%</span>
+                          <span className="block text-cyan-100">Next lesson: {course.nextLesson}</span>
+                        </div>
+                        <Link to={`/course/${course.id}/lesson/${course.id === 'dm-2' ? 'l2' : 'l1'}`} className="btn-primary mt-2 md:mt-0 shadow-lg" state={{ fromDashboard: true }} onClick={() => { sessionStorage.setItem('fromDashboard', 'true'); }}>Go to Course</Link>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
         )}

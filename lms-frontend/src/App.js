@@ -8,13 +8,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
-import InteractiveCourseDetail from './pages/InteractiveCourseDetail';
-import TestCourses from './pages/TestCourses';
-import AICourseGenerator from './pages/AICourseGenerator';
-import FindValidCourses from './pages/FindValidCourses';
-import TestInteractiveWorkspace from './pages/TestInteractiveWorkspace';
-import DebugInteractiveCourse from './pages/DebugInteractiveCourse';
-import DebugCourse from "./pages/DebugCourse";
+import InteractiveCourseDetail from "./pages/InteractiveCourseDetail";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
@@ -32,11 +26,8 @@ import TestAI from "./pages/TestAI";
 import ConversationalCourseTest from "./pages/ConversationalCourseTest";
 import ConversationalDemo from "./pages/ConversationalDemo";
 import SuperIntelligentTrendyDemo from "./demo/SuperIntelligentTrendyDemo";
-import VibeCodingCourse from "./pages/VibeCodingCourse";
-import TestVibeCoding from "./pages/TestVibeCoding";
-import AdminDashboard from "./pages/AdminDashboard";
 import FunctionCallingDemo from "./demo/FunctionCallingDemo";
-// import { digitalMarketingCourses } from "./data/digitalMarketingCourses";
+import { digitalMarketingCourses } from "./data/digitalMarketingCourses";
 import { login, signup, logout, getCurrentUser } from "./services/authService";
 import "./App.css";
 import AdminPage from "./pages/AdminPage";
@@ -55,8 +46,6 @@ function App() {
     const [isLoading, setIsLoading] = useState(true);
     // Move useNavigate inside the App function
     const navigate = useNavigate();
-
-    // Force rebuild to trigger deployment
 
     const handleLogin = () => {
         setIsLoginModalOpen(true);
@@ -173,10 +162,11 @@ function App() {
     // Wrapper to use useParams for lesson route
     const LessonViewerWrapper = () => {
         const { id, lessonId } = useParams();
-        // TODO: Replace with API call to get course from Supabase
-        // For now, redirect to course detail page which will handle real data
-        window.location.href = `/course/${id}`;
-        return <div>Loading course...</div>;
+        // TODO: Replace with API call to get course
+        const course = digitalMarketingCourses.find(c => c.id === id);
+        if (!course) return <div>Course Not Found</div>;
+        // Pass lessonId as prop to LessonViewer
+        return <LessonViewer key={lessonId} course={course} lessonId={lessonId} />;
     };
 
     return (
@@ -195,7 +185,6 @@ function App() {
                     <Route path="/course/:id/*" element={<InteractiveCourseDetail user={user} onLogin={handleLogin} onSignup={handleSignup} />} />
                     <Route path="/course/:id/lesson/:lessonId" element={<LessonViewerWrapper />} />
                     <Route path="/course/:id/module-quiz" element={<ModuleQuiz />} />
-                    <Route path="/test-courses" element={<TestCourses />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/profile" element={<Profile user={user} />} />
                     <Route path="/contact" element={<Contact />} />
@@ -214,18 +203,10 @@ function App() {
                     <Route path="/certificates" element={<CertificateDashboard />} />
                     <Route path="/certificate-preview" element={<CertificatePreview />} />
                     <Route path="/course-creator" element={<CourseCreator />} />
-                    <Route path="/ai-course-generator" element={<AICourseGenerator />} />
-                    <Route path="/find-valid-courses" element={<FindValidCourses />} />
-                    <Route path="/test-interactive-workspace" element={<TestInteractiveWorkspace />} />
-                    <Route path="/debug-interactive-course/:id" element={<DebugInteractiveCourse />} />
                     <Route path="/conversational-course-test" element={<ConversationalCourseTest />} />
                     <Route path="/conversational-demo" element={<ConversationalDemo />} />
                     <Route path="/super-intelligent-demo" element={<SuperIntelligentTrendyDemo />} />
                     <Route path="/function-calling-demo" element={<FunctionCallingDemo />} />
-                    <Route path="/debug-course/:id" element={<DebugCourse />} />
-                    <Route path="/vibe-coding/:id" element={<VibeCodingCourse />} />
-                    <Route path="/test-vibe-coding" element={<TestVibeCoding />} />
-                    <Route path="/admin-dashboard" element={<AdminDashboard />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>
