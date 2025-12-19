@@ -10,6 +10,7 @@ import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
 import InteractiveCourseDetail from './pages/InteractiveCourseDetail';
 import TestCourses from './pages/TestCourses';
+import AICourseGenerator from './pages/AICourseGenerator';
 import DebugCourse from "./pages/DebugCourse";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
@@ -207,6 +208,7 @@ function App() {
                     <Route path="/certificates" element={<CertificateDashboard />} />
                     <Route path="/certificate-preview" element={<CertificatePreview />} />
                     <Route path="/course-creator" element={<CourseCreator />} />
+                    <Route path="/ai-course-generator" element={<AICourseGenerator />} />
                     <Route path="/conversational-course-test" element={<ConversationalCourseTest />} />
                     <Route path="/conversational-demo" element={<ConversationalDemo />} />
                     <Route path="/super-intelligent-demo" element={<SuperIntelligentTrendyDemo />} />
