@@ -8,7 +8,8 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
-import InteractiveCourseDetail from "./pages/InteractiveCourseDetail";
+import InteractiveCourseDetail from './pages/InteractiveCourseDetail';
+import TestCourses from './pages/TestCourses';
 import DebugCourse from "./pages/DebugCourse";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
@@ -187,6 +188,7 @@ function App() {
                     <Route path="/course/:id/*" element={<InteractiveCourseDetail user={user} onLogin={handleLogin} onSignup={handleSignup} />} />
                     <Route path="/course/:id/lesson/:lessonId" element={<LessonViewerWrapper />} />
                     <Route path="/course/:id/module-quiz" element={<ModuleQuiz />} />
+                    <Route path="/test-courses" element={<TestCourses />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/profile" element={<Profile user={user} />} />
                     <Route path="/contact" element={<Contact />} />
