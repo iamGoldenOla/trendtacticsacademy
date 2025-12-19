@@ -75,7 +75,7 @@ INSERT INTO modules (
     NOW()
 ),
 (
-    'e4bbea33-dg4f-8b22-ff0b-0ff3fb724e55',
+    'e4bbea33-df4f-8b22-ff0b-0ff3fb724e55',
     'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
     'CSS Styling',
     'Master CSS styling techniques and responsive design',
@@ -85,7 +85,7 @@ INSERT INTO modules (
     NOW()
 ),
 (
-    'f5ccfb44-eh5g-9c33-gg1c-1gg4gc835f66',
+    'f5ccfb44-ef5f-9c33-ff1c-1ff4fc835f66',
     'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
     'JavaScript Basics',
     'Introduction to JavaScript programming',
@@ -109,7 +109,7 @@ INSERT INTO lessons (
 ) VALUES 
 -- Lessons for HTML Fundamentals
 (
-    '06aaf155-f16h-0a14-hh2a-2hh5ha946g77',
+    '06aaf155-f16f-0a14-ff2a-2ff5fa946f77',
     'd3aadf22-cf3e-7a11-ee9a-9ee2ea613d44',
     'HTML Document Structure',
     'Learn about the basic structure of an HTML document including DOCTYPE, html, head, and body tags.',
@@ -119,7 +119,7 @@ INSERT INTO lessons (
     NOW()
 ),
 (
-    '17bbg266-g27i-1b25-ii3b-3ii6ib057h88',
+    '17bbf266-f27f-1b25-ff3b-3ff6fb057f88',
     'd3aadf22-cf3e-7a11-ee9a-9ee2ea613d44',
     'Common HTML Elements',
     'Explore commonly used HTML elements such as headings, paragraphs, lists, and links.',
@@ -130,8 +130,8 @@ INSERT INTO lessons (
 ),
 -- Lessons for CSS Styling
 (
-    '28cch377-h38j-2c36-jj4c-4jj7jc168i99',
-    'e4bbea33-dg4f-8b22-ff0b-0ff3fb724e55',
+    '28ccf377-f38f-2c36-ff4c-4ff7fc168f99',
+    'e4bbea33-df4f-8b22-ff0b-0ff3fb724e55',
     'CSS Selectors',
     'Learn how to select and style HTML elements using various CSS selectors.',
     1,
@@ -140,8 +140,8 @@ INSERT INTO lessons (
     NOW()
 ),
 (
-    '39ddi488-i49k-3d47-kk5d-5kk8kd279j00',
-    'e4bbea33-dg4f-8b22-ff0b-0ff3fb724e55',
+    '39ddf488-f49f-3d47-ff5d-5ff8fd279f00',
+    'e4bbea33-df4f-8b22-ff0b-0ff3fb724e55',
     'Responsive Design',
     'Understand how to create responsive designs that work on different screen sizes.',
     2,
@@ -156,7 +156,7 @@ CREATE OR REPLACE FUNCTION generate_ai_course(
     p_title TEXT,
     p_description TEXT,
     p_category TEXT DEFAULT 'General',
-    p_level TEXT DEFAULT 'Beginner'
+    p_level TEXT DEFAULT 'beginner'
 ) RETURNS UUID AS $$
 DECLARE
     new_course_id UUID;
