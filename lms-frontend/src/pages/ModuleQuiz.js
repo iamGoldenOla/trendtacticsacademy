@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
+// Removed digitalMarketingCourses import to use real course data
 
 const ModuleQuiz = () => {
     const { id } = useParams();
-    const course = digitalMarketingCourses.find(c => c.id === id);
-    const questions = course?.moduleQuiz || [];
+    // TODO: Replace with real course data fetching
+    const course = null;
+    const questions = []; // No questions without real course data
     const [quizStep, setQuizStep] = useState(0);
     const [quizAnswers, setQuizAnswers] = useState([]);
     const [quizCompleted, setQuizCompleted] = useState(false);

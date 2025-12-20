@@ -1,39 +1,10 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
-// Mock course data (should match MyCourses mock data)
-const mockCourses = [
-    {
-        id: 'dm-1',
-        title: 'Fundamentals of Digital Marketing',
-        instructor: 'Jane Doe',
-        thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop',
-        progress: 80,
-        community: true,
-        lessons: [
-            { id: 'l1', title: 'Introduction', completed: true },
-            { id: 'l2', title: 'SEO Basics', completed: true },
-            { id: 'l3', title: 'Social Media', completed: false },
-            { id: 'l4', title: 'Email Marketing', completed: false },
-        ],
-    },
-    {
-        id: 'dm-2',
-        title: 'Website Design for Beginners',
-        instructor: 'John Smith',
-        thumbnail: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=250&fit=crop',
-        progress: 100,
-        community: false,
-        lessons: [
-            { id: 'l1', title: 'Getting Started', completed: true },
-            { id: 'l2', title: 'Design Principles', completed: true },
-            { id: 'l3', title: 'Responsive Design', completed: true },
-        ],
-    },
-];
+// Removed digitalMarketingCourses import and mock data to use real course data
 const CourseDashboard = () => {
     const { courseId } = useParams();
-    const course = digitalMarketingCourses.find((c) => c.id === courseId);
+    // TODO: Replace with real course data fetching
+    const course = null;
     if (!course) {
         return (<div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-12 px-4">
         <h1 className="text-2xl font-bold text-brand-navy mb-4">Course Not Found</h1>
