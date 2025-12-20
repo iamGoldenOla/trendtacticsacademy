@@ -1,77 +1,58 @@
-// Test script to verify course service is working
-const { createClient } = require('@supabase/supabase-js');
+import { createClient } from '@supabase/supabase-js';
 
-// Use the same Supabase configuration as in the frontend
+// Initialize Supabase client
 const supabaseUrl = 'https://uimdbodamoeyukrghchb.supabase.co';
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc';
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 async function testCourseService() {
-  console.log('🔍 Testing course service...');
-  
   try {
-    // Test connection to Supabase
-    console.log('1. Testing Supabase connection...');
-    const { data: healthCheck, error: healthError } = await supabase
-      .from('courses')
-      .select('count()', { count: 'exact' })
-      .limit(1);
+    console.log('Testing course service directly...');
     
-    if (healthError) {
-      console.error('❌ Connection failed:', healthError.message);
-      return;
-    }
-    console.log('✅ Supabase connection successful');
-    
-    // Test fetching published courses
-    console.log('\n2. Fetching published courses...');
-    const { data: courses, error: courseError } = await supabase
+    // Test the exact query used in courseService.getAllCourses()
+    const { data, error } = await supabase
       .from('courses')
-      .select('*')
+      .select(`
+        *,
+        modules (
+          id,
+          title,
+          description,
+          ordering,
+          duration,
+          lessons (
+            id,
+            title,
+            ordering,
+            duration
+          )
+        )
+      `)
       .eq('is_published', true)
-      .limit(5);
-    
-    if (courseError) {
-      console.error('❌ Failed to fetch courses:', courseError.message);
+      .eq('id', 'a1b2c3d4-e5f6-7890-abcd-ef1234567890') // Only fetch Vibe Coding course
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Supabase query error:', error);
       return;
     }
     
-    console.log(`✅ Successfully fetched ${courses.length} published courses`);
+    console.log('Query successful!');
+    console.log('Data received:', JSON.stringify(data, null, 2));
+    console.log('Number of courses:', data ? data.length : 0);
     
-    if (courses.length > 0) {
-      console.log('\nSample courses:');
-      courses.forEach(course => {
-        console.log(`  - ${course.title} (${course.category}) - Published: ${course.is_published}`);
-      });
-    } else {
-      console.log('⚠️  No published courses found');
+    if (data && data.length > 0) {
+      console.log('First course details:');
+      console.log('- ID:', data[0].id);
+      console.log('- Title:', data[0].title);
+      console.log('- Modules count:', data[0].modules ? data[0].modules.length : 0);
     }
-    
-    // Test fetching all courses (including drafts)
-    console.log('\n3. Fetching all courses (published and drafts)...');
-    const { data: allCourses, error: allCoursesError } = await supabase
-      .from('courses')
-      .select('*')
-      .limit(10);
-    
-    if (allCoursesError) {
-      console.error('❌ Failed to fetch all courses:', allCoursesError.message);
-      return;
-    }
-    
-    console.log(`✅ Successfully fetched ${allCourses.length} total courses`);
-    
-    const publishedCount = allCourses.filter(c => c.is_published).length;
-    const draftCount = allCourses.filter(c => !c.is_published).length;
-    
-    console.log(`  - Published courses: ${publishedCount}`);
-    console.log(`  - Draft courses: ${draftCount}`);
-    
-  } catch (error) {
-    console.error('💥 Unexpected error during testing:', error.message);
-    console.error(error.stack);
+
+  } catch (err) {
+    console.error('Unexpected error:', err);
   }
 }
 
+// Run the test
 testCourseService();
