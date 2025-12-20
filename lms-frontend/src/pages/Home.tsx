@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Course } from '../types';
-import { digitalMarketingCourses } from '../data/digitalMarketingCourses';
+import { courseService } from '../services';
 
 /*
 <style jsx global>{`
@@ -36,8 +36,26 @@ import { digitalMarketingCourses } from '../data/digitalMarketingCourses';
 */
 
 const Home: React.FC = () => {
-  // Instead of mock featuredCourses, use the shared data
-  const featuredCourses = digitalMarketingCourses.slice(0, 3); // Show first 3 as featured
+  const [featuredCourses, setFeaturedCourses] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchFeaturedCourses = async () => {
+      try {
+        setLoading(true);
+        // Fetch only the Vibe Coding course
+        const courses = await courseService.getAllCourses();
+        setFeaturedCourses(courses);
+      } catch (error) {
+        console.error('Error fetching featured courses:', error);
+        setFeaturedCourses([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeaturedCourses();
+  }, []);
 
   const features = [
     {
@@ -173,7 +191,7 @@ const Home: React.FC = () => {
               <div key={course.id} className="card hover:shadow-xl transition-shadow duration-300">
                 <div className="relative mb-4">
                   <img
-                    src={course.thumbnail}
+                    src={course.thumbnail_url || course.thumbnail || 'https://placehold.co/400x200'}
                     alt={course.title}
                     className="w-full h-48 object-cover rounded-lg"
                   />
@@ -191,7 +209,7 @@ const Home: React.FC = () => {
                   </p>
                   
                   <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                    <span>By {course.instructor.name}</span>
+                    <span>By {course.instructor?.name || 'Instructor'}</span>
                     <span>{course.duration}</span>
                   </div>
                   
@@ -199,20 +217,20 @@ const Home: React.FC = () => {
                     <div className="flex items-center">
                       <div className="flex text-yellow-400">
                         {[...Array(5)].map((_, i) => (
-                          <svg key={i} className={`w-4 h-4 ${i < Math.floor(course.rating) ? 'fill-current' : 'fill-gray-300'}`} viewBox="0 0 20 20">
+                          <svg key={i} className={`w-4 h-4 ${i < Math.floor(course.rating || 4.5) ? 'fill-current' : 'fill-gray-300'}`} viewBox="0 0 20 20">
                             <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
                           </svg>
                         ))}
                       </div>
-                      <span className="ml-2 text-sm text-gray-600">({course.rating})</span>
+                      <span className="ml-2 text-sm text-gray-600">({course.rating || 4.5})</span>
                     </div>
-                    <span className="text-sm text-gray-500">{course.enrolledStudents} students</span>
+                    <span className="text-sm text-gray-500">{course.enrolledStudents || course.enrolled_students || 0} students</span>
                   </div>
                 </div>
                 
                 <div className="flex items-center justify-between">
                   <span className="text-2xl font-heading font-bold text-brand-navy">
-                    ${course.price}
+                    ${course.price || 0}
                   </span>
                   <Link to={`/course/${course.id}`} className="btn-primary">
                     View Course

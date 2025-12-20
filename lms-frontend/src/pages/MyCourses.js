@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
-// Mock enrolled courses data
-const enrolledCourses = digitalMarketingCourses.filter(course => ["dm-1", "dm-2"].includes(course.id));
+// Removed digitalMarketingCourses import to use real course data
+// TODO: Replace with real enrolled courses data
+const enrolledCourses = [];
 const MyCourses = () => (<div className="min-h-screen flex flex-col items-center bg-gray-50 py-12 px-4">
     <h1 className="text-3xl md:text-4xl font-heading font-bold text-brand-navy mb-4">My Courses</h1>
     {enrolledCourses.length === 0 ? (<>

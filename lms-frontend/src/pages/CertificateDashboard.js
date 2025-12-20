@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
+// Removed digitalMarketingCourses import to use real course data
 import { useNavigate } from "react-router-dom";
 import StudentDashboardLayout from "../components/StudentDashboardLayout";
 import CertificateTemplate from "../components/CertificateTemplate";
@@ -10,24 +10,9 @@ const CertificateDashboard = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Simulate fetching progress data for enrolled courses
-        // In real app, replace with API call
-        const enrolledCourses = digitalMarketingCourses.filter(course => ["dm-1", "dm-2"].includes(course.id));
-        const progressData = enrolledCourses.map(course => {
-            // Remove score property since it's not present in course data
-            const totalLessons = course.lessons ? course.lessons.length : 0;
-            const completedLessons = course.lessons ? course.lessons.filter((l) => l.isCompleted).length : 0;
-            const isCompleted = completedLessons === totalLessons && totalLessons > 0;
-            return {
-                id: course.id,
-                title: course.title,
-                totalLessons,
-                completedLessons,
-                isCompleted,
-                // score: course.bestScore || 0, // removed
-            };
-        });
-        setProgress(progressData);
+        // TODO: Replace with real progress data fetching
+        // For now, show empty progress data
+        setProgress([]);
     }, []);
 
     const handleViewCertificate = (courseId) => {

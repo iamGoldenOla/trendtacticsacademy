@@ -27,7 +27,7 @@ import ConversationalCourseTest from "./pages/ConversationalCourseTest";
 import ConversationalDemo from "./pages/ConversationalDemo";
 import SuperIntelligentTrendyDemo from "./demo/SuperIntelligentTrendyDemo";
 import FunctionCallingDemo from "./demo/FunctionCallingDemo";
-import { digitalMarketingCourses } from "./data/digitalMarketingCourses";
+// Removed digitalMarketingCourses import to use real course data
 import { login, signup, logout, getCurrentUser } from "./services/authService";
 import "./App.css";
 import AdminPage from "./pages/AdminPage";
@@ -163,10 +163,8 @@ function App() {
     const LessonViewerWrapper = () => {
         const { id, lessonId } = useParams();
         // TODO: Replace with API call to get course
-        const course = digitalMarketingCourses.find(c => c.id === id);
-        if (!course) return <div>Course Not Found</div>;
-        // Pass lessonId as prop to LessonViewer
-        return <LessonViewer key={lessonId} course={course} lessonId={lessonId} />;
+        // For now, we'll show a message that this needs to be implemented
+        return <div>Course content loading... This feature needs to be implemented with real course data.</div>;
     };
 
     return (
