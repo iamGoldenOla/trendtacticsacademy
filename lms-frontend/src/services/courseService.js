@@ -4,8 +4,8 @@
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase client (using anon key for now - in production, use backend API)
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL || 'https://your-project.supabase.co';
-const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY || 'your-anon-key';
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL || 'https://uimdbodamoeyukrghchb.supabase.co';
+const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc';
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
@@ -25,13 +25,13 @@ class CourseService {
         .from('courses')
         .select(`
           *,
-          modules (
+          modules!modules_course_id_fkey (
             id,
             title,
             description,
             ordering,
             duration,
-            lessons (
+            lessons!lessons_module_id_fkey (
               id,
               title,
               ordering,
@@ -76,6 +76,7 @@ class CourseService {
       throw error;
     }
   }
+
   // Get course by ID (for course detail page) - Only allow Vibe Coding course
   async getCourseById(courseId) {
     try {
@@ -97,13 +98,13 @@ class CourseService {
         .from('courses')
         .select(`
           *,
-          modules (
+          modules!modules_course_id_fkey (
             id,
             title,
             description,
             ordering,
             duration,
-            lessons (
+            lessons!lessons_module_id_fkey (
               id,
               title,
               ordering,
@@ -144,6 +145,7 @@ class CourseService {
       throw error;
     }
   }
+
   // Enroll user in course
   async enrollInCourse(courseId, userId) {
     try {
