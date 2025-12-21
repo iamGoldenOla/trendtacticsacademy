@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1: Understanding Vibe Coding - Vibe Coding Course</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --brand-navy: #001f3f;
+            --brand-cyan: #39CCCC;
+            --brand-teal: #3D9970;
+            --brand-red: #FF4136;
+            --brand-blue: #0074D9;
+            --brand-orange: #FF851B;
+            --brand-purple: #B10DC9;
+            --brand-yellow: #FFDC00;
+            --brand-gray: #AAAAAA;
+            --brand-light-gray: #DDDDDD;
+            --brand-dark-gray: #111111;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-blue) 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo i {
+            color: var(--brand-cyan);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .breadcrumb {
+            padding: 1rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb a {
+            color: var(--brand-blue);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb span {
+            color: #666;
+        }
+        
+        .module-header {
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-navy) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .module-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .module-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .module-content {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 2rem;
+        }
+        
+        .lesson {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .lesson:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .lesson-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .lesson-number {
+            width: 40px;
+            height: 40px;
+            background: var(--brand-cyan);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .lesson-title {
+            font-size: 1.5rem;
+            color: var(--brand-navy);
+            margin: 0;
+        }
+        
+        .lesson-duration {
+            color: var(--brand-cyan);
+            font-weight: 600;
+            margin-left: auto;
+        }
+        
+        .lesson-content {
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .lesson-content h3 {
+            color: var(--brand-navy);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .lesson-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .lesson-content ul, .lesson-content ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+        
+        .lesson-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .prev-button {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .prev-button:hover {
+            background: #e0e0e0;
+        }
+        
+        .next-button {
+            background: var(--brand-cyan);
+            color: var(--brand-navy);
+        }
+        
+        .next-button:hover {
+            background: #2aacaa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(57, 204, 204, 0.3);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--brand-cyan);
+            width: 20%; /* This would be dynamic in a real implementation */
+            border-radius: 4px;
+        }
+        
+        .progress-text {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .module-header h1 {
+                font-size: 2rem;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-button {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Trendtactics Academy</span>
+                </div>
+                <div class="nav-links">
+                    <a href="/"><i class="fas fa-home"></i> Home</a>
+                    <a href="/courses"><i class="fas fa-book"></i> Courses</a>
+                    <a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="/playground"><i class="fas fa-code"></i> Playground</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Breadcrumb -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">Home</a> <span>/</span>
+            <a href="/courses">Courses</a> <span>/</span>
+            <a href="/courses/vibe-coding">Vibe Coding</a> <span>/</span>
+            <span>Module 1</span>
+        </div>
+    </div>
+    
+    <!-- Module Header -->
+    <section class="module-header">
+        <div class="container">
+            <h1>Module 1: Understanding Vibe Coding</h1>
+            <p>Learn the foundational concepts of Vibe Coding and why it exists as a more intuitive approach to digital creation.</p>
+        </div>
+    </section>
+    
+    <!-- Progress -->
+    <div class="container">
+        <div class="progress-text">Module 1 of 5 • Lesson 1 of 3</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+    
+    <!-- Module Content -->
+    <section class="module-content">
+        <div class="lesson">
+            <div class="lesson-header">
+                <div class="lesson-number">1</div>
+                <h2 class="lesson-title">What Is Vibe Coding?</h2>
+                <div class="lesson-duration">30 minutes</div>
+            </div>
+            
+            <div class="lesson-content">
+                <p>
+                    Welcome to the world of Vibe Coding! This revolutionary approach to digital creation flips traditional coding on its head 
+                    by focusing on ideas, intention, and creativity rather than rigid syntax and technical rules.
+                </p>
+                
+                <h3>The Core Philosophy</h3>
+                <p>
+                    Vibe Coding is built on the principle that digital creation should be an extension of human creativity, not a barrier to it. 
+                    Instead of wrestling with complex code structures, you'll learn to express your ideas naturally and let AI assist in translating 
+                    them into functional digital products.
+                </p>
+                
+                <h3>Key Principles</h3>
+                <ul>
+                    <li><strong>Ideas First:</strong> Focus on what you want to create before worrying about how to build it</li>
+                    <li><strong>Intention Over Syntax:</strong> Communicate your vision clearly rather than memorizing technical rules</li>
+                    <li><strong>Collaboration with AI:</strong> Treat AI as a creative partner, not just a tool</li>
+                    <li><strong>Confidence Through Exploration:</strong> Experiment freely without fear of "doing it wrong"</li>
+                </ul>
+                
+                <h3>Why Traditional Coding Falls Short</h3>
+                <p>
+                    Traditional coding approaches often overwhelm beginners with syntax, frameworks, and technical minutiae before they've even 
+                    formed a clear vision of what they want to create. This leads to frustration, imposter syndrome, and ultimately abandonment 
+                    of creative projects.
+                </p>
+                
+                <h3>How Vibe Coding Is Different</h3>
+                <p>
+                    Vibe Coding removes these barriers by:
+                </p>
+                
+                <ol>
+                    <li>Starting with your creative vision, not technical implementation</li>
+                    <li>Using natural language to express ideas</li>
+                    <li>Leveraging AI to handle the technical translation</li>
+                    <li>Encouraging experimentation and iteration</li>
+                    <li>Building confidence through small, successful steps</li>
+                </ol>
+                
+                <h3>Real-World Applications</h3>
+                <p>
+                    Vibe Coding can be applied to virtually any digital creation:
+                </p>
+                
+                <ul>
+                    <li>Websites and web applications</li>
+                    <li>Mobile apps and games</li>
+                    <li>Data visualizations and dashboards</li>
+                    <li>Automation scripts and workflows</li>
+                    <li>Digital art and interactive media</li>
+                    <li>Prototypes and proof-of-concepts</li>
+                </ul>
+                
+                <p>
+                    By the end of this lesson, you'll understand the fundamental shift in mindset that makes Vibe Coding so powerful and 
+                    accessible to creators of all backgrounds.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Navigation Buttons -->
+        <div class="navigation-buttons">
+            <a href="/courses/vibe-coding" class="nav-button prev-button">
+                <i class="fas fa-arrow-left"></i>
+                Back to Course
+            </a>
+            <a href="module-1-lesson-2.html" class="nav-button next-button">
+                Next Lesson: Why Vibe Coding Exists
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Module 1: Understanding Vibe Coding Loaded');
+        });
+    </script>
+</body>
+</html>
