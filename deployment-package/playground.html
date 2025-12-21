@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Playground - Trendtactics Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --brand-navy: #001f3f;
+            --brand-cyan: #39CCCC;
+            --brand-teal: #3D9970;
+            --brand-red: #FF4136;
+            --brand-blue: #0074D9;
+            --brand-orange: #FF851B;
+            --brand-purple: #B10DC9;
+            --brand-yellow: #FFDC00;
+            --brand-gray: #AAAAAA;
+            --brand-light-gray: #DDDDDD;
+            --brand-dark-gray: #111111;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-blue) 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo i {
+            color: var(--brand-cyan);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .nav-links a.active {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background: var(--brand-cyan);
+            color: var(--brand-navy);
+        }
+        
+        .btn-primary:hover {
+            background: #2aacaa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(57, 204, 204, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .playground-container {
+            display: flex;
+            min-height: calc(100vh - 120px);
+            margin-top: 20px;
+            gap: 20px;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            padding: 1.5rem;
+        }
+        
+        .sidebar h3 {
+            color: var(--brand-navy);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--brand-light-gray);
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #555;
+            text-decoration: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background: rgba(57, 204, 204, 0.1);
+            color: var(--brand-navy);
+        }
+        
+        .sidebar-menu a.active {
+            background: var(--brand-cyan);
+            color: var(--brand-navy);
+            font-weight: 600;
+        }
+        
+        .main-content {
+            flex: 1;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .playground-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .playground-header h1 {
+            color: var(--brand-navy);
+        }
+        
+        .playground-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            height: 60vh;
+        }
+        
+        .editor-panel, .preview-panel {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .panel-header {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-bottom: 1px solid #ddd;
+            font-weight: 600;
+            color: var(--brand-navy);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .editor, .preview {
+            flex: 1;
+            padding: 15px;
+            overflow: auto;
+        }
+        
+        .editor textarea {
+            width: 100%;
+            height: 100%;
+            border: none;
+            resize: none;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            outline: none;
+        }
+        
+        .preview iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+            margin-top: auto;
+        }
+        
+        .examples-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--brand-light-gray);
+        }
+        
+        .section-title {
+            color: var(--brand-navy);
+            margin-bottom: 1.5rem;
+        }
+        
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .example-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+        
+        .example-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: var(--brand-cyan);
+        }
+        
+        .example-card h4 {
+            color: var(--brand-navy);
+            margin-bottom: 0.5rem;
+        }
+        
+        .example-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .playground-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+            
+            .playground-content {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Trendtactics Academy</span>
+                </div>
+                <div class="nav-links">
+                    <a href="/"><i class="fas fa-home"></i> Home</a>
+                    <a href="/courses"><i class="fas fa-book"></i> Courses</a>
+                    <a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="/playground" class="active"><i class="fas fa-flask"></i> Playground</a>
+                    <a href="/whiteboard"><i class="fas fa-chalkboard"></i> Whiteboard</a>
+                </div>
+                <div class="auth-buttons">
+                    <a href="/profile" class="btn btn-secondary">
+                        <i class="fas fa-user"></i> Profile
+                    </a>
+                    <a href="/logout" class="btn btn-primary">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Playground Content -->
+    <div class="container">
+        <div class="playground-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>Playground Tools</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="/playground" class="active"><i class="fas fa-code"></i> HTML/CSS Editor</a></li>
+                    <li><a href="/playground/javascript"><i class="fab fa-js"></i> JavaScript Sandbox</a></li>
+                    <li><a href="/playground/react"><i class="fab fa-react"></i> React Playground</a></li>
+                    <li><a href="/playground/vue"><i class="fab fa-vuejs"></i> Vue Playground</a></li>
+                    <li><a href="/playground/node"><i class="fab fa-node-js"></i> Node.js REPL</a></li>
+                    <li><a href="/playground/python"><i class="fab fa-python"></i> Python Interpreter</a></li>
+                </ul>
+                
+                <div style="margin-top: 2rem;">
+                    <h3>Resources</h3>
+                    <ul class="sidebar-menu">
+                        <li><a href="/playground/snippets"><i class="fas fa-paste"></i> Code Snippets</a></li>
+                        <li><a href="/playground/templates"><i class="fas fa-file-code"></i> Templates</a></li>
+                        <li><a href="/playground/documentation"><i class="fas fa-book"></i> Documentation</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="playground-header">
+                    <h1><i class="fas fa-flask"></i> Interactive Playground</h1>
+                    <div class="actions">
+                        <button class="btn btn-primary" id="runBtn">
+                            <i class="fas fa-play"></i> Run Code
+                        </button>
+                        <button class="btn btn-secondary" id="clearBtn">
+                            <i class="fas fa-trash"></i> Clear
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="playground-content">
+                    <div class="editor-panel">
+                        <div class="panel-header">
+                            <span>Editor</span>
+                            <select id="languageSelector">
+                                <option>HTML/CSS</option>
+                                <option>JavaScript</option>
+                                <option>React JSX</option>
+                            </select>
+                        </div>
+                        <div class="editor">
+                            <textarea id="codeEditor">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Playground&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        .highlight {
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;container&quot;&gt;
+        &lt;h1&gt;Welcome to the Playground!&lt;/h1&gt;
+        &lt;p&gt;This is an interactive environment where you can experiment with HTML, CSS, and JavaScript.&lt;/p&gt;
+        
+        &lt;div class=&quot;highlight&quot;&gt;
+            &lt;p&gt;Try editing this code and click &quot;Run Code&quot; to see your changes!&lt;/p&gt;
+        &lt;/div&gt;
+        
+        &lt;button onclick=&quot;changeColor()&quot; style=&quot;padding: 10px 20px; font-size: 1rem; background: #fff; color: #667eea; border: none; border-radius: 5px; cursor: pointer;&quot;&gt;
+            Change Background
+        &lt;/button&gt;
+    &lt;/div&gt;
+    
+    &lt;script&gt;
+        function changeColor() {
+            const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.background = `linear-gradient(135deg, ${randomColor} 0%, ${randomColor} 100%)`;
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-panel">
+                        <div class="panel-header">
+                            <span>Preview</span>
+                            <span id="previewStatus">Ready</span>
+                        </div>
+                        <div class="preview">
+                            <iframe id="previewFrame" title="Playground Preview"></iframe>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="toolbar">
+                    <button class="btn btn-primary" id="saveBtn">
+                        <i class="fas fa-save"></i> Save Project
+                    </button>
+                    <button class="btn btn-secondary" id="shareBtn">
+                        <i class="fas fa-share"></i> Share
+                    </button>
+                    <button class="btn btn-secondary" id="downloadBtn">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+                
+                <div class="examples-section">
+                    <h2 class="section-title">Example Projects</h2>
+                    <div class="examples-grid">
+                        <div class="example-card" onclick="loadExample('animation')">
+                            <h4><i class="fas fa-magic"></i> CSS Animations</h4>
+                            <p>Create stunning animations with CSS transitions</p>
+                        </div>
+                        <div class="example-card" onclick="loadExample('calculator')">
+                            <h4><i class="fas fa-calculator"></i> JavaScript Calculator</h4>
+                            <p>Build a functional calculator with JavaScript</p>
+                        </div>
+                        <div class="example-card" onclick="loadExample('todo')">
+                            <h4><i class="fas fa-tasks"></i> Todo App</h4>
+                            <p>Create a complete todo application</p>
+                        </div>
+                        <div class="example-card" onclick="loadExample('gallery')">
+                            <h4><i class="fas fa-images"></i> Image Gallery</h4>
+                            <p>Build a responsive image gallery</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Playground Loaded Successfully');
+            
+            const codeEditor = document.getElementById('codeEditor');
+            const previewFrame = document.getElementById('previewFrame');
+            const runBtn = document.getElementById('runBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            
+            // Run code function
+            function runCode() {
+                const code = codeEditor.value;
+                const previewDocument = previewFrame.contentDocument || previewFrame.contentWindow.document;
+                
+                previewDocument.open();
+                previewDocument.write(code);
+                previewDocument.close();
+                
+                document.getElementById('previewStatus').textContent = 'Running';
+                setTimeout(() => {
+                    document.getElementById('previewStatus').textContent = 'Ready';
+                }, 1000);
+            }
+            
+            // Clear editor function
+            function clearEditor() {
+                codeEditor.value = '';
+                const previewDocument = previewFrame.contentDocument || previewFrame.contentWindow.document;
+                previewDocument.open();
+                previewDocument.write('');
+                previewDocument.close();
+            }
+            
+            // Load example function
+            function loadExample(exampleType) {
+                let exampleCode = '';
+                
+                switch(exampleType) {
+                    case 'animation':
+                        exampleCode = `<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Animation Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .animated-box {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            border-radius: 10px;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-box"></div>
+</body>
+</html>`;
+                        break;
+                        
+                    case 'calculator':
+                        exampleCode = `<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f0f0f0;
+            margin: 0;
+        }
+        .calculator {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .display {
+            width: 100%;
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            padding: 0 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #f0f0f0;
+        }
+        button:hover {
+            background: #e0e0e0;
+        }
+        .operator {
+            background: #4ECDC4;
+            color: white;
+        }
+        .equals {
+            background: #FF6B6B;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="display" id="display" readonly>
+        <div class="buttons">
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="appendToDisplay('/')">/</button>
+            <button onclick="appendToDisplay('*')">*</button>
+            <button onclick="appendToDisplay('-')">-</button>
+            
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('+')" class="operator">+</button>
+            
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="calculate()" class="equals">=</button>
+            
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="backspace()">⌫</button>
+        </div>
+    </div>
+    
+    <script>
+        const display = document.getElementById('display');
+        
+        function appendToDisplay(value) {
+            display.value += value;
+        }
+        
+        function clearDisplay() {
+            display.value = '';
+        }
+        
+        function backspace() {
+            display.value = display.value.slice(0, -1);
+        }
+        
+        function calculate() {
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>`;
+                        break;
+                        
+                    default:
+                        exampleCode = codeEditor.value;
+                }
+                
+                codeEditor.value = exampleCode;
+                runCode();
+            }
+            
+            // Event listeners
+            runBtn.addEventListener('click', runCode);
+            clearBtn.addEventListener('click', clearEditor);
+            
+            // Initialize preview
+            runCode();
+        });
+    </script>
+</body>
+</html>
