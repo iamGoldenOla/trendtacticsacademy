@@ -1,0 +1,19 @@
+{
+  "name": "trendtactics-academy-vibe-coding",
+  "version": "1.0.0",
+  "description": "HTML version of Vibe Coding course for Trendtactics Academy",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "education",
+    "course",
+    "vibe-coding",
+    "trendtactics",
+    "academy"
+  ],
+  "author": "Trendtactics Academy",
+  "license": "MIT"
+}
