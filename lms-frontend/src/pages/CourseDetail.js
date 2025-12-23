@@ -130,6 +130,9 @@ const CourseDetail = ({ user, onLogin, onSignup }) => {
     // Use mock course if no course data
     const courseData = course || mockCourse;
 
+    // Check if the course has valid data for display
+    const hasValidCourseData = course && course.id && (course.title || courseData.title);
+
     const handleEnroll = async () => {
         if (!user) {
             if (onLogin) onLogin();
