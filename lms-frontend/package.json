@@ -2,7 +2,7 @@
   "name": "lms-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/trendtacticsacademy",
+  "homepage": "https://iamgoldenola.github.io/trendtacticsacademy",
   "dependencies": {
     "@supabase/supabase-js": "^2.87.3",
     "@testing-library/dom": "^10.4.0",
