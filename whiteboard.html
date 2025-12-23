@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Whiteboard - Trendtactics Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --brand-navy: #001f3f;
+            --brand-cyan: #39CCCC;
+            --brand-teal: #3D9970;
+            --brand-red: #FF4136;
+            --brand-blue: #0074D9;
+            --brand-orange: #FF851B;
+            --brand-purple: #B10DC9;
+            --brand-yellow: #FFDC00;
+            --brand-gray: #AAAAAA;
+            --brand-light-gray: #DDDDDD;
+            --brand-dark-gray: #111111;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-blue) 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo i {
+            color: var(--brand-cyan);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .nav-links a.active {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background: var(--brand-cyan);
+            color: var(--brand-navy);
+        }
+        
+        .btn-primary:hover {
+            background: #2aacaa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(57, 204, 204, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .whiteboard-container {
+            display: flex;
+            height: calc(100vh - 120px);
+            margin-top: 20px;
+            gap: 20px;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar h3 {
+            color: var(--brand-navy);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--brand-light-gray);
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            flex: 1;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #555;
+            text-decoration: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background: rgba(57, 204, 204, 0.1);
+            color: var(--brand-navy);
+        }
+        
+        .sidebar-menu a.active {
+            background: var(--brand-cyan);
+            color: var(--brand-navy);
+            font-weight: 600;
+        }
+        
+        .collaborators {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .collaborator-list {
+            list-style: none;
+        }
+        
+        .collaborator-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .collaborator-item.online {
+            background: rgba(57, 204, 204, 0.1);
+        }
+        
+        .collaborator-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--brand-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 0.8rem;
+            font-size: 0.8rem;
+        }
+        
+        .collaborator-name {
+            font-size: 0.9rem;
+        }
+        
+        .collaborator-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ccc;
+            margin-left: auto;
+        }
+        
+        .collaborator-status.online {
+            background: #4CAF50;
+        }
+        
+        .main-content {
+            flex: 1;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .whiteboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .whiteboard-header h1 {
+            color: var(--brand-navy);
+            font-size: 1.5rem;
+        }
+        
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tool-group {
+            display: flex;
+            gap: 5px;
+            padding: 0 10px;
+            border-right: 1px solid #eee;
+        }
+        
+        .tool-group:last-child {
+            border-right: none;
+        }
+        
+        .tool-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            transition: all 0.2s ease;
+        }
+        
+        .tool-btn:hover {
+            background: #f0f0f0;
+        }
+        
+        .tool-btn.active {
+            background: var(--brand-cyan);
+            color: var(--brand-navy);
+        }
+        
+        .canvas-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+        
+        #whiteboardCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: crosshair;
+        }
+        
+        .color-picker {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .color-option {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .color-option.active {
+            border-color: #333;
+            transform: scale(1.1);
+        }
+        
+        .black { background: #000000; }
+        .red { background: #FF4136; }
+        .blue { background: #0074D9; }
+        .green { background: #2ECC40; }
+        .yellow { background: #FFDC00; }
+        .purple { background: #B10DC9; }
+        .orange { background: #FF851B; }
+        
+        .status-bar {
+            padding: 0.5rem 1.5rem;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        @media (max-width: 768px) {
+            .whiteboard-container {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Trendtactics Academy</span>
+                </div>
+                <div class="nav-links">
+                    <a href="/"><i class="fas fa-home"></i> Home</a>
+                    <a href="/about"><i class="fas fa-info-circle"></i> About</a>
+                    <a href="/courses"><i class="fas fa-book"></i> Courses</a>
+                    <a href="/contact"><i class="fas fa-envelope"></i> Contact</a>
+                    <a href="/login" class="btn btn-secondary">Sign In</a>
+                    <a href="/signup" class="btn btn-primary">Sign Up</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Whiteboard Content -->
+    <div class="container">
+        <div class="whiteboard-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>Whiteboard Tools</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="/whiteboard" class="active"><i class="fas fa-chalkboard"></i> Main Board</a></li>
+                    <li><a href="/whiteboard/projects"><i class="fas fa-project-diagram"></i> Project Boards</a></li>
+                    <li><a href="/whiteboard/templates"><i class="fas fa-file-alt"></i> Templates</a></li>
+                    <li><a href="/whiteboard/history"><i class="fas fa-history"></i> Revision History</a></li>
+                    <li><a href="/whiteboard/export"><i class="fas fa-download"></i> Export Options</a></li>
+                </ul>
+                
+                <div class="collaborators">
+                    <h3>Collaborators</h3>
+                    <ul class="collaborator-list">
+                        <li class="collaborator-item online">
+                            <div class="collaborator-avatar">AJ</div>
+                            <div class="collaborator-name">Alex Johnson</div>
+                            <div class="collaborator-status online"></div>
+                        </li>
+                        <li class="collaborator-item online">
+                            <div class="collaborator-avatar">MS</div>
+                            <div class="collaborator-name">Maria Smith</div>
+                            <div class="collaborator-status online"></div>
+                        </li>
+                        <li class="collaborator-item">
+                            <div class="collaborator-avatar">TP</div>
+                            <div class="collaborator-name">Tom Peterson</div>
+                            <div class="collaborator-status"></div>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="whiteboard-header">
+                    <h1><i class="fas fa-chalkboard"></i> Collaborative Whiteboard</h1>
+                    <div class="board-actions">
+                        <button class="btn btn-secondary" id="inviteBtn">
+                            <i class="fas fa-user-plus"></i> Invite
+                        </button>
+                        <button class="btn btn-primary" id="saveBtn">
+                            <i class="fas fa-save"></i> Save
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="toolbar">
+                    <div class="tool-group">
+                        <button class="tool-btn active" id="penTool" title="Pen Tool">
+                            <i class="fas fa-pen"></i>
+                        </button>
+                        <button class="tool-btn" id="eraserTool" title="Eraser">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                        <button class="tool-btn" id="lineTool" title="Line Tool">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button class="tool-btn" id="rectangleTool" title="Rectangle">
+                            <i class="far fa-square"></i>
+                        </button>
+                        <button class="tool-btn" id="circleTool" title="Circle">
+                            <i class="far fa-circle"></i>
+                        </button>
+                        <button class="tool-btn" id="textTool" title="Text">
+                            <i class="fas fa-font"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="tool-group">
+                        <div class="color-picker">
+                            <div class="color-option black active" data-color="#000000"></div>
+                            <div class="color-option red" data-color="#FF4136"></div>
+                            <div class="color-option blue" data-color="#0074D9"></div>
+                            <div class="color-option green" data-color="#2ECC40"></div>
+                            <div class="color-option yellow" data-color="#FFDC00"></div>
+                            <div class="color-option purple" data-color="#B10DC9"></div>
+                            <div class="color-option orange" data-color="#FF851B"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-group">
+                        <button class="tool-btn" id="undoBtn" title="Undo">
+                            <i class="fas fa-undo"></i>
+                        </button>
+                        <button class="tool-btn" id="redoBtn" title="Redo">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                        <button class="tool-btn" id="clearBtn" title="Clear Board">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="canvas-container">
+                    <canvas id="whiteboardCanvas" width="1000" height="600"></canvas>
+                </div>
+                
+                <div class="status-bar">
+                    <div class="tool-status">Pen Tool Active</div>
+                    <div class="collaboration-status">2 collaborators online</div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Whiteboard Loaded Successfully');
+            
+            const canvas = document.getElementById('whiteboardCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size to match container
+            function resizeCanvas() {
+                const container = canvas.parentElement;
+                canvas.width = container.clientWidth;
+                canvas.height = container.clientHeight;
+                
+                // Redraw content if needed (in a real app, you'd store the drawing data)
+                redrawCanvas();
+            }
+            
+            // Initial resize
+            resizeCanvas();
+            
+            // Handle window resize
+            window.addEventListener('resize', resizeCanvas);
+            
+            // Drawing state
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+            let currentTool = 'pen';
+            let currentColor = '#000000';
+            let lineWidth = 3;
+            
+            // Set up canvas context
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            ctx.lineWidth = lineWidth;
+            ctx.strokeStyle = currentColor;
+            
+            // Tool buttons
+            const toolButtons = {
+                pen: document.getElementById('penTool'),
+                eraser: document.getElementById('eraserTool'),
+                line: document.getElementById('lineTool'),
+                rectangle: document.getElementById('rectangleTool'),
+                circle: document.getElementById('circleTool'),
+                text: document.getElementById('textTool')
+            };
+            
+            // Color options
+            const colorOptions = document.querySelectorAll('.color-option');
+            
+            // Set active tool
+            function setActiveTool(tool) {
+                currentTool = tool;
+                
+                // Update UI
+                Object.values(toolButtons).forEach(btn => btn.classList.remove('active'));
+                toolButtons[tool].classList.add('active');
+                
+                // Update cursor
+                if (tool === 'eraser') {
+                    canvas.style.cursor = 'pointer';
+                } else {
+                    canvas.style.cursor = 'crosshair';
+                }
+                
+                // Update status
+                document.querySelector('.tool-status').textContent = 
+                    tool.charAt(0).toUpperCase() + tool.slice(1) + ' Tool Active';
+            }
+            
+            // Set active color
+            function setActiveColor(color) {
+                currentColor = color;
+                
+                // Update UI
+                colorOptions.forEach(option => option.classList.remove('active'));
+                event.target.classList.add('active');
+                
+                // Update canvas context
+                ctx.strokeStyle = currentColor;
+            }
+            
+            // Drawing functions
+            function startDrawing(e) {
+                isDrawing = true;
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+            }
+            
+            function draw(e) {
+                if (!isDrawing) return;
+                
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+                
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+            }
+            
+            function stopDrawing() {
+                isDrawing = false;
+            }
+            
+            // Redraw canvas (placeholder for now)
+            function redrawCanvas() {
+                // In a real app, this would redraw stored drawing data
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw a welcome message
+                ctx.font = '20px Arial';
+                ctx.fillStyle = '#cccccc';
+                ctx.textAlign = 'center';
+                ctx.fillText('Start drawing on the whiteboard!', canvas.width/2, canvas.height/2);
+            }
+            
+            // Clear canvas
+            function clearCanvas() {
+                if (confirm('Are you sure you want to clear the entire whiteboard?')) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    redrawCanvas();
+                }
+            }
+            
+            // Event listeners for tools
+            Object.keys(toolButtons).forEach(tool => {
+                toolButtons[tool].addEventListener('click', () => setActiveTool(tool));
+            });
+            
+            // Event listeners for colors
+            colorOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    setActiveColor(e.target.dataset.color);
+                });
+            });
+            
+            // Canvas event listeners
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+            
+            // Clear button
+            document.getElementById('clearBtn').addEventListener('click', clearCanvas);
+            
+            // Undo/Redo buttons (placeholders)
+            document.getElementById('undoBtn').addEventListener('click', function() {
+                alert('Undo functionality would be implemented in a full version');
+            });
+            
+            document.getElementById('redoBtn').addEventListener('click', function() {
+                alert('Redo functionality would be implemented in a full version');
+            });
+            
+            // Initialize
+            setActiveTool('pen');
+            redrawCanvas();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Trendtactics Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --brand-navy: #001f3f;
+            --brand-cyan: #39CCCC;
+            --brand-teal: #3D9970;
+            --brand-red: #FF4136;
+            --brand-blue: #0074D9;
+            --brand-orange: #FF851B;
+            --brand-purple: #B10DC9;
+            --brand-yellow: #FFDC00;
+            --brand-gray: #AAAAAA;
+            --brand-light-gray: #DDDDDD;
+            --brand-dark-gray: #111111;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-blue) 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo i {
+            color: var(--brand-cyan);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--brand-navy) 0%, #003366 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+        
+        .about-section {
+            padding: 4rem 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--brand-navy);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--brand-cyan);
+            border-radius: 2px;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .mission-card, .vision-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            border: 1px solid #eee;
+        }
+        
+        .mission-card h3, .vision-card h3 {
+            color: var(--brand-navy);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .mission-card p, .vision-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .team-section {
+            padding: 4rem 0;
+            background: #f8f9fa;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid #eee;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+        
+        .member-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--brand-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 1rem;
+        }
+        
+        .member-name {
+            font-size: 1.2rem;
+            color: var(--brand-navy);
+            margin-bottom: 0.5rem;
+        }
+        
+        .member-role {
+            color: var(--brand-cyan);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .member-bio {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .footer {
+            background: var(--brand-navy);
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--brand-cyan);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Trendtactics Academy</span>
+                </div>
+                <div class="nav-links">
+                    <a href="/"><i class="fas fa-home"></i> Home</a>
+                    <a href="/about" class="active"><i class="fas fa-info-circle"></i> About</a>
+                    <a href="/courses"><i class="fas fa-book"></i> Courses</a>
+                    <a href="/contact"><i class="fas fa-envelope"></i> Contact</a>
+                    <a href="/login" class="btn btn-secondary">Sign In</a>
+                    <a href="/signup" class="btn btn-primary">Sign Up</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>About Trendtactics Academy</h1>
+            <p>Empowering creators with innovative learning approaches for the digital age</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title">Our Story</h2>
+            <div class="about-content">
+                <p>Trendtactics Academy was founded with a simple yet powerful mission: to make digital education accessible, engaging, and effective for everyone. We believe that learning should be an adventure, not a chore.</p>
+                <p>Our innovative approach combines traditional educational methods with cutting-edge technology to create immersive learning experiences. We focus on practical, hands-on learning that prepares students for real-world challenges.</p>
+                <p>From our humble beginnings in 2023, we've grown to serve thousands of students worldwide, offering courses in web development, app development, digital marketing, and emerging technologies.</p>
+            </div>
+
+            <div class="mission-vision">
+                <div class="mission-card">
+                    <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                    <p>To democratize digital education by providing high-quality, accessible learning experiences that empower individuals to transform their careers and achieve their digital goals.</p>
+                </div>
+                <div class="vision-card">
+                    <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                    <p>To be the leading global platform for digital skills education, fostering a community of lifelong learners who drive innovation and positive change in the digital world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="member-name">Alex Johnson</h3>
+                    <div class="member-role">Founder & CEO</div>
+                    <p class="member-bio">Visionary leader with 15+ years in education technology and a passion for making learning accessible to all.</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="member-name">Maria Smith</h3>
+                    <div class="member-role">Head of Education</div>
+                    <p class="member-bio">Educational expert with a background in instructional design and curriculum development.</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="member-name">David Wilson</h3>
+                    <div class="member-role">Technology Director</div>
+                    <p class="member-bio">Tech innovator focused on creating immersive learning experiences through cutting-edge tools.</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="member-name">Sarah Chen</h3>
+                    <div class="member-role">Learning Experience Designer</div>
+                    <p class="member-bio">Passionate about creating engaging, student-centered learning experiences that drive results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Trendtactics Academy</h3>
+                    <p style="color: #ccc; line-height: 1.6;">
+                        Empowering creators with innovative learning approaches for the digital age.
+                    </p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="/courses"><i class="fas fa-book"></i> Courses</a></li>
+                        <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="/blog"><i class="fas fa-blog"></i> Blog</a></li>
+                        <li><a href="/community"><i class="fas fa-users"></i> Community</a></li>
+                        <li><a href="/support"><i class="fas fa-life-ring"></i> Support</a></li>
+                        <li><a href="/faq"><i class="fas fa-question"></i> FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Trendtactics Academy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ About Page Loaded Successfully');
+        });
+    </script>
+</body>
+</html>
