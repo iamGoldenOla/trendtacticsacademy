@@ -13,7 +13,7 @@ async function deployToCPanel() {
             user: process.env.FTP_USER || 'your_ftp_username',
             password: process.env.FTP_PASS || 'your_ftp_password',
             port: process.env.FTP_PORT || 21,
-            remotePath: process.env.FTP_PATH || '/public_html' // Adjust this to your web root
+            remotePath: process.env.FTP_PATH || '/public_html/academy.trendtacticsdigital.com' // Adjust this to your web root
         };
 
         console.log('Connecting to FTP server...');
