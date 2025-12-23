@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/trendtacticsacademy/static/css/main.9ac4f3b7.css",
+    "main.js": "/trendtacticsacademy/static/js/main.60152000.js",
+    "static/js/453.e398a72c.chunk.js": "/trendtacticsacademy/static/js/453.e398a72c.chunk.js",
+    "index.html": "/trendtacticsacademy/index.html",
+    "main.9ac4f3b7.css.map": "/trendtacticsacademy/static/css/main.9ac4f3b7.css.map",
+    "main.60152000.js.map": "/trendtacticsacademy/static/js/main.60152000.js.map",
+    "453.e398a72c.chunk.js.map": "/trendtacticsacademy/static/js/453.e398a72c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9ac4f3b7.css",
+    "static/js/main.60152000.js"
+  ]
+}
