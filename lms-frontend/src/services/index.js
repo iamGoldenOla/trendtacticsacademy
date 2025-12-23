@@ -4,7 +4,7 @@ import * as courseService from "./courseService";
 import * as lessonService from "./lessonService";
 import * as progressService from "./progressService";
 import * as userService from "./userService";
-import * as aiCourseService from "./aiCourseService";
+import aiCourseService from "./aiCourseService";
 
 export * from "./api";
 export * from "./types";
