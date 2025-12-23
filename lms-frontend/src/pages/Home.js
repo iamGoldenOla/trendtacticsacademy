@@ -241,7 +241,7 @@ const Home = () => {
                                             ${course.price || 0}
                                         </span>
                                         <Link 
-                                            to={`/course/${course.id}`} 
+                                            to={`/course/${course.id}/overview`} 
                                             className="btn-primary"
                                         >
                                             View Course
