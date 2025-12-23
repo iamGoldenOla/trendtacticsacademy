@@ -260,7 +260,7 @@ const Courses = () => {
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <Link to={`/course/${course.id}`} className="btn-primary">
+                    <Link to={`/course/${course.id}/overview`} className="btn-primary">
                       View Course
                     </Link>
                   </div>
