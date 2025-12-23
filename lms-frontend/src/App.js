@@ -189,6 +189,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/courses" element={<Courses />} />
+                    <Route path="/course/:id" element={<CourseDetail user={user} onLogin={handleLogin} onSignup={handleSignup} />} />
                     <Route path="/course/:id/*" element={<InteractiveCourseDetail user={user} onLogin={handleLogin} onSignup={handleSignup} />} />
                     <Route path="/course/:id/lesson/:lessonId" element={<LessonViewerWrapper />} />
                     <Route path="/course/:id/module-quiz" element={<ModuleQuiz />} />
