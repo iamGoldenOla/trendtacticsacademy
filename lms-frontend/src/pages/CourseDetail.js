@@ -138,12 +138,14 @@ const CourseDetail = ({ user, onLogin, onSignup }) => {
             if (onLogin) onLogin();
             return;
         }
-        // If the course is free, enroll directly
+        // If the course is free, enroll directly and redirect to interactive course
         if (courseData.price === 0) {
             try {
                 await courseService.enrollInCourse(courseData.id);
                 setIsEnrolled(true);
                 setShowSuccessMessage(true);
+                // Redirect to interactive course structure after enrollment
+                window.location.href = `/course/${courseData.id}/overview`;
                 // Hide success message after 5 seconds
                 setTimeout(() => {
                     setShowSuccessMessage(false);
@@ -295,13 +297,15 @@ const CourseDetail = ({ user, onLogin, onSignup }) => {
 
                   {isEnrolled ? (
                     <div className="flex flex-col gap-3">
-                      <button className="w-full btn-primary text-center" disabled={!courseData.modules || courseData.modules.length === 0 || !courseData.modules[0].lessons || courseData.modules[0].lessons.length === 0}>
+                      <button 
+                        onClick={() => window.location.href = `/course/${courseData.id}/overview`} 
+                        className="w-full btn-primary text-center" disabled={!courseData.modules || courseData.modules.length === 0 || !courseData.modules[0].lessons || courseData.modules[0].lessons.length === 0}>
                         {courseData.modules && courseData.modules.length > 0 && courseData.modules[0].lessons && courseData.modules[0].lessons.length > 0 
                           ? 'Continue Learning' 
                           : 'No Lessons Available'}
                       </button>
-                      <Link to="/dashboard" className="w-full btn-secondary text-center">
-                        Go to Dashboard
+                      <Link to={`/course/${courseData.id}/overview`} className="w-full btn-secondary text-center">
+                        Go to Course
                       </Link>
                     </div>
                   ) : (
