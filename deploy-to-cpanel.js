@@ -5,11 +5,12 @@ const ftp = require('basic-ftp');
 async function deployToCPanel() {
     const client = new ftp.Client();
     client.ftp.verbose = true;
+    client.ftp.timeout = 1200000; // 20 minutes timeout
 
     try {
         // Configuration - replace with your actual cPanel/FTP details
         const config = {
-            host: process.env.FTP_HOST || 'your-domain.com',
+            host: process.env.FTP_HOST || '193.227.129.17',
             user: process.env.FTP_USER || 'your_ftp_username',
             password: process.env.FTP_PASS || 'your_ftp_password',
             port: process.env.FTP_PORT || 21,
@@ -22,7 +23,7 @@ async function deployToCPanel() {
         console.log('Connected to FTP server successfully!');
 
         // Upload build directory contents
-        const buildDir = path.join(__dirname, 'lms-frontend', 'build');
+        const buildDir = path.join(__dirname, 'build');
         
         if (!fs.existsSync(buildDir)) {
             throw new Error(`Build directory does not exist: ${buildDir}`);

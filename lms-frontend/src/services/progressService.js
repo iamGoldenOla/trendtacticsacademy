@@ -1,21 +1,28 @@
-import { get, post } from "./api";
-
-const PROGRESS_ENDPOINTS = {
-    GET_USER_PROGRESS: '/progress/user',
-    GET_COURSE_PROGRESS: (courseId) => `/progress/course/${courseId}`,
-    UPDATE_PROGRESS: '/progress',
-};
+import { supabase } from './supabaseClient';
 
 /**
  * Get all progress for the current user
  */
 export const getUserProgress = async () => {
     try {
-        const response = await get(PROGRESS_ENDPOINTS.GET_USER_PROGRESS);
-        if (response.success && response.data) {
-            return response.data;
+        // Get current user
+        const { data: { user }, error: authError } = await supabase.auth.getUser();
+        
+        if (authError || !user) {
+            throw new Error('User not authenticated');
         }
-        return [];
+        
+        const { data: progress, error: progressError } = await supabase
+            .from('lesson_progress')
+            .select('*')
+            .eq('user_id', user.id);
+        
+        if (progressError) {
+            console.error('Error fetching user progress:', progressError.message);
+            return [];
+        }
+        
+        return progress || [];
     }
     catch (error) {
         console.error('Error fetching user progress:', error);
@@ -28,11 +35,25 @@ export const getUserProgress = async () => {
  */
 export const getCourseProgress = async (courseId) => {
     try {
-        const response = await get(PROGRESS_ENDPOINTS.GET_COURSE_PROGRESS(courseId));
-        if (response.success && response.data) {
-            return response.data;
+        // Get current user
+        const { data: { user }, error: authError } = await supabase.auth.getUser();
+        
+        if (authError || !user) {
+            throw new Error('User not authenticated');
         }
-        return [];
+        
+        const { data: progress, error: progressError } = await supabase
+            .from('lesson_progress')
+            .select('*')
+            .eq('user_id', user.id)
+            .eq('course_id', courseId);
+        
+        if (progressError) {
+            console.error('Error fetching course progress:', progressError.message);
+            return [];
+        }
+        
+        return progress || [];
     }
     catch (error) {
         console.error(`Error fetching progress for course ${courseId}:`, error);
@@ -55,16 +76,34 @@ export const calculateCourseCompletion = (progress, totalLessons) => {
  */
 export const updateProgress = async (lessonId, courseId, completed) => {
     try {
-        const progressData = {
-            lesson: lessonId,
-            course: courseId,
-            completed,
-        };
-        const response = await post(PROGRESS_ENDPOINTS.UPDATE_PROGRESS, progressData);
-        if (response.success && response.data) {
-            return response.data;
+        // Get current user
+        const { data: { user }, error: authError } = await supabase.auth.getUser();
+        
+        if (authError || !user) {
+            throw new Error('User not authenticated');
         }
-        return null;
+        
+        // Create or update lesson completion record
+        const { data: progress, error: progressError } = await supabase
+            .from('lesson_progress')
+            .upsert([
+                { 
+                    user_id: user.id, 
+                    course_id: courseId, 
+                    lesson_id: lessonId, 
+                    completed, 
+                    completed_at: completed ? new Date().toISOString() : null
+                }
+            ])
+            .select()
+            .single();
+        
+        if (progressError) {
+            console.error('Error updating progress:', progressError.message);
+            throw new Error(progressError.message);
+        }
+        
+        return progress;
     }
     catch (error) {
         console.error(`Error updating progress for lesson ${lessonId}:`, error);

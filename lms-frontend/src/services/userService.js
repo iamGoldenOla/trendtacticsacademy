@@ -1,21 +1,37 @@
-import { get, put } from "./api";
-
-const USER_ENDPOINTS = {
-    GET_PROFILE: '/users/profile',
-    UPDATE_PROFILE: '/users/profile',
-    UPDATE_PASSWORD: '/users/password',
-};
+import { supabase } from './supabaseClient';
 
 /**
  * Get the current user's profile
  */
 export const getUserProfile = async () => {
     try {
-        const response = await get(USER_ENDPOINTS.GET_PROFILE);
-        if (response.success && response.data) {
-            return response.data;
+        // Get current user from auth
+        const { data: { user }, error: authError } = await supabase.auth.getUser();
+        
+        if (authError || !user) {
+            throw new Error('User not authenticated');
         }
-        return null;
+        
+        // Get user profile from the users table
+        const { data: profile, error: profileError } = await supabase
+            .from('users')
+            .select('*')
+            .eq('id', user.id)
+            .single();
+        
+        if (profileError) {
+            // If no profile exists, return basic user info
+            return {
+                id: user.id,
+                email: user.email,
+                name: user.user_metadata?.name || user.email.split('@')[0],
+                role: 'student',
+                created_at: user.created_at,
+                enrolled_courses: [],
+            };
+        }
+        
+        return profile;
     }
     catch (error) {
         console.error('Error fetching user profile:', error);
@@ -28,22 +44,54 @@ export const getUserProfile = async () => {
  */
 export const updateUserProfile = async (userData) => {
     try {
-        const response = await put(USER_ENDPOINTS.UPDATE_PROFILE, userData);
-        if (response.success && response.data) {
-            // Update the user in localStorage
-            const userJson = localStorage.getItem('user');
-            if (userJson) {
-                const currentUser = JSON.parse(userJson);
-                const updatedUser = { ...currentUser, ...response.data };
-                localStorage.setItem('user', JSON.stringify(updatedUser));
-            }
-            return response.data;
+        // Get current user from auth
+        const { data: { user }, error: authError } = await supabase.auth.getUser();
+        
+        if (authError || !user) {
+            throw new Error('User not authenticated');
         }
-        return null;
+        
+        // Update user profile in the database
+        const { data: profile, error: profileError } = await supabase
+            .from('users')
+            .update({
+                ...userData,
+                updated_at: new Date().toISOString(),
+            })
+            .eq('id', user.id)
+            .select()
+            .single();
+        
+        if (profileError) {
+            console.error('Error updating user profile:', profileError.message);
+            throw new Error(profileError.message || 'Failed to update profile');
+        }
+        
+        // Update user metadata in auth if needed
+        if (userData.name) {
+            const { error: metadataError } = await supabase.auth.updateUser({
+                data: { name: userData.name }
+            });
+            
+            if (metadataError) {
+                console.error('Error updating user metadata:', metadataError);
+                // Don't throw error here as profile was updated in DB
+            }
+        }
+        
+        // Update the user in localStorage
+        const userJson = localStorage.getItem('user');
+        if (userJson) {
+            const currentUser = JSON.parse(userJson);
+            const updatedUser = { ...currentUser, ...profile };
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+        }
+        
+        return profile;
     }
     catch (error) {
         console.error('Error updating user profile:', error);
-        throw new Error(error.response?.data?.message || error.message || 'Failed to update profile');
+        throw new Error(error.message || 'Failed to update profile');
     }
 };
 
@@ -52,15 +100,21 @@ export const updateUserProfile = async (userData) => {
  */
 export const updatePassword = async (currentPassword, newPassword) => {
     try {
-        const response = await put(USER_ENDPOINTS.UPDATE_PASSWORD, {
-            currentPassword,
-            newPassword,
+        // Use Supabase's change password function
+        const { error } = await supabase.auth.updateUser({
+            password: newPassword,
         });
-        return response.success;
+        
+        if (error) {
+            console.error('Error updating password:', error.message);
+            throw new Error(error.message || 'Failed to update password');
+        }
+        
+        return { success: true };
     }
     catch (error) {
         console.error('Error updating password:', error);
-        throw new Error(error.response?.data?.message || error.message || 'Failed to update password');
+        throw new Error(error.message || 'Failed to update password');
     }
 };
 
