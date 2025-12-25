@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/trendtacticsacademy/static/css/main.9ac4f3b7.css",
-    "main.js": "/trendtacticsacademy/static/js/main.60152000.js",
-    "static/js/453.e398a72c.chunk.js": "/trendtacticsacademy/static/js/453.e398a72c.chunk.js",
-    "index.html": "/trendtacticsacademy/index.html",
-    "main.9ac4f3b7.css.map": "/trendtacticsacademy/static/css/main.9ac4f3b7.css.map",
-    "main.60152000.js.map": "/trendtacticsacademy/static/js/main.60152000.js.map",
-    "453.e398a72c.chunk.js.map": "/trendtacticsacademy/static/js/453.e398a72c.chunk.js.map"
+    "main.css": "./static/css/main.9ac4f3b7.css",
+    "main.js": "./static/js/main.2d98b0f7.js",
+    "static/js/453.e398a72c.chunk.js": "./static/js/453.e398a72c.chunk.js",
+    "index.html": "./index.html",
+    "main.9ac4f3b7.css.map": "./static/css/main.9ac4f3b7.css.map",
+    "main.2d98b0f7.js.map": "./static/js/main.2d98b0f7.js.map",
+    "453.e398a72c.chunk.js.map": "./static/js/453.e398a72c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9ac4f3b7.css",
-    "static/js/main.60152000.js"
+    "static/js/main.2d98b0f7.js"
   ]
 }

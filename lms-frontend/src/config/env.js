@@ -9,7 +9,7 @@ const getApiBaseUrl = () => {
         return process.env.REACT_APP_API_URL || 'http://localhost:5000';
     }
     // In production, use the production API URL
-    return process.env.REACT_APP_API_URL || 'https://your-production-api.com';
+    return process.env.REACT_APP_API_URL || 'https://academy.trendtacticsdigital.com';
 };
 
 export const config = {
