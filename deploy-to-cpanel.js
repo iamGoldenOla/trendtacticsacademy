@@ -23,8 +23,8 @@ async function deployToCPanel() {
         console.log('Connected to FTP server successfully!');
 
         // Upload build directory contents
-        const buildDir = path.join(__dirname, 'build');
-        
+        const buildDir = path.join(__dirname, 'lms-frontend', 'build');
+
         if (!fs.existsSync(buildDir)) {
             throw new Error(`Build directory does not exist: ${buildDir}`);
         }
@@ -33,7 +33,7 @@ async function deployToCPanel() {
         await client.uploadFromDir(buildDir, config.remotePath);
 
         console.log('Upload completed successfully!');
-        
+
     } catch (err) {
         console.error('Deployment failed:', err);
         process.exit(1);
