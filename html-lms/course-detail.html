@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Coding - Trendtactics Academy</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">Trendtactics Academy</div>
+            <nav class="nav">
+                <a href="/">Home</a>
+                <a href="/courses.html">Courses</a>
+                <a href="/dashboard.html" id="dashboardLink" style="display:none;">Dashboard</a>
+                <button class="btn btn-secondary" id="authBtn" onclick="handleAuthClick()">Sign In</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container" style="padding: 3rem 0;">
+        <!-- Course Hero -->
+        <div class="hero">
+            <span class="badge badge-primary">Beginner Friendly</span>
+            <h1 class="hero-title">Vibe Coding</h1>
+            <p class="hero-subtitle">Learn to create digital products by focusing on ideas, intention, creativity, and
+                guidance</p>
+        </div>
+
+        <!-- Course Info Grid -->
+        <div class="grid grid-2" style="margin-bottom: 3rem;">
+            <!-- Course Details Card -->
+            <div class="card">
+                <h2 class="card-title">Course Overview</h2>
+                <p class="card-description">
+                    Vibe Coding is a revolutionary approach to learning programming. Instead of memorizing syntax,
+                    you'll focus on expressing your ideas clearly and using AI as a creative partner.
+                </p>
+
+                <div style="margin-top: 2rem;">
+                    <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">What You'll Learn</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0; color: var(--text-secondary);">
+                            ✨ Think before you code
+                        </li>
+                        <li style="padding: 0.5rem 0; color: var(--text-secondary);">
+                            🤖 Work with AI as a creative partner
+                        </li>
+                        <li style="padding: 0.5rem 0; color: var(--text-secondary);">
+                            🎨 Build real projects with confidence
+                        </li>
+                        <li style="padding: 0.5rem 0; color: var(--text-secondary);">
+                            🚀 Use safe environments to experiment
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Enrollment Card -->
+            <div class="card"
+                style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none;">
+                <h2 class="card-title" style="color: white;">Ready to Start?</h2>
+                <p style="color: rgba(255,255,255,0.9); margin-bottom: 2rem;">
+                    Join thousands of learners and begin your creative coding journey today.
+                </p>
+
+                <div
+                    style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: var(--radius); margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <span style="color: rgba(255,255,255,0.9);">Duration</span>
+                        <span style="color: white; font-weight: 600;">6 weeks</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <span style="color: rgba(255,255,255,0.9);">Level</span>
+                        <span style="color: white; font-weight: 600;">Beginner</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: rgba(255,255,255,0.9);">Price</span>
+                        <span style="color: white; font-weight: 600; font-size: 1.5rem;">FREE</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-lg" id="enrollBtn" onclick="handleEnroll()"
+                    style="width: 100%; background: white; color: var(--primary);">
+                    <span id="enrollBtnText">Enroll Now</span>
+                </button>
+
+                <div id="enrollMessage"
+                    style="margin-top: 1rem; padding: 1rem; border-radius: var(--radius); display: none;"></div>
+            </div>
+        </div>
+
+        <!-- Course Modules -->
+        <div class="card">
+            <h2 class="card-title">Course Structure</h2>
+            <div style="margin-top: 2rem;">
+                <div
+                    style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem;">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 1: Understanding Vibe Coding</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
+                </div>
+                <div
+                    style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem;">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 2: Thinking Before Coding</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
+                </div>
+                <div
+                    style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem;">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 3: Working with AI</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
+                </div>
+                <div
+                    style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem;">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 4: Vibe Coding in Real Life</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
+                </div>
+                <div style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius);">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 5: Building with Confidence</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 2 weeks</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/supabase-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        const COURSE_ID = 'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d'; // Vibe Coding course ID
+
+        // Check auth status on load
+        async function initPage() {
+            const loggedIn = await Auth.isLoggedIn();
+            const authBtn = document.getElementById('authBtn');
+            const dashboardLink = document.getElementById('dashboardLink');
+
+            if (loggedIn) {
+                const user = await Auth.getCurrentUser();
+                authBtn.textContent = user?.name || 'Account';
+                authBtn.onclick = () => window.location.href = '/dashboard.html';
+                dashboardLink.style.display = 'block';
+
+                // Check if already enrolled
+                await checkEnrollment();
+            }
+        }
+
+        // Check if user is already enrolled
+        async function checkEnrollment() {
+            try {
+                const user = await Auth.getCurrentUser();
+                if (!user) return;
+
+                const { data, error } = await window.sbClient
+                    .from('enrollments')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .eq('course_id', COURSE_ID)
+                    .single();
+
+                if (data) {
+                    const enrollBtn = document.getElementById('enrollBtn');
+                    const enrollBtnText = document.getElementById('enrollBtnText');
+                    enrollBtnText.textContent = 'Continue Learning';
+                    enrollBtn.onclick = () => window.location.href = '/dashboard.html';
+                }
+            } catch (error) {
+                console.log('Not enrolled yet');
+            }
+        }
+
+        // Handle auth button click
+        function handleAuthClick() {
+            window.location.href = '/signup.html';
+        }
+
+        // Handle enrollment
+        async function handleEnroll() {
+            const enrollBtn = document.getElementById('enrollBtn');
+            const enrollBtnText = document.getElementById('enrollBtnText');
+            const enrollMessage = document.getElementById('enrollMessage');
+
+            // Check if logged in
+            const loggedIn = await Auth.isLoggedIn();
+            if (!loggedIn) {
+                window.location.href = '/signup.html?redirect=' + encodeURIComponent(window.location.pathname);
+                return;
+            }
+
+            // Disable button
+            enrollBtn.disabled = true;
+            enrollBtnText.innerHTML = '<span class="spinner"></span> Enrolling...';
+
+            try {
+                const user = await Auth.getCurrentUser();
+
+                // Create enrollment
+                const { data, error } = await window.sbClient
+                    .from('enrollments')
+                    .insert({
+                        user_id: user.id,
+                        course_id: COURSE_ID,
+                        enrolled_at: new Date().toISOString(),
+                        status: 'active'
+                    })
+                    .select()
+                    .single();
+
+                if (error) {
+                    // Check if already enrolled
+                    if (error.code === '23505') {
+                        enrollMessage.style.display = 'block';
+                        enrollMessage.style.background = 'rgba(16, 185, 129, 0.1)';
+                        enrollMessage.style.color = 'var(--success)';
+                        enrollMessage.textContent = '✅ You are already enrolled!';
+
+                        setTimeout(() => {
+                            window.location.href = '/dashboard.html';
+                        }, 1500);
+                    } else {
+                        throw error;
+                    }
+                } else {
+                    enrollMessage.style.display = 'block';
+                    enrollMessage.style.background = 'rgba(16, 185, 129, 0.1)';
+                    enrollMessage.style.color = 'var(--success)';
+                    enrollMessage.textContent = '✅ Enrollment successful! Redirecting...';
+
+                    setTimeout(() => {
+                        window.location.href = '/dashboard.html';
+                    }, 1500);
+                }
+            } catch (error) {
+                console.error('Enrollment error:', error);
+                enrollMessage.style.display = 'block';
+                enrollMessage.style.background = 'rgba(239, 68, 68, 0.1)';
+                enrollMessage.style.color = 'var(--error)';
+                enrollMessage.textContent = '❌ ' + error.message;
+
+                enrollBtn.disabled = false;
+                enrollBtnText.textContent = 'Try Again';
+            }
+        }
+
+        // Initialize page
+        initPage();
+    </script>
+</body>
+
+</html>
