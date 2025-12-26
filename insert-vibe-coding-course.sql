@@ -1,7 +1,7 @@
 -- Insert the Vibe Coding course with featured status
 -- This script creates the Vibe Coding course that should appear on the homepage
 
--- Insert the main Vibe Coding course
+-- 1. Insert the main Vibe Coding course
 INSERT INTO courses (
     id,
     title,
@@ -13,15 +13,15 @@ INSERT INTO courses (
     is_published,
     created_at,
     updated_at,
-    featured  -- Add featured field to make it appear on homepage
+    featured
 ) VALUES 
 (
-    'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d',  -- Unique UUID for Vibe Coding course
+    'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d',  -- Valid UUID
     'Vibe Coding',
     'Learn to create digital products by focusing on ideas, intention, creativity, and guidance — often with the help of AI — instead of memorizing code syntax or complex technical rules.',
-    'featured',
+    'Creative Coding',  -- Adjusted category to match description better
     'beginner',
-    '6 weeks',
+    6, -- Duration in weeks (integer)
     0,
     true,
     NOW(),
@@ -39,7 +39,8 @@ ON CONFLICT (id) DO UPDATE SET
     updated_at = EXCLUDED.updated_at,
     featured = EXCLUDED.featured;
 
--- Insert modules for Vibe Coding course
+-- 2. Insert modules for Vibe Coding course
+-- We use static valid UUIDs here to ensure we can reference them in lessons
 INSERT INTO modules (
     id,
     course_id,
@@ -51,52 +52,52 @@ INSERT INTO modules (
     updated_at
 ) VALUES 
 (
-    'f0f69f5b-3g4c-5d0b-9b4e-2f6g7b8c9d0e',
+    'a1a11111-1a1a-1a1a-1a1a-1a1a1a1a1a1a',
     'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d',
     'Understanding Vibe Coding',
     'Learn the foundational concepts of Vibe Coding and why it exists',
     1,
-    '1 week',
+    1, -- 1 week
     NOW(),
     NOW()
 ),
 (
-    'g1g70g6c-4h5d-6e1c-0c5f-3g7h8c9d0e1f',
+    'b2b22222-2b2b-2b2b-2b2b-2b2b2b2b2b2b',
     'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d',
     'Thinking Before Coding',
     'Develop the skill of expressing ideas clearly before implementation',
     2,
-    '1 week',
+    1, -- 1 week
     NOW(),
     NOW()
 ),
 (
-    'h2h81h7d-5i6e-7f2d-1d6g-4h8i9d0e1f2g',
+    'c3c33333-3c3c-3c3c-3c3c-3c3c3c3c3c3c',
     'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d',
     'Working with AI as a Creative Partner',
     'Learn how to collaborate effectively with AI tools',
     3,
-    '1 week',
+    1, -- 1 week
     NOW(),
     NOW()
 ),
 (
-    'i3i92i8e-6j7f-8g3e-2e7h-5i9j0e1f2g3h',
+    'd4d44444-4d4d-4d4d-4d4d-4d4d4d4d4d4d',
     'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d',
     'Vibe Coding in Real Life',
     'See how Vibe Coding works in practical scenarios',
     4,
-    '1 week',
+    1, -- 1 week
     NOW(),
     NOW()
 ),
 (
-    'j4j03j9f-7k8g-9h4f-3f8i-6j0k1f2g3h4i',
+    'e5e55555-5e5e-5e5e-5e5e-5e5e5e5e5e5e',
     'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d',
     'Exploring and Building with Confidence',
     'Use safe environments to experiment and build complete projects',
     5,
-    '2 weeks',
+    2, -- 2 weeks
     NOW(),
     NOW()
 )
@@ -107,113 +108,49 @@ ON CONFLICT (id) DO UPDATE SET
     duration = EXCLUDED.duration,
     updated_at = EXCLUDED.updated_at;
 
--- Insert lessons for the modules
+-- 3. Insert lessons (Placeholder structure, content will be populated by Generation Task)
+-- Using valid UUIDs starting with 1000... for easy identification
+
 INSERT INTO lessons (
     id,
     module_id,
     title,
-    content,
     ordering,
     duration,
     created_at,
     updated_at
 ) VALUES 
--- Lessons for Understanding Vibe Coding module
+-- Module 1: Understanding Vibe Coding
 (
-    'k5k14k0g-8l9h-0i5g-4g9j-7k1l2g3h4i5j',
-    'f0f69f5b-3g4c-5d0b-9b4e-2f6g7b8c9d0e',
-    'What is Vibe Coding?',
-    'Introduction to the concept of Vibe Coding and how it differs from traditional coding approaches.',
+    '10000000-0000-0000-0000-000000000001',
+    'a1a11111-1a1a-1a1a-1a1a-1a1a1a1a1a1a',
+    'What Is Vibe Coding?',
     1,
-    '30 minutes',
+    30, -- minutes
     NOW(),
     NOW()
 ),
 (
-    'l6l25l1h-9m0i-1j6h-5h0k-8l2m3h4i5j6k',
-    'f0f69f5b-3g4c-5d0b-9b4e-2f6g7b8c9d0e',
+    '10000000-0000-0000-0000-000000000002',
+    'a1a11111-1a1a-1a1a-1a1a-1a1a1a1a1a1a',
     'Why Vibe Coding Exists',
-    'Understanding the problems with traditional coding education and how Vibe Coding solves them.',
     2,
-    '45 minutes',
+    45,
     NOW(),
     NOW()
 ),
 (
-    'm7m36m2i-0n1j-2k7i-6i1l-9m3n4i5j6k7l',
-    'f0f69f5b-3g4c-5d0b-9b4e-2f6g7b8c9d0e',
-    'Core Principles',
-    'Learn the fundamental principles that guide Vibe Coding methodology.',
+    '10000000-0000-0000-0000-000000000003',
+    'a1a11111-1a1a-1a1a-1a1a-1a1a1a1a1a1a',
+    'How Vibe Coding Is Different from Traditional Coding',
     3,
-    '1 hour',
-    NOW(),
-    NOW()
-),
--- Lessons for Thinking Before Coding module
-(
-    'n8n47n3j-1o2k-3l8j-7j2m-0n4o5j6k7l8m',
-    'g1g70g6c-4h5d-6e1c-0c5f-3g7h8c9d0e1f',
-    'Idea Formation',
-    'Learn how to form clear and actionable ideas before starting to code.',
-    1,
-    '45 minutes',
-    NOW(),
-    NOW()
-),
-(
-    'o9o58o4k-2p3l-4m9k-8k3n-1o5p6k7l8m9n',
-    'g1g70g6c-4h5d-6e1c-0c5f-3g7h8c9d0e1f',
-    'Expressing Ideas Clearly',
-    'Techniques for expressing your ideas in ways that are easy to implement.',
-    2,
-    '1 hour',
-    NOW(),
-    NOW()
-),
-(
-    'p0p69p5l-3q4m-5n0l-9l4o-2p6q7l8m9n0o',
-    'g1g70g6c-4h5d-6e1c-0c5f-3g7h8c9d0e1f',
-    'Planning Your Approach',
-    'How to plan your approach before diving into implementation.',
-    3,
-    '1 hour',
-    NOW(),
-    NOW()
-),
--- Lessons for Working with AI as a Creative Partner module
-(
-    'q1q70q6m-4r5n-6o1m-0m5p-3q7r8m9n0o1p',
-    'h2h81h7d-5i6e-7f2d-1d6g-4h8i9d0e1f2g',
-    'Introduction to AI Tools',
-    'Overview of AI tools available for coding and how to use them effectively.',
-    1,
-    '1 hour',
-    NOW(),
-    NOW()
-),
-(
-    'r2r81r7n-5s6o-7p2n-1n6q-4r8s9n0o1p2q',
-    'h2h81h7d-5i6e-7f2d-1d6g-4h8i9d0e1f2g',
-    'Collaboration Strategies',
-    'Best practices for collaborating with AI tools in your coding workflow.',
-    2,
-    '1 hour',
-    NOW(),
-    NOW()
-),
-(
-    's3s92s8o-6t7p-8q3o-2o7r-5s9t0o1p2q3r',
-    'h2h81h7d-5i6e-7f2d-1d6g-4h8i9d0e1f2g',
-    'Reviewing AI Suggestions',
-    'How to review and validate AI-generated code before using it.',
-    3,
-    '1.5 hours',
+    60,
     NOW(),
     NOW()
 )
 ON CONFLICT (id) DO UPDATE SET
     title = EXCLUDED.title,
-    content = EXCLUDED.content,
+    module_id = EXCLUDED.module_id,
     ordering = EXCLUDED.ordering,
     duration = EXCLUDED.duration,
     updated_at = EXCLUDED.updated_at;
