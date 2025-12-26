@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, useParams, Navigate, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import LoginModal from "./components/LoginModal";
-import SignupModal from "./components/SignupModal";
+import EnrollAuthModal from "./components/EnrollAuthModal";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Courses from "./pages/Courses";
@@ -227,10 +226,25 @@ function App() {
             <Footer />
 
             {/* Authentication Modals */}
-            <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} onLogin={handleLoginSubmit} onSwitchToSignup={switchToSignup} />
-            
-            <SignupModal isOpen={isSignupModalOpen} onClose={() => setIsSignupModalOpen(false)} onSignup={handleSignupSubmit} onSwitchToLogin={switchToLogin} />
-            
+            {/* Unified Authentication Modal */}
+            <EnrollAuthModal
+                isOpen={isLoginModalOpen || isSignupModalOpen}
+                onClose={() => {
+                    setIsLoginModalOpen(false);
+                    setIsSignupModalOpen(false);
+                }}
+                onAuthSuccess={(userData) => {
+                    setUser(userData);
+                    setIsLoginModalOpen(false);
+                    setIsSignupModalOpen(false);
+                    if (userData.role === 'admin') {
+                        navigate('/admin');
+                    } else {
+                        navigate('/dashboard');
+                    }
+                }}
+            />
+
             {/* Trendy AI Assistant */}
             <TrendyAssistant />
         </div>
