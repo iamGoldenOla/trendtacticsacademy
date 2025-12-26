@@ -1,24 +1,26 @@
-/* Modern LMS Design System */
+/* Modern LMS Design System - Trendtactics Brand Colors */
 :root {
-    --primary: #667eea;
-    --primary-dark: #5568d3;
-    --secondary: #764ba2;
+    --primary: #0ea5e9;
+    /* Cyan */
+    --primary-dark: #0284c7;
+    --secondary: #1e3a8a;
+    /* Navy Blue */
     --success: #10b981;
     --error: #ef4444;
     --warning: #f59e0b;
     --info: #3b82f6;
-    
+
     --bg-primary: #0f172a;
     --bg-secondary: #1e293b;
     --bg-tertiary: #334155;
-    
+
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
     --text-muted: #94a3b8;
-    
+
     --border: #334155;
     --border-light: #475569;
-    
+
     --radius: 12px;
     --radius-lg: 16px;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -217,7 +219,9 @@ body {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Responsive */
@@ -225,12 +229,13 @@ body {
     .hero-title {
         font-size: 2rem;
     }
-    
+
     .nav {
         gap: 1rem;
     }
-    
-    .grid-2, .grid-3 {
+
+    .grid-2,
+    .grid-3 {
         grid-template-columns: 1fr;
     }
 }
