@@ -1,0 +1,35 @@
+name: Deploy HTML LMS to cPanel
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'html-lms/**'
+      - 'signup.html'
+      - 'whiteboard.html'
+      - 'playground.html'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Deploy to cPanel via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /public_html/academy.trendtacticsdigital.com/
+          local-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/lms-frontend/**
+            **/.gemini/**
+            **/README.md
