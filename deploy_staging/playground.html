@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Playground - Trendtactics Academy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .toolbar {
+            background: #1e293b;
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+        }
+
+        .toolbar button {
+            padding: 0.5rem 1rem;
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .toolbar button:hover {
+            background: #0284c7;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .editor-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #334155;
+        }
+
+        .editor-header {
+            background: #1e293b;
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid #334155;
+            font-size: 0.875rem;
+            color: #94a3b8;
+        }
+
+        textarea {
+            flex: 1;
+            background: #0f172a;
+            color: #f8fafc;
+            border: none;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: none;
+        }
+
+        textarea:focus {
+            outline: none;
+        }
+
+        #output {
+            flex: 1;
+            background: white;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="toolbar">
+        <button id="runBtn">Run Code</button>
+        <button id="clearBtn">Clear</button>
+    </div>
+
+    <div class="container">
+        <div class="editor-section">
+            <div class="editor-header">HTML</div>
+            <textarea id="htmlCode" placeholder="Write your HTML here..."></textarea>
+        </div>
+
+        <div class="editor-section">
+            <div class="editor-header">CSS</div>
+            <textarea id="cssCode" placeholder="Write your CSS here..."></textarea>
+        </div>
+
+        <div class="editor-section">
+            <div class="editor-header">JavaScript</div>
+            <textarea id="jsCode" placeholder="Write your JavaScript here..."></textarea>
+        </div>
+
+        <div class="editor-section" style="border-right: none;">
+            <div class="editor-header">Output</div>
+            <iframe id="output"></iframe>
+        </div>
+    </div>
+
+    <script>
+        const htmlCode = document.getElementById('htmlCode');
+        const cssCode = document.getElementById('cssCode');
+        const jsCode = document.getElementById('jsCode');
+        const output = document.getElementById('output');
+        const runBtn = document.getElementById('runBtn');
+        const clearBtn = document.getElementById('clearBtn');
+
+        function runCode() {
+            const html = htmlCode.value;
+            const css = `<style>${cssCode.value}</style>`;
+            const js = `<script>${jsCode.value}<\/script>`;
+
+            const code = html + css + js;
+
+            output.srcdoc = code;
+        }
+
+        runBtn.addEventListener('click', runCode);
+
+        clearBtn.addEventListener('click', () => {
+            htmlCode.value = '';
+            cssCode.value = '';
+            jsCode.value = '';
+            output.srcdoc = '';
+        });
+
+        // Auto-run on input (optional)
+        let timeout;
+        [htmlCode, cssCode, jsCode].forEach(editor => {
+            editor.addEventListener('input', () => {
+                clearTimeout(timeout);
+                timeout = setTimeout(runCode, 1000);
+            });
+        });
+    </script>
+</body>
+
+</html>

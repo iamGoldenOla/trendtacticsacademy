@@ -16,12 +16,12 @@
             <div class="logo">Trendtactics Academy</div>
             <nav class="nav">
                 <a href="https://trendtacticsdigital.com">Digital Services</a>
-                <a href="/">Home</a>
-                <a href="/about.html">About</a>
-                <a href="/services.html">Services</a>
-                <a href="/contact.html">Contact</a>
+                <a href="index.html">Home</a>
+                <a href="#about">About</a>
+                <a href="#features">Features</a>
                 <a href="#courses">Courses</a>
-                <a href="/dashboard.html" id="dashboardLink" style="display:none;">Dashboard</a>
+                <a href="contact.html">Contact</a>
+                <a href="dashboard.html" id="dashboardLink" style="display:none;">Dashboard</a>
                 <button class="btn btn-secondary" id="authBtn" onclick="handleAuth()">Sign In</button>
             </nav>
         </div>
@@ -29,25 +29,149 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="container" style="text-align: center; position: relative; z-index: 1;">
+            <h1 class="hero-title">Master Digital Skills with AI</h1>
+            <p class="hero-subtitle">Learn coding, design, and digital marketing with expert-led courses. Build real
+                projects with AI as your creative partner. Join thousands of students transforming their careers.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+                <a href="#courses" class="btn btn-primary btn-lg">Explore Courses</a>
+                <a href="signup.html" class="btn btn-secondary btn-lg">Start Free Today</a>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-3" style="margin-top: 4rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary);">5,000+</div>
+                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">Active Students</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary);">50+</div>
+                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">Expert Courses</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary);">95%</div>
+                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">Success Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="container" style="padding: 6rem 0;">
+        <div class="grid grid-2" style="gap: 4rem; align-items: center;">
+            <div>
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">About Trendtactics Academy</h2>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
+                    We're revolutionizing digital education by combining expert instruction with AI-powered learning.
+                    Our mission is to make high-quality tech education accessible to everyone, everywhere.
+                </p>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
+                    Founded by industry professionals, Trendtactics Academy focuses on practical, project-based
+                    learning that prepares you for real-world challenges. Whether you're starting your tech journey or
+                    advancing your career, we're here to guide you every step of the way.
+                </p>
+                <div class="grid grid-2" style="gap: 1.5rem; margin-top: 2rem;">
+                    <div class="card" style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Our Mission</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Empower learners worldwide with
+                            cutting-edge digital skills through AI-enhanced education.</p>
+                    </div>
+                    <div class="card" style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Our Vision</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Become the world's leading platform
+                            for AI-powered digital skills training.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card"
+                style="padding: 3rem; text-align: center; background: linear-gradient(135deg, var(--primary), var(--secondary));">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🎓</div>
+                <h3 style="font-size: 1.5rem; color: white; margin-bottom: 1rem;">Learn from the Best</h3>
+                <p style="color: rgba(255,255,255,0.9); line-height: 1.7;">
+                    Our instructors are industry veterans with years of experience at top tech companies. They bring
+                    real-world insights directly to your learning journey.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="container"
+        style="padding: 6rem 0; background: var(--bg-secondary); margin: 0 -100vw; padding-left: 100vw; padding-right: 100vw;">
         <div class="container">
-            <h1 class="hero-title">Master Digital Skills</h1>
-            <p class="hero-subtitle">Learn coding, design, and digital marketing with expert-led courses</p>
-            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
-                <a href="#courses" class="btn btn-primary btn-lg">Browse Courses</a>
-                <a href="/signup.html" class="btn btn-secondary btn-lg">Get Started Free</a>
+            <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">Why Choose Trendtactics Academy?
+            </h2>
+
+            <div class="grid grid-3">
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🤖</div>
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">AI-Powered Learning
+                    </h3>
+                    <p style="color: var(--text-secondary);">
+                        Learn to work with AI as your creative partner. Get personalized recommendations and adaptive
+                        learning paths.
+                    </p>
+                </div>
+
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">💻</div>
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Interactive Tools</h3>
+                    <p style="color: var(--text-secondary);">
+                        Code playground, whiteboard, and hands-on projects. Practice in safe environments before going
+                        live.
+                    </p>
+                </div>
+
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">📜</div>
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Certificates</h3>
+                    <p style="color: var(--text-secondary);">
+                        Earn industry-recognized certificates to showcase your skills and boost your career prospects.
+                    </p>
+                </div>
+
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">👥</div>
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Community Support</h3>
+                    <p style="color: var(--text-secondary);">
+                        Join a vibrant community of learners. Get help, share projects, and network with peers.
+                    </p>
+                </div>
+
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">⚡</div>
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Self-Paced</h3>
+                    <p style="color: var(--text-secondary);">
+                        Learn at your own pace, on your own schedule. Access courses anytime, anywhere, on any device.
+                    </p>
+                </div>
+
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎯</div>
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Project-Based</h3>
+                    <p style="color: var(--text-secondary);">
+                        Build real projects that you can add to your portfolio. Learn by doing, not just watching.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Courses Section -->
-    <section id="courses" class="container" style="padding: 4rem 0;">
-        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">Featured Courses</h2>
+    <section id="courses" class="container" style="padding: 6rem 0;">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Featured Courses</h2>
+        <p
+            style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Start your learning journey with our most popular courses. Each course is designed by industry experts and
+            includes hands-on projects.
+        </p>
 
         <div class="grid grid-2">
             <!-- Vibe Coding Course -->
             <div class="card">
-                <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                     <span class="badge badge-primary">Beginner</span>
+                    <span class="badge badge-success">Free</span>
                 </div>
                 <h3 class="card-title">Vibe Coding</h3>
                 <p class="card-description">
@@ -56,81 +180,149 @@
                 </p>
                 <div style="margin: 1.5rem 0;">
                     <p style="color: var(--text-muted); font-size: 0.875rem;">
-                        5 Modules • 6 Weeks • Certificate
+                        ⏱️ 5 Modules • 📅 6 Weeks • 📜 Certificate
                     </p>
                 </div>
-                <a href="/course-detail.html" class="btn btn-primary" style="width: 100%; text-align: center;">
+                <a href="course-detail.html" class="btn btn-primary" style="width: 100%; text-align: center;">
                     View Course
                 </a>
             </div>
 
-            <!-- Placeholder for more courses -->
+            <!-- Coming Soon -->
             <div class="card" style="background: var(--bg-tertiary); border-style: dashed;">
                 <div style="text-align: center; padding: 2rem 0;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🚀</div>
                     <h3 class="card-title">More Courses Coming Soon</h3>
                     <p class="card-description">
-                        We're constantly adding new courses to help you master digital skills.
+                        We're constantly adding new courses in web development, design, digital marketing, and more.
+                        Stay tuned!
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="container" style="padding: 4rem 0;">
-        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">Why Choose Us?</h2>
+    <!-- Team Section -->
+    <section class="container"
+        style="padding: 6rem 0; background: var(--bg-secondary); margin: 0 -100vw; padding-left: 100vw; padding-right: 100vw;">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Meet Our Team</h2>
+            <p
+                style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Learn from industry experts who are passionate about teaching and helping you succeed.
+            </p>
 
-        <div class="grid grid-3">
-            <div style="text-align: center; padding: 2rem;">
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Interactive Learning</h3>
-                <p style="color: var(--text-secondary);">
-                    Whiteboard, code playground, and hands-on projects
-                </p>
-            </div>
+            <div class="grid grid-3">
+                <div class="card" style="text-align: center;">
+                    <div
+                        style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;">
+                        👨‍💼
+                    </div>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Akinola Olujobi</h3>
+                    <p style="color: var(--primary); font-size: 0.9rem; margin-bottom: 0.5rem;">Founder & Lead
+                        Instructor</p>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">
+                        10+ years in digital marketing and software development. Passionate about AI-powered education.
+                    </p>
+                </div>
 
-            <div style="text-align: center; padding: 2rem;">
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">AI-Powered</h3>
-                <p style="color: var(--text-secondary);">
-                    Learn to work with AI as your creative partner
-                </p>
-            </div>
+                <div class="card" style="text-align: center;">
+                    <div
+                        style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;">
+                        👩‍💻
+                    </div>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Expert Instructor</h3>
+                    <p style="color: var(--primary); font-size: 0.9rem; margin-bottom: 0.5rem;">Senior Developer</p>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">
+                        Full-stack developer with expertise in modern web technologies and AI integration.
+                    </p>
+                </div>
 
-            <div style="text-align: center; padding: 2rem;">
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Certificates</h3>
-                <p style="color: var(--text-secondary);">
-                    Earn certificates to showcase your skills
-                </p>
+                <div class="card" style="text-align: center;">
+                    <div
+                        style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;">
+                        👨‍🎨
+                    </div>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Design Expert</h3>
+                    <p style="color: var(--primary); font-size: 0.9rem; margin-bottom: 0.5rem;">UI/UX Designer</p>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">
+                        Award-winning designer specializing in user experience and interface design.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="container" style="padding: 4rem 0;">
+    <section class="container" style="padding: 6rem 0;">
         <div class="card"
-            style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; text-align: center;">
-            <h2 style="font-size: 2rem; color: white; margin-bottom: 1rem;">Ready to Start Learning?</h2>
+            style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; text-align: center; box-shadow: var(--glow-strong);">
+            <h2 style="font-size: 2rem; color: white; margin-bottom: 1rem;">Ready to Transform Your Career?</h2>
             <p style="color: rgba(255,255,255,0.9); margin-bottom: 2rem; font-size: 1.125rem;">
-                Join thousands of students mastering digital skills
+                Join thousands of students mastering digital skills. Start learning today with our free courses.
             </p>
-            <a href="/signup.html" class="btn btn-lg" style="background: white; color: var(--primary);">
+            <a href="signup.html" class="btn btn-lg" style="background: white; color: var(--primary);">
                 Create Free Account
             </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer
-        style="background: var(--bg-secondary); border-top: 1px solid var(--border); padding: 3rem 0; margin-top: 4rem;">
-        <div class="container" style="text-align: center;">
-            <div class="logo" style="margin-bottom: 1rem;">Trendtactics Academy</div>
-            <p style="color: var(--text-muted);">Empowering learners worldwide with cutting-edge digital skills</p>
-            <p style="color: var(--text-muted); margin-top: 1rem;">
-                <a href="https://trendtacticsdigital.com"
-                    style="color: var(--primary); text-decoration: none;">Trendtactics Digital Services</a>
-            </p>
-            <p style="color: var(--text-muted); margin-top: 2rem; font-size: 0.875rem;">
-                © 2025 Trendtactics Academy. All rights reserved.
-            </p>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- About Section -->
+                <div class="footer-section">
+                    <h3>Trendtactics Academy</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Empowering learners worldwide with cutting-edge digital skills. Master coding, design, and
+                        digital marketing with AI-powered learning.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Learning -->
+                <div class="footer-section">
+                    <h3>Learning</h3>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="playground.html">Code Playground</a></li>
+                        <li><a href="whiteboard.html">Whiteboard</a></li>
+                        <li><a href="ai-assistant.html">AI Assistant</a></li>
+                    </ul>
+                </div>
+
+                <!-- Connect -->
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="https://trendtacticsdigital.com" target="_blank">Trendtactics Digital</a></li>
+                        <li><a href="contact.html">Get in Touch</a></li>
+                        <li><a href="signup.html">Join Academy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>© 2025 Trendtactics Academy. All rights reserved.</p>
+                <p style="margin-top: 0.5rem;">
+                    <a href="https://trendtacticsdigital.com" style="color: var(--primary); text-decoration: none;">
+                        Powered by Trendtactics Digital
+                    </a>
+                </p>
+            </div>
         </div>
     </footer>
 
@@ -138,6 +330,20 @@
     <script src="js/supabase-client.js"></script>
     <script src="js/auth.js"></script>
     <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
         async function initHomepage() {
             const loggedIn = await Auth.isLoggedIn();
             const authBtn = document.getElementById('authBtn');
@@ -146,13 +352,13 @@
             if (loggedIn) {
                 const user = await Auth.getCurrentUser();
                 authBtn.textContent = user?.name || 'Account';
-                authBtn.onclick = () => window.location.href = '/dashboard.html';
+                authBtn.onclick = () => window.location.href = 'dashboard.html';
                 dashboardLink.style.display = 'block';
             }
         }
 
         function handleAuth() {
-            window.location.href = '/signup.html';
+            window.location.href = 'signup.html';
         }
 
         initHomepage();
