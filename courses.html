@@ -193,15 +193,20 @@
     <script src="js/auth.js"></script>
     <script>
         async function initPage() {
-            const loggedIn = await Auth.isLoggedIn();
-            const authBtn = document.getElementById('authBtn');
-            const dashboardLink = document.getElementById('dashboardLink');
+            try {
+                const loggedIn = await Auth.isLoggedIn();
+                const authBtn = document.getElementById('authBtn');
+                const dashboardLink = document.getElementById('dashboardLink');
 
-            if (loggedIn) {
-                const user = await Auth.getCurrentUser();
-                authBtn.textContent = user?.name || 'Account';
-                authBtn.onclick = () => window.location.href = 'dashboard.html';
-                dashboardLink.style.display = 'block';
+                if (loggedIn) {
+                    const user = await Auth.getCurrentUser();
+                    authBtn.textContent = user?.name || 'Account';
+                    authBtn.onclick = () => window.location.href = 'dashboard.html';
+                    dashboardLink.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Auth initialization error:', error);
+                // Continue without auth functionality if there's an error
             }
         }
 
