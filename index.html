@@ -17,9 +17,9 @@
             <nav class="nav">
                 <a href="https://trendtacticsdigital.com">Digital Services</a>
                 <a href="index.html">Home</a>
-                <a href="#about">About</a>
-                <a href="#features">Features</a>
-                <a href="#courses">Courses</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="courses.html">Courses</a>
                 <a href="contact.html">Contact</a>
                 <a href="dashboard.html" id="dashboardLink" style="display:none;">Dashboard</a>
                 <button class="btn btn-secondary" id="authBtn" onclick="handleAuth()">Sign In</button>
@@ -28,13 +28,13 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero hero-home">
         <div class="container" style="text-align: center; position: relative; z-index: 1;">
             <h1 class="hero-title">Master Digital Skills with AI</h1>
             <p class="hero-subtitle">Learn coding, design, and digital marketing with expert-led courses. Build real
                 projects with AI as your creative partner. Join thousands of students transforming their careers.</p>
             <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
-                <a href="#courses" class="btn btn-primary btn-lg">Explore Courses</a>
+                <a href="courses.html" class="btn btn-primary btn-lg">Explore Courses</a>
                 <a href="signup.html" class="btn btn-secondary btn-lg">Start Free Today</a>
             </div>
 
@@ -42,22 +42,30 @@
             <div class="grid grid-3" style="margin-top: 4rem; max-width: 800px; margin-left: auto; margin-right: auto;">
                 <div style="text-align: center;">
                     <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary);">5,000+</div>
-                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">Active Students</div>
+                    <div style="color: rgba(255,255,255,0.8); margin-top: 0.5rem;">Active Students</div>
                 </div>
                 <div style="text-align: center;">
                     <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary);">50+</div>
-                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">Expert Courses</div>
+                    <div style="color: rgba(255,255,255,0.8); margin-top: 0.5rem;">Expert Courses</div>
                 </div>
                 <div style="text-align: center;">
                     <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary);">95%</div>
-                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">Success Rate</div>
+                    <div style="color: rgba(255,255,255,0.8); margin-top: 0.5rem;">Success Rate</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="container" style="padding: 6rem 0;">
+    <!-- Parallax Section 1 -->
+    <section class="parallax-section parallax-1">
+        <div class="container parallax-content">
+            <h2 style="font-size: 3rem; margin-bottom: 1rem;">Future-Ready Skills</h2>
+            <p style="font-size: 1.25rem;">Unlock your potential with courses designed for the AI era.</p>
+        </div>
+    </section>
+
+    <!-- About Section Teaser -->
+    <section id="about" class="container section-padding">
         <div class="grid grid-2" style="gap: 4rem; align-items: center;">
             <div>
                 <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">About Trendtactics Academy</h2>
@@ -65,105 +73,67 @@
                     We're revolutionizing digital education by combining expert instruction with AI-powered learning.
                     Our mission is to make high-quality tech education accessible to everyone, everywhere.
                 </p>
-                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
-                    Founded by industry professionals, Trendtactics Academy focuses on practical, project-based
-                    learning that prepares you for real-world challenges. Whether you're starting your tech journey or
-                    advancing your career, we're here to guide you every step of the way.
-                </p>
-                <div class="grid grid-2" style="gap: 1.5rem; margin-top: 2rem;">
-                    <div class="card" style="padding: 1.5rem;">
-                        <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Our Mission</h3>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Empower learners worldwide with
-                            cutting-edge digital skills through AI-enhanced education.</p>
-                    </div>
-                    <div class="card" style="padding: 1.5rem;">
-                        <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Our Vision</h3>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Become the world's leading platform
-                            for AI-powered digital skills training.</p>
-                    </div>
-                </div>
+                <a href="about.html" class="btn btn-primary">Read More About Us</a>
             </div>
             <div class="card"
                 style="padding: 3rem; text-align: center; background: linear-gradient(135deg, var(--primary), var(--secondary));">
                 <div style="font-size: 3rem; margin-bottom: 1rem;">🎓</div>
                 <h3 style="font-size: 1.5rem; color: white; margin-bottom: 1rem;">Learn from the Best</h3>
                 <p style="color: rgba(255,255,255,0.9); line-height: 1.7;">
-                    Our instructors are industry veterans with years of experience at top tech companies. They bring
-                    real-world insights directly to your learning journey.
+                    Our instructors are industry veterans with years of experience at top tech companies.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="container"
-        style="padding: 6rem 0; background: var(--bg-secondary); margin: 0 -100vw; padding-left: 100vw; padding-right: 100vw;">
-        <div class="container">
-            <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">Why Choose Trendtactics Academy?
-            </h2>
+    <!-- Parallax Section 2 -->
+    <section class="parallax-section parallax-2">
+        <div class="container parallax-content">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Transform Your Career</h2>
+            <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto;">Join a community of innovators and creators
+                building the future.</p>
+        </div>
+    </section>
 
+    <!-- Services Teaser (Replaces Features) -->
+    <section id="services" class="container section-padding"
+        style="background: var(--bg-secondary); margin: 0 -100vw; padding-left: 100vw; padding-right: 100vw;">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">Our Services</h2>
             <div class="grid grid-3">
                 <div class="card" style="text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🤖</div>
-                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">AI-Powered Learning
-                    </h3>
-                    <p style="color: var(--text-secondary);">
-                        Learn to work with AI as your creative partner. Get personalized recommendations and adaptive
-                        learning paths.
-                    </p>
-                </div>
-
-                <div class="card" style="text-align: center;">
                     <div style="font-size: 2.5rem; margin-bottom: 1rem;">💻</div>
-                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Interactive Tools</h3>
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Web Development</h3>
                     <p style="color: var(--text-secondary);">
-                        Code playground, whiteboard, and hands-on projects. Practice in safe environments before going
-                        live.
+                        Modern, responsive websites built with the latest technologies.
                     </p>
                 </div>
-
                 <div class="card" style="text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">📜</div>
-                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Certificates</h3>
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">📱</div>
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">App Development</h3>
                     <p style="color: var(--text-secondary);">
-                        Earn industry-recognized certificates to showcase your skills and boost your career prospects.
+                        Native and cross-platform mobile applications that users love.
                     </p>
                 </div>
-
                 <div class="card" style="text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">👥</div>
-                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Community Support</h3>
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🚀</div>
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Digital Services</h3>
                     <p style="color: var(--text-secondary);">
-                        Join a vibrant community of learners. Get help, share projects, and network with peers.
+                        Comprehensive digital strategies to grow your business online.
                     </p>
                 </div>
-
-                <div class="card" style="text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">⚡</div>
-                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Self-Paced</h3>
-                    <p style="color: var(--text-secondary);">
-                        Learn at your own pace, on your own schedule. Access courses anytime, anywhere, on any device.
-                    </p>
-                </div>
-
-                <div class="card" style="text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎯</div>
-                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Project-Based</h3>
-                    <p style="color: var(--text-secondary);">
-                        Build real projects that you can add to your portfolio. Learn by doing, not just watching.
-                    </p>
-                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="services.html" class="btn btn-secondary">View All Services</a>
             </div>
         </div>
     </section>
 
     <!-- Courses Section -->
-    <section id="courses" class="container" style="padding: 6rem 0;">
+    <section id="courses" class="container section-padding">
         <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 1rem;">Featured Courses</h2>
-        <p
-            style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-            Start your learning journey with our most popular courses. Each course is designed by industry experts and
-            includes hands-on projects.
+        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+            Start your learning journey with our most popular courses.
         </p>
 
         <div class="grid grid-2">
@@ -175,28 +145,26 @@
                 </div>
                 <h3 class="card-title">Vibe Coding</h3>
                 <p class="card-description">
-                    Learn to create digital products by focusing on ideas, intention, creativity, and guidance.
-                    Perfect for beginners who want to build without getting lost in syntax.
+                    Learn to create digital products by focusing on ideas and creativity with AI assistance.
                 </p>
                 <div style="margin: 1.5rem 0;">
                     <p style="color: var(--text-muted); font-size: 0.875rem;">
-                        ⏱️ 5 Modules • 📅 6 Weeks • 📜 Certificate
+                        ⏱️ 5 Modules • 📅 3 Weeks • 📜 Certificate
                     </p>
                 </div>
                 <a href="course-detail.html" class="btn btn-primary" style="width: 100%; text-align: center;">
                     View Course
                 </a>
             </div>
-
             <!-- Coming Soon -->
             <div class="card" style="background: var(--bg-tertiary); border-style: dashed;">
                 <div style="text-align: center; padding: 2rem 0;">
                     <div style="font-size: 2.5rem; margin-bottom: 1rem;">🚀</div>
                     <h3 class="card-title">More Courses Coming Soon</h3>
-                    <p class="card-description">
-                        We're constantly adding new courses in web development, design, digital marketing, and more.
-                        Stay tuned!
-                    </p>
+                    <button class="btn btn-secondary" disabled
+                        style="opacity: 0.6; cursor: not-allowed; margin-top: 1rem;">
+                        Coming Soon
+                    </button>
                 </div>
             </div>
         </div>

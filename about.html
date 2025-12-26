@@ -19,8 +19,8 @@
                 <a href="index.html">Home</a>
                 <a href="about.html">About</a>
                 <a href="services.html">Services</a>
-                <a href="contacts.html">Contact</a>
                 <a href="courses.html">Courses</a>
+                <a href="contact.html">Contact</a>
                 <a href="dashboard.html" id="dashboardLink" style="display:none;">Dashboard</a>
                 <button class="btn btn-secondary" id="authBtn" onclick="handleAuth()">Sign In</button>
             </nav>
@@ -28,62 +28,81 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero hero-about">
         <div class="container" style="text-align: center; position: relative; z-index: 1;">
             <h1 class="hero-title">About Trendtactics Academy</h1>
-            <p class="hero-subtitle">We are revolutionizing digital education by combining expert instruction with
-                AI-powered learning. Empowering learners worldwide.</p>
+            <p class="hero-subtitle">Empowering learners worldwide with cutting-edge digital skills</p>
         </div>
     </section>
 
-    <!-- Mission & Vision -->
-    <section class="container" style="padding: 4rem 0;">
-        <div class="grid grid-2" style="gap: 4rem; align-items: center;">
-            <div>
-                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Our Mission</h2>
-                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem;">
-                    Trendtactics Academy is dedicated to making high-quality digital education accessible to everyone.
-                    We believe that learning should be engaging, practical, and focused on real-world applications.
-                </p>
-                <div class="card" style="padding: 1.5rem; border-left: 4px solid var(--primary);">
-                    <p style="color: var(--text-primary); font-style: italic;">
-                        "To empower the next generation of digital creators with the tools, skills, and confidence to
-                        build the future."
+    <!-- Parallax Section -->
+    <section class="parallax-section parallax-3">
+        <div class="container parallax-content">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Innovation & Excellence</h2>
+            <p style="font-size: 1.25rem;">We believe in the power of technology to transform lives.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container" style="padding: 4rem 0;">
+        <div class="card">
+            <h2 class="card-title">Our Mission</h2>
+            <p class="card-description">
+                Trendtactics Academy is dedicated to making digital education accessible to everyone.
+                We believe that learning should be engaging, practical, and focused on real-world applications.
+            </p>
+            <p class="card-description">
+                Our innovative approach combines interactive learning tools, AI-powered assistance, and
+                hands-on projects to help students master digital skills with confidence.
+            </p>
+        </div>
+
+        <div class="card" style="margin-top: 2rem;">
+            <h2 class="card-title">What Makes Us Different</h2>
+            <div class="grid grid-2" style="margin-top: 2rem;">
+                <div>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Beginner-Friendly</h3>
+                    <p style="color: var(--text-secondary);">
+                        Our courses are designed for complete beginners. We explain concepts in simple,
+                        clear language that anyone can understand.
+                    </p>
+                </div>
+                <div>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Interactive Tools</h3>
+                    <p style="color: var(--text-secondary);">
+                        Learn by doing with our integrated whiteboard, code playground, and project-based
+                        assignments.
+                    </p>
+                </div>
+                <div>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">AI-Powered Learning</h3>
+                    <p style="color: var(--text-secondary);">
+                        Get personalized help from AI tutors that adapt to your learning pace and style.
+                    </p>
+                </div>
+                <div>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Real-World Focus</h3>
+                    <p style="color: var(--text-secondary);">
+                        Build actual projects that you can add to your portfolio and use in your career.
                     </p>
                 </div>
             </div>
-            <div class="card"
-                style="text-align: center; background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));">
-                <div style="font-size: 4rem; margin-bottom: 1rem;">🚀</div>
-                <h3 style="font-size: 1.5rem; color: var(--primary); margin-bottom: 1rem;">Future-Ready Skills</h3>
-                <p style="color: var(--text-secondary);">
-                    We don't just teach syntax; we teach problem-solving, creativity, and AI collaboration.
-                </p>
-            </div>
         </div>
-    </section>
 
-    <!-- Values Section -->
-    <section class="container" style="padding: 4rem 0;">
-        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">Core Values</h2>
-        <div class="grid grid-3">
-            <div class="card" style="text-align: center;">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">💡</div>
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Innovation</h3>
-                <p style="color: var(--text-secondary);">Embracing new technologies and teaching methods.</p>
-            </div>
-            <div class="card" style="text-align: center;">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🤝</div>
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Accessiblity</h3>
-                <p style="color: var(--text-secondary);">Making tech education available to everyone.</p>
-            </div>
-            <div class="card" style="text-align: center;">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏆</div>
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Excellence</h3>
-                <p style="color: var(--text-secondary);">Delivering the highest quality practical training.</p>
-            </div>
+        <div class="card" style="margin-top: 2rem;">
+            <h2 class="card-title">Part of Trendtactics Digital</h2>
+            <p class="card-description">
+                Trendtactics Academy is the educational arm of <a href="https://trendtacticsdigital.com"
+                    style="color: var(--primary); text-decoration: none;">Trendtactics Digital</a>,
+                a full-service digital agency specializing in web development, digital marketing, and creative
+                solutions.
+            </p>
+            <p class="card-description">
+                Our academy brings the same professional expertise and industry knowledge to our students,
+                ensuring you learn skills that are relevant and in-demand.
+            </p>
         </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">

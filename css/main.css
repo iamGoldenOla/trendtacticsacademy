@@ -248,12 +248,16 @@ body {
 }
 
 /* Hero Section */
+/* Hero Sections with Specific Images */
 .hero {
-    padding: 6rem 0;
-    text-align: center;
     position: relative;
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    padding: 8rem 0 6rem;
     overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    /* Added from original .hero */
 }
 
 .hero::before {
@@ -261,12 +265,83 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-        radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(0, 217, 255, 0.1) 0%, transparent 50%);
-    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(11, 20, 55, 0.9) 0%, rgba(11, 20, 55, 0.7) 100%);
+    z-index: 0;
+}
+
+.hero-home {
+    background-image: url('../images/homepage.jpg');
+}
+
+.hero-about {
+    background-image: url('../images/aboutpage.jpg');
+}
+
+.hero-services {
+    background-image: url('../images/servicespage.jpg');
+}
+
+.hero-courses {
+    background-image: url('../images/coursespage.jpg');
+}
+
+.hero-contact {
+    background-image: url('../images/contactpage.jpg');
+}
+
+/* Parallax Sections */
+.parallax-section {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 6rem 0;
+    position: relative;
+    color: white;
+    text-align: center;
+}
+
+.parallax-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(11, 20, 55, 0.7);
+    /* Dark overlay */
+    z-index: 1;
+}
+
+.parallax-content {
+    position: relative;
+    z-index: 2;
+}
+
+.parallax-1 {
+    background-image: url('../images/studentparallex3.jpg');
+}
+
+.parallax-2 {
+    background-image: url('../images/parrallexpage1.jpg');
+}
+
+.parallax-3 {
+    background-image: url('../images/parallexpage4.jpg');
+}
+
+.parallax-4 {
+    background-image: url('../images/parallexpage2.jpg');
+}
+
+.parallax-5 {
+    background-image: url('../images/websiteparallexpage.jpg');
+}
+
+.section-padding {
+    padding: 4rem 0;
 }
 
 .hero-title {
