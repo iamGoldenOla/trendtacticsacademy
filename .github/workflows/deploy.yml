@@ -19,7 +19,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /public_html/academy.trendtacticsdigital.com/
+          server-dir: ./
           security: loose
           # Matches your user request: upload to 'master' branch content to the FTP root
           # The FTP user should point specifically to the academy folder on the server
