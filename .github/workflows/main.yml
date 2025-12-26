@@ -1,0 +1,32 @@
+name: Deploy Academy to FTP
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: 📂 Sync files (Deploy)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ./
+          security: loose
+          # Matches your user request: upload to 'master' branch content to the FTP root
+          # The FTP user should point specifically to the academy folder on the server
+          # Exclude git files and node_modules if any
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/README.md
+            **/.github/**
