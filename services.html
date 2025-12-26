@@ -19,6 +19,7 @@
                 <a href="index.html">Home</a>
                 <a href="about.html">About</a>
                 <a href="services.html">Services</a>
+                <a href="courses.html">Courses</a>
                 <a href="contact.html">Contact</a>
                 <a href="dashboard.html" id="dashboardLink" style="display:none;">Dashboard</a>
                 <button class="btn btn-secondary" id="authBtn" onclick="handleAuth()">Sign In</button>
@@ -27,107 +28,114 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero hero-services">
         <div class="container" style="text-align: center; position: relative; z-index: 1;">
             <h1 class="hero-title">Our Services</h1>
-            <p class="hero-subtitle">Comprehensive learning solutions designed to transform your digital capabilities.
+            <p class="hero-subtitle">Comprehensive learning solutions and digital services to transform your business.
             </p>
+        </div>
+    </section>
+
+    <!-- Parallax Section -->
+    <section class="parallax-section parallax-5">
+        <div class="container parallax-content">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Expert Solutions</h2>
+            <p style="font-size: 1.25rem;">From learning to implementation, we have you covered.</p>
         </div>
     </section>
 
     <!-- Services Grid -->
     <section class="container" style="padding: 4rem 0;">
-        <div class="grid grid-2">
-            <!-- Online Courses -->
+        <div class="grid grid-3">
+            <!-- Web Development -->
             <div class="card">
-                <h2 class="card-title">Online Courses</h2>
+                <h2 class="card-title">Web Development</h2>
                 <p class="card-description">
-                    Self-paced courses covering coding, design, digital marketing, and more.
-                    Learn at your own speed with lifetime access to course materials.
+                    We build high-performance, responsive websites that drive results. From landing pages to complex web
+                    applications.
                 </p>
                 <div style="margin-top: 1.5rem;">
                     <div
                         style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
-                        <span style="color: var(--primary);">✓</span> Interactive lessons
+                        <span style="color: var(--primary);">✓</span> Custom Web Design
                     </div>
                     <div
                         style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
-                        <span style="color: var(--primary);">✓</span> Hands-on projects
+                        <span style="color: var(--primary);">✓</span> E-commerce Solutions
                     </div>
                     <div
                         style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
-                        <span style="color: var(--primary);">✓</span> Certificates of completion
+                        <span style="color: var(--primary);">✓</span> CMS Integration
                     </div>
                 </div>
+            </div>
+
+            <!-- App Development -->
+            <div class="card">
+                <h2 class="card-title">App Development</h2>
+                <p class="card-description">
+                    Native and cross-platform mobile apps designed for optimal user experience and performance.
+                </p>
+                <div style="margin-top: 1.5rem;">
+                    <div
+                        style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
+                        <span style="color: var(--primary);">✓</span> iOS & Android
+                    </div>
+                    <div
+                        style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
+                        <span style="color: var(--primary);">✓</span> React Native
+                    </div>
+                    <div
+                        style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
+                        <span style="color: var(--primary);">✓</span> UI/UX Design
+                    </div>
+                </div>
+            </div>
+
+            <!-- Digital Services -->
+            <div class="card">
+                <h2 class="card-title">Digital Services</h2>
+                <p class="card-description">
+                    Comprehensive digital strategies including SEO, social media marketing, and content creation.
+                </p>
+                <div style="margin-top: 1.5rem;">
+                    <div
+                        style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
+                        <span style="color: var(--primary);">✓</span> SEO Optimization
+                    </div>
+                    <div
+                        style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
+                        <span style="color: var(--primary);">✓</span> Content Strategy
+                    </div>
+                    <div
+                        style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
+                        <span style="color: var(--primary);">✓</span> Analytics
+                    </div>
+                </div>
+            </div>
+
+            <!-- Online Courses -->
+            <div class="card">
+                <h2 class="card-title">Online Courses</h2>
+                <p class="card-description">
+                    Self-paced courses covering coding, design, and digital skills.
+                </p>
             </div>
 
             <!-- Vibe Coding -->
             <div class="card">
                 <h2 class="card-title">Vibe Coding Program</h2>
                 <p class="card-description">
-                    Our flagship program teaching you to create digital products using AI as a creative partner.
-                    Perfect for beginners with zero coding experience.
+                    Our flagship AI-powered coding program for beginners.
                 </p>
-                <div style="margin-top: 1.5rem;">
-                    <div
-                        style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
-                        <span style="color: var(--primary);">✓</span> No prior experience needed
-                    </div>
-                    <div
-                        style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
-                        <span style="color: var(--primary);">✓</span> Focus on ideas, not syntax
-                    </div>
-                    <div
-                        style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
-                        <span style="color: var(--primary);">✓</span> Build real projects
-                    </div>
-                </div>
             </div>
 
             <!-- Interactive Tools -->
             <div class="card">
-                <h2 class="card-title">Interactive Learning Tools</h2>
+                <h2 class="card-title">Learning Tools</h2>
                 <p class="card-description">
-                    Access our suite of learning tools including code playground, whiteboard,
-                    and AI-powered tutors to enhance your learning experience.
+                    Access our suite of tools: Code Playground, Whiteboard, and AI Tutors.
                 </p>
-                <div style="margin-top: 1.5rem;">
-                    <div
-                        style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
-                        <span style="color: var(--primary);">✓</span> Code playground
-                    </div>
-                    <div
-                        style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
-                        <span style="color: var(--primary);">✓</span> Digital whiteboard
-                    </div>
-                    <div
-                        style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
-                        <span style="color: var(--primary);">✓</span> AI tutor assistance
-                    </div>
-                </div>
-            </div>
-
-            <!-- Custom Training -->
-            <div class="card">
-                <h2 class="card-title">Corporate Training</h2>
-                <p class="card-description">
-                    Customized training programs for teams and organizations looking to upskill their workforce
-                    in modern digital technologies.
-                </p>
-                <div style="margin-top: 1.5rem;">
-                    <div
-                        style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
-                        <span style="color: var(--primary);">✓</span> Tailored curriculum
-                    </div>
-                    <div
-                        style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
-                        <span style="color: var(--primary);">✓</span> Progress tracking
-                    </div>
-                    <div
-                        style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; color: var(--text-secondary);">
-                        <span style="color: var(--primary);">✓</span> Dedicated support
-                    </div>
-                </div>
             </div>
         </div>
     </section>
