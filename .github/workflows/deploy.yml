@@ -20,6 +20,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ./
+          security: loose
           # Matches your user request: upload to 'master' branch content to the FTP root
           # The FTP user should point specifically to the academy folder on the server
           # Exclude git files and node_modules if any
