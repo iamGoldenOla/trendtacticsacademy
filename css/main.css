@@ -276,37 +276,41 @@ body {
 
 /* Hero Section */
 /* Hero Sections with Specific Images */
+.hero-about {
+    background-image: url('../images/aboutpage.jpg');
+}
+
 .hero-services {
-    background-image: url('../images/homepage.jpg');
+    background-image: url('../images/servicespage.jpg');
 }
 
 .hero-courses {
-    background-image: url('../images/homepage.jpg');
+    background-image: url('../images/coursespage.jpg');
 }
 
 .hero-contact {
-    background-image: url('../images/aboutpage.jpg');
+    background-image: url('../images/contactpage.jpg');
 }
 
 /* Parallax Sections */
 .parallax-1 {
-    background-image: url('../images/homepage.jpg');
+    background-image: url('../images/parrallexpage1.jpg');
 }
 
 .parallax-2 {
-    background-image: url('../images/aboutpage.jpg');
+    background-image: url('../images/websiteparallexpage.jpg');
 }
 
 .parallax-3 {
-    background-image: url('../images/homepage.jpg');
+    background-image: url('../images/studentparallex3.jpg');
 }
 
 .parallax-4 {
-    background-image: url('../images/aboutpage.jpg');
+    background-image: url('../images/parallexpage2.jpg');
 }
 
 .parallax-5 {
-    background-image: url('../images/homepage.jpg');
+    background-image: url('../images/parallexpage4.jpg');
 }
 
 .section-padding {
