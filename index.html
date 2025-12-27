@@ -20,6 +20,7 @@
                 <a href="about.html">About</a>
                 <a href="services.html">Services</a>
                 <a href="courses.html">Courses</a>
+                <a href="blog.html">Blog</a>
                 <a href="contact.html">Contact</a>
                 <a href="dashboard.html" id="dashboardLink" style="display:none;">Dashboard</a>
                 <button class="btn btn-secondary" id="authBtn" onclick="handleAuth()">Sign In</button>
@@ -88,12 +89,28 @@
         </div>
     </section>
 
-    <!-- Parallax Section 2 -->
-    <section class="parallax-section parallax-2">
-        <div class="container parallax-content">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Transform Your Career</h2>
-            <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto;">Join a community of innovators and creators
-                building the future.</p>
+    <!-- How It Works Section (Replaces Parallax 2) -->
+    <section class="section-padding"
+        style="background: var(--bg-tertiary); margin: 0 -100vw; padding-left: 100vw; padding-right: 100vw;">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;">How It Works</h2>
+            <div class="process-grid">
+                <div class="process-step">
+                    <h3>1. Join for Free</h3>
+                    <p>Create your account in seconds and get instant access to our free introductory courses and
+                        community.</p>
+                </div>
+                <div class="process-step">
+                    <h3>2. Learn with AI</h3>
+                    <p>Master new skills using our AI-enhanced curriculum that adapts to your learning pace and style.
+                    </p>
+                </div>
+                <div class="process-step">
+                    <h3>3. Build Portfolio</h3>
+                    <p>Apply what you learn by building real-world projects that you can showcase to potential
+                        employers.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -172,6 +189,43 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
+    <section class="container section-padding">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">Frequently Asked Questions</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question">
+                    Is Trendtactics Academy free?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes! Many of our introductory courses, including Vibe Coding, are completely free to start. We
+                    believe in making education accessible to everyone.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do I get a certificate?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Absolutely. Upon successful completion of any course, you will receive a verified digital
+                    certificate that you can add to your LinkedIn profile or resume.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do I need prior coding experience?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    No prior experience is needed for our beginner courses. Our curriculum is designed to take you from
+                    zero to hero, with AI assistance to help you learn faster.
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Team Section -->
     <section class="section-padding"
         style="padding: 6rem 0; background: var(--bg-secondary); margin: 0 -100vw; padding-left: 100vw; padding-right: 100vw;">
@@ -231,6 +285,21 @@
                         Award-winning designer specializing in user experience and interface design.
                     </p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community & Newsletter Section -->
+    <section class="section-padding newsletter-section"
+        style="margin: 0 -100vw; padding-left: 100vw; padding-right: 100vw;">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Join Our Community</h2>
+            <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem;">
+                Stay updated with the latest AI trends, free resources, and academy news. Join 5,000+ others.
+            </p>
+            <div class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" class="newsletter-input">
+                <button class="btn btn-primary">Subscribe</button>
             </div>
         </div>
     </section>
