@@ -2,8 +2,13 @@
 const { createClient } = require('@supabase/supabase-js');
 
 // Trendtactics Digital Supabase credentials
-const supabaseUrl = 'https://wtgwxnhnqdnbzpetltrt.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind0Z3d4bmhucWRuYnpwZXRsdHJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUwNjQ2NjUsImV4cCI6MjA4MDY0MDY2NX0.3eblmq4lsnDQU33M9XqZpBqux9bi9hX2G0yUuPScHJA';
+require('dotenv').config();
+const supabaseUrl = process.env.SUPABASE_URL_DIGITAL || 'https://wtgwxnhnqdnbzpetltrt.supabase.co';
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY_DIGITAL || process.env.SUPABASE_ANON_KEY;
+if (!supabaseAnonKey) {
+  console.error('Missing SUPABASE_ANON_KEY_DIGITAL (or SUPABASE_ANON_KEY). Set in environment (.env); do not hardcode.');
+  process.exit(1);
+}
 
 // Create Supabase client
 const supabase = createClient(supabaseUrl, supabaseAnonKey);

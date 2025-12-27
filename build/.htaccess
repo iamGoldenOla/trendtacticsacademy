@@ -4,12 +4,7 @@
     Header set Content-Security-Policy "default-src * 'unsafe-inline' 'unsafe-eval'; connect-src *; script-src * 'unsafe-inline' 'unsafe-eval'; frame-src *; img-src * data: https:; style-src * 'unsafe-inline'; font-src *; worker-src * blob:; child-src *;"
 </IfModule>
 
-# Handle routing for SPA
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
-    RewriteRule ^index\.html$ - [L]
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule . /index.html [L]
-</IfModule>
+# Serve static multi-page HTML; disable SPA rewrites
+# Let Apache serve files and directories as-is; no catch-all to index.html
+# Use a proper 404 page for missing routes
+ErrorDocument 404 /404.html
