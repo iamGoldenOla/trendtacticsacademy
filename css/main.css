@@ -611,7 +611,11 @@ body {
 }
 
 .hero::after {
-    display: none;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+    pointer-events: none;
 }
 
 .hero .container {
@@ -686,13 +690,29 @@ body {
     .parallax-4 {
         background-image: radial-gradient(circle at 20% 80%, rgba(0, 217, 255, 0.15), transparent 40%), linear-gradient(180deg, var(--bg-secondary), var(--bg-tertiary));
     }
+    
+    .parallax-5 {
+        background-image: url('../images/websiteparallexpage.jpg');
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+    }
+    
+    .parallax-6 {
+        background-image: url('../images/websiteparallexpage.jpg');
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+    }
 }
 
 /* Mobile: disable fixed to avoid jank */
 @media (max-width: 1023px) {
 
     .parallax-1,
-    .parallax-3 {
+    .parallax-3,
+    .parallax-5,
+    .parallax-6 {
         background-attachment: initial;
     }
 }
