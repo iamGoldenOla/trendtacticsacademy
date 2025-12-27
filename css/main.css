@@ -629,8 +629,8 @@ body {
 @media (max-width: 900px) { .ai-container { flex-direction: column; } .sidebar { width: 100%; } }
 /* Scrollers */
 .scroller { overflow: hidden; width: 100%; position: relative; }
-.scroller-track { display: flex; align-items: center; gap: 2rem; white-space: nowrap; will-change: transform; animation: scroll-left 30s linear infinite; }
-.scroller:hover .scroller-track { animation-play-state: paused; }
+.scroller-track { display: flex; align-items: center; gap: 2rem; white-space: nowrap; will-change: transform; animation: scroll-left 20s linear infinite; }
+.scroller:hover .scroller-track { animation-play-state: running; }
 @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* Stats items for scroller */
