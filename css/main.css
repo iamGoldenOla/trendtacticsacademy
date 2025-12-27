@@ -613,7 +613,7 @@ body {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
     pointer-events: none;
 }
 
@@ -646,7 +646,7 @@ body {
     background-position: center;
 }
 
-.hero-courses {
+.hero-about {
     background-image: url('../images/aboutpage.jpg');
     background-size: cover;
     background-position: center;
