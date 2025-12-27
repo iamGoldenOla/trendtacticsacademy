@@ -419,10 +419,9 @@
                     <h3>Quick Links</h3>
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        - <li><a href="#about">About Us</a></li>
-                        + <li><a href="about.html">About Us</a></li>
-                        <li><a href="#courses">Courses</a></li>
-                        <li><a href="#services">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="services.html">Services</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -479,6 +478,17 @@
             });
         });
 
+        // FAQ Toggle
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Close others
+                document.querySelectorAll('.faq-item').forEach(other => {
+                    if (other !== item) other.classList.remove('active');
+                });
+                item.classList.toggle('active');
+            });
+        });
+
         async function initHomepage() {
             try {
                 const loggedIn = await Auth.isLoggedIn();
@@ -492,8 +502,7 @@
                     dashboardLink.style.display = 'block';
                 }
             } catch (error) {
-                console.error('Auth initialization error:', error);
-                // Continue without auth functionality if there's an error
+                // console.error('Auth initialization error:', error);
             }
         }
 

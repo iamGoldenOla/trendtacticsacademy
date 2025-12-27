@@ -998,6 +998,7 @@ body {
         font-size: 1.5rem;
     }
 }
+
 /* New Homepage Styles */
 
 /* Stats Grid */
@@ -1129,8 +1130,10 @@ body {
     from {
         transform: translateX(0);
     }
+
     to {
-        transform: translateX(-25%); /* 4 sets, scroll 1 set width */
+        transform: translateX(-25%);
+        /* 4 sets, scroll 1 set width */
     }
 }
 
@@ -1152,8 +1155,10 @@ body {
 }
 
 .process-step::before {
-    counter-increment: process-counter; /* Add counter */
-    content: counter(process-counter); /* Display counter */
+    counter-increment: process-counter;
+    /* Add counter */
+    content: counter(process-counter);
+    /* Display counter */
     width: 50px;
     height: 50px;
     background: var(--bg-tertiary);
@@ -1180,41 +1185,85 @@ body {
     line-height: 1.6;
 }
 
-/* FAQ Section */
+/* FAQ Section - Square Cards */
 .faq-grid {
     display: grid;
-    gap: 1.5rem;
-    max-width: 800px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 .faq-item {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
     transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 280px;
+    /* Make it square-ish */
+    position: relative;
+    overflow: hidden;
 }
 
 .faq-item:hover {
     border-color: var(--primary);
-    transform: translateX(5px);
+    transform: translateY(-5px);
+    box-shadow: var(--glow);
 }
 
 .faq-question {
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 0.5rem;
-    font-size: 1.125rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.faq-question span {
+    display: block;
+    font-size: 2rem;
+    color: var(--primary);
+    margin-top: 1rem;
+    transition: transform 0.3s ease;
 }
 
 .faq-answer {
     color: var(--text-secondary);
     line-height: 1.6;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    transform: translateY(20px);
+}
+
+.faq-item.active {
+    background: var(--bg-tertiary);
+    border-color: var(--primary);
+}
+
+.faq-item.active .faq-question {
+    transform: translateY(-10px);
+}
+
+.faq-item.active .faq-question span {
+    transform: rotate(45deg);
+}
+
+.faq-item.active .faq-answer {
+    max-height: 300px;
+    /* Enough for content */
+    opacity: 1;
+    transform: translateY(0);
     margin-top: 1rem;
     border-top: 1px solid var(--border-light);
     padding-top: 1rem;
@@ -1314,16 +1363,29 @@ body {
 
 /* Partner Logo Visibility Fix */
 .partner-logo {
-    background: rgba(255, 255, 255, 0.9);
+    background: #ffffff;
+    /* Explicit white background */
     border-radius: 12px;
-    padding: 1rem 2rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    width: 180px;
+    /* Fixed width for consistency */
+    height: 100px;
+    /* Fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 0 1rem;
+    /* Spacing between cards */
 }
 
 /* Override image filter for visibility in white bubble */
 .partner-logo img {
     filter: none;
     opacity: 1;
-    height: 40px;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    height: auto;
+    /* Let object-fit handle it */
 }
-
