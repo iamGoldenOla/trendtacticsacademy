@@ -36,54 +36,95 @@
         </div>
     </section>
 
-    <!-- Parallax Section -->
-    <section class="parallax-section parallax-3">
+    <!-- Welcome Section -->
+    <section class="container" style="padding: 4rem 0;">
+        <div class="card" style="text-align: center; background: linear-gradient(135deg, rgba(22, 32, 68, 0.9), rgba(11, 20, 55, 0.9)); border: 1px solid rgba(0, 217, 255, 0.2);">
+            <h2 class="card-title" style="color: var(--primary); font-size: 2rem; margin-bottom: 1rem;">Welcome to Trendtactics Academy</h2>
+            <p class="card-description" style="font-size: 1.2rem; line-height: 1.8; max-width: 800px; margin: 0 auto 2rem;">
+                We're passionate about empowering learners worldwide with cutting-edge digital skills. Our mission is to create a supportive, inclusive learning environment where students can thrive and build successful careers in technology.
+            </p>
+            <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div class="stat-card">
+                    <div class="stat-number">5,000+</div>
+                    <div class="stat-label">Students</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Courses</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="parallax-section parallax-5">
         <div class="container parallax-content">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Innovation & Excellence</h2>
-            <p style="font-size: 1.25rem;">We believe in the power of technology to transform lives.</p>
+            <div class="card" style="background: rgba(11, 20, 55, 0.9); border: 1px solid rgba(0, 217, 255, 0.2); text-align: center;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary);">Our Story</h2>
+                <p style="font-size: 1.25rem; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                    Founded with a vision to democratize digital education, Trendtactics Academy has grown from a small startup to a trusted learning platform serving thousands of students worldwide.
+                </p>
+            </div>
         </div>
     </section>
 
     <!-- Main Content -->
     <main class="container" style="padding: 4rem 0;">
-        <div class="card">
-            <h2 class="card-title">Our Mission</h2>
-            <p class="card-description">
-                Trendtactics Academy is dedicated to making digital education accessible to everyone.
-                We believe that learning should be engaging, practical, and focused on real-world applications.
-            </p>
-            <p class="card-description">
-                Our innovative approach combines interactive learning tools, AI-powered assistance, and
-                hands-on projects to help students master digital skills with confidence.
-            </p>
+        <div class="grid grid-2" style="gap: 3rem; margin-bottom: 3rem;">
+            <div class="card">
+                <h2 class="card-title" style="color: var(--primary);">Our Mission</h2>
+                <p class="card-description" style="line-height: 1.8;">
+                    Trendtactics Academy is dedicated to making digital education accessible to everyone.
+                    We believe that learning should be engaging, practical, and focused on real-world applications.
+                </p>
+                <p class="card-description" style="line-height: 1.8;">
+                    Our innovative approach combines interactive learning tools, AI-powered assistance, and
+                    hands-on projects to help students master digital skills with confidence.
+                </p>
+            </div>
+            <div class="card">
+                <h2 class="card-title" style="color: var(--primary);">Our Vision</h2>
+                <p class="card-description" style="line-height: 1.8;">
+                    To create a world where anyone, anywhere, can access high-quality digital education
+                    and transform their career through technology skills.
+                </p>
+                <p class="card-description" style="line-height: 1.8;">
+                    We envision a future where education is personalized, engaging, and directly applicable
+                    to real-world challenges.
+                </p>
+            </div>
         </div>
 
         <div class="card" style="margin-top: 2rem;">
             <h2 class="card-title">What Makes Us Different</h2>
             <div class="grid grid-2" style="margin-top: 2rem;">
-                <div>
-                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Beginner-Friendly</h3>
-                    <p style="color: var(--text-secondary);">
+                <div class="card" style="background: var(--bg-tertiary); border: 1px solid var(--border-light);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.25rem;"><span style="display: inline-block; width: 2rem; height: 2rem; background: var(--primary); border-radius: 50%; color: var(--bg-primary); text-align: center; line-height: 2rem; margin-right: 0.5rem; font-size: 1rem;">1</span> Beginner-Friendly</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7;">
                         Our courses are designed for complete beginners. We explain concepts in simple,
                         clear language that anyone can understand.
                     </p>
                 </div>
-                <div>
-                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Interactive Tools</h3>
-                    <p style="color: var(--text-secondary);">
+                <div class="card" style="background: var(--bg-tertiary); border: 1px solid var(--border-light);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.25rem;"><span style="display: inline-block; width: 2rem; height: 2rem; background: var(--primary); border-radius: 50%; color: var(--bg-primary); text-align: center; line-height: 2rem; margin-right: 0.5rem; font-size: 1rem;">2</span> Interactive Tools</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7;">
                         Learn by doing with our integrated whiteboard, code playground, and project-based
                         assignments.
                     </p>
                 </div>
-                <div>
-                    <h3 style="color: var(--primary); margin-bottom: 1rem;">AI-Powered Learning</h3>
-                    <p style="color: var(--text-secondary);">
+                <div class="card" style="background: var(--bg-tertiary); border: 1px solid var(--border-light);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.25rem;"><span style="display: inline-block; width: 2rem; height: 2rem; background: var(--primary); border-radius: 50%; color: var(--bg-primary); text-align: center; line-height: 2rem; margin-right: 0.5rem; font-size: 1rem;">3</span> AI-Powered Learning</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7;">
                         Get personalized help from AI tutors that adapt to your learning pace and style.
                     </p>
                 </div>
-                <div>
-                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Real-World Focus</h3>
-                    <p style="color: var(--text-secondary);">
+                <div class="card" style="background: var(--bg-tertiary); border: 1px solid var(--border-light);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.25rem;"><span style="display: inline-block; width: 2rem; height: 2rem; background: var(--primary); border-radius: 50%; color: var(--bg-primary); text-align: center; line-height: 2rem; margin-right: 0.5rem; font-size: 1rem;">4</span> Real-World Focus</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7;">
                         Build actual projects that you can add to your portfolio and use in your career.
                     </p>
                 </div>
@@ -189,21 +230,25 @@
         </div>
     </section>
 
-    <!-- Parallax Section 3 -->
-    <section class="parallax-section parallax-3">
+    <!-- Student Success Parallax -->
+    <section class="parallax-section parallax-4">
         <div class="container parallax-content">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Student Success Stories</h2>
-            <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto;">Join thousands of students who transformed
-                their careers with our courses.</p>
+            <div class="card" style="background: rgba(11, 20, 55, 0.9); border: 1px solid rgba(0, 217, 255, 0.2); text-align: center;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary);">Student Success Stories</h2>
+                <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto; line-height: 1.8;">Join thousands of students who transformed
+                    their careers with our courses.</p>
+            </div>
         </div>
     </section>
 
-    <!-- Parallax Section 4 -->
-    <section class="parallax-section parallax-4">
+    <!-- Industry Skills Parallax -->
+    <section class="parallax-section parallax-5">
         <div class="container parallax-content">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Industry-Ready Skills</h2>
-            <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto;">Master the tools and technologies that
-                employers are looking for.</p>
+            <div class="card" style="background: rgba(11, 20, 55, 0.9); border: 1px solid rgba(0, 217, 255, 0.2); text-align: center;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary);">Industry-Ready Skills</h2>
+                <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto; line-height: 1.8;">Master the tools and technologies that
+                    employers are looking for.</p>
+            </div>
         </div>
     </section>
 

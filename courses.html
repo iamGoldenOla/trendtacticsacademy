@@ -38,50 +38,86 @@
         </div>
     </section>
 
-    <!-- Parallax Section -->
+    <!-- Welcome Section -->
+    <section class="container" style="padding: 4rem 0;">
+        <div class="card" style="text-align: center; background: linear-gradient(135deg, rgba(22, 32, 68, 0.9), rgba(11, 20, 55, 0.9)); border: 1px solid rgba(0, 217, 255, 0.2); margin-bottom: 3rem;">
+            <h2 class="card-title" style="color: var(--primary); font-size: 2rem; margin-bottom: 1rem;">Explore Our Courses</h2>
+            <p class="card-description" style="font-size: 1.2rem; line-height: 1.8; max-width: 800px; margin: 0 auto;">
+                Discover expert-led courses designed to accelerate your career in the digital economy. Learn from industry experts and build real-world projects that showcase your skills.
+            </p>
+        </div>
+    </section>
+
+    <!-- Courses Overview Parallax -->
     <section class="parallax-section parallax-2">
         <div class="container parallax-content">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Start Your Journey</h2>
-            <p style="font-size: 1.25rem;">Expert-led instruction. Real-world projects.</p>
+            <div class="card" style="background: rgba(11, 20, 55, 0.9); border: 1px solid rgba(0, 217, 255, 0.2); text-align: center;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary);">Start Your Learning Journey</h2>
+                <p style="font-size: 1.25rem; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                    Expert-led instruction with real-world projects and hands-on experience.
+                </p>
+            </div>
         </div>
     </section>
 
     <!-- Courses Grid -->
     <section class="container" style="padding: 4rem 0;">
-        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">Available Courses</h2>
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem; color: var(--primary);">Available Courses</h2>
 
         <div class="grid grid-2">
             <!-- Vibe Coding Course -->
-            <div class="card">
+            <div class="card" style="transition: all 0.3s ease;">
                 <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                     <span class="badge badge-primary">Beginner</span>
                     <span class="badge badge-success">Free</span>
                 </div>
-                <h3 class="card-title">Vibe Coding</h3>
-                <p class="card-description">
+                <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                        💻
+                    </div>
+                    <h3 class="card-title" style="margin: 0; color: var(--primary);">Vibe Coding</h3>
+                </div>
+                <p class="card-description" style="line-height: 1.7; margin-bottom: 1.5rem;">
                     Learn to create digital products by focusing on ideas, intention, creativity, and guidance.
                     Perfect for beginners who want to build without getting lost in syntax.
                 </p>
-                <div style="margin: 1.5rem 0;">
-                    <p style="color: var(--text-muted); font-size: 0.875rem;">
-                        ⏱️ 5 Modules • 📅 3 Weeks • 📜 Certificate
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(22, 32, 68, 0.5); border-radius: var(--radius); border: 1px solid var(--border-light);">
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                        <span style="color: var(--primary); margin-right: 0.5rem;">⏱️</span> 5 Modules
+                    </p>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                        <span style="color: var(--primary); margin-right: 0.5rem;">📅</span> 3 Weeks
+                    </p>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                        <span style="color: var(--primary); margin-right: 0.5rem;">📜</span> Certificate
                     </p>
                 </div>
                 <!-- Fixed link: relative path to course-detail.html -->
-                <a href="course-detail.html" class="btn btn-primary" style="width: 100%; text-align: center;">
+                <a href="course-detail.html" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">
                     View Course
                 </a>
             </div>
 
             <!-- Coming Soon -->
-            <div class="card" style="background: var(--bg-tertiary); border-style: dashed;">
+            <div class="card" style="background: linear-gradient(135deg, rgba(22, 32, 68, 0.6), rgba(11, 20, 55, 0.6)); border: 1px dashed var(--primary); transition: all 0.3s ease;">
                 <div style="text-align: center; padding: 2rem 0;">
                     <div style="font-size: 2.5rem; margin-bottom: 1rem;">🚀</div>
-                    <h3 class="card-title">More Courses Coming Soon</h3>
-                    <p class="card-description">
+                    <h3 class="card-title" style="color: var(--primary);">More Courses Coming Soon</h3>
+                    <p class="card-description" style="line-height: 1.7; margin: 1rem 0;">
                         We're constantly adding new courses in web development, design, digital marketing, and more.
                         Stay tuned!
                     </p>
+                    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(22, 32, 68, 0.5); border-radius: var(--radius); border: 1px solid var(--border-light);">
+                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center; justify-content: center;">
+                            <span style="color: var(--primary); margin-right: 0.5rem;">🎯</span> Web Development
+                        </p>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center; justify-content: center;">
+                            <span style="color: var(--primary); margin-right: 0.5rem;">🎨</span> UI/UX Design
+                        </p>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center; justify-content: center;">
+                            <span style="color: var(--primary); margin-right: 0.5rem;">📈</span> Digital Marketing
+                        </p>
+                    </div>
                     <button class="btn btn-secondary" disabled
                         style="opacity: 0.6; cursor: not-allowed; margin-top: 1rem;">
                         Coming Soon
@@ -93,21 +129,25 @@
 
     <!-- Partners section removed: visible only on Home and About pages -->
 
-    <!-- Parallax Section 3 -->
-    <section class="parallax-section parallax-3">
+    <!-- Student Success Parallax -->
+    <section class="parallax-section parallax-2">
         <div class="container parallax-content">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Student Success Stories</h2>
-            <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto;">Join thousands of students who transformed
-                their careers with our courses.</p>
+            <div class="card" style="background: rgba(11, 20, 55, 0.9); border: 1px solid rgba(0, 217, 255, 0.2); text-align: center;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary);">Student Success Stories</h2>
+                <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto; line-height: 1.8;">Join thousands of students who transformed
+                    their careers with our courses.</p>
+            </div>
         </div>
     </section>
 
-    <!-- Parallax Section 4 -->
+    <!-- Industry Skills Parallax -->
     <section class="parallax-section parallax-4">
         <div class="container parallax-content">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Industry-Ready Skills</h2>
-            <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto;">Master the tools and technologies that
-                employers are looking for.</p>
+            <div class="card" style="background: rgba(11, 20, 55, 0.9); border: 1px solid rgba(0, 217, 255, 0.2); text-align: center;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary);">Industry-Ready Skills</h2>
+                <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto; line-height: 1.8;">Master the tools and technologies that
+                    employers are looking for.</p>
+            </div>
         </div>
     </section>
 
