@@ -605,7 +605,8 @@ body {
     min-height: 70vh;
     display: flex;
     align-items: center;
-    background: radial-gradient(1200px circle at 20% 20%, rgba(0, 217, 255, 0.15), transparent 40%), linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    background-size: cover;
+    background-position: center;
     overflow: hidden;
 }
 
