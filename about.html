@@ -16,13 +16,13 @@
             <div class="logo">Trendtactics Academy</div>
             <nav class="nav">
                 <a href="https://trendtacticsdigital.com">Digital Services</a>
-                <a href="index.html">Home</a>
-                <a href="about.html" class="active" style="color: var(--primary);">About</a>
-                <a href="services.html">Services</a>
-                <a href="courses.html">Courses</a>
-                <a href="blog.html">Blog</a>
-                <a href="contact.html">Contact</a>
-                <a href="dashboard.html" id="dashboardLink" style="display:none;">Dashboard</a>
+                <a href="/">Home</a>
+                <a href="/about" class="active" style="color: var(--primary);">About</a>
+                <a href="/services">Services</a>
+                <a href="/courses">Courses</a>
+                <a href="/blog">Blog</a>
+                <a href="/contact">Contact</a>
+                <a href="/dashboard" id="dashboardLink" style="display:none;">Dashboard</a>
                 <button class="btn btn-secondary" id="authBtn" onclick="handleAuth()">Sign In</button>
             </nav>
         </div>
@@ -317,7 +317,7 @@
             <h2 style="font-size: 2rem; color: white; margin-bottom: 1rem;">Join Our Learning Community</h2>
             <p style="color: rgba(255,255,255,0.9); margin-bottom: 2rem; font-size: 1.125rem;">Start learning with
                 expert-led courses and AI-powered tools designed for real-world success.</p>
-            <a href="signup.html" class="btn btn-lg" style="background: white; color: var(--primary);">Create Free
+            <a href="/signup" class="btn btn-lg" style="background: white; color: var(--primary);">Create Free
                 Account</a>
         </div>
     </section>
@@ -339,11 +339,11 @@
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="courses.html">Courses</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/courses">Courses</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/contact">Contact</a></li>
                     </ul>
                 </div>
 
@@ -351,10 +351,10 @@
                 <div class="footer-section">
                     <h3>Learning</h3>
                     <ul>
-                        <li><a href="dashboard.html">Dashboard</a></li>
-                        <li><a href="playground.html">Code Playground</a></li>
-                        <li><a href="whiteboard.html">Whiteboard</a></li>
-                        <li><a href="ai-assistant.html">AI Assistant</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/playground">Code Playground</a></li>
+                        <li><a href="/whiteboard">Whiteboard</a></li>
+                        <li><a href="/ai-assistant">AI Assistant</a></li>
                     </ul>
                 </div>
 
@@ -363,8 +363,8 @@
                     <h3>Connect</h3>
                     <ul>
                         <li><a href="https://trendtacticsdigital.com" target="_blank">Trendtactics Digital</a></li>
-                        <li><a href="contact.html">Get in Touch</a></li>
-                        <li><a href="signup.html">Join Academy</a></li>
+                        <li><a href="/contact">Get in Touch</a></li>
+                        <li><a href="/signup">Join Academy</a></li>
                     </ul>
                 </div>
             </div>
@@ -394,7 +394,7 @@
                 if (loggedIn) {
                     const user = await Auth.getCurrentUser();
                     authBtn.textContent = user?.name || 'Account';
-                    authBtn.onclick = () => window.location.href = 'dashboard.html';
+                    authBtn.onclick = () => window.location.href = '/dashboard';
                     dashboardLink.style.display = 'block';
                 }
             } catch (error) {
@@ -404,7 +404,7 @@
         }
 
         function handleAuth() {
-            window.location.href = 'signup.html';
+            window.location.href = '/signup';
         }
 
         initPage();

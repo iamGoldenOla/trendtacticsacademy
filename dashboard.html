@@ -15,9 +15,9 @@
         <div class="container header-content">
             <div class="logo">Trendtactics Academy</div>
             <nav class="nav">
-                <a href="index.html">Home</a>
-                <a href="courses.html">Courses</a>
-                <a href="dashboard.html">Dashboard</a>
+                <a href="/">Home</a>
+                <a href="/courses">Courses</a>
+                <a href="/dashboard">Dashboard</a>
                 <button class="btn btn-secondary" id="userBtn" onclick="Auth.logout()">Logout</button>
             </nav>
         </div>
@@ -48,7 +48,7 @@
             <div class="card" style="text-align: center;">
                 <h2 class="card-title" style="margin-bottom: 0.5rem;">No courses yet</h2>
                 <p class="card-description" style="margin-bottom: 1.5rem;">Start learning by enrolling in a course</p>
-                <a href="courses.html" class="btn btn-primary btn-lg">Browse Courses</a>
+                <a href="/courses" class="btn btn-primary btn-lg">Browse Courses</a>
             </div>
         </div>
     </main>
@@ -67,7 +67,7 @@
             // Get current user
             currentUser = await Auth.getCurrentUser();
             if (!currentUser) {
-                window.location.href = 'signup.html';
+                window.location.href = '/signup';
                 return;
             }
 
@@ -156,7 +156,7 @@
         }
 
         function viewCourseDetails(courseId) {
-            window.location.href = `course-detail.html?id=${courseId}`;
+            window.location.href = `/course-detail?id=${courseId}`;
         }
 
         // Initialize dashboard
