@@ -45,7 +45,7 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
@@ -276,95 +276,37 @@ body {
 
 /* Hero Section */
 /* Hero Sections with Specific Images */
-.hero {
-    position: relative;
-    padding: 8rem 0 6rem;
-    overflow: hidden;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    text-align: center;
-    /* Added from original .hero */
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(11, 20, 55, 0.9) 0%, rgba(11, 20, 55, 0.7) 100%);
-    z-index: 0;
-}
-
-.hero-home {
+.hero-services {
     background-image: url('../images/homepage.jpg');
 }
 
-.hero-about {
-    background-image: url('../images/aboutpage.jpg');
-}
-
-.hero-services {
-    background-image: url('../images/servicespage.jpg');
-}
-
 .hero-courses {
-    background-image: url('../images/coursespage.jpg');
+    background-image: url('../images/homepage.jpg');
 }
 
 .hero-contact {
-    background-image: url('../images/contactpage.jpg');
+    background-image: url('../images/aboutpage.jpg');
 }
 
 /* Parallax Sections */
-.parallax-section {
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 6rem 0;
-    position: relative;
-    color: white;
-    text-align: center;
-}
-
-.parallax-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(11, 20, 55, 0.7);
-    /* Dark overlay */
-    z-index: 1;
-}
-
-.parallax-content {
-    position: relative;
-    z-index: 2;
-}
-
 .parallax-1 {
-    background-image: url('../images/studentparallex3.jpg');
+    background-image: url('../images/homepage.jpg');
 }
 
 .parallax-2 {
-    background-image: url('../images/parrallexpage1.jpg');
+    background-image: url('../images/aboutpage.jpg');
 }
 
 .parallax-3 {
-    background-image: url('../images/parallexpage4.jpg');
+    background-image: url('../images/homepage.jpg');
 }
 
 .parallax-4 {
-    background-image: url('../images/parallexpage2.jpg');
+    background-image: url('../images/aboutpage.jpg');
 }
 
 .parallax-5 {
-    background-image: url('../images/websiteparallexpage.jpg');
+    background-image: url('../images/homepage.jpg');
 }
 
 .section-padding {
@@ -600,3 +542,88 @@ body {
 .mb-4 {
     margin-bottom: 2rem;
 }
+
+/* Typography & Utilities */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+.section-padding { padding: 6rem 0; }
+.center { text-align: center; }
+
+/* Badges */
+.badge { display: inline-block; padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; border: 1px solid var(--border-light); color: var(--text-secondary); background: rgba(22,32,68,0.6); }
+.badge-primary { color: white; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: none; }
+.badge-success { color: white; background: linear-gradient(135deg, var(--success), #059669); border: none; }
+
+/* Spinner */
+.spinner { width: 32px; height: 32px; border: 3px solid rgba(255,255,255,0.2); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Hero */
+.hero { position: relative; min-height: 70vh; display: flex; align-items: center; background: radial-gradient(1200px circle at 20% 20%, rgba(0,217,255,0.15), transparent 40%), linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); overflow: hidden; }
+.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.4)); pointer-events: none; }
+.hero .container { position: relative; z-index: 1; }
+.hero-title { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 800; letter-spacing: -0.02em; background: linear-gradient(135deg, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-subtitle { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text-secondary); max-width: 900px; margin: 1rem auto 0; }
+
+/* Hero variants */
+.hero-home { background-image: url('../images/homepage.jpg'); background-size: cover; background-position: center; }
+.hero-courses { background-image: url('../images/aboutpage.jpg'); background-size: cover; background-position: center; }
+
+/* Parallax sections */
+.parallax-section { position: relative; padding: 6rem 0; color: #fff; text-align: center; background: linear-gradient(180deg, var(--bg-secondary), var(--bg-tertiary)); }
+.parallax-content { position: relative; z-index: 1; }
+
+/* Desktop-only fixed background for parallax */
+@media (min-width: 1024px) {
+  .parallax-1 { background-image: url('../images/homepage.jpg'); background-attachment: fixed; background-position: center; background-size: cover; }
+  .parallax-2 { background-image: radial-gradient(circle at 80% 20%, rgba(0,217,255,0.15), transparent 40%), linear-gradient(180deg, var(--bg-secondary), var(--bg-tertiary)); }
+  .parallax-3 { background-image: url('../images/aboutpage.jpg'); background-attachment: fixed; background-position: center; background-size: cover; }
+  .parallax-4 { background-image: radial-gradient(circle at 20% 80%, rgba(0,217,255,0.15), transparent 40%), linear-gradient(180deg, var(--bg-secondary), var(--bg-tertiary)); }
+}
+
+/* Mobile: disable fixed to avoid jank */
+@media (max-width: 1023px) {
+  .parallax-1, .parallax-3 { background-attachment: initial; }
+}
+
+/* Footer */
+.footer { background: rgba(11,20,55,0.95); border-top: 1px solid var(--border); padding: 3rem 0; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
+.footer-section h3 { color: #fff; margin-bottom: 1rem; }
+.footer-section ul { list-style: none; }
+.footer-section li { margin: 0.5rem 0; }
+.footer-section a { color: var(--text-secondary); text-decoration: none; }
+.footer-section a:hover { color: var(--primary); }
+.footer-bottom { margin-top: 2rem; text-align: center; color: var(--text-muted); }
+
+/* Partner logos */
+.partner-logo img { height: 48px; width: auto; filter: grayscale(20%); opacity: 0.9; transition: all 0.3s ease; }
+.partner-logo img:hover { filter: none; opacity: 1; transform: scale(1.03); }
+
+/* AI Assistant Page Styles */
+.ai-container { display: flex; min-height: calc(100vh - 140px); margin-top: 2rem; gap: 2rem; }
+.sidebar { width: 260px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow); }
+.sidebar h3 { color: var(--text-primary); margin-bottom: 1rem; }
+.sidebar-menu { list-style: none; }
+.sidebar-menu a { display: flex; align-items: center; gap: 0.75rem; color: var(--text-secondary); text-decoration: none; padding: 0.75rem; border-radius: var(--radius); transition: all 0.25s ease; }
+.sidebar-menu a:hover { background: var(--bg-tertiary); color: var(--text-primary); }
+
+.main-content { flex: 1; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+.ai-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.ai-header h1 { font-size: 1.75rem; }
+
+.chat-container { flex: 1; display: flex; flex-direction: column; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.chat-messages { flex: 1; padding: 1.25rem; overflow-y: auto; }
+.message { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
+.message.user { justify-content: flex-end; }
+.message .bubble { max-width: 70%; padding: 0.9rem 1rem; border-radius: 16px; line-height: 1.6; }
+.message.user .bubble { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #0B1437; }
+.message.ai .bubble { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border); }
+
+.chat-input { display: flex; gap: 0.75rem; padding: 0.75rem; border-top: 1px solid var(--border); background: var(--bg-secondary); }
+.chat-input input { flex: 1; padding: 0.75rem 1rem; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-tertiary); color: var(--text-primary); outline: none; }
+.chat-input input::placeholder { color: var(--text-muted); }
+.chat-input button { padding: 0.75rem 1.25rem; }
+
+/* Responsive AI layout */
+@media (max-width: 900px) { .ai-container { flex-direction: column; } .sidebar { width: 100%; } }

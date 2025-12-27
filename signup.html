@@ -189,9 +189,13 @@
     <script>
         // Initialize Supabase using the global supabase object
         const { createClient } = supabase;
+        const SUPABASE_ANON_KEY = window.__ENV__?.SUPABASE_ANON_KEY || null;
+        if (!SUPABASE_ANON_KEY) {
+        console.error('Missing SUPABASE_ANON_KEY. Provide via window.__ENV__ injected server-side.');
+        }
         const sbClient = createClient(
             'https://uimdbodamoeyukrghchb.supabase.co',
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc'
+            SUPABASE_ANON_KEY
         );
 
         let isLoginMode = false;

@@ -2,8 +2,13 @@
 const { createClient } = require('@supabase/supabase-js');
 
 // Use the same Supabase configuration as in the frontend
-const supabaseUrl = 'https://uimdbodamoeyukrghchb.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc';
+require('dotenv').config();
+const supabaseUrl = process.env.SUPABASE_URL || 'https://uimdbodamoeyukrghchb.supabase.co';
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
+if (!supabaseAnonKey) {
+  console.error('Missing SUPABASE_ANON_KEY. Set in environment (.env) and never hardcode.');
+  process.exit(1);
+}
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 

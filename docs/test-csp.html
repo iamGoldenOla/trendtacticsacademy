@@ -8,28 +8,33 @@
     <p>This page is for testing CSP headers.</p>
     
     <script>
-        // Test if we can connect to Supabase
-        fetch('https://uimdbodamoeyukrghchb.supabase.co/rest/v1/courses?select=id,title&limit=1', {
-            method: 'GET',
-            headers: {
-                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc',
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc'
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Network response was not ok');
-        })
-        .then(data => {
-            document.body.innerHTML += '<p style="color: green;">✅ Successfully connected to Supabase!</p>';
-            console.log('Data:', data);
-        })
-        .catch(error => {
-            document.body.innerHTML += '<p style="color: red;">❌ Failed to connect to Supabase: ' + error.message + '</p>';
-            console.error('Error:', error);
-        });
+        // Test if we can connect to Supabase using env-provided anon key
+        const anonKey = window.__ENV__?.SUPABASE_ANON_KEY;
+        if (!anonKey) {
+            document.body.innerHTML += '<p style="color: orange;">⚠️ Missing SUPABASE_ANON_KEY in window.__ENV__. Supabase calls are disabled.</p>';
+        } else {
+            fetch('https://uimdbodamoeyukrghchb.supabase.co/rest/v1/courses?select=id,title&limit=1', {
+                method: 'GET',
+                headers: {
+                    'apikey': anonKey,
+                    'Authorization': 'Bearer ' + anonKey
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Network response was not ok');
+            })
+            .then(data => {
+                document.body.innerHTML += '<p style="color: green;">✅ Successfully connected to Supabase!</p>';
+                console.log('Data:', data);
+            })
+            .catch(error => {
+                document.body.innerHTML += '<p style="color: red;">❌ Failed to connect to Supabase: ' + error.message + '</p>';
+                console.error('Error:', error);
+            });
+        }
     </script>
 </body>
 </html>

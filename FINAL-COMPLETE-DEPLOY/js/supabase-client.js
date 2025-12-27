@@ -1,10 +1,20 @@
 // Shared Supabase client for all HTML pages
 const SUPABASE_URL = 'https://uimdbodamoeyukrghchb.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc';
+const SUPABASE_ANON_KEY = window.__ENV__?.SUPABASE_ANON_KEY ?? null;
 
-// Initialize Supabase client
-const { createClient } = supabase;
-const sbClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-// Export for use in other scripts
-window.sbClient = sbClient;
+if (!SUPABASE_ANON_KEY) {
+  console.error('Missing SUPABASE_ANON_KEY. Provide via window.__ENV__ injected server-side.');
+  window.sbClient = {
+    auth: {
+      async getSession() { return { data: { session: null }, error: new Error('Supabase not configured') }; },
+      async getUser() { return { data: { user: null }, error: new Error('Supabase not configured') }; },
+      async signOut() { return { error: new Error('Supabase not configured') }; },
+      async signInWithPassword() { return { data: null, error: new Error('Supabase not configured') }; },
+      async signUp() { return { data: null, error: new Error('Supabase not configured') }; },
+    },
+    from() { return { select: async () => ({ data: null, error: new Error('Supabase not configured') }) }; },
+  };
+} else {
+  const { createClient } = supabase;
+  window.sbClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+}
