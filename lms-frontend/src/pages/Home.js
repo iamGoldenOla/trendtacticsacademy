@@ -25,7 +25,16 @@ const Home = () => {
                         return course.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(course.id);
                     });
                     
-                    setRealCourses(validCourses.slice(0, 3)); // Get first 3 real courses
+                    // Prioritize featured courses if they exist, otherwise take first 3 valid courses
+                    const featuredCourses = validCourses.filter(course => course.featured || course.is_featured || course.category === 'featured');
+                    
+                    if (featuredCourses.length > 0) {
+                        // If we have featured courses, show up to 3 of them
+                        setRealCourses(featuredCourses.slice(0, 3));
+                    } else {
+                        // Otherwise, show first 3 valid courses
+                        setRealCourses(validCourses.slice(0, 3));
+                    }
                 } else {
                     console.warn('No valid courses found in Supabase');
                     setRealCourses([]); // Show empty state instead of mock data
@@ -236,7 +245,7 @@ const Home = () => {
                                             ${course.price || 0}
                                         </span>
                                         <Link 
-                                            to={`/course/${course.id}`} 
+                                            to={`/course/${course.id}/overview`} 
                                             className="btn-primary"
                                         >
                                             View Course
