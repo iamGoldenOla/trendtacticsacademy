@@ -627,3 +627,17 @@ body {
 
 /* Responsive AI layout */
 @media (max-width: 900px) { .ai-container { flex-direction: column; } .sidebar { width: 100%; } }
+/* Scrollers */
+.scroller { overflow: hidden; width: 100%; position: relative; }
+.scroller-track { display: flex; align-items: center; gap: 2rem; white-space: nowrap; will-change: transform; animation: scroll-left 30s linear infinite; }
+.scroller:hover .scroller-track { animation-play-state: paused; }
+@keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* Stats items for scroller */
+.stat { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.75rem 1rem; background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: var(--radius-lg); min-width: 180px; box-shadow: var(--shadow); }
+.stat-number { font-size: 2rem; font-weight: 700; color: var(--primary); line-height: 1; }
+.stat-label { color: var(--text-secondary); margin-top: 0.25rem; }
+
+@media (max-width: 768px) {
+  .stat-number { font-size: 1.5rem; }
+}
