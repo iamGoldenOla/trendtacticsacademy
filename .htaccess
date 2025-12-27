@@ -29,5 +29,31 @@ Options -Indexes
 # Default document
 DirectoryIndex index.html
 
+# Rewrite rules for multi-page application
+RewriteEngine On
+
+# Redirect /index to / (home page)
+RewriteRule ^index$ / [R=301,L]
+
+# Redirect /about to about.html
+RewriteRule ^about$ about.html [L]
+
+# Redirect /services to services.html
+RewriteRule ^services$ services.html [L]
+
+# Redirect /courses to courses.html
+RewriteRule ^courses$ courses.html [L]
+
+# Redirect /blog to blog.html
+RewriteRule ^blog$ blog.html [L]
+
+# Redirect /contact to contact.html
+RewriteRule ^contact$ contact.html [L]
+
+# For any other specific routes that don't exist as files, serve 404
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /404.html [L]
+
 # Error pages (optional)
 ErrorDocument 404 /404.html
