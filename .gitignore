@@ -1,0 +1,5 @@
+lms-frontend/
+lms-backend/
+.env
+.env.local
+.env.*.local

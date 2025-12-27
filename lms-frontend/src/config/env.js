@@ -4,12 +4,12 @@
 
 // Get the API base URL from environment variables or use default
 const getApiBaseUrl = () => {
-    // In development, use the local backend server
+    // Only use localhost if explicitly in development mode
     if (process.env.NODE_ENV === 'development') {
         return process.env.REACT_APP_API_URL || 'http://localhost:5000';
     }
-    // In production, use the production API URL
-    return process.env.REACT_APP_API_URL || 'https://your-production-api.com';
+    // Default to production URL for all other cases
+    return process.env.REACT_APP_API_URL || 'https://academy.trendtacticsdigital.com/api';
 };
 
 export const config = {

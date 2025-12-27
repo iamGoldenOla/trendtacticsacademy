@@ -10,7 +10,7 @@ The course page was showing "Error Loading Courses" and "Showing 0 of 0 courses"
 **Solution**: Added the following to `lms-frontend/.env`:
 ```
 REACT_APP_SUPABASE_URL=https://uimdbodamoeyukrghchb.supabase.co
-REACT_APP_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc
+REACT_APP_SUPABASE_ANON_KEY=<YOUR_SUPABASE_ANON_KEY>
 ```
 
 ### 2. Incorrect Field References in Courses Component

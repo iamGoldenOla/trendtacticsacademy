@@ -9,10 +9,15 @@ async function testCoursesEndpoint() {
     console.log('Fetching courses from API...');
     
     // Since the frontend uses direct Supabase calls, let's check if we can access the courses
+    const ANON_KEY = process.env.SUPABASE_ANON_KEY;
+    if (!ANON_KEY) {
+      console.error('Missing SUPABASE_ANON_KEY environment variable. Aborting request.');
+      return;
+    }
     const response = await fetch('https://uimdbodamoeyukrghchb.supabase.co/rest/v1/courses?select=*', {
       headers: {
-        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc'
+        'apikey': ANON_KEY,
+        'Authorization': 'Bearer ' + ANON_KEY
       }
     });
     
