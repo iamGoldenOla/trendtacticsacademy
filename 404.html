@@ -1,19 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Redirecting...</title>
-    <script>
-        sessionStorage.redirect = location.href;
-    </script>
-    <noscript>
-        <meta http-equiv="refresh" content="0; url=https://iamgoldenola.github.io/trendtacticsacademy/">
-    </noscript>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Trendtactics Academy</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <script>
-        window.location.href = "https://iamgoldenola.github.io/trendtacticsacademy/" + (window.location.hash || "");
-    </script>
-    <p>If you are not redirected automatically, follow this <a href="https://iamgoldenola.github.io/trendtacticsacademy/">link</a>.</p>
+    <div class="container" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem;">
+        <h1 class="hero-title" style="font-size: 4rem; margin-bottom: 1rem;">404</h1>
+        <h2 style="font-size: 2rem; margin-bottom: 1rem; color: var(--primary);">Page Not Found</h2>
+        <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px;">
+            Sorry, the page you're looking for doesn't exist or has been moved.
+        </p>
+        <div style="margin: 2rem 0;">
+            <a href="index.html" class="btn btn-primary" style="margin-right: 1rem;">Go Home</a>
+            <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: auto;">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Trendtactics Academy</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Empowering learners worldwide with cutting-edge digital skills. Master coding, design, and
+                        digital marketing with AI-powered learning.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="courses.html">Courses</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Trendtactics Academy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
