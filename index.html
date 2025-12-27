@@ -510,7 +510,23 @@
             window.location.href = '/signup';
         }
 
+        // Handle clean URL routing from GitHub Pages 404 redirect
+        function handleCleanURLRouting() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const requestedPath = urlParams.get('p');
+            
+            if (requestedPath) {
+                // Remove the query parameter to clean up the URL
+                const cleanURL = window.location.pathname.replace(/\?.*/, '');
+                if (cleanURL !== requestedPath) {
+                    // This helps maintain clean URLs in the browser
+                    history.replaceState({}, '', requestedPath);
+                }
+            }
+        }
+        
         initHomepage();
+        handleCleanURLRouting();
     </script>
 </body>
 
