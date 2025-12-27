@@ -1,0 +1,722 @@
+[
+  {
+    "course_title": "Vibe Coding",
+    "module_title": "Understanding Vibe Coding",
+    "lesson_number": 1,
+    "lesson_title": "What Is Vibe Coding?",
+    "introduction": "Welcome to your first lesson in Vibe Coding! Don't worry if you've never coded before - this is completely normal. In this lesson, we'll explore what Vibe Coding is and why it's different from traditional approaches. By the end of this lesson, you'll have a clear understanding of what makes Vibe Coding special and why it's perfect for beginners.",
+    "big_idea": "Vibe Coding is a beginner-friendly way of creating digital products by focusing on ideas, intention, creativity, and guidance — often with the help of AI — instead of memorizing syntax or complex technical rules. It's about understanding concepts first, then building with confidence.",
+    "visuals": "Create a large, friendly card with a light blue background showing a person having an idea (lightbulb icon) next to a computer screen with simple, colorful shapes being created. Include a connecting arrow showing the idea flowing into the digital creation. Add a smaller card below with two columns: one labeled 'Traditional Coding' (showing complex code symbols and a stressed face) and another labeled 'Vibe Coding' (showing simple icons and a smiling face).",
+    "steps": [
+      "Step 1: Understand that coding is simply a way to tell computers what to do",
+      "Step 2: Recognize that Vibe Coding focuses on ideas before technical details",
+      "Step 3: Learn that Vibe Coding uses AI and guidance to make creation easier",
+      "Step 4: See that Vibe Coding avoids complex syntax and technical rules initially",
+      "Step 5: Appreciate that Vibe Coding builds confidence before complexity"
+    ],
+    "example": "Think of Vibe Coding like cooking with a recipe app that guides you step by step. Instead of memorizing all the cooking techniques first, the app tells you exactly what to do at each moment. Similarly, Vibe Coding uses AI and guidance to help you create digital products without needing to memorize all the technical rules upfront.",
+    "playground_activity": "In the playground section, create a simple drag-and-drop activity where students can move idea cards (like 'I want a website to show my photos' or 'I need an app to track my tasks') to a 'Digital Creation' box. As they move each idea, a simple visual representation appears showing how that idea could become a real digital product. No code required - just visual representation of the connection between ideas and digital creation.",
+    "reflection_question": "Think about a digital product you use every day (like a weather app, social media, or a game). How might someone have created this using Vibe Coding principles - focusing on the main idea first rather than complex technical details?",
+    "quiz": {
+      "questions": [
+        "What does Vibe Coding focus on first?",
+        "Is Vibe Coding designed for beginners?",
+        "Does Vibe Coding emphasize memorizing syntax first?",
+        "What does Vibe Coding use to make creation easier?",
+        "What is the main goal of Vibe Coding?"
+      ],
+      "answers": [
+        "Ideas, intention, creativity, and guidance",
+        "Yes, it's specifically designed for beginners",
+        "No, it avoids complex syntax initially",
+        "AI and guidance",
+        "To make digital creation accessible and confidence-building for beginners"
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "What is Creative Coding? (Beginner Friendly)",
+        "creator": "CodeNewbie",
+        "embed": true,
+        "reason": "Simple explanation of creative approaches to coding that aligns with Vibe Coding principles"
+      },
+      "extra_reading": [
+        "https://example.com/creative-coding-intro - Introduction to Creative Approaches to Programming",
+        "https://example.com/beginner-programming-mindset - Building Confidence in Programming"
+      ]
+    },
+    "summary": "In this lesson, you learned that Vibe Coding is a beginner-friendly approach that focuses on ideas and creativity before technical details. You now understand that Vibe Coding uses AI and guidance to make digital creation accessible, and that it builds confidence before complexity. You're ready to continue exploring how Vibe Coding works in the next lesson."
+  },
+  {
+    "course_title": "Vibe Coding",
+    "module_title": "Understanding Vibe Coding",
+    "lesson_number": 2,
+    "lesson_title": "Why Vibe Coding Exists",
+    "introduction": "Welcome to \"Why Vibe Coding Exists\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+    "big_idea": "Vibe Coding exists because traditional coding approaches often overwhelm beginners with complex syntax and technical rules before they understand the core concepts. Vibe Coding flips this approach by focusing on ideas and creativity first, making digital creation accessible to everyone.",
+    "visuals": "Create a comparison diagram showing two paths: one with a person looking overwhelmed by complex code symbols, and another with the same person smiling while creating with simple, intuitive tools. Include a bridge showing how Vibe Coding connects these experiences.",
+    "steps": [
+      "Step 1: Recognize the challenges beginners face with traditional coding",
+      "Step 2: Understand how focusing on ideas first reduces anxiety",
+      "Step 3: Learn about the benefits of guided learning approaches",
+      "Step 4: See how Vibe Coding addresses these challenges",
+      "Step 5: Appreciate the importance of confidence-building in learning"
+    ],
+    "example": "Think about learning to drive. Would you start by memorizing every technical detail about the engine, transmission, and electronics? No! You start with the basic goal of getting from point A to point B safely. Vibe Coding works the same way - it focuses on your goals and intentions first, then provides the tools to achieve them.",
+    "playground_activity": "In the playground section, create an interactive activity related to \"Why Vibe Coding Exists\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+    "reflection_question": "How does the concept of \"Why Vibe Coding Exists\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "quiz": {
+      "questions": [
+        "What is the main focus of Why Vibe Coding Exists?",
+        "How does this concept benefit beginners?",
+        "Is this concept part of Vibe Coding's core principles?",
+        "What is one practical application of this concept?",
+        "How does this concept build confidence in learners?"
+      ],
+      "answers": [
+        "The specific concept covered in this lesson",
+        "It reduces anxiety and makes learning accessible",
+        "Yes, it's a core principle of Vibe Coding",
+        "Applying this concept in digital creation projects",
+        "By focusing on ideas and providing guidance rather than complexity"
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Understanding Why Vibe Coding Exists - Vibe Coding Fundamentals",
+        "creator": "Vibe Coding Tutorials",
+        "embed": true,
+        "reason": "Relevant video content for this lesson topic"
+      },
+      "extra_reading": [
+        "https://example.com/extra-resource-1 - Additional reading for this topic",
+        "https://example.com/extra-resource-2 - More resources for curious learners"
+      ]
+    },
+    "summary": "In this lesson on \"Why Vibe Coding Exists\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  },
+  {
+    "course_title": "Vibe Coding",
+    "module_title": "Understanding Vibe Coding",
+    "lesson_number": 3,
+    "lesson_title": "How Vibe Coding Is Different from Traditional Coding",
+    "introduction": "Welcome to \"How Vibe Coding Is Different from Traditional Coding\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+    "big_idea": "Traditional coding starts with technical details and syntax, which can be intimidating for beginners. Vibe Coding starts with your ideas and intentions, using AI and guidance to help you create without getting bogged down in technical complexity.",
+    "visuals": "Design a split-screen visual showing 'Traditional Approach' (left side: complex code, frustrated learner) versus 'Vibe Approach' (right side: idea-focused creation, happy learner). Include arrows showing the learning journey in each approach.",
+    "steps": [
+      "Step 1: Examine traditional coding's focus on syntax and rules",
+      "Step 2: Compare with Vibe Coding's focus on ideas and creativity",
+      "Step 3: Identify the key differences in learning approaches",
+      "Step 4: Understand how these differences benefit beginners",
+      "Step 5: Recognize the value of guided, supportive learning"
+    ],
+    "example": "Traditional coding is like learning to cook by memorizing the chemical composition of every ingredient before making a sandwich. Vibe Coding is like learning to cook by starting with simple recipes that produce satisfying results, with understanding of the chemistry coming naturally through experience.",
+    "playground_activity": "In the playground section, create an interactive activity related to \"How Vibe Coding Is Different from Traditional Coding\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+    "reflection_question": "How does the concept of \"How Vibe Coding Is Different from Traditional Coding\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "quiz": {
+      "questions": [
+        "What is the main focus of How Vibe Coding Is Different from Traditional Coding?",
+        "How does this concept benefit beginners?",
+        "Is this concept part of Vibe Coding's core principles?",
+        "What is one practical application of this concept?",
+        "How does this concept build confidence in learners?"
+      ],
+      "answers": [
+        "The specific concept covered in this lesson",
+        "It reduces anxiety and makes learning accessible",
+        "Yes, it's a core principle of Vibe Coding",
+        "Applying this concept in digital creation projects",
+        "By focusing on ideas and providing guidance rather than complexity"
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Understanding How Vibe Coding Is Different from Traditional Coding - Vibe Coding Fundamentals",
+        "creator": "Vibe Coding Tutorials",
+        "embed": true,
+        "reason": "Relevant video content for this lesson topic"
+      },
+      "extra_reading": [
+        "https://example.com/extra-resource-1 - Additional reading for this topic",
+        "https://example.com/extra-resource-2 - More resources for curious learners"
+      ]
+    },
+    "summary": "In this lesson on \"How Vibe Coding Is Different from Traditional Coding\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  },
+  {
+    "course_title": "Vibe Coding",
+    "module_title": "Thinking Before Coding",
+    "lesson_number": 4,
+    "lesson_title": "Learning to Think in Ideas, Not Code",
+    "introduction": "Welcome to \"Learning to Think in Ideas, Not Code\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+    "big_idea": "In Vibe Coding, you learn to think about what you want to create first, then use tools and guidance to make it happen. This approach builds confidence and helps you understand the purpose behind your digital creations.",
+    "visuals": "Show a lightbulb icon transforming into a simple digital product (like a website or app icon) with a thinking person in the background. Include a flow arrow from the lightbulb to the digital product.",
+    "steps": [
+      "Step 1: Understand the main concept of this lesson",
+      "Step 2: Learn how this concept applies to Vibe Coding",
+      "Step 3: See practical examples of this concept in action",
+      "Step 4: Practice applying this concept in the playground",
+      "Step 5: Reflect on how this fits into your learning journey"
+    ],
+    "example": "Instead of thinking 'I need to create a for loop to iterate through an array', in Vibe Coding you think 'I want to show a list of items on my webpage'. The tools and guidance help translate your idea into the necessary code.",
+    "playground_activity": "In the playground section, create an interactive activity related to \"Learning to Think in Ideas, Not Code\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+    "reflection_question": "How does the concept of \"Learning to Think in Ideas, Not Code\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "quiz": {
+      "questions": [
+        "What is the main focus of Learning to Think in Ideas, Not Code?",
+        "How does this concept benefit beginners?",
+        "Is this concept part of Vibe Coding's core principles?",
+        "What is one practical application of this concept?",
+        "How does this concept build confidence in learners?"
+      ],
+      "answers": [
+        "The specific concept covered in this lesson",
+        "It reduces anxiety and makes learning accessible",
+        "Yes, it's a core principle of Vibe Coding",
+        "Applying this concept in digital creation projects",
+        "By focusing on ideas and providing guidance rather than complexity"
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Understanding Learning to Think in Ideas, Not Code - Vibe Coding Fundamentals",
+        "creator": "Vibe Coding Tutorials",
+        "embed": true,
+        "reason": "Relevant video content for this lesson topic"
+      },
+      "extra_reading": [
+        "https://example.com/extra-resource-1 - Additional reading for this topic",
+        "https://example.com/extra-resource-2 - More resources for curious learners"
+      ]
+    },
+    "summary": "In this lesson on \"Learning to Think in Ideas, Not Code\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  },
+  {
+    "course_title": "Vibe Coding",
+    "module_title": "Thinking Before Coding",
+    "lesson_number": 5,
+    "lesson_title": "Turning Simple Ideas into Digital Instructions",
+    "introduction": "Welcome to \"Turning Simple Ideas into Digital Instructions\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+    "big_idea": "Vibe Coding teaches you to break down your ideas into simple steps that can be translated into digital form. This process helps you see how your creative ideas can become real digital products.",
+    "visuals": "Create a step-by-step visual showing an idea (like 'I want to track my expenses') flowing through a simple process that results in a digital solution. Include friendly icons and clear arrows.",
+    "steps": [
+      "Step 1: Understand the main concept of this lesson",
+      "Step 2: Learn how this concept applies to Vibe Coding",
+      "Step 3: See practical examples of this concept in action",
+      "Step 4: Practice applying this concept in the playground",
+      "Step 5: Reflect on how this fits into your learning journey"
+    ],
+    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
+    "playground_activity": "In the playground section, create an interactive activity related to \"Turning Simple Ideas into Digital Instructions\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+    "reflection_question": "How does the concept of \"Turning Simple Ideas into Digital Instructions\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "quiz": {
+      "questions": [
+        "What is the main focus of Turning Simple Ideas into Digital Instructions?",
+        "How does this concept benefit beginners?",
+        "Is this concept part of Vibe Coding's core principles?",
+        "What is one practical application of this concept?",
+        "How does this concept build confidence in learners?"
+      ],
+      "answers": [
+        "The specific concept covered in this lesson",
+        "It reduces anxiety and makes learning accessible",
+        "Yes, it's a core principle of Vibe Coding",
+        "Applying this concept in digital creation projects",
+        "By focusing on ideas and providing guidance rather than complexity"
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Understanding Turning Simple Ideas into Digital Instructions - Vibe Coding Fundamentals",
+        "creator": "Vibe Coding Tutorials",
+        "embed": true,
+        "reason": "Relevant video content for this lesson topic"
+      },
+      "extra_reading": [
+        "https://example.com/extra-resource-1 - Additional reading for this topic",
+        "https://example.com/extra-resource-2 - More resources for curious learners"
+      ]
+    },
+    "summary": "In this lesson on \"Turning Simple Ideas into Digital Instructions\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  },
+  {
+    "course_title": "Vibe Coding",
+    "module_title": "Thinking Before Coding",
+    "lesson_number": 6,
+    "lesson_title": "Understanding Intent in Vibe Coding",
+    "introduction": "Welcome to \"Understanding Intent in Vibe Coding\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+    "big_idea": "Intent is the 'why' behind your digital creation. In Vibe Coding, understanding your intent helps you make better decisions about your project and communicate more effectively with AI tools.",
+    "visuals": "Design a visual showing a person with a clear goal (like 'I want to connect with friends') and how this intent guides the creation of a digital solution. Include a compass or roadmap metaphor.",
+    "steps": [
+      "Step 1: Understand the main concept of this lesson",
+      "Step 2: Learn how this concept applies to Vibe Coding",
+      "Step 3: See practical examples of this concept in action",
+      "Step 4: Practice applying this concept in the playground",
+      "Step 5: Reflect on how this fits into your learning journey"
+    ],
+    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
+    "playground_activity": "In the playground section, create an interactive activity related to \"Understanding Intent in Vibe Coding\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+    "reflection_question": "How does the concept of \"Understanding Intent in Vibe Coding\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "quiz": {
+      "questions": [
+        "What is the main focus of Understanding Intent in Vibe Coding?",
+        "How does this concept benefit beginners?",
+        "Is this concept part of Vibe Coding's core principles?",
+        "What is one practical application of this concept?",
+        "How does this concept build confidence in learners?"
+      ],
+      "answers": [
+        "The specific concept covered in this lesson",
+        "It reduces anxiety and makes learning accessible",
+        "Yes, it's a core principle of Vibe Coding",
+        "Applying this concept in digital creation projects",
+        "By focusing on ideas and providing guidance rather than complexity"
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Understanding Understanding Intent in Vibe Coding - Vibe Coding Fundamentals",
+        "creator": "Vibe Coding Tutorials",
+        "embed": true,
+        "reason": "Relevant video content for this lesson topic"
+      },
+      "extra_reading": [
+        "https://example.com/extra-resource-1 - Additional reading for this topic",
+        "https://example.com/extra-resource-2 - More resources for curious learners"
+      ]
+    },
+    "summary": "In this lesson on \"Understanding Intent in Vibe Coding\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  },
+  {
+    "course_title": "Vibe Coding",
+    "module_title": "Working with AI as a Creative Partner",
+    "lesson_number": 7,
+    "lesson_title": "What AI Really Is (In Simple Terms)",
+    "introduction": "Welcome to \"What AI Really Is (In Simple Terms)\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+    "big_idea": "AI (Artificial Intelligence) is like a very helpful assistant that can process information and help you with tasks. In Vibe Coding, AI serves as a tool to help you create digital products more efficiently.",
+    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
+    "steps": [
+      "Step 1: Understand the main concept of this lesson",
+      "Step 2: Learn how this concept applies to Vibe Coding",
+      "Step 3: See practical examples of this concept in action",
+      "Step 4: Practice applying this concept in the playground",
+      "Step 5: Reflect on how this fits into your learning journey"
+    ],
+    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
+    "playground_activity": "In the playground section, create an interactive activity related to \"What AI Really Is (In Simple Terms)\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+    "reflection_question": "How does the concept of \"What AI Really Is (In Simple Terms)\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "quiz": {
+      "questions": [
+        "What is the main focus of What AI Really Is (In Simple Terms)?",
+        "How does this concept benefit beginners?",
+        "Is this concept part of Vibe Coding's core principles?",
+        "What is one practical application of this concept?",
+        "How does this concept build confidence in learners?"
+      ],
+      "answers": [
+        "The specific concept covered in this lesson",
+        "It reduces anxiety and makes learning accessible",
+        "Yes, it's a core principle of Vibe Coding",
+        "Applying this concept in digital creation projects",
+        "By focusing on ideas and providing guidance rather than complexity"
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Understanding What AI Really Is (In Simple Terms) - Vibe Coding Fundamentals",
+        "creator": "Vibe Coding Tutorials",
+        "embed": true,
+        "reason": "Relevant video content for this lesson topic"
+      },
+      "extra_reading": [
+        "https://example.com/extra-resource-1 - Additional reading for this topic",
+        "https://example.com/extra-resource-2 - More resources for curious learners"
+      ]
+    },
+    "summary": "In this lesson on \"What AI Really Is (In Simple Terms)\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  },
+  {
+    "course_title": "Vibe Coding",
+    "module_title": "Working with AI as a Creative Partner",
+    "lesson_number": 8,
+    "lesson_title": "How AI Helps in Vibe Coding",
+    "introduction": "Welcome to \"How AI Helps in Vibe Coding\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+    "big_idea": "AI in Vibe Coding acts as a guide and helper, suggesting approaches, catching errors, and helping you implement your ideas without needing to know complex technical details.",
+    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
+    "steps": [
+      "Step 1: Understand the main concept of this lesson",
+      "Step 2: Learn how this concept applies to Vibe Coding",
+      "Step 3: See practical examples of this concept in action",
+      "Step 4: Practice applying this concept in the playground",
+      "Step 5: Reflect on how this fits into your learning journey"
+    ],
+    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
+    "playground_activity": "In the playground section, create an interactive activity related to \"How AI Helps in Vibe Coding\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+    "reflection_question": "How does the concept of \"How AI Helps in Vibe Coding\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "quiz": {
+      "questions": [
+        "What is the main focus of How AI Helps in Vibe Coding?",
+        "How does this concept benefit beginners?",
+        "Is this concept part of Vibe Coding's core principles?",
+        "What is one practical application of this concept?",
+        "How does this concept build confidence in learners?"
+      ],
+      "answers": [
+        "The specific concept covered in this lesson",
+        "It reduces anxiety and makes learning accessible",
+        "Yes, it's a core principle of Vibe Coding",
+        "Applying this concept in digital creation projects",
+        "By focusing on ideas and providing guidance rather than complexity"
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Understanding How AI Helps in Vibe Coding - Vibe Coding Fundamentals",
+        "creator": "Vibe Coding Tutorials",
+        "embed": true,
+        "reason": "Relevant video content for this lesson topic"
+      },
+      "extra_reading": [
+        "https://example.com/extra-resource-1 - Additional reading for this topic",
+        "https://example.com/extra-resource-2 - More resources for curious learners"
+      ]
+    },
+    "summary": "In this lesson on \"How AI Helps in Vibe Coding\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  },
+  {
+    "course_title": "Vibe Coding",
+    "module_title": "Working with AI as a Creative Partner",
+    "lesson_number": 9,
+    "lesson_title": "Talking to AI Clearly and Effectively",
+    "introduction": "Welcome to \"Talking to AI Clearly and Effectively\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+    "big_idea": "Effective communication with AI involves being clear about what you want to achieve. In Vibe Coding, you'll learn simple techniques to get the best results from AI assistance.",
+    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
+    "steps": [
+      "Step 1: Understand the main concept of this lesson",
+      "Step 2: Learn how this concept applies to Vibe Coding",
+      "Step 3: See practical examples of this concept in action",
+      "Step 4: Practice applying this concept in the playground",
+      "Step 5: Reflect on how this fits into your learning journey"
+    ],
+    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
+    "playground_activity": "In the playground section, create an interactive activity related to \"Talking to AI Clearly and Effectively\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+    "reflection_question": "How does the concept of \"Talking to AI Clearly and Effectively\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "quiz": {
+      "questions": [
+        "What is the main focus of Talking to AI Clearly and Effectively?",
+        "How does this concept benefit beginners?",
+        "Is this concept part of Vibe Coding's core principles?",
+        "What is one practical application of this concept?",
+        "How does this concept build confidence in learners?"
+      ],
+      "answers": [
+        "The specific concept covered in this lesson",
+        "It reduces anxiety and makes learning accessible",
+        "Yes, it's a core principle of Vibe Coding",
+        "Applying this concept in digital creation projects",
+        "By focusing on ideas and providing guidance rather than complexity"
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Understanding Talking to AI Clearly and Effectively - Vibe Coding Fundamentals",
+        "creator": "Vibe Coding Tutorials",
+        "embed": true,
+        "reason": "Relevant video content for this lesson topic"
+      },
+      "extra_reading": [
+        "https://example.com/extra-resource-1 - Additional reading for this topic",
+        "https://example.com/extra-resource-2 - More resources for curious learners"
+      ]
+    },
+    "summary": "In this lesson on \"Talking to AI Clearly and Effectively\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  },
+  {
+    "course_title": "Vibe Coding",
+    "module_title": "Vibe Coding in Real Life",
+    "lesson_number": 10,
+    "lesson_title": "Real Examples of Vibe Coding",
+    "introduction": "Welcome to \"Real Examples of Vibe Coding\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+    "big_idea": "Real examples show how Vibe Coding principles have been applied to create actual digital products. These examples demonstrate the power of focusing on ideas and using guidance tools.",
+    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
+    "steps": [
+      "Step 1: Understand the main concept of this lesson",
+      "Step 2: Learn how this concept applies to Vibe Coding",
+      "Step 3: See practical examples of this concept in action",
+      "Step 4: Practice applying this concept in the playground",
+      "Step 5: Reflect on how this fits into your learning journey"
+    ],
+    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
+    "playground_activity": "In the playground section, create an interactive activity related to \"Real Examples of Vibe Coding\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+    "reflection_question": "How does the concept of \"Real Examples of Vibe Coding\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "quiz": {
+      "questions": [
+        "What is the main focus of Real Examples of Vibe Coding?",
+        "How does this concept benefit beginners?",
+        "Is this concept part of Vibe Coding's core principles?",
+        "What is one practical application of this concept?",
+        "How does this concept build confidence in learners?"
+      ],
+      "answers": [
+        "The specific concept covered in this lesson",
+        "It reduces anxiety and makes learning accessible",
+        "Yes, it's a core principle of Vibe Coding",
+        "Applying this concept in digital creation projects",
+        "By focusing on ideas and providing guidance rather than complexity"
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Understanding Real Examples of Vibe Coding - Vibe Coding Fundamentals",
+        "creator": "Vibe Coding Tutorials",
+        "embed": true,
+        "reason": "Relevant video content for this lesson topic"
+      },
+      "extra_reading": [
+        "https://example.com/extra-resource-1 - Additional reading for this topic",
+        "https://example.com/extra-resource-2 - More resources for curious learners"
+      ]
+    },
+    "summary": "In this lesson on \"Real Examples of Vibe Coding\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  },
+  {
+    "course_title": "Vibe Coding",
+    "module_title": "Vibe Coding in Real Life",
+    "lesson_number": 11,
+    "lesson_title": "Building Simple Things Without Fear",
+    "introduction": "Welcome to \"Building Simple Things Without Fear\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+    "big_idea": "Vibe Coding creates a safe environment for experimentation where mistakes are learning opportunities. This approach helps you build confidence while creating real digital products.",
+    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
+    "steps": [
+      "Step 1: Understand the main concept of this lesson",
+      "Step 2: Learn how this concept applies to Vibe Coding",
+      "Step 3: See practical examples of this concept in action",
+      "Step 4: Practice applying this concept in the playground",
+      "Step 5: Reflect on how this fits into your learning journey"
+    ],
+    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
+    "playground_activity": "In the playground section, create an interactive activity related to \"Building Simple Things Without Fear\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+    "reflection_question": "How does the concept of \"Building Simple Things Without Fear\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "quiz": {
+      "questions": [
+        "What is the main focus of Building Simple Things Without Fear?",
+        "How does this concept benefit beginners?",
+        "Is this concept part of Vibe Coding's core principles?",
+        "What is one practical application of this concept?",
+        "How does this concept build confidence in learners?"
+      ],
+      "answers": [
+        "The specific concept covered in this lesson",
+        "It reduces anxiety and makes learning accessible",
+        "Yes, it's a core principle of Vibe Coding",
+        "Applying this concept in digital creation projects",
+        "By focusing on ideas and providing guidance rather than complexity"
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Understanding Building Simple Things Without Fear - Vibe Coding Fundamentals",
+        "creator": "Vibe Coding Tutorials",
+        "embed": true,
+        "reason": "Relevant video content for this lesson topic"
+      },
+      "extra_reading": [
+        "https://example.com/extra-resource-1 - Additional reading for this topic",
+        "https://example.com/extra-resource-2 - More resources for curious learners"
+      ]
+    },
+    "summary": "In this lesson on \"Building Simple Things Without Fear\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  },
+  {
+    "course_title": "Vibe Coding",
+    "module_title": "Vibe Coding in Real Life",
+    "lesson_number": 12,
+    "lesson_title": "Common Beginner Mistakes and How to Avoid Them",
+    "introduction": "Welcome to \"Common Beginner Mistakes and How to Avoid Them\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+    "big_idea": "Understanding common beginner challenges helps you navigate your learning journey more effectively. Vibe Coding provides guidance to avoid these pitfalls.",
+    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
+    "steps": [
+      "Step 1: Understand the main concept of this lesson",
+      "Step 2: Learn how this concept applies to Vibe Coding",
+      "Step 3: See practical examples of this concept in action",
+      "Step 4: Practice applying this concept in the playground",
+      "Step 5: Reflect on how this fits into your learning journey"
+    ],
+    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
+    "playground_activity": "In the playground section, create an interactive activity related to \"Common Beginner Mistakes and How to Avoid Them\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+    "reflection_question": "How does the concept of \"Common Beginner Mistakes and How to Avoid Them\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "quiz": {
+      "questions": [
+        "What is the main focus of Common Beginner Mistakes and How to Avoid Them?",
+        "How does this concept benefit beginners?",
+        "Is this concept part of Vibe Coding's core principles?",
+        "What is one practical application of this concept?",
+        "How does this concept build confidence in learners?"
+      ],
+      "answers": [
+        "The specific concept covered in this lesson",
+        "It reduces anxiety and makes learning accessible",
+        "Yes, it's a core principle of Vibe Coding",
+        "Applying this concept in digital creation projects",
+        "By focusing on ideas and providing guidance rather than complexity"
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Understanding Common Beginner Mistakes and How to Avoid Them - Vibe Coding Fundamentals",
+        "creator": "Vibe Coding Tutorials",
+        "embed": true,
+        "reason": "Relevant video content for this lesson topic"
+      },
+      "extra_reading": [
+        "https://example.com/extra-resource-1 - Additional reading for this topic",
+        "https://example.com/extra-resource-2 - More resources for curious learners"
+      ]
+    },
+    "summary": "In this lesson on \"Common Beginner Mistakes and How to Avoid Them\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  },
+  {
+    "course_title": "Vibe Coding",
+    "module_title": "Exploring and Building with Confidence",
+    "lesson_number": 13,
+    "lesson_title": "Using a Playground to Experiment Safely",
+    "introduction": "Welcome to \"Using a Playground to Experiment Safely\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+    "big_idea": "A playground environment allows you to experiment with ideas without consequences. In Vibe Coding, playgrounds provide safe spaces to test and refine your concepts.",
+    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
+    "steps": [
+      "Step 1: Understand the main concept of this lesson",
+      "Step 2: Learn how this concept applies to Vibe Coding",
+      "Step 3: See practical examples of this concept in action",
+      "Step 4: Practice applying this concept in the playground",
+      "Step 5: Reflect on how this fits into your learning journey"
+    ],
+    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
+    "playground_activity": "In the playground section, create an interactive activity related to \"Using a Playground to Experiment Safely\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+    "reflection_question": "How does the concept of \"Using a Playground to Experiment Safely\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "quiz": {
+      "questions": [
+        "What is the main focus of Using a Playground to Experiment Safely?",
+        "How does this concept benefit beginners?",
+        "Is this concept part of Vibe Coding's core principles?",
+        "What is one practical application of this concept?",
+        "How does this concept build confidence in learners?"
+      ],
+      "answers": [
+        "The specific concept covered in this lesson",
+        "It reduces anxiety and makes learning accessible",
+        "Yes, it's a core principle of Vibe Coding",
+        "Applying this concept in digital creation projects",
+        "By focusing on ideas and providing guidance rather than complexity"
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Understanding Using a Playground to Experiment Safely - Vibe Coding Fundamentals",
+        "creator": "Vibe Coding Tutorials",
+        "embed": true,
+        "reason": "Relevant video content for this lesson topic"
+      },
+      "extra_reading": [
+        "https://example.com/extra-resource-1 - Additional reading for this topic",
+        "https://example.com/extra-resource-2 - More resources for curious learners"
+      ]
+    },
+    "summary": "In this lesson on \"Using a Playground to Experiment Safely\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  },
+  {
+    "course_title": "Vibe Coding",
+    "module_title": "Exploring and Building with Confidence",
+    "lesson_number": 14,
+    "lesson_title": "Improving Your Ideas Step by Step",
+    "introduction": "Welcome to \"Improving Your Ideas Step by Step\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+    "big_idea": "Iterative improvement is a key principle in Vibe Coding. You'll learn to start with simple ideas and gradually enhance them based on feedback and testing.",
+    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
+    "steps": [
+      "Step 1: Understand the main concept of this lesson",
+      "Step 2: Learn how this concept applies to Vibe Coding",
+      "Step 3: See practical examples of this concept in action",
+      "Step 4: Practice applying this concept in the playground",
+      "Step 5: Reflect on how this fits into your learning journey"
+    ],
+    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
+    "playground_activity": "In the playground section, create an interactive activity related to \"Improving Your Ideas Step by Step\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+    "reflection_question": "How does the concept of \"Improving Your Ideas Step by Step\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "quiz": {
+      "questions": [
+        "What is the main focus of Improving Your Ideas Step by Step?",
+        "How does this concept benefit beginners?",
+        "Is this concept part of Vibe Coding's core principles?",
+        "What is one practical application of this concept?",
+        "How does this concept build confidence in learners?"
+      ],
+      "answers": [
+        "The specific concept covered in this lesson",
+        "It reduces anxiety and makes learning accessible",
+        "Yes, it's a core principle of Vibe Coding",
+        "Applying this concept in digital creation projects",
+        "By focusing on ideas and providing guidance rather than complexity"
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Understanding Improving Your Ideas Step by Step - Vibe Coding Fundamentals",
+        "creator": "Vibe Coding Tutorials",
+        "embed": true,
+        "reason": "Relevant video content for this lesson topic"
+      },
+      "extra_reading": [
+        "https://example.com/extra-resource-1 - Additional reading for this topic",
+        "https://example.com/extra-resource-2 - More resources for curious learners"
+      ]
+    },
+    "summary": "In this lesson on \"Improving Your Ideas Step by Step\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  },
+  {
+    "course_title": "Vibe Coding",
+    "module_title": "Exploring and Building with Confidence",
+    "lesson_number": 15,
+    "lesson_title": "Your First Complete Vibe-Coded Project",
+    "introduction": "Welcome to \"Your First Complete Vibe-Coded Project\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+    "big_idea": "Your first complete project brings together all the Vibe Coding principles you've learned. It demonstrates how to create a functional digital product while maintaining focus on ideas and creativity.",
+    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
+    "steps": [
+      "Step 1: Understand the main concept of this lesson",
+      "Step 2: Learn how this concept applies to Vibe Coding",
+      "Step 3: See practical examples of this concept in action",
+      "Step 4: Practice applying this concept in the playground",
+      "Step 5: Reflect on how this fits into your learning journey"
+    ],
+    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
+    "playground_activity": "In the playground section, create an interactive activity related to \"Your First Complete Vibe-Coded Project\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+    "reflection_question": "How does the concept of \"Your First Complete Vibe-Coded Project\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "quiz": {
+      "questions": [
+        "What is the main focus of Your First Complete Vibe-Coded Project?",
+        "How does this concept benefit beginners?",
+        "Is this concept part of Vibe Coding's core principles?",
+        "What is one practical application of this concept?",
+        "How does this concept build confidence in learners?"
+      ],
+      "answers": [
+        "The specific concept covered in this lesson",
+        "It reduces anxiety and makes learning accessible",
+        "Yes, it's a core principle of Vibe Coding",
+        "Applying this concept in digital creation projects",
+        "By focusing on ideas and providing guidance rather than complexity"
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Understanding Your First Complete Vibe-Coded Project - Vibe Coding Fundamentals",
+        "creator": "Vibe Coding Tutorials",
+        "embed": true,
+        "reason": "Relevant video content for this lesson topic"
+      },
+      "extra_reading": [
+        "https://example.com/extra-resource-1 - Additional reading for this topic",
+        "https://example.com/extra-resource-2 - More resources for curious learners"
+      ]
+    },
+    "summary": "In this lesson on \"Your First Complete Vibe-Coded Project\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  }
+]

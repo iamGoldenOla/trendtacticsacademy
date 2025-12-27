@@ -1,0 +1,48 @@
+{
+  "course_title": "Vibe Coding",
+  "module_title": "Understanding Vibe Coding",
+  "lesson_number": 3,
+  "lesson_title": "How Vibe Coding Is Different from Traditional Coding",
+  "introduction": "Welcome to \"How Vibe Coding Is Different from Traditional Coding\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+  "big_idea": "Traditional coding starts with technical details and syntax, which can be intimidating for beginners. Vibe Coding starts with your ideas and intentions, using AI and guidance to help you create without getting bogged down in technical complexity.",
+  "visuals": "Design a split-screen visual showing 'Traditional Approach' (left side: complex code, frustrated learner) versus 'Vibe Approach' (right side: idea-focused creation, happy learner). Include arrows showing the learning journey in each approach.",
+  "steps": [
+    "Step 1: Examine traditional coding's focus on syntax and rules",
+    "Step 2: Compare with Vibe Coding's focus on ideas and creativity",
+    "Step 3: Identify the key differences in learning approaches",
+    "Step 4: Understand how these differences benefit beginners",
+    "Step 5: Recognize the value of guided, supportive learning"
+  ],
+  "example": "Traditional coding is like learning to cook by memorizing the chemical composition of every ingredient before making a sandwich. Vibe Coding is like learning to cook by starting with simple recipes that produce satisfying results, with understanding of the chemistry coming naturally through experience.",
+  "playground_activity": "In the playground section, create an interactive activity related to \"How Vibe Coding Is Different from Traditional Coding\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+  "reflection_question": "How does the concept of \"How Vibe Coding Is Different from Traditional Coding\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+  "quiz": {
+    "questions": [
+      "What is the main focus of How Vibe Coding Is Different from Traditional Coding?",
+      "How does this concept benefit beginners?",
+      "Is this concept part of Vibe Coding's core principles?",
+      "What is one practical application of this concept?",
+      "How does this concept build confidence in learners?"
+    ],
+    "answers": [
+      "The specific concept covered in this lesson",
+      "It reduces anxiety and makes learning accessible",
+      "Yes, it's a core principle of Vibe Coding",
+      "Applying this concept in digital creation projects",
+      "By focusing on ideas and providing guidance rather than complexity"
+    ]
+  },
+  "resources": {
+    "video": {
+      "title": "Understanding How Vibe Coding Is Different from Traditional Coding - Vibe Coding Fundamentals",
+      "creator": "Vibe Coding Tutorials",
+      "embed": true,
+      "reason": "Relevant video content for this lesson topic"
+    },
+    "extra_reading": [
+      "https://example.com/extra-resource-1 - Additional reading for this topic",
+      "https://example.com/extra-resource-2 - More resources for curious learners"
+    ]
+  },
+  "summary": "In this lesson on \"How Vibe Coding Is Different from Traditional Coding\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+}

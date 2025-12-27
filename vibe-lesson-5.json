@@ -1,0 +1,48 @@
+{
+  "course_title": "Vibe Coding",
+  "module_title": "Thinking Before Coding",
+  "lesson_number": 5,
+  "lesson_title": "Turning Simple Ideas into Digital Instructions",
+  "introduction": "Welcome to \"Turning Simple Ideas into Digital Instructions\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+  "big_idea": "Vibe Coding teaches you to break down your ideas into simple steps that can be translated into digital form. This process helps you see how your creative ideas can become real digital products.",
+  "visuals": "Create a step-by-step visual showing an idea (like 'I want to track my expenses') flowing through a simple process that results in a digital solution. Include friendly icons and clear arrows.",
+  "steps": [
+    "Step 1: Understand the main concept of this lesson",
+    "Step 2: Learn how this concept applies to Vibe Coding",
+    "Step 3: See practical examples of this concept in action",
+    "Step 4: Practice applying this concept in the playground",
+    "Step 5: Reflect on how this fits into your learning journey"
+  ],
+  "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
+  "playground_activity": "In the playground section, create an interactive activity related to \"Turning Simple Ideas into Digital Instructions\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+  "reflection_question": "How does the concept of \"Turning Simple Ideas into Digital Instructions\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+  "quiz": {
+    "questions": [
+      "What is the main focus of Turning Simple Ideas into Digital Instructions?",
+      "How does this concept benefit beginners?",
+      "Is this concept part of Vibe Coding's core principles?",
+      "What is one practical application of this concept?",
+      "How does this concept build confidence in learners?"
+    ],
+    "answers": [
+      "The specific concept covered in this lesson",
+      "It reduces anxiety and makes learning accessible",
+      "Yes, it's a core principle of Vibe Coding",
+      "Applying this concept in digital creation projects",
+      "By focusing on ideas and providing guidance rather than complexity"
+    ]
+  },
+  "resources": {
+    "video": {
+      "title": "Understanding Turning Simple Ideas into Digital Instructions - Vibe Coding Fundamentals",
+      "creator": "Vibe Coding Tutorials",
+      "embed": true,
+      "reason": "Relevant video content for this lesson topic"
+    },
+    "extra_reading": [
+      "https://example.com/extra-resource-1 - Additional reading for this topic",
+      "https://example.com/extra-resource-2 - More resources for curious learners"
+    ]
+  },
+  "summary": "In this lesson on \"Turning Simple Ideas into Digital Instructions\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+}
