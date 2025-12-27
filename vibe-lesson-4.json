@@ -1,0 +1,48 @@
+{
+  "course_title": "Vibe Coding",
+  "module_title": "Thinking Before Coding",
+  "lesson_number": 4,
+  "lesson_title": "Learning to Think in Ideas, Not Code",
+  "introduction": "Welcome to \"Learning to Think in Ideas, Not Code\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+  "big_idea": "In Vibe Coding, you learn to think about what you want to create first, then use tools and guidance to make it happen. This approach builds confidence and helps you understand the purpose behind your digital creations.",
+  "visuals": "Show a lightbulb icon transforming into a simple digital product (like a website or app icon) with a thinking person in the background. Include a flow arrow from the lightbulb to the digital product.",
+  "steps": [
+    "Step 1: Understand the main concept of this lesson",
+    "Step 2: Learn how this concept applies to Vibe Coding",
+    "Step 3: See practical examples of this concept in action",
+    "Step 4: Practice applying this concept in the playground",
+    "Step 5: Reflect on how this fits into your learning journey"
+  ],
+  "example": "Instead of thinking 'I need to create a for loop to iterate through an array', in Vibe Coding you think 'I want to show a list of items on my webpage'. The tools and guidance help translate your idea into the necessary code.",
+  "playground_activity": "In the playground section, create an interactive activity related to \"Learning to Think in Ideas, Not Code\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+  "reflection_question": "How does the concept of \"Learning to Think in Ideas, Not Code\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+  "quiz": {
+    "questions": [
+      "What is the main focus of Learning to Think in Ideas, Not Code?",
+      "How does this concept benefit beginners?",
+      "Is this concept part of Vibe Coding's core principles?",
+      "What is one practical application of this concept?",
+      "How does this concept build confidence in learners?"
+    ],
+    "answers": [
+      "The specific concept covered in this lesson",
+      "It reduces anxiety and makes learning accessible",
+      "Yes, it's a core principle of Vibe Coding",
+      "Applying this concept in digital creation projects",
+      "By focusing on ideas and providing guidance rather than complexity"
+    ]
+  },
+  "resources": {
+    "video": {
+      "title": "Understanding Learning to Think in Ideas, Not Code - Vibe Coding Fundamentals",
+      "creator": "Vibe Coding Tutorials",
+      "embed": true,
+      "reason": "Relevant video content for this lesson topic"
+    },
+    "extra_reading": [
+      "https://example.com/extra-resource-1 - Additional reading for this topic",
+      "https://example.com/extra-resource-2 - More resources for curious learners"
+    ]
+  },
+  "summary": "In this lesson on \"Learning to Think in Ideas, Not Code\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+}

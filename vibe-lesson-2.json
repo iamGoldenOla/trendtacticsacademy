@@ -1,0 +1,48 @@
+{
+  "course_title": "Vibe Coding",
+  "module_title": "Understanding Vibe Coding",
+  "lesson_number": 2,
+  "lesson_title": "Why Vibe Coding Exists",
+  "introduction": "Welcome to \"Why Vibe Coding Exists\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+  "big_idea": "Vibe Coding exists because traditional coding approaches often overwhelm beginners with complex syntax and technical rules before they understand the core concepts. Vibe Coding flips this approach by focusing on ideas and creativity first, making digital creation accessible to everyone.",
+  "visuals": "Create a comparison diagram showing two paths: one with a person looking overwhelmed by complex code symbols, and another with the same person smiling while creating with simple, intuitive tools. Include a bridge showing how Vibe Coding connects these experiences.",
+  "steps": [
+    "Step 1: Recognize the challenges beginners face with traditional coding",
+    "Step 2: Understand how focusing on ideas first reduces anxiety",
+    "Step 3: Learn about the benefits of guided learning approaches",
+    "Step 4: See how Vibe Coding addresses these challenges",
+    "Step 5: Appreciate the importance of confidence-building in learning"
+  ],
+  "example": "Think about learning to drive. Would you start by memorizing every technical detail about the engine, transmission, and electronics? No! You start with the basic goal of getting from point A to point B safely. Vibe Coding works the same way - it focuses on your goals and intentions first, then provides the tools to achieve them.",
+  "playground_activity": "In the playground section, create an interactive activity related to \"Why Vibe Coding Exists\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
+  "reflection_question": "How does the concept of \"Why Vibe Coding Exists\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+  "quiz": {
+    "questions": [
+      "What is the main focus of Why Vibe Coding Exists?",
+      "How does this concept benefit beginners?",
+      "Is this concept part of Vibe Coding's core principles?",
+      "What is one practical application of this concept?",
+      "How does this concept build confidence in learners?"
+    ],
+    "answers": [
+      "The specific concept covered in this lesson",
+      "It reduces anxiety and makes learning accessible",
+      "Yes, it's a core principle of Vibe Coding",
+      "Applying this concept in digital creation projects",
+      "By focusing on ideas and providing guidance rather than complexity"
+    ]
+  },
+  "resources": {
+    "video": {
+      "title": "Understanding Why Vibe Coding Exists - Vibe Coding Fundamentals",
+      "creator": "Vibe Coding Tutorials",
+      "embed": true,
+      "reason": "Relevant video content for this lesson topic"
+    },
+    "extra_reading": [
+      "https://example.com/extra-resource-1 - Additional reading for this topic",
+      "https://example.com/extra-resource-2 - More resources for curious learners"
+    ]
+  },
+  "summary": "In this lesson on \"Why Vibe Coding Exists\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+}
