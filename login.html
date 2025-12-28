@@ -295,8 +295,10 @@
                 
                 const { data: { session } } = await sbClient.auth.getSession();
                 if (session) {
-                    // User is already logged in, redirect to dashboard
-                    window.location.href = './dashboard.html';
+                    // User is already logged in, redirect to dashboard or specified redirect
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const redirectParam = urlParams.get('redirect') || './dashboard.html';
+                    window.location.href = redirectParam;
                 }
             } catch (error) {
                 console.error('Error checking auth status:', error);
@@ -381,11 +383,15 @@
                             throw error;
                         }
                         
+                        // Get redirect parameter from URL
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const redirectParam = urlParams.get('redirect') || './dashboard.html';
+                                            
                         // Show success message
-                        alert('Login successful! Redirecting to dashboard...');
-                        
-                        // Redirect to dashboard
-                        window.location.href = './dashboard.html';
+                        alert('Login successful! Redirecting...');
+                                            
+                        // Redirect to dashboard or specified redirect
+                        window.location.href = redirectParam;
                     } catch (error) {
                         console.error('Login error:', error);
                         alert('Login failed: ' + error.message);

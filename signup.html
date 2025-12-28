@@ -306,6 +306,7 @@
 
                     console.log('Login successful:', data);
                     showMessage('✅ Login successful! Redirecting...', 'success');
+                    // Add a small delay to show the message before redirect
                     setTimeout(() => {
                         window.location.href = redirectParam;
                     }, 1500);
@@ -356,14 +357,11 @@
                             console.log('Profile created successfully');
                         }
 
-                        if (!data.session) {
-                            showMessage('✅ Account created! Please check your email to confirm.', 'success');
-                        } else {
-                            showMessage('✅ Account created successfully! Redirecting...', 'success');
-                            setTimeout(() => {
-                                window.location.href = redirectParam;
-                            }, 1500);
-                        }
+                        // Always redirect after successful signup, regardless of session status
+                        showMessage('✅ Account created successfully! Redirecting...', 'success');
+                        setTimeout(() => {
+                            window.location.href = redirectParam;
+                        }, 1500);
                     }
                 }
 
