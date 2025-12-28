@@ -2,53 +2,29 @@
 <html>
 <head>
     <title>CSP Test</title>
+    <meta charset="utf-8">
+    <!-- Explicit CSP meta tag that should allow Supabase -->
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; 
+                   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdnjs.cloudflare.com https://fonts.googleapis.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://js.puter.com; 
+                   connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co https://*.supabase.co; 
+                   img-src 'self' data: https:; 
+                   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; 
+                   font-src 'self' https://fonts.gstatic.com;">
 </head>
 <body>
-    <h1>Content Security Policy Test</h1>
-    <p>This page is for testing CSP headers.</p>
+    <h1>CSP Test Page</h1>
+    <p>This page has an explicit CSP meta tag that allows Supabase connections.</p>
+    <p>If this page works for authentication, then the issue is with server-level CSP headers.</p>
     
     <script>
-        // Test if we can connect to Supabase
-        const anonKey = window.__ENV__?.SUPABASE_ANON_KEY;
-        if (!anonKey) {
-            document.body.innerHTML += '<p style="color: orange;">⚠️ Missing SUPABASE_ANON_KEY (not injected). This test will skip calling Supabase.</p>';
-        } else {
-            fetch('https://uimdbodamoeyukrghchb.supabase.co/rest/v1/courses?select=id,title&limit=1', {
-                method: 'GET',
-                headers: {
-                    'apikey': anonKey,
-                    'Authorization': `Bearer ${anonKey}`
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error('Network response was not ok');
-            })
-            .then(data => {
-                document.body.innerHTML += '<p style="color: green;">✅ Successfully connected to Supabase!</p>';
-                console.log('Data:', data);
-            })
-            .catch(error => {
-                document.body.innerHTML += '<p style="color: red;">❌ Failed to connect to Supabase: ' + error.message + '</p>';
-                console.error('Error:', error);
-            });
-        }
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Network response was not ok');
-        })
-        .then(data => {
-            document.body.innerHTML += '<p style="color: green;">✅ Successfully connected to Supabase!</p>';
-            console.log('Data:', data);
-        })
-        .catch(error => {
-            document.body.innerHTML += '<p style="color: red;">❌ Failed to connect to Supabase: ' + error.message + '</p>';
-            console.error('Error:', error);
-        });
+        // Supabase configuration - your actual Supabase key
+        window.__ENV__ = {
+            SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc'
+        };
+        
+        console.log('CSP test page loaded with explicit CSP meta tag');
+        console.log('Supabase key configured');
     </script>
 </body>
 </html>
