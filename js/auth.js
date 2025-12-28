@@ -30,14 +30,14 @@ const Auth = {
     // Logout
     async logout() {
         await window.sbClient.auth.signOut();
-        window.location.href = '/';
+        window.location.href = './index.html';
     },
 
     // Redirect to signup if not logged in
     async requireAuth() {
         const loggedIn = await this.isLoggedIn();
         if (!loggedIn) {
-            window.location.href = '/signup.html?redirect=' + encodeURIComponent(window.location.pathname);
+            window.location.href = './signup.html?redirect=' + encodeURIComponent(window.location.pathname);
             return false;
         }
         return true;

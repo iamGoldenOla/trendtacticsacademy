@@ -104,27 +104,23 @@
         <div class="card">
             <h2 class="card-title">Course Structure</h2>
             <div style="margin-top: 2rem;">
-                <div
-                    style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem;">
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; cursor: pointer; transition: all 0.2s;">
                     <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 1: Understanding Vibe Coding</h3>
                     <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
                 </div>
-                <div
-                    style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem;">
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; cursor: pointer; transition: all 0.2s;">
                     <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 2: Thinking Before Coding</h3>
                     <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
                 </div>
-                <div
-                    style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem;">
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; cursor: pointer; transition: all 0.2s;">
                     <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 3: Working with AI</h3>
                     <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
                 </div>
-                <div
-                    style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem;">
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; cursor: pointer; transition: all 0.2s;">
                     <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 4: Vibe Coding in Real Life</h3>
                     <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
                 </div>
-                <div style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius);">
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); cursor: pointer; transition: all 0.2s;">
                     <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 5: Building with Confidence</h3>
                     <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 2 weeks</p>
                 </div>
@@ -230,7 +226,8 @@
                         enrollMessage.textContent = '✅ You are already enrolled!';
 
                         setTimeout(() => {
-                            window.location.href = '/dashboard';
+                            // Redirect to lesson viewer for the first lesson
+                            window.location.href = './lesson-viewer.html?course=' + COURSE_ID;
                         }, 1500);
                     } else {
                         throw error;
@@ -239,10 +236,11 @@
                     enrollMessage.style.display = 'block';
                     enrollMessage.style.background = 'rgba(16, 185, 129, 0.1)';
                     enrollMessage.style.color = 'var(--success)';
-                    enrollMessage.textContent = '✅ Enrollment successful! Redirecting...';
+                    enrollMessage.textContent = '✅ Enrollment successful! Redirecting to your course...';
 
                     setTimeout(() => {
-                        window.location.href = '/dashboard';
+                        // Redirect to lesson viewer for the first lesson
+                        window.location.href = './lesson-viewer.html?course=' + COURSE_ID;
                     }, 1500);
                 }
             } catch (error) {
@@ -259,6 +257,32 @@
 
         // Initialize page
         initPage();
+        
+        // Add click handlers to module cards
+        document.querySelectorAll('.module-card').forEach((card, index) => {
+            card.addEventListener('click', () => {
+                const user = Auth.getCurrentUser();
+                if (user) {
+                    // Navigate to the first lesson of the module
+                    // For now, redirect to the dashboard where lessons will be accessible
+                    window.location.href = './dashboard.html';
+                } else {
+                    // If not logged in, redirect to signup
+                    window.location.href = './signup.html?redirect=' + encodeURIComponent(window.location.pathname);
+                }
+            });
+            
+            // Add hover effect
+            card.addEventListener('mouseenter', () => {
+                card.style.background = 'var(--bg-secondary)';
+                card.style.transform = 'translateY(-2px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.background = 'var(--bg-tertiary)';
+                card.style.transform = 'translateY(0)';
+            });
+        });
     </script>
 </body>
 
