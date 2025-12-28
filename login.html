@@ -418,10 +418,10 @@
                         }
                         
                         // Show success message
-                        alert('Login successful! Redirecting...');
+                        alert('Login successful! Redirecting to dashboard...');
                                             
-                        // Redirect to dashboard or specified redirect
-                        window.location.href = redirectParam;
+                        // Always redirect to dashboard after login to continue learning
+                        window.location.href = './dashboard.html';
                     } catch (error) {
                         console.error('Login error:', error);
                         alert('Login failed: ' + error.message);
