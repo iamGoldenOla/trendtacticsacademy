@@ -20,3 +20,13 @@ if (!SUPABASE_ANON_KEY) {
   const { createClient } = supabase;
   window.sbClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 }
+
+// Scroll to top when page loads
+window.addEventListener('load', function() {
+  window.scrollTo(0, 0);
+});
+
+// Scroll to top when navigation occurs
+window.addEventListener('beforeunload', function() {
+  window.scrollTo(0, 0);
+});

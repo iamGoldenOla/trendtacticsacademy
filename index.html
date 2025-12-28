@@ -499,7 +499,7 @@
                 if (loggedIn) {
                     const user = await Auth.getCurrentUser();
                     authBtn.textContent = user?.name || 'Account';
-                    authBtn.onclick = () => window.location.href = '/dashboard';
+                    authBtn.onclick = () => window.location.href = './dashboard.html';
                     dashboardLink.style.display = 'block';
                 }
             } catch (error) {
@@ -508,7 +508,7 @@
         }
 
         function handleAuth() {
-            window.location.href = '/signup';
+            window.location.href = './signup.html';
         }
 
         // Handle clean URL routing from GitHub Pages 404 redirect

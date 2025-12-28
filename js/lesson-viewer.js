@@ -308,6 +308,16 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// Scroll to top when page loads
+window.addEventListener('load', function() {
+  window.scrollTo(0, 0);
+});
+
+// Scroll to top when navigation occurs
+window.addEventListener('beforeunload', function() {
+  window.scrollTo(0, 0);
+});
+
 // Export functions for use in other modules (if using modules)
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
