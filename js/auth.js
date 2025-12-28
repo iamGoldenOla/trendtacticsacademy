@@ -44,5 +44,15 @@ const Auth = {
     }
 };
 
+// Scroll to top when page loads
+window.addEventListener('load', function() {
+    window.scrollTo(0, 0);
+});
+
+// Scroll to top when navigation occurs
+window.addEventListener('beforeunload', function() {
+    window.scrollTo(0, 0);
+});
+
 // Export
 window.Auth = Auth;
