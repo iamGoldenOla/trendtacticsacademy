@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Page Not Found</title>
+    <script>
+        // Get the requested path
+        const requestedPath = location.pathname;
+        
+        // Define the mapping of paths to HTML files
+        const pathMap = {
+            '/': '/index.html',
+            '/about': '/about.html',
+            '/services': '/services.html',
+            '/courses': '/courses.html',
+            '/contact': '/contact.html',
+            '/dashboard': '/dashboard.html',
+            '/playground': '/playground.html',
+            '/whiteboard': '/whiteboard.html',
+            '/ai-assistant': '/ai-assistant.html',
+            '/course-detail': '/course-detail.html',
+            '/lesson-viewer': '/lesson-viewer.html',
+            '/signup': '/signup.html',
+            '/login': '/login.html',
+            '/blog': '/blog.html'
+        };
+        
+        // Check if the requested path has a corresponding HTML file
+        if (pathMap[requestedPath]) {
+            // Redirect to the appropriate HTML file
+            location.replace(pathMap[requestedPath]);
+        } else {
+            // If no specific mapping, redirect to home
+            location.replace('/index.html');
+        }
+    </script>
+</head>
+<body>
+    <h1>Redirecting...</h1>
+    <p>If you're not redirected automatically, follow this <a href="/index.html">link</a>.</p>
+</body>
+</html>
