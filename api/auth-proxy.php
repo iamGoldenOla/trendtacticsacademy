@@ -15,7 +15,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 $path = $_GET['path'] ?? '';
 
 // Validate the path to ensure it's only for Supabase auth
-if (!preg_match('/^\/auth\/v1\/(signup|signin|signout|user|recover|verify)$/', $path)) {
+if (!preg_match('/^\/auth\/v1\/(signup|signin|signout|user|recover|verify|token|authorize|magiclink|otp)$/', $path)) {
     http_response_code(400);
     echo json_encode(['error' => 'Invalid path']);
     exit();
@@ -30,6 +30,16 @@ $targetUrl = $supabaseUrl . $path;
 
 // Get the request body
 $input = file_get_contents('php://input');
+
+// Parse query string to get additional parameters
+$queryParams = $_GET;
+// Remove the 'path' parameter as it's already used
+unset($queryParams['path']);
+
+// If there are additional query parameters, append them to the URL
+if (!empty($queryParams)) {
+    $targetUrl .= '?' . http_build_query($queryParams);
+}
 
 // Set up the cURL request to Supabase
 $ch = curl_init();
