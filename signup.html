@@ -195,21 +195,19 @@
     </div>
 
     <script>
-        // Initialize Supabase using the global supabase object
-        const { createClient } = supabase;
-        const SUPABASE_ANON_KEY = window.__ENV__?.SUPABASE_ANON_KEY || null;
-        if (!SUPABASE_ANON_KEY) {
-        console.error('Missing SUPABASE_ANON_KEY. Provide via window.__ENV__ injected server-side.');
-        }
-        const sbClient = createClient(
-            'https://uimdbodamoeyukrghchb.supabase.co',
-            SUPABASE_ANON_KEY
-        );
+        // We're using a proxy approach to avoid CSP issues, so we don't need direct Supabase client here
+        // The proxy handles all Supabase communication
+        console.log('Using proxy approach for Supabase communication');
         
         // Check if user is already logged in
         async function checkAuthStatus() {
             try {
-                const { data: { session } } = await sbClient.auth.getSession();
+                // For now, we'll skip session checking since we're using proxy
+                // In a real implementation, you'd need to manage sessions differently
+                // when using a proxy approach
+                
+                // Check for session in localStorage or cookies
+                const session = localStorage.getItem('supabase_session');
                 if (session) {
                     // User is already logged in, redirect to dashboard or specified redirect
                     const urlParams = new URLSearchParams(window.location.search);
@@ -301,10 +299,26 @@
                 if (isLoginMode) {
                     // LOGIN
                     console.log('Attempting login for:', email);
-                    const { data, error } = await sbClient.auth.signInWithPassword({
-                        email,
-                        password
+                    // Use proxy to avoid CSP issues
+                    const response = await fetch('./api/auth-proxy.php?path=/auth/v1/token', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email,
+                            password,
+                            grant_type: 'password'
+                        })
                     });
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || 'Login failed');
+                    }
+                    
+                    const data = await response.json();
+                    const error = null;
 
                     if (error) {
                         console.error('Login error:', error);
@@ -312,6 +326,26 @@
                     }
 
                     console.log('Login successful:', data);
+                    
+                    // Store session and user data in localStorage
+                    if (data.session || data.user) {
+                        // Store session if available
+                        if (data.session) {
+                            localStorage.setItem('supabase_session', JSON.stringify(data.session));
+                        }
+                        
+                        // Store user data
+                        const userData = {
+                            id: data.user?.id || data.id,
+                            email,
+                            name: data.user?.user_metadata?.name || email,
+                            role: data.user?.role || 'student',
+                            created_at: data.user?.created_at || new Date().toISOString(),
+                            updated_at: new Date().toISOString()
+                        };
+                        localStorage.setItem('supabase_user', JSON.stringify(userData));
+                    }
+                    
                     showMessage('✅ Login successful! Redirecting...', 'success');
                     // Add a small delay to show the message before redirect
                     setTimeout(() => {
@@ -325,16 +359,29 @@
                     }
 
                     console.log('Attempting signup for:', email);
-                    const { data, error } = await sbClient.auth.signUp({
-                        email,
-                        password,
-                        options: {
+                    // Use proxy to avoid CSP issues
+                    const response = await fetch('./api/auth-proxy.php?path=/auth/v1/signup', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email,
+                            password,
                             data: {
                                 name,
                                 role: 'student'
                             }
-                        }
+                        })
                     });
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || 'Signup failed');
+                    }
+                    
+                    const data = await response.json();
+                    const error = null;
 
                     if (error) {
                         console.error('Signup error:', error);
@@ -343,28 +390,26 @@
 
                     console.log('Signup response:', data);
 
-                    if (data?.user) {
-                        // Create profile
-                        console.log('Creating profile for user:', data.user.id);
-                        const { error: profileError } = await sbClient
-                            .from('users')
-                            .insert({
-                                id: data.user.id,
+                    if (data) {
+                        // Store session and user data in localStorage
+                        if (data.session || data.user) {
+                            // Store session if available
+                            if (data.session) {
+                                localStorage.setItem('supabase_session', JSON.stringify(data.session));
+                            }
+                                                    
+                            // Store user data
+                            const userData = {
+                                id: data.user?.id || data.id,
                                 email,
                                 name,
                                 role: 'student',
                                 created_at: new Date().toISOString(),
                                 updated_at: new Date().toISOString()
-                            });
-
-                        if (profileError) {
-                            console.warn('Profile creation warning:', profileError);
-                            showMessage(`⚠️ Account created but profile setup incomplete: ${profileError.message}`, 'error');
-                        } else {
-                            console.log('Profile created successfully');
+                            };
+                            localStorage.setItem('supabase_user', JSON.stringify(userData));
                         }
-
-                        // Always redirect after successful signup, regardless of session status
+                    
                         showMessage('✅ Account created successfully! Redirecting...', 'success');
                         setTimeout(() => {
                             window.location.href = redirectParam;

@@ -1,0 +1,78 @@
+<?php
+// CORS headers
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+
+// Handle preflight requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+// Get the request method and path
+$method = $_SERVER['REQUEST_METHOD'];
+$path = $_GET['path'] ?? '';
+
+// Validate the path to ensure it's only for Supabase auth
+if (!preg_match('/^\/auth\/v1\/(signup|signin|signout|user|recover|verify)$/', $path)) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Invalid path']);
+    exit();
+}
+
+// Supabase configuration
+$supabaseUrl = 'https://uimdbodamoeyukrghchb.supabase.co';
+$supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc';
+
+// Build the target URL
+$targetUrl = $supabaseUrl . $path;
+
+// Get the request body
+$input = file_get_contents('php://input');
+
+// Set up the cURL request to Supabase
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $targetUrl);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $input);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+// Set headers
+$headers = [
+    'Authorization: Bearer ' . $supabaseAnonKey,
+    'Content-Type: application/json',
+    'apikey: ' . $supabaseAnonKey,
+    'User-Agent: Trendtactics-Academy-Auth-Proxy/1.0'
+];
+
+// Add any additional headers from the original request
+if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+    $headers[] = 'Authorization: ' . $_SERVER['HTTP_AUTHORIZATION'];
+}
+
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+// Execute the request
+$response = curl_exec($ch);
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$curlError = curl_error($ch);
+
+curl_close($ch);
+
+// Handle cURL errors
+if ($curlError) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Curl error: ' . $curlError]);
+    exit();
+}
+
+// Set the response headers
+header('Content-Type: application/json');
+http_response_code($httpCode);
+
+// Output the response
+echo $response;
+?>
