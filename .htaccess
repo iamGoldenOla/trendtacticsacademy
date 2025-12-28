@@ -11,3 +11,8 @@ RewriteRule ^(.+)$ $1.html [L,QSA]
 
 # Ensure clean URLs work properly
 Options -MultiViews
+
+# Content Security Policy to allow Supabase connections
+<IfModule mod_headers.c>
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com; connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com;"
+</IfModule>
