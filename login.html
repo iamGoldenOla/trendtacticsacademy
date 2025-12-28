@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Trendtactics Academy</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>" type="image/svg+xml">
+    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -277,8 +278,29 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
             console.log('✅ Login Page Loaded Successfully');
+            
+            // Check if user is already logged in
+            try {
+                const { createClient } = supabase;
+                const SUPABASE_ANON_KEY = window.__ENV__?.SUPABASE_ANON_KEY || null;
+                if (!SUPABASE_ANON_KEY) {
+                    console.error('Missing SUPABASE_ANON_KEY. Provide via window.__ENV__ injected server-side.');
+                }
+                const sbClient = createClient(
+                    'https://uimdbodamoeyukrghchb.supabase.co',
+                    SUPABASE_ANON_KEY
+                );
+                
+                const { data: { session } } = await sbClient.auth.getSession();
+                if (session) {
+                    // User is already logged in, redirect to dashboard
+                    window.location.href = './dashboard.html';
+                }
+            } catch (error) {
+                console.error('Error checking auth status:', error);
+            }
             
             const loginForm = document.getElementById('loginForm');
             const emailInput = document.getElementById('email');
@@ -306,7 +328,7 @@
             });
             
             // Form submission
-            loginForm.addEventListener('submit', function(e) {
+            loginForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 // Validate form
@@ -328,12 +350,50 @@
                 }
                 
                 if (isValid) {
-                    // In a real implementation, you would send this data to a server
-                    // For now, we'll just show an alert
-                    alert('Login successful! Redirecting to dashboard...');
+                    // Login with Supabase
+                    const email = emailInput.value;
+                    const password = passwordInput.value;
                     
-                    // Redirect to dashboard (in a real app)
-                    // window.location.href = '/dashboard';
+                    // Show loading state
+                    const submitBtn = loginForm.querySelector('.btn-primary');
+                    const originalBtnText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+                    submitBtn.disabled = true;
+                    
+                    try {
+                        // Initialize Supabase client
+                        const { createClient } = supabase;
+                        const SUPABASE_ANON_KEY = window.__ENV__?.SUPABASE_ANON_KEY || null;
+                        if (!SUPABASE_ANON_KEY) {
+                            console.error('Missing SUPABASE_ANON_KEY. Provide via window.__ENV__ injected server-side.');
+                        }
+                        const sbClient = createClient(
+                            'https://uimdbodamoeyukrghchb.supabase.co',
+                            SUPABASE_ANON_KEY
+                        );
+                        
+                        const { data, error } = await sbClient.auth.signInWithPassword({
+                            email,
+                            password
+                        });
+                        
+                        if (error) {
+                            throw error;
+                        }
+                        
+                        // Show success message
+                        alert('Login successful! Redirecting to dashboard...');
+                        
+                        // Redirect to dashboard
+                        window.location.href = './dashboard.html';
+                    } catch (error) {
+                        console.error('Login error:', error);
+                        alert('Login failed: ' + error.message);
+                        
+                        // Restore button
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.disabled = false;
+                    }
                 }
             });
         });

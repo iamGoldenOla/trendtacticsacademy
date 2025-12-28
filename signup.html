@@ -198,6 +198,22 @@
             'https://uimdbodamoeyukrghchb.supabase.co',
             SUPABASE_ANON_KEY
         );
+        
+        // Check if user is already logged in
+        async function checkAuthStatus() {
+            try {
+                const { data: { session } } = await sbClient.auth.getSession();
+                if (session) {
+                    // User is already logged in, redirect to dashboard
+                    window.location.href = './dashboard.html';
+                }
+            } catch (error) {
+                console.error('Error checking auth status:', error);
+            }
+        }
+        
+        // Check auth status on page load
+        checkAuthStatus();
 
         let isLoginMode = false;
 
