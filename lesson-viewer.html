@@ -92,13 +92,13 @@
             <div class="logo">Trendtactics Academy</div>
             <nav class="nav">
                 <a href="https://trendtacticsdigital.com">Digital Services</a>
-                <a href="/">Home</a>
-                <a href="/about">About</a>
-                <a href="/services">Services</a>
-                <a href="/courses">Courses</a>
-                <a href="/blog">Blog</a>
-                <a href="/contact">Contact</a>
-                <a href="/dashboard">Dashboard</a>
+                <a href="./index.html">Home</a>
+                <a href="./about.html">About</a>
+                <a href="./services.html">Services</a>
+                <a href="./courses.html">Courses</a>
+                <a href="./blog.html">Blog</a>
+                <a href="./contact.html">Contact</a>
+                <a href="./dashboard.html">Dashboard</a>
                 <button class="btn btn-secondary" onclick="Auth.logout()">Logout</button>
             </nav>
         </div>
@@ -143,11 +143,11 @@
                 </div>
 
                 <div id="whiteboard-panel" class="tool-panel active">
-                    <iframe src="/whiteboard" title="Whiteboard"></iframe>
+                    <iframe src="./whiteboard.html" title="Whiteboard"></iframe>
                 </div>
 
                 <div id="playground-panel" class="tool-panel">
-                    <iframe src="/playground" title="Code Playground"></iframe>
+                    <iframe src="./playground.html" title="Code Playground"></iframe>
                 </div>
             </div>
         </div>
@@ -172,7 +172,7 @@
             const lessonId = urlParams.get('lesson');
 
             if (!courseId) {
-                window.location.href = '/dashboard';
+                window.location.href = './dashboard.html';
                 return;
             }
 

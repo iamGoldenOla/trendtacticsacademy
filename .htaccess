@@ -1,0 +1,13 @@
+# Traditional static HTML routing for subdomain
+RewriteEngine On
+
+# Directly serve existing files and directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [L]
+
+# For non-existing paths, try the corresponding .html file
+RewriteRule ^(.+)$ $1.html [L,QSA]
+
+# Ensure clean URLs work properly
+Options -MultiViews
