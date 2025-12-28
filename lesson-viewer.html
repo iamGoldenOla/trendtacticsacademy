@@ -185,6 +185,17 @@
                 // Load first lesson
                 if (allLessons.length > 0) {
                     await loadLesson(allLessons[0].id);
+                } else {
+                    // If no lessons are found, redirect back to dashboard
+                    document.getElementById('loadingState').style.display = 'none';
+                    document.getElementById('lessonContainer').innerHTML = `
+                        <div class="card" style="text-align: center; padding: 2rem;">
+                            <h2 class="card-title">No Lessons Available</h2>
+                            <p class="card-description">This course doesn't have any lessons yet. Check back later or contact support.</p>
+                            <a href="./dashboard.html" class="btn btn-primary" style="display: inline-block; margin-top: 1rem;">Go to Dashboard</a>
+                        </div>
+                    `;
+                    document.getElementById('lessonContainer').style.display = 'block';
                 }
             }
         }
@@ -201,19 +212,16 @@
                 currentCourse = course;
 
                 // Load all lessons for this course
-                const { data: modules, error: modulesError } = await window.sbClient
-                    .from('modules')
-                    .select(`
-                        *,
-                        lessons (*)
-                    `)
+                const { data: lessons, error: lessonsError } = await window.sbClient
+                    .from('lessons')
+                    .select('*')
                     .eq('course_id', courseId)
                     .order('order_index');
 
-                if (modulesError) throw modulesError;
+                if (lessonsError) throw lessonsError;
 
-                // Flatten lessons
-                allLessons = modules.flatMap(m => m.lessons || []).sort((a, b) => a.order_index - b.order_index);
+                // Set lessons
+                allLessons = lessons.sort((a, b) => a.order_index - b.order_index);
 
             } catch (error) {
                 console.error('Error loading course:', error);
@@ -336,7 +344,7 @@
 
             if (newIndex !== currentIndex) {
                 const newLesson = allLessons[newIndex];
-                window.location.href = `?course=${currentCourse.id}&lesson=${newLesson.id}`;
+                window.location.href = `./lesson-viewer.html?course=${currentCourse.id}&lesson=${newLesson.id}`;
             }
         }
 
