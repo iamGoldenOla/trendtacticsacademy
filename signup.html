@@ -202,17 +202,11 @@
         // Check if user is already logged in
         async function checkAuthStatus() {
             try {
-                // For now, we'll skip session checking since we're using proxy
-                // In a real implementation, you'd need to manage sessions differently
-                // when using a proxy approach
-                
                 // Check for session in localStorage or cookies
                 const session = localStorage.getItem('supabase_session');
                 if (session) {
-                    // User is already logged in, redirect to dashboard or specified redirect
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const redirectParam = urlParams.get('redirect') || './dashboard.html';
-                    window.location.href = redirectParam;
+                    // User is already logged in, redirect to dashboard
+                    window.location.href = './dashboard.html';
                 }
             } catch (error) {
                 console.error('Error checking auth status:', error);
@@ -300,23 +294,22 @@
                     // LOGIN
                     console.log('Attempting login for:', email);
                     // Use proxy to avoid CSP issues
-                    const response = await fetch('./api/auth-proxy.php?path=/auth/v1/token', {
+                    const response = await fetch('./api/auth-proxy.php?path=/auth/v1/token&grant_type=password', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
                             email,
-                            password,
-                            grant_type: 'password'
+                            password
                         })
                     });
-                    
+                                            
                     if (!response.ok) {
                         const errorData = await response.json();
                         throw new Error(errorData.error || 'Login failed');
                     }
-                    
+                                            
                     const data = await response.json();
                     const error = null;
 
@@ -328,7 +321,7 @@
                     console.log('Login successful:', data);
                     
                     // Store session and user data in localStorage
-                    if (data.session || data.user) {
+                    if (data.session || data.user || data.id) {
                         // Store session if available
                         if (data.session) {
                             localStorage.setItem('supabase_session', JSON.stringify(data.session));
@@ -336,9 +329,9 @@
                         
                         // Store user data
                         const userData = {
-                            id: data.user?.id || data.id,
+                            id: data.user?.id || data.id || data.user_id,
                             email,
-                            name: data.user?.user_metadata?.name || email,
+                            name: data.user?.user_metadata?.name || data.name || email,
                             role: data.user?.role || 'student',
                             created_at: data.user?.created_at || new Date().toISOString(),
                             updated_at: new Date().toISOString()
@@ -369,9 +362,11 @@
                         body: JSON.stringify({
                             email,
                             password,
-                            data: {
-                                name,
-                                role: 'student'
+                            options: {
+                                data: {
+                                    name,
+                                    role: 'student'
+                                }
                             }
                         })
                     });
@@ -398,10 +393,10 @@
                             if (data.session) {
                                 localStorage.setItem('supabase_session', JSON.stringify(data.session));
                             }
-                                                    
+                                                
                             // Store user data
                             const userData = {
-                                id: data.user?.id || data.id,
+                                id: data.user?.id || data.id || data.user_id,
                                 email,
                                 name,
                                 role: 'student',
@@ -410,7 +405,7 @@
                             };
                             localStorage.setItem('supabase_user', JSON.stringify(userData));
                         }
-                    
+                                        
                         showMessage('✅ Account created successfully! Redirecting to dashboard...', 'success');
                         setTimeout(() => {
                             // Always redirect to dashboard after signup to start learning
