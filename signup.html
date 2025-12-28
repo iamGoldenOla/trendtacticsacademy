@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auth Test - Trendtactics Academy</title>
+    <title>Create Account - Trendtactics Academy</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>" type="image/svg+xml">
     <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
     <style>
@@ -204,8 +204,10 @@
             try {
                 const { data: { session } } = await sbClient.auth.getSession();
                 if (session) {
-                    // User is already logged in, redirect to dashboard
-                    window.location.href = './dashboard.html';
+                    // User is already logged in, redirect to dashboard or specified redirect
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const redirectParam = urlParams.get('redirect') || './dashboard.html';
+                    window.location.href = redirectParam;
                 }
             } catch (error) {
                 console.error('Error checking auth status:', error);
@@ -235,6 +237,15 @@
         toggleLink.addEventListener('click', (e) => {
             e.preventDefault();
             isLoginMode = !isLoginMode;
+            
+            // Preserve redirect parameter in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectParam = urlParams.get('redirect');
+            let newUrl = window.location.pathname;
+            if (redirectParam) {
+                newUrl += '?redirect=' + encodeURIComponent(redirectParam);
+            }
+            window.history.replaceState({}, '', newUrl);
 
             if (isLoginMode) {
                 title.textContent = 'Welcome Back';
@@ -265,6 +276,9 @@
 
         // Handle form submission
         form.addEventListener('submit', async (e) => {
+            // Get redirect parameter from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectParam = urlParams.get('redirect') || './dashboard.html';
             e.preventDefault();
 
             const email = emailInput.value.trim();
@@ -293,7 +307,7 @@
                     console.log('Login successful:', data);
                     showMessage('✅ Login successful! Redirecting...', 'success');
                     setTimeout(() => {
-                        window.location.href = './dashboard.html';
+                        window.location.href = redirectParam;
                     }, 1500);
 
                 } else {
@@ -347,7 +361,7 @@
                         } else {
                             showMessage('✅ Account created successfully! Redirecting...', 'success');
                             setTimeout(() => {
-                                window.location.href = './dashboard.html';
+                                window.location.href = redirectParam;
                             }, 1500);
                         }
                     }
