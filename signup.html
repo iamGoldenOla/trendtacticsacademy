@@ -349,7 +349,8 @@
                     showMessage('✅ Login successful! Redirecting...', 'success');
                     // Add a small delay to show the message before redirect
                     setTimeout(() => {
-                        window.location.href = redirectParam;
+                        // Always redirect to dashboard after login to continue learning
+                        window.location.href = './dashboard.html';
                     }, 1500);
 
                 } else {
@@ -410,9 +411,10 @@
                             localStorage.setItem('supabase_user', JSON.stringify(userData));
                         }
                     
-                        showMessage('✅ Account created successfully! Redirecting...', 'success');
+                        showMessage('✅ Account created successfully! Redirecting to dashboard...', 'success');
                         setTimeout(() => {
-                            window.location.href = redirectParam;
+                            // Always redirect to dashboard after signup to start learning
+                            window.location.href = './dashboard.html';
                         }, 1500);
                     }
                 }

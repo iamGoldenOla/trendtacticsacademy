@@ -200,7 +200,8 @@
             // Check if logged in
             const loggedIn = await Auth.isLoggedIn();
             if (!loggedIn) {
-                window.location.href = './signup.html?redirect=' + encodeURIComponent(window.location.pathname);
+                // Redirect to signup but after signup go to dashboard instead of back to course
+                window.location.href = './signup.html';
                 return;
             }
 
@@ -232,8 +233,8 @@
                         enrollMessage.textContent = '✅ You are already enrolled!';
 
                         setTimeout(() => {
-                            // Redirect to lesson viewer for the first lesson
-                            window.location.href = './lesson-viewer.html?course=' + COURSE_ID;
+                            // Redirect to dashboard to continue learning
+                            window.location.href = './dashboard.html';
                         }, 1500);
                     } else {
                         throw error;
@@ -245,8 +246,8 @@
                     enrollMessage.textContent = '✅ Enrollment successful! Redirecting to your course...';
 
                     setTimeout(() => {
-                        // Redirect to lesson viewer for the first lesson
-                        window.location.href = './lesson-viewer.html?course=' + COURSE_ID;
+                        // Redirect to dashboard to continue learning
+                        window.location.href = './dashboard.html';
                     }, 1500);
                 }
             } catch (error) {
@@ -274,7 +275,7 @@
                     window.location.href = './dashboard.html';
                 } else {
                     // If not logged in, redirect to signup
-                    window.location.href = './signup.html?redirect=' + encodeURIComponent(window.location.pathname);
+                    window.location.href = './signup.html';
                 }
             });
             
