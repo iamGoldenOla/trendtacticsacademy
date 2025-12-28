@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Playground - Trendtactics Academy</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <!-- Shared Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">Trendtactics Academy</div>
+            <nav class="nav">
+                <a href="https://trendtacticsdigital.com">Digital Services</a>
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/services">Services</a>
+                <a href="/courses">Courses</a>
+                <a href="/blog">Blog</a>
+                <a href="/contact">Contact</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/playground" class="active" style="color: var(--primary);">Playground</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="toolbar" style="position: sticky; top: 64px; z-index: 50;">
+        <button id="runBtn">Run Code</button>
+        <button id="clearBtn">Clear</button>
+    </div>
+
+    <div class="container">
+        <div class="editor-section">
+            <div class="editor-header">HTML</div>
+            <textarea id="htmlCode" placeholder="Write your HTML here..."></textarea>
+        </div>
+
+        <div class="editor-section">
+            <div class="editor-header">CSS</div>
+            <textarea id="cssCode" placeholder="Write your CSS here..."></textarea>
+        </div>
+
+        <div class="editor-section">
+            <div class="editor-header">JavaScript</div>
+            <textarea id="jsCode" placeholder="Write your JavaScript here..."></textarea>
+        </div>
+
+        <div class="editor-section" style="border-right: none;">
+            <div class="editor-header">Output</div>
+            <iframe id="output"></iframe>
+        </div>
+    </div>
+
+    <script>
+        const htmlCode = document.getElementById('htmlCode');
+        const cssCode = document.getElementById('cssCode');
+        const jsCode = document.getElementById('jsCode');
+        const output = document.getElementById('output');
+        const runBtn = document.getElementById('runBtn');
+        const clearBtn = document.getElementById('clearBtn');
+
+        function runCode() {
+            const html = htmlCode.value;
+            const css = `<style>${cssCode.value}</style>`;
+            const js = `<script>${jsCode.value}<\/script>`;
+
+            const code = html + css + js;
+
+            output.srcdoc = code;
+        }
+
+        runBtn.addEventListener('click', runCode);
+
+        clearBtn.addEventListener('click', () => {
+            htmlCode.value = '';
+            cssCode.value = '';
+            jsCode.value = '';
+            output.srcdoc = '';
+        });
+
+        // Auto-run on input (optional)
+        let timeout;
+        [htmlCode, cssCode, jsCode].forEach(editor => {
+            editor.addEventListener('input', () => {
+                clearTimeout(timeout);
+                timeout = setTimeout(runCode, 1000);
+            });
+        });
+    </script>
+</body>
+
+</html>

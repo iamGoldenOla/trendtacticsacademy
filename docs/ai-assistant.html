@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant - Trendtactics Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <!-- Shared Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">Trendtactics Academy</div>
+            <nav class="nav">
+                <a href="https://trendtacticsdigital.com">Digital Services</a>
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/services">Services</a>
+                <a href="/courses">Courses</a>
+                <a href="/blog">Blog</a>
+                <a href="/contact">Contact</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/ai-assistant" class="active" style="color: var(--primary);">AI Assistant</a>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <div class="ai-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>AI Tools</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="/ai-assistant" class="active"><i class="fas fa-comments"></i> AI Chat</a></li>
+                    <li><a href="/ai-assistant/course-builder"><i class="fas fa-book"></i> Course Builder</a></li>
+                    <li><a href="/ai-assistant/code-help"><i class="fas fa-code"></i> Code Helper</a></li>
+                    <li><a href="/ai-assistant/project-ideas"><i class="fas fa-lightbulb"></i> Project Ideas</a></li>
+                    <li><a href="/ai-assistant/learning-path"><i class="fas fa-map-signs"></i> Learning Path</a></li>
+                </ul>
+                
+                <div style="margin-top: 2rem;">
+                    <h3>Quick Actions</h3>
+                    <ul class="sidebar-menu">
+                        <li><a href="/ai-assistant/ask-question"><i class="fas fa-question-circle"></i> Ask a Question</a></li>
+                        <li><a href="/ai-assistant/get-help"><i class="fas fa-life-ring"></i> Get Help</a></li>
+                        <li><a href="/ai-assistant/suggest-content"><i class="fas fa-magic"></i> Suggest Content</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="ai-header">
+                    <h1><i class="fas fa-robot"></i> AI Learning Assistant</h1>
+                </div>
+                
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message ai">
+                            <div class="message-avatar">AI</div>
+                            <div class="bubble">
+                                <p>Hello! I'm your AI Learning Assistant. I can help you with course materials, answer questions, suggest projects, and even help generate personalized learning content. What would you like help with today?</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input">
+                        <input type="text" id="messageInput" placeholder="Ask me anything about your courses...">
+                        <button id="sendButton"><i class="fas fa-paper-plane"></i> Send</button>
+                    </div>
+                </div>
+                
+                <div class="ai-features">
+                    <h2 class="section-title">AI-Powered Features</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h3>Personalized Courses</h3>
+                            <p>Generate custom courses based on your learning goals and interests</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3>Code Assistance</h3>
+                            <p>Get help with coding challenges and projects in real-time</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3>Creative Ideas</h3>
+                            <p>Generate project ideas and creative concepts for your learning</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <h3>Learning Paths</h3>
+                            <p>Get personalized learning paths based on your goals</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Trendtactics Academy</h3>
+                    <p style="color: #ccc; line-height: 1.6;">
+                        Empowering creators with innovative learning approaches for the digital age.
+                    </p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="/courses"><i class="fas fa-book"></i> Courses</a></li>
+                        <li><a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="/playground"><i class="fas fa-code"></i> Playground</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="/blog"><i class="fas fa-blog"></i> Blog</a></li>
+                        <li><a href="/community"><i class="fas fa-users"></i> Community</a></li>
+                        <li><a href="/support"><i class="fas fa-life-ring"></i> Support</a></li>
+                        <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Trendtactics Academy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ AI Assistant Loaded Successfully');
+            
+            const chatMessages = document.getElementById('chatMessages');
+            const messageInput = document.getElementById('messageInput');
+            const sendButton = document.getElementById('sendButton');
+            
+            // Function to add a message to the chat
+            function addMessage(content, isUser = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${isUser ? 'user' : 'ai'}`;
+                
+                const avatarDiv = document.createElement('div');
+                avatarDiv.className = 'message-avatar';
+                avatarDiv.textContent = isUser ? 'U' : 'AI';
+                
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'bubble';
+                const p = document.createElement('p');
+                p.textContent = content;
+                contentDiv.appendChild(p);
+                
+                messageDiv.appendChild(avatarDiv);
+                messageDiv.appendChild(contentDiv);
+                
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // Function to simulate AI response
+            function getAIResponse(userMessage) {
+                // Simple response logic - in a real app, this would connect to an AI API
+                const responses = [
+                    "That's a great question! Based on your learning goals, I recommend starting with the fundamentals and gradually building up your skills.",
+                    "I can help you with that! Would you like me to generate a custom learning path for this topic?",
+                    "This is an important concept in digital creation. Let me explain it in simple terms...",
+                    "I've identified some resources that might help you understand this better. Would you like me to suggest some exercises?",
+                    "That's exactly what we cover in the Vibe Coding course! Let me point you to the relevant module."
+                ];
+                
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
+            
+            // Send message function
+            function sendMessage() {
+                const message = messageInput.value.trim();
+                if (message) {
+                    addMessage(message, true);
+                    messageInput.value = '';
+                    
+                    // Simulate AI thinking
+                    setTimeout(() => {
+                        const aiResponse = getAIResponse(message);
+                        addMessage(aiResponse, false);
+                    }, 1000);
+                }
+            }
+            
+            // Event listeners
+            sendButton.addEventListener('click', sendMessage);
+            
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            // Sample conversation to demonstrate functionality
+            setTimeout(() => {
+                addMessage("I see you're interested in AI-powered learning. I can help you generate personalized courses, suggest projects, and answer questions about any topic in our curriculum.", false);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

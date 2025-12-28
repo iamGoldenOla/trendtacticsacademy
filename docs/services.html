@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our AI-Powered Learning Programs - Trendtactics Academy</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>" type="image/svg+xml">
+    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">Trendtactics Academy</div>
+            <nav class="nav">
+                <a href="https://trendtacticsdigital.com">Digital Services</a>
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/services" class="active" style="color: var(--primary);">Services</a>
+                <a href="/courses">Courses</a>
+                <a href="/blog">Blog</a>
+                <a href="/contact">Contact</a>
+                <a href="/dashboard" id="dashboardLink" style="display:none;">Dashboard</a>
+                <button class="btn btn-secondary" id="authBtn" onclick="handleAuth()">Sign In</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero hero-services">
+        <div class="container" style="text-align: center; position: relative; z-index: 1;">
+            <h1 class="hero-title">Our Services</h1>
+            <p class="hero-subtitle">Comprehensive learning solutions and digital services to transform your business.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section Header -->
+    <section class="container" style="padding: 4rem 0;">
+        <div class="card" style="text-align: center; background: linear-gradient(135deg, rgba(22, 32, 68, 0.9), rgba(11, 20, 55, 0.9)); border: 1px solid rgba(0, 217, 255, 0.2); margin-bottom: 3rem;">
+            <h2 class="card-title" style="color: var(--primary); font-size: 2rem; margin-bottom: 1rem;">Our AI-Powered Learning Programs</h2>
+            <p class="card-description" style="font-size: 1.2rem; line-height: 1.8; max-width: 800px; margin: 0 auto;">
+                Learn modern digital skills using AI-assisted tools, real projects, and industry-ready workflows.
+            </p>
+        </div>
+    </section>
+
+    <!-- Core Learning Programs -->
+    <section class="container" style="padding: 2rem 0 4rem;">
+        <div class="grid grid-3">
+            <!-- Learn Web Development with AI -->
+            <div class="card" style="text-align: center; transition: all 0.3s ease;">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem; width: 80px; height: 80px; margin: 0 auto 1rem; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: white;">
+                        <path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.11-.9-2-2-2H4c-1.11 0-2 .89-2 2v10c0 1.1.89 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/>
+                    </svg>
+                </div>
+                <h2 class="card-title" style="color: var(--primary); margin-bottom: 1rem;">Learn Web Development with AI</h2>
+                <p class="card-description" style="line-height: 1.6; margin-bottom: 1.5rem;">
+                    Learn how to design and build modern websites and web applications using AI-assisted development tools.
+                </p>
+                <div style="margin-top: 1.5rem;">
+                    <ul style="text-align: left; color: var(--text-secondary); list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> HTML, CSS, JavaScript fundamentals</li>
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> React and modern frontend frameworks</li>
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> AI-assisted coding, debugging, and optimization</li>
+                        <li style="display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> Prompt-driven development workflows</li>
+                    </ul>
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <a href="/courses" class="btn btn-primary" style="width: max-content; margin: 0 auto;">Explore Web Development Courses</a>
+                </div>
+            </div>
+
+            <!-- Learn App Development with AI -->
+            <div class="card" style="text-align: center; transition: all 0.3s ease;">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem; width: 80px; height: 80px; margin: 0 auto 1rem; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: white;">
+                        <path d="M17 2H7C5.9 2 5.01 2.9 5.01 4L5 20C5 21.1 5.9 22 7 22H17C18.1 22 19 21.1 19 20V4C19 2.9 18.1 2 17 2ZM17 20H7V4H17V20ZM8 6H16V8H8V6ZM8 10H16V12H8V10ZM8 14H13V16H8V14Z"/>
+                    </svg>
+                </div>
+                <h2 class="card-title" style="color: var(--primary); margin-bottom: 1rem;">Learn App Development with AI</h2>
+                <p class="card-description" style="line-height: 1.6; margin-bottom: 1.5rem;">
+                    Understand how to build mobile applications using AI-supported design and development processes.
+                </p>
+                <div style="margin-top: 1.5rem;">
+                    <ul style="text-align: left; color: var(--text-secondary); list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> Mobile UI/UX fundamentals</li>
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> Cross-platform app concepts</li>
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> AI-assisted component generation</li>
+                        <li style="display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> App architecture & deployment basics</li>
+                    </ul>
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <a href="/courses" class="btn btn-primary" style="width: max-content; margin: 0 auto;">Explore App Development Courses</a>
+                </div>
+            </div>
+
+            <!-- Learn Digital Marketing with AI -->
+            <div class="card" style="text-align: center; transition: all 0.3s ease;">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem; width: 80px; height: 80px; margin: 0 auto 1rem; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: white;">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                    </svg>
+                </div>
+                <h2 class="card-title" style="color: var(--primary); margin-bottom: 1rem;">Learn Digital Marketing with AI</h2>
+                <p class="card-description" style="line-height: 1.6; margin-bottom: 1.5rem;">
+                    Develop modern marketing skills using AI tools for growth, automation, and analytics.
+                </p>
+                <div style="margin-top: 1.5rem;">
+                    <ul style="text-align: left; color: var(--text-secondary); list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> AI-assisted SEO & content strategy</li>
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> Social media automation workflows</li>
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> Performance tracking & insights using AI</li>
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> Email Marketing</li>
+                        <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> Facebook Ads</li>
+                        <li style="display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> Content Creation</li>
+                    </ul>
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <a href="/courses" class="btn btn-primary" style="width: max-content; margin: 0 auto;">Explore Digital Marketing Courses</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flagship Program (Primary Highlight) -->
+    <section class="container" style="padding: 2rem 0 4rem;">
+        <div class="card" style="text-align: center; background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; padding: 3rem;">
+            <div style="font-size: 3rem; margin-bottom: 1rem; width: 100px; height: 100px; margin: 0 auto 1.5rem; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: var(--primary);">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+                </svg>
+            </div>
+            <h2 class="card-title" style="color: white; font-size: 2.5rem; margin-bottom: 1rem;">Vibe Coding Program (AI-Powered)</h2>
+            <p class="card-description" style="color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 1.5rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Our flagship beginner-friendly coding program designed for absolute beginners, powered by AI.
+            </p>
+            <div style="margin-top: 1.5rem; max-width: 800px; margin: 0 auto 2rem;">
+                <ul style="text-align: left; color: rgba(255,255,255,0.9); list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: white; margin-right: 0.5rem;">✓</span> No prior tech background required</li>
+                    <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: white; margin-right: 0.5rem;">✓</span> Learn by building with AI assistance</li>
+                    <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: white; margin-right: 0.5rem;">✓</span> Real-world projects from day one</li>
+                    <li style="display: flex; align-items: center;"><span style="color: white; margin-right: 0.5rem;">✓</span> AI tutors guiding every step</li>
+                </ul>
+            </div>
+            <div style="margin-top: 1.5rem;">
+                <a href="/courses" class="btn btn-lg" style="background: white; color: var(--primary); width: max-content; margin: 0 auto;">Join the Vibe Coding Program</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Tools & AI Support -->
+    <section class="container" style="padding: 2rem 0 4rem;">
+        <div class="card" style="text-align: center; margin-bottom: 3rem;">
+            <h2 class="card-title" style="color: var(--primary); font-size: 2rem; margin-bottom: 1rem;">AI Learning Tools & Resources</h2>
+            <p class="card-description" style="font-size: 1.2rem; line-height: 1.8; max-width: 800px; margin: 0 auto 2rem;">
+                Present tools as learning accelerators, not standalone products.
+            </p>
+            <div class="grid grid-3">
+                <div class="card" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem; width: 80px; height: 80px; margin: 0 auto 1rem; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: white;">
+                            <path d="M19.8 18.4L14 10.67V6.5l1.35-1.69c.26-.33.03-.81-.39-.81H9.04c-.42 0-.65.48-.39.81L10 6.5v4.17L4.2 18.4c-.49.66-.02 1.6.8 1.6h14c.82 0 1.29-.94.8-1.6z"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title" style="color: var(--primary); margin-bottom: 1rem;">AI Code Playground</h3>
+                    <p class="card-description">Practice and experiment in real time</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem; width: 80px; height: 80px; margin: 0 auto 1rem; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: white;">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-5h2v5zm4 0h-2v-3h2v3zm0-5h-2v-2h2v2zm4 5h-2V7h2v10z"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title" style="color: var(--primary); margin-bottom: 1rem;">Interactive Whiteboard</h3>
+                    <p class="card-description">Visual explanations & breakdowns</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem; width: 80px; height: 80px; margin: 0 auto 1rem; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: white;">
+                            <path d="M16 1H8C6.34 1 5 2.34 5 4v16c0 1.66 1.34 3 3 3h8c1.66 0 3-1.34 3-3V4c0-1.66-1.34-3-3-3zm-1 16c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm-2-8H9V6h4v3zm6-3h-2v3h2V6z"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title" style="color: var(--primary); margin-bottom: 1rem;">AI Tutor</h3>
+                    <p class="card-description">On-demand coding, design, and marketing support</p>
+                </div>
+            </div>
+            <div style="margin-top: 2rem;">
+                <a href="/playground" class="btn btn-primary" style="width: max-content; margin: 0 auto;">Access Learning Tools</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Parallax -->
+    <section class="parallax-section parallax-5">
+        <div class="container parallax-content">
+            <div class="card" style="background: rgba(11, 20, 55, 0.9); border: 1px solid rgba(0, 217, 255, 0.2); text-align: center;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary);">AI-Powered Learning Excellence</h2>
+                <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto; line-height: 1.8;">Experience the future of digital education with our AI-enhanced learning programs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skill & Career Pathways -->
+    <section class="container" style="padding: 2rem 0 4rem;">
+        <div class="card" style="text-align: center; margin-bottom: 3rem;">
+            <h2 class="card-title" style="color: var(--primary); font-size: 2rem; margin-bottom: 1rem;">Career-Focused Learning Paths</h2>
+            <p class="card-description" style="font-size: 1.2rem; line-height: 1.8; max-width: 800px; margin: 0 auto 2rem;">
+                Structured paths that take learners from beginner → job-ready, using AI-assisted workflows.
+            </p>
+            <div class="grid grid-3">
+                <div class="card" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem; width: 80px; height: 80px; margin: 0 auto 1rem; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: white;">
+                            <path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title" style="color: var(--primary); margin-bottom: 1rem;">Beginner Track</h3>
+                    <p class="card-description">Start from basics and build foundational skills</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem; width: 80px; height: 80px; margin: 0 auto 1rem; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: white;">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title" style="color: var(--primary); margin-bottom: 1rem;">Intermediate Track</h3>
+                    <p class="card-description">Develop practical skills with real projects</p>
+                </div>
+                <div class="card" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem; width: 80px; height: 80px; margin: 0 auto 1rem; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: white;">
+                            <path d="M20 6h-2V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4zm10 15H4v-2h16v2zm0-5H4V8h16v6z"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title" style="color: var(--primary); margin-bottom: 1rem;">Advanced Track</h3>
+                    <p class="card-description">Job-ready skills for freelancing and employment</p>
+                </div>
+            </div>
+            <div style="margin-top: 2rem;">
+                <ul style="text-align: left; color: var(--text-secondary); list-style: none; padding: 0; max-width: 800px; margin: 0 auto 2rem;">
+                    <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> Portfolio-driven learning</li>
+                    <li style="margin-bottom: 0.5rem; display: flex; align-items: center;"><span style="color: var(--primary); margin-right: 0.5rem;">✓</span> Freelancing, remote work & startup readiness</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clear Boundary Between Learning & Execution -->
+    <section class="container" style="padding: 4rem 0; text-align: center;">
+        <div class="card" style="background: linear-gradient(135deg, rgba(22, 32, 68, 0.9), rgba(11, 20, 55, 0.9)); border: 1px solid rgba(0, 217, 255, 0.2); padding: 3rem;">
+            <h2 class="card-title" style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1rem;">Need professionals to build for you instead of learning?</h2>
+            <p class="card-description" style="font-size: 1.2rem; line-height: 1.8; max-width: 800px; margin: 0 auto 2rem;">
+                Visit Trendtactics Digital for web development, app development, and digital services.
+            </p>
+            <a href="https://trendtacticsdigital.com" target="_blank" class="btn btn-lg" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; width: max-content; margin: 0 auto;">Visit Trendtactics Digital</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- About Section -->
+                <div class="footer-section">
+                    <h3>Trendtactics Academy</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Empowering learners worldwide with cutting-edge digital skills. Master coding, design, and
+                        digital marketing with AI-powered learning.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/courses">Courses</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Learning -->
+                <div class="footer-section">
+                    <h3>Learning</h3>
+                    <ul>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/playground">Code Playground</a></li>
+                        <li><a href="/whiteboard">Whiteboard</a></li>
+                        <li><a href="/ai-assistant">AI Assistant</a></li>
+                    </ul>
+                </div>
+
+                <!-- Connect -->
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="https://trendtacticsdigital.com" target="_blank">Trendtactics Digital</a></li>
+                        <li><a href="/contact">Get in Touch</a></li>
+                        <li><a href="/signup">Join Academy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>© 2025 Trendtactics Academy. All rights reserved.</p>
+                <p style="margin-top: 0.5rem;">
+                    <a href="https://trendtacticsdigital.com" style="color: var(--primary); text-decoration: none;">
+                        Powered by Trendtactics Digital
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/supabase-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        async function initPage() {
+            try {
+                const loggedIn = await Auth.isLoggedIn();
+                const authBtn = document.getElementById('authBtn');
+                const dashboardLink = document.getElementById('dashboardLink');
+
+                if (loggedIn) {
+                    const user = await Auth.getCurrentUser();
+                    authBtn.textContent = user?.name || 'Account';
+                    authBtn.onclick = () => window.location.href = '/dashboard';
+                    dashboardLink.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Auth initialization error:', error);
+                // Continue without auth functionality if there's an error
+            }
+        }
+
+        function handleAuth() {
+            window.location.href = '/signup';
+        }
+
+        initPage();
+    </script>
+</body>
+
+</html>

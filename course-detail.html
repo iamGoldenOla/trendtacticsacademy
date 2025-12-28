@@ -16,12 +16,12 @@
             <div class="logo">Trendtactics Academy</div>
             <nav class="nav">
                 <a href="https://trendtacticsdigital.com">Digital Services</a>
-                <a href="/">Home</a>
-                <a href="/about">About</a>
-                <a href="/services">Services</a>
-                <a href="/courses">Courses</a>
-                <a href="/contact">Contact</a>
-                <a href="/dashboard" id="dashboardLink" style="display:none;">Dashboard</a>
+                <a href="./index.html">Home</a>
+                <a href="./about.html">About</a>
+                <a href="./services.html">Services</a>
+                <a href="./courses.html">Courses</a>
+                <a href="./contact.html">Contact</a>
+                <a href="./dashboard.html" id="dashboardLink" style="display:none;">Dashboard</a>
                 <button class="btn btn-secondary" id="authBtn" onclick="handleAuthClick()">Sign In</button>
             </nav>
         </div>
@@ -148,7 +148,7 @@
                 if (loggedIn) {
                     const user = await Auth.getCurrentUser();
                     authBtn.textContent = user?.name || 'Account';
-                    authBtn.onclick = () => window.location.href = '/dashboard';
+                    authBtn.onclick = () => window.location.href = './dashboard.html';
                     dashboardLink.style.display = 'block';
 
                     // Check if already enrolled
@@ -177,7 +177,7 @@
                     const enrollBtn = document.getElementById('enrollBtn');
                     const enrollBtnText = document.getElementById('enrollBtnText');
                     enrollBtnText.textContent = 'Continue Learning';
-                    enrollBtn.onclick = () => window.location.href = '/dashboard';
+                    enrollBtn.onclick = () => window.location.href = './dashboard.html';
                 }
             } catch (error) {
                 console.log('Not enrolled yet');
@@ -186,7 +186,7 @@
 
         // Handle auth button click
         function handleAuthClick() {
-            window.location.href = '/signup';
+            window.location.href = './signup.html';
         }
 
         // Handle enrollment
@@ -198,7 +198,7 @@
             // Check if logged in
             const loggedIn = await Auth.isLoggedIn();
             if (!loggedIn) {
-                window.location.href = '/signup?redirect=' + encodeURIComponent(window.location.pathname);
+                window.location.href = './signup.html?redirect=' + encodeURIComponent(window.location.pathname);
                 return;
             }
 

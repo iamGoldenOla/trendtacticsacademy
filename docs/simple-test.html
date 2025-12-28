@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h1>Course Display Test</h1>
+    <div id="results"></div>
+
+    <script>
+        // Test if we can fetch the course data directly
+        const { createClient } = supabase;
+        
+        // Use the same credentials as your frontend
+        const supabaseUrl = 'https://uimdbodamoeyukrghchb.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc';
+        
+        const supabaseClient = createClient(supabaseUrl, supabaseKey);
+        
+        async function testCourseFetch() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<p>Testing course fetch...</p>';
+            
+            try {
+                // Test the exact query used by your frontend
+                const { data, error } = await supabaseClient
+                    .from('courses')
+                    .select(`
+                        *,
+                        modules!modules_course_id_fkey (
+                            id,
+                            title,
+                            description,
+                            ordering,
+                            duration,
+                            lessons!lessons_module_id_fkey (
+                                id,
+                                title,
+                                ordering,
+                                duration
+                            )
+                        )
+                    `)
+                    .eq('is_published', true)
+                    .eq('id', 'a1b2c3d4-e5f6-7890-abcd-ef1234567890') // Only fetch Vibe Coding course
+                    .order('created_at', { ascending: false });
+                
+                if (error) {
+                    resultsDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+                    return;
+                }
+                
+                if (data && data.length > 0) {
+                    const course = data[0];
+                    let html = `<h2 style="color: green;">Success! Course Found:</h2>`;
+                    html += `<p><strong>Title:</strong> ${course.title}</p>`;
+                    html += `<p><strong>Modules:</strong> ${course.modules ? course.modules.length : 0}</p>`;
+                    
+                    if (course.modules && course.modules.length > 0) {
+                        html += `<h3>Modules:</h3><ul>`;
+                        course.modules.forEach((module, index) => {
+                            const lessonCount = module.lessons ? module.lessons.length : 0;
+                            html += `<li><strong>Module ${index + 1}:</strong> ${module.title} (${lessonCount} lessons)</li>`;
+                        });
+                        html += `</ul>`;
+                        
+                        // Calculate total lessons
+                        const totalLessons = course.modules.reduce((sum, module) => 
+                            sum + (module.lessons ? module.lessons.length : 0), 0);
+                        html += `<p><strong>Total Lessons:</strong> ${totalLessons}</p>`;
+                        
+                        if (totalLessons > 0) {
+                            html += `<p style="color: green;"><strong>The course should display on your website!</strong></p>`;
+                            html += `<p>Possible issues:</p>`;
+                            html += `<ol>
+                                <li>Browser cache - try hard refresh (Ctrl+F5)</li>
+                                <li>JavaScript errors in browser console</li>
+                                <li>Frontend filtering that excludes courses with 0 enrolled students</li>
+                                <li>Network issues preventing the request from completing</li>
+                            </ol>`;
+                        } else {
+                            html += `<p style="color: orange;"><strong>Course has no lessons, might not display</strong></p>`;
+                        }
+                    }
+                    
+                    resultsDiv.innerHTML = html;
+                } else {
+                    resultsDiv.innerHTML = `<p style="color: orange;">No courses returned. Possible reasons:</p>
+                        <ol>
+                            <li>Course is not published</li>
+                            <li>RLS policies preventing access</li>
+                            <li>Course ID doesn't match</li>
+                            <li>No courses exist in database</li>
+                        </ol>`;
+                }
+            } catch (err) {
+                resultsDiv.innerHTML = `<p style="color: red;">Unexpected error: ${err.message}</p>`;
+            }
+        }
+        
+        // Run the test when page loads
+        testCourseFetch();
+    </script>
+</body>
+</html>

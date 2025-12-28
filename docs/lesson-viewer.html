@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson Viewer - Trendtactics Academy</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+    <style>
+        .lesson-content {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .lesson-content h2 {
+            color: var(--primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content h3 {
+            color: var(--text-primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .lesson-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content ul,
+        .lesson-content ol {
+            color: var(--text-secondary);
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .tool-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+
+        .tool-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tool-panel {
+            display: none;
+        }
+
+        .tool-panel.active {
+            display: block;
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">Trendtactics Academy</div>
+            <nav class="nav">
+                <a href="https://trendtacticsdigital.com">Digital Services</a>
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/services">Services</a>
+                <a href="/courses">Courses</a>
+                <a href="/blog">Blog</a>
+                <a href="/contact">Contact</a>
+                <a href="/dashboard">Dashboard</a>
+                <button class="btn btn-secondary" onclick="Auth.logout()">Logout</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container" style="padding: 2rem 0;">
+        <!-- Loading State -->
+        <div id="loadingState" style="text-align: center; padding: 4rem 0;">
+            <div class="spinner" style="width: 40px; height: 40px; border-width: 4px;"></div>
+            <p style="margin-top: 1rem; color: var(--text-secondary);">Loading lesson...</p>
+        </div>
+
+        <!-- Lesson Content -->
+        <div id="lessonContainer" style="display: none;">
+            <!-- Lesson Header -->
+            <div style="margin-bottom: 2rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <div>
+                        <p style="color: var(--text-muted); margin-bottom: 0.5rem;" id="courseTitle">Course</p>
+                        <h1 style="font-size: 2.5rem;" id="lessonTitle">Lesson Title</h1>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <button class="btn btn-secondary" id="prevBtn" onclick="navigateLesson('prev')">←
+                            Previous</button>
+                        <button class="btn btn-primary" id="nextBtn" onclick="navigateLesson('next')">Next →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson Content -->
+            <div class="lesson-content" id="lessonContent">
+                <p>Loading content...</p>
+            </div>
+
+            <!-- Interactive Tools -->
+            <div class="card">
+                <h2 class="card-title">Interactive Tools</h2>
+                <div class="tool-tabs">
+                    <button class="tool-tab active" onclick="switchTab('whiteboard')">Whiteboard</button>
+                    <button class="tool-tab" onclick="switchTab('playground')">💻 Code Playground</button>
+                </div>
+
+                <div id="whiteboard-panel" class="tool-panel active">
+                    <iframe src="/whiteboard" title="Whiteboard"></iframe>
+                </div>
+
+                <div id="playground-panel" class="tool-panel">
+                    <iframe src="/playground" title="Code Playground"></iframe>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/supabase-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        let currentCourse = null;
+        let currentLesson = null;
+        let allLessons = [];
+
+        async function initLessonViewer() {
+            // Require authentication
+            const isAuth = await Auth.requireAuth();
+            if (!isAuth) return;
+
+            // Get course ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = urlParams.get('course');
+            const lessonId = urlParams.get('lesson');
+
+            if (!courseId) {
+                window.location.href = '/dashboard';
+                return;
+            }
+
+            // Load course and lessons
+            await loadCourse(courseId);
+
+            if (lessonId) {
+                await loadLesson(lessonId);
+            } else {
+                // Load first lesson
+                if (allLessons.length > 0) {
+                    await loadLesson(allLessons[0].id);
+                }
+            }
+        }
+
+        async function loadCourse(courseId) {
+            try {
+                const { data: course, error } = await window.sbClient
+                    .from('courses')
+                    .select('*')
+                    .eq('id', courseId)
+                    .single();
+
+                if (error) throw error;
+                currentCourse = course;
+
+                // Load all lessons for this course
+                const { data: modules, error: modulesError } = await window.sbClient
+                    .from('modules')
+                    .select(`
+                        *,
+                        lessons (*)
+                    `)
+                    .eq('course_id', courseId)
+                    .order('order_index');
+
+                if (modulesError) throw modulesError;
+
+                // Flatten lessons
+                allLessons = modules.flatMap(m => m.lessons || []).sort((a, b) => a.order_index - b.order_index);
+
+            } catch (error) {
+                console.error('Error loading course:', error);
+                alert('Error loading course: ' + error.message);
+            }
+        }
+
+        async function loadLesson(lessonId) {
+            const loadingState = document.getElementById('loadingState');
+            const lessonContainer = document.getElementById('lessonContainer');
+
+            try {
+                const { data: lesson, error } = await window.sbClient
+                    .from('lessons')
+                    .select('*')
+                    .eq('id', lessonId)
+                    .single();
+
+                if (error) throw error;
+                currentLesson = lesson;
+
+                // Update UI
+                document.getElementById('courseTitle').textContent = currentCourse?.title || 'Course';
+                document.getElementById('lessonTitle').textContent = lesson.title;
+
+                // Display lesson content
+                if (lesson.lesson_json) {
+                    displayLessonContent(lesson.lesson_json);
+                } else {
+                    document.getElementById('lessonContent').innerHTML = `
+                        <p>${lesson.content || 'No content available for this lesson.'}</p>
+                    `;
+                }
+
+                // Update navigation buttons
+                updateNavigationButtons();
+
+                loadingState.style.display = 'none';
+                lessonContainer.style.display = 'block';
+
+            } catch (error) {
+                console.error('Error loading lesson:', error);
+                loadingState.style.display = 'none';
+                lessonContainer.innerHTML = `
+                    <div class="card" style="background: rgba(239, 68, 68, 0.1);">
+                        <p style="color: var(--error);">❌ Error loading lesson: ${error.message}</p>
+                    </div>
+                `;
+                lessonContainer.style.display = 'block';
+            }
+        }
+
+        function displayLessonContent(lessonJson) {
+            const contentDiv = document.getElementById('lessonContent');
+            let content = '';
+
+            try {
+                const data = typeof lessonJson === 'string' ? JSON.parse(lessonJson) : lessonJson;
+
+                // Introduction
+                if (data.introduction) {
+                    content += `<h2>Introduction</h2><p>${data.introduction}</p>`;
+                }
+
+                // Learning Objectives
+                if (data.learning_objectives && data.learning_objectives.length > 0) {
+                    content += `<h2>What You'll Learn</h2><ul>`;
+                    data.learning_objectives.forEach(obj => {
+                        content += `<li>${obj}</li>`;
+                    });
+                    content += `</ul>`;
+                }
+
+                // Main Content Sections
+                if (data.content_sections && data.content_sections.length > 0) {
+                    data.content_sections.forEach(section => {
+                        content += `<h2>${section.title}</h2>`;
+                        content += `<p>${section.content}</p>`;
+
+                        if (section.examples && section.examples.length > 0) {
+                            content += `<h3>Examples</h3>`;
+                            section.examples.forEach(example => {
+                                content += `<p><strong>${example.title}:</strong> ${example.description}</p>`;
+                            });
+                        }
+                    });
+                }
+
+                // Summary
+                if (data.summary) {
+                    content += `<h2>Summary</h2><p>${data.summary}</p>`;
+                }
+
+                contentDiv.innerHTML = content;
+
+            } catch (error) {
+                console.error('Error parsing lesson JSON:', error);
+                contentDiv.innerHTML = `<p>Error displaying lesson content.</p>`;
+            }
+        }
+
+        function updateNavigationButtons() {
+            const currentIndex = allLessons.findIndex(l => l.id === currentLesson.id);
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            prevBtn.disabled = currentIndex <= 0;
+            nextBtn.disabled = currentIndex >= allLessons.length - 1;
+        }
+
+        function navigateLesson(direction) {
+            const currentIndex = allLessons.findIndex(l => l.id === currentLesson.id);
+            let newIndex;
+
+            if (direction === 'prev') {
+                newIndex = Math.max(0, currentIndex - 1);
+            } else {
+                newIndex = Math.min(allLessons.length - 1, currentIndex + 1);
+            }
+
+            if (newIndex !== currentIndex) {
+                const newLesson = allLessons[newIndex];
+                window.location.href = `?course=${currentCourse.id}&lesson=${newLesson.id}`;
+            }
+        }
+
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tool-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update panels
+            document.querySelectorAll('.tool-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.getElementById(tabName + '-panel').classList.add('active');
+        }
+
+        // Initialize
+        initLessonViewer();
+    </script>
+</body>
+
+</html>
