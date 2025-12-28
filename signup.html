@@ -294,14 +294,15 @@
                     // LOGIN
                     console.log('Attempting login for:', email);
                     // Use proxy to avoid CSP issues
-                    const response = await fetch('./api/auth-proxy.php?path=/auth/v1/token&grant_type=password', {
+                    const response = await fetch('./api/auth-proxy.php?path=/auth/v1/token', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
                             email,
-                            password
+                            password,
+                            grant_type: 'password'
                         })
                     });
                                             
@@ -362,11 +363,9 @@
                         body: JSON.stringify({
                             email,
                             password,
-                            options: {
-                                data: {
-                                    name,
-                                    role: 'student'
-                                }
+                            data: {
+                                name,
+                                role: 'student'
                             }
                         })
                     });
