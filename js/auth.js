@@ -2,34 +2,35 @@
 const Auth = {
     // Check if user is logged in
     async isLoggedIn() {
-        const { data: { session } } = await window.sbClient.auth.getSession();
+        // Check for session in localStorage
+        const session = localStorage.getItem('supabase_session');
         return !!session;
     },
 
     // Get current user
     async getCurrentUser() {
-        const { data: { session } } = await window.sbClient.auth.getSession();
+        // Check for session in localStorage
+        const session = localStorage.getItem('supabase_session');
         if (!session) return null;
-
-        const { data: { user } } = await window.sbClient.auth.getUser();
-        if (!user) return null;
-
-        // Get profile from users table
-        const { data: profile } = await window.sbClient
-            .from('users')
-            .select('*')
-            .eq('id', user.id)
-            .single();
-
-        return {
-            ...user,
-            ...profile
-        };
+        
+        try {
+            // Get user info from localStorage or a server endpoint
+            const userData = localStorage.getItem('supabase_user');
+            if (userData) {
+                return JSON.parse(userData);
+            }
+            return null;
+        } catch (error) {
+            console.error('Error getting current user:', error);
+            return null;
+        }
     },
 
     // Logout
     async logout() {
-        await window.sbClient.auth.signOut();
+        // Clear stored session and user data
+        localStorage.removeItem('supabase_session');
+        localStorage.removeItem('supabase_user');
         window.location.href = './index.html';
     },
 
