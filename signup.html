@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account - Trendtactics Academy</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdnjs.cloudflare.com https://fonts.googleapis.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://js.puter.com; connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co https://*.supabase.co; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com;">
+    <title>Join Trendtactics Academy - Start Your Learning Journey</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdnjs.cloudflare.com https://fonts.googleapis.com; connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co https://*.supabase.co; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com;">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>" type="image/svg+xml">
-    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
-    <script>
-        // Supabase configuration - these should be replaced during deployment
-        window.__ENV__ = {
-            SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc'
-        };
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #00D9FF;
+            --primary-dark: #00B8D9;
+            --secondary: #7C3AED;
+            --bg-dark: #0B1437;
+            --bg-darker: #060D24;
+            --bg-card: rgba(15, 25, 55, 0.95);
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --success: #10B981;
+            --error: #EF4444;
+            --border: rgba(0, 217, 255, 0.2);
+            --glow: 0 0 40px rgba(0, 217, 255, 0.15);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -22,203 +31,521 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-darker);
             min-height: 100vh;
+            display: flex;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Left Panel - Branding */
+        .brand-panel {
+            flex: 1;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-panel::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 217, 255, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(124, 58, 237, 0.08) 0%, transparent 50%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .brand-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 480px;
+        }
+
+        .brand-logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .brand-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .brand-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        .features {
+            text-align: left;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 217, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            background: rgba(0, 217, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
-        .container {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 450px;
+        .feature-text h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-text p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Right Panel - Form */
+        .form-panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: var(--bg-dark);
+        }
+
+        .form-container {
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 420px;
         }
 
-        h1 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 28px;
+        .form-header {
+            margin-bottom: 2rem;
         }
 
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 14px;
+        .form-header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .auth-form {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: var(--glow);
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
         }
 
-        label {
+        .form-group label {
             display: block;
-            margin-bottom: 8px;
-            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
             font-weight: 500;
-            font-size: 14px;
+            color: var(--text-secondary);
         }
 
-        input {
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input {
             width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e0e0e0;
+            padding: 0.875rem 1rem;
+            padding-left: 2.75rem;
+            background: var(--bg-darker);
+            border: 1px solid var(--border);
             border-radius: 10px;
-            font-size: 15px;
-            transition: all 0.3s;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
         }
 
-        input:focus {
+        .input-wrapper input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1);
         }
 
-        button {
+        .input-wrapper input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.25rem;
+            transition: color 0.2s;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary);
+        }
+
+        .submit-btn {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             border: none;
             border-radius: 10px;
-            font-size: 16px;
+            color: var(--bg-darker);
+            font-size: 1rem;
             font-weight: 600;
+            font-family: inherit;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
-        button:hover {
+        .submit-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
         }
 
-        button:active {
+        .submit-btn:active {
             transform: translateY(0);
         }
 
-        button:disabled {
-            opacity: 0.6;
+        .submit-btn:disabled {
+            opacity: 0.7;
             cursor: not-allowed;
-        }
-
-        .message {
-            padding: 12px 16px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .error {
-            background: #fee;
-            border: 1px solid #fcc;
-            color: #c33;
-        }
-
-        .success {
-            background: #efe;
-            border: 1px solid #cfc;
-            color: #3c3;
-        }
-
-        .toggle {
-            text-align: center;
-            margin-top: 20px;
-            color: #666;
-            font-size: 14px;
-        }
-
-        .toggle a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .toggle a:hover {
-            text-decoration: underline;
+            transform: none;
         }
 
         .spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid #fff;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--bg-darker);
             border-top-color: transparent;
             border-radius: 50%;
-            animation: spin 0.6s linear infinite;
+            animation: spin 0.8s linear infinite;
         }
 
         @keyframes spin {
-            to {
-                transform: rotate(360deg);
+            to { transform: rotate(360deg); }
+        }
+
+        .message {
+            padding: 0.875rem 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .message.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: var(--error);
+        }
+
+        .message.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--success);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .divider span {
+            padding: 0 1rem;
+        }
+
+        .toggle-form {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .toggle-form a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .toggle-form a:hover {
+            color: var(--text-primary);
+            text-decoration: underline;
+        }
+
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-home:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            body {
+                flex-direction: column;
             }
+
+            .brand-panel {
+                padding: 2rem;
+                min-height: auto;
+            }
+
+            .brand-title {
+                font-size: 2rem;
+            }
+
+            .features {
+                display: none;
+            }
+
+            .form-panel {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-form {
+                padding: 1.5rem;
+            }
+
+            .brand-panel {
+                padding: 1.5rem;
+            }
+
+            .brand-title {
+                font-size: 1.5rem;
+            }
+
+            .brand-subtitle {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Password strength indicator */
+        .password-strength {
+            margin-top: 0.5rem;
+            height: 4px;
+            background: var(--bg-darker);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-weak { width: 33%; background: var(--error); }
+        .strength-medium { width: 66%; background: #F59E0B; }
+        .strength-strong { width: 100%; background: var(--success); }
+
+        .password-hint {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
         }
     </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1 id="title">Create Account</h1>
-        <p class="subtitle" id="subtitle">Join Trendtactics Academy</p>
+    <!-- Left Panel - Branding -->
+    <div class="brand-panel">
+        <div class="brand-content">
+            <div class="brand-logo">🎓</div>
+            <h1 class="brand-title">Trendtactics Academy</h1>
+            <p class="brand-subtitle">
+                Master digital skills with AI-powered learning. Join thousands of students transforming their careers.
+            </p>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🚀</div>
+                    <div class="feature-text">
+                        <h4>Learn at Your Pace</h4>
+                        <p>Self-paced courses designed for busy professionals</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🤖</div>
+                    <div class="feature-text">
+                        <h4>AI-Powered Assistance</h4>
+                        <p>Get help from our intelligent AI tutors anytime</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📜</div>
+                    <div class="feature-text">
+                        <h4>Earn Certificates</h4>
+                        <p>Get recognized certifications for your skills</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <div id="message"></div>
+    <!-- Right Panel - Form -->
+    <div class="form-panel">
+        <div class="form-container">
+            <a href="/" class="back-home">
+                ← Back to Home
+            </a>
 
-        <form id="authForm">
-            <div class="form-group" id="nameGroup">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" required autocomplete="name">
+            <div class="form-header">
+                <h1 id="formTitle">Create Your Account</h1>
+                <p id="formSubtitle">Start your learning journey today</p>
             </div>
 
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" required autocomplete="email">
+            <div class="auth-form">
+                <div id="messageContainer"></div>
+
+                <form id="authForm">
+                    <div class="form-group" id="nameGroup">
+                        <label for="name">Full Name</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">👤</span>
+                            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">📧</span>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">🔒</span>
+                            <input type="password" id="password" name="password" placeholder="Create a strong password" required minlength="8">
+                            <button type="button" class="password-toggle" onclick="togglePassword()">👁️</button>
+                        </div>
+                        <div class="password-strength" id="passwordStrength">
+                            <div class="password-strength-bar" id="strengthBar"></div>
+                        </div>
+                        <p class="password-hint" id="passwordHint">Minimum 8 characters</p>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span id="btnText">Create Account</span>
+                    </button>
+                </form>
+
+                <div class="toggle-form">
+                    <span id="toggleText">Already have an account?</span>
+                    <a href="#" id="toggleLink">Sign In</a>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" required minlength="8" autocomplete="new-password">
-            </div>
-
-            <button type="submit" id="submitBtn">
-                <span id="btnText">Create Account</span>
-            </button>
-        </form>
-
-        <div class="toggle">
-            <span id="toggleText">Already have an account?</span>
-            <a href="#" id="toggleLink">Sign In</a>
         </div>
     </div>
 
     <script>
-        // We're using a proxy approach to avoid CSP issues, so we don't need direct Supabase client here
-        // The proxy handles all Supabase communication
-        console.log('Using proxy approach for Supabase communication');
-        
         // Check if user is already logged in
-        async function checkAuthStatus() {
-            try {
-                // Check for session in localStorage or cookies
-                const session = localStorage.getItem('supabase_session');
-                if (session) {
-                    // User is already logged in, redirect to dashboard
-                    window.location.href = '/dashboard';
-                }
-            } catch (error) {
-                console.error('Error checking auth status:', error);
+        (function checkAuthOnLoad() {
+            const session = localStorage.getItem('supabase_session');
+            const user = localStorage.getItem('supabase_user');
+            if (session && user) {
+                // User is already logged in, redirect immediately
+                window.location.replace('/dashboard');
+                return;
             }
-        }
-        
-        // Check auth status on page load
-        checkAuthStatus();
+        })();
 
         let isLoginMode = false;
 
-        // DOM elements
+        // DOM Elements
         const form = document.getElementById('authForm');
         const nameGroup = document.getElementById('nameGroup');
         const nameInput = document.getElementById('name');
@@ -226,58 +553,80 @@
         const passwordInput = document.getElementById('password');
         const submitBtn = document.getElementById('submitBtn');
         const btnText = document.getElementById('btnText');
-        const messageDiv = document.getElementById('message');
-        const title = document.getElementById('title');
-        const subtitle = document.getElementById('subtitle');
+        const messageContainer = document.getElementById('messageContainer');
+        const formTitle = document.getElementById('formTitle');
+        const formSubtitle = document.getElementById('formSubtitle');
         const toggleText = document.getElementById('toggleText');
         const toggleLink = document.getElementById('toggleLink');
+        const strengthBar = document.getElementById('strengthBar');
+        const passwordHint = document.getElementById('passwordHint');
+
+        // Toggle password visibility
+        function togglePassword() {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+        }
+
+        // Password strength checker
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            strengthBar.className = 'password-strength-bar';
+            
+            if (password.length === 0) {
+                strengthBar.style.width = '0';
+                passwordHint.textContent = 'Minimum 8 characters';
+            } else if (password.length < 8) {
+                strengthBar.classList.add('strength-weak');
+                passwordHint.textContent = 'Too short - keep going!';
+            } else if (password.length < 12 || !/[A-Z]/.test(password) || !/[0-9]/.test(password)) {
+                strengthBar.classList.add('strength-medium');
+                passwordHint.textContent = 'Good - add numbers & capitals for stronger';
+            } else {
+                strengthBar.classList.add('strength-strong');
+                passwordHint.textContent = 'Strong password!';
+            }
+        });
 
         // Toggle between login and signup
         toggleLink.addEventListener('click', (e) => {
             e.preventDefault();
             isLoginMode = !isLoginMode;
-            
-            // Preserve redirect parameter in URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const redirectParam = urlParams.get('redirect');
-            let newUrl = window.location.pathname;
-            if (redirectParam) {
-                newUrl += '?redirect=' + encodeURIComponent(redirectParam);
-            }
-            window.history.replaceState({}, '', newUrl);
+            messageContainer.innerHTML = '';
 
             if (isLoginMode) {
-                title.textContent = 'Welcome Back';
-                subtitle.textContent = 'Sign in to continue learning';
+                formTitle.textContent = 'Welcome Back';
+                formSubtitle.textContent = 'Sign in to continue learning';
                 nameGroup.style.display = 'none';
                 nameInput.required = false;
                 btnText.textContent = 'Sign In';
                 toggleText.textContent = "Don't have an account?";
-                toggleLink.textContent = 'Sign Up';
+                toggleLink.textContent = 'Create Account';
+                document.getElementById('passwordStrength').style.display = 'none';
+                passwordHint.style.display = 'none';
             } else {
-                title.textContent = 'Create Account';
-                subtitle.textContent = 'Join Trendtactics Academy';
+                formTitle.textContent = 'Create Your Account';
+                formSubtitle.textContent = 'Start your learning journey today';
                 nameGroup.style.display = 'block';
                 nameInput.required = true;
                 btnText.textContent = 'Create Account';
                 toggleText.textContent = 'Already have an account?';
                 toggleLink.textContent = 'Sign In';
+                document.getElementById('passwordStrength').style.display = 'block';
+                passwordHint.style.display = 'block';
             }
 
-            messageDiv.innerHTML = '';
             form.reset();
+            strengthBar.className = 'password-strength-bar';
+            strengthBar.style.width = '0';
         });
 
         // Show message
         function showMessage(text, type = 'error') {
-            messageDiv.innerHTML = `<div class="message ${type}">${text}</div>`;
+            messageContainer.innerHTML = `<div class="message ${type}">${text}</div>`;
         }
 
         // Handle form submission
         form.addEventListener('submit', async (e) => {
-            // Get redirect parameter from URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const redirectParam = urlParams.get('redirect') || '/dashboard';
             e.preventDefault();
 
             const email = emailInput.value.trim();
@@ -286,65 +635,49 @@
 
             // Disable form
             submitBtn.disabled = true;
-            btnText.innerHTML = '<span class="spinner"></span> Processing...';
-            messageDiv.innerHTML = '';
+            btnText.innerHTML = '<span class="spinner"></span>';
+            messageContainer.innerHTML = '';
 
             try {
                 if (isLoginMode) {
                     // LOGIN
                     console.log('Attempting login for:', email);
-                    // Use proxy to avoid CSP issues - grant_type must be in URL
                     const response = await fetch('./api/auth-proxy.php?path=/auth/v1/token&grant_type=password', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            email,
-                            password
-                        })
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
                     });
-                                            
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(errorData.error_description || errorData.msg || errorData.error || 'Login failed');
-                    }
-                                            
+                    
                     const data = await response.json();
-                    const error = null;
-
-                    if (error) {
-                        console.error('Login error:', error);
-                        throw error;
+                    
+                    if (!response.ok) {
+                        throw new Error(data.error_description || data.msg || data.error || 'Invalid email or password');
                     }
 
                     console.log('Login successful:', data);
                     
-                    // Store session and user data in localStorage
-                    if (data.session || data.user || data.id) {
-                        // Store session if available
-                        if (data.session) {
-                            localStorage.setItem('supabase_session', JSON.stringify(data.session));
-                        }
-                        
-                        // Store user data
-                        const userData = {
-                            id: data.user?.id || data.id || data.user_id,
-                            email,
-                            name: data.user?.user_metadata?.name || data.name || email,
-                            role: data.user?.role || 'student',
-                            created_at: data.user?.created_at || new Date().toISOString(),
-                            updated_at: new Date().toISOString()
-                        };
-                        localStorage.setItem('supabase_user', JSON.stringify(userData));
+                    // Store session - handle different response formats
+                    if (data.access_token) {
+                        localStorage.setItem('supabase_session', JSON.stringify({
+                            access_token: data.access_token,
+                            refresh_token: data.refresh_token,
+                            expires_at: data.expires_at
+                        }));
                     }
                     
-                    showMessage('✅ Login successful! Redirecting...', 'success');
-                    // Add a small delay to show the message before redirect
+                    // Store user data
+                    const userData = {
+                        id: data.user?.id || data.id,
+                        email: data.user?.email || email,
+                        name: data.user?.user_metadata?.name || email.split('@')[0],
+                        role: 'student'
+                    };
+                    localStorage.setItem('supabase_user', JSON.stringify(userData));
+                    
+                    showMessage('✅ Welcome back! Redirecting...', 'success');
                     setTimeout(() => {
-                        // Always redirect to dashboard after login to continue learning
-                    window.location.href = '/dashboard';
-                    }, 1500);
+                        window.location.replace('/dashboard');
+                    }, 1000);
 
                 } else {
                     // SIGNUP
@@ -353,65 +686,50 @@
                     }
 
                     console.log('Attempting signup for:', email);
-                    // Use proxy to avoid CSP issues
                     const response = await fetch('./api/auth-proxy.php?path=/auth/v1/signup', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             email,
                             password,
                             options: {
-                                data: {
-                                    name,
-                                    role: 'student'
-                                }
+                                data: { name, role: 'student' }
                             }
                         })
                     });
                     
+                    const data = await response.json();
+                    
                     if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(errorData.error_description || errorData.msg || errorData.error || 'Signup failed');
+                        throw new Error(data.error_description || data.msg || data.error || 'Signup failed');
+                    }
+
+                    console.log('Signup successful:', data);
+
+                    // Store session - handle different response formats
+                    if (data.access_token) {
+                        localStorage.setItem('supabase_session', JSON.stringify({
+                            access_token: data.access_token,
+                            refresh_token: data.refresh_token,
+                            expires_at: data.expires_at
+                        }));
+                    } else if (data.session) {
+                        localStorage.setItem('supabase_session', JSON.stringify(data.session));
                     }
                     
-                    const data = await response.json();
-                    const error = null;
-
-                    if (error) {
-                        console.error('Signup error:', error);
-                        throw error;
-                    }
-
-                    console.log('Signup response:', data);
-
-                    if (data) {
-                        // Store session and user data in localStorage
-                        if (data.session || data.user) {
-                            // Store session if available
-                            if (data.session) {
-                                localStorage.setItem('supabase_session', JSON.stringify(data.session));
-                            }
-                                                
-                            // Store user data
-                            const userData = {
-                                id: data.user?.id || data.id || data.user_id,
-                                email,
-                                name,
-                                role: 'student',
-                                created_at: new Date().toISOString(),
-                                updated_at: new Date().toISOString()
-                            };
-                            localStorage.setItem('supabase_user', JSON.stringify(userData));
-                        }
-                                        
-                        showMessage('✅ Account created successfully! Redirecting to dashboard...', 'success');
-                        setTimeout(() => {
-                            // Always redirect to dashboard after signup to start learning
-                        window.location.href = '/dashboard';
-                        }, 1500);
-                    }
+                    // Store user data
+                    const userData = {
+                        id: data.user?.id || data.id,
+                        email: data.user?.email || email,
+                        name: data.user?.user_metadata?.name || name,
+                        role: 'student'
+                    };
+                    localStorage.setItem('supabase_user', JSON.stringify(userData));
+                    
+                    showMessage('✅ Account created successfully! Redirecting...', 'success');
+                    setTimeout(() => {
+                        window.location.replace('/dashboard');
+                    }, 1000);
                 }
 
             } catch (error) {
@@ -424,5 +742,4 @@
         });
     </script>
 </body>
-
 </html>
