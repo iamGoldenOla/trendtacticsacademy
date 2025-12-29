@@ -35,7 +35,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero hero-services" style="background: linear-gradient(135deg, rgba(11, 20, 55, 0.65), rgba(6, 13, 36, 0.7)), url('/images/websiteparallexpage.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <section class="hero hero-services" style="background: url('/images/websiteparallexpage.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
         <div class="container" style="text-align: center; position: relative; z-index: 1;">
             <h1 class="hero-title">Our AI-Powered Learning Programs</h1>
             <p class="hero-subtitle">Master modern digital skills with AI-assisted tools, real projects, and industry-ready workflows.
@@ -349,6 +349,13 @@
         function handleAuth() {
             window.location.href = '/signup';
         }
+
+        // Scroll to top on page load
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                window.scrollTo(0, 0);
+            }, 0);
+        });
 
         initPage();
     </script>

@@ -1,0 +1,58 @@
+{
+  "course_title": "Prompt Engineering Mastery",
+  "module_title": "Specialized Applications",
+  "lesson_number": 12,
+  "lesson_title": "Prompt Engineering for Code Generation",
+  "introduction": "In this lesson, we'll explore specialized prompt engineering techniques for code generation. Coding with AI assistance is becoming increasingly common, and effective prompts can significantly improve the quality, efficiency, and correctness of AI-generated code. We'll cover techniques for different programming languages, frameworks, and development scenarios.",
+  "big_idea": "Specialized prompt techniques can significantly improve the quality and correctness of AI-generated code.",
+  "why_it_matters": "Code generation is a powerful application of AI that can accelerate development, but it requires precise prompts to produce correct, efficient, and maintainable code. Understanding how to craft effective coding prompts can make you a more productive developer.",
+  "core_concepts": [
+    {
+      "title": "Language-Specific Prompts",
+      "content": "Different programming languages have unique syntax, conventions, and best practices. Effective code prompts specify the language and any relevant frameworks or libraries to ensure appropriate code generation."
+    },
+    {
+      "title": "Functionality Requirements",
+      "content": "Clear specifications of what the code should do, including inputs, outputs, constraints, and edge cases, help the AI generate more accurate code that meets your requirements."
+    },
+    {
+      "title": "Code Quality Considerations",
+      "content": "Prompts that specify requirements for readability, efficiency, security, or maintainability help the AI generate higher quality code that follows best practices."
+    }
+  ],
+  "real_world_example": "Instead of 'Write a function to sort data,' a more effective prompt would be: 'Write a Python function named bubble_sort that takes a list of integers and returns the sorted list in ascending order. Include error handling for non-list inputs. Use comments to explain each step. Follow PEP 8 style guidelines.' This prompt specifies language, functionality, error handling, documentation, and style requirements.",
+  "steps": [
+    "Specify the programming language and any frameworks",
+    "Define the exact functionality needed",
+    "Include requirements for inputs, outputs, and error handling",
+    "Specify any style or quality requirements",
+    "Test the generated code to ensure it meets requirements"
+  ],
+  "playground_activity": "Write a prompt for a simple function without specifying the language, then write the same prompt specifying the language and requirements. Compare the results and note the differences in quality and appropriateness.",
+  "reflection_question": "How do detailed requirements in coding prompts affect the quality of generated code?",
+  "quiz": {
+    "question": "What is the primary benefit of specifying programming language in code generation prompts?",
+    "options": [
+      "It makes the AI respond faster",
+      "It ensures the AI generates code in the correct syntax and style",
+      "It reduces the cost of using AI",
+      "It makes the AI more creative"
+    ],
+    "answer": "It ensures the AI generates code in the correct syntax and style",
+    "explanation": "Specifying the programming language ensures the AI generates code using the correct syntax, conventions, and best practices for that language."
+  },
+  "key_takeaways": [
+    "Language specification ensures correct syntax",
+    "Clear functionality requirements improve accuracy",
+    "Quality requirements lead to better code",
+    "Code generation benefits greatly from detailed prompts"
+  ],
+  "resources": {
+    "video": "https://www.youtube.com/watch?v=example12",
+    "extra_reading": [
+      "https://example.com/code-generation-prompts",
+      "https://example.com/ai-assisted-programming"
+    ]
+  },
+  "summary": "In this lesson, we've explored specialized prompt engineering techniques for code generation. By providing clear language specifications, functionality requirements, and quality expectations, you can significantly improve the quality and correctness of AI-generated code."
+}

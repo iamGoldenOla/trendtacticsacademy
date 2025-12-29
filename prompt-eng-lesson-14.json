@@ -1,0 +1,58 @@
+{
+  "course_title": "Prompt Engineering Mastery",
+  "module_title": "Troubleshooting and Best Practices",
+  "lesson_number": 14,
+  "lesson_title": "Common Prompt Engineering Mistakes and How to Avoid Them",
+  "introduction": "In this lesson, we'll examine common mistakes in prompt engineering and learn how to avoid them. Understanding these pitfalls is crucial for developing effective prompts and achieving consistent results with AI systems. We'll explore the most frequent errors and their solutions, helping you become a more proficient prompt engineer.",
+  "big_idea": "Recognizing and avoiding common prompt engineering mistakes leads to more effective and reliable AI interactions.",
+  "why_it_matters": "Common mistakes can significantly impact the quality and reliability of AI responses. By understanding these pitfalls, you can avoid them and create more effective prompts that consistently produce the desired results.",
+  "core_concepts": [
+    {
+      "title": "Ambiguous Language",
+      "content": "Using vague or unclear language in prompts can lead to varied interpretations by the AI. Specific, precise language produces more consistent and targeted results."
+    },
+    {
+      "title": "Missing Context",
+      "content": "Failing to provide sufficient context can result in generic or irrelevant responses. Always consider what background information the AI needs to understand the task."
+    },
+    {
+      "title": "Overly Complex Prompts",
+      "content": "Very long or complex prompts can confuse the AI. Strive for clarity and focus, including only necessary information to achieve your objective."
+    }
+  ],
+  "real_world_example": "A common mistake: 'Tell me about marketing.' Better approach: 'Explain the key components of a digital marketing strategy for a B2B software company targeting enterprise clients. Include discussion of content marketing, social media, and account-based marketing. Format as a 3-point summary with brief explanations.' The improved prompt provides context, specifies the audience, and defines the output format.",
+  "steps": [
+    "Review your prompt for ambiguous language",
+    "Ensure sufficient context is provided",
+    "Check that the prompt is focused and clear",
+    "Test the prompt with sample inputs",
+    "Refine based on the results"
+  ],
+  "playground_activity": "Take a prompt you've used that didn't produce the desired results. Identify which common mistake it might have contained, then rewrite it to avoid that mistake. Compare the results.",
+  "reflection_question": "How might understanding common mistakes change your approach to creating prompts?",
+  "quiz": {
+    "question": "What is a common mistake in prompt engineering?",
+    "options": [
+      "Providing too much context",
+      "Using ambiguous or unclear language",
+      "Being too specific",
+      "Using simple language"
+    ],
+    "answer": "Using ambiguous or unclear language",
+    "explanation": "Using ambiguous language is a common mistake that can lead to varied interpretations by the AI and inconsistent results."
+  },
+  "key_takeaways": [
+    "Avoid ambiguous language for consistent results",
+    "Provide sufficient context for relevant responses",
+    "Keep prompts clear and focused",
+    "Test prompts to identify and fix issues"
+  ],
+  "resources": {
+    "video": "https://www.youtube.com/watch?v=example14",
+    "extra_reading": [
+      "https://example.com/common-prompt-mistakes",
+      "https://example.com/avoiding-prompt-errors"
+    ]
+  },
+  "summary": "In this lesson, we've examined common prompt engineering mistakes and how to avoid them. By recognizing these pitfalls and applying best practices, you can create more effective prompts that consistently produce high-quality results."
+}

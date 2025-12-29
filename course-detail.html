@@ -115,9 +115,12 @@
                     </div>
                 </div>
 
-                <button class="btn btn-lg" id="enrollBtn" onclick="handlePurchase()" style="width: 100%; background: white; color: var(--primary);">
-                    <span id="enrollBtnText">Buy Now</span>
-                </button>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="/lesson-viewer?course=vibe-coding&lesson=1" class="btn btn-lg" style="flex: 1; min-width: 120px; background: white; color: var(--primary); text-align: center;">View Course</a>
+                    <button class="btn btn-lg" id="enrollBtn" onclick="handlePurchase()" style="flex: 1; min-width: 120px; background: rgba(255,255,255,0.2); color: white; border: 2px solid white;">
+                        <span id="enrollBtnText">Buy Now</span>
+                    </button>
+                </div>
 
                 <div id="enrollMessage" style="margin-top: 1rem; padding: 1rem; border-radius: var(--radius); display: none;"></div>
             </div>

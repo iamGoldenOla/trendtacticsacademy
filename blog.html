@@ -206,6 +206,13 @@
             window.location.href = '/signup';
         }
 
+        // Scroll to top on page load
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                window.scrollTo(0, 0);
+            }, 0);
+        });
+
         initHomepage();
     </script>
 </body>
