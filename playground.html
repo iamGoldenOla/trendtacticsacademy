@@ -556,7 +556,8 @@ The response must be valid JSON that can be parsed.`;
     <div class="handle"></div>
   </div>
   <div class="notes" id="notes"></div>
-  <p class="instruction">Click the cup to make it sing!</p>
+  <p class="instruction">Click the cup to make it sing! (with sound)</p>
+  <p class="volume-hint">Make sure your volume is on!</p>
 </div>`,
                     css: `* { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -665,10 +666,45 @@ body {
   color: #94A3B8;
   margin-top: 30px;
   font-size: 14px;
+}
+.volume-hint {
+  color: #00D9FF;
+  font-size: 12px;
+  margin-top: 8px;
+  opacity: 0.7;
 }`,
-                    js: `let isSinging = false;
+                    js: `// Web Audio API for real sound
+let audioCtx = null;
+let isSinging = false;
 let noteInterval;
-const notes = ['♪', '♫', '♬', '♩', '🎵', '🎶'];
+let melodyInterval;
+const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
+const noteSymbols = ['♪', '♫', '♬', '♩'];
+
+// Note frequencies
+const frequencies = {
+  'C4': 261.63, 'D4': 293.66, 'E4': 329.63, 'F4': 349.23,
+  'G4': 392.00, 'A4': 440.00, 'B4': 493.88, 'C5': 523.25
+};
+
+function playNote(noteName, duration = 0.3) {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  
+  osc.frequency.value = frequencies[noteName];
+  osc.type = 'sine';
+  
+  gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+  
+  osc.start();
+  osc.stop(audioCtx.currentTime + duration);
+}
 
 function toggleSing() {
   const cup = document.querySelector('.cup');
@@ -677,9 +713,17 @@ function toggleSing() {
   if (isSinging) {
     cup.classList.add('singing');
     noteInterval = setInterval(createNote, 300);
+    // Play a simple melody
+    let noteIndex = 0;
+    playNote(notes[noteIndex]);
+    melodyInterval = setInterval(() => {
+      noteIndex = (noteIndex + 1) % notes.length;
+      playNote(notes[noteIndex]);
+    }, 400);
   } else {
     cup.classList.remove('singing');
     clearInterval(noteInterval);
+    clearInterval(melodyInterval);
   }
 }
 
@@ -687,7 +731,7 @@ function createNote() {
   const container = document.getElementById('notes');
   const note = document.createElement('span');
   note.className = 'note';
-  note.textContent = notes[Math.floor(Math.random() * notes.length)];
+  note.textContent = noteSymbols[Math.floor(Math.random() * noteSymbols.length)];
   note.style.left = (Math.random() * 100 - 50) + 'px';
   container.appendChild(note);
   setTimeout(() => note.remove(), 1000);
@@ -1357,6 +1401,296 @@ document.querySelectorAll('.card').forEach(card => {
     }, 150);
   });
 });`
+                };
+            }
+
+            // Landing page template
+            if (p.includes('landing') || p.includes('page') || p.includes('website') || p.includes('company') || p.includes('watch') || p.includes('brand') || p.includes('product')) {
+                // Determine the type of product/company
+                let productName = 'Luxe';
+                let tagline = 'Precision Meets Elegance';
+                let productType = 'watch';
+                let productSvg = `<svg class="product-image" viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="60" y="0" width="80" height="40" rx="5" fill="url(#strap)"/>
+                    <rect x="60" y="240" width="80" height="40" rx="5" fill="url(#strap)"/>
+                    <circle cx="100" cy="140" r="70" fill="url(#case)" stroke="#FFD700" stroke-width="4"/>
+                    <circle cx="100" cy="140" r="55" fill="#0B1437"/>
+                    <circle cx="100" cy="140" r="50" stroke="#00D9FF" stroke-width="1" fill="none"/>
+                    <line x1="100" y1="140" x2="100" y2="100" stroke="#FFD700" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="100" y1="140" x2="130" y2="140" stroke="#00D9FF" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="100" cy="140" r="5" fill="#FFD700"/>
+                    <text x="100" y="170" text-anchor="middle" fill="#94A3B8" font-size="8" font-family="Inter">SWISS MADE</text>
+                    <defs>
+                        <linearGradient id="strap" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#1a1a1a"/>
+                            <stop offset="50%" stop-color="#333"/>
+                            <stop offset="100%" stop-color="#1a1a1a"/>
+                        </linearGradient>
+                        <linearGradient id="case" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#C0C0C0"/>
+                            <stop offset="50%" stop-color="#E8E8E8"/>
+                            <stop offset="100%" stop-color="#A0A0A0"/>
+                        </linearGradient>
+                    </defs>
+                </svg>`;
+                
+                if (p.includes('shoe') || p.includes('sneaker') || p.includes('footwear')) {
+                    productName = 'StepX';
+                    tagline = 'Walk Your Way';
+                    productType = 'shoes';
+                }
+                if (p.includes('phone') || p.includes('tech') || p.includes('gadget')) {
+                    productName = 'TechPro';
+                    tagline = 'Innovation Redefined';
+                    productType = 'tech';
+                }
+                
+                return {
+                    html: `<div class="landing-page">
+  <nav class="landing-nav">
+    <div class="logo">${productName}</div>
+    <ul class="nav-menu">
+      <li><a href="#">Collections</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <button class="shop-btn">Shop Now</button>
+  </nav>
+  
+  <section class="hero">
+    <div class="hero-content">
+      <span class="subtitle">Premium Collection 2025</span>
+      <h1>${productName} <span class="gold">Signature</span></h1>
+      <p class="tagline">${tagline}</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="showNotification()">Explore Collection</button>
+        <button class="btn-secondary">Watch Video</button>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-number">10K+</span><span class="stat-label">Happy Customers</span></div>
+        <div class="stat"><span class="stat-number">50+</span><span class="stat-label">Countries</span></div>
+        <div class="stat"><span class="stat-number">5</span><span class="stat-label">Year Warranty</span></div>
+      </div>
+    </div>
+    <div class="hero-product">
+      ${productSvg}
+      <div class="product-glow"></div>
+    </div>
+  </section>
+  
+  <div class="notification" id="notification">Welcome to ${productName}! Explore our premium collection.</div>
+</div>`,
+                    css: `* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0B1437 0%, #060D24 50%, #0a0a1a 100%);
+  font-family: 'Inter', sans-serif;
+  color: white;
+  overflow-x: hidden;
+}
+.landing-page { min-height: 100vh; }
+.landing-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 60px;
+  background: rgba(6, 13, 36, 0.8);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 2px;
+}
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+}
+.nav-menu a {
+  color: #94A3B8;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+.nav-menu a:hover { color: #FFD700; }
+.shop-btn {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #0B1437;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.shop-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+}
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 100px 60px 60px;
+  gap: 60px;
+}
+.hero-content { flex: 1; max-width: 550px; }
+.subtitle {
+  color: #FFD700;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+}
+.hero h1 {
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.gold { color: #FFD700; }
+.tagline {
+  color: #94A3B8;
+  font-size: 18px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+.hero-buttons { display: flex; gap: 16px; margin-bottom: 50px; }
+.btn-primary {
+  background: linear-gradient(135deg, #00D9FF, #00B8D9);
+  color: #0B1437;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 217, 255, 0.3);
+}
+.btn-secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255,255,255,0.3);
+  padding: 16px 32px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-secondary:hover {
+  border-color: #FFD700;
+  color: #FFD700;
+}
+.stats { display: flex; gap: 40px; }
+.stat { text-align: left; }
+.stat-number {
+  display: block;
+  font-size: 32px;
+  font-weight: 700;
+  color: #FFD700;
+}
+.stat-label {
+  color: #64748B;
+  font-size: 14px;
+}
+.hero-product {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.product-image {
+  width: 300px;
+  height: auto;
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 30px 50px rgba(0, 217, 255, 0.2));
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+.product-glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0,217,255,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse 3s ease infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+.notification {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #0B1437;
+  padding: 16px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.5s;
+  z-index: 1000;
+}
+.notification.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}`,
+                    js: `function showNotification() {
+  const notif = document.getElementById('notification');
+  notif.classList.add('show');
+  setTimeout(() => {
+    notif.classList.remove('show');
+  }, 3000);
+}
+
+// Add smooth scroll behavior
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+  });
+});
+
+// Animate elements on load
+window.addEventListener('load', () => {
+  document.querySelector('.hero-content').style.animation = 'fadeInLeft 1s ease forwards';
+  document.querySelector('.hero-product').style.animation = 'fadeInRight 1s ease forwards';
+});
+
+// Add CSS animations dynamically
+const style = document.createElement('style');
+style.textContent = \`
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+\`;
+document.head.appendChild(style);`
                 };
             }
 
