@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https: http:; frame-src 'self' https://www.youtube.com https://youtube.com https://*.youtube.com; child-src 'self' https://www.youtube.com https://youtube.com; connect-src 'self' https: wss:; media-src 'self' https: blob:;">
-    <title>Vibe Coding - Trendtactics Academy</title>
+    <title>Course Viewer - Trendtactics Academy</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>" type="image/svg+xml">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -130,7 +130,7 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <div class="logo">📖 Vibe Coding Course</div>
+            <div class="logo" id="courseLogo">📖 Course Viewer</div>
             <nav class="nav">
                 <a href="/">Home</a>
                 <a href="/about">About</a>
@@ -149,6 +149,12 @@
             <div class="sidebar-header">
                 <h2>Course Lessons</h2>
                 <p id="progressText">0/15 completed</p>
+            </div>
+            <div style="padding: 0.5rem 1rem; border-bottom: 1px solid var(--border);">
+                <select id="courseSelect" onchange="switchCourse(this.value)" style="width: 100%; padding: 0.5rem; background: var(--bg-darker); border: 1px solid var(--border); color: var(--text-primary); border-radius: 6px; font-size: 0.8rem; cursor: pointer;">
+                    <option value="vibe-coding">Vibe Coding</option>
+                    <option value="prompt-engineering">Prompt Engineering</option>
+                </select>
             </div>
             <div class="lesson-list" id="lessonList"></div>
         </aside>
@@ -173,10 +179,8 @@
     </div>
 
     <script>
-        // ALL 15 LESSONS
-        const LESSONS = [
-            { id: 1, module: "Understanding Vibe Coding", title: "What Is Vibe Coding?", duration: "8 min", intro: "Welcome to your first lesson! Don't worry if you've never coded before. We'll explore what Vibe Coding is and why it's perfect for beginners.", bigIdea: "Vibe Coding is a beginner-friendly way of creating digital products by focusing on ideas, intention, creativity, and guidance — with the help of AI — instead of memorizing syntax or complex rules.", steps: ["Understand that coding is simply telling computers what to do", "Vibe Coding focuses on ideas before technical details", "AI and guidance make creation easier", "Avoid complex syntax initially", "Build confidence before complexity"], example: "Think of Vibe Coding like cooking with a recipe app. Instead of memorizing techniques, the app guides you step by step.", video: "https://www.youtube.com/embed/iLCDSY2XX7E", videoCredit: "Vibe Coding Fundamentals", reflection: "Think about a digital product you use daily. How might someone have created it focusing on the main idea first?", quiz: [{ q: "What does Vibe Coding focus on first?", a: "Ideas and creativity", opts: ["Complex syntax", "Ideas and creativity", "Memorizing code", "Technical rules"] }], summary: "You learned that Vibe Coding focuses on ideas and creativity before technical details. You're ready for the next lesson!" },
-            { id: 2, module: "Understanding Vibe Coding", title: "Why Vibe Coding Exists", duration: "7 min", intro: "In this lesson, we'll explore why Vibe Coding was created and how it solves problems that beginners face with traditional coding.", bigIdea: "Traditional coding often overwhelms beginners with complex syntax before they understand core concepts. Vibe Coding flips this by focusing on ideas first, making digital creation accessible to everyone.", steps: ["Recognize challenges beginners face with traditional coding", "Understand how focusing on ideas reduces anxiety", "Learn about guided learning approaches", "See how Vibe Coding addresses these challenges", "Appreciate confidence-building in learning"], example: "Would you start driving by memorizing every engine detail? No! You start with the goal of getting from A to B.", video: "", reflection: "Can you think of a time when a complex approach made learning harder than it needed to be?", quiz: [{ q: "Why does Vibe Coding exist?", a: "To make coding accessible to beginners", opts: ["To replace all coding", "To make coding accessible to beginners", "To teach complex syntax", "To eliminate AI"] }], summary: "You now understand why Vibe Coding exists - to make digital creation accessible and reduce beginner anxiety." },
+        const COURSES={"vibe-coding":{title:"Vibe Coding",lessons:[{id:1,module:"Understanding Vibe Coding",title:"What Is Vibe Coding?",duration:"8 min",intro:"Welcome to Vibe Coding! We'll explore what it is and why it's perfect for beginners.",bigIdea:"Vibe Coding focuses on ideas and creativity with AI help instead of memorizing syntax.",steps:["Coding is telling computers what to do","Focus on ideas before technical details","AI makes creation easier","Avoid complex syntax initially","Build confidence first"],example:"Think of Vibe Coding like cooking with a recipe app.",video:"https://www.youtube.com/embed/iLCDSY2XX7E",videoCredit:"Vibe Coding Fundamentals",reflection:"Think about a digital product you use daily.",quiz:[{q:"What does Vibe Coding focus on first?",a:"Ideas and creativity",opts:["Complex syntax","Ideas and creativity","Memorizing code","Technical rules"]},{q:"Who is Vibe Coding for?",a:"Beginners",opts:["Experts only","Beginners","Scientists","Mathematicians"]},{q:"What helps in Vibe Coding?",a:"AI assistance",opts:["Memorization","AI assistance","Complex rules","Nothing"]},{q:"What should you avoid initially?",a:"Complex syntax",opts:["Ideas","Complex syntax","Creativity","Learning"]},{q:"What does Vibe Coding build?",a:"Confidence",opts:["Fear","Confidence","Complexity","Nothing"]}],summary:"Vibe Coding focuses on ideas and creativity. Ready for the next lesson!"},
+            {id:2,module:"Understanding Vibe Coding",title:"Why Vibe Coding Exists",duration:"7 min",intro:"Explore why Vibe Coding was created for beginners.",bigIdea:"Traditional coding overwhelms beginners. Vibe Coding focuses on ideas first.",steps:["Recognize beginner challenges","Ideas reduce anxiety","Guided learning helps","Vibe Coding addresses challenges","Build confidence"],example:"Would you memorize engine details before driving? No!",video:"",reflection:"When did complexity make learning harder?",quiz:[{q:"Why does Vibe Coding exist?",a:"To make coding accessible",opts:["Replace all coding","To make coding accessible","Teach complex syntax","Eliminate AI"]},{q:"What does traditional coding do?",a:"Overwhelms beginners",opts:["Helps immediately","Overwhelms beginners","Is easy","Nothing"]},{q:"What does focusing on ideas reduce?",a:"Anxiety",opts:["Learning","Anxiety","Progress","Creativity"]},{q:"Vibe Coding makes digital creation what?",a:"Accessible",opts:["Impossible","Accessible","Expensive","Hard"]},{q:"What approach does Vibe Coding use?",a:"Guided learning",opts:["Trial by fire","Guided learning","Memorization","No structure"]}],summary:"Vibe Coding makes digital creation accessible."},
             { id: 3, module: "Understanding Vibe Coding", title: "How Vibe Coding Is Different", duration: "8 min", intro: "Let's compare Vibe Coding with traditional approaches to understand what makes it special.", bigIdea: "Traditional coding starts with technical details and syntax. Vibe Coding starts with your ideas and intentions, using AI to help you create without technical complexity.", steps: ["Examine traditional coding's focus on syntax", "Compare with Vibe Coding's focus on ideas", "Identify key differences in learning approaches", "Understand how these differences benefit beginners", "Recognize the value of guided, supportive learning"], example: "Traditional coding is like learning chemistry before making a sandwich. Vibe Coding is like starting with simple recipes.", video: "", reflection: "Which approach would help you feel more confident as a beginner?", quiz: [{ q: "How is Vibe Coding different?", a: "It focuses on ideas before syntax", opts: ["More complex syntax", "It focuses on ideas before syntax", "No AI assistance", "Harder for beginners"] }], summary: "You understand how Vibe Coding differs from traditional approaches by prioritizing ideas over syntax." },
             { id: 4, module: "Thinking Before Coding", title: "Thinking in Ideas, Not Code", duration: "9 min", intro: "Learn to think about what you want to create first, then let tools help make it happen.", bigIdea: "In Vibe Coding, you think about what you want to create first, then use tools and guidance to make it happen. This builds confidence and purpose.", steps: ["Understand the concept of idea-first thinking", "Learn how this applies to Vibe Coding", "See practical examples in action", "Practice in the playground", "Reflect on your learning journey"], example: "Instead of thinking 'I need a for loop', think 'I want to show a list of items'. The tools translate your idea.", video: "https://www.youtube.com/embed/2v5Fs7Xr11Y", videoCredit: "Vibe Coding 101 - Replit", reflection: "How does thinking in ideas change your approach to creating?", quiz: [{ q: "What should you focus on first?", a: "Your idea and what you want to create", opts: ["Complex code syntax", "Your idea and what you want to create", "Memorizing functions", "Technical docs"] }], summary: "You've learned to think in ideas first, letting tools handle the technical translation." },
             { id: 5, module: "Thinking Before Coding", title: "Ideas to Digital Instructions", duration: "8 min", intro: "Learn to break down your ideas into simple steps that become digital products.", bigIdea: "Vibe Coding teaches you to break ideas into simple steps that translate into digital form. This shows how creative ideas become real products.", steps: ["Break your idea into simple components", "Identify the main goal", "List the steps to achieve it", "Use AI to help implement each step", "Iterate and improve"], example: "Want to track expenses? Break it down: 1) Add expense, 2) See total, 3) View history.", video: "", reflection: "Think of an app idea. Can you break it into 3-5 simple steps?", quiz: [{ q: "How do you turn ideas into products?", a: "Break them into simple steps", opts: ["Write complex code first", "Break them into simple steps", "Memorize syntax", "Skip planning"] }], summary: "You can now break ideas into actionable steps that become digital products." },
@@ -188,57 +192,75 @@
             { id: 11, module: "Vibe Coding in Practice", title: "Everyday Applications", duration: "7 min", intro: "Discover how Vibe Coding applies to everyday digital creations.", bigIdea: "Vibe Coding isn't just for apps - it applies to websites, automations, games, and any digital creation you can imagine.", steps: ["Identify everyday digital needs", "See how Vibe Coding solves them", "Practice with small projects", "Build confidence gradually", "Expand to bigger ideas"], example: "Birthday reminder, expense tracker, recipe organizer - all everyday apps you can create.", video: "", reflection: "What everyday problem could you solve with a simple digital tool?", quiz: [{ q: "What can Vibe Coding create?", a: "Any digital creation you imagine", opts: ["Only complex apps", "Any digital creation you imagine", "Only websites", "Only games"] }], summary: "Vibe Coding applies to any digital creation in your everyday life." },
             { id: 12, module: "Your First Project", title: "Choosing Your First Project", duration: "8 min", intro: "Learn how to pick the perfect first project for your Vibe Coding journey.", bigIdea: "Your first project should be simple, personally meaningful, and achievable. Starting small builds confidence for bigger projects.", steps: ["Pick something personally useful", "Keep it simple (1-3 features)", "Ensure it's achievable in one session", "Focus on learning, not perfection", "Celebrate completing it"], example: "Good first projects: a personal greeting page, a simple counter, a color palette generator.", video: "", reflection: "What simple, personally meaningful project excites you?", quiz: [{ q: "What makes a good first project?", a: "Simple and personally meaningful", opts: ["Complex with many features", "Simple and personally meaningful", "Someone else's idea", "Perfect from the start"] }], summary: "Choose a simple, meaningful first project to build confidence." },
             { id: 13, module: "Your First Project", title: "Describing What You Want", duration: "9 min", intro: "Master the art of describing your project clearly to get great AI-generated results.", bigIdea: "Clear descriptions lead to better AI-generated code. Learn to articulate your vision in simple, specific terms.", steps: ["Start with the main purpose", "Describe what users will see", "Explain what happens when they interact", "Specify colors, sizes, and styles", "Review and refine your description"], example: "'A page with a dark background, a large welcome message in blue, and a button that changes color when clicked.'", video: "", reflection: "Practice describing something you see around you in specific terms.", quiz: [{ q: "Why are clear descriptions important?", a: "They lead to better AI results", opts: ["They're not important", "They lead to better AI results", "AI prefers vague descriptions", "Only experts need them"] }], summary: "Clear descriptions are your superpower for great Vibe Coding results." },
-            { id: 14, module: "Your First Project", title: "Building and Iterating", duration: "10 min", intro: "Learn the build-test-improve cycle that makes Vibe Coding effective.", bigIdea: "Vibe Coding is iterative - you build something, see how it works, and improve it. Each iteration makes your project better.", steps: ["Generate your first version", "Test it and note what works", "Identify improvements needed", "Describe changes to AI", "Repeat until satisfied"], example: "First version: basic button. Iteration 1: add color. Iteration 2: add hover effect. Better each time!", video: "https://www.youtube.com/embed/iLCDSY2XX7E", videoCredit: "Vibe Coding Fundamentals", reflection: "How do you feel about improving through iterations rather than perfection?", quiz: [{ q: "What is iteration in Vibe Coding?", a: "Building and improving step by step", opts: ["Getting it perfect first try", "Building and improving step by step", "Giving up after one try", "Copying someone else"] }], summary: "Iteration is the secret to great Vibe Coding projects." },
-            { id: 15, module: "Moving Forward", title: "Your Vibe Coding Journey", duration: "6 min", intro: "Congratulations! You've completed the Vibe Coding course. Let's look at your journey ahead.", bigIdea: "You now have the foundation for Vibe Coding. The journey continues as you apply these principles to increasingly creative and ambitious projects.", steps: ["Review what you've learned", "Celebrate your progress", "Plan your next projects", "Join the community", "Keep creating and learning"], example: "Students who completed this course have gone on to create personal websites, games, productivity tools, and even small businesses.", video: "", reflection: "What will you create with your new Vibe Coding skills?", quiz: [{ q: "What comes next after this course?", a: "Keep creating and learning", opts: ["Stop learning", "Keep creating and learning", "Forget everything", "Wait for instructions"] }], summary: "Congratulations! You're now a Vibe Coder. Keep creating, keep learning, and enjoy the journey!" }
-        ];
+            { id: 14, module: "Your First Project", title: "Building and Iterating", duration: "10 min", intro: "Learn the build-test-improve cycle.", bigIdea: "Vibe Coding is iterative - build, test, improve.", steps: ["Generate first version", "Test it", "Identify improvements", "Describe changes to AI", "Repeat"], example: "First: basic button. Add color. Add hover. Better each time!", video: "https://www.youtube.com/embed/iLCDSY2XX7E", videoCredit: "Vibe Coding Fundamentals", reflection: "How do you feel about iterations vs perfection?", quiz: [{q:"What is iteration?",a:"Building and improving step by step",opts:["Perfect first try","Building and improving step by step","Giving up","Copying"]},{q:"After first version?",a:"Test it",opts:["Delete it","Test it","Ignore it","Give up"]},{q:"Iterations make projects?",a:"Better",opts:["Worse","Better","Same","Confusing"]},{q:"Describe changes to?",a:"AI",opts:["Nobody","AI","Void","Random"]},{q:"Repeat until?",a:"Satisfied",opts:["Frustrated","Satisfied","Confused","Never"]}], summary: "Iteration is the secret to great projects." },
+            { id: 15, module: "Moving Forward", title: "Your Vibe Coding Journey", duration: "6 min", intro: "Congratulations! You've completed the course.", bigIdea: "You now have the foundation. Keep creating!", steps: ["Review what you learned", "Celebrate progress", "Plan next projects", "Join community", "Keep learning"], example: "Students have created websites, games, tools, and businesses.", video: "", reflection: "What will you create?", quiz: [{q:"What comes next?",a:"Keep creating and learning",opts:["Stop","Keep creating and learning","Forget","Wait"]},{q:"You now have foundation for?",a:"Vibe Coding",opts:["Nothing","Vibe Coding","Confusion","Problems"]},{q:"Plan your next?",a:"Projects",opts:["Breaks","Projects","Complaints","Nothing"]},{q:"Join the?",a:"Community",opts:["Isolation","Community","Nothing","Void"]},{q:"Keep?",a:"Creating and learning",opts:["Stopping","Creating and learning","Forgetting","Waiting"]}], summary: "Congratulations! You're now a Vibe Coder!" }
+        ]},
+        "prompt-engineering":{title:"Prompt Engineering",lessons:[
+            {id:1,module:"Introduction to Prompts",title:"What Is a Prompt?",duration:"8 min",intro:"Learn what prompts are and why they matter.",bigIdea:"A prompt is the instruction you give to AI. Better prompts = better results.",steps:["Understand what a prompt is","Learn why prompts matter","See prompt-response connection","Recognize good vs poor prompts","Appreciate prompt engineering skill"],example:"Poor: 'Write about dogs.' Better: 'Write 100 words on why dogs make great pets.'",video:"",reflection:"How clear was your last prompt to AI?",quiz:[{q:"What is a prompt?",a:"Instruction to AI",opts:["A computer","Instruction to AI","A language","A database"]},{q:"What affects AI response quality?",a:"Prompt quality",opts:["Weather","Prompt quality","Random chance","Nothing"]},{q:"Better prompts lead to?",a:"Better results",opts:["Worse","Better results","No change","Confusion"]},{q:"Prompt engineering is a?",a:"Skill",opts:["Luck","Skill","Random","Problem"]},{q:"Poor prompts are usually?",a:"Vague",opts:["Specific","Vague","Perfect","Long"]}],summary:"Prompts are instructions to AI. Better prompts = better results."},
+            {id:2,module:"Introduction to Prompts",title:"Why Prompt Engineering Matters",duration:"7 min",intro:"Discover why prompt engineering is valuable in the AI age.",bigIdea:"Prompt engineering is the art of communicating effectively with AI.",steps:["Understand AI's growing importance","See how prompts unlock AI potential","Learn why this skill is valuable","Recognize opportunities","Commit to developing skill"],example:"A team mastering prompts generates 10x more content ideas.",video:"",reflection:"How might prompt skills help you?",quiz:[{q:"Prompt engineering is the art of?",a:"Communicating with AI",opts:["Building computers","Communicating with AI","Writing code","Drawing"]},{q:"Who has advantage with AI?",a:"Those who craft good prompts",opts:["Nobody","Those who craft good prompts","Only programmers","Only scientists"]},{q:"Good prompts can generate how many more ideas?",a:"10x more",opts:["No more","10x more","Fewer","Same"]},{q:"Prompt engineering is becoming?",a:"Valuable",opts:["Useless","Valuable","Outdated","Confusing"]},{q:"You should?",a:"Develop this skill",opts:["Ignore AI","Develop this skill","Avoid technology","Give up"]}],summary:"Prompt engineering unlocks AI's potential."},
+            {id:3,module:"Introduction to Prompts",title:"Anatomy of a Good Prompt",duration:"9 min",intro:"Learn the key components of effective prompts.",bigIdea:"Good prompts have context, instructions, format, and examples.",steps:["Learn four components","Understand context","Master instructions","Specify format","Use examples"],example:"Context: 'You are a cooking assistant.' Instruction: 'Give recipe.' Format: 'List ingredients, then steps.'",video:"",reflection:"What context would your task need?",quiz:[{q:"What are the four components?",a:"Context, instructions, format, examples",opts:["Random words","Context, instructions, format, examples","Just questions","Nothing"]},{q:"Context tells AI?",a:"The situation or role",opts:["Nothing","The situation or role","Random info","Confusion"]},{q:"Instructions should be?",a:"Specific and clear",opts:["Vague","Specific and clear","Missing","Confusing"]},{q:"Format specifies?",a:"How output should look",opts:["Nothing","How output should look","Random things","Confusion"]},{q:"Examples help AI understand?",a:"What you're looking for",opts:["Nothing","What you're looking for","Confusion","Problems"]}],summary:"Good prompts have context, instructions, format, and examples."},
+            {id:4,module:"Crafting Effective Prompts",title:"Being Specific and Clear",duration:"8 min",intro:"Specificity is the foundation of effective prompts.",bigIdea:"Vague prompts get vague results. Be specific!",steps:["Recognize vague vs specific","Add specific details","Include constraints","Specify quantities","Review clarity"],example:"Vague: 'Write about exercise.' Specific: 'Write 200 words on 3 benefits of walking 30 min daily.'",video:"",reflection:"Make a vague prompt more specific.",quiz:[{q:"Vague prompts get?",a:"Vague results",opts:["Perfect results","Vague results","Better results","No results"]},{q:"More specific means more?",a:"Accurate and useful",opts:["Confusing","Accurate and useful","Random","Wrong"]},{q:"Include relevant?",a:"Constraints",opts:["Confusion","Constraints","Problems","Nothing"]},{q:"Specifying quantities means?",a:"Including numbers",opts:["Random words","Including numbers","Nothing","Confusion"]},{q:"After writing prompt, you should?",a:"Review clarity",opts:["Forget it","Review clarity","Delete it","Ignore it"]}],summary:"Being specific leads to better AI responses."},
+            {id:5,module:"Crafting Effective Prompts",title:"Providing Context",duration:"7 min",intro:"Context helps AI respond appropriately.",bigIdea:"Context is like giving AI background information.",steps:["Understand context","Describe your situation","Assign roles","Include background","Balance with brevity"],example:"'You are a patient teacher helping a 10-year-old understand fractions.'",video:"",reflection:"What context would help AI with your task?",quiz:[{q:"Context is like giving AI?",a:"Background information",opts:["Confusion","Background information","Problems","Nothing"]},{q:"Context includes who you are and?",a:"Your situation",opts:["Random facts","Your situation","Nothing","Confusion"]},{q:"Assigning roles helps AI?",a:"Respond appropriately",opts:["Get confused","Respond appropriately","Fail","Nothing"]},{q:"Balance context with?",a:"Brevity",opts:["Length","Brevity","Confusion","Nothing"]},{q:"The example assigns AI the role of?",a:"Patient teacher",opts:["Robot","Patient teacher","Computer","Nothing"]}],summary:"Context helps AI understand and respond appropriately."},
+            {id:6,module:"Crafting Effective Prompts",title:"Specifying Output Format",duration:"8 min",intro:"Tell AI how you want the response structured.",bigIdea:"Specify length, style, and structure for best results.",steps:["Learn common formats","Specify length","Choose styles","Use templates","Combine requirements"],example:"'Give me 5 bullet points, under 20 words each, on meditation benefits.'",video:"",reflection:"What format would be most useful for you?",quiz:[{q:"Output format tells AI?",a:"How to structure response",opts:["What to say","How to structure response","Nothing","Random things"]},{q:"Format includes length, style, and?",a:"Structure",opts:["Nothing","Structure","Confusion","Problems"]},{q:"Specifying length means?",a:"How long response should be",opts:["Nothing","How long response should be","Random things","Confusion"]},{q:"You can use format?",a:"Templates",opts:["Nothing","Templates","Confusion","Problems"]},{q:"The example asks for how many bullet points?",a:"5",opts:["10","5","100","None"]}],summary:"Specifying format ensures proper response structure."},
+            {id:7,module:"Advanced Techniques",title:"Chain of Thought Prompting",duration:"9 min",intro:"Get AI to show reasoning step by step.",bigIdea:"Chain of thought leads to more accurate answers.",steps:["Understand chain of thought","When to use it","Add 'think step by step'","Review reasoning","Correct errors"],example:"'15 apples, sell 7, receive 10. How many? Think step by step.'",video:"",reflection:"What problem could benefit from step-by-step reasoning?",quiz:[{q:"Chain of thought asks AI to?",a:"Think step by step",opts:["Skip steps","Think step by step","Give random answers","Nothing"]},{q:"Useful for?",a:"Complex questions or math",opts:["Simple questions","Complex questions or math","Nothing","Random tasks"]},{q:"A simple phrase to add?",a:"Think step by step",opts:["Skip steps","Think step by step","Guess randomly","Nothing"]},{q:"After AI reasons, you should?",a:"Review its process",opts:["Ignore it","Review its process","Delete it","Nothing"]},{q:"This leads to more?",a:"Accurate answers",opts:["Wrong","Accurate answers","Random","Confusing"]}],summary:"Chain of thought improves accuracy."},
+            {id:8,module:"Advanced Techniques",title:"Few-Shot Learning",duration:"8 min",intro:"Provide examples to help AI understand patterns.",bigIdea:"AI learns patterns from your examples.",steps:["Understand few-shot","Create good examples","Show input-output pairs","Start with 2-3 examples","Increase for complex tasks"],example:"'Hey!' → 'Good morning.' | 'What's up?' → 'How are you?' Now convert: 'Yo!'",video:"",reflection:"What task could you teach AI with examples?",quiz:[{q:"Few-shot means giving AI?",a:"A few examples",opts:["No examples","A few examples","Confusion","Nothing"]},{q:"AI learns what from examples?",a:"The pattern",opts:["Nothing","The pattern","Confusion","Problems"]},{q:"Show what pairs?",a:"Input-output",opts:["Random","Input-output","Nothing","Confusion"]},{q:"Start with how many examples?",a:"2-3",opts:["100","2-3","0","1000"]},{q:"For complex tasks, do what with examples?",a:"Increase them",opts:["Decrease","Increase them","Remove","Ignore"]}],summary:"Few-shot learning teaches AI through examples."},
+            {id:9,module:"Advanced Techniques",title:"Role-Based Prompting",duration:"7 min",intro:"Assign specific roles to improve responses.",bigIdea:"Different roles give different results.",steps:["Understand role power","Choose appropriate roles","Define role clearly","Add expertise details","Combine with other techniques"],example:"'You are an experienced financial advisor helping young professionals.'",video:"",reflection:"What expert role would help you?",quiz:[{q:"Role-based prompting tells AI to act as?",a:"A specific expert",opts:["Nothing","A specific expert","Random person","Confusion"]},{q:"Different roles give?",a:"Different results",opts:["Same results","Different results","No results","Random"]},{q:"Define the role how?",a:"Clearly with details",opts:["Vaguely","Clearly with details","Not at all","Randomly"]},{q:"Combine roles with?",a:"Other techniques",opts:["Nothing","Other techniques","Confusion","Problems"]},{q:"The example assigns role of?",a:"Financial advisor",opts:["Random person","Financial advisor","Nobody","Confusion"]}],summary:"Roles shape AI responses effectively."},
+            {id:10,module:"Practical Applications",title:"Prompts for Writing",duration:"8 min",intro:"Master prompts for all writing tasks.",bigIdea:"Specify type, audience, tone, length, and key points.",steps:["Identify writing type","Define audience","Specify tone","List key points","Set length"],example:"'Write 150-word LinkedIn post announcing career change. Tone: excited but humble.'",video:"",reflection:"What writing task could AI help with?",quiz:[{q:"Writing prompts should specify type and?",a:"Tone, length, key points",opts:["Nothing","Tone, length, key points","Random things","Confusion"]},{q:"Defining audience helps AI?",a:"Write appropriately",opts:["Get confused","Write appropriately","Nothing","Fail"]},{q:"Listing key points ensures?",a:"Important content included",opts:["Nothing included","Important content included","Confusion","Problems"]},{q:"The example tone is excited but?",a:"Humble",opts:["Arrogant","Humble","Angry","Sad"]},{q:"Format requirements help AI know?",a:"How to structure",opts:["Nothing","How to structure","Random things","Confusion"]}],summary:"Effective writing prompts specify type, audience, tone, length, key points."},
+            {id:11,module:"Practical Applications",title:"Prompts for Analysis",duration:"8 min",intro:"Learn to prompt AI for effective analysis.",bigIdea:"State what you're analyzing, focus, format, and conclusions needed.",steps:["Define what to analyze","Specify focus","Request insights","Ask for recommendations","Set output structure"],example:"'Analyze this review. Focus: sentiment, complaint, improvement. Format: Sentiment: | Issue: | Recommendation:'",video:"",reflection:"What data could benefit from AI analysis?",quiz:[{q:"Analysis prompts should state what and?",a:"What to focus on",opts:["Nothing","What to focus on","Random things","Confusion"]},{q:"Specify the analysis?",a:"Focus",opts:["Nothing","Focus","Confusion","Problems"]},{q:"Requesting specific insights gets?",a:"Targeted useful analysis",opts:["Random analysis","Targeted useful analysis","Nothing","Confusion"]},{q:"Output structure should be?",a:"Clearly defined",opts:["Random","Clearly defined","Missing","Confusing"]},{q:"Example asks for sentiment, issue, and?",a:"Recommendation",opts:["Nothing","Recommendation","Confusion","Problems"]}],summary:"Effective analysis prompts specify what, focus, and output format."},
+            {id:12,module:"Practical Applications",title:"Prompts for Coding",duration:"9 min",intro:"Master prompts that help AI write code.",bigIdea:"Specify language, functionality, constraints, and documentation needs.",steps:["Specify programming language","Describe functionality","Include constraints","Request comments","Ask for explanations"],example:"'Write Python function that returns average of a list. Include validation, handle empty lists, add docstring and comments.'",video:"",reflection:"What coding task could AI help with?",quiz:[{q:"Coding prompts should specify first?",a:"Programming language",opts:["Nothing","Programming language","Random things","Confusion"]},{q:"Functionality should be described?",a:"Clearly",opts:["Vaguely","Clearly","Not at all","Randomly"]},{q:"Constraints include?",a:"Limits and specifications",opts:["Nothing","Limits and specifications","Confusion","Problems"]},{q:"Comments help with?",a:"Understanding code",opts:["Confusion","Understanding code","Nothing","Problems"]},{q:"Example asks for what kind of validation?",a:"Input validation",opts:["No validation","Input validation","Random","Nothing"]}],summary:"Effective coding prompts specify language, functionality, constraints, documentation."},
+            {id:13,module:"Mastering Prompt Engineering",title:"Iterating and Refining",duration:"8 min",intro:"Learn to improve prompts based on responses.",bigIdea:"Prompt engineering is iterative. Write, review, refine.",steps:["Accept first prompts aren't perfect","Review responses critically","Identify gaps","Refine prompt parts","Keep notes on what works"],example:"First: 'Write about cats.' Too generic. Refined: 'Write 3 fun facts about cats sleeping habits for kids.'",video:"",reflection:"How comfortable are you with iteration?",quiz:[{q:"Prompt engineering is?",a:"Iterative",opts:["One-time","Iterative","Random","Perfect immediately"]},{q:"First prompts are rarely?",a:"Perfect",opts:["Wrong","Perfect","Bad","The last"]},{q:"Review responses how?",a:"Critically",opts:["Not at all","Critically","Randomly","Quickly"]},{q:"Identify gaps then?",a:"Refine the prompt",opts:["Give up","Refine the prompt","Ignore","Nothing"]},{q:"Keeping notes helps?",a:"Remember what works",opts:["Nothing","Remember what works","Confusion","Problems"]}],summary:"Prompt engineering is iterative: write, review, refine."},
+            {id:14,module:"Mastering Prompt Engineering",title:"Common Mistakes to Avoid",duration:"7 min",intro:"Learn common prompt mistakes and avoid them.",bigIdea:"Avoid vagueness, conflicting instructions, and overloading.",steps:["Recognize vagueness","Avoid conflicts","Don't overload","Specify format","Test prompts"],example:"Mistake: 'Write something good but also bad, short but comprehensive.' Conflicting!",video:"",reflection:"What prompt mistakes have you made?",quiz:[{q:"Common prompt mistake?",a:"Being too vague",opts:["Being specific","Being too vague","Being clear","Nothing"]},{q:"Conflicting instructions cause?",a:"Confusing responses",opts:["Perfect responses","Confusing responses","Better results","Nothing"]},{q:"Overloading prompts does?",a:"Reduces quality",opts:["Improves quality","Reduces quality","Nothing","Perfect"]},{q:"Always specify?",a:"Output format",opts:["Nothing","Output format","Random things","Confusion"]},{q:"Testing prompts helps?",a:"Catch and fix mistakes",opts:["Make more mistakes","Catch and fix mistakes","Nothing","Get confused"]}],summary:"Avoid vagueness, conflicts, and overloading for better prompts."},
+            {id:15,module:"Mastering Prompt Engineering",title:"Your Prompt Engineering Journey",duration:"6 min",intro:"Congratulations! You've completed Prompt Engineering.",bigIdea:"You have strong foundation. Keep practicing!",steps:["Review what you learned","Build prompt library","Practice daily","Experiment","Share knowledge"],example:"Create a personal prompt template document. Update as you learn.",video:"",reflection:"What will you accomplish with these skills?",quiz:[{q:"Build a?",a:"Prompt library",opts:["Nothing","Prompt library","Random notes","Confusion"]},{q:"Practice how often?",a:"Daily",opts:["Never","Daily","Once a year","Randomly"]},{q:"Experimenting helps?",a:"Discover new techniques",opts:["Get confused","Discover new techniques","Fail","Nothing"]},{q:"Sharing knowledge helps?",a:"You and others learn",opts:["Nobody","You and others learn","Confusion","Problems"]},{q:"You now have foundation in?",a:"Prompt engineering",opts:["Nothing","Prompt engineering","Confusion","Random"]}],summary:"Congratulations! You're now a Prompt Engineer!"}
+        ]}};
 
+        let currentCourse = "vibe-coding";
         let currentLesson = 0;
-        let completedLessons = new Set();
+        let completedLessons = {};
 
-        // Initialize
         (function init() {
             const s = localStorage.getItem('supabase_session');
             const u = localStorage.getItem('supabase_user');
             if (!s || !u) { window.location.replace('/signup'); return; }
-            
-            // Load saved progress
-            const saved = localStorage.getItem('vibe_progress');
-            if (saved) completedLessons = new Set(JSON.parse(saved));
-            
-            // Get lesson from URL
+            const saved = localStorage.getItem('course_progress');
+            if (saved) completedLessons = JSON.parse(saved);
             const p = new URLSearchParams(window.location.search);
-            currentLesson = Math.max(0, Math.min((parseInt(p.get('lesson')) || 1) - 1, LESSONS.length - 1));
-            
+            if (p.get('course') && COURSES[p.get('course')]) currentCourse = p.get('course');
+            document.getElementById('courseSelect').value = currentCourse;
+            currentLesson = Math.max(0, Math.min((parseInt(p.get('lesson')) || 1) - 1, COURSES[currentCourse].lessons.length - 1));
+            updateLogo();
             renderLessonList();
             renderLesson();
         })();
 
+        function updateLogo() { document.getElementById('courseLogo').textContent = '📖 ' + COURSES[currentCourse].title; }
+
+        function switchCourse(courseId) {
+            if (COURSES[courseId]) {
+                currentCourse = courseId;
+                currentLesson = 0;
+                updateLogo();
+                renderLessonList();
+                renderLesson();
+                history.replaceState({}, '', `?course=${courseId}&lesson=1`);
+            }
+        }
+
         function renderLessonList() {
+            const lessons = COURSES[currentCourse].lessons;
+            const completed = completedLessons[currentCourse] || [];
             let html = '';
             let currentModule = '';
-            
-            LESSONS.forEach((L, i) => {
+            lessons.forEach((L, i) => {
                 if (L.module !== currentModule) {
                     currentModule = L.module;
                     html += `<div class="module-group"><div class="module-title">${currentModule}</div>`;
                 }
-                
                 const isActive = i === currentLesson;
-                const isCompleted = completedLessons.has(i);
-                
-                html += `
-                    <div class="lesson-item ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}" onclick="selectLesson(${i})">
-                        <div class="lesson-num">${isCompleted ? '✓' : i + 1}</div>
-                        <div class="lesson-info">
-                            <div class="lesson-name">${L.title}</div>
-                            <div class="lesson-duration">⏱️ ${L.duration}</div>
-                        </div>
-                    </div>
-                `;
+                const isCompleted = completed.includes(i);
+                html += `<div class="lesson-item ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}" onclick="selectLesson(${i})"><div class="lesson-num">${isCompleted ? '✓' : i + 1}</div><div class="lesson-info"><div class="lesson-name">${L.title}</div><div class="lesson-duration">⏱️ ${L.duration}</div></div></div>`;
             });
-            
             document.getElementById('lessonList').innerHTML = html;
-            document.getElementById('progressText').textContent = `${completedLessons.size}/${LESSONS.length} completed`;
+            document.getElementById('progressText').textContent = `${completed.length}/${lessons.length} completed`;
         }
 
         function selectLesson(index) {
@@ -246,102 +268,22 @@
             renderLessonList();
             renderLesson();
             switchTab('board');
-            history.replaceState({}, '', `?course=vibe-coding&lesson=${index + 1}`);
+            history.replaceState({}, '', `?course=${currentCourse}&lesson=${index + 1}`);
         }
 
         function renderLesson() {
-            const L = LESSONS[currentLesson];
-            
+            const L = COURSES[currentCourse].lessons[currentLesson];
+            const totalLessons = COURSES[currentCourse].lessons.length;
             let videoHtml = '';
             if (L.video) {
-                videoHtml = `
-                    <div class="content-section">
-                        <h3 class="section-title">🎬 Watch & Learn</h3>
-                        <div class="video-container">
-                            <iframe 
-                                src="${L.video}" 
-                                title="Lesson Video"
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                        ${L.videoCredit ? `<p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.5rem; text-align: right;">📺 Video by: ${L.videoCredit}</p>` : ''}
-                    </div>
-                `;
+                videoHtml = `<div class="content-section"><h3 class="section-title">Watch & Learn</h3><div class="video-container"><iframe src="${L.video}" title="Lesson Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>${L.videoCredit ? `<p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.5rem; text-align: right;">Video: ${L.videoCredit}</p>` : ''}</div>`;
             }
-            
-            document.getElementById('learningBoard').innerHTML = `
-                <div class="board-content">
-                    <div class="lesson-header">
-                        <h1>${L.title}</h1>
-                        <div class="lesson-meta">
-                            <span>📚 ${L.module}</span>
-                            <span>⏱️ ${L.duration}</span>
-                            <span>📖 Lesson ${currentLesson + 1} of ${LESSONS.length}</span>
-                        </div>
-                    </div>
-
-                    <div class="content-section">
-                        <h3 class="section-title">👋 Introduction</h3>
-                        <p class="section-text">${L.intro}</p>
-                        <div class="big-idea-box">
-                            <strong style="color: var(--primary);">💡 The Big Idea</strong>
-                            <p style="margin-top: 0.5rem;">${L.bigIdea}</p>
-                        </div>
-                    </div>
-
-                    ${videoHtml}
-
-                    <div class="content-section">
-                        <h3 class="section-title">📝 Key Steps</h3>
-                        <ol class="steps-list">
-                            ${L.steps.map((s, i) => `<li><span class="step-badge">${i + 1}</span><span>${s}</span></li>`).join('')}
-                        </ol>
-                    </div>
-
-                    <div class="content-section">
-                        <h3 class="section-title">🎯 Example</h3>
-                        <p class="section-text">${L.example}</p>
-                    </div>
-
-                    <div class="content-section">
-                        <h3 class="section-title">📋 Quick Quiz</h3>
-                        ${L.quiz.map((q, i) => `
-                            <div class="quiz-item" id="quiz-${i}">
-                                <p><strong>Q:</strong> ${q.q}</p>
-                                <div class="quiz-options">
-                                    ${q.opts.map(o => `<div class="quiz-opt" onclick="checkQuiz(${i}, '${o.replace(/'/g, "\\'")}', '${q.a.replace(/'/g, "\\'")}')">${o}</div>`).join('')}
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-
-                    <div class="content-section">
-                        <h3 class="section-title">🤔 Reflection</h3>
-                        <p class="section-text">${L.reflection}</p>
-                    </div>
-
-                    <div class="content-section" style="background: linear-gradient(135deg, var(--bg-card), rgba(16, 185, 129, 0.1)); border-color: var(--success);">
-                        <h3 class="section-title" style="color: var(--success);">✅ Summary</h3>
-                        <p class="section-text">${L.summary}</p>
-                    </div>
-
-                    <div class="lesson-nav">
-                        <button class="nav-btn" onclick="navigate(-1)" ${currentLesson === 0 ? 'disabled' : ''}>← Previous Lesson</button>
-                        <button class="nav-btn primary" onclick="completeAndNext()">
-                            ${currentLesson >= LESSONS.length - 1 ? '🎉 Complete Course' : 'Mark Complete & Next →'}
-                        </button>
-                    </div>
-                </div>
-            `;
+            document.getElementById('learningBoard').innerHTML = `<div class="board-content"><div class="lesson-header"><h1>${L.title}</h1><div class="lesson-meta"><span>${L.module}</span><span>${L.duration}</span><span>Lesson ${currentLesson + 1} of ${totalLessons}</span></div></div><div class="content-section"><h3 class="section-title">Introduction</h3><p class="section-text">${L.intro}</p><div class="big-idea-box"><strong style="color: var(--primary);">The Big Idea</strong><p style="margin-top: 0.5rem;">${L.bigIdea}</p></div></div>${videoHtml}<div class="content-section"><h3 class="section-title">Key Steps</h3><ol class="steps-list">${L.steps.map((s, i) => `<li><span class="step-badge">${i + 1}</span><span>${s}</span></li>`).join('')}</ol></div><div class="content-section"><h3 class="section-title">Example</h3><p class="section-text">${L.example}</p></div><div class="content-section"><h3 class="section-title">Quick Quiz (5 Questions)</h3>${L.quiz.map((q, i) => `<div class="quiz-item" id="quiz-${i}"><p><strong>Q${i+1}:</strong> ${q.q}</p><div class="quiz-options">${q.opts.map(o => `<div class="quiz-opt" onclick="checkQuiz(${i}, '${o.replace(/'/g, "\\'")}', '${q.a.replace(/'/g, "\\'")}')">${o}</div>`).join('')}</div></div>`).join('')}</div><div class="content-section"><h3 class="section-title">Reflection</h3><p class="section-text">${L.reflection}</p></div><div class="content-section" style="background: linear-gradient(135deg, var(--bg-card), rgba(16, 185, 129, 0.1)); border-color: var(--success);"><h3 class="section-title" style="color: var(--success);">Summary</h3><p class="section-text">${L.summary}</p></div><div class="lesson-nav"><button class="nav-btn" onclick="navigate(-1)" ${currentLesson === 0 ? 'disabled' : ''}>Previous Lesson</button><button class="nav-btn primary" onclick="completeAndNext()">${currentLesson >= totalLessons - 1 ? 'Complete Course' : 'Mark Complete & Next'}</button></div></div>`;
         }
 
         function switchTab(tab) {
             document.querySelectorAll('.content-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-            
             document.querySelector(`.content-tab:nth-child(${tab === 'board' ? 1 : 2})`).classList.add('active');
             document.getElementById(`${tab}-panel`).classList.add('active');
         }
@@ -356,21 +298,23 @@
         }
 
         function navigate(dir) {
-            currentLesson = Math.max(0, Math.min(currentLesson + dir, LESSONS.length - 1));
+            const totalLessons = COURSES[currentCourse].lessons.length;
+            currentLesson = Math.max(0, Math.min(currentLesson + dir, totalLessons - 1));
             renderLessonList();
             renderLesson();
             document.getElementById('learningBoard').scrollTop = 0;
-            history.replaceState({}, '', `?course=vibe-coding&lesson=${currentLesson + 1}`);
+            history.replaceState({}, '', `?course=${currentCourse}&lesson=${currentLesson + 1}`);
         }
 
         function completeAndNext() {
-            completedLessons.add(currentLesson);
-            localStorage.setItem('vibe_progress', JSON.stringify([...completedLessons]));
-            
-            if (currentLesson < LESSONS.length - 1) {
+            if (!completedLessons[currentCourse]) completedLessons[currentCourse] = [];
+            if (!completedLessons[currentCourse].includes(currentLesson)) completedLessons[currentCourse].push(currentLesson);
+            localStorage.setItem('course_progress', JSON.stringify(completedLessons));
+            const totalLessons = COURSES[currentCourse].lessons.length;
+            if (currentLesson < totalLessons - 1) {
                 navigate(1);
             } else {
-                alert('🎉 Congratulations! You have completed the Vibe Coding course!');
+                alert('Congratulations! You have completed the ' + COURSES[currentCourse].title + ' course!');
                 renderLessonList();
             }
         }
