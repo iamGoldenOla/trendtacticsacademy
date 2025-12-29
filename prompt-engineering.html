@@ -108,12 +108,15 @@
                     </div>
                     <div style="display: flex; justify-content: space-between;">
                         <span style="color: rgba(255,255,255,0.9);">Price</span>
-                        <span style="color: white; font-weight: 600; font-size: 1.5rem;">FREE</span>
+                        <div style="text-align: right;">
+                            <span style="color: white; font-weight: 600; font-size: 1.5rem;">$3</span>
+                            <span style="color: rgba(255,255,255,0.7); font-size: 0.9rem; display: block;">or N5,000</span>
+                        </div>
                     </div>
                 </div>
 
-                <button class="btn btn-lg" id="enrollBtn" onclick="handleEnroll()" style="width: 100%; background: white; color: var(--primary);">
-                    <span id="enrollBtnText">Enroll Now</span>
+                <button class="btn btn-lg" id="enrollBtn" onclick="handlePurchase()" style="width: 100%; background: white; color: var(--primary);">
+                    <span id="enrollBtnText">Buy Now</span>
                 </button>
 
                 <div id="enrollMessage" style="margin-top: 1rem; padding: 1rem; border-radius: var(--radius); display: none;"></div>
@@ -310,60 +313,15 @@
             window.location.href = '/signup';
         }
 
-        async function handleEnroll() {
-            const enrollBtn = document.getElementById('enrollBtn');
-            const enrollBtnText = document.getElementById('enrollBtnText');
-            const enrollMessage = document.getElementById('enrollMessage');
-
-            const loggedIn = await Auth.isLoggedIn();
-            if (!loggedIn) {
-                window.location.href = '/signup';
-                return;
-            }
-
-            enrollBtn.disabled = true;
-            enrollBtnText.innerHTML = '<span class="spinner"></span> Enrolling...';
-
-            try {
-                const user = await Auth.getCurrentUser();
-
-                const { data, error } = await window.sbClient
-                    .from('enrollments')
-                    .insert({
-                        user_id: user.id,
-                        course_id: COURSE_ID,
-                        enrolled_at: new Date().toISOString(),
-                        status: 'active'
-                    })
-                    .select()
-                    .single();
-
-                if (error) {
-                    if (error.code === '23505') {
-                        enrollMessage.style.display = 'block';
-                        enrollMessage.style.background = 'rgba(16, 185, 129, 0.1)';
-                        enrollMessage.style.color = 'var(--success)';
-                        enrollMessage.textContent = 'You are already enrolled!';
-                        setTimeout(() => { window.location.href = '/dashboard'; }, 1500);
-                    } else {
-                        throw error;
-                    }
-                } else {
-                    enrollMessage.style.display = 'block';
-                    enrollMessage.style.background = 'rgba(16, 185, 129, 0.1)';
-                    enrollMessage.style.color = 'var(--success)';
-                    enrollMessage.textContent = 'Enrollment successful! Redirecting...';
-                    setTimeout(() => { window.location.href = '/dashboard'; }, 1500);
-                }
-            } catch (error) {
-                console.error('Enrollment error:', error);
-                enrollMessage.style.display = 'block';
-                enrollMessage.style.background = 'rgba(239, 68, 68, 0.1)';
-                enrollMessage.style.color = 'var(--error)';
-                enrollMessage.textContent = error.message;
-                enrollBtn.disabled = false;
-                enrollBtnText.textContent = 'Try Again';
-            }
+        function handlePurchase() {
+            // Store course info and redirect to checkout
+            sessionStorage.setItem('checkout_course', JSON.stringify({
+                id: COURSE_ID,
+                name: 'Prompt Engineering Mastery',
+                price_usd: 3,
+                price_ngn: 5000
+            }));
+            window.location.href = '/checkout';
         }
 
         initPage();
