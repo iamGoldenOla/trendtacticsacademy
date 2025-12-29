@@ -499,10 +499,10 @@
             try {
                 const loggedIn = await Auth.isLoggedIn();
                 const authBtn = document.getElementById('authBtn');
-                const dashboardLink = document.getElementById('dashboardLink');
 
                 if (loggedIn) {
                     const user = await Auth.getCurrentUser();
+                    // Show user name or 'Dashboard' when logged in
                     authBtn.textContent = user?.name || 'Dashboard';
                     authBtn.onclick = () => window.location.href = '/dashboard';
                 }

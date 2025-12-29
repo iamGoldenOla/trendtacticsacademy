@@ -617,23 +617,8 @@
             const coursesContainer = document.getElementById('coursesContainer');
             const emptyState = document.getElementById('emptyState');
 
-            let courses = [];
-
-            try {
-                // Try to get courses from database
-                const dbCourses = await apiCall('/rest/v1/courses?select=id,title,description,level,duration,category&is_published=eq.true');
-                
-                if (dbCourses && Array.isArray(dbCourses) && dbCourses.length > 0) {
-                    courses = dbCourses;
-                }
-            } catch (error) {
-                console.log('Database unavailable, using fallback courses');
-            }
-
-            // Use fallback if no database courses
-            if (courses.length === 0) {
-                courses = FALLBACK_COURSES;
-            }
+            // Always use our defined courses (Vibe Coding + Prompt Engineering)
+            const courses = FALLBACK_COURSES;
 
             loadingState.style.display = 'none';
 
