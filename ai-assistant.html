@@ -4,222 +4,453 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Assistant - Trendtactics Academy</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00D9FF;
+            --primary-dark: #00B8D9;
+            --secondary: #7C3AED;
+            --bg-dark: #0B1437;
+            --bg-darker: #060D24;
+            --bg-card: rgba(15, 25, 55, 0.95);
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --success: #10B981;
+            --border: rgba(0, 217, 255, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-darker);
+            min-height: 100vh;
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: var(--bg-dark);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 1rem;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .nav a:hover, .nav a.active {
+            color: var(--primary);
+            background: rgba(0, 217, 255, 0.1);
+        }
+
+        .main-container {
+            flex: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ai-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .ai-header p {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .chat-container {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-height: 500px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 85%;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .message.ai .message-avatar {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .message.user .message-avatar {
+            background: var(--secondary);
+        }
+
+        .bubble {
+            background: var(--bg-dark);
+            padding: 1rem;
+            border-radius: 12px;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .message.user .bubble {
+            background: rgba(0, 217, 255, 0.15);
+            border: 1px solid var(--border);
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            background: var(--bg-dark);
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            background: var(--bg-darker);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.875rem 1rem;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-family: inherit;
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .chat-input input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 10px;
+            padding: 0.875rem 1.5rem;
+            color: var(--bg-darker);
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .send-btn:hover {
+            box-shadow: 0 8px 20px rgba(0, 217, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .quick-prompts {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .quick-prompt {
+            background: var(--bg-darker);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-prompt:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 0.3rem;
+            padding: 1rem;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: typing 1s infinite ease-in-out;
+        }
+
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 100% { opacity: 0.3; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-4px); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+
+            .nav {
+                justify-content: center;
+            }
+
+            .main-container {
+                padding: 1rem;
+            }
+
+            .ai-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .chat-container {
+                min-height: 400px;
+            }
+
+            .message {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .send-btn span {
+                display: none;
+            }
+
+            .send-btn {
+                padding: 0.875rem;
+            }
+
+            .quick-prompts {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Shared Header -->
     <header class="header">
-        <div class="container header-content">
-            <div class="logo">Trendtactics Academy</div>
+        <div class="header-content">
+            <div class="logo">🤖 AI Assistant</div>
             <nav class="nav">
-                <a href="https://trendtacticsdigital.com">Digital Services</a>
-                <a href="./index.html">Home</a>
-                <a href="./about.html">About</a>
-                <a href="./services.html">Services</a>
-                <a href="./courses.html">Courses</a>
-                <a href="./blog.html">Blog</a>
-                <a href="./contact.html">Contact</a>
-                <a href="./dashboard.html">Dashboard</a>
-                <a href="./ai-assistant.html" class="active" style="color: var(--primary);">AI Assistant</a>
+                <a href="/">Home</a>
+                <a href="/courses">Courses</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/playground">Playground</a>
+                <a href="/whiteboard">Whiteboard</a>
+                <a href="/ai-assistant" class="active">AI</a>
             </nav>
         </div>
     </header>
-    <div class="container">
-        <div class="ai-container">
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <h3>AI Tools</h3>
-                <ul class="sidebar-menu">
-                    <li><a href="./ai-assistant.html" class="active"><i class="fas fa-comments"></i> AI Chat</a></li>
-                    <li><a href="./ai-assistant.html"><i class="fas fa-book"></i> Course Builder</a></li>
-                    <li><a href="./ai-assistant.html"><i class="fas fa-code"></i> Code Helper</a></li>
-                    <li><a href="./ai-assistant.html"><i class="fas fa-lightbulb"></i> Project Ideas</a></li>
-                    <li><a href="./ai-assistant.html"><i class="fas fa-map-signs"></i> Learning Path</a></li>
-                </ul>
-                
-                <div style="margin-top: 2rem;">
-                    <h3>Quick Actions</h3>
-                    <ul class="sidebar-menu">
-                        <li><a href="./ai-assistant.html"><i class="fas fa-question-circle"></i> Ask a Question</a></li>
-                        <li><a href="./ai-assistant.html"><i class="fas fa-life-ring"></i> Get Help</a></li>
-                        <li><a href="./ai-assistant.html"><i class="fas fa-magic"></i> Suggest Content</a></li>
-                    </ul>
-                </div>
-            </aside>
 
-            <!-- Main Content -->
-            <main class="main-content">
-                <div class="ai-header">
-                    <h1><i class="fas fa-robot"></i> AI Learning Assistant</h1>
-                </div>
-                
-                <div class="chat-container">
-                    <div class="chat-messages" id="chatMessages">
-                        <div class="message ai">
-                            <div class="message-avatar">AI</div>
-                            <div class="bubble">
-                                <p>Hello! I'm your AI Learning Assistant. I can help you with course materials, answer questions, suggest projects, and even help generate personalized learning content. What would you like help with today?</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="chat-input">
-                        <input type="text" id="messageInput" placeholder="Ask me anything about your courses...">
-                        <button id="sendButton"><i class="fas fa-paper-plane"></i> Send</button>
-                    </div>
-                </div>
-                
-                <div class="ai-features">
-                    <h2 class="section-title">AI-Powered Features</h2>
-                    <div class="features-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <h3>Personalized Courses</h3>
-                            <p>Generate custom courses based on your learning goals and interests</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-code"></i>
-                            </div>
-                            <h3>Code Assistance</h3>
-                            <p>Get help with coding challenges and projects in real-time</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-lightbulb"></i>
-                            </div>
-                            <h3>Creative Ideas</h3>
-                            <p>Generate project ideas and creative concepts for your learning</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-chalkboard-teacher"></i>
-                            </div>
-                            <h3>Learning Paths</h3>
-                            <p>Get personalized learning paths based on your goals</p>
-                        </div>
+    <div class="main-container">
+        <div class="ai-header">
+            <h1>🤖 AI Learning Assistant</h1>
+            <p>Ask me anything about courses, coding, or digital marketing</p>
+        </div>
+
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai">
+                    <div class="message-avatar">🤖</div>
+                    <div class="bubble">
+                        <p>Hello! I'm your AI Learning Assistant. I can help you with:</p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1rem;">
+                            <li>Course recommendations</li>
+                            <li>Coding questions</li>
+                            <li>Project ideas</li>
+                            <li>Learning paths</li>
+                        </ul>
+                        <p style="margin-top: 0.5rem;">What would you like help with today?</p>
                     </div>
                 </div>
-            </main>
+            </div>
+
+            <div class="chat-input-container">
+                <div class="chat-input">
+                    <input type="text" id="messageInput" placeholder="Ask me anything...">
+                    <button class="send-btn" id="sendBtn">
+                        <span>Send</span> ➤
+                    </button>
+                </div>
+                <div class="quick-prompts">
+                    <button class="quick-prompt" onclick="sendQuickPrompt('What courses do you recommend for beginners?')">📚 Course recommendations</button>
+                    <button class="quick-prompt" onclick="sendQuickPrompt('Help me with a coding project idea')">💡 Project ideas</button>
+                    <button class="quick-prompt" onclick="sendQuickPrompt('Explain Vibe Coding to me')">🎯 What is Vibe Coding?</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Trendtactics Academy</h3>
-                    <p style="color: #ccc; line-height: 1.6;">
-                        Empowering creators with innovative learning approaches for the digital age.
-                    </p>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="./index.html"><i class="fas fa-home"></i> Home</a></li>
-                        <li><a href="./courses.html"><i class="fas fa-book"></i> Courses</a></li>
-                        <li><a href="./dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                        <li><a href="./playground.html"><i class="fas fa-code"></i> Playground</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li><a href="./blog.html"><i class="fas fa-blog"></i> Blog</a></li>
-                        <li><a href="./community.html"><i class="fas fa-users"></i> Community</a></li>
-                        <li><a href="./support.html"><i class="fas fa-life-ring"></i> Support</a></li>
-                        <li><a href="./contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2025 Trendtactics Academy. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('✅ AI Assistant Loaded Successfully');
+        const chatMessages = document.getElementById('chatMessages');
+        const messageInput = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        function addMessage(content, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'ai'}`;
             
-            const chatMessages = document.getElementById('chatMessages');
-            const messageInput = document.getElementById('messageInput');
-            const sendButton = document.getElementById('sendButton');
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${isUser ? '👤' : '🤖'}</div>
+                <div class="bubble"><p>${content}</p></div>
+            `;
             
-            // Function to add a message to the chat
-            function addMessage(content, isUser = false) {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `message ${isUser ? 'user' : 'ai'}`;
-                
-                const avatarDiv = document.createElement('div');
-                avatarDiv.className = 'message-avatar';
-                avatarDiv.textContent = isUser ? 'U' : 'AI';
-                
-                const contentDiv = document.createElement('div');
-                contentDiv.className = 'bubble';
-                const p = document.createElement('p');
-                p.textContent = content;
-                contentDiv.appendChild(p);
-                
-                messageDiv.appendChild(avatarDiv);
-                messageDiv.appendChild(contentDiv);
-                
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTyping() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message ai';
+            typingDiv.id = 'typing';
+            typingDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="typing-indicator">
+                    <span></span><span></span><span></span>
+                </div>
+            `;
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTyping() {
+            const typing = document.getElementById('typing');
+            if (typing) typing.remove();
+        }
+
+        function getAIResponse(userMessage) {
+            const lowercaseMsg = userMessage.toLowerCase();
+            
+            if (lowercaseMsg.includes('course') || lowercaseMsg.includes('recommend')) {
+                return "I'd recommend starting with our 'Vibe Coding' course! It's perfect for beginners and teaches you to create digital products using AI assistance. You'll learn to focus on ideas and creativity rather than complex syntax. Check it out in the Courses section!";
             }
             
-            // Function to simulate AI response
-            function getAIResponse(userMessage) {
-                // Simple response logic - in a real app, this would connect to an AI API
-                const responses = [
-                    "That's a great question! Based on your learning goals, I recommend starting with the fundamentals and gradually building up your skills.",
-                    "I can help you with that! Would you like me to generate a custom learning path for this topic?",
-                    "This is an important concept in digital creation. Let me explain it in simple terms...",
-                    "I've identified some resources that might help you understand this better. Would you like me to suggest some exercises?",
-                    "That's exactly what we cover in the Vibe Coding course! Let me point you to the relevant module."
-                ];
-                
-                return responses[Math.floor(Math.random() * responses.length)];
+            if (lowercaseMsg.includes('project') || lowercaseMsg.includes('idea')) {
+                return "Here are some project ideas for you:\n\n• Build a personal portfolio website\n• Create a simple to-do list app\n• Design a landing page for a product\n• Make an interactive quiz game\n\nWould you like me to explain how to start any of these?";
             }
             
-            // Send message function
-            function sendMessage() {
-                const message = messageInput.value.trim();
-                if (message) {
-                    addMessage(message, true);
-                    messageInput.value = '';
-                    
-                    // Simulate AI thinking
-                    setTimeout(() => {
-                        const aiResponse = getAIResponse(message);
-                        addMessage(aiResponse, false);
-                    }, 1000);
-                }
+            if (lowercaseMsg.includes('vibe') || lowercaseMsg.includes('coding')) {
+                return "Vibe Coding is a beginner-friendly approach to creating digital products! Instead of memorizing complex syntax, you focus on ideas, intention, and creativity while using AI as your coding partner. It's designed to make digital creation accessible and confidence-building for everyone.";
             }
             
-            // Event listeners
-            sendButton.addEventListener('click', sendMessage);
+            if (lowercaseMsg.includes('help') || lowercaseMsg.includes('stuck')) {
+                return "I'm here to help! You can try our Playground to practice coding, use the Whiteboard for brainstorming, or ask me specific questions. What would you like to explore?";
+            }
             
-            messageInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
-            });
+            const responses = [
+                "That's a great question! Let me think about how to help you best with this.",
+                "I can definitely help with that! Would you like more specific guidance on this topic?",
+                "This is an interesting area to explore. Have you checked out our related course modules?",
+                "I'd recommend breaking this down into smaller steps. Where would you like to start?"
+            ];
             
-            // Sample conversation to demonstrate functionality
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+            
+            addMessage(message, true);
+            messageInput.value = '';
+            
+            showTyping();
+            
             setTimeout(() => {
-                addMessage("I see you're interested in AI-powered learning. I can help you generate personalized courses, suggest projects, and answer questions about any topic in our curriculum.", false);
-            }, 2000);
+                hideTyping();
+                const response = getAIResponse(message);
+                addMessage(response, false);
+            }, 1000 + Math.random() * 1000);
+        }
+
+        function sendQuickPrompt(prompt) {
+            messageInput.value = prompt;
+            sendMessage();
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
         });
     </script>
 </body>

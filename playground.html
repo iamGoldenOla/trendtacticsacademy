@@ -1,56 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Playground - Trendtactics Academy</title>
-    <link rel="stylesheet" href="css/main.css">
-</head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00D9FF;
+            --primary-dark: #00B8D9;
+            --secondary: #7C3AED;
+            --bg-dark: #0B1437;
+            --bg-darker: #060D24;
+            --bg-card: rgba(15, 25, 55, 0.95);
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --success: #10B981;
+            --error: #EF4444;
+            --border: rgba(0, 217, 255, 0.2);
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-darker);
+            min-height: 100vh;
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: var(--bg-dark);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 1rem;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .nav a:hover, .nav a.active {
+            color: var(--primary);
+            background: rgba(0, 217, 255, 0.1);
+        }
+
+        .toolbar {
+            background: var(--bg-dark);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 1rem;
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .toolbar-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-family: inherit;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toolbar-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .toolbar-btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--bg-darker);
+            border: none;
+        }
+
+        .toolbar-btn.primary:hover {
+            box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
+        }
+
+        .main-container {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+        }
+
+        .editor-panel {
+            background: var(--bg-darker);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            background: var(--bg-dark);
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-icon {
+            font-size: 1rem;
+        }
+
+        textarea {
+            flex: 1;
+            background: var(--bg-darker);
+            border: none;
+            color: var(--text-primary);
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            resize: none;
+        }
+
+        textarea:focus {
+            outline: none;
+        }
+
+        textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .output-panel {
+            grid-column: 2;
+            grid-row: 1 / 3;
+        }
+
+        iframe {
+            flex: 1;
+            border: none;
+            background: #fff;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, 1fr);
+            }
+
+            .output-panel {
+                grid-column: 1;
+                grid-row: 4;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-content {
+                flex-direction: column;
+            }
+
+            .nav {
+                justify-content: center;
+            }
+
+            .toolbar {
+                justify-content: center;
+            }
+
+            .main-container {
+                grid-template-rows: 150px 150px 150px 1fr;
+            }
+        }
+    </style>
+</head>
 <body>
-    <!-- Shared Header -->
     <header class="header">
-        <div class="container header-content">
-            <div class="logo">Trendtactics Academy</div>
+        <div class="header-content">
+            <div class="logo">💻 Code Playground</div>
             <nav class="nav">
-                <a href="https://trendtacticsdigital.com">Digital Services</a>
-                <a href="./index.html">Home</a>
-                <a href="./about.html">About</a>
-                <a href="./services.html">Services</a>
-                <a href="./courses.html">Courses</a>
-                <a href="./blog.html">Blog</a>
-                <a href="./contact.html">Contact</a>
-                <a href="./dashboard.html">Dashboard</a>
-                <a href="./playground.html" class="active" style="color: var(--primary);">Playground</a>
+                <a href="/">Home</a>
+                <a href="/courses">Courses</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/playground" class="active">Playground</a>
+                <a href="/whiteboard">Whiteboard</a>
             </nav>
         </div>
     </header>
 
-    <div class="toolbar" style="position: sticky; top: 64px; z-index: 50;">
-        <button id="runBtn">Run Code</button>
-        <button id="clearBtn">Clear</button>
+    <div class="toolbar">
+        <button class="toolbar-btn primary" id="runBtn">▶ Run Code</button>
+        <button class="toolbar-btn" id="clearBtn">🗑 Clear All</button>
+        <button class="toolbar-btn" id="templateBtn">📄 Template</button>
     </div>
 
-    <div class="container">
-        <div class="editor-section">
-            <div class="editor-header">HTML</div>
-            <textarea id="htmlCode" placeholder="Write your HTML here..."></textarea>
+    <div class="main-container">
+        <div class="editor-panel">
+            <div class="panel-header"><span class="panel-icon">🔶</span> HTML</div>
+            <textarea id="htmlCode" placeholder="<!-- Write your HTML here -->
+<h1>Hello World!</h1>
+<p>Start coding...</p>"></textarea>
         </div>
 
-        <div class="editor-section">
-            <div class="editor-header">CSS</div>
-            <textarea id="cssCode" placeholder="Write your CSS here..."></textarea>
-        </div>
-
-        <div class="editor-section">
-            <div class="editor-header">JavaScript</div>
-            <textarea id="jsCode" placeholder="Write your JavaScript here..."></textarea>
-        </div>
-
-        <div class="editor-section" style="border-right: none;">
-            <div class="editor-header">Output</div>
+        <div class="editor-panel output-panel">
+            <div class="panel-header"><span class="panel-icon">👁</span> Output</div>
             <iframe id="output"></iframe>
+        </div>
+
+        <div class="editor-panel">
+            <div class="panel-header"><span class="panel-icon">🎨</span> CSS</div>
+            <textarea id="cssCode" placeholder="/* Write your CSS here */
+body {
+  font-family: sans-serif;
+  padding: 20px;
+}"></textarea>
+        </div>
+
+        <div class="editor-panel" style="grid-column: 1;">
+            <div class="panel-header"><span class="panel-icon">⚡</span> JavaScript</div>
+            <textarea id="jsCode" placeholder="// Write your JavaScript here
+console.log('Hello!');"></textarea>
         </div>
     </div>
 
@@ -59,37 +268,81 @@
         const cssCode = document.getElementById('cssCode');
         const jsCode = document.getElementById('jsCode');
         const output = document.getElementById('output');
-        const runBtn = document.getElementById('runBtn');
-        const clearBtn = document.getElementById('clearBtn');
 
         function runCode() {
             const html = htmlCode.value;
             const css = `<style>${cssCode.value}</style>`;
             const js = `<script>${jsCode.value}<\/script>`;
-
-            const code = html + css + js;
-
-            output.srcdoc = code;
+            output.srcdoc = html + css + js;
         }
 
-        runBtn.addEventListener('click', runCode);
+        document.getElementById('runBtn').addEventListener('click', runCode);
 
-        clearBtn.addEventListener('click', () => {
+        document.getElementById('clearBtn').addEventListener('click', () => {
             htmlCode.value = '';
             cssCode.value = '';
             jsCode.value = '';
             output.srcdoc = '';
         });
 
-        // Auto-run on input (optional)
+        document.getElementById('templateBtn').addEventListener('click', () => {
+            htmlCode.value = `<!DOCTYPE html>
+<html>
+<head>
+  <title>My Page</title>
+</head>
+<body>
+  <h1>Hello, World!</h1>
+  <p>Welcome to Trendtactics Academy!</p>
+  <button id="clickMe">Click Me</button>
+</body>
+</html>`;
+            cssCode.value = `body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #0B1437, #060D24);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+h1 {
+  background: linear-gradient(135deg, #00D9FF, #7C3AED);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+button {
+  background: #00D9FF;
+  color: #060D24;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button:hover {
+  box-shadow: 0 8px 20px rgba(0, 217, 255, 0.4);
+}`;
+            jsCode.value = `document.getElementById('clickMe').addEventListener('click', function() {
+  alert('Welcome to Vibe Coding! 🚀');
+});`;
+            runCode();
+        });
+
+        // Auto-run on input with debounce
         let timeout;
         [htmlCode, cssCode, jsCode].forEach(editor => {
             editor.addEventListener('input', () => {
                 clearTimeout(timeout);
-                timeout = setTimeout(runCode, 1000);
+                timeout = setTimeout(runCode, 800);
             });
         });
     </script>
 </body>
-
 </html>
