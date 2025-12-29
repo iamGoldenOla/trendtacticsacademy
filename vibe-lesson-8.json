@@ -1,48 +1,195 @@
 {
-  "course_title": "Vibe Coding",
-  "module_title": "Working with AI as a Creative Partner",
+  "course_title": "Vibe Coding: Building Real Software with AI",
+  "module_title": "Module 4: Agentic Coding Tools",
   "lesson_number": 8,
-  "lesson_title": "How AI Helps in Vibe Coding",
-  "introduction": "Welcome to \"How AI Helps in Vibe Coding\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-  "big_idea": "AI in Vibe Coding acts as a guide and helper, suggesting approaches, catching errors, and helping you implement your ideas without needing to know complex technical details.",
-  "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
-  "steps": [
-    "Step 1: Understand the main concept of this lesson",
-    "Step 2: Learn how this concept applies to Vibe Coding",
-    "Step 3: See practical examples of this concept in action",
-    "Step 4: Practice applying this concept in the playground",
-    "Step 5: Reflect on how this fits into your learning journey"
+  "lesson_title": "Understanding Agentic AI: Devin, OpenHands, and Autonomous Development",
+  "introduction": "We have now reached the cutting edge of Vibe Coding: Agentic AI tools. These are not assistants that wait for your instructions - they are autonomous agents that can plan, execute, and iterate on development tasks with minimal human guidance.\n\nAgentic coding represents a fundamental shift in how software gets built. Instead of prompting for each step, you describe an outcome and the agent figures out how to achieve it. It can browse documentation, write code, run tests, debug errors, and refine its approach - all autonomously. This is the future that many predicted but few expected to arrive so quickly.\n\nIn this lesson, you will understand what agentic AI is, explore the leading tools (Devin and OpenHands), and learn when autonomous development is appropriate versus when human guidance is essential.",
+  "big_idea": "Agentic AI tools are autonomous software development agents that can independently plan, execute, and iterate on complex tasks. Unlike assistants that respond to prompts, agents take high-level goals and work towards them independently, asking for human input only when truly necessary. This represents the highest level of AI delegation in Vibe Coding, requiring clear specifications but offering transformative productivity gains.",
+  "why_it_matters": "Agentic AI is transforming software development economics. Tasks that previously required hours of developer time can be delegated entirely, freeing humans to focus on higher-level decisions. However, effective delegation requires understanding what agents can and cannot do, how to specify tasks clearly, and when human oversight is essential. Mastering this balance is a valuable skill as agentic tools become more prevalent.",
+  "what_makes_agents_different": {
+    "title": "AI Assistants vs AI Agents",
+    "comparison": [
+      {
+        "aspect": "Interaction Model",
+        "assistant": "Responds to individual prompts, waits for next instruction",
+        "agent": "Takes high-level goal, works autonomously towards completion"
+      },
+      {
+        "aspect": "Planning",
+        "assistant": "You plan the steps, AI executes each one",
+        "agent": "Agent plans and executes steps, may adjust plan based on results"
+      },
+      {
+        "aspect": "Error Handling",
+        "assistant": "Reports errors for you to fix",
+        "agent": "Attempts to diagnose and fix errors autonomously"
+      },
+      {
+        "aspect": "Scope",
+        "assistant": "Typically one file or focused task at a time",
+        "agent": "Can work across entire projects, multiple systems"
+      },
+      {
+        "aspect": "Human Involvement",
+        "assistant": "Continuous guidance required",
+        "agent": "Minimal guidance, checks in when stuck or for approval"
+      }
+    ]
+  },
+  "leading_agentic_tools": {
+    "devin": {
+      "name": "Devin (by Cognition)",
+      "description": "The first AI software engineer capable of handling complete development tasks autonomously",
+      "capabilities": [
+        "Reads and understands complex codebases",
+        "Plans multi-step implementation strategies",
+        "Writes code across multiple files and languages",
+        "Runs tests and debugs failures",
+        "Reads documentation and learns new APIs",
+        "Maintains context over long development sessions"
+      ],
+      "best_for": "Enterprise development, complex integrations, tasks with clear specifications",
+      "considerations": [
+        "Expensive - designed for professional/enterprise use",
+        "Requires clear, detailed specifications",
+        "Best for well-defined tasks with measurable outcomes",
+        "Not available to all users yet (waitlist)"
+      ]
+    },
+    "openhands": {
+      "name": "OpenHands (formerly OpenDevin)",
+      "description": "Open-source agentic coding platform that can be self-hosted and customized",
+      "capabilities": [
+        "Autonomous code generation and modification",
+        "Terminal access for running commands",
+        "Browser interaction for research and testing",
+        "File system navigation and modification",
+        "Extensible architecture for custom tools"
+      ],
+      "best_for": "Teams wanting self-hosted solutions, custom workflows, open-source projects",
+      "considerations": [
+        "Requires technical setup",
+        "Performance depends on underlying AI model",
+        "Community-supported rather than commercial backing",
+        "More flexible but less polished than commercial options"
+      ]
+    }
+  },
+  "agentic_workflow": {
+    "title": "How Agentic Development Works",
+    "phases": [
+      {
+        "phase": "1. Specification",
+        "description": "You provide a detailed description of the desired outcome. This is the most critical step - vague specifications lead to wrong results.",
+        "example": "Create a REST API for managing blog posts. Requirements: CRUD operations, PostgreSQL database, authentication with JWT, rate limiting on public endpoints, Swagger documentation."
+      },
+      {
+        "phase": "2. Planning",
+        "description": "The agent analyzes requirements and creates an implementation plan. Better agents show their plan for review.",
+        "example": "Agent outputs: 'I will: 1) Set up Express server 2) Create database schema 3) Implement auth middleware 4) Build CRUD endpoints 5) Add rate limiting 6) Generate Swagger docs'"
+      },
+      {
+        "phase": "3. Execution",
+        "description": "The agent implements the plan, writing code, running tests, and adjusting as needed.",
+        "example": "Agent creates files, writes code, runs tests, notices a failing test, adjusts implementation, tests pass."
+      },
+      {
+        "phase": "4. Verification",
+        "description": "The agent verifies the implementation meets requirements. May run automated tests or demonstrate functionality.",
+        "example": "Agent: 'Implementation complete. All endpoints working. Ran 24 tests - all passing. Documentation available at /api-docs.'"
+      },
+      {
+        "phase": "5. Review",
+        "description": "Human reviews the output, tests edge cases, and may request adjustments.",
+        "example": "You test the API, notice rate limiting is too aggressive, ask agent to adjust threshold."
+      }
+    ]
+  },
+  "when_to_use_agents": [
+    {
+      "scenario": "Well-specified, bounded tasks",
+      "example": "Migrate a codebase from JavaScript to TypeScript",
+      "why": "Clear objective, measurable completion, limited scope for misinterpretation"
+    },
+    {
+      "scenario": "Repetitive development patterns",
+      "example": "Create CRUD APIs for 10 different entity types",
+      "why": "Once pattern is established, agent can replicate efficiently"
+    },
+    {
+      "scenario": "Research and implementation of new integrations",
+      "example": "Integrate with a payment provider API",
+      "why": "Agent can read documentation and implement without you learning the API"
+    },
+    {
+      "scenario": "Bug fixes with clear reproduction steps",
+      "example": "Users report error X when doing Y - fix it",
+      "why": "Agent can reproduce, diagnose, and fix autonomously"
+    }
   ],
-  "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-  "playground_activity": "In the playground section, create an interactive activity related to \"How AI Helps in Vibe Coding\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-  "reflection_question": "How does the concept of \"How AI Helps in Vibe Coding\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+  "when_not_to_use_agents": [
+    {
+      "scenario": "Ambiguous or evolving requirements",
+      "why": "Agents need clear targets; shifting goals waste computation and time"
+    },
+    {
+      "scenario": "Highly creative or novel solutions",
+      "why": "Human judgment often required for unprecedented challenges"
+    },
+    {
+      "scenario": "Security-critical implementations",
+      "why": "Human review essential for security - agents may miss subtle vulnerabilities"
+    },
+    {
+      "scenario": "Early exploration and prototyping",
+      "why": "Faster to experiment with assistants when direction is uncertain"
+    }
+  ],
+  "steps": [
+    "Step 1: Evaluate whether your task is well-suited for agentic development",
+    "Step 2: Write a detailed specification with clear requirements and constraints",
+    "Step 3: Review the agent's plan before execution when possible",
+    "Step 4: Monitor progress and provide guidance when agent requests it",
+    "Step 5: Thoroughly review and test the output",
+    "Step 6: Iterate with specific feedback if adjustments are needed"
+  ],
+  "playground_activity": "While full agentic tools may not be immediately accessible, you can practice the specification skill. Write a detailed specification for this task: 'Build a URL shortener service.' Include: core features, technical requirements, constraints, edge cases to handle, and success criteria. Compare your specification to a classmate's or review it critically - what ambiguities might cause an agent to produce wrong results?",
+  "reflection_question": "Think about tasks in your work or projects that are well-defined but time-consuming. Which would be good candidates for agentic development? What would you need to specify clearly?",
   "quiz": {
     "questions": [
-      "What is the main focus of How AI Helps in Vibe Coding?",
-      "How does this concept benefit beginners?",
-      "Is this concept part of Vibe Coding's core principles?",
-      "What is one practical application of this concept?",
-      "How does this concept build confidence in learners?"
+      "What is the key difference between AI assistants and AI agents?",
+      "Why is specification quality so important for agentic development?",
+      "What type of task is ideal for agentic tools?",
+      "When should you NOT use agentic development?",
+      "What is the human's role in the agentic development workflow?"
     ],
     "answers": [
-      "The specific concept covered in this lesson",
-      "It reduces anxiety and makes learning accessible",
-      "Yes, it's a core principle of Vibe Coding",
-      "Applying this concept in digital creation projects",
-      "By focusing on ideas and providing guidance rather than complexity"
+      "Agents work autonomously towards high-level goals; assistants respond to individual prompts requiring continuous guidance",
+      "Vague specifications lead to wrong results - agents interpret and execute what you specify, so clarity is essential",
+      "Well-specified, bounded tasks with clear objectives and measurable completion criteria",
+      "Ambiguous requirements, creative/novel solutions, security-critical code, or early exploration phases",
+      "Provide clear specifications, review plans, monitor progress, test outputs, and provide feedback for refinement"
     ]
   },
+  "key_takeaways": [
+    "Agentic AI works autonomously towards goals, not just responding to prompts",
+    "Specification quality determines output quality - invest time in clear requirements",
+    "Best for well-defined tasks; not suited for ambiguous or security-critical work",
+    "Human oversight remains essential for review and validation",
+    "Devin is commercial and polished; OpenHands is open-source and customizable"
+  ],
   "resources": {
     "video": {
-      "title": "Understanding How AI Helps in Vibe Coding - Vibe Coding Fundamentals",
-      "creator": "Vibe Coding Tutorials",
+      "title": "Devin: The First AI Software Engineer Explained",
+      "url": "https://www.youtube.com/watch?v=example",
       "embed": true,
-      "reason": "Relevant video content for this lesson topic"
+      "reason": "Understanding the capabilities and limitations of the leading agentic tool"
     },
     "extra_reading": [
-      "https://example.com/extra-resource-1 - Additional reading for this topic",
-      "https://example.com/extra-resource-2 - More resources for curious learners"
+      "https://www.cognition.ai - Devin by Cognition",
+      "https://github.com/OpenDevin/OpenDevin - OpenHands open-source project",
+      "https://trendtacticsdigital.com/blog/agentic-ai-guide - Our guide to agentic development"
     ]
   },
-  "summary": "In this lesson on \"How AI Helps in Vibe Coding\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  "summary": "In this lesson, you explored agentic AI - autonomous agents that can plan and execute complex development tasks independently. You learned the difference between assistants and agents, explored Devin and OpenHands, and understood when agentic development is appropriate. The key insight is that effective delegation requires clear specifications and human oversight remains essential. In the next lesson, we will focus on real-world workflows that combine different Vibe Coding tools for maximum effectiveness."
 }

@@ -1,48 +1,206 @@
 {
-  "course_title": "Vibe Coding",
-  "module_title": "Vibe Coding in Real Life",
+  "course_title": "Vibe Coding: Building Real Software with AI",
+  "module_title": "Module 6: Prompting for Software",
   "lesson_number": 10,
-  "lesson_title": "Real Examples of Vibe Coding",
-  "introduction": "Welcome to \"Real Examples of Vibe Coding\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-  "big_idea": "Real examples show how Vibe Coding principles have been applied to create actual digital products. These examples demonstrate the power of focusing on ideas and using guidance tools.",
-  "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
-  "steps": [
-    "Step 1: Understand the main concept of this lesson",
-    "Step 2: Learn how this concept applies to Vibe Coding",
-    "Step 3: See practical examples of this concept in action",
-    "Step 4: Practice applying this concept in the playground",
-    "Step 5: Reflect on how this fits into your learning journey"
+  "lesson_title": "Prompt Engineering for Code: Writing Instructions That Work",
+  "introduction": "Everything in Vibe Coding depends on your ability to communicate effectively with AI. This skill - prompt engineering for code - is what separates those who struggle with AI tools from those who use them masterfully.\n\nPrompt engineering is not about tricks or magic phrases. It is a systematic approach to writing instructions that AI interprets correctly. In this lesson, you will learn the principles, patterns, and practices that produce reliable, high-quality code from AI systems.\n\nThe concepts here apply across all Vibe Coding tools: Full-Stack Builders, AI-First IDEs, and Agentic Tools. While each tool has nuances, the core principles of effective prompting are universal.",
+  "big_idea": "Effective code prompts have three elements: clear intent (what you want), sufficient context (what the AI needs to know), and explicit constraints (what you do not want). Mastering this formula transforms AI from unpredictable into reliable. The more precisely you can express your requirements, the better your results will be.",
+  "why_it_matters": "The same task can take 10 minutes or 2 hours depending on prompt quality. Poor prompts require multiple iterations, produce wrong code, and create frustration. Good prompts get close to the right answer on the first try, requiring only minor refinements. This skill compounds - better prompting at every step means dramatically faster project completion.",
+  "the_prompt_formula": {
+    "title": "The Three Elements of Effective Code Prompts",
+    "elements": [
+      {
+        "element": "Intent",
+        "description": "What you want the code to do - the outcome, not the implementation",
+        "weak_example": "Create a function",
+        "strong_example": "Create a function that validates email addresses, returning true for valid emails and false for invalid ones",
+        "key_questions": [
+          "What should this code accomplish?",
+          "What is the input and output?",
+          "What problem does this solve?"
+        ]
+      },
+      {
+        "element": "Context",
+        "description": "The information AI needs to write appropriate code",
+        "weak_example": "Make a login page",
+        "strong_example": "Create a login page for a React app using our existing Button and Input components from /components/ui. Use Tailwind CSS for styling. The app uses Supabase for authentication.",
+        "key_questions": [
+          "What technology stack is this for?",
+          "What existing code should this integrate with?",
+          "What patterns does this codebase use?",
+          "What environment will this run in?"
+        ]
+      },
+      {
+        "element": "Constraints",
+        "description": "What the code should NOT do, limits and boundaries",
+        "weak_example": "Add error handling",
+        "strong_example": "Add error handling that catches network failures and shows user-friendly messages. Do not use console.log in production code. Do not modify the existing API response format.",
+        "key_questions": [
+          "What should be left unchanged?",
+          "What approaches should be avoided?",
+          "What limits apply (performance, size, complexity)?",
+          "What standards must be followed?"
+        ]
+      }
+    ]
+  },
+  "prompting_patterns": {
+    "title": "Proven Patterns for Code Prompts",
+    "patterns": [
+      {
+        "name": "The Example Pattern",
+        "description": "Show examples of input/output to clarify expected behavior",
+        "template": "Create a function that [description]. Examples:\n- Input: [example] → Output: [expected]\n- Input: [example] → Output: [expected]",
+        "example": "Create a function that formats phone numbers. Examples:\n- Input: '1234567890' → Output: '(123) 456-7890'\n- Input: '+1-123-456-7890' → Output: '(123) 456-7890'\n- Input: 'invalid' → Output: null"
+      },
+      {
+        "name": "The Reference Pattern",
+        "description": "Point to existing code that should be followed or matched",
+        "template": "Create [new thing] following the same pattern as [existing thing in codebase]",
+        "example": "Create a ProductCard component following the same pattern as UserCard in /components/UserCard.tsx"
+      },
+      {
+        "name": "The Step-by-Step Pattern",
+        "description": "Break complex tasks into ordered steps",
+        "template": "Implement the following:\n1. [First step]\n2. [Second step]\n3. [Third step]",
+        "example": "Implement user registration:\n1. Validate email format and password strength\n2. Check if email already exists in database\n3. Hash the password\n4. Create user record\n5. Send verification email\n6. Return success response"
+      },
+      {
+        "name": "The Persona Pattern",
+        "description": "Ask AI to adopt a specific expertise perspective",
+        "template": "As a [role/expert], [request]",
+        "example": "As a senior security engineer, review this authentication code and identify any vulnerabilities"
+      },
+      {
+        "name": "The Negative Pattern",
+        "description": "Explicitly state what to avoid",
+        "template": "[Request]. Do NOT [anti-pattern 1], [anti-pattern 2], [anti-pattern 3]",
+        "example": "Refactor this function for better performance. Do NOT change the function signature, do NOT add new dependencies, do NOT modify the return type"
+      }
+    ]
+  },
+  "common_prompting_mistakes": [
+    {
+      "mistake": "Ambiguous pronouns",
+      "bad_example": "Update it to handle errors better",
+      "good_example": "Update the fetchUserData function to catch network errors and return a default user object on failure",
+      "why_it_fails": "AI does not know what 'it' refers to without context"
+    },
+    {
+      "mistake": "Missing technology context",
+      "bad_example": "Create a button component",
+      "good_example": "Create a React button component using TypeScript and Tailwind CSS",
+      "why_it_fails": "Button components differ vastly between frameworks - React, Vue, vanilla JS, etc."
+    },
+    {
+      "mistake": "Assuming AI knows your codebase",
+      "bad_example": "Add this feature to the dashboard",
+      "good_example": "Add a 'Recent Activity' widget to the dashboard in /pages/dashboard.tsx, following the existing widget pattern",
+      "why_it_fails": "AI does not automatically know your file structure or patterns"
+    },
+    {
+      "mistake": "Combining too many requests",
+      "bad_example": "Create the entire user management system with registration, login, profile, settings, and admin controls",
+      "good_example": "Create user registration with email/password. We'll add other features separately.",
+      "why_it_fails": "Large requests produce lower-quality results and are harder to iterate on"
+    }
   ],
-  "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-  "playground_activity": "In the playground section, create an interactive activity related to \"Real Examples of Vibe Coding\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-  "reflection_question": "How does the concept of \"Real Examples of Vibe Coding\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+  "iterative_prompting": {
+    "title": "The Art of Iteration",
+    "description": "Rarely does the first prompt produce perfect results. Effective Vibe Coders expect and plan for iteration.",
+    "process": [
+      {
+        "step": 1,
+        "action": "Start with a clear, scoped request",
+        "example": "Create a basic user login form with email and password fields"
+      },
+      {
+        "step": 2,
+        "action": "Review output and identify gaps",
+        "example": "Form works, but needs validation and loading state"
+      },
+      {
+        "step": 3,
+        "action": "Request specific additions or changes",
+        "example": "Add email format validation and password minimum length (8 chars). Show loading spinner while submitting."
+      },
+      {
+        "step": 4,
+        "action": "Refine based on testing",
+        "example": "The validation message appears too aggressively. Only show after field is blurred or form is submitted."
+      }
+    ],
+    "tips": [
+      "Each iteration should request one or two specific changes",
+      "Reference specific code or behavior when requesting changes",
+      "If AI misunderstands repeatedly, rephrase completely rather than adding more to a confusing prompt"
+    ]
+  },
+  "advanced_techniques": [
+    {
+      "technique": "Chain of Thought",
+      "description": "Ask AI to explain its reasoning before writing code",
+      "example": "Before writing the code, explain your approach for implementing real-time notifications in this architecture. Then implement it.",
+      "benefit": "Catches wrong approaches before code is written; produces better-thought-out solutions"
+    },
+    {
+      "technique": "Rubber Duck Debugging with AI",
+      "description": "Explain your problem to AI and ask for diagnosis",
+      "example": "This function should return filtered users but it returns an empty array. Here is the function. Walk me through what might be wrong.",
+      "benefit": "Often reveals issues you missed; AI can spot logical errors"
+    },
+    {
+      "technique": "Specification-First",
+      "description": "Ask AI to create specifications before implementation",
+      "example": "Before coding, write a specification for this feature including: inputs, outputs, edge cases, and error conditions. Then implement to match the spec.",
+      "benefit": "Produces more complete implementations that handle edge cases"
+    }
+  ],
+  "steps": [
+    "Step 1: Before prompting, clarify Intent, Context, and Constraints in your mind",
+    "Step 2: Write the prompt using one or more proven patterns",
+    "Step 3: Review AI output - does it match your intent?",
+    "Step 4: If not, identify what was misunderstood and refine",
+    "Step 5: Use iteration to add features or fix issues incrementally"
+  ],
+  "playground_activity": "Practice writing prompts for this scenario: You need a function that calculates shipping costs based on order weight and destination zone. Write three versions of the prompt: 1) A weak prompt 2) A medium prompt using the formula 3) A strong prompt using the Example Pattern. Compare what AI generates for each.",
+  "reflection_question": "Think about a time when AI gave you completely wrong code. Looking back, what was missing from your prompt? How would you write it differently now?",
   "quiz": {
     "questions": [
-      "What is the main focus of Real Examples of Vibe Coding?",
-      "How does this concept benefit beginners?",
-      "Is this concept part of Vibe Coding's core principles?",
-      "What is one practical application of this concept?",
-      "How does this concept build confidence in learners?"
+      "What are the three elements of the effective code prompt formula?",
+      "What is the Example Pattern and when should you use it?",
+      "Why is combining too many requests in one prompt problematic?",
+      "What should you do when AI repeatedly misunderstands your request?",
+      "How does the Reference Pattern improve code generation quality?"
     ],
     "answers": [
-      "The specific concept covered in this lesson",
-      "It reduces anxiety and makes learning accessible",
-      "Yes, it's a core principle of Vibe Coding",
-      "Applying this concept in digital creation projects",
-      "By focusing on ideas and providing guidance rather than complexity"
+      "Intent (what you want), Context (what AI needs to know), and Constraints (what to avoid)",
+      "Showing input/output examples to clarify expected behavior - use when the function's behavior is complex or nuanced",
+      "Large requests produce lower-quality results because AI struggles to maintain focus across many requirements",
+      "Rephrase completely rather than adding more to a confusing prompt - start fresh with clearer language",
+      "By pointing to existing code as a model, AI matches your project's patterns, style, and architecture"
     ]
   },
+  "key_takeaways": [
+    "Effective prompts combine clear Intent, sufficient Context, and explicit Constraints",
+    "Use patterns: Example, Reference, Step-by-Step, Persona, and Negative",
+    "Expect and plan for iteration - first prompts rarely perfect",
+    "Avoid ambiguity, provide technology context, reference existing code",
+    "Break large requests into smaller, focused prompts"
+  ],
   "resources": {
     "video": {
-      "title": "Understanding Real Examples of Vibe Coding - Vibe Coding Fundamentals",
-      "creator": "Vibe Coding Tutorials",
+      "title": "Prompt Engineering for Developers",
+      "url": "https://www.youtube.com/watch?v=example",
       "embed": true,
-      "reason": "Relevant video content for this lesson topic"
+      "reason": "Comprehensive guide to writing effective prompts for code generation"
     },
     "extra_reading": [
-      "https://example.com/extra-resource-1 - Additional reading for this topic",
-      "https://example.com/extra-resource-2 - More resources for curious learners"
+      "https://trendtacticsdigital.com/blog/code-prompting - Our code prompting playbook",
+      "https://trendtacticsdigital.com/blog/prompt-patterns - Complete pattern library"
     ]
   },
-  "summary": "In this lesson on \"Real Examples of Vibe Coding\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  "summary": "In this lesson, you learned the formula for effective code prompts: Intent + Context + Constraints. You explored proven patterns (Example, Reference, Step-by-Step, Persona, Negative) and common mistakes to avoid. The key insight is that prompt quality directly determines output quality - investing in better prompts pays off exponentially. In the next module, we will look at the future of Vibe Coding and how to stay ahead of this rapidly evolving field."
 }

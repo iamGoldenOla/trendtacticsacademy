@@ -1,48 +1,135 @@
 {
-  "course_title": "Vibe Coding",
-  "module_title": "Understanding Vibe Coding",
+  "course_title": "Vibe Coding: Building Real Software with AI",
+  "module_title": "Module 2: Full-Stack AI Builders",
   "lesson_number": 3,
-  "lesson_title": "How Vibe Coding Is Different from Traditional Coding",
-  "introduction": "Welcome to \"How Vibe Coding Is Different from Traditional Coding\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-  "big_idea": "Traditional coding starts with technical details and syntax, which can be intimidating for beginners. Vibe Coding starts with your ideas and intentions, using AI and guidance to help you create without getting bogged down in technical complexity.",
-  "visuals": "Design a split-screen visual showing 'Traditional Approach' (left side: complex code, frustrated learner) versus 'Vibe Approach' (right side: idea-focused creation, happy learner). Include arrows showing the learning journey in each approach.",
-  "steps": [
-    "Step 1: Examine traditional coding's focus on syntax and rules",
-    "Step 2: Compare with Vibe Coding's focus on ideas and creativity",
-    "Step 3: Identify the key differences in learning approaches",
-    "Step 4: Understand how these differences benefit beginners",
-    "Step 5: Recognize the value of guided, supportive learning"
+  "lesson_title": "Mastering Bolt.new: From Idea to Deployed App",
+  "introduction": "Bolt.new has emerged as one of the most powerful Full-Stack AI Builders available today. In this hands-on lesson, you will learn to use Bolt effectively - from crafting your first prompt to deploying a working application. This is where theory becomes practice.\n\nWhat makes Bolt special is its speed and simplicity. You can go from a blank page to a deployed web application in under 30 minutes, often faster. But speed without quality produces disposable prototypes. This lesson teaches you to use Bolt strategically - knowing when to use it, how to prompt it effectively, and how to iterate towards production-quality results.\n\nBy the end of this lesson, you will have built and deployed your first real application using Bolt. You will understand the prompting patterns that produce the best results, and you will know the limitations that help you decide when Bolt is the right tool versus when you need something more powerful.",
+  "big_idea": "Bolt.new transforms natural language descriptions into complete, deployed web applications. Your effectiveness depends on prompt quality - specific, structured prompts with clear requirements produce dramatically better results than vague descriptions. The key is learning to think like a product manager: defining what users need, how they will interact with it, and what success looks like.",
+  "why_it_matters": "The ability to rapidly prototype and deploy ideas changes what is possible. Instead of spending weeks or months building a minimum viable product, you can test concepts in hours. This accelerates learning, reduces risk, and democratizes entrepreneurship. Mastering Bolt means you can validate business ideas faster, create tools for your personal workflow, and build portfolio pieces that demonstrate real capability.",
+  "bolt_fundamentals": {
+    "what_bolt_does": "Bolt.new is an AI-powered full-stack application generator. You describe what you want to build in natural language, and Bolt generates a complete working application including frontend UI, backend logic, database schema, and deployment configuration. It uses modern web technologies like React, Node.js, and various databases.",
+    "how_it_works": [
+      "You enter a description of your application idea",
+      "Bolt's AI analyzes your requirements and generates code",
+      "The application appears in a live preview you can interact with",
+      "You can iterate by describing changes in natural language",
+      "When satisfied, you deploy with one click"
+    ],
+    "key_capabilities": [
+      "Frontend generation with modern React components",
+      "Backend API creation with Node.js",
+      "Database integration (Supabase, Firebase, etc.)",
+      "Authentication and user management",
+      "Responsive design for mobile and desktop",
+      "One-click deployment to live URLs"
+    ]
+  },
+  "prompting_patterns": {
+    "title": "The Anatomy of an Effective Bolt Prompt",
+    "sections": [
+      {
+        "name": "1. Purpose Statement",
+        "description": "Start with what the application does and who it is for",
+        "example": "Build a recipe management app for home cooks who want to organize their favorite recipes"
+      },
+      {
+        "name": "2. Core Features",
+        "description": "List the essential functionality in priority order",
+        "example": "Features: Add new recipes with ingredients and instructions, search recipes by name or ingredient, categorize by meal type, save favorites"
+      },
+      {
+        "name": "3. User Experience Details",
+        "description": "Describe how users should interact with the app",
+        "example": "Clean, simple interface. Recipe cards with photos on the home screen. Clicking a card opens full recipe details. Search bar always visible at top"
+      },
+      {
+        "name": "4. Design Direction",
+        "description": "Specify visual style preferences",
+        "example": "Modern, warm color scheme with earthy tones. Large, readable fonts. Generous white space. Food-focused imagery"
+      },
+      {
+        "name": "5. Technical Requirements",
+        "description": "Include any specific technical needs",
+        "example": "Store data locally. No user accounts needed. Works offline after first load"
+      }
+    ],
+    "bad_prompt_example": "Make me a recipe app",
+    "good_prompt_example": "Build a recipe management web app for home cooks. Core features: add recipes with title, ingredients list, step-by-step instructions, and photo upload. Browse recipes in a card grid layout. Search by recipe name or ingredient. Filter by categories (breakfast, lunch, dinner, dessert). Save favorites. Modern, warm design with earthy colors. Mobile-friendly. Store data in browser local storage - no backend needed."
+  },
+  "real_world_example": "Let us build a practical application step-by-step.\n\nProject: Personal Task Tracker\n\nStep 1 - Initial Prompt: 'Build a personal task tracker. Features: add tasks with title and due date, mark tasks complete, filter by status (all, active, completed), delete tasks. Clean, minimal design with a blue accent color. Store tasks in local storage.'\n\nStep 2 - Review and Iterate: The first version appears. The design is good but tasks need priority levels. Refinement: 'Add a priority field to tasks (low, medium, high). Show priority with colored badges. Sort tasks by priority by default.'\n\nStep 3 - Polish: 'Make the add-task form slide down when clicking the Add button. Add a subtle animation when tasks are marked complete. Show a friendly empty state when no tasks exist.'\n\nStep 4 - Deploy: Click deploy, get a live URL, share with others.\n\nTotal time: 15-25 minutes. Result: A fully functional, well-designed task tracker that works on any device.",
+  "common_mistakes": [
+    {
+      "mistake": "Vague initial prompts",
+      "problem": "Bolt guesses what you want, often incorrectly",
+      "solution": "Be specific about features, design, and user experience from the start"
+    },
+    {
+      "mistake": "Trying to build too much at once",
+      "problem": "Complex prompts produce confused, buggy results",
+      "solution": "Start simple, then add features incrementally"
+    },
+    {
+      "mistake": "Not testing thoroughly",
+      "problem": "Bugs and edge cases slip through",
+      "solution": "Test every feature before iterating. Try to break things."
+    },
+    {
+      "mistake": "Ignoring error messages",
+      "problem": "Problems compound as you add more features",
+      "solution": "Fix errors immediately before moving on"
+    }
   ],
-  "example": "Traditional coding is like learning to cook by memorizing the chemical composition of every ingredient before making a sandwich. Vibe Coding is like learning to cook by starting with simple recipes that produce satisfying results, with understanding of the chemistry coming naturally through experience.",
-  "playground_activity": "In the playground section, create an interactive activity related to \"How Vibe Coding Is Different from Traditional Coding\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-  "reflection_question": "How does the concept of \"How Vibe Coding Is Different from Traditional Coding\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+  "limitations": [
+    "Complex backend logic may require manual coding",
+    "Custom integrations with external APIs can be challenging",
+    "Performance optimization is limited",
+    "Code structure may not follow best practices",
+    "Not suitable for large-scale enterprise applications"
+  ],
+  "steps": [
+    "Step 1: Go to bolt.new and create an account (free tier available)",
+    "Step 2: Craft your initial prompt using the structure above",
+    "Step 3: Review the generated application thoroughly",
+    "Step 4: Iterate with specific refinement requests",
+    "Step 5: Test all features across devices",
+    "Step 6: Deploy when satisfied"
+  ],
+  "playground_activity": "Build your first application with Bolt right now. Use this starter prompt: 'Build a simple bookmark manager. Features: save links with a title and optional notes, organize into folders, search bookmarks, click to open in new tab. Minimal, clean design with a dark mode option. Store in local storage.' Deploy it and share the URL.",
+  "reflection_question": "What simple tool or application would make your daily life easier? How would you describe it to Bolt using the prompting patterns from this lesson?",
   "quiz": {
     "questions": [
-      "What is the main focus of How Vibe Coding Is Different from Traditional Coding?",
-      "How does this concept benefit beginners?",
-      "Is this concept part of Vibe Coding's core principles?",
-      "What is one practical application of this concept?",
-      "How does this concept build confidence in learners?"
+      "What are the five key sections of an effective Bolt prompt?",
+      "Why should you start with simple features before adding complexity?",
+      "What should you do immediately when you encounter an error in Bolt?",
+      "What types of projects is Bolt NOT well-suited for?",
+      "What is the main difference between a vague prompt and an effective prompt in Bolt?"
     ],
     "answers": [
-      "The specific concept covered in this lesson",
-      "It reduces anxiety and makes learning accessible",
-      "Yes, it's a core principle of Vibe Coding",
-      "Applying this concept in digital creation projects",
-      "By focusing on ideas and providing guidance rather than complexity"
+      "Purpose Statement, Core Features, User Experience Details, Design Direction, and Technical Requirements",
+      "Complex prompts produce confused, buggy results - incremental building allows for cleaner iteration",
+      "Fix errors immediately before moving on to prevent compounding problems",
+      "Complex backend logic, custom API integrations, large-scale enterprise applications, and performance-critical systems",
+      "Effective prompts are specific about features, design, and user experience; vague prompts force Bolt to guess, often incorrectly"
     ]
   },
+  "key_takeaways": [
+    "Bolt transforms descriptions into deployed applications in minutes",
+    "Prompt quality directly determines output quality",
+    "Use the 5-part prompt structure: Purpose, Features, UX, Design, Technical",
+    "Build incrementally - start simple, add features one at a time",
+    "Always test thoroughly before deploying"
+  ],
   "resources": {
     "video": {
-      "title": "Understanding How Vibe Coding Is Different from Traditional Coding - Vibe Coding Fundamentals",
-      "creator": "Vibe Coding Tutorials",
+      "title": "Bolt.new Complete Tutorial 2024",
+      "url": "https://www.youtube.com/watch?v=example",
       "embed": true,
-      "reason": "Relevant video content for this lesson topic"
+      "reason": "Comprehensive walkthrough of Bolt features and best practices"
     },
     "extra_reading": [
-      "https://example.com/extra-resource-1 - Additional reading for this topic",
-      "https://example.com/extra-resource-2 - More resources for curious learners"
+      "https://bolt.new/docs - Official Bolt documentation",
+      "https://trendtacticsdigital.com/blog/bolt-prompting-guide - Advanced prompting techniques"
     ]
   },
-  "summary": "In this lesson on \"How Vibe Coding Is Different from Traditional Coding\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  "summary": "In this lesson, you learned to use Bolt.new effectively - from crafting structured prompts to deploying working applications. You now understand the 5-part prompt structure, common mistakes to avoid, and Bolt's limitations. The key insight is that your prompting skill directly determines the quality of output. In the next lesson, we will explore Lovable, another Full-Stack Builder with different strengths."
 }

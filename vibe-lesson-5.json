@@ -1,48 +1,163 @@
 {
-  "course_title": "Vibe Coding",
-  "module_title": "Thinking Before Coding",
+  "course_title": "Vibe Coding: Building Real Software with AI",
+  "module_title": "Module 2: Full-Stack AI Builders",
   "lesson_number": 5,
-  "lesson_title": "Turning Simple Ideas into Digital Instructions",
-  "introduction": "Welcome to \"Turning Simple Ideas into Digital Instructions\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-  "big_idea": "Vibe Coding teaches you to break down your ideas into simple steps that can be translated into digital form. This process helps you see how your creative ideas can become real digital products.",
-  "visuals": "Create a step-by-step visual showing an idea (like 'I want to track my expenses') flowing through a simple process that results in a digital solution. Include friendly icons and clear arrows.",
-  "steps": [
-    "Step 1: Understand the main concept of this lesson",
-    "Step 2: Learn how this concept applies to Vibe Coding",
-    "Step 3: See practical examples of this concept in action",
-    "Step 4: Practice applying this concept in the playground",
-    "Step 5: Reflect on how this fits into your learning journey"
+  "lesson_title": "Replit: Learning, Building, and Deploying in One Platform",
+  "introduction": "Replit stands apart from other Full-Stack Builders because it is not just a generation tool - it is a complete development environment. While Bolt and Lovable focus on outputting finished applications, Replit gives you a workspace where you can learn, experiment, collaborate, and deploy all in one place. This makes it uniquely valuable for learners and teams.\n\nIn this lesson, you will understand what makes Replit different, when it is the best choice, and how to leverage its unique features. You will also learn about Replit's AI assistant (Ghostwriter) and how it integrates with the broader development experience.\n\nReplit's power comes from its flexibility. You can start with AI-generated code, then learn by modifying it. You can collaborate in real-time with others. You can deploy instantly without configuring servers. This combination makes it an excellent bridge between pure no-code tools and professional development environments.",
+  "big_idea": "Replit is a browser-based development environment with integrated AI assistance, real-time collaboration, and instant deployment. Unlike pure generation tools, Replit lets you see, understand, and modify the code - making it ideal for learning, team projects, and applications that need backend logic. Its AI assistant (Ghostwriter) provides contextual coding help while you maintain full control.",
+  "why_it_matters": "As you progress in Vibe Coding, you will eventually want to understand what the AI creates. You will want to customize behavior, debug issues, and add features that pure generation tools struggle with. Replit provides the transitional environment where you can start with AI assistance, learn how code works by example, and gradually develop deeper skills. For teams, the real-time collaboration means multiple people can work on the same project simultaneously - invaluable for startups and agencies.",
+  "replit_unique_features": [
+    {
+      "feature": "Browser-Based IDE",
+      "explanation": "No software installation required. Everything runs in your browser - code editor, terminal, preview, and deployment. Access your projects from any computer.",
+      "benefit": "Start coding immediately, work from anywhere, no setup friction"
+    },
+    {
+      "feature": "Ghostwriter AI",
+      "explanation": "Replit's built-in AI assistant that understands your code context. It can complete code, explain functions, debug errors, and generate new features.",
+      "benefit": "AI assistance that understands your specific project, not just generic code completion"
+    },
+    {
+      "feature": "Multiplayer Coding",
+      "explanation": "Multiple users can edit the same code simultaneously with real-time cursors, like Google Docs for code.",
+      "benefit": "Perfect for pair programming, teaching, team projects, and client demonstrations"
+    },
+    {
+      "feature": "Instant Deployment",
+      "explanation": "Every Repl can be deployed with one click. Backend servers, databases, and scheduled jobs all work seamlessly.",
+      "benefit": "No DevOps knowledge required - your code is live immediately"
+    },
+    {
+      "feature": "Integrated Database",
+      "explanation": "Replit includes built-in key-value storage and PostgreSQL databases that require no configuration.",
+      "benefit": "Store data without setting up external services"
+    },
+    {
+      "feature": "Templates and Forking",
+      "explanation": "Start from community templates or fork existing projects. Learn by studying and modifying working code.",
+      "benefit": "Accelerate learning and prototyping by building on existing work"
+    }
   ],
-  "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-  "playground_activity": "In the playground section, create an interactive activity related to \"Turning Simple Ideas into Digital Instructions\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-  "reflection_question": "How does the concept of \"Turning Simple Ideas into Digital Instructions\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+  "ghostwriter_deep_dive": {
+    "title": "Mastering Ghostwriter AI",
+    "capabilities": [
+      {
+        "capability": "Code Completion",
+        "description": "Ghostwriter predicts and suggests the next lines of code as you type, understanding your project context."
+      },
+      {
+        "capability": "Chat Assistant",
+        "description": "Ask questions about your code, request explanations, or ask for help implementing features."
+      },
+      {
+        "capability": "Generate Code",
+        "description": "Describe what you want to add and Ghostwriter writes it, integrated into your existing codebase."
+      },
+      {
+        "capability": "Debug Helper",
+        "description": "When errors occur, Ghostwriter can analyze the error and suggest fixes."
+      },
+      {
+        "capability": "Code Transformation",
+        "description": "Refactor code, convert between languages, or optimize existing functions."
+      }
+    ],
+    "effective_prompting": [
+      "Be specific about where you want changes: 'In the handleSubmit function, add validation for empty email'",
+      "Reference existing code: 'Create a similar component to UserCard but for products'",
+      "Ask for explanations: 'Explain what this useEffect hook does and why it has these dependencies'",
+      "Request incremental changes: 'Add error handling to this API call' rather than rewriting everything"
+    ]
+  },
+  "when_to_use_replit": [
+    {
+      "scenario": "Learning to code with AI support",
+      "reason": "You can see the code, modify it, and learn by doing - not just consuming output"
+    },
+    {
+      "scenario": "Projects requiring custom backend logic",
+      "reason": "Replit handles servers, APIs, cron jobs, and databases that pure generators struggle with"
+    },
+    {
+      "scenario": "Team collaboration",
+      "reason": "Real-time multiplayer editing makes pair programming and team development seamless"
+    },
+    {
+      "scenario": "Teaching or demonstrating",
+      "reason": "Share your Repl and code together in real-time with students or clients"
+    },
+    {
+      "scenario": "Full-stack applications with complex requirements",
+      "reason": "When you need more control than Bolt/Lovable provide but don't want local development setup"
+    }
+  ],
+  "real_world_example": "Let us build a practical backend application with Replit.\n\nProject: Discord Bot for Community Management\n\nThis project requires backend logic - it needs to run continuously, respond to events, and interact with external APIs. Bolt and Lovable cannot do this. Replit excels here.\n\nStep 1 - Create New Repl: Choose Python template (or Node.js). Name it 'community-bot'.\n\nStep 2 - Use Ghostwriter: 'Create a Discord bot that welcomes new members, tracks message count, and responds to !stats command showing top contributors.'\n\nStep 3 - Review Generated Code: Ghostwriter creates the bot structure. Read through it to understand how Discord.py works.\n\nStep 4 - Iterate: 'Add a moderation feature: when users type banned words, auto-delete the message and warn them.'\n\nStep 5 - Add Database: 'Store user warning counts in Replit's database. After 3 warnings, notify moderators.'\n\nStep 6 - Deploy: Click Run and enable Always On. Your bot runs 24/7.\n\nStep 7 - Invite Collaborators: Share the Repl with team members who can see your code and contribute.\n\nResult: A fully functional Discord bot running continuously, with real-time collaboration capability.",
+  "replit_vs_alternatives": {
+    "title": "When Replit is the Right Choice",
+    "comparisons": [
+      {
+        "vs": "Bolt/Lovable",
+        "replit_wins": "Backend logic, learning opportunities, customization, collaboration",
+        "alternatives_win": "Pure speed for frontend-focused prototypes"
+      },
+      {
+        "vs": "Local Development",
+        "replit_wins": "Zero setup, instant sharing, built-in deployment, AI assistance",
+        "alternatives_win": "Performance, offline work, advanced tooling"
+      },
+      {
+        "vs": "GitHub Codespaces",
+        "replit_wins": "Simpler, integrated deployment, better for beginners",
+        "alternatives_win": "Enterprise features, GitHub integration, VS Code interface"
+      }
+    ]
+  },
+  "steps": [
+    "Step 1: Create a Replit account at replit.com",
+    "Step 2: Create a new Repl, choosing an appropriate template",
+    "Step 3: Use Ghostwriter to generate initial code",
+    "Step 4: Read through the generated code to understand it",
+    "Step 5: Iterate with specific prompts for additional features",
+    "Step 6: Test thoroughly using the live preview",
+    "Step 7: Deploy and optionally enable Always On for backend projects"
+  ],
+  "playground_activity": "Create a simple API with Replit. Start a new Python Flask Repl (or Node Express). Ask Ghostwriter: 'Create a REST API with endpoints for managing a todo list. Include GET all todos, POST new todo, PUT update todo, DELETE todo. Store data in memory for now.' Test your API using the built-in tools. Then ask Ghostwriter to explain how each endpoint works. Finally, ask it to add persistence using Replit's database.",
+  "reflection_question": "Consider a project idea that needs more than just a frontend - maybe a bot, an API, or a data processing tool. How would you approach building it with Replit? What questions would you ask Ghostwriter?",
   "quiz": {
     "questions": [
-      "What is the main focus of Turning Simple Ideas into Digital Instructions?",
-      "How does this concept benefit beginners?",
-      "Is this concept part of Vibe Coding's core principles?",
-      "What is one practical application of this concept?",
-      "How does this concept build confidence in learners?"
+      "What makes Replit different from pure AI code generators like Bolt?",
+      "What is Ghostwriter and what can it do?",
+      "When should you choose Replit over Bolt or Lovable?",
+      "What is 'Multiplayer Coding' in Replit?",
+      "What types of projects benefit most from Replit's backend capabilities?"
     ],
     "answers": [
-      "The specific concept covered in this lesson",
-      "It reduces anxiety and makes learning accessible",
-      "Yes, it's a core principle of Vibe Coding",
-      "Applying this concept in digital creation projects",
-      "By focusing on ideas and providing guidance rather than complexity"
+      "Replit is a full development environment where you can see, modify, and learn from code, not just consume generated output",
+      "Replit's AI assistant that provides contextual code completion, explanations, generation, and debugging within your project",
+      "When you need backend logic, want to learn by modifying code, need team collaboration, or require custom functionality",
+      "Real-time collaborative editing where multiple users can code together simultaneously, like Google Docs for code",
+      "Bots, APIs, data processing, scheduled jobs, and any application requiring server-side logic running continuously"
     ]
   },
+  "key_takeaways": [
+    "Replit is a complete development environment, not just a generator",
+    "Ghostwriter provides contextual AI assistance within your project",
+    "Real-time collaboration makes team development seamless",
+    "Best for learning, backend projects, and applications needing customization",
+    "One-click deployment with built-in databases and hosting"
+  ],
   "resources": {
     "video": {
-      "title": "Understanding Turning Simple Ideas into Digital Instructions - Vibe Coding Fundamentals",
-      "creator": "Vibe Coding Tutorials",
+      "title": "Building Full-Stack Apps with Replit and AI",
+      "url": "https://www.youtube.com/watch?v=example",
       "embed": true,
-      "reason": "Relevant video content for this lesson topic"
+      "reason": "Comprehensive walkthrough of Replit's AI-assisted development workflow"
     },
     "extra_reading": [
-      "https://example.com/extra-resource-1 - Additional reading for this topic",
-      "https://example.com/extra-resource-2 - More resources for curious learners"
+      "https://replit.com - Create your first Repl",
+      "https://docs.replit.com/ghostwriter - Ghostwriter documentation",
+      "https://trendtacticsdigital.com/blog/replit-backend-guide - Building backends with Replit"
     ]
   },
-  "summary": "In this lesson on \"Turning Simple Ideas into Digital Instructions\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  "summary": "In this lesson, you learned that Replit offers a unique combination of AI assistance, full development environment, real-time collaboration, and instant deployment. Unlike pure generators, Replit lets you see and modify code - making it ideal for learning and complex projects. You now understand when to choose Replit over Bolt or Lovable, and how to leverage Ghostwriter for AI-assisted development. In the next module, we will explore AI-First IDEs that offer even more control and power for those ready to dive deeper into code."
 }

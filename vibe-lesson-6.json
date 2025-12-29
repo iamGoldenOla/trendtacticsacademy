@@ -1,48 +1,117 @@
 {
-  "course_title": "Vibe Coding",
-  "module_title": "Thinking Before Coding",
+  "course_title": "Vibe Coding: Building Real Software with AI",
+  "module_title": "Module 3: AI-First IDEs",
   "lesson_number": 6,
-  "lesson_title": "Understanding Intent in Vibe Coding",
-  "introduction": "Welcome to \"Understanding Intent in Vibe Coding\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-  "big_idea": "Intent is the 'why' behind your digital creation. In Vibe Coding, understanding your intent helps you make better decisions about your project and communicate more effectively with AI tools.",
-  "visuals": "Design a visual showing a person with a clear goal (like 'I want to connect with friends') and how this intent guides the creation of a digital solution. Include a compass or roadmap metaphor.",
-  "steps": [
-    "Step 1: Understand the main concept of this lesson",
-    "Step 2: Learn how this concept applies to Vibe Coding",
-    "Step 3: See practical examples of this concept in action",
-    "Step 4: Practice applying this concept in the playground",
-    "Step 5: Reflect on how this fits into your learning journey"
+  "lesson_title": "Introduction to AI-First IDEs: Cursor, Windsurf, and Qoder",
+  "introduction": "Having explored Full-Stack Builders that generate complete applications, we now move to a more powerful category of tools: AI-First IDEs. These are professional development environments enhanced with AI capabilities that give you full control while dramatically accelerating your workflow.\n\nAI-First IDEs represent the sweet spot for many developers and ambitious Vibe Coders. They offer the power to build complex, production-grade applications while AI assists with the tedious parts - writing boilerplate, suggesting implementations, explaining unfamiliar code, and debugging issues. Unlike Full-Stack Builders, you work directly with code, but AI makes that work significantly more productive.\n\nThis lesson introduces the three leading AI-First IDEs: Cursor, Windsurf, and Qoder. By the end, you will understand their distinct approaches to AI-assisted development and know which might be best for your needs.",
+  "big_idea": "AI-First IDEs are code editors built from the ground up with AI integration. They understand your entire codebase, can make multi-file changes, explain complex code, and assist with debugging. Unlike traditional IDEs with AI plugins, these tools treat AI as a core feature, not an afterthought. The result is a fundamentally different coding experience where AI is always available and deeply integrated.",
+  "why_it_matters": "As you progress beyond prototypes to building real products, you need more control than Full-Stack Builders provide. You need to debug issues, optimize performance, integrate with existing systems, and implement custom logic. AI-First IDEs give you this control while keeping AI's productivity benefits. They represent the future of professional software development - understanding them now prepares you for the evolving industry.",
+  "ide_comparison": {
+    "cursor": {
+      "name": "Cursor",
+      "tagline": "The AI-first code editor built for pair programming with AI",
+      "key_strength": "Deep codebase understanding and conversational AI assistance",
+      "how_it_works": "Fork of VS Code with native AI integration. AI can read your entire project, make changes across multiple files, and engage in conversations about your code.",
+      "best_for": "Professional developers, complex projects, teams with existing codebases",
+      "unique_features": [
+        "Chat with your codebase - ask questions about how things work",
+        "Multi-file edits with a single prompt",
+        "Inline code generation and editing",
+        "Symbols understanding - knows functions, classes, and their relationships",
+        "Composer mode for complex multi-step tasks"
+      ],
+      "learning_curve": "Moderate - familiar VS Code interface, AI features add complexity"
+    },
+    "windsurf": {
+      "name": "Windsurf",
+      "tagline": "Flow state coding with AI",
+      "key_strength": "Speed and natural coding flow with minimal interruption",
+      "how_it_works": "AI completion that feels like an extension of your thoughts. Predicts what you want to write and suggests it as you code.",
+      "best_for": "Individual developers who want to code faster, focused development sessions",
+      "unique_features": [
+        "Predictive code completion that understands context",
+        "Fast, inline suggestions without context switching",
+        "Cascade - autonomous development feature",
+        "Clean, minimal interface focused on flow",
+        "Strong TypeScript and JavaScript support"
+      ],
+      "learning_curve": "Lower - less complex features, faster to become productive"
+    },
+    "qoder": {
+      "name": "Qoder",
+      "tagline": "Agentic development workflows",
+      "key_strength": "Autonomous task completion with minimal guidance",
+      "how_it_works": "AI agent that can plan and execute multi-step development tasks independently, asking for input only when necessary.",
+      "best_for": "Complex refactoring, automated development workflows, experienced developers",
+      "unique_features": [
+        "Agentic mode - AI completes tasks autonomously",
+        "Multi-step planning and execution",
+        "Self-correction and iterative refinement",
+        "Terminal integration for running commands",
+        "Deep project understanding"
+      ],
+      "learning_curve": "Higher - requires understanding how to delegate effectively to AI agents"
+    }
+  },
+  "when_to_use_ai_first_ides": [
+    "You need to work with existing codebases",
+    "Your project requires custom backend logic and integrations",
+    "You want to understand the code, not just consume generated output",
+    "You need performance optimization and debugging capabilities",
+    "You are building production applications that need to scale",
+    "You want to learn programming while being productive"
   ],
-  "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-  "playground_activity": "In the playground section, create an interactive activity related to \"Understanding Intent in Vibe Coding\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-  "reflection_question": "How does the concept of \"Understanding Intent in Vibe Coding\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+  "real_world_example": "Consider a real scenario: You are building a SaaS application and need to implement Stripe payment integration.\n\nWith a Full-Stack Builder: You describe 'add Stripe payments' and get generated code. If it does not work or needs customization, you are stuck without understanding why.\n\nWith an AI-First IDE (Cursor): You open your existing project. You ask Cursor: 'How should I structure Stripe integration in this codebase?' It analyzes your project and suggests an approach. You then say: 'Create the payment processing module with subscription management.' Cursor generates code that fits your existing patterns. When Stripe's webhook does not work, you ask: 'Why is this webhook failing?' and Cursor helps you debug by analyzing the code and error logs.\n\nThe difference: You maintain understanding and control while AI accelerates every step.",
+  "getting_started_recommendations": {
+    "for_beginners": "Start with Windsurf. Its simpler interface and flow-focused design makes it easiest to become productive quickly.",
+    "for_intermediate": "Try Cursor. Its VS Code foundation is familiar, and its codebase understanding is powerful for learning how professional code works.",
+    "for_advanced": "Explore Qoder's agentic features. If you can clearly define tasks, Qoder's autonomous execution saves significant time."
+  },
+  "steps": [
+    "Step 1: Download one AI-First IDE to start (Cursor is recommended for most people)",
+    "Step 2: Open an existing project or clone a starter template",
+    "Step 3: Explore the AI chat feature - ask questions about the code",
+    "Step 4: Try inline generation - start typing and see AI suggestions",
+    "Step 5: Make a multi-file change using AI assistance",
+    "Step 6: Use AI to debug something that is not working"
+  ],
+  "playground_activity": "Download Cursor (cursor.com) and open a project. Try these exercises: 1) Open a file and ask 'What does this file do?' 2) Ask 'Where is authentication handled in this project?' 3) Request 'Add a new API endpoint for user preferences' and watch Cursor create multiple files. 4) Find a bug and ask 'Why might this not be working?'",
+  "reflection_question": "Think about a coding task that has frustrated you in the past - maybe debugging, understanding unfamiliar code, or implementing a complex feature. How might an AI-First IDE have changed that experience?",
   "quiz": {
     "questions": [
-      "What is the main focus of Understanding Intent in Vibe Coding?",
-      "How does this concept benefit beginners?",
-      "Is this concept part of Vibe Coding's core principles?",
-      "What is one practical application of this concept?",
-      "How does this concept build confidence in learners?"
+      "What distinguishes AI-First IDEs from traditional IDEs with AI plugins?",
+      "Which AI-First IDE is best known for deep codebase understanding and multi-file edits?",
+      "What is Windsurf's primary design focus?",
+      "What makes Qoder unique among AI-First IDEs?",
+      "When should you choose an AI-First IDE over a Full-Stack Builder?"
     ],
     "answers": [
-      "The specific concept covered in this lesson",
-      "It reduces anxiety and makes learning accessible",
-      "Yes, it's a core principle of Vibe Coding",
-      "Applying this concept in digital creation projects",
-      "By focusing on ideas and providing guidance rather than complexity"
+      "AI is a core feature built into the foundation, not an add-on - the entire experience is designed around AI assistance",
+      "Cursor - it can read entire projects, understand relationships between files, and make coordinated changes",
+      "Flow state coding - minimal interruption with predictive suggestions that feel like an extension of your thoughts",
+      "Agentic development - it can autonomously plan and execute multi-step tasks with minimal guidance",
+      "When you need control, must work with existing code, require debugging/optimization, or are building production applications"
     ]
   },
+  "key_takeaways": [
+    "AI-First IDEs treat AI as a core feature, not an afterthought",
+    "Cursor excels at codebase understanding and multi-file changes",
+    "Windsurf focuses on flow state and speed",
+    "Qoder offers autonomous agentic development",
+    "Choose AI-First IDEs when you need control beyond what Full-Stack Builders offer"
+  ],
   "resources": {
     "video": {
-      "title": "Understanding Understanding Intent in Vibe Coding - Vibe Coding Fundamentals",
-      "creator": "Vibe Coding Tutorials",
+      "title": "AI-First IDE Comparison 2024",
+      "url": "https://www.youtube.com/watch?v=example",
       "embed": true,
-      "reason": "Relevant video content for this lesson topic"
+      "reason": "Side-by-side comparison of leading AI-First IDEs"
     },
     "extra_reading": [
-      "https://example.com/extra-resource-1 - Additional reading for this topic",
-      "https://example.com/extra-resource-2 - More resources for curious learners"
+      "https://cursor.com - Download Cursor",
+      "https://windsurf.ai - Download Windsurf",
+      "https://trendtacticsdigital.com/blog/ai-ide-guide - Comprehensive AI IDE guide"
     ]
   },
-  "summary": "In this lesson on \"Understanding Intent in Vibe Coding\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  "summary": "In this lesson, you learned about AI-First IDEs - professional development environments with AI deeply integrated into every workflow. You explored Cursor, Windsurf, and Qoder, understanding their distinct approaches and strengths. The key insight is that AI-First IDEs give you control and understanding while keeping AI's productivity benefits. In the next lesson, we will dive deep into Cursor and learn to use it effectively for real projects."
 }
