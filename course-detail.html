@@ -38,9 +38,17 @@
         <!-- Course Hero -->
         <div class="hero">
             <span class="badge badge-primary">Beginner Friendly</span>
-            <h1 class="hero-title">Vibe Coding</h1>
-            <p class="hero-subtitle">Learn to create digital products by focusing on ideas, intention, creativity, and
-                guidance</p>
+            <h1 class="hero-title">Vibe Coding: Building Real Software with AI</h1>
+            <p class="hero-subtitle">The modern way of building software where humans focus on intent, systems, and outcomes while AI handles execution.</p>
+        </div>
+
+        <!-- YouTube Video Section -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <h2 class="card-title" style="text-align: center; margin-bottom: 1.5rem;">Watch: What is Vibe Coding?</h2>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius);">
+                <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://www.youtube.com/embed/jVMf5gqS8P8" title="What is Vibe Coding? - Introduction" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p style="text-align: center; color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">Learn how Vibe Coding is transforming the way software is built in 2025</p>
         </div>
 
         <!-- Course Info Grid -->
@@ -49,42 +57,50 @@
             <div class="card">
                 <h2 class="card-title">Course Overview</h2>
                 <p class="card-description">
-                    Vibe Coding is a revolutionary approach to learning programming. Instead of memorizing syntax,
-                    you'll focus on expressing your ideas clearly and using AI as a creative partner.
+                    Vibe Coding is the modern way of building software where humans focus on intent, systems, and outcomes while AI handles execution. Learn how real products are built in 2025 using AI-powered builders, IDEs, and autonomous agents.
                 </p>
 
                 <div style="margin-top: 2rem;">
                     <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">What You'll Learn</h3>
                     <ul style="list-style: none; padding: 0;">
-                        <li style="padding: 0.5rem 0; color: var(--text-secondary);">
-                            Think before you code
+                        <li style="padding: 0.5rem 0; color: var(--text-secondary); display: flex; align-items: center;">
+                            <span style="color: var(--primary); margin-right: 0.75rem; font-weight: bold;">1.</span> Master the Vibe Coding ecosystem and mindset
                         </li>
-                        <li style="padding: 0.5rem 0; color: var(--text-secondary);">
-                            Work with AI as a creative partner
+                        <li style="padding: 0.5rem 0; color: var(--text-secondary); display: flex; align-items: center;">
+                            <span style="color: var(--primary); margin-right: 0.75rem; font-weight: bold;">2.</span> Build full-stack apps with AI-first tools (Bolt, Lovable, Replit)
                         </li>
-                        <li style="padding: 0.5rem 0; color: var(--text-secondary);">
-                            Build real projects with confidence
+                        <li style="padding: 0.5rem 0; color: var(--text-secondary); display: flex; align-items: center;">
+                            <span style="color: var(--primary); margin-right: 0.75rem; font-weight: bold;">3.</span> Use AI-first IDEs like Cursor, Windsurf, and Qoder
                         </li>
-                        <li style="padding: 0.5rem 0; color: var(--text-secondary);">
-                            Use safe environments to experiment
+                        <li style="padding: 0.5rem 0; color: var(--text-secondary); display: flex; align-items: center;">
+                            <span style="color: var(--primary); margin-right: 0.75rem; font-weight: bold;">4.</span> Deploy real projects using Vercel, Netlify, and Supabase
+                        </li>
+                        <li style="padding: 0.5rem 0; color: var(--text-secondary); display: flex; align-items: center;">
+                            <span style="color: var(--primary); margin-right: 0.75rem; font-weight: bold;">5.</span> Master prompt engineering for software development
                         </li>
                     </ul>
                 </div>
             </div>
 
             <!-- Enrollment Card -->
-            <div class="card"
-                style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none;">
+            <div class="card" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none;">
                 <h2 class="card-title" style="color: white;">Ready to Start?</h2>
                 <p style="color: rgba(255,255,255,0.9); margin-bottom: 2rem;">
-                    Join thousands of learners and begin your creative coding journey today.
+                    Join thousands of learners and begin your journey to building real software with AI.
                 </p>
 
-                <div
-                    style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: var(--radius); margin-bottom: 2rem;">
+                <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: var(--radius); margin-bottom: 2rem;">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
                         <span style="color: rgba(255,255,255,0.9);">Duration</span>
-                        <span style="color: white; font-weight: 600;">6 weeks</span>
+                        <span style="color: white; font-weight: 600;">4-6 weeks</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <span style="color: rgba(255,255,255,0.9);">Modules</span>
+                        <span style="color: white; font-weight: 600;">8 Modules</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <span style="color: rgba(255,255,255,0.9);">Lessons</span>
+                        <span style="color: white; font-weight: 600;">14 Lessons</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
                         <span style="color: rgba(255,255,255,0.9);">Level</span>
@@ -96,39 +112,88 @@
                     </div>
                 </div>
 
-                <button class="btn btn-lg" id="enrollBtn" onclick="handleEnroll()"
-                    style="width: 100%; background: white; color: var(--primary);">
+                <button class="btn btn-lg" id="enrollBtn" onclick="handleEnroll()" style="width: 100%; background: white; color: var(--primary);">
                     <span id="enrollBtnText">Enroll Now</span>
                 </button>
 
-                <div id="enrollMessage"
-                    style="margin-top: 1rem; padding: 1rem; border-radius: var(--radius); display: none;"></div>
+                <div id="enrollMessage" style="margin-top: 1rem; padding: 1rem; border-radius: var(--radius); display: none;"></div>
             </div>
         </div>
 
         <!-- Course Modules -->
         <div class="card">
-            <h2 class="card-title">Course Structure</h2>
+            <h2 class="card-title">Course Structure: 8 Modules</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">A comprehensive curriculum taking you from Vibe Coding foundations to building real-world projects.</p>
             <div style="margin-top: 2rem;">
-                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; cursor: pointer; transition: all 0.2s;">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 1: Understanding Vibe Coding</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
+                <!-- Module 1 -->
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; cursor: pointer; transition: all 0.2s; border-left: 4px solid var(--primary);">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 1: Vibe Coding Foundations</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">2 lessons | Understand what Vibe Coding is and why it matters</p>
+                    <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
+                        <li>What is Vibe Coding?</li>
+                        <li>Why Vibe Coding is the Future</li>
+                    </ul>
                 </div>
-                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; cursor: pointer; transition: all 0.2s;">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 2: Thinking Before Coding</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
+                <!-- Module 2 -->
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; cursor: pointer; transition: all 0.2s; border-left: 4px solid var(--primary);">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 2: The Vibe Coding Ecosystem</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">2 lessons | Explore the tools and platforms powering modern software</p>
+                    <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
+                        <li>Overview of Vibe Coding Tools</li>
+                        <li>AI-First Development Workflow</li>
+                    </ul>
                 </div>
-                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; cursor: pointer; transition: all 0.2s;">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 3: Working with AI</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
+                <!-- Module 3 -->
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; cursor: pointer; transition: all 0.2s; border-left: 4px solid var(--primary);">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 3: Full-Stack AI Builders</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">2 lessons | Build complete apps with Bolt.new, Lovable, Replit Agent</p>
+                    <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
+                        <li>Bolt.new and Lovable Deep Dive</li>
+                        <li>Replit Agent and V0 Walkthrough</li>
+                    </ul>
                 </div>
-                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; cursor: pointer; transition: all 0.2s;">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 4: Vibe Coding in Real Life</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
+                <!-- Module 4 -->
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; cursor: pointer; transition: all 0.2s; border-left: 4px solid var(--primary);">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 4: AI-First IDEs</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">2 lessons | Master Cursor, Windsurf, and Qoder for AI-assisted coding</p>
+                    <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
+                        <li>Cursor IDE Mastery</li>
+                        <li>Windsurf, Qoder, and Other AI IDEs</li>
+                    </ul>
                 </div>
-                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); cursor: pointer; transition: all 0.2s;">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 5: Building with Confidence</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 2 weeks</p>
+                <!-- Module 5 -->
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; cursor: pointer; transition: all 0.2s; border-left: 4px solid var(--primary);">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 5: Agentic Coding Tools</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">2 lessons | Work with autonomous AI agents that complete tasks</p>
+                    <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
+                        <li>Devin, OpenHands, and Claude Computer Use</li>
+                        <li>Real-World Agentic Workflows</li>
+                    </ul>
+                </div>
+                <!-- Module 6 -->
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; cursor: pointer; transition: all 0.2s; border-left: 4px solid var(--primary);">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 6: Real-World Workflows</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">1 lesson | Deploy and iterate on live projects</p>
+                    <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
+                        <li>From Prototype to Production with Vercel and Supabase</li>
+                    </ul>
+                </div>
+                <!-- Module 7 -->
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; cursor: pointer; transition: all 0.2s; border-left: 4px solid var(--primary);">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 7: Prompting for Software</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">2 lessons | Write effective prompts for code generation</p>
+                    <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
+                        <li>Prompt Engineering for Code</li>
+                        <li>Advanced Prompting Strategies</li>
+                    </ul>
+                </div>
+                <!-- Module 8 -->
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); cursor: pointer; transition: all 0.2s; border-left: 4px solid var(--primary);">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 8: The Future of Vibe Coding</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">1 lesson | Where software development is headed</p>
+                    <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
+                        <li>AI-First Careers and Emerging Tools</li>
+                    </ul>
                 </div>
             </div>
         </div>
