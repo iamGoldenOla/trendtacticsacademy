@@ -16,13 +16,13 @@
             <div class="logo">Trendtactics Academy</div>
             <nav class="nav">
                 <a href="https://trendtacticsdigital.com">Digital Services</a>
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="services.html">Services</a>
-                <a href="courses.html">Courses</a>
-                <a href="blog.html" class="active" style="color: var(--primary);">Blog</a>
-                <a href="contact.html">Contact</a>
-                <a href="dashboard.html" id="dashboardLink" style="display:none;">Dashboard</a>
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/services">Services</a>
+                <a href="/courses">Courses</a>
+                <a href="/blog" class="active" style="color: var(--primary);">Blog</a>
+                <a href="/contact">Contact</a>
+                <a href="/dashboard" id="dashboardLink" style="display:none;">Dashboard</a>
                 <button class="btn btn-secondary" id="authBtn" onclick="handleAuth()">Sign In</button>
             </nav>
         </div>
@@ -54,7 +54,7 @@
                     The landscape of software development is changing rapidly. Learn how to leverage AI tools to become
                     a more effective developer and secure your future in the industry.
                 </p>
-                <a href="blog-post.html" class="btn btn-primary" style="width: max-content;">Read Full Story</a>
+                <a href="/blog-post" class="btn btn-primary" style="width: max-content;">Read Full Story</a>
             </div>
         </div>
     </section>
@@ -73,7 +73,7 @@
                         Boost your productivity with these essential extensions that every developer should have
                         installed.
                     </p>
-                    <a href="blog-post.html" class="blog-link">Read More →</a>
+                    <a href="/blog-post" class="blog-link">Read More →</a>
                 </div>
             </div>
 
@@ -86,7 +86,7 @@
                     <p class="blog-excerpt">
                         How to design accessible and beautiful dark themes for your web applications properly.
                     </p>
-                    <a href="blog-post.html" class="blog-link">Read More →</a>
+                    <a href="/blog-post" class="blog-link">Read More →</a>
                 </div>
             </div>
 
@@ -99,7 +99,7 @@
                     <p class="blog-excerpt">
                         A realistic roadmap for climbing the career ladder in tech without a computer science degree.
                     </p>
-                    <a href="blog-post.html" class="blog-link">Read More →</a>
+                    <a href="/blog-post" class="blog-link">Read More →</a>
                 </div>
             </div>
         </div>
@@ -137,11 +137,11 @@
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="courses.html">Courses</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/courses">Courses</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/contact">Contact</a></li>
                     </ul>
                 </div>
 
@@ -149,10 +149,10 @@
                 <div class="footer-section">
                     <h3>Learning</h3>
                     <ul>
-                        <li><a href="dashboard.html">Dashboard</a></li>
-                        <li><a href="playground.html">Code Playground</a></li>
-                        <li><a href="whiteboard.html">Whiteboard</a></li>
-                        <li><a href="ai-assistant.html">AI Assistant</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/playground">Code Playground</a></li>
+                        <li><a href="/whiteboard">Whiteboard</a></li>
+                        <li><a href="/ai-assistant">AI Assistant</a></li>
                     </ul>
                 </div>
 
@@ -161,8 +161,8 @@
                     <h3>Connect</h3>
                     <ul>
                         <li><a href="https://trendtacticsdigital.com" target="_blank">Trendtactics Digital</a></li>
-                        <li><a href="contact.html">Get in Touch</a></li>
-                        <li><a href="signup.html">Join Academy</a></li>
+                        <li><a href="/contact">Get in Touch</a></li>
+                        <li><a href="/signup">Join Academy</a></li>
                     </ul>
                 </div>
             </div>
@@ -192,7 +192,7 @@
                 if (loggedIn) {
                     const user = await Auth.getCurrentUser();
                     authBtn.textContent = user?.name || 'Account';
-                    authBtn.onclick = () => window.location.href = 'dashboard.html';
+                    authBtn.onclick = () => window.location.href = '/dashboard';
                     dashboardLink.style.display = 'block';
                 }
             } catch (error) {
@@ -201,7 +201,7 @@
         }
 
         function handleAuth() {
-            window.location.href = 'signup.html';
+            window.location.href = '/signup';
         }
 
         initHomepage();
