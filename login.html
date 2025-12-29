@@ -363,16 +363,15 @@
                         // The proxy handles all Supabase communication
                         console.log('Using proxy approach for Supabase communication');
                         
-                        // Use proxy to avoid CSP issues
-                        const response = await fetch('./api/auth-proxy.php?path=/auth/v1/token', {
+                        // Use proxy to avoid CSP issues - grant_type must be in URL
+                        const response = await fetch('./api/auth-proxy.php?path=/auth/v1/token&grant_type=password', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
                             },
                             body: JSON.stringify({
                                 email,
-                                password,
-                                grant_type: 'password'
+                                password
                             })
                         });
                         

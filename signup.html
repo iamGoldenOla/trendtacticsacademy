@@ -293,22 +293,21 @@
                 if (isLoginMode) {
                     // LOGIN
                     console.log('Attempting login for:', email);
-                    // Use proxy to avoid CSP issues
-                    const response = await fetch('./api/auth-proxy.php?path=/auth/v1/token', {
+                    // Use proxy to avoid CSP issues - grant_type must be in URL
+                    const response = await fetch('./api/auth-proxy.php?path=/auth/v1/token&grant_type=password', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
                             email,
-                            password,
-                            grant_type: 'password'
+                            password
                         })
                     });
                                             
                     if (!response.ok) {
                         const errorData = await response.json();
-                        throw new Error(errorData.error || 'Login failed');
+                        throw new Error(errorData.error_description || errorData.msg || errorData.error || 'Login failed');
                     }
                                             
                     const data = await response.json();
@@ -363,16 +362,18 @@
                         body: JSON.stringify({
                             email,
                             password,
-                            data: {
-                                name,
-                                role: 'student'
+                            options: {
+                                data: {
+                                    name,
+                                    role: 'student'
+                                }
                             }
                         })
                     });
                     
                     if (!response.ok) {
                         const errorData = await response.json();
-                        throw new Error(errorData.error || 'Signup failed');
+                        throw new Error(errorData.error_description || errorData.msg || errorData.error || 'Signup failed');
                     }
                     
                     const data = await response.json();
