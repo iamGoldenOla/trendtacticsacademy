@@ -1,376 +1,776 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson Viewer - Trendtactics Academy</title>
-    <link rel="stylesheet" href="css/main.css">
-    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
-    <script>
-        // Supabase configuration - these should be replaced during deployment
-        window.__ENV__ = {
-            SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc'
-        };
-    </script>
+    <title>Learning - Trendtactics Academy</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .lesson-content {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
+        :root {
+            --primary: #00D9FF;
+            --primary-dark: #00B8D9;
+            --secondary: #7C3AED;
+            --bg-dark: #0B1437;
+            --bg-darker: #060D24;
+            --bg-card: rgba(15, 25, 55, 0.95);
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --success: #10B981;
+            --error: #EF4444;
+            --warning: #F59E0B;
+            --border: rgba(0, 217, 255, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-darker);
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+
+        .header {
+            background: var(--bg-dark);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .logo {
+            font-size: 1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav a, .nav button {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .nav a:hover, .nav button:hover {
+            color: var(--primary);
+            background: rgba(0, 217, 255, 0.1);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Lesson Header */
+        .lesson-header {
             margin-bottom: 2rem;
         }
 
-        .lesson-content h2 {
+        .breadcrumb {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .breadcrumb a {
             color: var(--primary);
-            margin-top: 2rem;
+            text-decoration: none;
+        }
+
+        .lesson-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lesson-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Lesson Content */
+        .lesson-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .lesson-content h3 {
-            color: var(--text-primary);
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .lesson-content p {
+        .lesson-text {
             color: var(--text-secondary);
             line-height: 1.8;
             margin-bottom: 1rem;
         }
 
-        .lesson-content ul,
-        .lesson-content ol {
+        .big-idea {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(124, 58, 237, 0.1));
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.5rem 0;
+        }
+
+        .big-idea p {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .steps-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .steps-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-darker);
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
             color: var(--text-secondary);
-            margin-left: 2rem;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--bg-darker);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        /* Quiz Section */
+        .quiz-question {
+            background: var(--bg-darker);
+            border-radius: 12px;
+            padding: 1.5rem;
             margin-bottom: 1rem;
         }
 
-        .lesson-content li {
-            margin-bottom: 0.5rem;
+        .quiz-question p {
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 1rem;
         }
 
-        .tool-tabs {
+        .quiz-options {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid var(--border);
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .quiz-option {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .quiz-option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        /* Interactive Tools */
+        .tools-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
 
         .tool-tab {
-            padding: 1rem 2rem;
-            background: none;
-            border: none;
+            background: var(--bg-darker);
+            border: 1px solid var(--border);
             color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
-            border-bottom: 2px solid transparent;
-            margin-bottom: -2px;
+            font-family: inherit;
+            font-size: 0.9rem;
             transition: all 0.2s;
         }
 
-        .tool-tab.active {
+        .tool-tab:hover, .tool-tab.active {
+            border-color: var(--primary);
             color: var(--primary);
-            border-bottom-color: var(--primary);
         }
 
-        .tool-panel {
-            display: none;
+        .tool-tab.active {
+            background: rgba(0, 217, 255, 0.1);
         }
 
-        .tool-panel.active {
-            display: block;
-        }
-
-        iframe {
-            width: 100%;
-            height: 600px;
+        .tool-frame {
             border: 1px solid var(--border);
-            border-radius: var(--radius);
+            border-radius: 12px;
+            overflow: hidden;
+            height: 500px;
+        }
+
+        .tool-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Navigation */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--bg-darker);
+            border: none;
+            font-weight: 600;
+        }
+
+        .nav-btn.primary:hover {
+            box-shadow: 0 8px 20px rgba(0, 217, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            background: var(--bg-darker);
+            height: 6px;
+            border-radius: 3px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+
+            .nav {
+                justify-content: center;
+            }
+
+            .lesson-title {
+                font-size: 1.5rem;
+            }
+
+            .lesson-card {
+                padding: 1.25rem;
+            }
+
+            .lesson-nav {
+                flex-direction: column;
+            }
+
+            .nav-btn {
+                justify-content: center;
+            }
         }
     </style>
 </head>
-
 <body>
-    <!-- Header -->
     <header class="header">
-        <div class="container header-content">
-            <div class="logo">Trendtactics Academy</div>
+        <div class="header-content">
+            <div class="logo">📖 Learning</div>
             <nav class="nav">
-                <a href="https://trendtacticsdigital.com">Digital Services</a>
-                <a href="./index.html">Home</a>
-                <a href="./about.html">About</a>
-                <a href="./services.html">Services</a>
-                <a href="./courses.html">Courses</a>
-                <a href="./blog.html">Blog</a>
-                <a href="./contact.html">Contact</a>
-                <a href="./dashboard.html">Dashboard</a>
-                <button class="btn btn-secondary" onclick="Auth.logout()">Logout</button>
+                <a href="/">Home</a>
+                <a href="/courses">Courses</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/playground">Playground</a>
+                <button onclick="logout()">Logout</button>
             </nav>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container" style="padding: 2rem 0;">
+    <main class="container">
         <!-- Loading State -->
-        <div id="loadingState" style="text-align: center; padding: 4rem 0;">
-            <div class="spinner" style="width: 40px; height: 40px; border-width: 4px;"></div>
-            <p style="margin-top: 1rem; color: var(--text-secondary);">Loading lesson...</p>
+        <div id="loadingState" class="loading">
+            <div class="spinner"></div>
+            <p class="loading-text">Preparing your lesson...</p>
         </div>
 
         <!-- Lesson Content -->
-        <div id="lessonContainer" style="display: none;">
-            <!-- Lesson Header -->
-            <div style="margin-bottom: 2rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <div>
-                        <p style="color: var(--text-muted); margin-bottom: 0.5rem;" id="courseTitle">Course</p>
-                        <h1 style="font-size: 2.5rem;" id="lessonTitle">Lesson Title</h1>
-                    </div>
-                    <div style="display: flex; gap: 1rem;">
-                        <button class="btn btn-secondary" id="prevBtn" onclick="navigateLesson('prev')">←
-                            Previous</button>
-                        <button class="btn btn-primary" id="nextBtn" onclick="navigateLesson('next')">Next →</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Lesson Content -->
-            <div class="lesson-content" id="lessonContent">
-                <p>Loading content...</p>
-            </div>
-
-            <!-- Interactive Tools -->
-            <div class="card">
-                <h2 class="card-title">Interactive Tools</h2>
-                <div class="tool-tabs">
-                    <button class="tool-tab active" onclick="switchTab('whiteboard')">Whiteboard</button>
-                    <button class="tool-tab" onclick="switchTab('playground')">💻 Code Playground</button>
-                </div>
-
-                <div id="whiteboard-panel" class="tool-panel active">
-                    <iframe src="./whiteboard.html" title="Whiteboard"></iframe>
-                </div>
-
-                <div id="playground-panel" class="tool-panel">
-                    <iframe src="./playground.html" title="Code Playground"></iframe>
-                </div>
-            </div>
+        <div id="lessonContent" style="display: none;">
+            <!-- Will be populated by JavaScript -->
         </div>
     </main>
 
-    <!-- Scripts -->
-    <script src="js/supabase-client.js"></script>
-    <script src="js/auth.js"></script>
     <script>
-        let currentCourse = null;
-        let currentLesson = null;
-        let allLessons = [];
+        // Configuration
+        const COURSE_DATA = {
+            'vibe-coding': {
+                title: 'Vibe Coding',
+                description: 'A beginner-friendly approach to creating digital products',
+                lessons: [
+                    {
+                        id: 1,
+                        title: 'What Is Vibe Coding?',
+                        module: 'Understanding Vibe Coding',
+                        introduction: "Welcome to your first lesson in Vibe Coding! Don't worry if you've never coded before - this is completely normal. In this lesson, we'll explore what Vibe Coding is and why it's different from traditional approaches.",
+                        bigIdea: "Vibe Coding is a beginner-friendly way of creating digital products by focusing on ideas, intention, creativity, and guidance — often with the help of AI — instead of memorizing syntax or complex technical rules.",
+                        steps: [
+                            "Understand that coding is simply a way to tell computers what to do",
+                            "Recognize that Vibe Coding focuses on ideas before technical details",
+                            "Learn that Vibe Coding uses AI and guidance to make creation easier",
+                            "See that Vibe Coding avoids complex syntax and technical rules initially",
+                            "Appreciate that Vibe Coding builds confidence before complexity"
+                        ],
+                        example: "Think of Vibe Coding like cooking with a recipe app that guides you step by step. Instead of memorizing all the cooking techniques first, the app tells you exactly what to do at each moment.",
+                        reflection: "Think about a digital product you use every day. How might someone have created this using Vibe Coding principles - focusing on the main idea first?",
+                        quiz: [
+                            { q: "What does Vibe Coding focus on first?", a: "Ideas, intention, creativity, and guidance", options: ["Complex syntax", "Ideas, intention, creativity, and guidance", "Memorizing code", "Technical rules"] },
+                            { q: "Is Vibe Coding designed for beginners?", a: "Yes, specifically for beginners", options: ["No, it's for experts", "Yes, specifically for beginners", "Only for professionals", "For intermediate users"] }
+                        ],
+                        summary: "You learned that Vibe Coding is a beginner-friendly approach that focuses on ideas and creativity before technical details. You're ready for the next lesson!"
+                    },
+                    {
+                        id: 2,
+                        title: 'Your First Digital Creation',
+                        module: 'Getting Started',
+                        introduction: "Now that you understand what Vibe Coding is, let's create something! In this lesson, you'll make your first digital creation using just natural language.",
+                        bigIdea: "You don't need to know code to create digital products. By describing what you want in plain English, AI can help generate the code for you.",
+                        steps: [
+                            "Go to the Playground tab below",
+                            "Type a description of what you want to create (e.g., 'a blue button that says Hello')",
+                            "Click Generate and watch the AI create it",
+                            "Explore the generated code to see how it works",
+                            "Try modifying your request to see different results"
+                        ],
+                        example: "Try typing: 'Create a countdown timer' and watch the AI generate a working timer with start, pause, and reset buttons!",
+                        reflection: "What was surprising about seeing your idea turn into a working digital product?",
+                        quiz: [
+                            { q: "What do you need to create in the playground?", a: "Just a description in plain English", options: ["Complex code", "Programming knowledge", "Just a description in plain English", "A computer science degree"] },
+                            { q: "What helps generate the code for you?", a: "AI", options: ["Manual typing", "AI", "Copying from books", "Guessing"] }
+                        ],
+                        summary: "You created your first digital product using natural language! This is the essence of Vibe Coding - ideas first, code second."
+                    },
+                    {
+                        id: 3,
+                        title: 'Understanding Building Blocks',
+                        module: 'Core Concepts',
+                        introduction: "Every digital creation is made of three building blocks: HTML (structure), CSS (style), and JavaScript (behavior). Let's understand these without getting technical.",
+                        bigIdea: "Think of HTML as the skeleton, CSS as the clothing, and JavaScript as the actions. Together, they create everything you see on the web.",
+                        steps: [
+                            "HTML is like building with Lego blocks - it's the structure",
+                            "CSS is like painting and decorating - it makes things look good",
+                            "JavaScript is like adding motors - it makes things move and respond",
+                            "All three work together to create interactive experiences",
+                            "In Vibe Coding, AI handles the technical details while you focus on the vision"
+                        ],
+                        example: "When you ask for 'a red button that bounces when clicked', HTML creates the button, CSS makes it red, and JavaScript makes it bounce.",
+                        reflection: "Look at a website you use often. Can you identify parts that might be structure (HTML), style (CSS), or behavior (JavaScript)?",
+                        quiz: [
+                            { q: "What does HTML provide?", a: "Structure", options: ["Colors", "Structure", "Animations", "Sound"] },
+                            { q: "What makes things look good?", a: "CSS", options: ["HTML", "CSS", "JavaScript", "Python"] }
+                        ],
+                        summary: "You now understand the three building blocks of digital creation. With this knowledge, you can better describe what you want to create!"
+                    }
+                ]
+            }
+        };
 
-        async function initLessonViewer() {
-            // Require authentication
-            const isAuth = await Auth.requireAuth();
-            if (!isAuth) return;
+        let currentCourse = null;
+        let currentLessonIndex = 0;
+        let currentUser = null;
+
+        async function init() {
+            // Check auth
+            const session = localStorage.getItem('supabase_session');
+            const userData = localStorage.getItem('supabase_user');
+            
+            if (!session || !userData) {
+                window.location.replace('/signup');
+                return;
+            }
+
+            currentUser = JSON.parse(userData);
 
             // Get course ID from URL
             const urlParams = new URLSearchParams(window.location.search);
             const courseId = urlParams.get('course');
-            const lessonId = urlParams.get('lesson');
+            const lessonParam = urlParams.get('lesson');
 
             if (!courseId) {
-                window.location.href = './dashboard.html';
+                window.location.replace('/dashboard');
                 return;
             }
 
-            // Load course and lessons
-            await loadCourse(courseId);
-
-            if (lessonId) {
-                await loadLesson(lessonId);
-            } else {
-                // Load first lesson
-                if (allLessons.length > 0) {
-                    await loadLesson(allLessons[0].id);
-                } else {
-                    // If no lessons are found, redirect back to dashboard
-                    document.getElementById('loadingState').style.display = 'none';
-                    document.getElementById('lessonContainer').innerHTML = `
-                        <div class="card" style="text-align: center; padding: 2rem;">
-                            <h2 class="card-title">No Lessons Available</h2>
-                            <p class="card-description">This course doesn't have any lessons yet. Check back later or contact support.</p>
-                            <a href="./dashboard.html" class="btn btn-primary" style="display: inline-block; margin-top: 1rem;">Go to Dashboard</a>
-                        </div>
-                    `;
-                    document.getElementById('lessonContainer').style.display = 'block';
-                }
-            }
+            // Try to load from database first, fallback to generated content
+            await loadCourse(courseId, lessonParam);
         }
 
-        async function loadCourse(courseId) {
-            try {
-                const { data: course, error } = await window.sbClient
-                    .from('courses')
-                    .select('*')
-                    .eq('id', courseId)
-                    .single();
-
-                if (error) throw error;
-                currentCourse = course;
-
-                // Load all lessons for this course
-                const { data: lessons, error: lessonsError } = await window.sbClient
-                    .from('lessons')
-                    .select('*')
-                    .eq('course_id', courseId)
-                    .order('order_index');
-
-                if (lessonsError) throw lessonsError;
-
-                // Set lessons
-                allLessons = lessons.sort((a, b) => a.order_index - b.order_index);
-
-            } catch (error) {
-                console.error('Error loading course:', error);
-                alert('Error loading course: ' + error.message);
-            }
-        }
-
-        async function loadLesson(lessonId) {
+        async function loadCourse(courseId, lessonParam) {
             const loadingState = document.getElementById('loadingState');
-            const lessonContainer = document.getElementById('lessonContainer');
+            const lessonContent = document.getElementById('lessonContent');
 
             try {
-                const { data: lesson, error } = await window.sbClient
-                    .from('lessons')
-                    .select('*')
-                    .eq('id', lessonId)
-                    .single();
+                // Try to fetch course from database via proxy
+                const courseResponse = await fetch(`./api/auth-proxy.php?path=/rest/v1/courses?id=eq.${courseId}&select=id,title,description`);
+                const courses = await courseResponse.json();
 
-                if (error) throw error;
-                currentLesson = lesson;
+                if (courses && courses.length > 0 && courses[0].title) {
+                    // Try to fetch lessons
+                    const lessonsResponse = await fetch(`./api/auth-proxy.php?path=/rest/v1/lessons?course_id=eq.${courseId}&select=*&order=order_index`);
+                    const lessons = await lessonsResponse.json();
 
-                // Update UI
-                document.getElementById('courseTitle').textContent = currentCourse?.title || 'Course';
-                document.getElementById('lessonTitle').textContent = lesson.title;
-
-                // Display lesson content
-                if (lesson.lesson_json) {
-                    displayLessonContent(lesson.lesson_json);
-                } else {
-                    document.getElementById('lessonContent').innerHTML = `
-                        <p>${lesson.content || 'No content available for this lesson.'}</p>
-                    `;
+                    if (lessons && lessons.length > 0 && !lessons.error) {
+                        // Use database lessons
+                        currentCourse = {
+                            ...courses[0],
+                            lessons: lessons.map((l, i) => ({
+                                id: i + 1,
+                                title: l.title,
+                                module: l.module_title || 'Module',
+                                introduction: l.content || l.introduction || '',
+                                bigIdea: l.lesson_json?.big_idea || '',
+                                steps: l.lesson_json?.steps || [],
+                                example: l.lesson_json?.example || '',
+                                reflection: l.lesson_json?.reflection_question || '',
+                                quiz: l.lesson_json?.quiz?.questions?.map((q, qi) => ({
+                                    q: q,
+                                    a: l.lesson_json.quiz.answers[qi],
+                                    options: generateOptions(l.lesson_json.quiz.answers[qi])
+                                })) || [],
+                                summary: l.lesson_json?.summary || ''
+                            }))
+                        };
+                    }
                 }
-
-                // Update navigation buttons
-                updateNavigationButtons();
-
-                loadingState.style.display = 'none';
-                lessonContainer.style.display = 'block';
-
             } catch (error) {
-                console.error('Error loading lesson:', error);
-                loadingState.style.display = 'none';
-                lessonContainer.innerHTML = `
-                    <div class="card" style="background: rgba(239, 68, 68, 0.1);">
-                        <p style="color: var(--error);">❌ Error loading lesson: ${error.message}</p>
+                console.log('Database fetch failed, using generated content:', error);
+            }
+
+            // Fallback to generated Vibe Coding course
+            if (!currentCourse || !currentCourse.lessons || currentCourse.lessons.length === 0) {
+                currentCourse = COURSE_DATA['vibe-coding'];
+            }
+
+            // Set lesson index
+            if (lessonParam) {
+                currentLessonIndex = parseInt(lessonParam) - 1 || 0;
+            }
+            currentLessonIndex = Math.max(0, Math.min(currentLessonIndex, currentCourse.lessons.length - 1));
+
+            // Render lesson
+            renderLesson();
+            loadingState.style.display = 'none';
+            lessonContent.style.display = 'block';
+        }
+
+        function generateOptions(correctAnswer) {
+            const genericOptions = [
+                "Complex technical requirements",
+                "Memorizing syntax rules",
+                "Advanced programming skills",
+                correctAnswer
+            ];
+            return shuffleArray(genericOptions);
+        }
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function renderLesson() {
+            const lesson = currentCourse.lessons[currentLessonIndex];
+            const progress = ((currentLessonIndex + 1) / currentCourse.lessons.length) * 100;
+
+            document.getElementById('lessonContent').innerHTML = `
+                <!-- Progress Bar -->
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${progress}%"></div>
+                </div>
+
+                <!-- Header -->
+                <div class="lesson-header">
+                    <p class="breadcrumb">
+                        <a href="/dashboard">Dashboard</a> / 
+                        <a href="/courses">${currentCourse.title}</a> / 
+                        Lesson ${currentLessonIndex + 1}
+                    </p>
+                    <h1 class="lesson-title">${lesson.title}</h1>
+                    <div class="lesson-meta">
+                        <span>📚 ${lesson.module}</span>
+                        <span>⏱️ ~10 min</span>
+                        <span>📊 Lesson ${currentLessonIndex + 1} of ${currentCourse.lessons.length}</span>
                     </div>
-                `;
-                lessonContainer.style.display = 'block';
-            }
+                </div>
+
+                <!-- Introduction -->
+                <div class="lesson-card">
+                    <h2 class="section-title">👋 Introduction</h2>
+                    <p class="lesson-text">${lesson.introduction}</p>
+                    
+                    ${lesson.bigIdea ? `
+                    <div class="big-idea">
+                        <h3 style="color: var(--primary); margin-bottom: 0.5rem;">💡 The Big Idea</h3>
+                        <p>${lesson.bigIdea}</p>
+                    </div>
+                    ` : ''}
+                </div>
+
+                ${lesson.steps && lesson.steps.length > 0 ? `
+                <!-- Steps -->
+                <div class="lesson-card">
+                    <h2 class="section-title">📝 Key Steps</h2>
+                    <ol class="steps-list">
+                        ${lesson.steps.map((step, i) => `
+                            <li>
+                                <span class="step-number">${i + 1}</span>
+                                <span>${step.replace(/^Step \d+: /, '')}</span>
+                            </li>
+                        `).join('')}
+                    </ol>
+                </div>
+                ` : ''}
+
+                ${lesson.example ? `
+                <!-- Example -->
+                <div class="lesson-card">
+                    <h2 class="section-title">🎯 Real-World Example</h2>
+                    <p class="lesson-text">${lesson.example}</p>
+                </div>
+                ` : ''}
+
+                <!-- Interactive Tools -->
+                <div class="lesson-card">
+                    <h2 class="section-title">🛠️ Practice Zone</h2>
+                    <p class="lesson-text" style="margin-bottom: 1rem;">Try what you've learned! Use the AI Playground to create something or the Whiteboard to take notes.</p>
+                    
+                    <div class="tools-tabs">
+                        <button class="tool-tab active" onclick="switchTool('playground')">💻 AI Playground</button>
+                        <button class="tool-tab" onclick="switchTool('whiteboard')">🎨 Whiteboard</button>
+                    </div>
+                    
+                    <div class="tool-frame">
+                        <iframe id="toolFrame" src="/playground"></iframe>
+                    </div>
+                </div>
+
+                ${lesson.quiz && lesson.quiz.length > 0 ? `
+                <!-- Quiz -->
+                <div class="lesson-card">
+                    <h2 class="section-title">📋 Quick Check</h2>
+                    <p class="lesson-text" style="margin-bottom: 1rem;">Test your understanding:</p>
+                    
+                    ${lesson.quiz.map((q, qi) => `
+                        <div class="quiz-question" id="quiz-${qi}">
+                            <p><strong>Q${qi + 1}:</strong> ${q.q}</p>
+                            <div class="quiz-options">
+                                ${q.options.map((opt, oi) => `
+                                    <div class="quiz-option" onclick="checkAnswer(${qi}, '${opt.replace(/'/g, "\\'")}', '${q.a.replace(/'/g, "\\'")}')">${opt}</div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                ` : ''}
+
+                ${lesson.reflection ? `
+                <!-- Reflection -->
+                <div class="lesson-card">
+                    <h2 class="section-title">🤔 Reflection</h2>
+                    <p class="lesson-text">${lesson.reflection}</p>
+                </div>
+                ` : ''}
+
+                ${lesson.summary ? `
+                <!-- Summary -->
+                <div class="lesson-card" style="background: linear-gradient(135deg, var(--bg-card), rgba(16, 185, 129, 0.1)); border-color: var(--success);">
+                    <h2 class="section-title" style="color: var(--success);">✅ Summary</h2>
+                    <p class="lesson-text">${lesson.summary}</p>
+                </div>
+                ` : ''}
+
+                <!-- Navigation -->
+                <div class="lesson-nav">
+                    <button class="nav-btn" onclick="navigateLesson('prev')" ${currentLessonIndex === 0 ? 'disabled' : ''}>
+                        ← Previous Lesson
+                    </button>
+                    <button class="nav-btn primary" onclick="navigateLesson('next')" ${currentLessonIndex >= currentCourse.lessons.length - 1 ? 'disabled' : ''}>
+                        Next Lesson →
+                    </button>
+                </div>
+            `;
         }
 
-        function displayLessonContent(lessonJson) {
-            const contentDiv = document.getElementById('lessonContent');
-            let content = '';
-
-            try {
-                const data = typeof lessonJson === 'string' ? JSON.parse(lessonJson) : lessonJson;
-
-                // Introduction
-                if (data.introduction) {
-                    content += `<h2>Introduction</h2><p>${data.introduction}</p>`;
-                }
-
-                // Learning Objectives
-                if (data.learning_objectives && data.learning_objectives.length > 0) {
-                    content += `<h2>What You'll Learn</h2><ul>`;
-                    data.learning_objectives.forEach(obj => {
-                        content += `<li>${obj}</li>`;
-                    });
-                    content += `</ul>`;
-                }
-
-                // Main Content Sections
-                if (data.content_sections && data.content_sections.length > 0) {
-                    data.content_sections.forEach(section => {
-                        content += `<h2>${section.title}</h2>`;
-                        content += `<p>${section.content}</p>`;
-
-                        if (section.examples && section.examples.length > 0) {
-                            content += `<h3>Examples</h3>`;
-                            section.examples.forEach(example => {
-                                content += `<p><strong>${example.title}:</strong> ${example.description}</p>`;
-                            });
-                        }
-                    });
-                }
-
-                // Summary
-                if (data.summary) {
-                    content += `<h2>Summary</h2><p>${data.summary}</p>`;
-                }
-
-                contentDiv.innerHTML = content;
-
-            } catch (error) {
-                console.error('Error parsing lesson JSON:', error);
-                contentDiv.innerHTML = `<p>Error displaying lesson content.</p>`;
-            }
+        function switchTool(tool) {
+            document.querySelectorAll('.tool-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const frame = document.getElementById('toolFrame');
+            frame.src = tool === 'playground' ? '/playground' : '/whiteboard';
         }
 
-        function updateNavigationButtons() {
-            const currentIndex = allLessons.findIndex(l => l.id === currentLesson.id);
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-
-            prevBtn.disabled = currentIndex <= 0;
-            nextBtn.disabled = currentIndex >= allLessons.length - 1;
+        function checkAnswer(quizIndex, selected, correct) {
+            const quizDiv = document.getElementById(`quiz-${quizIndex}`);
+            const options = quizDiv.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => {
+                opt.onclick = null; // Disable further clicks
+                if (opt.textContent === correct) {
+                    opt.classList.add('correct');
+                } else if (opt.textContent === selected && selected !== correct) {
+                    opt.classList.add('incorrect');
+                }
+            });
         }
 
         function navigateLesson(direction) {
-            const currentIndex = allLessons.findIndex(l => l.id === currentLesson.id);
-            let newIndex;
-
-            if (direction === 'prev') {
-                newIndex = Math.max(0, currentIndex - 1);
-            } else {
-                newIndex = Math.min(allLessons.length - 1, currentIndex + 1);
+            if (direction === 'prev' && currentLessonIndex > 0) {
+                currentLessonIndex--;
+            } else if (direction === 'next' && currentLessonIndex < currentCourse.lessons.length - 1) {
+                currentLessonIndex++;
             }
-
-            if (newIndex !== currentIndex) {
-                const newLesson = allLessons[newIndex];
-                window.location.href = `./lesson-viewer.html?course=${currentCourse.id}&lesson=${newLesson.id}`;
-            }
+            
+            window.scrollTo(0, 0);
+            renderLesson();
+            
+            // Update URL
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.set('lesson', currentLessonIndex + 1);
+            window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
         }
 
-        function switchTab(tabName) {
-            // Update tab buttons
-            document.querySelectorAll('.tool-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-            // Update panels
-            document.querySelectorAll('.tool-panel').forEach(panel => {
-                panel.classList.remove('active');
-            });
-            document.getElementById(tabName + '-panel').classList.add('active');
+        function logout() {
+            localStorage.removeItem('supabase_session');
+            localStorage.removeItem('supabase_user');
+            window.location.replace('/');
         }
 
         // Initialize
-        initLessonViewer();
+        init();
     </script>
 </body>
-
 </html>
