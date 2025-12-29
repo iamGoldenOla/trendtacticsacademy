@@ -1,48 +1,134 @@
 {
-  "course_title": "Vibe Coding",
-  "module_title": "Thinking Before Coding",
+  "course_title": "Vibe Coding: Building Real Software with AI",
+  "module_title": "Module 2: Full-Stack AI Builders",
   "lesson_number": 4,
-  "lesson_title": "Learning to Think in Ideas, Not Code",
-  "introduction": "Welcome to \"Learning to Think in Ideas, Not Code\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-  "big_idea": "In Vibe Coding, you learn to think about what you want to create first, then use tools and guidance to make it happen. This approach builds confidence and helps you understand the purpose behind your digital creations.",
-  "visuals": "Show a lightbulb icon transforming into a simple digital product (like a website or app icon) with a thinking person in the background. Include a flow arrow from the lightbulb to the digital product.",
-  "steps": [
-    "Step 1: Understand the main concept of this lesson",
-    "Step 2: Learn how this concept applies to Vibe Coding",
-    "Step 3: See practical examples of this concept in action",
-    "Step 4: Practice applying this concept in the playground",
-    "Step 5: Reflect on how this fits into your learning journey"
+  "lesson_title": "Lovable: Building Beautiful, Production-Ready Applications",
+  "introduction": "While Bolt excels at speed, Lovable excels at quality. Lovable.dev is a Full-Stack AI Builder designed specifically for creating beautiful, well-architected applications that feel production-ready from the start. In this lesson, you will learn what makes Lovable different and when to choose it over other tools.\n\nLovable approaches AI-generated applications differently. Instead of optimizing purely for speed, it focuses on thoughtful component architecture, professional UI design, and code structure that developers would actually want to maintain. This makes it ideal for projects that need to look polished and potentially scale beyond the initial prototype.\n\nBy the end of this lesson, you will understand Lovable's unique strengths, know how to prompt it effectively, and have a clear framework for deciding between Lovable, Bolt, and other Full-Stack Builders based on your project needs.",
+  "big_idea": "Lovable generates applications with a focus on design quality and code architecture. It produces React components with proper structure, implements design systems consistently, and creates applications that look and feel professional. The tradeoff is that it may be slower than Bolt and has a steeper learning curve, but the output is often more suitable for production use.",
+  "why_it_matters": "First impressions matter enormously in digital products. Users make judgments about credibility and quality within seconds of seeing your application. A beautiful, well-designed interface builds trust immediately. Lovable helps you create that professional impression without needing design skills or extensive frontend development experience. For entrepreneurs, this means your MVP can look like a funded startup's product, not a hackathon project.",
+  "lovable_vs_bolt": {
+    "title": "Choosing Between Lovable and Bolt",
+    "comparison": [
+      {
+        "aspect": "Speed",
+        "bolt": "Faster initial generation",
+        "lovable": "Slower but more refined output"
+      },
+      {
+        "aspect": "Design Quality",
+        "bolt": "Good, functional design",
+        "lovable": "Excellent, polished design"
+      },
+      {
+        "aspect": "Code Structure",
+        "bolt": "Variable, sometimes messy",
+        "lovable": "Consistent, maintainable"
+      },
+      {
+        "aspect": "Best For",
+        "bolt": "Quick prototypes, personal tools, testing ideas",
+        "lovable": "Client projects, SaaS products, portfolio pieces"
+      },
+      {
+        "aspect": "Learning Curve",
+        "bolt": "Lower, more forgiving",
+        "lovable": "Higher, more specific prompting needed"
+      }
+    ]
+  },
+  "lovable_strengths": [
+    {
+      "strength": "Design Systems",
+      "explanation": "Lovable implements consistent design systems with proper color palettes, typography scales, and spacing. Components look like they belong together."
+    },
+    {
+      "strength": "Component Architecture",
+      "explanation": "Generated code follows React best practices with proper component separation, props handling, and state management patterns."
+    },
+    {
+      "strength": "Responsive Design",
+      "explanation": "Applications work beautifully across desktop, tablet, and mobile without extra prompting."
+    },
+    {
+      "strength": "Micro-interactions",
+      "explanation": "Subtle animations, hover states, and transitions that make applications feel polished and professional."
+    },
+    {
+      "strength": "Accessibility",
+      "explanation": "Better default accessibility features including proper contrast, keyboard navigation, and semantic HTML."
+    }
   ],
-  "example": "Instead of thinking 'I need to create a for loop to iterate through an array', in Vibe Coding you think 'I want to show a list of items on my webpage'. The tools and guidance help translate your idea into the necessary code.",
-  "playground_activity": "In the playground section, create an interactive activity related to \"Learning to Think in Ideas, Not Code\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-  "reflection_question": "How does the concept of \"Learning to Think in Ideas, Not Code\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+  "prompting_for_lovable": {
+    "title": "Effective Lovable Prompting",
+    "key_differences": "Lovable responds well to design-focused language. Unlike Bolt where you focus on features, Lovable prompts should emphasize the experience you want to create.",
+    "template": {
+      "opening": "Build a [type of application] that feels [emotional quality - modern, warm, professional, playful]",
+      "user_focus": "For [specific user type] who need to [primary goal]",
+      "design_direction": "Design inspiration: [reference style - minimal SaaS, e-commerce, dashboard, editorial]",
+      "key_features": "Core functionality: [list features with UX context]",
+      "interactions": "Key interactions: [describe important user flows]"
+    },
+    "example_prompt": "Build a client portal dashboard that feels professional and trustworthy. For freelance designers who need to share project updates with clients. Design inspiration: minimal SaaS dashboard with generous whitespace. Core functionality: project list with status badges, file sharing with drag-drop upload, comment threads on deliverables, progress timeline. Key interactions: smooth transitions between views, subtle loading states, satisfying upload feedback."
+  },
+  "real_world_example": "Let us build a professional application with Lovable.\n\nProject: Freelancer Client Portal\n\nStep 1 - Initial Prompt: 'Build a client portal for freelancers that feels professional and builds trust. For solo designers/developers who need to share work with clients. Modern, minimal design with a neutral color palette and blue accents. Features: project dashboard showing active projects, file upload with preview, comment system for feedback, simple status updates. Clean typography, generous spacing, subtle shadows.'\n\nStep 2 - Review: The initial output shows a polished dashboard. The design is cohesive and professional. But we need better navigation. Refinement: 'Add a sidebar navigation with icons for Dashboard, Projects, Files, and Settings. Make the current page indicator subtle but clear.'\n\nStep 3 - Enhance: 'Add a notification bell in the header that shows when clients leave new comments. Include a quick-action button for uploading files that's always accessible.'\n\nStep 4 - Final Polish: 'Add skeleton loading states for the project cards. Implement a dark mode toggle in settings.'\n\nResult: A portfolio-worthy client portal that looks like a real SaaS product. Total time: 30-45 minutes.",
+  "when_to_use_lovable": [
+    "Client work where first impressions matter",
+    "SaaS product prototypes you might actually ship",
+    "Portfolio projects to showcase your capabilities",
+    "Applications where design quality impacts user trust",
+    "Projects that need to scale beyond initial prototype"
+  ],
+  "when_to_use_bolt": [
+    "Quick experiments and idea validation",
+    "Personal productivity tools",
+    "Learning and exploration",
+    "Projects where speed matters more than polish",
+    "Simple utilities that don't need design sophistication"
+  ],
+  "steps": [
+    "Step 1: Go to lovable.dev and create an account",
+    "Step 2: Start with a design-focused prompt emphasizing the experience",
+    "Step 3: Reference specific design styles (minimal SaaS, editorial, etc.)",
+    "Step 4: Iterate on design details before adding features",
+    "Step 5: Polish micro-interactions and transitions",
+    "Step 6: Test responsiveness across device sizes"
+  ],
+  "playground_activity": "Create a professional-looking SaaS landing page with Lovable. Use this prompt: 'Build a SaaS landing page that feels modern and trustworthy. For a fictional productivity app called FocusFlow. Design inspiration: Notion, Linear, Vercel. Sections: hero with tagline and CTA, feature grid with icons, testimonial carousel, pricing cards, footer. Minimal design with subtle gradients, large typography, and smooth scroll animations.' Compare the result quality to what Bolt would produce.",
+  "reflection_question": "Think about a project you want to build that needs to impress users or clients. How would you describe the feeling and experience you want to create, beyond just the features?",
   "quiz": {
     "questions": [
-      "What is the main focus of Learning to Think in Ideas, Not Code?",
-      "How does this concept benefit beginners?",
-      "Is this concept part of Vibe Coding's core principles?",
-      "What is one practical application of this concept?",
-      "How does this concept build confidence in learners?"
+      "What is Lovable's primary advantage over Bolt?",
+      "What type of language should you use in Lovable prompts?",
+      "When should you choose Bolt instead of Lovable?",
+      "What does 'component architecture' mean in the context of Lovable's output?",
+      "Why is design quality particularly important for certain types of projects?"
     ],
     "answers": [
-      "The specific concept covered in this lesson",
-      "It reduces anxiety and makes learning accessible",
-      "Yes, it's a core principle of Vibe Coding",
-      "Applying this concept in digital creation projects",
-      "By focusing on ideas and providing guidance rather than complexity"
+      "Higher design quality and better code architecture for production-ready applications",
+      "Design-focused language that emphasizes experience, feeling, and design style rather than just features",
+      "When speed matters more than polish, for quick experiments, personal tools, or simple utilities",
+      "Properly structured React components with good separation, props handling, and maintainable code patterns",
+      "First impressions affect user trust - professional design builds credibility for client work, SaaS products, and portfolio pieces"
     ]
   },
+  "key_takeaways": [
+    "Lovable prioritizes design quality and code architecture over pure speed",
+    "Use design-focused prompting: describe feelings, experiences, and visual style",
+    "Choose Lovable for client work, SaaS products, and portfolio pieces",
+    "Choose Bolt for quick prototypes and personal tools",
+    "Both tools have their place - master the decision framework"
+  ],
   "resources": {
     "video": {
-      "title": "Understanding Learning to Think in Ideas, Not Code - Vibe Coding Fundamentals",
-      "creator": "Vibe Coding Tutorials",
+      "title": "Lovable vs Bolt: Which Should You Use?",
+      "url": "https://www.youtube.com/watch?v=example",
       "embed": true,
-      "reason": "Relevant video content for this lesson topic"
+      "reason": "Direct comparison showing output quality differences"
     },
     "extra_reading": [
-      "https://example.com/extra-resource-1 - Additional reading for this topic",
-      "https://example.com/extra-resource-2 - More resources for curious learners"
+      "https://lovable.dev - Official Lovable platform",
+      "https://trendtacticsdigital.com/blog/design-focused-prompting - Guide to design-focused AI prompting"
     ]
   },
-  "summary": "In this lesson on \"Learning to Think in Ideas, Not Code\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  "summary": "In this lesson, you learned that Lovable excels at creating beautiful, production-ready applications with professional design and maintainable code architecture. You now understand how to write design-focused prompts and have a clear framework for choosing between Lovable and Bolt. The key insight is that different projects have different needs - knowing when to prioritize polish over speed is a valuable skill. In the next lesson, we will explore Replit, which offers a unique blend of learning, collaboration, and deployment capabilities."
 }

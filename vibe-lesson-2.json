@@ -1,48 +1,149 @@
 {
-  "course_title": "Vibe Coding",
-  "module_title": "Understanding Vibe Coding",
+  "course_title": "Vibe Coding: Building Real Software with AI",
+  "module_title": "Module 1: Vibe Coding Foundations",
   "lesson_number": 2,
-  "lesson_title": "Why Vibe Coding Exists",
-  "introduction": "Welcome to \"Why Vibe Coding Exists\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-  "big_idea": "Vibe Coding exists because traditional coding approaches often overwhelm beginners with complex syntax and technical rules before they understand the core concepts. Vibe Coding flips this approach by focusing on ideas and creativity first, making digital creation accessible to everyone.",
-  "visuals": "Create a comparison diagram showing two paths: one with a person looking overwhelmed by complex code symbols, and another with the same person smiling while creating with simple, intuitive tools. Include a bridge showing how Vibe Coding connects these experiences.",
-  "steps": [
-    "Step 1: Recognize the challenges beginners face with traditional coding",
-    "Step 2: Understand how focusing on ideas first reduces anxiety",
-    "Step 3: Learn about the benefits of guided learning approaches",
-    "Step 4: See how Vibe Coding addresses these challenges",
-    "Step 5: Appreciate the importance of confidence-building in learning"
+  "lesson_title": "The Vibe Coding Ecosystem: Tools That Power Modern Development",
+  "introduction": "Now that you understand what Vibe Coding is, it is time to explore the tools that make it possible. The Vibe Coding ecosystem has exploded in 2024, with dozens of powerful AI-powered tools designed for different use cases. Understanding this landscape is essential before you start building.\n\nThis lesson will give you a clear map of the major categories of tools, what each does best, and how to choose the right tool for your projects. By the end, you will have a mental framework for navigating this rapidly evolving space and making informed decisions about which tools to learn and use.\n\nThe tools we cover here are not theoretical - these are production-grade platforms used by startups, enterprises, and individual creators to build real software every day. Some of these tools did not exist 18 months ago, yet they are already transforming how software gets built.",
+  "big_idea": "The Vibe Coding ecosystem consists of three main categories: Full-Stack AI Builders (like Bolt, Lovable, and Replit) that generate complete applications from descriptions, AI-First IDEs (like Cursor, Windsurf, and Qoder) that enhance coding with AI assistance, and Agentic Tools (like Devin and OpenHands) that can autonomously complete complex development tasks. Each category serves different needs, and skilled Vibe Coders know when to use each.",
+  "why_it_matters": "Choosing the wrong tool wastes time and produces suboptimal results. A tool designed for quick prototypes will frustrate you if you need production-grade code. A professional IDE will overwhelm you if you just want to build a simple landing page. Understanding the ecosystem means you can match your tool to your goal, maximizing efficiency and output quality. This knowledge also helps you evaluate new tools as they emerge - and new tools emerge weekly in this space.",
+  "tool_categories": [
+    {
+      "category": "Full-Stack AI Builders",
+      "description": "These platforms generate complete, working applications from natural language descriptions. They handle frontend, backend, database, and deployment in one integrated experience. Best for rapid prototyping, MVPs, and people who want working software without touching code.",
+      "examples": [
+        {
+          "name": "Bolt.new",
+          "strength": "Speed and simplicity. Describe what you want, get a working app in minutes.",
+          "best_for": "Quick prototypes, landing pages, simple web apps",
+          "limitation": "Less control over code structure and architecture"
+        },
+        {
+          "name": "Lovable",
+          "strength": "Beautiful UI generation and thoughtful component architecture",
+          "best_for": "Design-focused applications, SaaS products, professional interfaces",
+          "limitation": "Steeper learning curve for customization"
+        },
+        {
+          "name": "Replit",
+          "strength": "Full development environment with AI assistance and instant deployment",
+          "best_for": "Learning, collaboration, projects that need backend logic",
+          "limitation": "Performance limitations on free tier"
+        }
+      ]
+    },
+    {
+      "category": "AI-First IDEs",
+      "description": "These are code editors supercharged with AI capabilities. They still require you to work with code, but AI assists with writing, explaining, debugging, and refactoring. Best for developers who want AI assistance while maintaining full control.",
+      "examples": [
+        {
+          "name": "Cursor",
+          "strength": "Deep codebase understanding and multi-file edits",
+          "best_for": "Professional developers, complex projects, team codebases",
+          "limitation": "Requires some coding knowledge to use effectively"
+        },
+        {
+          "name": "Windsurf",
+          "strength": "Flow state coding with intelligent code completion",
+          "best_for": "Individual developers, focused coding sessions",
+          "limitation": "Newer tool with evolving feature set"
+        },
+        {
+          "name": "Qoder",
+          "strength": "Agentic workflows and autonomous task completion",
+          "best_for": "Complex refactoring, multi-step development tasks",
+          "limitation": "Best suited for experienced users"
+        }
+      ]
+    },
+    {
+      "category": "Agentic Coding Tools",
+      "description": "These are AI agents that can autonomously complete development tasks. You give them a goal, and they plan, execute, and iterate with minimal guidance. Best for complex tasks you want to delegate entirely.",
+      "examples": [
+        {
+          "name": "Devin",
+          "strength": "Full autonomy on complex development tasks",
+          "best_for": "Enterprise development, complex integrations",
+          "limitation": "Expensive, requires clear specifications"
+        },
+        {
+          "name": "OpenHands",
+          "strength": "Open-source agentic development",
+          "best_for": "Self-hosted solutions, customizable workflows",
+          "limitation": "Requires technical setup"
+        }
+      ]
+    }
   ],
-  "example": "Think about learning to drive. Would you start by memorizing every technical detail about the engine, transmission, and electronics? No! You start with the basic goal of getting from point A to point B safely. Vibe Coding works the same way - it focuses on your goals and intentions first, then provides the tools to achieve them.",
-  "playground_activity": "In the playground section, create an interactive activity related to \"Why Vibe Coding Exists\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-  "reflection_question": "How does the concept of \"Why Vibe Coding Exists\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+  "decision_framework": {
+    "title": "How to Choose the Right Tool",
+    "rules": [
+      {
+        "if": "You want a working prototype in under an hour",
+        "use": "Full-Stack AI Builder (Bolt or Lovable)"
+      },
+      {
+        "if": "You have an existing codebase and need AI assistance",
+        "use": "AI-First IDE (Cursor or Windsurf)"
+      },
+      {
+        "if": "You want to learn coding with AI support",
+        "use": "Replit or Cursor"
+      },
+      {
+        "if": "You need to delegate a complex task end-to-end",
+        "use": "Agentic Tool (Devin or OpenHands)"
+      },
+      {
+        "if": "You want beautiful UI without design skills",
+        "use": "Lovable"
+      }
+    ]
+  },
+  "real_world_example": "Let us follow two different projects to see tool selection in action.\n\nProject A: Maria wants to build a portfolio website to showcase her photography. She has no coding experience and needs it done this weekend. Best choice: Bolt.new. She can describe her vision, iterate on the design, and have a deployed website in a few hours.\n\nProject B: James is a developer with a complex e-commerce codebase. He needs to refactor the payment processing module and add new features. Best choice: Cursor. The AI can understand his existing code, suggest improvements, and help implement changes while he maintains full control.\n\nProject C: A startup needs to integrate their app with five different APIs and set up a data pipeline. They have clear specifications but limited engineering bandwidth. Best choice: Devin. They can delegate the entire integration task and review the results.",
+  "steps": [
+    "Step 1: Identify your goal - prototype, production code, or learning",
+    "Step 2: Assess your technical comfort level - no code, some code, or professional",
+    "Step 3: Match your goal and comfort level to a tool category",
+    "Step 4: Within that category, choose based on your specific needs",
+    "Step 5: Start with one tool, master it, then expand your toolkit"
+  ],
+  "playground_activity": "Visit Bolt.new and describe a simple project: 'Create a personal task tracker with the ability to add tasks, mark them complete, and filter by status.' Watch how quickly a working application emerges. Then visit Cursor's website and explore their demo videos to see how AI-assisted coding works. Compare the experiences - both are Vibe Coding, but serve different needs.",
+  "reflection_question": "Based on your current goals and technical comfort level, which tool category seems most appropriate for your first Vibe Coding projects? What specific project would you want to build with it?",
   "quiz": {
     "questions": [
-      "What is the main focus of Why Vibe Coding Exists?",
-      "How does this concept benefit beginners?",
-      "Is this concept part of Vibe Coding's core principles?",
-      "What is one practical application of this concept?",
-      "How does this concept build confidence in learners?"
+      "What are the three main categories of tools in the Vibe Coding ecosystem?",
+      "Which category is best for generating complete applications from descriptions without touching code?",
+      "What is the primary advantage of AI-First IDEs over Full-Stack Builders?",
+      "Which tool would you recommend for someone who wants a prototype in under an hour with no coding experience?",
+      "What characterizes Agentic Coding Tools compared to other categories?"
     ],
     "answers": [
-      "The specific concept covered in this lesson",
-      "It reduces anxiety and makes learning accessible",
-      "Yes, it's a core principle of Vibe Coding",
-      "Applying this concept in digital creation projects",
-      "By focusing on ideas and providing guidance rather than complexity"
+      "Full-Stack AI Builders, AI-First IDEs, and Agentic Coding Tools",
+      "Full-Stack AI Builders (like Bolt, Lovable, and Replit)",
+      "More control over code structure and the ability to work with existing codebases",
+      "Bolt.new or Lovable - Full-Stack AI Builders designed for speed and simplicity",
+      "They can autonomously complete complex development tasks with minimal guidance"
     ]
   },
+  "key_takeaways": [
+    "The Vibe Coding ecosystem has three main tool categories serving different needs",
+    "Full-Stack Builders generate complete apps; AI-First IDEs enhance coding; Agentic Tools work autonomously",
+    "Tool selection depends on your goal, technical level, and project complexity",
+    "Mastering one tool deeply is more valuable than superficial knowledge of many",
+    "The ecosystem is rapidly evolving - expect new tools and capabilities regularly"
+  ],
   "resources": {
     "video": {
-      "title": "Understanding Why Vibe Coding Exists - Vibe Coding Fundamentals",
-      "creator": "Vibe Coding Tutorials",
+      "title": "Comparing AI Coding Tools in 2024",
+      "url": "https://www.youtube.com/watch?v=example",
       "embed": true,
-      "reason": "Relevant video content for this lesson topic"
+      "reason": "Comprehensive comparison of major tools in the ecosystem"
     },
     "extra_reading": [
-      "https://example.com/extra-resource-1 - Additional reading for this topic",
-      "https://example.com/extra-resource-2 - More resources for curious learners"
+      "https://bolt.new - Try Full-Stack AI Building",
+      "https://cursor.com - Explore AI-First IDE features",
+      "https://lovable.dev - Build beautiful UIs with AI"
     ]
   },
-  "summary": "In this lesson on \"Why Vibe Coding Exists\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  "summary": "In this lesson, you mapped the Vibe Coding ecosystem and learned to categorize tools into Full-Stack AI Builders, AI-First IDEs, and Agentic Coding Tools. You now have a decision framework for choosing the right tool based on your goals and technical comfort. The key insight is that different tools serve different purposes - there is no single 'best' tool, only the best tool for your specific situation. In the next lesson, we will dive deep into Full-Stack AI Builders and learn to use them effectively."
 }

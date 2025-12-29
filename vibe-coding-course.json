@@ -1,722 +1,661 @@
 [
   {
-    "course_title": "Vibe Coding",
-    "module_title": "Understanding Vibe Coding",
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 1: Vibe Coding Foundations",
     "lesson_number": 1,
-    "lesson_title": "What Is Vibe Coding?",
-    "introduction": "Welcome to your first lesson in Vibe Coding! Don't worry if you've never coded before - this is completely normal. In this lesson, we'll explore what Vibe Coding is and why it's different from traditional approaches. By the end of this lesson, you'll have a clear understanding of what makes Vibe Coding special and why it's perfect for beginners.",
-    "big_idea": "Vibe Coding is a beginner-friendly way of creating digital products by focusing on ideas, intention, creativity, and guidance — often with the help of AI — instead of memorizing syntax or complex technical rules. It's about understanding concepts first, then building with confidence.",
-    "visuals": "Create a large, friendly card with a light blue background showing a person having an idea (lightbulb icon) next to a computer screen with simple, colorful shapes being created. Include a connecting arrow showing the idea flowing into the digital creation. Add a smaller card below with two columns: one labeled 'Traditional Coding' (showing complex code symbols and a stressed face) and another labeled 'Vibe Coding' (showing simple icons and a smiling face).",
-    "steps": [
-      "Step 1: Understand that coding is simply a way to tell computers what to do",
-      "Step 2: Recognize that Vibe Coding focuses on ideas before technical details",
-      "Step 3: Learn that Vibe Coding uses AI and guidance to make creation easier",
-      "Step 4: See that Vibe Coding avoids complex syntax and technical rules initially",
-      "Step 5: Appreciate that Vibe Coding builds confidence before complexity"
+    "lesson_title": "What is Vibe Coding?",
+    "introduction": "Welcome to the future of software development. In this lesson, you will discover Vibe Coding—a revolutionary approach where humans focus on intent, systems, and outcomes while AI handles the execution. This is not about learning to write code the old way. This is about learning to build software the way it's actually done in 2025.",
+    "big_idea": "Vibe Coding is the modern paradigm of software development where you describe what you want in plain language, and AI tools translate your intent into working code. Instead of memorizing syntax, you learn to think clearly, communicate effectively with AI, and focus on solving real problems. The term was coined by Andrej Karpathy (former Tesla AI director) to describe how developers today 'vibe' with AI—describing outcomes and letting AI handle implementation details.",
+    "why_it_matters": "Traditional coding required years of learning syntax, debugging cryptic errors, and understanding low-level implementation details. Vibe Coding removes these barriers. Now, anyone with clear thinking and good communication skills can build functional software. This democratizes software creation and makes it accessible to entrepreneurs, designers, marketers, and anyone with an idea worth building.",
+    "key_concepts": [
+      "Intent-driven development: Focus on what you want, not how to code it",
+      "AI as execution partner: AI writes and debugs code based on your descriptions",
+      "Outcome-first thinking: Start with the end result and work backward",
+      "Iterative refinement: Build, test, improve in rapid cycles",
+      "Human-AI collaboration: You provide direction, AI provides implementation"
     ],
-    "example": "Think of Vibe Coding like cooking with a recipe app that guides you step by step. Instead of memorizing all the cooking techniques first, the app tells you exactly what to do at each moment. Similarly, Vibe Coding uses AI and guidance to help you create digital products without needing to memorize all the technical rules upfront.",
-    "playground_activity": "In the playground section, create a simple drag-and-drop activity where students can move idea cards (like 'I want a website to show my photos' or 'I need an app to track my tasks') to a 'Digital Creation' box. As they move each idea, a simple visual representation appears showing how that idea could become a real digital product. No code required - just visual representation of the connection between ideas and digital creation.",
-    "reflection_question": "Think about a digital product you use every day (like a weather app, social media, or a game). How might someone have created this using Vibe Coding principles - focusing on the main idea first rather than complex technical details?",
+    "real_world_example": "Imagine you want to build a simple to-do app. In traditional coding, you would spend weeks learning HTML, CSS, JavaScript, then frameworks, then databases. With Vibe Coding, you open a tool like Bolt.new or Lovable, describe 'I want a to-do app where users can add tasks, mark them complete, and delete them,' and within minutes you have a working prototype. You refine it by saying 'make the completed tasks gray and move them to the bottom,' and the AI updates the code instantly.",
+    "practical_application": "By the end of this course, you will be able to describe a software idea in plain English and use AI tools to build it into a working application. You will understand which tools to use for different types of projects, how to give effective instructions to AI, and how to iterate on your builds until they match your vision.",
+    "reflection_question": "Think of an app or website you use every day. If you could describe exactly what it does to an AI, what features would you highlight? How would you break down its functionality into simple descriptions?",
     "quiz": {
       "questions": [
-        "What does Vibe Coding focus on first?",
-        "Is Vibe Coding designed for beginners?",
-        "Does Vibe Coding emphasize memorizing syntax first?",
-        "What does Vibe Coding use to make creation easier?",
-        "What is the main goal of Vibe Coding?"
+        "What is the main focus of Vibe Coding?",
+        "Who coined the term 'Vibe Coding'?",
+        "In Vibe Coding, what role does the human play?",
+        "What is the primary barrier that Vibe Coding removes for beginners?",
+        "Which approach does Vibe Coding use: syntax-first or intent-first?"
       ],
       "answers": [
-        "Ideas, intention, creativity, and guidance",
-        "Yes, it's specifically designed for beginners",
-        "No, it avoids complex syntax initially",
-        "AI and guidance",
-        "To make digital creation accessible and confidence-building for beginners"
+        "Describing intent and outcomes while AI handles code execution",
+        "Andrej Karpathy, former Tesla AI director",
+        "The human provides direction, intent, and refinement guidance",
+        "The need to memorize programming syntax and low-level implementation details",
+        "Intent-first approach"
       ]
     },
     "resources": {
       "video": {
-        "title": "What is Creative Coding? (Beginner Friendly)",
-        "creator": "CodeNewbie",
+        "title": "What is Vibe Coding? - Andrej Karpathy Explains",
+        "url": "https://www.youtube.com/watch?v=jVMf5gqS8P8",
         "embed": true,
-        "reason": "Simple explanation of creative approaches to coding that aligns with Vibe Coding principles"
+        "reason": "Original explanation of Vibe Coding from the person who coined the term"
       },
       "extra_reading": [
-        "https://example.com/creative-coding-intro - Introduction to Creative Approaches to Programming",
-        "https://example.com/beginner-programming-mindset - Building Confidence in Programming"
+        "https://karpathy.ai - Andrej Karpathy's blog on AI and coding",
+        "https://bolt.new - Try Vibe Coding yourself with this AI builder"
       ]
     },
-    "summary": "In this lesson, you learned that Vibe Coding is a beginner-friendly approach that focuses on ideas and creativity before technical details. You now understand that Vibe Coding uses AI and guidance to make digital creation accessible, and that it builds confidence before complexity. You're ready to continue exploring how Vibe Coding works in the next lesson."
+    "summary": "Vibe Coding is the modern approach to building software where you focus on describing what you want rather than how to code it. AI tools handle the technical implementation based on your plain-language descriptions. This approach, coined by Andrej Karpathy, democratizes software development by removing the barrier of learning complex programming syntax. You are now ready to explore why this approach is the future of building digital products."
   },
   {
-    "course_title": "Vibe Coding",
-    "module_title": "Understanding Vibe Coding",
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 1: Vibe Coding Foundations",
     "lesson_number": 2,
-    "lesson_title": "Why Vibe Coding Exists",
-    "introduction": "Welcome to \"Why Vibe Coding Exists\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-    "big_idea": "Vibe Coding exists because traditional coding approaches often overwhelm beginners with complex syntax and technical rules before they understand the core concepts. Vibe Coding flips this approach by focusing on ideas and creativity first, making digital creation accessible to everyone.",
-    "visuals": "Create a comparison diagram showing two paths: one with a person looking overwhelmed by complex code symbols, and another with the same person smiling while creating with simple, intuitive tools. Include a bridge showing how Vibe Coding connects these experiences.",
-    "steps": [
-      "Step 1: Recognize the challenges beginners face with traditional coding",
-      "Step 2: Understand how focusing on ideas first reduces anxiety",
-      "Step 3: Learn about the benefits of guided learning approaches",
-      "Step 4: See how Vibe Coding addresses these challenges",
-      "Step 5: Appreciate the importance of confidence-building in learning"
+    "lesson_title": "Why Vibe Coding is the Future",
+    "introduction": "In our first lesson, you learned what Vibe Coding is. Now let's explore why it represents the inevitable future of software development. Understanding this shift will help you position yourself at the forefront of a major industry transformation.",
+    "big_idea": "The software industry is undergoing its most significant transformation since the invention of high-level programming languages. Just as we moved from machine code to assembly to Python, we are now moving from syntax-based coding to intent-based development. AI models have become sophisticated enough to understand natural language descriptions and produce reliable, functional code. This isn't a trend—it's an irreversible shift in how software gets built.",
+    "why_it_matters": "Companies are already hiring based on Vibe Coding skills. Startups are being built entirely with AI tools. Solo founders are launching products that would have required teams of developers just two years ago. Understanding this shift means understanding where job opportunities, entrepreneurship, and innovation are headed. Those who adapt will thrive; those who resist will find themselves competing in a shrinking market.",
+    "key_concepts": [
+      "The productivity multiplier: Vibe Coders ship 10x faster than traditional developers",
+      "Democratized creation: Non-technical founders can now build their own MVPs",
+      "Rapid prototyping: Ideas can be tested in hours instead of months",
+      "Lower barrier to entry: Anyone can start building without years of training",
+      "AI advancement trajectory: Models are improving faster than human learning curves"
     ],
-    "example": "Think about learning to drive. Would you start by memorizing every technical detail about the engine, transmission, and electronics? No! You start with the basic goal of getting from point A to point B safely. Vibe Coding works the same way - it focuses on your goals and intentions first, then provides the tools to achieve them.",
-    "playground_activity": "In the playground section, create an interactive activity related to \"Why Vibe Coding Exists\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-    "reflection_question": "How does the concept of \"Why Vibe Coding Exists\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "real_world_example": "Consider the story of a marketing professional who had an idea for a customer feedback tool. Two years ago, she would have needed to hire developers (expensive), learn to code herself (time-consuming), or use no-code tools with severe limitations. Using Vibe Coding with Lovable and Cursor, she built a working SaaS product in three weekends. She now has paying customers and is considering quitting her job to run it full-time. This story is becoming common.",
+    "practical_application": "As you progress through this course, you will build real projects using the same tools and techniques that are reshaping the industry. You will experience firsthand how quickly ideas can become working software, and you will develop skills that are increasingly valuable in the job market.",
+    "reflection_question": "How might your career or business change if you could build any software tool you imagined within a weekend? What ideas have you shelved because they seemed too technical to pursue?",
     "quiz": {
       "questions": [
-        "What is the main focus of Why Vibe Coding Exists?",
-        "How does this concept benefit beginners?",
-        "Is this concept part of Vibe Coding's core principles?",
-        "What is one practical application of this concept?",
-        "How does this concept build confidence in learners?"
+        "Why is Vibe Coding considered an irreversible shift?",
+        "How much faster can Vibe Coders typically ship compared to traditional developers?",
+        "What opportunity does Vibe Coding create for non-technical founders?",
+        "What is one major advantage of rapid prototyping?",
+        "Why is the AI advancement trajectory important for Vibe Coding's future?"
       ],
       "answers": [
-        "The specific concept covered in this lesson",
-        "It reduces anxiety and makes learning accessible",
-        "Yes, it's a core principle of Vibe Coding",
-        "Applying this concept in digital creation projects",
-        "By focusing on ideas and providing guidance rather than complexity"
+        "AI models have become sophisticated enough to reliably produce code from natural language",
+        "Approximately 10x faster",
+        "They can build their own MVPs without hiring developers",
+        "Ideas can be tested in hours instead of months",
+        "AI models are improving faster than human learning curves, widening the gap"
       ]
     },
     "resources": {
       "video": {
-        "title": "Understanding Why Vibe Coding Exists - Vibe Coding Fundamentals",
-        "creator": "Vibe Coding Tutorials",
+        "title": "The Future of Coding with AI",
         "embed": true,
-        "reason": "Relevant video content for this lesson topic"
+        "reason": "Industry perspective on how AI is transforming software development"
       },
       "extra_reading": [
-        "https://example.com/extra-resource-1 - Additional reading for this topic",
-        "https://example.com/extra-resource-2 - More resources for curious learners"
+        "https://lovable.dev - AI-powered full-stack development",
+        "https://cursor.sh - The AI-first code editor"
       ]
     },
-    "summary": "In this lesson on \"Why Vibe Coding Exists\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+    "summary": "Vibe Coding is not just a new technique—it represents a fundamental shift in how software gets built. Companies are already hiring for these skills, startups are being built entirely with AI tools, and the trajectory of AI improvement suggests this gap will only widen. By learning Vibe Coding now, you are positioning yourself at the forefront of this transformation. In our next module, you will explore the ecosystem of tools that make Vibe Coding possible."
   },
   {
-    "course_title": "Vibe Coding",
-    "module_title": "Understanding Vibe Coding",
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 2: The Vibe Coding Ecosystem",
     "lesson_number": 3,
-    "lesson_title": "How Vibe Coding Is Different from Traditional Coding",
-    "introduction": "Welcome to \"How Vibe Coding Is Different from Traditional Coding\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-    "big_idea": "Traditional coding starts with technical details and syntax, which can be intimidating for beginners. Vibe Coding starts with your ideas and intentions, using AI and guidance to help you create without getting bogged down in technical complexity.",
-    "visuals": "Design a split-screen visual showing 'Traditional Approach' (left side: complex code, frustrated learner) versus 'Vibe Approach' (right side: idea-focused creation, happy learner). Include arrows showing the learning journey in each approach.",
-    "steps": [
-      "Step 1: Examine traditional coding's focus on syntax and rules",
-      "Step 2: Compare with Vibe Coding's focus on ideas and creativity",
-      "Step 3: Identify the key differences in learning approaches",
-      "Step 4: Understand how these differences benefit beginners",
-      "Step 5: Recognize the value of guided, supportive learning"
+    "lesson_title": "Overview of Vibe Coding Tools",
+    "introduction": "Now that you understand what Vibe Coding is and why it matters, it's time to explore the tools that make it possible. This lesson provides a comprehensive overview of the Vibe Coding ecosystem—from full-stack AI builders to AI-powered IDEs to autonomous coding agents.",
+    "big_idea": "The Vibe Coding ecosystem consists of three main categories of tools: Full-Stack AI Builders (like Bolt.new, Lovable, Replit Agent) that generate complete applications from descriptions; AI-First IDEs (like Cursor, Windsurf, Qoder) that enhance traditional coding with AI assistance; and Agentic Tools (like Devin, Claude Computer Use) that can autonomously complete complex development tasks. Each category serves different use cases, and understanding when to use which tool is a core Vibe Coding skill.",
+    "why_it_matters": "Choosing the wrong tool for your project can waste hours or even days. A simple landing page doesn't need an autonomous agent. A complex enterprise system might overwhelm a visual builder. By understanding the strengths and limitations of each tool category, you can make informed decisions that accelerate your development process.",
+    "key_concepts": [
+      "Full-Stack AI Builders: Generate complete apps from text descriptions (Bolt, Lovable, Replit)",
+      "AI-First IDEs: Traditional coding supercharged with AI (Cursor, Windsurf, Qoder)",
+      "Agentic Tools: Autonomous AI that completes multi-step tasks (Devin, Claude)",
+      "Tool selection criteria: Complexity, customization needs, deployment requirements",
+      "Hybrid workflows: Combining multiple tools for optimal results"
     ],
-    "example": "Traditional coding is like learning to cook by memorizing the chemical composition of every ingredient before making a sandwich. Vibe Coding is like learning to cook by starting with simple recipes that produce satisfying results, with understanding of the chemistry coming naturally through experience.",
-    "playground_activity": "In the playground section, create an interactive activity related to \"How Vibe Coding Is Different from Traditional Coding\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-    "reflection_question": "How does the concept of \"How Vibe Coding Is Different from Traditional Coding\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "real_world_example": "A solo founder building a SaaS product might start with Lovable to quickly prototype the UI and basic functionality. Once the concept is validated, she might move the codebase to Cursor for more fine-grained control and customization. For repetitive tasks like setting up authentication or payment integration, she might use an agentic tool. This hybrid approach leverages the strengths of each tool category.",
+    "practical_application": "In the upcoming lessons, you will get hands-on experience with tools from each category. You will build projects with Bolt.new and Lovable, write and refactor code with Cursor and Qoder, and understand how agentic tools like Devin work. By the end of this module, you will be able to assess any project and select the optimal tool or combination of tools.",
+    "reflection_question": "Think about a project you would like to build. Is it a simple website, a complex web application, or something in between? Which category of tools do you think would be most appropriate, and why?",
     "quiz": {
       "questions": [
-        "What is the main focus of How Vibe Coding Is Different from Traditional Coding?",
-        "How does this concept benefit beginners?",
-        "Is this concept part of Vibe Coding's core principles?",
-        "What is one practical application of this concept?",
-        "How does this concept build confidence in learners?"
+        "What are the three main categories of Vibe Coding tools?",
+        "Which tool category is best for generating complete apps from text descriptions?",
+        "What is a key advantage of AI-First IDEs over Full-Stack Builders?",
+        "When might you use an agentic tool instead of a visual builder?",
+        "What is a hybrid workflow in Vibe Coding?"
       ],
       "answers": [
-        "The specific concept covered in this lesson",
-        "It reduces anxiety and makes learning accessible",
-        "Yes, it's a core principle of Vibe Coding",
-        "Applying this concept in digital creation projects",
-        "By focusing on ideas and providing guidance rather than complexity"
+        "Full-Stack AI Builders, AI-First IDEs, and Agentic Tools",
+        "Full-Stack AI Builders like Bolt.new and Lovable",
+        "More fine-grained control and customization of the code",
+        "For complex multi-step tasks that require autonomous decision-making",
+        "Combining multiple tool categories to leverage the strengths of each"
       ]
     },
     "resources": {
       "video": {
-        "title": "Understanding How Vibe Coding Is Different from Traditional Coding - Vibe Coding Fundamentals",
-        "creator": "Vibe Coding Tutorials",
+        "title": "Vibe Coding Tools Comparison",
         "embed": true,
-        "reason": "Relevant video content for this lesson topic"
+        "reason": "Visual comparison of different Vibe Coding tool categories"
       },
       "extra_reading": [
-        "https://example.com/extra-resource-1 - Additional reading for this topic",
-        "https://example.com/extra-resource-2 - More resources for curious learners"
+        "https://bolt.new - Full-stack AI builder",
+        "https://cursor.sh - AI-first code editor",
+        "https://devin.ai - Autonomous AI developer"
       ]
     },
-    "summary": "In this lesson on \"How Vibe Coding Is Different from Traditional Coding\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+    "summary": "The Vibe Coding ecosystem includes Full-Stack AI Builders for rapid app generation, AI-First IDEs for enhanced traditional coding, and Agentic Tools for autonomous task completion. Selecting the right tool for your project is a core Vibe Coding skill. Many successful projects use a hybrid approach, leveraging multiple tools at different stages. In the next lesson, you will learn about AI-First development workflows that tie these tools together."
   },
   {
-    "course_title": "Vibe Coding",
-    "module_title": "Thinking Before Coding",
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 2: The Vibe Coding Ecosystem",
     "lesson_number": 4,
-    "lesson_title": "Learning to Think in Ideas, Not Code",
-    "introduction": "Welcome to \"Learning to Think in Ideas, Not Code\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-    "big_idea": "In Vibe Coding, you learn to think about what you want to create first, then use tools and guidance to make it happen. This approach builds confidence and helps you understand the purpose behind your digital creations.",
-    "visuals": "Show a lightbulb icon transforming into a simple digital product (like a website or app icon) with a thinking person in the background. Include a flow arrow from the lightbulb to the digital product.",
-    "steps": [
-      "Step 1: Understand the main concept of this lesson",
-      "Step 2: Learn how this concept applies to Vibe Coding",
-      "Step 3: See practical examples of this concept in action",
-      "Step 4: Practice applying this concept in the playground",
-      "Step 5: Reflect on how this fits into your learning journey"
+    "lesson_title": "AI-First Development Workflow",
+    "introduction": "Understanding tools is important, but knowing how to use them together in an effective workflow is what separates productive Vibe Coders from those who struggle. This lesson teaches you the AI-First development workflow—a systematic approach to building software with AI tools.",
+    "big_idea": "The AI-First development workflow follows a clear pattern: Describe, Generate, Evaluate, Refine, Deploy. You start by describing what you want in plain language, then generate code or an application using AI tools. You evaluate the output against your requirements, refine through iterative prompting, and finally deploy to production. This cycle can happen many times per day, enabling rapid iteration that was impossible with traditional development.",
+    "why_it_matters": "Without a structured workflow, Vibe Coding can feel chaotic. You might waste time regenerating the same code, lose track of what you've tried, or get stuck in unproductive loops. The AI-First workflow gives you a repeatable process that consistently produces results. It also helps you communicate with AI more effectively, which is the core skill that determines your success.",
+    "key_concepts": [
+      "Describe: Write clear, specific descriptions of what you want",
+      "Generate: Use AI tools to produce code or applications",
+      "Evaluate: Compare output against your requirements",
+      "Refine: Iterate through additional prompts and adjustments",
+      "Deploy: Push working code to production",
+      "Rapid iteration: Complete this cycle multiple times per day"
     ],
-    "example": "Instead of thinking 'I need to create a for loop to iterate through an array', in Vibe Coding you think 'I want to show a list of items on my webpage'. The tools and guidance help translate your idea into the necessary code.",
-    "playground_activity": "In the playground section, create an interactive activity related to \"Learning to Think in Ideas, Not Code\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-    "reflection_question": "How does the concept of \"Learning to Think in Ideas, Not Code\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "real_world_example": "Building a customer feedback widget: You DESCRIBE it as 'a floating button that opens a feedback form with star rating and text input.' You GENERATE it in Bolt.new. You EVALUATE and notice the button is too small on mobile. You REFINE by saying 'make the button larger on mobile screens and add a subtle animation.' You GENERATE again and EVALUATE—now it looks great. You DEPLOY to your website. Total time: 20 minutes. Traditional development: 2-3 days.",
+    "practical_application": "From this point forward, you will apply this workflow to every project you build in this course. You will practice writing clear descriptions, evaluating AI output critically, and refining through effective prompts. These skills transfer across all Vibe Coding tools and will remain valuable even as specific tools evolve.",
+    "reflection_question": "Think about a recent time you tried to explain something to another person. How specific were you? Did they understand exactly what you meant? The same clarity is needed when describing projects to AI.",
     "quiz": {
       "questions": [
-        "What is the main focus of Learning to Think in Ideas, Not Code?",
-        "How does this concept benefit beginners?",
-        "Is this concept part of Vibe Coding's core principles?",
-        "What is one practical application of this concept?",
-        "How does this concept build confidence in learners?"
+        "What are the five steps of the AI-First development workflow?",
+        "Why is the Evaluate step important?",
+        "How often can the workflow cycle be repeated?",
+        "What happens during the Refine step?",
+        "How does the AI-First workflow compare to traditional development speed?"
       ],
       "answers": [
-        "The specific concept covered in this lesson",
-        "It reduces anxiety and makes learning accessible",
-        "Yes, it's a core principle of Vibe Coding",
-        "Applying this concept in digital creation projects",
-        "By focusing on ideas and providing guidance rather than complexity"
+        "Describe, Generate, Evaluate, Refine, Deploy",
+        "To compare output against requirements and identify what needs improvement",
+        "Multiple times per day, enabling rapid iteration",
+        "You provide additional prompts and adjustments to improve the output",
+        "AI-First workflow can be 10x faster for many projects"
       ]
     },
     "resources": {
       "video": {
-        "title": "Understanding Learning to Think in Ideas, Not Code - Vibe Coding Fundamentals",
-        "creator": "Vibe Coding Tutorials",
+        "title": "AI-First Development in Action",
         "embed": true,
-        "reason": "Relevant video content for this lesson topic"
+        "reason": "Watch the workflow applied to a real project"
       },
       "extra_reading": [
-        "https://example.com/extra-resource-1 - Additional reading for this topic",
-        "https://example.com/extra-resource-2 - More resources for curious learners"
+        "https://docs.bolt.new - Bolt.new documentation",
+        "https://docs.lovable.dev - Lovable documentation"
       ]
     },
-    "summary": "In this lesson on \"Learning to Think in Ideas, Not Code\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+    "summary": "The AI-First development workflow—Describe, Generate, Evaluate, Refine, Deploy—provides a repeatable process for building software with AI. This workflow enables rapid iteration and consistent results. The key is writing clear descriptions and evaluating output critically. In the next module, you will apply this workflow using Full-Stack AI Builders to create complete applications."
   },
   {
-    "course_title": "Vibe Coding",
-    "module_title": "Thinking Before Coding",
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 3: Full-Stack AI Builders",
     "lesson_number": 5,
-    "lesson_title": "Turning Simple Ideas into Digital Instructions",
-    "introduction": "Welcome to \"Turning Simple Ideas into Digital Instructions\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-    "big_idea": "Vibe Coding teaches you to break down your ideas into simple steps that can be translated into digital form. This process helps you see how your creative ideas can become real digital products.",
-    "visuals": "Create a step-by-step visual showing an idea (like 'I want to track my expenses') flowing through a simple process that results in a digital solution. Include friendly icons and clear arrows.",
-    "steps": [
-      "Step 1: Understand the main concept of this lesson",
-      "Step 2: Learn how this concept applies to Vibe Coding",
-      "Step 3: See practical examples of this concept in action",
-      "Step 4: Practice applying this concept in the playground",
-      "Step 5: Reflect on how this fits into your learning journey"
+    "lesson_title": "Bolt.new and Lovable Deep Dive",
+    "introduction": "It's time to get hands-on with the most powerful Full-Stack AI Builders available today. In this lesson, you will learn to use Bolt.new and Lovable—two tools that can generate complete, deployable web applications from simple text descriptions.",
+    "big_idea": "Bolt.new and Lovable represent the cutting edge of Full-Stack AI Builders. Bolt.new (by StackBlitz) runs entirely in the browser, generates React/Vue/Svelte applications, and can deploy directly to production. Lovable focuses on beautiful, production-ready applications with built-in authentication, databases, and payment integration. Both tools allow you to describe what you want and receive a working application within minutes.",
+    "why_it_matters": "These tools eliminate the biggest bottleneck in software development: the gap between idea and prototype. Previously, turning an idea into something you could show investors, customers, or colleagues required weeks of development. Now it takes minutes. This changes how businesses validate ideas, how entrepreneurs test markets, and how products evolve.",
+    "key_concepts": [
+      "Bolt.new: Browser-based, React/Vue/Svelte, instant preview and deployment",
+      "Lovable: Production-focused, built-in auth/database/payments",
+      "Prompt structure: Be specific about features, design, and behavior",
+      "Iteration technique: Build incrementally, adding features one at a time",
+      "Export and customization: Move generated code to other environments when needed"
     ],
-    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-    "playground_activity": "In the playground section, create an interactive activity related to \"Turning Simple Ideas into Digital Instructions\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-    "reflection_question": "How does the concept of \"Turning Simple Ideas into Digital Instructions\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "real_world_example": "Building a habit tracker with Bolt.new: 'Create a habit tracking app where users can add habits, mark them complete each day, and see a weekly streak counter. Use a clean, minimal design with green checkmarks for completed habits.' Bolt generates the app in 30 seconds. You click 'Deploy' and have a live URL to share. You then refine: 'Add a confetti animation when a 7-day streak is achieved.' The app updates instantly.",
+    "practical_application": "Open Bolt.new in your browser right now. Try building something simple—a personal portfolio, a landing page for a fictional product, or a simple calculator. Notice how the tool interprets your descriptions and generates working code. Pay attention to what works well in your prompts and what doesn't.",
+    "reflection_question": "If you could build any web application in the next 30 minutes, what would it be? Write a one-paragraph description that you could paste directly into Bolt.new.",
     "quiz": {
       "questions": [
-        "What is the main focus of Turning Simple Ideas into Digital Instructions?",
-        "How does this concept benefit beginners?",
-        "Is this concept part of Vibe Coding's core principles?",
-        "What is one practical application of this concept?",
-        "How does this concept build confidence in learners?"
+        "What technology does Bolt.new primarily generate?",
+        "What built-in features does Lovable provide?",
+        "Why is the idea-to-prototype gap important to close?",
+        "What is the recommended approach for building complex applications?",
+        "Can you export code from Bolt.new to use elsewhere?"
       ],
       "answers": [
-        "The specific concept covered in this lesson",
-        "It reduces anxiety and makes learning accessible",
-        "Yes, it's a core principle of Vibe Coding",
-        "Applying this concept in digital creation projects",
-        "By focusing on ideas and providing guidance rather than complexity"
+        "React, Vue, and Svelte applications",
+        "Authentication, databases, and payment integration",
+        "It accelerates validation of ideas with investors, customers, and colleagues",
+        "Build incrementally, adding features one at a time",
+        "Yes, you can export and customize the generated code"
       ]
     },
     "resources": {
       "video": {
-        "title": "Understanding Turning Simple Ideas into Digital Instructions - Vibe Coding Fundamentals",
-        "creator": "Vibe Coding Tutorials",
+        "title": "Building a Complete App with Bolt.new",
         "embed": true,
-        "reason": "Relevant video content for this lesson topic"
+        "reason": "Step-by-step demonstration of building with Bolt.new"
       },
       "extra_reading": [
-        "https://example.com/extra-resource-1 - Additional reading for this topic",
-        "https://example.com/extra-resource-2 - More resources for curious learners"
+        "https://bolt.new - Try Bolt.new now",
+        "https://lovable.dev - Try Lovable now"
       ]
     },
-    "summary": "In this lesson on \"Turning Simple Ideas into Digital Instructions\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+    "summary": "Bolt.new and Lovable are Full-Stack AI Builders that generate complete web applications from text descriptions. Bolt.new runs in the browser and deploys instantly, while Lovable focuses on production-ready applications with built-in features. The key to using these tools effectively is writing clear, specific prompts and building incrementally. In the next lesson, you will explore Replit Agent and V0 for additional building capabilities."
   },
   {
-    "course_title": "Vibe Coding",
-    "module_title": "Thinking Before Coding",
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 3: Full-Stack AI Builders",
     "lesson_number": 6,
-    "lesson_title": "Understanding Intent in Vibe Coding",
-    "introduction": "Welcome to \"Understanding Intent in Vibe Coding\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-    "big_idea": "Intent is the 'why' behind your digital creation. In Vibe Coding, understanding your intent helps you make better decisions about your project and communicate more effectively with AI tools.",
-    "visuals": "Design a visual showing a person with a clear goal (like 'I want to connect with friends') and how this intent guides the creation of a digital solution. Include a compass or roadmap metaphor.",
-    "steps": [
-      "Step 1: Understand the main concept of this lesson",
-      "Step 2: Learn how this concept applies to Vibe Coding",
-      "Step 3: See practical examples of this concept in action",
-      "Step 4: Practice applying this concept in the playground",
-      "Step 5: Reflect on how this fits into your learning journey"
+    "lesson_title": "Replit Agent and V0 Walkthrough",
+    "introduction": "Continuing our exploration of Full-Stack AI Builders, this lesson covers two additional powerful tools: Replit Agent and V0 by Vercel. Each brings unique capabilities that complement Bolt.new and Lovable.",
+    "big_idea": "Replit Agent is an autonomous coding assistant that can plan, build, and debug entire applications. Unlike simple generators, it can reason about multi-step projects and make decisions about architecture. V0 by Vercel specializes in generating beautiful UI components using React and Tailwind CSS. Together with Bolt and Lovable, these tools give you a complete arsenal for any web development project.",
+    "why_it_matters": "Different projects have different needs. A complex backend system might benefit from Replit Agent's reasoning capabilities. A marketing landing page might be fastest with V0's beautiful component library. Knowing when to use each tool—and how to combine them—dramatically increases your productivity and the quality of your output.",
+    "key_concepts": [
+      "Replit Agent: Autonomous, can plan and execute multi-step projects",
+      "V0: UI-focused, generates React/Tailwind components",
+      "Tool selection: Match tool capabilities to project requirements",
+      "Component integration: Use V0 components in larger projects",
+      "Iteration strategy: Know when to regenerate vs. when to manually adjust"
     ],
-    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-    "playground_activity": "In the playground section, create an interactive activity related to \"Understanding Intent in Vibe Coding\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-    "reflection_question": "How does the concept of \"Understanding Intent in Vibe Coding\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "real_world_example": "Building a SaaS dashboard: You might use V0 to generate individual UI components—a pricing table, a feature grid, a testimonial carousel. Then you use Replit Agent to assemble these into a cohesive application with routing, state management, and backend integration. This hybrid approach gives you the best of both tools.",
+    "practical_application": "Visit v0.dev and try generating a component: 'A pricing table with three tiers: Free, Pro, and Enterprise. Include feature comparisons and highlighted recommended tier.' Notice how V0 produces polished, responsive components. Then try Replit Agent with a more complex request and observe how it breaks down the project into steps.",
+    "reflection_question": "Think about a project that would require multiple types of work—some UI-heavy, some logic-heavy. How might you divide the work across different Vibe Coding tools?",
     "quiz": {
       "questions": [
-        "What is the main focus of Understanding Intent in Vibe Coding?",
-        "How does this concept benefit beginners?",
-        "Is this concept part of Vibe Coding's core principles?",
-        "What is one practical application of this concept?",
-        "How does this concept build confidence in learners?"
+        "What makes Replit Agent different from simpler code generators?",
+        "What does V0 specialize in generating?",
+        "When might you combine V0 and Replit Agent on the same project?",
+        "What CSS framework does V0 primarily use?",
+        "Why is tool selection important in Vibe Coding?"
       ],
       "answers": [
-        "The specific concept covered in this lesson",
-        "It reduces anxiety and makes learning accessible",
-        "Yes, it's a core principle of Vibe Coding",
-        "Applying this concept in digital creation projects",
-        "By focusing on ideas and providing guidance rather than complexity"
+        "It can reason about multi-step projects and make architectural decisions",
+        "Beautiful UI components using React and Tailwind CSS",
+        "When you need polished UI components integrated into a complex application",
+        "Tailwind CSS",
+        "Different tools have different strengths; matching tool to project increases productivity"
       ]
     },
     "resources": {
       "video": {
-        "title": "Understanding Understanding Intent in Vibe Coding - Vibe Coding Fundamentals",
-        "creator": "Vibe Coding Tutorials",
+        "title": "Replit Agent vs Traditional Development",
         "embed": true,
-        "reason": "Relevant video content for this lesson topic"
+        "reason": "See how Replit Agent approaches complex projects"
       },
       "extra_reading": [
-        "https://example.com/extra-resource-1 - Additional reading for this topic",
-        "https://example.com/extra-resource-2 - More resources for curious learners"
+        "https://replit.com/agent - Try Replit Agent",
+        "https://v0.dev - Try V0 by Vercel"
       ]
     },
-    "summary": "In this lesson on \"Understanding Intent in Vibe Coding\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+    "summary": "Replit Agent provides autonomous reasoning for complex projects, while V0 excels at generating beautiful UI components. Combining these tools with Bolt.new and Lovable gives you a complete toolkit for any web development project. The key is matching tool capabilities to project requirements. In the next module, you will learn to use AI-First IDEs for more precise control over your code."
   },
   {
-    "course_title": "Vibe Coding",
-    "module_title": "Working with AI as a Creative Partner",
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 4: AI-First IDEs",
     "lesson_number": 7,
-    "lesson_title": "What AI Really Is (In Simple Terms)",
-    "introduction": "Welcome to \"What AI Really Is (In Simple Terms)\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-    "big_idea": "AI (Artificial Intelligence) is like a very helpful assistant that can process information and help you with tasks. In Vibe Coding, AI serves as a tool to help you create digital products more efficiently.",
-    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
-    "steps": [
-      "Step 1: Understand the main concept of this lesson",
-      "Step 2: Learn how this concept applies to Vibe Coding",
-      "Step 3: See practical examples of this concept in action",
-      "Step 4: Practice applying this concept in the playground",
-      "Step 5: Reflect on how this fits into your learning journey"
+    "lesson_title": "Cursor IDE Mastery",
+    "introduction": "While Full-Stack AI Builders are powerful for generating complete applications, sometimes you need more precise control. AI-First IDEs like Cursor give you the traditional coding experience supercharged with AI capabilities. This lesson makes you proficient with Cursor—currently the most popular AI-first code editor.",
+    "big_idea": "Cursor is VS Code rebuilt from the ground up for AI-first development. It understands your entire codebase, can write and edit code based on natural language instructions, and catches errors before you make them. Unlike separate AI tools, Cursor integrates AI directly into your editing workflow—you can select code and ask questions, generate new code in context, and refactor entire files with simple prompts.",
+    "why_it_matters": "Full-Stack Builders are great for starting projects, but real-world software requires ongoing maintenance, customization, and debugging. Cursor gives you the control you need while retaining AI assistance. It's also essential when working with existing codebases, integrating with specific APIs, or building features that builders don't support out of the box.",
+    "key_concepts": [
+      "Cmd+K (Ctrl+K): Generate or edit code from natural language",
+      "Cmd+L (Ctrl+L): Chat with AI about your codebase",
+      "Tab completion: AI-powered autocomplete that understands context",
+      "Codebase awareness: Ask questions about any file in your project",
+      "Multi-file edits: Refactor across multiple files with a single prompt"
     ],
-    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-    "playground_activity": "In the playground section, create an interactive activity related to \"What AI Really Is (In Simple Terms)\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-    "reflection_question": "How does the concept of \"What AI Really Is (In Simple Terms)\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "real_world_example": "You have a React app generated by Bolt.new but need to add a specific API integration. Open the project in Cursor, select the component where you want to add the integration, press Cmd+K, and type 'Add a function to fetch user data from /api/users and display it in a table below.' Cursor generates the code in context, aware of your existing components and styling.",
+    "practical_application": "Download Cursor from cursor.sh and open any existing project. Try these exercises: 1) Select a function and ask 'Explain what this does.' 2) Press Cmd+K and type 'Add error handling to this function.' 3) Open the chat panel and ask 'Where is the database connection configured in this project?' Notice how Cursor understands context.",
+    "reflection_question": "When would you choose to use Cursor instead of a Full-Stack Builder? What types of tasks require the precision that an IDE provides?",
     "quiz": {
       "questions": [
-        "What is the main focus of What AI Really Is (In Simple Terms)?",
-        "How does this concept benefit beginners?",
-        "Is this concept part of Vibe Coding's core principles?",
-        "What is one practical application of this concept?",
-        "How does this concept build confidence in learners?"
+        "What keyboard shortcut generates or edits code in Cursor?",
+        "What is unique about Cursor compared to using ChatGPT for coding?",
+        "When is Cursor more appropriate than Full-Stack Builders?",
+        "What does 'codebase awareness' mean in Cursor?",
+        "Can Cursor edit multiple files at once?"
       ],
       "answers": [
-        "The specific concept covered in this lesson",
-        "It reduces anxiety and makes learning accessible",
-        "Yes, it's a core principle of Vibe Coding",
-        "Applying this concept in digital creation projects",
-        "By focusing on ideas and providing guidance rather than complexity"
+        "Cmd+K (or Ctrl+K on Windows)",
+        "Cursor understands your entire codebase and integrates directly into editing",
+        "When you need precise control, existing codebase work, or custom integrations",
+        "Cursor can understand and answer questions about any file in your project",
+        "Yes, it can refactor across multiple files with a single prompt"
       ]
     },
     "resources": {
       "video": {
-        "title": "Understanding What AI Really Is (In Simple Terms) - Vibe Coding Fundamentals",
-        "creator": "Vibe Coding Tutorials",
+        "title": "Cursor IDE Complete Tutorial",
         "embed": true,
-        "reason": "Relevant video content for this lesson topic"
+        "reason": "Comprehensive walkthrough of Cursor features"
       },
       "extra_reading": [
-        "https://example.com/extra-resource-1 - Additional reading for this topic",
-        "https://example.com/extra-resource-2 - More resources for curious learners"
+        "https://cursor.sh - Download Cursor",
+        "https://docs.cursor.sh - Official documentation"
       ]
     },
-    "summary": "In this lesson on \"What AI Really Is (In Simple Terms)\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+    "summary": "Cursor is an AI-first IDE that combines traditional coding precision with powerful AI capabilities. Key features include Cmd+K for code generation, codebase-aware chat, and multi-file editing. Use Cursor when you need more control than Full-Stack Builders provide, especially for existing codebases and custom integrations. In the next lesson, you will explore other AI-first IDEs including Windsurf and Qoder."
   },
   {
-    "course_title": "Vibe Coding",
-    "module_title": "Working with AI as a Creative Partner",
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 4: AI-First IDEs",
     "lesson_number": 8,
-    "lesson_title": "How AI Helps in Vibe Coding",
-    "introduction": "Welcome to \"How AI Helps in Vibe Coding\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-    "big_idea": "AI in Vibe Coding acts as a guide and helper, suggesting approaches, catching errors, and helping you implement your ideas without needing to know complex technical details.",
-    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
-    "steps": [
-      "Step 1: Understand the main concept of this lesson",
-      "Step 2: Learn how this concept applies to Vibe Coding",
-      "Step 3: See practical examples of this concept in action",
-      "Step 4: Practice applying this concept in the playground",
-      "Step 5: Reflect on how this fits into your learning journey"
+    "lesson_title": "Windsurf, Qoder, and Other AI IDEs",
+    "introduction": "Cursor isn't the only AI-first IDE. This lesson explores the alternatives—Windsurf, Qoder, and others—so you can choose the right tool for your workflow and preferences.",
+    "big_idea": "The AI-first IDE market is rapidly evolving. Windsurf (by Codeium) emphasizes 'flows'—multi-step AI actions that can be chained together. Qoder focuses on deep understanding of project context and intelligent code suggestions. GitHub Copilot remains integrated into VS Code as an AI pair programmer. Each tool has different strengths, and the best choice depends on your workflow, the types of projects you build, and your personal preferences.",
+    "why_it_matters": "Tool familiarity creates productivity. Investing time to understand multiple options helps you select the one that matches how you think and work. It also means you're not dependent on any single tool—if one becomes unavailable or changes pricing, you can switch without losing your skills.",
+    "key_concepts": [
+      "Windsurf: Emphasizes flows (multi-step AI actions)",
+      "Qoder: Deep project understanding and intelligent suggestions",
+      "GitHub Copilot: Integrated into VS Code as AI pair programmer",
+      "Comparison factors: Speed, accuracy, context understanding, pricing",
+      "Migration: Skills transfer between AI IDEs with minimal adjustment"
     ],
-    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-    "playground_activity": "In the playground section, create an interactive activity related to \"How AI Helps in Vibe Coding\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-    "reflection_question": "How does the concept of \"How AI Helps in Vibe Coding\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "real_world_example": "A developer uses Windsurf for projects requiring complex refactoring workflows—the ability to chain multiple AI actions saves time. The same developer prefers Qoder for greenfield projects where understanding new patterns quickly is important. For quick scripts and one-off files, GitHub Copilot in VS Code works fine. This flexibility comes from understanding multiple tools.",
+    "practical_application": "If you have access, try the same task in multiple AI IDEs. Generate a simple function, refactor it, then add tests. Notice how each tool approaches the task differently. Even if you settle on one primary tool, this comparison helps you understand what's possible.",
+    "reflection_question": "What aspects of an IDE matter most to you? Speed of suggestions? Accuracy? Price? Interface design? How would you weight these factors when choosing a tool?",
     "quiz": {
       "questions": [
-        "What is the main focus of How AI Helps in Vibe Coding?",
-        "How does this concept benefit beginners?",
-        "Is this concept part of Vibe Coding's core principles?",
-        "What is one practical application of this concept?",
-        "How does this concept build confidence in learners?"
+        "What is Windsurf's distinguishing feature?",
+        "What does Qoder focus on?",
+        "Where is GitHub Copilot integrated?",
+        "Why is it valuable to know multiple AI IDEs?",
+        "Do skills transfer between AI IDEs?"
       ],
       "answers": [
-        "The specific concept covered in this lesson",
-        "It reduces anxiety and makes learning accessible",
-        "Yes, it's a core principle of Vibe Coding",
-        "Applying this concept in digital creation projects",
-        "By focusing on ideas and providing guidance rather than complexity"
+        "Flows—multi-step AI actions that can be chained together",
+        "Deep understanding of project context and intelligent suggestions",
+        "VS Code as an AI pair programmer",
+        "It provides tool flexibility and independence from any single platform",
+        "Yes, core skills transfer with minimal adjustment"
       ]
     },
     "resources": {
       "video": {
-        "title": "Understanding How AI Helps in Vibe Coding - Vibe Coding Fundamentals",
-        "creator": "Vibe Coding Tutorials",
+        "title": "AI IDE Comparison 2025",
         "embed": true,
-        "reason": "Relevant video content for this lesson topic"
+        "reason": "Side-by-side comparison of major AI IDEs"
       },
       "extra_reading": [
-        "https://example.com/extra-resource-1 - Additional reading for this topic",
-        "https://example.com/extra-resource-2 - More resources for curious learners"
+        "https://codeium.com/windsurf - Try Windsurf",
+        "https://github.com/features/copilot - GitHub Copilot"
       ]
     },
-    "summary": "In this lesson on \"How AI Helps in Vibe Coding\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+    "summary": "The AI-first IDE landscape includes Cursor, Windsurf, Qoder, and GitHub Copilot, each with different strengths. Windsurf excels at flows, Qoder at context understanding, and Copilot at VS Code integration. Understanding multiple tools provides flexibility and prevents vendor lock-in. In the next module, you will explore Agentic Coding Tools that take AI assistance to the next level."
   },
   {
-    "course_title": "Vibe Coding",
-    "module_title": "Working with AI as a Creative Partner",
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 5: Agentic Coding Tools",
     "lesson_number": 9,
-    "lesson_title": "Talking to AI Clearly and Effectively",
-    "introduction": "Welcome to \"Talking to AI Clearly and Effectively\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-    "big_idea": "Effective communication with AI involves being clear about what you want to achieve. In Vibe Coding, you'll learn simple techniques to get the best results from AI assistance.",
-    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
-    "steps": [
-      "Step 1: Understand the main concept of this lesson",
-      "Step 2: Learn how this concept applies to Vibe Coding",
-      "Step 3: See practical examples of this concept in action",
-      "Step 4: Practice applying this concept in the playground",
-      "Step 5: Reflect on how this fits into your learning journey"
+    "lesson_title": "Devin, OpenHands, and Claude Computer Use",
+    "introduction": "Welcome to the frontier of Vibe Coding: Agentic Tools. These are AI systems that don't just respond to prompts—they autonomously plan, execute, and iterate on complex development tasks. This lesson introduces you to Devin, OpenHands, and Claude Computer Use.",
+    "big_idea": "Agentic coding tools represent a fundamental shift from AI assistance to AI autonomy. Devin, announced as 'the first AI software engineer,' can take a ticket from a project board, understand requirements, write code, test it, and submit a pull request—all autonomously. OpenHands is an open-source alternative with similar capabilities. Claude Computer Use allows Claude to directly interact with your computer to complete development tasks. These tools don't just suggest code; they complete entire workflows.",
+    "why_it_matters": "Agentic tools handle the repetitive, time-consuming parts of development that previously required human attention. Setting up boilerplate, configuring environments, debugging common errors, implementing standard features—these tasks can now be delegated to agents while you focus on architecture, design, and business logic. This multiplies your effective capacity.",
+    "key_concepts": [
+      "Autonomous execution: Agents complete multi-step tasks without constant guidance",
+      "Devin: Commercial AI software engineer for complex projects",
+      "OpenHands: Open-source alternative to Devin",
+      "Claude Computer Use: Claude directly interacting with your computer",
+      "Task delegation: Identifying which tasks are suitable for agents"
     ],
-    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-    "playground_activity": "In the playground section, create an interactive activity related to \"Talking to AI Clearly and Effectively\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-    "reflection_question": "How does the concept of \"Talking to AI Clearly and Effectively\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "real_world_example": "A team lead assigns a ticket: 'Add a forgot password feature with email verification.' With Devin, she assigns this ticket and checks back in an hour. Devin has analyzed the existing auth system, created the necessary routes and database changes, integrated with the email service, written tests, and submitted a PR for review. The team lead reviews and merges. What would have taken a junior developer a day takes an hour of review time.",
+    "practical_application": "While tools like Devin require enterprise access, you can experiment with OpenHands locally or use Claude's standard interface to understand how agents think. Try describing a multi-step task and ask Claude to break it into steps, explain its reasoning, and provide implementation guidance. This helps you understand what agents do internally.",
+    "reflection_question": "What repetitive development tasks do you (or would you) regularly encounter? Which of these could be safely delegated to an autonomous agent? What would you need to verify before accepting agent-generated code?",
     "quiz": {
       "questions": [
-        "What is the main focus of Talking to AI Clearly and Effectively?",
-        "How does this concept benefit beginners?",
-        "Is this concept part of Vibe Coding's core principles?",
-        "What is one practical application of this concept?",
-        "How does this concept build confidence in learners?"
+        "What distinguishes agentic tools from regular AI coding assistants?",
+        "What is Devin described as?",
+        "What is OpenHands?",
+        "What can Claude Computer Use do?",
+        "What types of tasks are best suited for agentic tools?"
       ],
       "answers": [
-        "The specific concept covered in this lesson",
-        "It reduces anxiety and makes learning accessible",
-        "Yes, it's a core principle of Vibe Coding",
-        "Applying this concept in digital creation projects",
-        "By focusing on ideas and providing guidance rather than complexity"
+        "They autonomously plan, execute, and iterate rather than just responding to prompts",
+        "The first AI software engineer",
+        "An open-source alternative to Devin",
+        "Directly interact with your computer to complete development tasks",
+        "Repetitive, well-defined tasks like boilerplate setup and standard feature implementation"
       ]
     },
     "resources": {
       "video": {
-        "title": "Understanding Talking to AI Clearly and Effectively - Vibe Coding Fundamentals",
-        "creator": "Vibe Coding Tutorials",
+        "title": "Devin AI Software Engineer Demo",
         "embed": true,
-        "reason": "Relevant video content for this lesson topic"
+        "reason": "See autonomous development in action"
       },
       "extra_reading": [
-        "https://example.com/extra-resource-1 - Additional reading for this topic",
-        "https://example.com/extra-resource-2 - More resources for curious learners"
+        "https://devin.ai - Devin website",
+        "https://github.com/All-Hands-AI/OpenHands - OpenHands repository"
       ]
     },
-    "summary": "In this lesson on \"Talking to AI Clearly and Effectively\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+    "summary": "Agentic coding tools like Devin, OpenHands, and Claude Computer Use represent the shift from AI assistance to AI autonomy. These tools can complete entire development workflows without constant human guidance. Best suited for repetitive and well-defined tasks, they multiply your effective capacity by handling time-consuming work while you focus on higher-level decisions. In the next lesson, you will learn how to integrate these tools into real-world workflows."
   },
   {
-    "course_title": "Vibe Coding",
-    "module_title": "Vibe Coding in Real Life",
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 5: Agentic Coding Tools",
     "lesson_number": 10,
-    "lesson_title": "Real Examples of Vibe Coding",
-    "introduction": "Welcome to \"Real Examples of Vibe Coding\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-    "big_idea": "Real examples show how Vibe Coding principles have been applied to create actual digital products. These examples demonstrate the power of focusing on ideas and using guidance tools.",
-    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
-    "steps": [
-      "Step 1: Understand the main concept of this lesson",
-      "Step 2: Learn how this concept applies to Vibe Coding",
-      "Step 3: See practical examples of this concept in action",
-      "Step 4: Practice applying this concept in the playground",
-      "Step 5: Reflect on how this fits into your learning journey"
+    "lesson_title": "Real-World Agentic Workflows",
+    "introduction": "Understanding agentic tools is one thing; integrating them effectively into real-world workflows is another. This lesson provides practical strategies for using agents in production environments.",
+    "big_idea": "Effective agentic workflows require clear task definition, appropriate guardrails, and systematic review processes. The goal is not to replace human judgment but to automate predictable work while maintaining quality control. The best teams use agents for high-volume, well-defined tasks while reserving human attention for architecture decisions, code review, and complex debugging.",
+    "why_it_matters": "Poorly implemented agentic workflows can create more problems than they solve—generating code that passes tests but has security vulnerabilities, introducing subtle bugs that take days to diagnose, or creating technical debt that compounds over time. Learning to use agents effectively means knowing when to trust them and when to intervene.",
+    "key_concepts": [
+      "Task specification: Clear, detailed requirements reduce agent errors",
+      "Guardrails: Automated checks that catch common issues",
+      "Review processes: Human verification before merging agent code",
+      "Feedback loops: Improving agent performance through corrections",
+      "Hybrid workflows: Combining agent work with human refinement"
     ],
-    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-    "playground_activity": "In the playground section, create an interactive activity related to \"Real Examples of Vibe Coding\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-    "reflection_question": "How does the concept of \"Real Examples of Vibe Coding\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "real_world_example": "A startup uses agentic workflows for all routine development: updating dependencies, adding CRUD endpoints, writing basic tests. Each agent-generated PR goes through automated linting and security scanning, then a quick human review focused on business logic and integration. The CTO estimates this saves 40 hours per week while maintaining code quality.",
+    "practical_application": "Design an agentic workflow for a specific type of task you regularly encounter. Define: 1) What exactly the agent should do, 2) What checks should run automatically, 3) What a human should verify, 4) How feedback should be incorporated. This framework applies to any agentic tool you use.",
+    "reflection_question": "What safeguards would you want before trusting agent-generated code in a production system? How would you balance speed gains against the risk of subtle bugs?",
     "quiz": {
       "questions": [
-        "What is the main focus of Real Examples of Vibe Coding?",
-        "How does this concept benefit beginners?",
-        "Is this concept part of Vibe Coding's core principles?",
-        "What is one practical application of this concept?",
-        "How does this concept build confidence in learners?"
+        "What three elements do effective agentic workflows require?",
+        "Why are guardrails important in agentic workflows?",
+        "What should humans focus on reviewing in agent-generated code?",
+        "How can agent performance be improved over time?",
+        "What is a hybrid workflow?"
       ],
       "answers": [
-        "The specific concept covered in this lesson",
-        "It reduces anxiety and makes learning accessible",
-        "Yes, it's a core principle of Vibe Coding",
-        "Applying this concept in digital creation projects",
-        "By focusing on ideas and providing guidance rather than complexity"
+        "Clear task definition, appropriate guardrails, and systematic review processes",
+        "They catch common issues automatically before human review",
+        "Business logic and integration concerns",
+        "Through feedback loops—correcting errors and providing guidance",
+        "Combining agent work with human refinement"
       ]
     },
     "resources": {
       "video": {
-        "title": "Understanding Real Examples of Vibe Coding - Vibe Coding Fundamentals",
-        "creator": "Vibe Coding Tutorials",
+        "title": "Agentic Workflows in Production",
         "embed": true,
-        "reason": "Relevant video content for this lesson topic"
+        "reason": "Real team case study of agentic workflow implementation"
       },
       "extra_reading": [
-        "https://example.com/extra-resource-1 - Additional reading for this topic",
-        "https://example.com/extra-resource-2 - More resources for curious learners"
+        "https://docs.devin.ai - Devin workflow documentation"
       ]
     },
-    "summary": "In this lesson on \"Real Examples of Vibe Coding\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+    "summary": "Effective agentic workflows combine clear task specification, automated guardrails, and human review. The goal is automating predictable work while maintaining quality control. Best practices include detailed requirements, automated checks, and focused human review. In the next module, you will apply everything you've learned to real-world deployment scenarios."
   },
   {
-    "course_title": "Vibe Coding",
-    "module_title": "Vibe Coding in Real Life",
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 6: Real-World Workflows",
     "lesson_number": 11,
-    "lesson_title": "Building Simple Things Without Fear",
-    "introduction": "Welcome to \"Building Simple Things Without Fear\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-    "big_idea": "Vibe Coding creates a safe environment for experimentation where mistakes are learning opportunities. This approach helps you build confidence while creating real digital products.",
-    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
-    "steps": [
-      "Step 1: Understand the main concept of this lesson",
-      "Step 2: Learn how this concept applies to Vibe Coding",
-      "Step 3: See practical examples of this concept in action",
-      "Step 4: Practice applying this concept in the playground",
-      "Step 5: Reflect on how this fits into your learning journey"
+    "lesson_title": "From Prototype to Production with Vercel and Supabase",
+    "introduction": "Building software is only valuable if people can use it. This lesson teaches you how to deploy your Vibe-coded projects to production using Vercel for hosting and Supabase for backend services.",
+    "big_idea": "The Vibe Coding stack increasingly standardizes on Vercel (for frontend deployment and serverless functions) and Supabase (for database, authentication, and storage). Both platforms are designed for rapid deployment—you can go from local development to production URL in minutes. Understanding this stack means you can take any project from idea to live product without traditional DevOps complexity.",
+    "why_it_matters": "A prototype sitting on your laptop doesn't prove anything. Shipping to production lets you get real user feedback, validate ideas with actual usage, and build a portfolio of live projects. The ability to deploy quickly also enables experimentation—you can try multiple approaches and see what works rather than committing to one path.",
+    "key_concepts": [
+      "Vercel: Frontend hosting, automatic deployments from Git",
+      "Supabase: PostgreSQL database, authentication, storage, realtime subscriptions",
+      "Environment variables: Secure configuration for API keys and secrets",
+      "Preview deployments: Test changes before going to production",
+      "Monitoring: Basic observability for production applications"
     ],
-    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-    "playground_activity": "In the playground section, create an interactive activity related to \"Building Simple Things Without Fear\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-    "reflection_question": "How does the concept of \"Building Simple Things Without Fear\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "real_world_example": "You've built a feedback widget with Bolt.new. To deploy: 1) Push the code to GitHub, 2) Connect the repo to Vercel (one click), 3) Set up a Supabase project for storing feedback, 4) Add Supabase keys as Vercel environment variables, 5) Deploy. Your widget is now live with a real database. Total time: 10 minutes.",
+    "practical_application": "Create a Vercel account (free tier is sufficient) and a Supabase project. Deploy any project you've built in this course. Go through the entire process: connecting Git, setting environment variables, verifying the production URL works. This hands-on experience is essential.",
+    "reflection_question": "How does the ability to deploy in minutes change how you approach building projects? Would you experiment more if deployment wasn't a barrier?",
     "quiz": {
       "questions": [
-        "What is the main focus of Building Simple Things Without Fear?",
-        "How does this concept benefit beginners?",
-        "Is this concept part of Vibe Coding's core principles?",
-        "What is one practical application of this concept?",
-        "How does this concept build confidence in learners?"
+        "What does Vercel provide for Vibe Coding projects?",
+        "What does Supabase provide?",
+        "Why are environment variables important?",
+        "What are preview deployments?",
+        "How long does deploying a project typically take with this stack?"
       ],
       "answers": [
-        "The specific concept covered in this lesson",
-        "It reduces anxiety and makes learning accessible",
-        "Yes, it's a core principle of Vibe Coding",
-        "Applying this concept in digital creation projects",
-        "By focusing on ideas and providing guidance rather than complexity"
+        "Frontend hosting and automatic deployments from Git",
+        "Database, authentication, storage, and realtime subscriptions",
+        "They securely store API keys and configuration without exposing them in code",
+        "Test deployments that let you verify changes before production",
+        "Minutes rather than hours or days"
       ]
     },
     "resources": {
       "video": {
-        "title": "Understanding Building Simple Things Without Fear - Vibe Coding Fundamentals",
-        "creator": "Vibe Coding Tutorials",
+        "title": "Full Stack Deployment with Vercel and Supabase",
         "embed": true,
-        "reason": "Relevant video content for this lesson topic"
+        "reason": "Complete walkthrough of production deployment"
       },
       "extra_reading": [
-        "https://example.com/extra-resource-1 - Additional reading for this topic",
-        "https://example.com/extra-resource-2 - More resources for curious learners"
+        "https://vercel.com - Vercel platform",
+        "https://supabase.com - Supabase platform"
       ]
     },
-    "summary": "In this lesson on \"Building Simple Things Without Fear\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+    "summary": "The Vercel + Supabase stack enables rapid deployment from prototype to production. Vercel handles frontend hosting with automatic Git deployments, while Supabase provides backend services including database, auth, and storage. This combination removes DevOps complexity and lets you focus on building. In the next module, you will master prompt engineering specifically for software development."
   },
   {
-    "course_title": "Vibe Coding",
-    "module_title": "Vibe Coding in Real Life",
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 7: Prompting for Software",
     "lesson_number": 12,
-    "lesson_title": "Common Beginner Mistakes and How to Avoid Them",
-    "introduction": "Welcome to \"Common Beginner Mistakes and How to Avoid Them\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-    "big_idea": "Understanding common beginner challenges helps you navigate your learning journey more effectively. Vibe Coding provides guidance to avoid these pitfalls.",
-    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
-    "steps": [
-      "Step 1: Understand the main concept of this lesson",
-      "Step 2: Learn how this concept applies to Vibe Coding",
-      "Step 3: See practical examples of this concept in action",
-      "Step 4: Practice applying this concept in the playground",
-      "Step 5: Reflect on how this fits into your learning journey"
+    "lesson_title": "Prompt Engineering for Code",
+    "introduction": "The quality of your prompts directly determines the quality of AI-generated code. This lesson teaches you specific techniques for writing prompts that produce better, more reliable software.",
+    "big_idea": "Prompt engineering for code differs from general prompt engineering. Code prompts need to specify technology stack, handle edge cases, define error handling, and produce consistent output formats. The best prompts are specific, structured, and provide context about the existing codebase. Vague prompts produce vague code; precise prompts produce precise code.",
+    "why_it_matters": "Poor prompting is the main reason people get frustrated with AI coding tools. They describe something vaguely, get unexpected results, and conclude the tool doesn't work. With proper prompting techniques, the same tools produce dramatically better results. Prompt engineering is the core skill that separates effective Vibe Coders from struggling ones.",
+    "key_concepts": [
+      "Specificity: Name technologies, versions, and expected behavior explicitly",
+      "Structure: Break complex prompts into clear sections",
+      "Context: Provide relevant code, file structure, or domain information",
+      "Examples: Show input/output examples when possible",
+      "Constraints: State what the code should NOT do"
     ],
-    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-    "playground_activity": "In the playground section, create an interactive activity related to \"Common Beginner Mistakes and How to Avoid Them\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-    "reflection_question": "How does the concept of \"Common Beginner Mistakes and How to Avoid Them\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "real_world_example": "Bad prompt: 'Write a function to validate emails.' Better prompt: 'Write a TypeScript function called validateEmail that takes a string input and returns {valid: boolean, error?: string}. It should check for @ symbol, valid domain format, and minimum length of 5 characters. If validation fails, return the specific error reason. Include JSDoc comments.'",
+    "practical_application": "Take a prompt you've used that didn't work well. Rewrite it using the techniques from this lesson: add specificity, structure it clearly, provide context, include examples, and state constraints. Test both versions and compare results.",
+    "reflection_question": "Looking back at prompts you've written, which of the five techniques (specificity, structure, context, examples, constraints) were you missing most often?",
     "quiz": {
       "questions": [
-        "What is the main focus of Common Beginner Mistakes and How to Avoid Them?",
-        "How does this concept benefit beginners?",
-        "Is this concept part of Vibe Coding's core principles?",
-        "What is one practical application of this concept?",
-        "How does this concept build confidence in learners?"
+        "Why does prompt engineering for code differ from general prompting?",
+        "What does specificity mean in code prompts?",
+        "Why is providing context important?",
+        "What role do constraints play?",
+        "How can you verify a prompt is effective?"
       ],
       "answers": [
-        "The specific concept covered in this lesson",
-        "It reduces anxiety and makes learning accessible",
-        "Yes, it's a core principle of Vibe Coding",
-        "Applying this concept in digital creation projects",
-        "By focusing on ideas and providing guidance rather than complexity"
+        "Code prompts need technology stack, edge cases, error handling, and output formats",
+        "Naming technologies, versions, and expected behavior explicitly",
+        "It helps AI understand the existing codebase and integration requirements",
+        "They define what the code should NOT do, preventing unwanted behavior",
+        "Compare results of specific prompts vs vague prompts on the same task"
       ]
     },
     "resources": {
       "video": {
-        "title": "Understanding Common Beginner Mistakes and How to Avoid Them - Vibe Coding Fundamentals",
-        "creator": "Vibe Coding Tutorials",
+        "title": "Prompt Engineering for Developers",
         "embed": true,
-        "reason": "Relevant video content for this lesson topic"
+        "reason": "Advanced prompting techniques for code generation"
       },
       "extra_reading": [
-        "https://example.com/extra-resource-1 - Additional reading for this topic",
-        "https://example.com/extra-resource-2 - More resources for curious learners"
+        "https://platform.openai.com/docs/guides/prompt-engineering",
+        "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering"
       ]
     },
-    "summary": "In this lesson on \"Common Beginner Mistakes and How to Avoid Them\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+    "summary": "Effective code prompts are specific, structured, and contextual. They include technology details, examples, and constraints. Prompt engineering is the core skill of Vibe Coding—better prompts produce dramatically better code. In the next lesson, you will learn advanced prompting strategies for complex development scenarios."
   },
   {
-    "course_title": "Vibe Coding",
-    "module_title": "Exploring and Building with Confidence",
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 7: Prompting for Software",
     "lesson_number": 13,
-    "lesson_title": "Using a Playground to Experiment Safely",
-    "introduction": "Welcome to \"Using a Playground to Experiment Safely\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-    "big_idea": "A playground environment allows you to experiment with ideas without consequences. In Vibe Coding, playgrounds provide safe spaces to test and refine your concepts.",
-    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
-    "steps": [
-      "Step 1: Understand the main concept of this lesson",
-      "Step 2: Learn how this concept applies to Vibe Coding",
-      "Step 3: See practical examples of this concept in action",
-      "Step 4: Practice applying this concept in the playground",
-      "Step 5: Reflect on how this fits into your learning journey"
+    "lesson_title": "Advanced Prompting Strategies",
+    "introduction": "Building on basic prompt engineering, this lesson covers advanced strategies for complex development scenarios: multi-step prompting, prompt chaining, iterative refinement, and working with large codebases.",
+    "big_idea": "Complex projects require complex prompting strategies. Multi-step prompting breaks large tasks into manageable pieces. Prompt chaining connects outputs of one prompt to inputs of another. Iterative refinement improves results through targeted follow-up prompts. Working with large codebases requires techniques for providing relevant context without exceeding token limits.",
+    "why_it_matters": "Basic prompting works for simple tasks. But real-world projects involve interdependent components, legacy code integration, and evolving requirements. Advanced strategies let you tackle projects that would be impossible with naive prompting approaches.",
+    "key_concepts": [
+      "Multi-step prompting: Break large tasks into sequential prompts",
+      "Prompt chaining: Use output of one prompt as input to next",
+      "Iterative refinement: Improve through targeted follow-ups",
+      "Context windowing: Provide relevant context for large codebases",
+      "System prompts: Establish persistent context for consistent behavior"
     ],
-    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-    "playground_activity": "In the playground section, create an interactive activity related to \"Using a Playground to Experiment Safely\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-    "reflection_question": "How does the concept of \"Using a Playground to Experiment Safely\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "real_world_example": "Building a complex feature: Step 1 prompt generates the data types. Step 2 uses those types to generate the API endpoint. Step 3 uses the API to generate the frontend component. Step 4 generates tests for all layers. Each step is manageable; together they build something complex.",
+    "practical_application": "Choose a complex feature you want to build. Before prompting, plan your multi-step approach: What needs to be built first? What depends on what? Write out your prompt chain before executing it.",
+    "reflection_question": "Think of a complex project you've struggled to describe in a single prompt. How would you break it into steps? What would each step need to know about previous steps?",
     "quiz": {
       "questions": [
-        "What is the main focus of Using a Playground to Experiment Safely?",
-        "How does this concept benefit beginners?",
-        "Is this concept part of Vibe Coding's core principles?",
-        "What is one practical application of this concept?",
-        "How does this concept build confidence in learners?"
+        "What is multi-step prompting?",
+        "How does prompt chaining work?",
+        "When is iterative refinement useful?",
+        "What is context windowing?",
+        "What are system prompts used for?"
       ],
       "answers": [
-        "The specific concept covered in this lesson",
-        "It reduces anxiety and makes learning accessible",
-        "Yes, it's a core principle of Vibe Coding",
-        "Applying this concept in digital creation projects",
-        "By focusing on ideas and providing guidance rather than complexity"
+        "Breaking large tasks into sequential prompts",
+        "Using the output of one prompt as input to the next",
+        "When initial results are close but need targeted improvements",
+        "Providing relevant context for large codebases without exceeding limits",
+        "Establishing persistent context for consistent behavior across prompts"
       ]
     },
     "resources": {
       "video": {
-        "title": "Understanding Using a Playground to Experiment Safely - Vibe Coding Fundamentals",
-        "creator": "Vibe Coding Tutorials",
+        "title": "Advanced Prompt Chaining Techniques",
         "embed": true,
-        "reason": "Relevant video content for this lesson topic"
+        "reason": "Real examples of complex prompt strategies"
       },
       "extra_reading": [
-        "https://example.com/extra-resource-1 - Additional reading for this topic",
-        "https://example.com/extra-resource-2 - More resources for curious learners"
+        "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/chain-prompts"
       ]
     },
-    "summary": "In this lesson on \"Using a Playground to Experiment Safely\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+    "summary": "Advanced prompting strategies—multi-step prompting, prompt chaining, iterative refinement, and context windowing—enable complex development that would be impossible with basic approaches. Planning your prompt sequence before executing is crucial for success. In the final module, you will explore the future of Vibe Coding and emerging career opportunities."
   },
   {
-    "course_title": "Vibe Coding",
-    "module_title": "Exploring and Building with Confidence",
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 8: The Future of Vibe Coding",
     "lesson_number": 14,
-    "lesson_title": "Improving Your Ideas Step by Step",
-    "introduction": "Welcome to \"Improving Your Ideas Step by Step\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-    "big_idea": "Iterative improvement is a key principle in Vibe Coding. You'll learn to start with simple ideas and gradually enhance them based on feedback and testing.",
-    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
-    "steps": [
-      "Step 1: Understand the main concept of this lesson",
-      "Step 2: Learn how this concept applies to Vibe Coding",
-      "Step 3: See practical examples of this concept in action",
-      "Step 4: Practice applying this concept in the playground",
-      "Step 5: Reflect on how this fits into your learning journey"
+    "lesson_title": "AI-First Careers and Emerging Tools",
+    "introduction": "As we conclude this course, let's look ahead. What does the future hold for Vibe Coding? What career opportunities are emerging? What tools should you watch? This lesson positions you for long-term success in an AI-first world.",
+    "big_idea": "Vibe Coding skills are becoming as essential as traditional computer literacy. Companies are creating new roles—AI engineers, prompt engineers, AI product managers—that didn't exist two years ago. The tools continue to evolve rapidly, but the core skills (clear thinking, effective communication, systematic problem-solving) remain constant. Those who build these foundations now will adapt easily as tools change.",
+    "why_it_matters": "The software industry is at an inflection point. In five years, building software without AI assistance will seem as unusual as building spreadsheets without a computer. Understanding this trajectory helps you make career decisions, choose learning investments, and identify opportunities before they become obvious to everyone.",
+    "key_concepts": [
+      "Emerging roles: AI engineer, prompt engineer, AI product manager",
+      "Skill premium: Vibe Coders can command higher rates",
+      "Tool evolution: Specific tools change but principles remain",
+      "Entrepreneurship: Solo founders building products that previously required teams",
+      "Continuous learning: Staying current with rapidly evolving landscape"
     ],
-    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-    "playground_activity": "In the playground section, create an interactive activity related to \"Improving Your Ideas Step by Step\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-    "reflection_question": "How does the concept of \"Improving Your Ideas Step by Step\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+    "real_world_example": "A designer with Vibe Coding skills now offers 'design-to-code' services, delivering functional prototypes instead of just mockups. This combination commands 3x the rate of design alone. A marketing professional builds internal tools for clients that previously required outside development firms. These hybrid roles are multiplying.",
+    "practical_application": "Consider your existing skills. How does Vibe Coding combine with what you already know? Write a description of a service or role that combines your domain expertise with the Vibe Coding skills you've learned. This is likely where your unique opportunity lies.",
+    "reflection_question": "Where do you want to be in two years? How does Vibe Coding fit into that vision? What specific application of these skills aligns with your goals?",
     "quiz": {
       "questions": [
-        "What is the main focus of Improving Your Ideas Step by Step?",
-        "How does this concept benefit beginners?",
-        "Is this concept part of Vibe Coding's core principles?",
-        "What is one practical application of this concept?",
-        "How does this concept build confidence in learners?"
+        "What new roles are emerging around AI development?",
+        "Why can Vibe Coders command higher rates?",
+        "What remains constant as tools change?",
+        "What opportunity does Vibe Coding create for solo founders?",
+        "Why is continuous learning important in this field?"
       ],
       "answers": [
-        "The specific concept covered in this lesson",
-        "It reduces anxiety and makes learning accessible",
-        "Yes, it's a core principle of Vibe Coding",
-        "Applying this concept in digital creation projects",
-        "By focusing on ideas and providing guidance rather than complexity"
+        "AI engineer, prompt engineer, AI product manager",
+        "They ship faster and can tackle projects that previously required larger teams",
+        "Core skills: clear thinking, effective communication, systematic problem-solving",
+        "Building products that previously required teams of developers",
+        "The landscape evolves rapidly; staying current maintains your advantage"
       ]
     },
     "resources": {
       "video": {
-        "title": "Understanding Improving Your Ideas Step by Step - Vibe Coding Fundamentals",
-        "creator": "Vibe Coding Tutorials",
+        "title": "The Future of Software Development",
         "embed": true,
-        "reason": "Relevant video content for this lesson topic"
+        "reason": "Industry perspective on where things are headed"
       },
       "extra_reading": [
-        "https://example.com/extra-resource-1 - Additional reading for this topic",
-        "https://example.com/extra-resource-2 - More resources for curious learners"
+        "https://www.levels.fyi/ai-engineers - AI engineering salaries",
+        "https://news.ycombinator.com - Stay current with emerging tools"
       ]
     },
-    "summary": "In this lesson on \"Improving Your Ideas Step by Step\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
-  },
-  {
-    "course_title": "Vibe Coding",
-    "module_title": "Exploring and Building with Confidence",
-    "lesson_number": 15,
-    "lesson_title": "Your First Complete Vibe-Coded Project",
-    "introduction": "Welcome to \"Your First Complete Vibe-Coded Project\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-    "big_idea": "Your first complete project brings together all the Vibe Coding principles you've learned. It demonstrates how to create a functional digital product while maintaining focus on ideas and creativity.",
-    "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
-    "steps": [
-      "Step 1: Understand the main concept of this lesson",
-      "Step 2: Learn how this concept applies to Vibe Coding",
-      "Step 3: See practical examples of this concept in action",
-      "Step 4: Practice applying this concept in the playground",
-      "Step 5: Reflect on how this fits into your learning journey"
-    ],
-    "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-    "playground_activity": "In the playground section, create an interactive activity related to \"Your First Complete Vibe-Coded Project\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-    "reflection_question": "How does the concept of \"Your First Complete Vibe-Coded Project\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
-    "quiz": {
-      "questions": [
-        "What is the main focus of Your First Complete Vibe-Coded Project?",
-        "How does this concept benefit beginners?",
-        "Is this concept part of Vibe Coding's core principles?",
-        "What is one practical application of this concept?",
-        "How does this concept build confidence in learners?"
-      ],
-      "answers": [
-        "The specific concept covered in this lesson",
-        "It reduces anxiety and makes learning accessible",
-        "Yes, it's a core principle of Vibe Coding",
-        "Applying this concept in digital creation projects",
-        "By focusing on ideas and providing guidance rather than complexity"
-      ]
-    },
-    "resources": {
-      "video": {
-        "title": "Understanding Your First Complete Vibe-Coded Project - Vibe Coding Fundamentals",
-        "creator": "Vibe Coding Tutorials",
-        "embed": true,
-        "reason": "Relevant video content for this lesson topic"
-      },
-      "extra_reading": [
-        "https://example.com/extra-resource-1 - Additional reading for this topic",
-        "https://example.com/extra-resource-2 - More resources for curious learners"
-      ]
-    },
-    "summary": "In this lesson on \"Your First Complete Vibe-Coded Project\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+    "summary": "Vibe Coding is creating new career opportunities and reshaping existing roles. The core skills transfer across tools and remain valuable as specific platforms evolve. Combining Vibe Coding with domain expertise unlocks unique opportunities. Congratulations on completing this course—you now have the foundation to build real software with AI. Continue practicing, stay curious, and ship projects. The best way to learn is by doing."
   }
 ]

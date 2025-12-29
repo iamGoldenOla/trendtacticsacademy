@@ -1,48 +1,198 @@
 {
-  "course_title": "Vibe Coding",
-  "module_title": "Vibe Coding in Real Life",
+  "course_title": "Vibe Coding: Building Real Software with AI",
+  "module_title": "Module 6: Prompting for Software",
   "lesson_number": 11,
-  "lesson_title": "Building Simple Things Without Fear",
-  "introduction": "Welcome to \"Building Simple Things Without Fear\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-  "big_idea": "Vibe Coding creates a safe environment for experimentation where mistakes are learning opportunities. This approach helps you build confidence while creating real digital products.",
-  "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
-  "steps": [
-    "Step 1: Understand the main concept of this lesson",
-    "Step 2: Learn how this concept applies to Vibe Coding",
-    "Step 3: See practical examples of this concept in action",
-    "Step 4: Practice applying this concept in the playground",
-    "Step 5: Reflect on how this fits into your learning journey"
+  "lesson_title": "Debugging and Refactoring with AI Assistance",
+  "introduction": "Writing code is only half the battle. Real-world software development involves extensive debugging and refactoring - finding and fixing bugs, improving code quality, and adapting code as requirements change. AI assistance transforms these traditionally tedious tasks.\n\nThis lesson teaches you how to leverage AI for debugging and refactoring effectively. You will learn prompting techniques that help AI diagnose issues, systematic approaches to AI-assisted debugging, and how to use AI for safe, incremental refactoring without breaking existing functionality.\n\nThese skills are particularly valuable because debugging and refactoring are where many developers spend most of their time. Improving your effectiveness here creates outsized productivity gains.",
+  "big_idea": "AI excels at debugging when given the right information: error messages, relevant code, expected vs actual behavior, and what you have already tried. For refactoring, AI provides a safety net - you can confidently restructure code because AI helps you maintain functionality while changing structure. The key is learning to provide AI with the context it needs to help effectively.",
+  "why_it_matters": "Studies show developers spend 30-50% of their time debugging. Improving debugging efficiency by even 20% translates to significant time savings. Similarly, many developers avoid beneficial refactoring because of the risk of introducing bugs. AI-assisted refactoring reduces this risk dramatically, enabling continuous code improvement that keeps projects healthy long-term.",
+  "ai_debugging_approach": {
+    "title": "Systematic AI-Assisted Debugging",
+    "steps": [
+      {
+        "step": 1,
+        "name": "Gather Information",
+        "description": "Collect everything relevant before engaging AI",
+        "gather": [
+          "The exact error message (full text, not paraphrased)",
+          "The code where the error occurs",
+          "What you expected to happen",
+          "What actually happened",
+          "Steps to reproduce",
+          "What you have already tried"
+        ]
+      },
+      {
+        "step": 2,
+        "name": "Describe the Problem Clearly",
+        "description": "Present the issue to AI with full context",
+        "template": "I'm seeing this error: [exact error]\n\nThis happens when: [reproduction steps]\n\nExpected behavior: [what should happen]\n\nActual behavior: [what happens]\n\nRelevant code:\n```\n[code]\n```\n\nI've already tried: [attempts]"
+      },
+      {
+        "step": 3,
+        "name": "Ask for Diagnosis",
+        "description": "Request analysis before fixes",
+        "example": "Can you analyze this issue and explain what's likely causing it before suggesting fixes?"
+      },
+      {
+        "step": 4,
+        "name": "Implement and Test",
+        "description": "Apply suggested fixes one at a time, testing after each",
+        "principle": "Never apply multiple fixes at once - you won't know which worked"
+      },
+      {
+        "step": 5,
+        "name": "Learn from the Bug",
+        "description": "Ask AI to explain why the bug occurred and how to prevent similar issues",
+        "example": "Now that we've fixed it, can you explain why this happened and how I could have prevented it?"
+      }
+    ]
+  },
+  "debugging_prompts": [
+    {
+      "scenario": "Runtime Error",
+      "prompt_template": "I'm getting this error:\n```\n[full error message with stack trace]\n```\n\nIt occurs in this function:\n```\n[relevant code]\n```\n\nThe function is called with: [input description]\nExpected result: [expected]\nActual result: [actual]\n\nWhat's causing this and how do I fix it?"
+    },
+    {
+      "scenario": "Logic Bug",
+      "prompt_template": "This function should [expected behavior] but instead it [actual behavior].\n\n```\n[function code]\n```\n\nExample: When I pass [input], I expect [expected output] but I get [actual output].\n\nCan you trace through the logic and identify where it goes wrong?"
+    },
+    {
+      "scenario": "Intermittent Bug",
+      "prompt_template": "I have an intermittent bug that only happens sometimes:\n- Happens when: [conditions when it occurs]\n- Does not happen when: [conditions when it works]\n\n```\n[relevant code]\n```\n\nWhat could cause this intermittent behavior?"
+    },
+    {
+      "scenario": "Performance Issue",
+      "prompt_template": "This function is slow - it takes [time] when processing [size] records:\n\n```\n[function code]\n```\n\nCan you identify performance bottlenecks and suggest optimizations?"
+    }
   ],
-  "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-  "playground_activity": "In the playground section, create an interactive activity related to \"Building Simple Things Without Fear\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-  "reflection_question": "How does the concept of \"Building Simple Things Without Fear\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+  "refactoring_with_ai": {
+    "title": "Safe AI-Assisted Refactoring",
+    "principles": [
+      {
+        "principle": "Preserve Behavior",
+        "description": "Refactoring changes structure, not behavior. Always verify functionality is preserved.",
+        "how_ai_helps": "Ask AI to refactor while explicitly maintaining the same inputs/outputs"
+      },
+      {
+        "principle": "Small Steps",
+        "description": "Make one refactoring change at a time. Test after each change.",
+        "how_ai_helps": "Request incremental changes rather than complete rewrites"
+      },
+      {
+        "principle": "Tests First",
+        "description": "Have tests before refactoring to catch any behavioral changes",
+        "how_ai_helps": "Ask AI to write tests for existing behavior before refactoring"
+      },
+      {
+        "principle": "Explain the Why",
+        "description": "Tell AI why you're refactoring so it makes appropriate choices",
+        "how_ai_helps": "Context about goals (readability? performance? maintainability?) guides AI decisions"
+      }
+    ],
+    "common_refactors": [
+      {
+        "refactor": "Extract Function",
+        "prompt": "Extract the [description] logic from this function into a separate, reusable function. Maintain the same behavior.",
+        "example": "Extract the email validation logic from the signup function into a separate validateEmail function. Maintain the same behavior."
+      },
+      {
+        "refactor": "Simplify Conditionals",
+        "prompt": "Simplify the conditional logic in this function. It should be easier to read but produce the same results.",
+        "example": "This if-else chain is hard to follow. Simplify it while maintaining the same behavior for all cases."
+      },
+      {
+        "refactor": "Improve Naming",
+        "prompt": "Rename variables and functions in this code to be more descriptive and follow [naming convention]. Do not change any logic.",
+        "example": "Rename variables to be more descriptive (currently using x, y, temp). Follow camelCase. Do not change any logic."
+      },
+      {
+        "refactor": "Add Type Safety",
+        "prompt": "Add TypeScript types to this JavaScript code. Infer types from usage where possible. Do not change any runtime behavior.",
+        "example": "Convert this JS function to TypeScript with proper types. The function currently works correctly - just add types."
+      }
+    ]
+  },
+  "refactoring_workflow": {
+    "title": "The Safe Refactoring Workflow",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Understand Current Behavior",
+        "prompt": "Explain what this function does, including all edge cases it handles",
+        "purpose": "Ensure you and AI understand what must be preserved"
+      },
+      {
+        "step": 2,
+        "action": "Generate Tests (if missing)",
+        "prompt": "Write unit tests that verify all the behaviors of this function, including edge cases",
+        "purpose": "Create a safety net to catch any behavioral changes"
+      },
+      {
+        "step": 3,
+        "action": "Request Refactoring",
+        "prompt": "Refactor this function to [goal]. The tests should still pass after refactoring.",
+        "purpose": "Get AI's refactored version"
+      },
+      {
+        "step": 4,
+        "action": "Review and Test",
+        "prompt": "N/A - manual step",
+        "purpose": "Verify refactoring maintains behavior"
+      },
+      {
+        "step": 5,
+        "action": "Ask for Verification",
+        "prompt": "Compare the original and refactored versions. Confirm they behave identically.",
+        "purpose": "Final sanity check before committing"
+      }
+    ]
+  },
+  "real_world_example": "Scenario: You have a 200-line function that handles user registration. It is hard to maintain and has bugs.\n\nStep 1: Ask AI to explain the function's complete behavior, documenting all cases.\n\nStep 2: Ask AI to generate comprehensive tests covering all cases.\n\nStep 3: Run tests to verify they pass with current code.\n\nStep 4: Ask AI: 'Refactor this registration function by extracting these concerns into separate functions: validation, duplicate checking, password hashing, email sending. The tests should still pass.'\n\nStep 5: Review the refactored code. Run tests. All pass.\n\nStep 6: Commit with confidence.\n\nResult: The 200-line function becomes 5 smaller, focused functions that are easier to understand, test, and maintain individually.",
+  "steps": [
+    "Step 1: For debugging - gather all relevant information before engaging AI",
+    "Step 2: Present problems with full context: error, code, expected vs actual",
+    "Step 3: Ask for diagnosis before fixes",
+    "Step 4: For refactoring - understand current behavior first",
+    "Step 5: Have tests before refactoring",
+    "Step 6: Make incremental changes, testing after each"
+  ],
+  "playground_activity": "Find a function in any codebase that you find hard to read. Use AI to: 1) Explain what the function does 2) Generate tests for it 3) Refactor it for readability 4) Verify the tests still pass. Document each prompt you used and the result.",
+  "reflection_question": "Think about a bug you spent hours debugging in the past. How would you present that bug to AI using the structured approach from this lesson? What information would you include?",
   "quiz": {
     "questions": [
-      "What is the main focus of Building Simple Things Without Fear?",
-      "How does this concept benefit beginners?",
-      "Is this concept part of Vibe Coding's core principles?",
-      "What is one practical application of this concept?",
-      "How does this concept build confidence in learners?"
+      "What five pieces of information should you gather before asking AI to debug?",
+      "Why should you apply AI-suggested fixes one at a time?",
+      "What is the most important principle of refactoring?",
+      "Why should you have tests before refactoring?",
+      "What should you ask AI to do before requesting a refactoring?"
     ],
     "answers": [
-      "The specific concept covered in this lesson",
-      "It reduces anxiety and makes learning accessible",
-      "Yes, it's a core principle of Vibe Coding",
-      "Applying this concept in digital creation projects",
-      "By focusing on ideas and providing guidance rather than complexity"
+      "Exact error message, relevant code, expected behavior, actual behavior, and what you've already tried",
+      "So you know which fix worked - multiple fixes at once obscure which change solved the problem",
+      "Preserve behavior - refactoring changes structure but not what the code does",
+      "Tests catch any accidental behavioral changes introduced during refactoring",
+      "Explain the current behavior - ensures you and AI understand what must be preserved"
     ]
   },
+  "key_takeaways": [
+    "Gather complete context before asking AI to debug",
+    "Ask for diagnosis before fixes",
+    "Refactoring changes structure, not behavior",
+    "Always have tests before refactoring",
+    "Make incremental changes and test after each"
+  ],
   "resources": {
     "video": {
-      "title": "Understanding Building Simple Things Without Fear - Vibe Coding Fundamentals",
-      "creator": "Vibe Coding Tutorials",
+      "title": "AI-Assisted Debugging Masterclass",
+      "url": "https://www.youtube.com/watch?v=example",
       "embed": true,
-      "reason": "Relevant video content for this lesson topic"
+      "reason": "Comprehensive guide to debugging with AI assistance"
     },
     "extra_reading": [
-      "https://example.com/extra-resource-1 - Additional reading for this topic",
-      "https://example.com/extra-resource-2 - More resources for curious learners"
+      "https://trendtacticsdigital.com/blog/ai-debugging - AI debugging techniques",
+      "https://trendtacticsdigital.com/blog/safe-refactoring - Safe refactoring with AI"
     ]
   },
-  "summary": "In this lesson on \"Building Simple Things Without Fear\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  "summary": "In this lesson, you learned systematic approaches to AI-assisted debugging and refactoring. For debugging, you now know how to gather context and present problems effectively. For refactoring, you understand the importance of tests, incremental changes, and behavior preservation. These skills apply across all Vibe Coding tools and represent some of the highest-value applications of AI assistance in development."
 }

@@ -1,48 +1,207 @@
 {
-  "course_title": "Vibe Coding",
-  "module_title": "Vibe Coding in Real Life",
+  "course_title": "Vibe Coding: Building Real Software with AI",
+  "module_title": "Module 7: Building for Production",
   "lesson_number": 12,
-  "lesson_title": "Common Beginner Mistakes and How to Avoid Them",
-  "introduction": "Welcome to \"Common Beginner Mistakes and How to Avoid Them\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-  "big_idea": "Understanding common beginner challenges helps you navigate your learning journey more effectively. Vibe Coding provides guidance to avoid these pitfalls.",
-  "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
+  "lesson_title": "From Prototype to Production: Security, Performance, and Best Practices",
+  "introduction": "Building a working prototype is exciting, but shipping it to real users requires more. Production software must be secure against attacks, performant under load, and reliable in ways prototypes do not need to be. This lesson bridges that gap.\n\nMany Vibe Coders build impressive prototypes but struggle with production readiness. AI-generated code often prioritizes functionality over security, performance over scalability, and working code over maintainable code. Knowing how to identify and address these gaps is essential for building software that can actually be deployed.\n\nBy the end of this lesson, you will have a checklist for production readiness and know how to use AI assistance to harden your applications for real-world use.",
+  "big_idea": "Production-ready software differs from prototypes in three key areas: security (protecting against attacks and data breaches), performance (handling real-world load efficiently), and reliability (working correctly even when things go wrong). AI-generated code often needs hardening in all three areas. Knowing what to check and how to fix it is the difference between a demo and a product.",
+  "why_it_matters": "Shipping insecure or unreliable software damages your reputation and your users. A single security breach can destroy a business. Poor performance drives users away. Understanding production requirements protects you, your users, and your business. These skills also make you more valuable professionally - many developers can build prototypes, fewer can ship production-ready software.",
+  "security_hardening": {
+    "title": "Security for Vibe Coders",
+    "why_ai_code_needs_review": "AI optimizes for functionality, not security. It generates code that works but may have vulnerabilities. Always review AI-generated code for security before deployment.",
+    "common_vulnerabilities": [
+      {
+        "vulnerability": "Injection Attacks",
+        "description": "User input is executed as code (SQL, commands, etc.)",
+        "ai_tendency": "AI often concatenates user input into queries directly",
+        "fix": "Always use parameterized queries or prepared statements",
+        "prompt": "Review this code for SQL injection vulnerabilities. Use parameterized queries where needed."
+      },
+      {
+        "vulnerability": "Missing Authentication",
+        "description": "Endpoints accessible without proper login verification",
+        "ai_tendency": "AI creates working endpoints but may skip auth checks",
+        "fix": "Add authentication middleware to all protected routes",
+        "prompt": "Add authentication checks to all endpoints that should require login. Return 401 for unauthenticated requests."
+      },
+      {
+        "vulnerability": "Exposed Secrets",
+        "description": "API keys, passwords, or tokens in code",
+        "ai_tendency": "AI may hardcode example values that look like secrets",
+        "fix": "Use environment variables for all secrets",
+        "prompt": "Review this code for hardcoded secrets. Move all sensitive values to environment variables."
+      },
+      {
+        "vulnerability": "Cross-Site Scripting (XSS)",
+        "description": "Malicious scripts injected through user content",
+        "ai_tendency": "AI may render user content without sanitization",
+        "fix": "Sanitize all user input before rendering",
+        "prompt": "Review this code for XSS vulnerabilities. Ensure all user input is sanitized before display."
+      },
+      {
+        "vulnerability": "Insufficient Authorization",
+        "description": "Users can access resources they should not have permission for",
+        "ai_tendency": "AI implements authentication but may skip authorization checks",
+        "fix": "Verify user has permission for each action, not just that they are logged in",
+        "prompt": "Add authorization checks to ensure users can only access their own resources."
+      }
+    ],
+    "security_review_prompt": "Review this application for security vulnerabilities. Check for: injection attacks, missing authentication/authorization, exposed secrets, XSS vulnerabilities, and insecure data handling. List all issues found with severity and fixes."
+  },
+  "performance_optimization": {
+    "title": "Performance for Real Users",
+    "why_prototypes_are_slow": "Prototypes optimize for development speed, not runtime speed. As data grows and users increase, performance problems emerge.",
+    "common_issues": [
+      {
+        "issue": "N+1 Queries",
+        "description": "Loading related data with one query per item instead of bulk",
+        "symptom": "Page gets slower as data grows",
+        "fix": "Use eager loading or batch queries",
+        "prompt": "Identify any N+1 query patterns in this code. Refactor to use efficient batch loading."
+      },
+      {
+        "issue": "Missing Caching",
+        "description": "Re-computing or re-fetching data that doesn't change often",
+        "symptom": "Slow responses for repeated requests",
+        "fix": "Cache expensive operations appropriately",
+        "prompt": "Identify data that could be cached in this application. Add appropriate caching with invalidation."
+      },
+      {
+        "issue": "Large Payload Sizes",
+        "description": "Sending more data than the client needs",
+        "symptom": "Slow load times, especially on mobile",
+        "fix": "Return only necessary fields, paginate lists",
+        "prompt": "Review API responses for unnecessary data. Implement pagination and field selection."
+      },
+      {
+        "issue": "Unoptimized Database",
+        "description": "Missing indexes, inefficient queries",
+        "symptom": "Slow queries as data grows",
+        "fix": "Add indexes for common queries, optimize query structure",
+        "prompt": "Analyze the database queries in this code. Suggest necessary indexes and query optimizations."
+      }
+    ],
+    "performance_review_prompt": "Analyze this application for performance issues. Check for: N+1 queries, missing caching opportunities, large payloads, and unoptimized database operations. Suggest specific improvements."
+  },
+  "reliability_patterns": {
+    "title": "Building Reliable Software",
+    "core_patterns": [
+      {
+        "pattern": "Error Handling",
+        "description": "Gracefully handling things that go wrong",
+        "implementation": "Try-catch blocks, error boundaries, meaningful error messages",
+        "prompt": "Add comprehensive error handling to this code. Include user-friendly error messages and proper logging."
+      },
+      {
+        "pattern": "Input Validation",
+        "description": "Verifying data before processing",
+        "implementation": "Validate all inputs at boundaries, return clear validation errors",
+        "prompt": "Add input validation for all user inputs. Include type checking, length limits, and format validation."
+      },
+      {
+        "pattern": "Retry Logic",
+        "description": "Automatically retrying failed operations that might succeed",
+        "implementation": "Retry with exponential backoff for network calls",
+        "prompt": "Add retry logic with exponential backoff to external API calls."
+      },
+      {
+        "pattern": "Health Checks",
+        "description": "Endpoints that verify the application is working",
+        "implementation": "Health endpoint that checks database, cache, and dependencies",
+        "prompt": "Create a health check endpoint that verifies database connectivity and key dependencies."
+      }
+    ]
+  },
+  "production_checklist": {
+    "title": "Production Readiness Checklist",
+    "categories": [
+      {
+        "category": "Security",
+        "items": [
+          "All secrets in environment variables",
+          "Authentication on protected routes",
+          "Authorization checks for resources",
+          "Input validation and sanitization",
+          "HTTPS enforced",
+          "Secure headers configured"
+        ]
+      },
+      {
+        "category": "Performance",
+        "items": [
+          "Database indexes for common queries",
+          "Caching for expensive operations",
+          "Pagination for list endpoints",
+          "Optimized images and assets",
+          "No N+1 query patterns"
+        ]
+      },
+      {
+        "category": "Reliability",
+        "items": [
+          "Comprehensive error handling",
+          "Input validation",
+          "Retry logic for external services",
+          "Health check endpoint",
+          "Graceful degradation for failures"
+        ]
+      },
+      {
+        "category": "Monitoring",
+        "items": [
+          "Error logging and alerting",
+          "Performance metrics",
+          "Uptime monitoring",
+          "Database monitoring"
+        ]
+      }
+    ]
+  },
+  "real_world_example": "Scenario: You built a task management app with Bolt and need to make it production-ready.\n\nStep 1 - Security Audit: 'Review this application for security vulnerabilities, focusing on authentication, authorization, and input handling.'\nAI identifies: hardcoded JWT secret, missing auth on API routes, no input validation.\n\nStep 2 - Fix Security Issues: 'Move JWT secret to environment variable. Add authentication middleware to /api routes. Add input validation for task creation.'\n\nStep 3 - Performance Review: 'Identify performance issues, especially around database queries.'\nAI identifies: N+1 query loading user's tasks with assigned members.\n\nStep 4 - Fix Performance: 'Refactor getTasksWithMembers to use a single query with JOIN instead of multiple queries.'\n\nStep 5 - Add Reliability: 'Add error handling, input validation, and a health check endpoint.'\n\nStep 6 - Final Review: Run through checklist, deploy with confidence.\n\nResult: A production-ready application that is secure, fast, and reliable.",
   "steps": [
-    "Step 1: Understand the main concept of this lesson",
-    "Step 2: Learn how this concept applies to Vibe Coding",
-    "Step 3: See practical examples of this concept in action",
-    "Step 4: Practice applying this concept in the playground",
-    "Step 5: Reflect on how this fits into your learning journey"
+    "Step 1: Run security audit prompt on your codebase",
+    "Step 2: Fix all identified security issues",
+    "Step 3: Run performance review prompt",
+    "Step 4: Implement performance optimizations",
+    "Step 5: Add reliability patterns (error handling, validation, health checks)",
+    "Step 6: Complete production readiness checklist"
   ],
-  "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-  "playground_activity": "In the playground section, create an interactive activity related to \"Common Beginner Mistakes and How to Avoid Them\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-  "reflection_question": "How does the concept of \"Common Beginner Mistakes and How to Avoid Them\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+  "playground_activity": "Take any prototype you have built and run it through production hardening. Use AI to: 1) Conduct a security audit 2) Identify performance issues 3) Add error handling 4) Create a health check endpoint. Document the issues found and fixes applied.",
+  "reflection_question": "Think about a website or application you use daily. What would happen if it had a security breach? What about if it went offline? This is why production readiness matters.",
   "quiz": {
     "questions": [
-      "What is the main focus of Common Beginner Mistakes and How to Avoid Them?",
-      "How does this concept benefit beginners?",
-      "Is this concept part of Vibe Coding's core principles?",
-      "What is one practical application of this concept?",
-      "How does this concept build confidence in learners?"
+      "What are the three key areas that distinguish production software from prototypes?",
+      "Why does AI-generated code often have security vulnerabilities?",
+      "What is an N+1 query problem and how do you fix it?",
+      "What should a health check endpoint verify?",
+      "Why is input validation important for both security and reliability?"
     ],
     "answers": [
-      "The specific concept covered in this lesson",
-      "It reduces anxiety and makes learning accessible",
-      "Yes, it's a core principle of Vibe Coding",
-      "Applying this concept in digital creation projects",
-      "By focusing on ideas and providing guidance rather than complexity"
+      "Security (protecting against attacks), Performance (handling load efficiently), and Reliability (working correctly when things go wrong)",
+      "AI optimizes for functionality and working code, not security - it takes the most direct path without considering attack vectors",
+      "Loading related data with one query per item instead of bulk - fix with eager loading or batch queries",
+      "Database connectivity, cache availability, and key external dependencies - anything the app needs to function",
+      "For security it prevents injection attacks and malicious input; for reliability it prevents crashes from unexpected data formats"
     ]
   },
+  "key_takeaways": [
+    "AI-generated code needs security review before production",
+    "Common security issues: injection, missing auth, exposed secrets, XSS",
+    "Performance issues emerge as data and users grow",
+    "Reliability patterns: error handling, validation, retries, health checks",
+    "Use the production checklist before deploying"
+  ],
   "resources": {
     "video": {
-      "title": "Understanding Common Beginner Mistakes and How to Avoid Them - Vibe Coding Fundamentals",
-      "creator": "Vibe Coding Tutorials",
+      "title": "Production Readiness for AI-Built Apps",
+      "url": "https://www.youtube.com/watch?v=example",
       "embed": true,
-      "reason": "Relevant video content for this lesson topic"
+      "reason": "Comprehensive guide to hardening AI-generated applications"
     },
     "extra_reading": [
-      "https://example.com/extra-resource-1 - Additional reading for this topic",
-      "https://example.com/extra-resource-2 - More resources for curious learners"
+      "https://owasp.org/Top10 - OWASP Top 10 Security Risks",
+      "https://trendtacticsdigital.com/blog/production-checklist - Our complete production checklist"
     ]
   },
-  "summary": "In this lesson on \"Common Beginner Mistakes and How to Avoid Them\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  "summary": "In this lesson, you learned to bridge the gap between prototypes and production software. You now understand security vulnerabilities common in AI-generated code, performance optimizations needed for real users, and reliability patterns that keep your software running. Use the production readiness checklist before every deployment. This knowledge separates demo builders from product shippers."
 }

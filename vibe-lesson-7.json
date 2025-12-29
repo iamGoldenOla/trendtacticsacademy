@@ -1,48 +1,156 @@
 {
-  "course_title": "Vibe Coding",
-  "module_title": "Working with AI as a Creative Partner",
+  "course_title": "Vibe Coding: Building Real Software with AI",
+  "module_title": "Module 3: AI-First IDEs",
   "lesson_number": 7,
-  "lesson_title": "What AI Really Is (In Simple Terms)",
-  "introduction": "Welcome to \"What AI Really Is (In Simple Terms)\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
-  "big_idea": "AI (Artificial Intelligence) is like a very helpful assistant that can process information and help you with tasks. In Vibe Coding, AI serves as a tool to help you create digital products more efficiently.",
-  "visuals": "Create a friendly, approachable visual that represents the main concept of this lesson. Use soft colors, simple icons, and clear visual flow to represent the lesson's key ideas.",
-  "steps": [
-    "Step 1: Understand the main concept of this lesson",
-    "Step 2: Learn how this concept applies to Vibe Coding",
-    "Step 3: See practical examples of this concept in action",
-    "Step 4: Practice applying this concept in the playground",
-    "Step 5: Reflect on how this fits into your learning journey"
+  "lesson_title": "Mastering Cursor: Your AI Pair Programmer",
+  "introduction": "Cursor has rapidly become the most popular AI-First IDE among professional developers. In this hands-on lesson, you will learn to use Cursor effectively - from basic chat interactions to advanced multi-file editing and the powerful Composer mode.\n\nWhat makes Cursor special is its deep understanding of your codebase. Unlike general-purpose AI assistants, Cursor reads and indexes your entire project. When you ask a question or request a change, it understands the context: your file structure, your coding patterns, the relationships between modules, and even your configuration files. This context-awareness produces dramatically better results than generic AI assistance.\n\nBy the end of this lesson, you will be comfortable using Cursor's key features: Chat, Edit, and Composer. You will know the prompting strategies that produce the best results, and you will understand how to iterate effectively when AI output needs refinement.",
+  "big_idea": "Cursor is an AI pair programmer that understands your entire codebase. Its power comes from three core features: Chat for conversations about your code, Edit for inline changes, and Composer for complex multi-file modifications. Mastering these features transforms your development workflow, making you significantly more productive while maintaining full understanding and control.",
+  "why_it_matters": "Professional developers using Cursor report 2-5x productivity improvements. But these gains only come from knowing how to use the tool effectively. Many developers download Cursor and barely scratch the surface, using it like a fancy autocomplete. This lesson teaches you to use Cursor's full capabilities, positioning you among the most productive developers in any team.",
+  "cursor_core_features": {
+    "chat": {
+      "name": "Chat (Cmd/Ctrl + L)",
+      "description": "Conversational AI assistant that can see your code and help you understand or modify it",
+      "use_cases": [
+        "Understanding unfamiliar code: 'Explain how authentication works in this project'",
+        "Planning implementations: 'How should I add user notifications to this app?'",
+        "Debugging: 'Why might this function be returning undefined?'",
+        "Learning: 'What design pattern is this code using?'",
+        "Code review: 'Are there any issues with this function?'"
+      ],
+      "best_practices": [
+        "Be specific about what file or function you are asking about",
+        "Provide context about what you are trying to achieve",
+        "Ask follow-up questions to refine understanding",
+        "Use @file or @symbol to reference specific code"
+      ]
+    },
+    "edit": {
+      "name": "Edit Mode (Cmd/Ctrl + K)",
+      "description": "Inline code editing where AI modifies selected code based on your instructions",
+      "use_cases": [
+        "Refactoring: Select code, press Cmd+K, 'Refactor this to use async/await'",
+        "Bug fixes: Select buggy code, 'Fix the null pointer exception here'",
+        "Optimization: Select function, 'Optimize this for performance'",
+        "Conversion: Select code, 'Convert this to TypeScript'",
+        "Documentation: Select function, 'Add JSDoc comments'"
+      ],
+      "best_practices": [
+        "Select the specific code you want changed",
+        "Be clear about what change you want",
+        "Review changes before accepting",
+        "Use undo if the change is not what you wanted"
+      ]
+    },
+    "composer": {
+      "name": "Composer (Cmd/Ctrl + I)",
+      "description": "Multi-file editing mode for complex changes that span multiple files",
+      "use_cases": [
+        "Feature implementation: 'Add a user profile page with API endpoint and database model'",
+        "Refactoring across files: 'Rename the User class to Account throughout the project'",
+        "Architecture changes: 'Move all API routes to a separate routes folder'",
+        "Adding integrations: 'Add Stripe subscription integration'",
+        "Creating components: 'Create a reusable DataTable component with sorting and filtering'"
+      ],
+      "best_practices": [
+        "Clearly describe the full scope of what you want",
+        "Mention which files or areas should be modified",
+        "Review all proposed changes before accepting",
+        "Break very large tasks into smaller Composer requests"
+      ]
+    }
+  },
+  "prompting_strategies": {
+    "title": "Effective Cursor Prompting",
+    "strategies": [
+      {
+        "name": "The Reference Strategy",
+        "description": "Point to existing code as a reference for what you want",
+        "example": "'Create a new endpoint for orders following the same pattern as the users endpoint in api/users.js'"
+      },
+      {
+        "name": "The Context Strategy",
+        "description": "Provide business context, not just technical requirements",
+        "example": "'Add payment retry logic. Users complained that temporary card failures are rejecting orders. We need to retry 3 times with exponential backoff before failing.'"
+      },
+      {
+        "name": "The Constraint Strategy",
+        "description": "Specify what you do NOT want changed",
+        "example": "'Add caching to the getProducts function but do not modify the database query or change the return type'"
+      },
+      {
+        "name": "The Iteration Strategy",
+        "description": "Start simple, then refine with follow-up requests",
+        "example": "First: 'Create a basic login form' → Then: 'Add email validation' → Then: 'Add password strength indicator'"
+      }
+    ]
+  },
+  "real_world_example": "Let us walk through a real development session with Cursor.\n\nTask: Add a 'Forgot Password' feature to an existing application.\n\nStep 1 - Understand Current Auth: Open Chat, ask: 'How does authentication currently work in this project? Where are the auth-related files?'\nCursor explains the auth flow and lists relevant files.\n\nStep 2 - Plan the Feature: Ask: 'What would I need to add for forgot password functionality? List the files and changes needed.'\nCursor outlines: email template, reset token generation, API endpoint, password reset page, email sending service.\n\nStep 3 - Generate Email Template: Open Composer: 'Create an email template for password reset following the style of existing email templates in /templates.'\nCursor creates the template file.\n\nStep 4 - Create API Endpoint: 'Add POST /api/auth/forgot-password endpoint that generates a reset token, stores it with expiration, and sends the email.'\nCursor creates the endpoint with proper error handling.\n\nStep 5 - Add Reset Page: 'Create a password reset page at /reset-password that accepts the token, validates it, and allows setting a new password.'\nCursor creates the frontend component and connects it to the API.\n\nStep 6 - Test and Refine: You test the feature. Token expiration is not working. Ask: 'The reset token is not expiring after the timeout. Can you check the token validation logic?'\nCursor identifies and fixes the issue.\n\nTotal time: 30-45 minutes for a feature that might take 4+ hours without AI assistance.",
+  "common_mistakes": [
+    {
+      "mistake": "Prompts that are too vague",
+      "example": "'Make authentication better'",
+      "fix": "Be specific: 'Add rate limiting to the login endpoint to prevent brute force attacks'"
+    },
+    {
+      "mistake": "Not providing context",
+      "example": "'Create a button component'",
+      "fix": "Add context: 'Create a button component that matches our design system in /components/ui'"
+    },
+    {
+      "mistake": "Accepting changes without review",
+      "example": "Clicking 'Accept All' immediately",
+      "fix": "Always review each file's changes before accepting, especially for multi-file edits"
+    },
+    {
+      "mistake": "Not using references",
+      "example": "'Create a new API endpoint'",
+      "fix": "Reference existing code: 'Create a new API endpoint following the pattern in api/users.js'"
+    }
   ],
-  "example": "Consider how this concept applies to a real-world scenario. Think of a digital product you use regularly and how this lesson's concept might apply to its creation. This helps solidify your understanding of the principle.",
-  "playground_activity": "In the playground section, create an interactive activity related to \"What AI Really Is (In Simple Terms)\". This could be a drag-and-drop exercise, a simple simulation, or a guided exploration that helps reinforce the lesson's main concepts. The activity should feel safe and encourage experimentation without fear of making mistakes.",
-  "reflection_question": "How does the concept of \"What AI Really Is (In Simple Terms)\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+  "steps": [
+    "Step 1: Download and install Cursor from cursor.com",
+    "Step 2: Open an existing project (or clone a starter template)",
+    "Step 3: Practice Chat (Cmd+L): Ask questions about the codebase",
+    "Step 4: Practice Edit (Cmd+K): Select code and request modifications",
+    "Step 5: Practice Composer (Cmd+I): Make a multi-file change",
+    "Step 6: Use the Reference and Context strategies in your prompts"
+  ],
+  "playground_activity": "Open a project in Cursor and complete this challenge: Add a 'dark mode' toggle. Use Chat to understand the current styling approach. Use Composer to 'Add a dark mode toggle in the header that persists user preference and applies dark theme styles throughout the app.' Review all changes before accepting. Test the feature and use Edit mode to fix any styling issues.",
+  "reflection_question": "Consider a recent coding task that took you several hours. How could you have broken it down into Cursor Chat, Edit, and Composer interactions? What would your prompts have been?",
   "quiz": {
     "questions": [
-      "What is the main focus of What AI Really Is (In Simple Terms)?",
-      "How does this concept benefit beginners?",
-      "Is this concept part of Vibe Coding's core principles?",
-      "What is one practical application of this concept?",
-      "How does this concept build confidence in learners?"
+      "What are Cursor's three core interaction modes?",
+      "When should you use Composer instead of Edit mode?",
+      "What is the Reference Strategy in Cursor prompting?",
+      "Why is it important to review changes before accepting them?",
+      "How does providing context improve Cursor's output?"
     ],
     "answers": [
-      "The specific concept covered in this lesson",
-      "It reduces anxiety and makes learning accessible",
-      "Yes, it's a core principle of Vibe Coding",
-      "Applying this concept in digital creation projects",
-      "By focusing on ideas and providing guidance rather than complexity"
+      "Chat (Cmd+L) for conversations, Edit (Cmd+K) for inline changes, and Composer (Cmd+I) for multi-file modifications",
+      "When changes span multiple files or require creating new files - Edit is for single-file inline changes",
+      "Pointing to existing code as a model for what you want - helps AI match your project's patterns and style",
+      "AI can introduce bugs, break existing functionality, or misunderstand requirements - review catches these issues",
+      "Context helps AI understand not just what to do but why, leading to solutions that fit the real requirements"
     ]
   },
+  "key_takeaways": [
+    "Chat for understanding and planning, Edit for inline changes, Composer for multi-file work",
+    "Use references to existing code to maintain consistency",
+    "Provide context about why, not just what",
+    "Always review changes before accepting",
+    "Break complex tasks into iterative requests"
+  ],
   "resources": {
     "video": {
-      "title": "Understanding What AI Really Is (In Simple Terms) - Vibe Coding Fundamentals",
-      "creator": "Vibe Coding Tutorials",
+      "title": "Cursor Power User Guide",
+      "url": "https://www.youtube.com/watch?v=example",
       "embed": true,
-      "reason": "Relevant video content for this lesson topic"
+      "reason": "Advanced techniques for maximizing Cursor productivity"
     },
     "extra_reading": [
-      "https://example.com/extra-resource-1 - Additional reading for this topic",
-      "https://example.com/extra-resource-2 - More resources for curious learners"
+      "https://cursor.com/docs - Official Cursor documentation",
+      "https://trendtacticsdigital.com/blog/cursor-mastery - Our comprehensive Cursor guide"
     ]
   },
-  "summary": "In this lesson on \"What AI Really Is (In Simple Terms)\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+  "summary": "In this lesson, you mastered Cursor's three core features: Chat for conversations and understanding, Edit for inline modifications, and Composer for multi-file changes. You learned prompting strategies that produce better results and common mistakes to avoid. The key insight is that effective Cursor use requires clear, contextual prompts and always reviewing AI output. In the next lesson, we will explore Agentic Coding Tools that take AI assistance even further."
 }
