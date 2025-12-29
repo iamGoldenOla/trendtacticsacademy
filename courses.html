@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Courses - Trendtactics Academy</title>
     <link rel="stylesheet" href="css/main.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%2300D9FF%22 width=%22100%22 height=%22100%22 rx=%2215%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 fill=%22white%22 text-anchor=%22middle%22 font-weight=%22bold%22>TA</text></svg>" type="image/svg+xml">
     <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
     <script>
         // Supabase configuration - these should be replaced during deployment
@@ -22,14 +22,13 @@
         <div class="container header-content">
             <div class="logo">Trendtactics Academy</div>
             <nav class="nav">
-                <a href="https://trendtacticsdigital.com">Digital Services</a>
                 <a href="/">Home</a>
                 <a href="/about">About</a>
                 <a href="/services">Services</a>
                 <a href="/courses" class="active" style="color: var(--primary);">Courses</a>
                 <a href="/blog">Blog</a>
+                <a href="https://trendtacticsdigital.com">Digital Services</a>
                 <a href="/contact">Contact</a>
-                <a href="/dashboard" id="dashboardLink" style="display:none;">Dashboard</a>
                 <button class="btn btn-secondary" id="authBtn" onclick="handleAuth()">Sign In</button>
             </nav>
         </div>
@@ -79,9 +78,7 @@
                     <span class="badge badge-success">Free</span>
                 </div>
                 <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
-                        💻
-                    </div>
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></div>
                     <h3 class="card-title" style="margin: 0; color: var(--primary);">Vibe Coding</h3>
                 </div>
                 <p class="card-description" style="line-height: 1.7; margin-bottom: 1.5rem;">
@@ -90,13 +87,13 @@
                 </p>
                 <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(22, 32, 68, 0.5); border-radius: var(--radius); border: 1px solid var(--border-light);">
                     <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
-                        <span style="color: var(--primary); margin-right: 0.5rem;">⏱️</span> 5 Modules
+                        <span style="color: var(--primary); margin-right: 0.5rem;">1.</span> 5 Modules
                     </p>
                     <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
-                        <span style="color: var(--primary); margin-right: 0.5rem;">📅</span> 3 Weeks
+                        <span style="color: var(--primary); margin-right: 0.5rem;">2.</span> 3 Weeks
                     </p>
                     <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
-                        <span style="color: var(--primary); margin-right: 0.5rem;">📜</span> Certificate
+                        <span style="color: var(--primary); margin-right: 0.5rem;">3.</span> Certificate
                     </p>
                 </div>
                 <!-- Fixed link: relative path to /course-detail -->
@@ -108,7 +105,7 @@
             <!-- Coming Soon -->
             <div class="card" style="background: linear-gradient(135deg, rgba(22, 32, 68, 0.6), rgba(11, 20, 55, 0.6)); border: 1px dashed var(--primary); transition: all 0.3s ease;">
                 <div style="text-align: center; padding: 2rem 0;">
-                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🚀</div>
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--text-muted), var(--text-secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
                     <h3 class="card-title" style="color: var(--primary);">More Courses Coming Soon</h3>
                     <p class="card-description" style="line-height: 1.7; margin: 1rem 0;">
                         We're constantly adding new courses in web development, design, digital marketing, and more.
@@ -116,13 +113,13 @@
                     </p>
                     <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(22, 32, 68, 0.5); border-radius: var(--radius); border: 1px solid var(--border-light);">
                         <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center; justify-content: center;">
-                            <span style="color: var(--primary); margin-right: 0.5rem;">🎯</span> Web Development
+                            <span style="color: var(--primary); margin-right: 0.5rem;">1.</span> Web Development
                         </p>
                         <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center; justify-content: center;">
-                            <span style="color: var(--primary); margin-right: 0.5rem;">🎨</span> UI/UX Design
+                            <span style="color: var(--primary); margin-right: 0.5rem;">2.</span> UI/UX Design
                         </p>
                         <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center; justify-content: center;">
-                            <span style="color: var(--primary); margin-right: 0.5rem;">📈</span> Digital Marketing
+                            <span style="color: var(--primary); margin-right: 0.5rem;">3.</span> Digital Marketing
                         </p>
                     </div>
                     <button class="btn btn-secondary" disabled
@@ -189,7 +186,6 @@
                     <ul>
                         <li><a href="/dashboard">Dashboard</a></li>
                         <li><a href="/playground">Code Playground</a></li>
-                        <li><a href="/whiteboard">Whiteboard</a></li>
                         <li><a href="/ai-assistant">AI Assistant</a></li>
                     </ul>
                 </div>
