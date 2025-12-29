@@ -1,0 +1,60 @@
+{
+  "course_title": "Prompt Engineering Mastery",
+  "module_title": "Advanced Prompt Techniques",
+  "lesson_number": 10,
+  "lesson_title": "Zero-Shot and Self-Consistency Techniques",
+  "introduction": "In this lesson, we'll explore zero-shot prompting and self-consistency techniques. Zero-shot prompting involves getting AI to perform tasks without providing examples, relying solely on clear instructions and context. Self-consistency techniques involve generating multiple responses and selecting the most consistent or highest quality one. These advanced techniques can significantly improve the reliability and accuracy of AI outputs.",
+  "big_idea": "Advanced prompting techniques like zero-shot and self-consistency can improve the reliability and accuracy of AI responses.",
+  "why_it_matters": "Zero-shot prompting allows you to get quality results without having to provide examples, making the process more efficient. Self-consistency techniques help ensure the accuracy of AI responses by comparing multiple outputs and selecting the most consistent one.",
+  "core_concepts": [
+    {
+      "title": "Zero-Shot Prompting",
+      "content": "This technique involves getting the AI to perform a task without providing examples, relying entirely on clear instructions, context, and role definition. The AI applies its pre-trained knowledge to the task."
+    },
+    {
+      "title": "Self-Consistency Methods",
+      "content": "Generating multiple responses to the same prompt and comparing them to identify the most consistent or accurate answer. This is particularly useful for tasks requiring factual accuracy."
+    },
+    {
+      "title": "Instruction Clarity",
+      "content": "For zero-shot prompting to be effective, instructions must be extremely clear, comprehensive, and unambiguous. The AI has no examples to reference, so instructions must be self-contained."
+    }
+  ],
+  "real_world_example": "For zero-shot prompting: 'You are an expert financial analyst. Analyze the implications of a 2% increase in interest rates on small business loans. Consider cash flow, expansion plans, and investment decisions. Format your response as a 3-point analysis with specific recommendations.' For self-consistency: Running the same prompt 3-5 times and comparing responses to find the most consistent facts or recommendations.",
+  "steps": [
+    "For zero-shot: Ensure instructions are comprehensive and clear",
+    "Provide sufficient context for the AI to understand the task",
+    "Define the role or expertise level required",
+    "Specify the desired output format",
+    "For self-consistency: Generate multiple responses",
+    "Compare responses to identify consistent elements",
+    "Select the most accurate or consistent answer"
+  ],
+  "playground_activity": "Try a complex analytical task using zero-shot prompting (no examples). Then try the same task with few-shot prompting (with examples). Compare the results and note when each technique is more effective.",
+  "reflection_question": "When might zero-shot prompting be more appropriate than few-shot prompting?",
+  "quiz": {
+    "question": "What is zero-shot prompting?",
+    "options": [
+      "Prompting without providing examples",
+      "Prompting with many examples",
+      "Prompting that makes the AI respond quickly",
+      "Prompting that reduces AI creativity"
+    ],
+    "answer": "Prompting without providing examples",
+    "explanation": "Zero-shot prompting involves getting the AI to perform a task without providing examples, relying entirely on clear instructions and context."
+  },
+  "key_takeaways": [
+    "Zero-shot prompting works without examples",
+    "Self-consistency improves accuracy by comparing multiple responses",
+    "Clear instructions are crucial for zero-shot success",
+    "These techniques expand your prompt engineering toolkit"
+  ],
+  "resources": {
+    "video": "https://www.youtube.com/watch?v=example10",
+    "extra_reading": [
+      "https://example.com/zero-shot-prompting",
+      "https://example.com/self-consistency-in-ai"
+    ]
+  },
+  "summary": "In this lesson, we've explored zero-shot prompting and self-consistency techniques. These advanced methods allow you to get quality results without examples and improve accuracy by comparing multiple responses."
+}

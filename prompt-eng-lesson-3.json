@@ -1,0 +1,58 @@
+{
+  "course_title": "Prompt Engineering Mastery",
+  "module_title": "Introduction to Prompt Engineering",
+  "lesson_number": 3,
+  "lesson_title": "Context and Role Setting",
+  "introduction": "In this lesson, we'll explore how to effectively set context and assign roles to AI systems to improve the quality of responses. Context and role setting are powerful techniques that significantly influence AI behavior and output quality. By providing clear context and defining specific roles, you can guide the AI to respond in ways that align with your specific needs and expectations.",
+  "big_idea": "Providing clear context and assigning specific roles to AI systems dramatically improves the relevance and quality of responses.",
+  "why_it_matters": "Without proper context, AI systems may generate generic responses that don't meet your specific needs. Context and role setting help the AI understand the situation, audience, and expectations, leading to more targeted and useful outputs.",
+  "core_concepts": [
+    {
+      "title": "The Importance of Context",
+      "content": "Context provides the AI with background information necessary to understand the task, audience, purpose, and constraints. It acts as the foundation upon which the AI builds its response."
+    },
+    {
+      "title": "Role Assignment",
+      "content": "Assigning a specific role to the AI (e.g., expert consultant, teacher, analyst) influences the tone, depth, and perspective of the response. The AI adapts its approach based on the role assigned."
+    },
+    {
+      "title": "Contextual Constraints",
+      "content": "Defining constraints within the context helps the AI understand boundaries, limitations, and specific requirements that must be adhered to in the response."
+    }
+  ],
+  "real_world_example": "Instead of asking 'How do I market a product?', you could set context and role: 'You are an experienced digital marketing consultant with 10 years in the tech industry. Your client is a startup with a $500 monthly marketing budget. Provide a 3-month marketing strategy focusing on organic growth and cost-effective tactics.' This context and role assignment produces much more targeted advice.",
+  "steps": [
+    "Identify the essential background information",
+    "Define the specific role you want the AI to assume",
+    "Specify constraints and requirements",
+    "Clarify the intended audience or purpose",
+    "Test how different contexts affect the response"
+  ],
+  "playground_activity": "Take the same question and ask it with three different contexts and roles: 1) As a general question, 2) With a specific role (e.g., 'You are an expert...'), and 3) With detailed context and constraints. Compare the differences in the responses.",
+  "reflection_question": "How might context and role setting change the way you approach different types of tasks with AI?",
+  "quiz": {
+    "question": "What is the primary benefit of assigning a specific role to an AI in a prompt?",
+    "options": [
+      "It makes the AI respond faster",
+      "It influences the tone, depth, and perspective of the response",
+      "It reduces the cost of using AI",
+      "It makes the AI more creative"
+    ],
+    "answer": "It influences the tone, depth, and perspective of the response",
+    "explanation": "Assigning a specific role influences how the AI approaches the task, affecting the tone, depth, and perspective of its response. This leads to more targeted and appropriate outputs."
+  },
+  "key_takeaways": [
+    "Context provides essential background information for the AI",
+    "Role assignment guides the AI's approach and perspective",
+    "Constraints help define boundaries for the response",
+    "Well-defined context leads to more relevant outputs"
+  ],
+  "resources": {
+    "video": "https://www.youtube.com/watch?v=example3",
+    "extra_reading": [
+      "https://example.com/context-setting-in-ai",
+      "https://example.com/role-based-prompting"
+    ]
+  },
+  "summary": "In this lesson, we've explored the powerful techniques of context setting and role assignment. These techniques allow you to guide AI behavior more precisely, resulting in responses that are better aligned with your specific needs and expectations."
+}

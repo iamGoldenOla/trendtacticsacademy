@@ -1,0 +1,58 @@
+{
+  "course_title": "Prompt Engineering Mastery",
+  "module_title": "Intermediate Prompt Techniques",
+  "lesson_number": 7,
+  "lesson_title": "Few-Shot Learning and Examples",
+  "introduction": "In this lesson, we'll explore few-shot learning techniques, which involve providing examples within your prompt to guide the AI's response. Few-shot prompting is a powerful technique that allows you to demonstrate the desired format, style, or approach by showing examples directly in the prompt. This method is particularly effective for tasks that require specific formatting or complex patterns.",
+  "big_idea": "Providing examples in your prompt teaches the AI the desired format, style, or approach for the response.",
+  "why_it_matters": "Few-shot learning allows you to demonstrate exactly what you want without having to describe it in abstract terms. By showing examples, you can guide the AI to produce outputs that match your specific requirements more accurately.",
+  "core_concepts": [
+    {
+      "title": "Few-Shot Prompting",
+      "content": "This technique involves providing several examples of input-output pairs within the prompt to demonstrate the desired behavior. The AI uses these examples to understand the pattern and apply it to the new request."
+    },
+    {
+      "title": "Example Quality",
+      "content": "The quality and clarity of your examples directly impact the AI's performance. Clear, relevant examples that represent the variety of scenarios you might encounter produce better results."
+    },
+    {
+      "title": "Example Format",
+      "content": "Examples should be clearly demarcated and follow a consistent format. Using consistent separators or formatting helps the AI distinguish between examples and instructions."
+    }
+  ],
+  "real_world_example": "For creating product descriptions, you might provide: 'Example 1: Product: Wireless headphones. Description: Premium noise-canceling headphones with 30-hour battery life. Perfect for travelers and office workers. Example 2: Product: Smart water bottle. Description: Hydration tracker that reminds you to drink water and monitors your daily intake. Ideal for fitness enthusiasts. Now write a description for: Product: Ergonomic keyboard.' This shows the AI the desired style and format.",
+  "steps": [
+    "Identify the pattern you want the AI to learn",
+    "Create 2-5 clear, representative examples",
+    "Format examples consistently",
+    "Clearly separate examples from the actual task",
+    "Test and refine the examples for clarity"
+  ],
+  "playground_activity": "Try a task using few-shot learning with 1 example, then with 3 examples, then with 5 examples. Compare how the quality and consistency of responses change with the number of examples provided.",
+  "reflection_question": "How do examples in prompts affect the AI's ability to generalize to new situations?",
+  "quiz": {
+    "question": "What is the main purpose of few-shot learning in prompts?",
+    "options": [
+      "To make the AI respond faster",
+      "To provide examples that demonstrate the desired format or approach",
+      "To reduce the cost of using AI",
+      "To make the AI more creative"
+    ],
+    "answer": "To provide examples that demonstrate the desired format or approach",
+    "explanation": "Few-shot learning uses examples within the prompt to demonstrate the desired behavior, allowing the AI to follow the pattern shown in the examples."
+  },
+  "key_takeaways": [
+    "Examples demonstrate the desired format and approach",
+    "Quality examples lead to better AI performance",
+    "Consistent formatting helps the AI understand the pattern",
+    "Few-shot learning is effective for complex patterns"
+  ],
+  "resources": {
+    "video": "https://www.youtube.com/watch?v=example7",
+    "extra_reading": [
+      "https://example.com/few-shot-learning-prompting",
+      "https://example.com/example-based-ai-tasks"
+    ]
+  },
+  "summary": "In this lesson, we've explored few-shot learning, a technique that uses examples within prompts to guide AI behavior. By providing clear, relevant examples, you can significantly improve the AI's ability to produce outputs that match your specific requirements."
+}

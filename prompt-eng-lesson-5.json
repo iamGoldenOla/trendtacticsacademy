@@ -1,0 +1,58 @@
+{
+  "course_title": "Prompt Engineering Mastery",
+  "module_title": "Introduction to Prompt Engineering",
+  "lesson_number": 5,
+  "lesson_title": "Output Formatting and Constraints",
+  "introduction": "In this lesson, we'll explore how to effectively specify output formats and constraints in your prompts. Properly formatted outputs are crucial for integration with other systems and for ensuring the response meets your specific requirements. We'll cover various techniques for controlling the structure, format, and constraints of AI-generated content.",
+  "big_idea": "Specifying output formats and constraints in prompts ensures the AI generates responses that are immediately usable and meet specific requirements.",
+  "why_it_matters": "Without format specifications, AI systems may generate responses in unexpected structures that require additional processing or formatting. Specifying formats upfront saves time and ensures compatibility with your intended use.",
+  "core_concepts": [
+    {
+      "title": "Format Specifications",
+      "content": "Explicitly defining the output format (e.g., bullet points, JSON, table, numbered list) helps the AI structure its response in a way that's immediately useful for your needs."
+    },
+    {
+      "title": "Length Constraints",
+      "content": "Specifying word counts, paragraph limits, or time limits helps ensure the response is appropriately detailed for your use case without being too verbose or too brief."
+    },
+    {
+      "title": "Constraint Enforcement",
+      "content": "Defining specific constraints (e.g., 'exclude technical jargon,' 'include 3 examples,' 'use formal language') guides the AI to generate content that meets your specific requirements."
+    }
+  ],
+  "real_world_example": "Instead of 'Explain machine learning,' a prompt with format specifications would be: 'Explain machine learning in 300 words or less, using a numbered list format with 5 key points. Each point should include a brief explanation and a real-world example. Use simple language suitable for beginners.' This generates a structured response that meets specific formatting and content requirements.",
+  "steps": [
+    "Identify the required output structure",
+    "Specify length or size constraints",
+    "Define any formatting requirements",
+    "Include content constraints or exclusions",
+    "Test the prompt to ensure constraints are followed"
+  ],
+  "playground_activity": "Create a prompt that requires a specific output format (e.g., table, JSON, list) without specifying the format, then create the same prompt with explicit format requirements. Compare the results.",
+  "reflection_question": "How do output format specifications impact the usability of AI-generated content?",
+  "quiz": {
+    "question": "Why is it important to specify output formats in prompts?",
+    "options": [
+      "It makes the AI respond faster",
+      "It ensures the response is structured in a way that's immediately useful",
+      "It reduces the cost of using AI",
+      "It makes the AI more creative"
+    ],
+    "answer": "It ensures the response is structured in a way that's immediately useful",
+    "explanation": "Specifying output formats ensures the AI generates responses in the structure you need, saving time and ensuring compatibility with your intended use."
+  },
+  "key_takeaways": [
+    "Format specifications ensure immediate usability of AI responses",
+    "Length constraints help control detail level",
+    "Specific constraints guide content quality",
+    "Structured outputs save time on post-processing"
+  ],
+  "resources": {
+    "video": "https://www.youtube.com/watch?v=example5",
+    "extra_reading": [
+      "https://example.com/format-specifications-ai",
+      "https://example.com/constraint-based-prompting"
+    ]
+  },
+  "summary": "In this lesson, we've explored how to effectively specify output formats and constraints in your prompts. By being explicit about the structure and requirements you need, you can generate AI responses that are immediately usable and require minimal post-processing."
+}

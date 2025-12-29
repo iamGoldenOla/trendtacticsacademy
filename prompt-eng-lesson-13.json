@@ -1,0 +1,58 @@
+{
+  "course_title": "Prompt Engineering Mastery",
+  "module_title": "Specialized Applications",
+  "lesson_number": 13,
+  "lesson_title": "Prompt Engineering for Data Analysis",
+  "introduction": "In this lesson, we'll explore specialized prompt engineering techniques for data analysis tasks. As data becomes increasingly important in decision-making, AI-powered data analysis can accelerate insights and improve accuracy. We'll cover techniques for asking AI to interpret data, identify patterns, perform calculations, and generate insights from datasets.",
+  "big_idea": "Specialized prompts can effectively guide AI systems to analyze data and generate meaningful insights.",
+  "why_it_matters": "Data analysis is a complex task that requires clear instructions to be effective. Well-crafted prompts help AI systems understand the context, objectives, and specific requirements of data analysis tasks, leading to more accurate and relevant insights.",
+  "core_concepts": [
+    {
+      "title": "Data Context Setting",
+      "content": "Providing clear context about the dataset, including what each field represents, the time period covered, and the business or research context, helps the AI provide more relevant analysis."
+    },
+    {
+      "title": "Analysis Objectives",
+      "content": "Clearly stating what you want to learn from the data (trends, correlations, anomalies, predictions) guides the AI to focus on the most relevant aspects of the data."
+    },
+    {
+      "title": "Output Requirements",
+      "content": "Specifying the format for insights (summary, charts, recommendations) ensures the AI provides results in a usable format for your needs."
+    }
+  ],
+  "real_world_example": "Instead of 'Analyze this sales data,' a more effective prompt would be: 'Analyze the quarterly sales data for 2023, focusing on identifying seasonal trends, top-performing products, and customer segments with declining sales. Provide insights in a 5-point summary with specific recommendations for Q1 2024. Include calculations of percentage changes and highlight any anomalies.' This prompt provides context, specifies objectives, and defines the output format.",
+  "steps": [
+    "Provide context about the dataset and its significance",
+    "Define specific analysis objectives and questions",
+    "Specify the type of insights needed",
+    "Request specific calculations or metrics",
+    "Define the required output format"
+  ],
+  "playground_activity": "Take a dataset and ask for analysis with a general prompt, then with a specific prompt that includes context, objectives, and format requirements. Compare the relevance and actionability of the insights generated.",
+  "reflection_question": "How does providing context about data improve the quality of AI-generated insights?",
+  "quiz": {
+    "question": "Why is it important to provide context about a dataset in analysis prompts?",
+    "options": [
+      "It makes the AI respond faster",
+      "It helps the AI understand the significance and provide relevant insights",
+      "It reduces the cost of using AI",
+      "It makes the AI more creative"
+    ],
+    "answer": "It helps the AI understand the significance and provide relevant insights",
+    "explanation": "Providing context helps the AI understand the business or research significance of the data, leading to more relevant and actionable insights."
+  },
+  "key_takeaways": [
+    "Context helps AI understand data significance",
+    "Clear objectives focus the analysis",
+    "Output specifications ensure usability",
+    "Data analysis benefits from structured prompts"
+  ],
+  "resources": {
+    "video": "https://www.youtube.com/watch?v=example13",
+    "extra_reading": [
+      "https://example.com/data-analysis-prompts",
+      "https://example.com/ai-data-insights"
+    ]
+  },
+  "summary": "In this lesson, we've explored specialized prompt engineering techniques for data analysis. By providing clear context, specific objectives, and defined output requirements, you can significantly improve the quality and relevance of AI-generated data insights."
+}

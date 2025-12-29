@@ -1,0 +1,58 @@
+{
+  "course_title": "Prompt Engineering Mastery",
+  "module_title": "Specialized Applications",
+  "lesson_number": 11,
+  "lesson_title": "Prompt Engineering for Content Creation",
+  "introduction": "In this lesson, we'll explore specialized prompt engineering techniques for content creation across various formats and platforms. Content creation is one of the most common applications of AI, and mastering prompt techniques for this domain can significantly improve the quality, relevance, and engagement of AI-generated content. We'll cover techniques for different content types, platforms, and audiences.",
+  "big_idea": "Specialized prompt techniques can significantly improve the quality and relevance of AI-generated content.",
+  "why_it_matters": "Content creation is a primary use case for AI systems, and effective prompt engineering can save significant time while producing higher quality results. Understanding platform-specific and audience-specific techniques ensures content resonates with its intended audience.",
+  "core_concepts": [
+    {
+      "title": "Platform-Specific Content",
+      "content": "Different platforms (Twitter, LinkedIn, YouTube, blogs) require different content styles, lengths, and approaches. Tailoring prompts to specific platforms improves engagement and effectiveness."
+    },
+    {
+      "title": "Audience Segmentation",
+      "content": "Prompts that specify target audiences produce more relevant and engaging content. Including demographic, interest, and behavioral information in prompts improves content relevance."
+    },
+    {
+      "title": "Content Formats",
+      "content": "Different content formats (listicles, how-to guides, storytelling, comparison) require different prompt structures and approaches to be effective."
+    }
+  ],
+  "real_world_example": "Instead of 'Write a social media post,' a more effective prompt would be: 'Write a LinkedIn post for marketing professionals aged 28-40 about the importance of data-driven marketing decisions. Include a hook, 2 key insights, and a question to encourage engagement. Use a professional but approachable tone, 150-200 words.' This specific prompt generates content tailored to the platform, audience, and format.",
+  "steps": [
+    "Identify the platform and its specific requirements",
+    "Define the target audience and their interests",
+    "Specify the content format and structure needed",
+    "Include engagement elements if required",
+    "Test and refine based on performance"
+  ],
+  "playground_activity": "Create the same content piece using a generic prompt and a platform/audience-specific prompt. Compare the relevance and engagement potential of each output.",
+  "reflection_question": "How do different content platforms require different prompt approaches?",
+  "quiz": {
+    "question": "Why is it important to specify the target audience in content creation prompts?",
+    "options": [
+      "It makes the AI respond faster",
+      "It helps the AI create content that resonates with the intended audience",
+      "It reduces the cost of using AI",
+      "It makes the AI more creative"
+    ],
+    "answer": "It helps the AI create content that resonates with the intended audience",
+    "explanation": "Specifying the target audience allows the AI to tailor the content's tone, language, and topics to better resonate with the intended audience."
+  },
+  "key_takeaways": [
+    "Platform-specific prompts improve content effectiveness",
+    "Audience specification increases relevance",
+    "Format requirements ensure proper structure",
+    "Content creation benefits greatly from detailed prompts"
+  ],
+  "resources": {
+    "video": "https://www.youtube.com/watch?v=example11",
+    "extra_reading": [
+      "https://example.com/content-creation-prompts",
+      "https://example.com/platform-specific-ai-content"
+    ]
+  },
+  "summary": "In this lesson, we've explored specialized prompt engineering techniques for content creation. By tailoring prompts to specific platforms, audiences, and formats, you can significantly improve the quality and effectiveness of AI-generated content."
+}

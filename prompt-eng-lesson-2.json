@@ -1,0 +1,58 @@
+{
+  "course_title": "Prompt Engineering Mastery",
+  "module_title": "Introduction to Prompt Engineering",
+  "lesson_number": 2,
+  "lesson_title": "The Anatomy of Effective Prompts",
+  "introduction": "In this lesson, we'll examine the structure of effective prompts by breaking them down into their core components. Understanding the anatomy of a well-crafted prompt is essential for consistently getting high-quality results from AI systems. We'll explore how different elements work together to guide AI behavior and produce desired outputs.",
+  "big_idea": "Effective prompts follow a structured approach with clear components that guide AI behavior toward specific outcomes.",
+  "why_it_matters": "Knowing the components of effective prompts allows you to consistently craft inputs that generate the results you need. This systematic approach reduces trial and error and increases the reliability of AI outputs.",
+  "core_concepts": [
+    {
+      "title": "The Components of a Prompt",
+      "content": "An effective prompt typically contains several key components: context, instruction, input data, and output format. Each component serves a specific purpose in guiding the AI toward the desired response."
+    },
+    {
+      "title": "Context Setting",
+      "content": "Context provides the background information the AI needs to understand the task. This might include the domain, audience, purpose, or relevant background information that shapes the response."
+    },
+    {
+      "title": "Clear Instructions",
+      "content": "Instructions specify exactly what you want the AI to do. These should be specific, actionable, and unambiguous to ensure the AI understands the task requirements."
+    }
+  ],
+  "real_world_example": "Consider a prompt for creating a product description: 'Context: You are a marketing copywriter for a tech company. Task: Write a compelling product description for our new noise-canceling headphones. Audience: Tech-savvy professionals aged 25-45. Format: 200 words with a headline, 2 bullet points of features, and a call-to-action.' This prompt clearly defines context, task, audience, and format requirements.",
+  "steps": [
+    "Identify the context needed for the task",
+    "Define the specific task or instruction",
+    "Specify any input data to be used",
+    "Clarify the desired output format",
+    "Test and refine each component"
+  ],
+  "playground_activity": "Take a simple prompt you've used before and break it down into its components: context, instruction, input, and output format. Then rewrite it by strengthening each component individually.",
+  "reflection_question": "How do the different components of a prompt interact to influence the AI's response?",
+  "quiz": {
+    "question": "Which of the following is NOT a typical component of an effective prompt?",
+    "options": [
+      "Context",
+      "Instruction",
+      "Input data",
+      "AI's personal opinion"
+    ],
+    "answer": "AI's personal opinion",
+    "explanation": "An effective prompt typically includes context, instruction, input data, and output format. The AI's personal opinion is not something you include in the prompt, as the AI generates responses based on the input provided."
+  },
+  "key_takeaways": [
+    "Effective prompts have identifiable components that work together",
+    "Context sets the stage for the AI's response",
+    "Clear instructions specify the desired action",
+    "Output format requirements guide the structure of the response"
+  ],
+  "resources": {
+    "video": "https://www.youtube.com/watch?v=example2",
+    "extra_reading": [
+      "https://example.com/prompt-structure-guide",
+      "https://example.com/ai-instruction-design"
+    ]
+  },
+  "summary": "In this lesson, we've examined the structure of effective prompts by identifying their key components. Understanding this anatomy will help you craft more consistent and effective prompts that reliably produce the outputs you need."
+}
