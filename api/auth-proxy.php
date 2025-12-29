@@ -17,7 +17,7 @@ $path = $_GET['path'] ?? '';
 // Validate the path to ensure it's only for Supabase auth
 if (!preg_match('/^\/auth\/v1\/(signup|signin|signout|user|recover|verify|token|authorize|magiclink|otp)$/', $path)) {
     http_response_code(400);
-    echo json_encode(['error' => 'Invalid path']);
+    echo json_encode(['error' => 'Invalid path', 'error_description' => 'The requested path is not allowed']);
     exit();
 }
 
@@ -49,19 +49,14 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $input);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 
-// Set headers
+// Set headers - only use apikey, not Bearer token for auth endpoints
 $headers = [
-    'Authorization: Bearer ' . $supabaseAnonKey,
     'Content-Type: application/json',
     'apikey: ' . $supabaseAnonKey,
     'User-Agent: Trendtactics-Academy-Auth-Proxy/1.0'
 ];
-
-// Add any additional headers from the original request
-if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
-    $headers[] = 'Authorization: ' . $_SERVER['HTTP_AUTHORIZATION'];
-}
 
 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -75,7 +70,7 @@ curl_close($ch);
 // Handle cURL errors
 if ($curlError) {
     http_response_code(500);
-    echo json_encode(['error' => 'Curl error: ' . $curlError]);
+    echo json_encode(['error' => 'Connection error', 'error_description' => $curlError]);
     exit();
 }
 
