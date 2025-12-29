@@ -14,8 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $method = $_SERVER['REQUEST_METHOD'];
 $path = $_GET['path'] ?? '';
 
-// Validate the path to ensure it's only for Supabase auth
-if (!preg_match('/^\/auth\/v1\/(signup|signin|signout|user|recover|verify|token|authorize|magiclink|otp)$/', $path)) {
+// Validate the path - allow auth endpoints AND REST API endpoints
+$isAuthPath = preg_match('/^\/auth\/v1\/(signup|signin|signout|user|recover|verify|token|authorize|magiclink|otp)$/', $path);
+$isRestPath = preg_match('/^\/rest\/v1\//', $path);
+
+if (!$isAuthPath && !$isRestPath) {
     http_response_code(400);
     echo json_encode(['error' => 'Invalid path', 'error_description' => 'The requested path is not allowed']);
     exit();
