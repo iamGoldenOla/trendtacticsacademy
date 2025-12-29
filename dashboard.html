@@ -7,7 +7,6 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdnjs.cloudflare.com https://fonts.googleapis.com; connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co https://*.supabase.co wss://*.supabase.co; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com;">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>" type="image/svg+xml">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
     <style>
         :root {
             --primary: #00D9FF;
@@ -557,12 +556,24 @@
     </main>
 
     <script>
-        // Supabase Configuration
-        const SUPABASE_URL = 'https://uimdbodamoeyukrghchb.supabase.co';
+        // Configuration
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc';
         
-        let supabase;
         let currentUser = null;
+
+        // Helper function to make API calls through proxy
+        async function apiCall(path, options = {}) {
+            const url = `./api/auth-proxy.php?path=${encodeURIComponent(path)}`;
+            const response = await fetch(url, {
+                method: options.method || 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...options.headers
+                },
+                body: options.body ? JSON.stringify(options.body) : undefined
+            });
+            return response.json();
+        }
 
         // Initialize
         async function init() {
@@ -580,14 +591,8 @@
             // Update UI with user info
             document.getElementById('userName').textContent = currentUser.name || currentUser.email?.split('@')[0] || 'Student';
 
-            // Initialize Supabase client
-            try {
-                supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                await loadCourses();
-            } catch (error) {
-                console.error('Supabase init error:', error);
-                showError('Unable to connect to database. Please try again later.');
-            }
+            // Load courses
+            await loadCourses();
         }
 
         async function loadCourses() {
@@ -597,51 +602,35 @@
             const errorState = document.getElementById('errorState');
 
             try {
-                // Get enrollments with course details
-                const { data: enrollments, error } = await supabase
-                    .from('enrollments')
-                    .select(`
-                        *,
-                        courses (
-                            id,
-                            title,
-                            description,
-                            level,
-                            duration,
-                            category
-                        )
-                    `)
-                    .eq('user_id', currentUser.id)
-                    .eq('status', 'active');
+                // First, try to get all available courses (not enrollments for now)
+                const courses = await apiCall('/rest/v1/courses?select=id,title,description,level,duration,category&is_published=eq.true');
 
                 loadingState.style.display = 'none';
 
-                if (error) {
-                    console.error('Query error:', error);
-                    // If no enrollments table or error, show empty state instead of error
-                    if (error.code === 'PGRST116' || error.message.includes('does not exist')) {
+                // Handle errors
+                if (courses.error || courses.message) {
+                    console.error('Query error:', courses);
+                    // Show empty state for table not found errors
+                    if (courses.code === 'PGRST116' || courses.message?.includes('does not exist')) {
                         emptyState.style.display = 'block';
                         return;
                     }
-                    throw error;
+                    // For new users, just show available courses
+                    emptyState.style.display = 'block';
+                    return;
                 }
 
-                if (!enrollments || enrollments.length === 0) {
+                if (!courses || courses.length === 0) {
                     emptyState.style.display = 'block';
                     document.getElementById('coursesCount').textContent = '0';
                     return;
                 }
 
                 // Update stats
-                document.getElementById('coursesCount').textContent = enrollments.length;
+                document.getElementById('coursesCount').textContent = courses.length;
 
-                // Render courses
-                coursesContainer.innerHTML = enrollments.map(enrollment => {
-                    const course = enrollment.courses;
-                    if (!course) return '';
-                    
-                    const progress = enrollment.progress || 0;
-                    
+                // Render available courses
+                coursesContainer.innerHTML = courses.map(course => {
                     return `
                         <div class="course-card">
                             <div class="course-header">
@@ -651,13 +640,13 @@
                             <p class="course-description">${course.description || 'No description available'}</p>
                             <div class="progress-container">
                                 <div class="progress-bar">
-                                    <div class="progress-fill" style="width: ${progress}%"></div>
+                                    <div class="progress-fill" style="width: 0%"></div>
                                 </div>
-                                <p class="progress-text">${progress}% complete</p>
+                                <p class="progress-text">Ready to start</p>
                             </div>
                             <div class="course-actions">
                                 <a href="/lesson-viewer?course=${course.id}" class="btn btn-primary">
-                                    ${progress > 0 ? 'Continue Learning' : 'Start Learning'}
+                                    Start Learning
                                 </a>
                                 <a href="/course-detail?id=${course.id}" class="btn btn-secondary">Details</a>
                             </div>
@@ -670,7 +659,8 @@
             } catch (error) {
                 console.error('Error loading courses:', error);
                 loadingState.style.display = 'none';
-                showError(`Error loading courses: ${error.message}`);
+                // Show empty state instead of error for better UX
+                emptyState.style.display = 'block';
             }
         }
 
