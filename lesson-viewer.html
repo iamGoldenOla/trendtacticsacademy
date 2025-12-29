@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning - Trendtactics Academy</title>
+    <title>Vibe Coding - Trendtactics Academy</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>" type="image/svg+xml">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -22,174 +22,344 @@
             --border: rgba(0, 217, 255, 0.2);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg-darker); min-height: 100vh; color: var(--text-primary); }
-        .header { background: var(--bg-dark); border-bottom: 1px solid var(--border); padding: 0.75rem 1rem; position: sticky; top: 0; z-index: 100; }
-        .header-content { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-darker); min-height: 100vh; color: var(--text-primary); display: flex; flex-direction: column; }
+        
+        /* Header */
+        .header { background: var(--bg-dark); border-bottom: 1px solid var(--border); padding: 0.6rem 1rem; }
+        .header-content { max-width: 1600px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
         .logo { font-size: 1rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .nav { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .nav { display: flex; gap: 0.4rem; flex-wrap: wrap; }
         .nav a { color: var(--text-secondary); text-decoration: none; padding: 0.4rem 0.6rem; border-radius: 6px; font-size: 0.8rem; transition: all 0.2s; }
         .nav a:hover { color: var(--primary); background: rgba(0, 217, 255, 0.1); }
-        .container { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
-        .progress-bar { background: var(--bg-dark); height: 6px; border-radius: 3px; margin-bottom: 1.5rem; overflow: hidden; }
-        .progress-fill { background: linear-gradient(90deg, var(--primary), var(--secondary)); height: 100%; transition: width 0.3s; }
+
+        /* Main Layout */
+        .main-layout { flex: 1; display: flex; overflow: hidden; }
+
+        /* Sidebar - Lesson List */
+        .sidebar { width: 280px; background: var(--bg-dark); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+        .sidebar-header { padding: 1rem; border-bottom: 1px solid var(--border); }
+        .sidebar-header h2 { font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0.25rem; }
+        .sidebar-header p { font-size: 0.75rem; color: var(--text-muted); }
+        .lesson-list { flex: 1; overflow-y: auto; padding: 0.5rem; }
+        .module-group { margin-bottom: 1rem; }
+        .module-title { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; padding: 0.5rem; margin-bottom: 0.25rem; }
+        .lesson-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; margin-bottom: 0.25rem; }
+        .lesson-item:hover { background: rgba(0, 217, 255, 0.1); }
+        .lesson-item.active { background: rgba(0, 217, 255, 0.15); border-left: 3px solid var(--primary); }
+        .lesson-item.completed { opacity: 0.7; }
+        .lesson-num { width: 24px; height: 24px; background: var(--bg-darker); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 600; flex-shrink: 0; }
+        .lesson-item.active .lesson-num { background: var(--primary); color: var(--bg-darker); border-color: var(--primary); }
+        .lesson-item.completed .lesson-num { background: var(--success); color: white; border-color: var(--success); }
+        .lesson-info { flex: 1; min-width: 0; }
+        .lesson-name { font-size: 0.8rem; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .lesson-duration { font-size: 0.7rem; color: var(--text-muted); }
+
+        /* Main Content Area */
+        .content-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+        /* Tabs */
+        .content-tabs { display: flex; background: var(--bg-dark); border-bottom: 1px solid var(--border); padding: 0 1rem; }
+        .content-tab { padding: 0.875rem 1.25rem; background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 0.85rem; font-weight: 500; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s; font-family: inherit; }
+        .content-tab:hover { color: var(--primary); }
+        .content-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+        /* Tab Panels */
+        .tab-panel { flex: 1; overflow: hidden; display: none; }
+        .tab-panel.active { display: flex; flex-direction: column; }
+
+        /* Learning Board */
+        .learning-board { flex: 1; overflow-y: auto; padding: 1.5rem; }
+        .board-content { max-width: 800px; margin: 0 auto; }
         .lesson-header { margin-bottom: 1.5rem; }
-        .breadcrumb { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 0.5rem; }
-        .breadcrumb a { color: var(--primary); text-decoration: none; }
-        .lesson-title { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .lesson-meta { display: flex; gap: 1rem; color: var(--text-muted); font-size: 0.8rem; flex-wrap: wrap; }
-        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; margin-bottom: 1.25rem; }
-        .section-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
-        .text { color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.75rem; }
-        .big-idea { background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(124, 58, 237, 0.1)); border-left: 4px solid var(--primary); padding: 1.25rem; border-radius: 0 10px 10px 0; margin: 1rem 0; }
-        .big-idea p { color: var(--text-primary); font-size: 1rem; line-height: 1.6; }
-        .steps { list-style: none; }
-        .steps li { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; background: var(--bg-darker); border-radius: 8px; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 0.9rem; }
-        .step-num { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: var(--bg-darker); min-width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem; }
-        .quiz-q { background: var(--bg-darker); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; }
-        .quiz-q p { color: var(--text-primary); font-weight: 500; margin-bottom: 0.75rem; font-size: 0.9rem; }
-        .quiz-opts { display: flex; flex-direction: column; gap: 0.4rem; }
-        .quiz-opt { background: var(--bg-card); border: 1px solid var(--border); padding: 0.75rem; border-radius: 6px; cursor: pointer; transition: all 0.2s; color: var(--text-secondary); font-size: 0.85rem; }
+        .lesson-header h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .lesson-meta { display: flex; gap: 1rem; color: var(--text-muted); font-size: 0.8rem; }
+        .content-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
+        .section-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .section-text { color: var(--text-secondary); line-height: 1.7; font-size: 0.9rem; }
+        .big-idea-box { background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(124, 58, 237, 0.1)); border-left: 4px solid var(--primary); padding: 1rem 1.25rem; border-radius: 0 10px 10px 0; margin: 1rem 0; }
+        .big-idea-box p { color: var(--text-primary); font-size: 0.95rem; line-height: 1.6; }
+        .steps-list { list-style: none; margin-top: 0.5rem; }
+        .steps-list li { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem; background: var(--bg-darker); border-radius: 8px; margin-bottom: 0.4rem; font-size: 0.85rem; color: var(--text-secondary); }
+        .step-badge { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: var(--bg-darker); min-width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.7rem; flex-shrink: 0; }
+
+        /* Video Section */
+        .video-container { background: #000; border-radius: 10px; overflow: hidden; margin: 1rem 0; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; }
+        .video-container iframe { width: 100%; height: 100%; border: none; }
+        .video-placeholder { text-align: center; color: var(--text-muted); }
+        .video-placeholder .icon { font-size: 3rem; margin-bottom: 0.5rem; }
+
+        /* Quiz Section */
+        .quiz-item { background: var(--bg-darker); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; }
+        .quiz-item p { color: var(--text-primary); font-weight: 500; margin-bottom: 0.75rem; font-size: 0.9rem; }
+        .quiz-options { display: flex; flex-direction: column; gap: 0.4rem; }
+        .quiz-opt { background: var(--bg-card); border: 1px solid var(--border); padding: 0.65rem; border-radius: 6px; cursor: pointer; transition: all 0.2s; color: var(--text-secondary); font-size: 0.85rem; }
         .quiz-opt:hover { border-color: var(--primary); color: var(--primary); }
         .quiz-opt.correct { background: rgba(16, 185, 129, 0.2); border-color: var(--success); color: var(--success); }
         .quiz-opt.wrong { background: rgba(239, 68, 68, 0.2); border-color: var(--error); color: var(--error); }
-        .tools-tabs { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
-        .tool-tab { background: var(--bg-darker); border: 1px solid var(--border); color: var(--text-secondary); padding: 0.6rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; font-family: inherit; }
-        .tool-tab:hover, .tool-tab.active { border-color: var(--primary); color: var(--primary); }
-        .tool-tab.active { background: rgba(0, 217, 255, 0.1); }
-        .tool-frame { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; height: 450px; }
-        .tool-frame iframe { width: 100%; height: 100%; border: none; }
-        .nav-btns { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
-        .nav-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary); padding: 0.875rem 1.25rem; border-radius: 8px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; font-family: inherit; }
+
+        /* Navigation Buttons */
+        .lesson-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+        .nav-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary); padding: 0.75rem 1.25rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; font-family: inherit; }
         .nav-btn:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); }
         .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
         .nav-btn.primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--bg-darker); border: none; font-weight: 600; }
         .nav-btn.primary:hover:not(:disabled) { box-shadow: 0 6px 15px rgba(0, 217, 255, 0.3); }
-        @media (max-width: 768px) {
+
+        /* Playground Panel */
+        .playground-frame { flex: 1; border: none; }
+
+        /* Mobile Responsive */
+        @media (max-width: 900px) {
+            .main-layout { flex-direction: column; }
+            .sidebar { width: 100%; max-height: 200px; border-right: none; border-bottom: 1px solid var(--border); }
+            .lesson-list { display: flex; gap: 0.5rem; flex-wrap: nowrap; overflow-x: auto; padding: 0.5rem; }
+            .module-group { display: contents; }
+            .module-title { display: none; }
+            .lesson-item { flex-shrink: 0; padding: 0.5rem 0.75rem; }
+            .lesson-info { display: none; }
+        }
+        @media (max-width: 600px) {
             .header-content { flex-direction: column; }
             .nav { justify-content: center; }
-            .lesson-title { font-size: 1.4rem; }
-            .card { padding: 1.25rem; }
-            .nav-btns { flex-direction: column; }
-            .nav-btn { text-align: center; }
+            .learning-board { padding: 1rem; }
+            .lesson-header h1 { font-size: 1.25rem; }
         }
     </style>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
-            <div class="logo">📖 Vibe Coding</div>
+            <div class="logo">📖 Vibe Coding Course</div>
             <nav class="nav">
                 <a href="/">Home</a>
                 <a href="/dashboard">Dashboard</a>
-                <a href="/playground">Playground</a>
-                <a href="/whiteboard">Whiteboard</a>
+                <a href="/ai-assistant">AI Assistant</a>
             </nav>
         </div>
     </header>
-    <main class="container" id="main"></main>
+
+    <div class="main-layout">
+        <!-- Sidebar with Lesson List -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Course Lessons</h2>
+                <p id="progressText">0/15 completed</p>
+            </div>
+            <div class="lesson-list" id="lessonList"></div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content-area">
+            <div class="content-tabs">
+                <button class="content-tab active" onclick="switchTab('board')">📋 Learning Board</button>
+                <button class="content-tab" onclick="switchTab('playground')">💻 AI Playground</button>
+            </div>
+
+            <!-- Learning Board Tab -->
+            <div class="tab-panel active" id="board-panel">
+                <div class="learning-board" id="learningBoard"></div>
+            </div>
+
+            <!-- Playground Tab -->
+            <div class="tab-panel" id="playground-panel">
+                <iframe class="playground-frame" src="/playground"></iframe>
+            </div>
+        </main>
+    </div>
+
     <script>
-        // ALL 15 LESSONS EMBEDDED - INSTANT LOADING
+        // ALL 15 LESSONS
         const LESSONS = [
-            { id: 1, module: "Understanding Vibe Coding", title: "What Is Vibe Coding?", intro: "Welcome to your first lesson! Don't worry if you've never coded before. We'll explore what Vibe Coding is and why it's perfect for beginners.", bigIdea: "Vibe Coding is a beginner-friendly way of creating digital products by focusing on ideas, intention, creativity, and guidance — with the help of AI — instead of memorizing syntax or complex rules.", steps: ["Understand that coding is simply telling computers what to do", "Vibe Coding focuses on ideas before technical details", "AI and guidance make creation easier", "Avoid complex syntax initially", "Build confidence before complexity"], example: "Think of Vibe Coding like cooking with a recipe app. Instead of memorizing techniques, the app guides you step by step.", reflection: "Think about a digital product you use daily. How might someone have created it focusing on the main idea first?", quiz: [{ q: "What does Vibe Coding focus on first?", a: "Ideas and creativity", opts: ["Complex syntax", "Ideas and creativity", "Memorizing code", "Technical rules"] }], summary: "You learned that Vibe Coding focuses on ideas and creativity before technical details. You're ready for the next lesson!" },
-            { id: 2, module: "Understanding Vibe Coding", title: "Why Vibe Coding Exists", intro: "In this lesson, we'll explore why Vibe Coding was created and how it solves problems that beginners face with traditional coding.", bigIdea: "Traditional coding often overwhelms beginners with complex syntax before they understand core concepts. Vibe Coding flips this by focusing on ideas first, making digital creation accessible to everyone.", steps: ["Recognize challenges beginners face with traditional coding", "Understand how focusing on ideas reduces anxiety", "Learn about guided learning approaches", "See how Vibe Coding addresses these challenges", "Appreciate confidence-building in learning"], example: "Would you start driving by memorizing every engine detail? No! You start with the goal of getting from A to B. Vibe Coding works the same way.", reflection: "Can you think of a time when a complex approach made learning harder than it needed to be?", quiz: [{ q: "Why does Vibe Coding exist?", a: "To make coding accessible to beginners", opts: ["To replace all coding", "To make coding accessible to beginners", "To teach complex syntax", "To eliminate AI"] }], summary: "You now understand why Vibe Coding exists - to make digital creation accessible and reduce beginner anxiety." },
-            { id: 3, module: "Understanding Vibe Coding", title: "How Vibe Coding Is Different", intro: "Let's compare Vibe Coding with traditional approaches to understand what makes it special.", bigIdea: "Traditional coding starts with technical details and syntax. Vibe Coding starts with your ideas and intentions, using AI to help you create without technical complexity.", steps: ["Examine traditional coding's focus on syntax", "Compare with Vibe Coding's focus on ideas", "Identify key differences in learning approaches", "Understand how these differences benefit beginners", "Recognize the value of guided, supportive learning"], example: "Traditional coding is like learning chemistry before making a sandwich. Vibe Coding is like starting with simple recipes that produce satisfying results.", reflection: "Which approach would help you feel more confident as a beginner?", quiz: [{ q: "How is Vibe Coding different?", a: "It focuses on ideas before syntax", opts: ["More complex syntax", "It focuses on ideas before syntax", "No AI assistance", "Harder for beginners"] }], summary: "You understand how Vibe Coding differs from traditional approaches by prioritizing ideas over syntax." },
-            { id: 4, module: "Thinking Before Coding", title: "Thinking in Ideas, Not Code", intro: "Learn to think about what you want to create first, then let tools help make it happen.", bigIdea: "In Vibe Coding, you think about what you want to create first, then use tools and guidance to make it happen. This builds confidence and purpose.", steps: ["Understand the concept of idea-first thinking", "Learn how this applies to Vibe Coding", "See practical examples in action", "Practice in the playground", "Reflect on your learning journey"], example: "Instead of thinking 'I need a for loop', think 'I want to show a list of items'. The tools translate your idea into code.", reflection: "How does thinking in ideas change your approach to creating?", quiz: [{ q: "What should you focus on first?", a: "Your idea and what you want to create", opts: ["Complex code syntax", "Your idea and what you want to create", "Memorizing functions", "Technical documentation"] }], summary: "You've learned to think in ideas first, letting tools handle the technical translation." },
-            { id: 5, module: "Thinking Before Coding", title: "Ideas to Digital Instructions", intro: "Learn to break down your ideas into simple steps that become digital products.", bigIdea: "Vibe Coding teaches you to break ideas into simple steps that translate into digital form. This process shows how creative ideas become real products.", steps: ["Break your idea into simple components", "Identify the main goal", "List the steps to achieve it", "Use AI to help implement each step", "Iterate and improve"], example: "Want to track expenses? Break it down: 1) Add expense, 2) See total, 3) View history. Each step becomes a digital feature.", reflection: "Think of an app idea. Can you break it into 3-5 simple steps?", quiz: [{ q: "How do you turn ideas into digital products?", a: "Break them into simple steps", opts: ["Write complex code first", "Break them into simple steps", "Memorize syntax", "Skip planning"] }], summary: "You can now break ideas into actionable steps that become digital products." },
-            { id: 6, module: "Thinking Before Coding", title: "Understanding Intent", intro: "Intent is the 'why' behind your creation. Understanding it leads to better products.", bigIdea: "Intent is the 'why' behind your digital creation. Understanding your intent helps you make better decisions and communicate effectively with AI tools.", steps: ["Identify why you want to create something", "Clarify who will use it", "Define what success looks like", "Use intent to guide decisions", "Communicate intent to AI clearly"], example: "Intent: 'I want to help friends share photos easily.' This guides every feature decision you make.", reflection: "What's the intent behind something you'd like to create?", quiz: [{ q: "What is intent in Vibe Coding?", a: "The 'why' behind your creation", opts: ["The code syntax", "The 'why' behind your creation", "The programming language", "The file structure"] }], summary: "Understanding intent helps you create purposeful digital products." },
-            { id: 7, module: "Working with AI", title: "What AI Really Is", intro: "Let's demystify AI and understand how it helps in Vibe Coding.", bigIdea: "AI is like a helpful assistant that processes information and helps with tasks. In Vibe Coding, AI serves as a tool to create digital products efficiently.", steps: ["Understand AI as a helpful tool", "Learn what AI can and can't do", "See how AI fits into Vibe Coding", "Practice communicating with AI", "Build confidence using AI assistance"], example: "AI is like a very knowledgeable friend who can help you build things, but you provide the ideas and direction.", reflection: "How do you feel about using AI as a creative partner?", quiz: [{ q: "What is AI in Vibe Coding?", a: "A helpful assistant tool", opts: ["A replacement for thinking", "A helpful assistant tool", "Something scary", "Only for experts"] }], summary: "AI is a helpful tool that amplifies your creativity in Vibe Coding." },
-            { id: 8, module: "Working with AI", title: "How AI Helps You Create", intro: "Discover the many ways AI assists you in the Vibe Coding process.", bigIdea: "AI acts as a guide and helper - suggesting approaches, catching errors, and implementing ideas without you knowing complex technical details.", steps: ["Learn how AI suggests approaches", "See how AI catches and fixes errors", "Understand AI's role in implementation", "Practice getting help from AI", "Combine your creativity with AI's capabilities"], example: "Describe 'a blue button that bounces when clicked' and AI generates the HTML, CSS, and JavaScript for you.", reflection: "What would you like AI to help you create?", quiz: [{ q: "How does AI help in Vibe Coding?", a: "Suggests, catches errors, and implements", opts: ["Does everything for you", "Suggests, catches errors, and implements", "Replaces your ideas", "Makes things complex"] }], summary: "AI is your creative partner that handles technical details while you focus on ideas." },
-            { id: 9, module: "Working with AI", title: "Talking to AI Effectively", intro: "Learn simple techniques to communicate clearly with AI and get great results.", bigIdea: "Effective AI communication means being clear about what you want. Simple techniques help you get the best results from AI assistance.", steps: ["Be specific about what you want", "Describe the end result you envision", "Break complex requests into parts", "Iterate and refine your requests", "Learn from each interaction"], example: "Instead of 'make a website', try 'create a simple page with a blue header, my name centered, and three cards below'.", reflection: "Try rephrasing a vague request to be more specific. What changes?", quiz: [{ q: "How should you talk to AI?", a: "Be clear and specific", opts: ["Be vague", "Be clear and specific", "Use technical jargon", "Write long paragraphs"] }], summary: "Clear, specific communication gets the best results from AI." },
-            { id: 10, module: "Vibe Coding in Practice", title: "Real Examples", intro: "See real examples of Vibe Coding in action with actual projects.", bigIdea: "Real examples show how Vibe Coding principles create actual digital products. These demonstrate the power of focusing on ideas with guidance tools.", steps: ["Study real Vibe Coding projects", "Identify the idea behind each", "See how ideas became products", "Notice the role of AI assistance", "Apply insights to your own ideas"], example: "A student described 'a timer for my workouts' and created a functional fitness timer app in minutes using Vibe Coding.", reflection: "What project inspires you to try Vibe Coding?", quiz: [{ q: "What do real examples show?", a: "How ideas become products", opts: ["Complex code is required", "How ideas become products", "AI does all the work", "It's only for experts"] }], summary: "Real examples prove that Vibe Coding turns ideas into working products." },
-            { id: 11, module: "Vibe Coding in Practice", title: "Everyday Applications", intro: "Discover how Vibe Coding applies to everyday digital creations.", bigIdea: "Vibe Coding isn't just for apps - it applies to websites, automations, games, and any digital creation you can imagine.", steps: ["Identify everyday digital needs", "See how Vibe Coding solves them", "Practice with small projects", "Build confidence gradually", "Expand to bigger ideas"], example: "Birthday reminder, expense tracker, recipe organizer - all everyday apps you can create with Vibe Coding.", reflection: "What everyday problem could you solve with a simple digital tool?", quiz: [{ q: "What can Vibe Coding create?", a: "Any digital creation you imagine", opts: ["Only complex apps", "Any digital creation you imagine", "Only websites", "Only games"] }], summary: "Vibe Coding applies to any digital creation in your everyday life." },
-            { id: 12, module: "Your First Project", title: "Choosing Your First Project", intro: "Learn how to pick the perfect first project for your Vibe Coding journey.", bigIdea: "Your first project should be simple, personally meaningful, and achievable. Starting small builds confidence for bigger projects.", steps: ["Pick something personally useful", "Keep it simple (1-3 features)", "Ensure it's achievable in one session", "Focus on learning, not perfection", "Celebrate completing it"], example: "Good first projects: a personal greeting page, a simple counter, a color palette generator, or a quote display.", reflection: "What simple, personally meaningful project excites you?", quiz: [{ q: "What makes a good first project?", a: "Simple and personally meaningful", opts: ["Complex with many features", "Simple and personally meaningful", "Someone else's idea", "Perfect from the start"] }], summary: "Choose a simple, meaningful first project to build confidence." },
-            { id: 13, module: "Your First Project", title: "Describing What You Want", intro: "Master the art of describing your project clearly to get great AI-generated results.", bigIdea: "Clear descriptions lead to better AI-generated code. Learn to articulate your vision in simple, specific terms.", steps: ["Start with the main purpose", "Describe what users will see", "Explain what happens when they interact", "Specify colors, sizes, and styles", "Review and refine your description"], example: "'A page with a dark background, a large welcome message in blue, and a button that changes color when clicked.'", reflection: "Practice describing something you see around you in specific terms.", quiz: [{ q: "Why are clear descriptions important?", a: "They lead to better AI results", opts: ["They're not important", "They lead to better AI results", "AI prefers vague descriptions", "Only experts need them"] }], summary: "Clear descriptions are your superpower for great Vibe Coding results." },
-            { id: 14, module: "Your First Project", title: "Building and Iterating", intro: "Learn the build-test-improve cycle that makes Vibe Coding effective.", bigIdea: "Vibe Coding is iterative - you build something, see how it works, and improve it. Each iteration makes your project better.", steps: ["Generate your first version", "Test it and note what works", "Identify improvements needed", "Describe changes to AI", "Repeat until satisfied"], example: "First version: basic button. Iteration 1: add color. Iteration 2: add hover effect. Iteration 3: add sound. Better each time!", reflection: "How do you feel about improving through iterations rather than perfection?", quiz: [{ q: "What is iteration in Vibe Coding?", a: "Building and improving step by step", opts: ["Getting it perfect first try", "Building and improving step by step", "Giving up after one try", "Copying someone else"] }], summary: "Iteration is the secret to great Vibe Coding projects." },
-            { id: 15, module: "Moving Forward", title: "Your Vibe Coding Journey", intro: "Congratulations! You've completed the Vibe Coding course. Let's look at your journey ahead.", bigIdea: "You now have the foundation for Vibe Coding. The journey continues as you apply these principles to increasingly creative and ambitious projects.", steps: ["Review what you've learned", "Celebrate your progress", "Plan your next projects", "Join the community", "Keep creating and learning"], example: "Students who completed this course have gone on to create personal websites, games, productivity tools, and even small businesses.", reflection: "What will you create with your new Vibe Coding skills?", quiz: [{ q: "What comes next after this course?", a: "Keep creating and learning", opts: ["Stop learning", "Keep creating and learning", "Forget everything", "Wait for instructions"] }], summary: "Congratulations! You're now a Vibe Coder. Keep creating, keep learning, and enjoy the journey!" }
+            { id: 1, module: "Understanding Vibe Coding", title: "What Is Vibe Coding?", duration: "8 min", intro: "Welcome to your first lesson! Don't worry if you've never coded before. We'll explore what Vibe Coding is and why it's perfect for beginners.", bigIdea: "Vibe Coding is a beginner-friendly way of creating digital products by focusing on ideas, intention, creativity, and guidance — with the help of AI — instead of memorizing syntax or complex rules.", steps: ["Understand that coding is simply telling computers what to do", "Vibe Coding focuses on ideas before technical details", "AI and guidance make creation easier", "Avoid complex syntax initially", "Build confidence before complexity"], example: "Think of Vibe Coding like cooking with a recipe app. Instead of memorizing techniques, the app guides you step by step.", video: "https://www.youtube.com/embed/ok-plXXHlWw", reflection: "Think about a digital product you use daily. How might someone have created it focusing on the main idea first?", quiz: [{ q: "What does Vibe Coding focus on first?", a: "Ideas and creativity", opts: ["Complex syntax", "Ideas and creativity", "Memorizing code", "Technical rules"] }], summary: "You learned that Vibe Coding focuses on ideas and creativity before technical details. You're ready for the next lesson!" },
+            { id: 2, module: "Understanding Vibe Coding", title: "Why Vibe Coding Exists", duration: "7 min", intro: "In this lesson, we'll explore why Vibe Coding was created and how it solves problems that beginners face with traditional coding.", bigIdea: "Traditional coding often overwhelms beginners with complex syntax before they understand core concepts. Vibe Coding flips this by focusing on ideas first, making digital creation accessible to everyone.", steps: ["Recognize challenges beginners face with traditional coding", "Understand how focusing on ideas reduces anxiety", "Learn about guided learning approaches", "See how Vibe Coding addresses these challenges", "Appreciate confidence-building in learning"], example: "Would you start driving by memorizing every engine detail? No! You start with the goal of getting from A to B.", video: "", reflection: "Can you think of a time when a complex approach made learning harder than it needed to be?", quiz: [{ q: "Why does Vibe Coding exist?", a: "To make coding accessible to beginners", opts: ["To replace all coding", "To make coding accessible to beginners", "To teach complex syntax", "To eliminate AI"] }], summary: "You now understand why Vibe Coding exists - to make digital creation accessible and reduce beginner anxiety." },
+            { id: 3, module: "Understanding Vibe Coding", title: "How Vibe Coding Is Different", duration: "8 min", intro: "Let's compare Vibe Coding with traditional approaches to understand what makes it special.", bigIdea: "Traditional coding starts with technical details and syntax. Vibe Coding starts with your ideas and intentions, using AI to help you create without technical complexity.", steps: ["Examine traditional coding's focus on syntax", "Compare with Vibe Coding's focus on ideas", "Identify key differences in learning approaches", "Understand how these differences benefit beginners", "Recognize the value of guided, supportive learning"], example: "Traditional coding is like learning chemistry before making a sandwich. Vibe Coding is like starting with simple recipes.", video: "", reflection: "Which approach would help you feel more confident as a beginner?", quiz: [{ q: "How is Vibe Coding different?", a: "It focuses on ideas before syntax", opts: ["More complex syntax", "It focuses on ideas before syntax", "No AI assistance", "Harder for beginners"] }], summary: "You understand how Vibe Coding differs from traditional approaches by prioritizing ideas over syntax." },
+            { id: 4, module: "Thinking Before Coding", title: "Thinking in Ideas, Not Code", duration: "9 min", intro: "Learn to think about what you want to create first, then let tools help make it happen.", bigIdea: "In Vibe Coding, you think about what you want to create first, then use tools and guidance to make it happen. This builds confidence and purpose.", steps: ["Understand the concept of idea-first thinking", "Learn how this applies to Vibe Coding", "See practical examples in action", "Practice in the playground", "Reflect on your learning journey"], example: "Instead of thinking 'I need a for loop', think 'I want to show a list of items'. The tools translate your idea.", video: "https://www.youtube.com/embed/mM-oBLVnscM", reflection: "How does thinking in ideas change your approach to creating?", quiz: [{ q: "What should you focus on first?", a: "Your idea and what you want to create", opts: ["Complex code syntax", "Your idea and what you want to create", "Memorizing functions", "Technical docs"] }], summary: "You've learned to think in ideas first, letting tools handle the technical translation." },
+            { id: 5, module: "Thinking Before Coding", title: "Ideas to Digital Instructions", duration: "8 min", intro: "Learn to break down your ideas into simple steps that become digital products.", bigIdea: "Vibe Coding teaches you to break ideas into simple steps that translate into digital form. This shows how creative ideas become real products.", steps: ["Break your idea into simple components", "Identify the main goal", "List the steps to achieve it", "Use AI to help implement each step", "Iterate and improve"], example: "Want to track expenses? Break it down: 1) Add expense, 2) See total, 3) View history.", video: "", reflection: "Think of an app idea. Can you break it into 3-5 simple steps?", quiz: [{ q: "How do you turn ideas into products?", a: "Break them into simple steps", opts: ["Write complex code first", "Break them into simple steps", "Memorize syntax", "Skip planning"] }], summary: "You can now break ideas into actionable steps that become digital products." },
+            { id: 6, module: "Thinking Before Coding", title: "Understanding Intent", duration: "7 min", intro: "Intent is the 'why' behind your creation. Understanding it leads to better products.", bigIdea: "Intent is the 'why' behind your digital creation. Understanding your intent helps you make better decisions and communicate effectively with AI tools.", steps: ["Identify why you want to create something", "Clarify who will use it", "Define what success looks like", "Use intent to guide decisions", "Communicate intent to AI clearly"], example: "Intent: 'I want to help friends share photos easily.' This guides every feature decision.", video: "", reflection: "What's the intent behind something you'd like to create?", quiz: [{ q: "What is intent in Vibe Coding?", a: "The 'why' behind your creation", opts: ["The code syntax", "The 'why' behind your creation", "The programming language", "The file structure"] }], summary: "Understanding intent helps you create purposeful digital products." },
+            { id: 7, module: "Working with AI", title: "What AI Really Is", duration: "9 min", intro: "Let's demystify AI and understand how it helps in Vibe Coding.", bigIdea: "AI is like a helpful assistant that processes information and helps with tasks. In Vibe Coding, AI serves as a tool to create digital products efficiently.", steps: ["Understand AI as a helpful tool", "Learn what AI can and can't do", "See how AI fits into Vibe Coding", "Practice communicating with AI", "Build confidence using AI assistance"], example: "AI is like a very knowledgeable friend who can help you build things, but you provide the ideas and direction.", video: "https://www.youtube.com/embed/ad79nYk2keg", reflection: "How do you feel about using AI as a creative partner?", quiz: [{ q: "What is AI in Vibe Coding?", a: "A helpful assistant tool", opts: ["A replacement for thinking", "A helpful assistant tool", "Something scary", "Only for experts"] }], summary: "AI is a helpful tool that amplifies your creativity in Vibe Coding." },
+            { id: 8, module: "Working with AI", title: "How AI Helps You Create", duration: "8 min", intro: "Discover the many ways AI assists you in the Vibe Coding process.", bigIdea: "AI acts as a guide and helper - suggesting approaches, catching errors, and implementing ideas without you knowing complex technical details.", steps: ["Learn how AI suggests approaches", "See how AI catches and fixes errors", "Understand AI's role in implementation", "Practice getting help from AI", "Combine your creativity with AI's capabilities"], example: "Describe 'a blue button that bounces when clicked' and AI generates the HTML, CSS, and JavaScript for you.", video: "", reflection: "What would you like AI to help you create?", quiz: [{ q: "How does AI help in Vibe Coding?", a: "Suggests, catches errors, and implements", opts: ["Does everything for you", "Suggests, catches errors, and implements", "Replaces your ideas", "Makes things complex"] }], summary: "AI is your creative partner that handles technical details while you focus on ideas." },
+            { id: 9, module: "Working with AI", title: "Talking to AI Effectively", duration: "10 min", intro: "Learn simple techniques to communicate clearly with AI and get great results.", bigIdea: "Effective AI communication means being clear about what you want. Simple techniques help you get the best results from AI assistance.", steps: ["Be specific about what you want", "Describe the end result you envision", "Break complex requests into parts", "Iterate and refine your requests", "Learn from each interaction"], example: "Instead of 'make a website', try 'create a simple page with a blue header, my name centered, and three cards below'.", video: "", reflection: "Try rephrasing a vague request to be more specific.", quiz: [{ q: "How should you talk to AI?", a: "Be clear and specific", opts: ["Be vague", "Be clear and specific", "Use technical jargon", "Write long paragraphs"] }], summary: "Clear, specific communication gets the best results from AI." },
+            { id: 10, module: "Vibe Coding in Practice", title: "Real Examples", duration: "8 min", intro: "See real examples of Vibe Coding in action with actual projects.", bigIdea: "Real examples show how Vibe Coding principles create actual digital products. These demonstrate the power of focusing on ideas with guidance tools.", steps: ["Study real Vibe Coding projects", "Identify the idea behind each", "See how ideas became products", "Notice the role of AI assistance", "Apply insights to your own ideas"], example: "A student described 'a timer for my workouts' and created a functional fitness timer app in minutes.", video: "https://www.youtube.com/embed/NILGIJpNKAQ", reflection: "What project inspires you to try Vibe Coding?", quiz: [{ q: "What do real examples show?", a: "How ideas become products", opts: ["Complex code is required", "How ideas become products", "AI does all the work", "It's only for experts"] }], summary: "Real examples prove that Vibe Coding turns ideas into working products." },
+            { id: 11, module: "Vibe Coding in Practice", title: "Everyday Applications", duration: "7 min", intro: "Discover how Vibe Coding applies to everyday digital creations.", bigIdea: "Vibe Coding isn't just for apps - it applies to websites, automations, games, and any digital creation you can imagine.", steps: ["Identify everyday digital needs", "See how Vibe Coding solves them", "Practice with small projects", "Build confidence gradually", "Expand to bigger ideas"], example: "Birthday reminder, expense tracker, recipe organizer - all everyday apps you can create.", video: "", reflection: "What everyday problem could you solve with a simple digital tool?", quiz: [{ q: "What can Vibe Coding create?", a: "Any digital creation you imagine", opts: ["Only complex apps", "Any digital creation you imagine", "Only websites", "Only games"] }], summary: "Vibe Coding applies to any digital creation in your everyday life." },
+            { id: 12, module: "Your First Project", title: "Choosing Your First Project", duration: "8 min", intro: "Learn how to pick the perfect first project for your Vibe Coding journey.", bigIdea: "Your first project should be simple, personally meaningful, and achievable. Starting small builds confidence for bigger projects.", steps: ["Pick something personally useful", "Keep it simple (1-3 features)", "Ensure it's achievable in one session", "Focus on learning, not perfection", "Celebrate completing it"], example: "Good first projects: a personal greeting page, a simple counter, a color palette generator.", video: "", reflection: "What simple, personally meaningful project excites you?", quiz: [{ q: "What makes a good first project?", a: "Simple and personally meaningful", opts: ["Complex with many features", "Simple and personally meaningful", "Someone else's idea", "Perfect from the start"] }], summary: "Choose a simple, meaningful first project to build confidence." },
+            { id: 13, module: "Your First Project", title: "Describing What You Want", duration: "9 min", intro: "Master the art of describing your project clearly to get great AI-generated results.", bigIdea: "Clear descriptions lead to better AI-generated code. Learn to articulate your vision in simple, specific terms.", steps: ["Start with the main purpose", "Describe what users will see", "Explain what happens when they interact", "Specify colors, sizes, and styles", "Review and refine your description"], example: "'A page with a dark background, a large welcome message in blue, and a button that changes color when clicked.'", video: "", reflection: "Practice describing something you see around you in specific terms.", quiz: [{ q: "Why are clear descriptions important?", a: "They lead to better AI results", opts: ["They're not important", "They lead to better AI results", "AI prefers vague descriptions", "Only experts need them"] }], summary: "Clear descriptions are your superpower for great Vibe Coding results." },
+            { id: 14, module: "Your First Project", title: "Building and Iterating", duration: "10 min", intro: "Learn the build-test-improve cycle that makes Vibe Coding effective.", bigIdea: "Vibe Coding is iterative - you build something, see how it works, and improve it. Each iteration makes your project better.", steps: ["Generate your first version", "Test it and note what works", "Identify improvements needed", "Describe changes to AI", "Repeat until satisfied"], example: "First version: basic button. Iteration 1: add color. Iteration 2: add hover effect. Better each time!", video: "https://www.youtube.com/embed/fCn9zQGmAiE", reflection: "How do you feel about improving through iterations rather than perfection?", quiz: [{ q: "What is iteration in Vibe Coding?", a: "Building and improving step by step", opts: ["Getting it perfect first try", "Building and improving step by step", "Giving up after one try", "Copying someone else"] }], summary: "Iteration is the secret to great Vibe Coding projects." },
+            { id: 15, module: "Moving Forward", title: "Your Vibe Coding Journey", duration: "6 min", intro: "Congratulations! You've completed the Vibe Coding course. Let's look at your journey ahead.", bigIdea: "You now have the foundation for Vibe Coding. The journey continues as you apply these principles to increasingly creative and ambitious projects.", steps: ["Review what you've learned", "Celebrate your progress", "Plan your next projects", "Join the community", "Keep creating and learning"], example: "Students who completed this course have gone on to create personal websites, games, productivity tools, and even small businesses.", video: "", reflection: "What will you create with your new Vibe Coding skills?", quiz: [{ q: "What comes next after this course?", a: "Keep creating and learning", opts: ["Stop learning", "Keep creating and learning", "Forget everything", "Wait for instructions"] }], summary: "Congratulations! You're now a Vibe Coder. Keep creating, keep learning, and enjoy the journey!" }
         ];
 
-        let lessonIndex = 0;
-        
-        // Check auth and render immediately
+        let currentLesson = 0;
+        let completedLessons = new Set();
+
+        // Initialize
         (function init() {
             const s = localStorage.getItem('supabase_session');
             const u = localStorage.getItem('supabase_user');
             if (!s || !u) { window.location.replace('/signup'); return; }
             
+            // Load saved progress
+            const saved = localStorage.getItem('vibe_progress');
+            if (saved) completedLessons = new Set(JSON.parse(saved));
+            
+            // Get lesson from URL
             const p = new URLSearchParams(window.location.search);
-            lessonIndex = Math.max(0, Math.min((parseInt(p.get('lesson')) || 1) - 1, LESSONS.length - 1));
-            render();
+            currentLesson = Math.max(0, Math.min((parseInt(p.get('lesson')) || 1) - 1, LESSONS.length - 1));
+            
+            renderLessonList();
+            renderLesson();
         })();
 
-        function render() {
-            const L = LESSONS[lessonIndex];
-            const pct = ((lessonIndex + 1) / LESSONS.length) * 100;
-            document.getElementById('main').innerHTML = `
-                <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-                <div class="lesson-header">
-                    <p class="breadcrumb"><a href="/dashboard">Dashboard</a> / Vibe Coding / Lesson ${lessonIndex + 1}</p>
-                    <h1 class="lesson-title">${L.title}</h1>
-                    <div class="lesson-meta"><span>📚 ${L.module}</span><span>⏱️ ~8 min</span><span>📊 ${lessonIndex + 1}/${LESSONS.length}</span></div>
-                </div>
-                <div class="card">
-                    <h2 class="section-title">👋 Introduction</h2>
-                    <p class="text">${L.intro}</p>
-                    <div class="big-idea"><h3 style="color:var(--primary);margin-bottom:0.5rem">💡 The Big Idea</h3><p>${L.bigIdea}</p></div>
-                </div>
-                <div class="card">
-                    <h2 class="section-title">📝 Key Steps</h2>
-                    <ol class="steps">${L.steps.map((s,i)=>`<li><span class="step-num">${i+1}</span><span>${s}</span></li>`).join('')}</ol>
-                </div>
-                <div class="card">
-                    <h2 class="section-title">🎯 Example</h2>
-                    <p class="text">${L.example}</p>
-                </div>
-                <div class="card">
-                    <h2 class="section-title">🛠️ Practice Zone</h2>
-                    <p class="text" style="margin-bottom:0.75rem">Try what you've learned! Use the AI Playground or Whiteboard.</p>
-                    <div class="tools-tabs">
-                        <button class="tool-tab active" onclick="switchTool('playground',this)">💻 AI Playground</button>
-                        <button class="tool-tab" onclick="switchTool('whiteboard',this)">🎨 Whiteboard</button>
+        function renderLessonList() {
+            let html = '';
+            let currentModule = '';
+            
+            LESSONS.forEach((L, i) => {
+                if (L.module !== currentModule) {
+                    currentModule = L.module;
+                    html += `<div class="module-group"><div class="module-title">${currentModule}</div>`;
+                }
+                
+                const isActive = i === currentLesson;
+                const isCompleted = completedLessons.has(i);
+                
+                html += `
+                    <div class="lesson-item ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}" onclick="selectLesson(${i})">
+                        <div class="lesson-num">${isCompleted ? '✓' : i + 1}</div>
+                        <div class="lesson-info">
+                            <div class="lesson-name">${L.title}</div>
+                            <div class="lesson-duration">⏱️ ${L.duration}</div>
+                        </div>
                     </div>
-                    <div class="tool-frame"><iframe id="toolFrame" src="/playground"></iframe></div>
-                </div>
-                <div class="card">
-                    <h2 class="section-title">📋 Quick Quiz</h2>
-                    ${L.quiz.map((q,i)=>`<div class="quiz-q" id="q${i}"><p><strong>Q:</strong> ${q.q}</p><div class="quiz-opts">${q.opts.map(o=>`<div class="quiz-opt" onclick="checkQ(${i},'${o.replace(/'/g,"\\'")}','${q.a.replace(/'/g,"\\'")}')">${o}</div>`).join('')}</div></div>`).join('')}
-                </div>
-                <div class="card">
-                    <h2 class="section-title">🤔 Reflection</h2>
-                    <p class="text">${L.reflection}</p>
-                </div>
-                <div class="card" style="background:linear-gradient(135deg,var(--bg-card),rgba(16,185,129,0.1));border-color:var(--success)">
-                    <h2 class="section-title" style="color:var(--success)">✅ Summary</h2>
-                    <p class="text">${L.summary}</p>
-                </div>
-                <div class="nav-btns">
-                    <button class="nav-btn" onclick="nav(-1)" ${lessonIndex===0?'disabled':''}>← Previous</button>
-                    <button class="nav-btn primary" onclick="nav(1)" ${lessonIndex>=LESSONS.length-1?'disabled':''}>Next Lesson →</button>
+                `;
+            });
+            
+            document.getElementById('lessonList').innerHTML = html;
+            document.getElementById('progressText').textContent = `${completedLessons.size}/${LESSONS.length} completed`;
+        }
+
+        function selectLesson(index) {
+            currentLesson = index;
+            renderLessonList();
+            renderLesson();
+            switchTab('board');
+            history.replaceState({}, '', `?course=vibe-coding&lesson=${index + 1}`);
+        }
+
+        function renderLesson() {
+            const L = LESSONS[currentLesson];
+            
+            let videoHtml = '';
+            if (L.video) {
+                videoHtml = `
+                    <div class="content-section">
+                        <h3 class="section-title">🎬 Watch & Learn</h3>
+                        <div class="video-container">
+                            <iframe src="${L.video}" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('learningBoard').innerHTML = `
+                <div class="board-content">
+                    <div class="lesson-header">
+                        <h1>${L.title}</h1>
+                        <div class="lesson-meta">
+                            <span>📚 ${L.module}</span>
+                            <span>⏱️ ${L.duration}</span>
+                            <span>📖 Lesson ${currentLesson + 1} of ${LESSONS.length}</span>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h3 class="section-title">👋 Introduction</h3>
+                        <p class="section-text">${L.intro}</p>
+                        <div class="big-idea-box">
+                            <strong style="color: var(--primary);">💡 The Big Idea</strong>
+                            <p style="margin-top: 0.5rem;">${L.bigIdea}</p>
+                        </div>
+                    </div>
+
+                    ${videoHtml}
+
+                    <div class="content-section">
+                        <h3 class="section-title">📝 Key Steps</h3>
+                        <ol class="steps-list">
+                            ${L.steps.map((s, i) => `<li><span class="step-badge">${i + 1}</span><span>${s}</span></li>`).join('')}
+                        </ol>
+                    </div>
+
+                    <div class="content-section">
+                        <h3 class="section-title">🎯 Example</h3>
+                        <p class="section-text">${L.example}</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h3 class="section-title">📋 Quick Quiz</h3>
+                        ${L.quiz.map((q, i) => `
+                            <div class="quiz-item" id="quiz-${i}">
+                                <p><strong>Q:</strong> ${q.q}</p>
+                                <div class="quiz-options">
+                                    ${q.opts.map(o => `<div class="quiz-opt" onclick="checkQuiz(${i}, '${o.replace(/'/g, "\\'")}', '${q.a.replace(/'/g, "\\'")}')">${o}</div>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div class="content-section">
+                        <h3 class="section-title">🤔 Reflection</h3>
+                        <p class="section-text">${L.reflection}</p>
+                    </div>
+
+                    <div class="content-section" style="background: linear-gradient(135deg, var(--bg-card), rgba(16, 185, 129, 0.1)); border-color: var(--success);">
+                        <h3 class="section-title" style="color: var(--success);">✅ Summary</h3>
+                        <p class="section-text">${L.summary}</p>
+                    </div>
+
+                    <div class="lesson-nav">
+                        <button class="nav-btn" onclick="navigate(-1)" ${currentLesson === 0 ? 'disabled' : ''}>← Previous Lesson</button>
+                        <button class="nav-btn primary" onclick="completeAndNext()">
+                            ${currentLesson >= LESSONS.length - 1 ? '🎉 Complete Course' : 'Mark Complete & Next →'}
+                        </button>
+                    </div>
                 </div>
             `;
         }
 
-        function switchTool(t, btn) {
-            document.querySelectorAll('.tool-tab').forEach(b=>b.classList.remove('active'));
-            btn.classList.add('active');
-            document.getElementById('toolFrame').src = '/' + t;
+        function switchTab(tab) {
+            document.querySelectorAll('.content-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            
+            document.querySelector(`.content-tab:nth-child(${tab === 'board' ? 1 : 2})`).classList.add('active');
+            document.getElementById(`${tab}-panel`).classList.add('active');
         }
 
-        function checkQ(i, sel, ans) {
-            document.querySelectorAll(`#q${i} .quiz-opt`).forEach(o => {
+        function checkQuiz(i, selected, correct) {
+            const quizDiv = document.getElementById(`quiz-${i}`);
+            quizDiv.querySelectorAll('.quiz-opt').forEach(o => {
                 o.onclick = null;
-                if (o.textContent === ans) o.classList.add('correct');
-                else if (o.textContent === sel) o.classList.add('wrong');
+                if (o.textContent === correct) o.classList.add('correct');
+                else if (o.textContent === selected) o.classList.add('wrong');
             });
         }
 
-        function nav(dir) {
-            lessonIndex = Math.max(0, Math.min(lessonIndex + dir, LESSONS.length - 1));
-            window.scrollTo(0, 0);
-            history.replaceState({}, '', `?course=vibe-coding&lesson=${lessonIndex + 1}`);
-            render();
+        function navigate(dir) {
+            currentLesson = Math.max(0, Math.min(currentLesson + dir, LESSONS.length - 1));
+            renderLessonList();
+            renderLesson();
+            document.getElementById('learningBoard').scrollTop = 0;
+            history.replaceState({}, '', `?course=vibe-coding&lesson=${currentLesson + 1}`);
+        }
+
+        function completeAndNext() {
+            completedLessons.add(currentLesson);
+            localStorage.setItem('vibe_progress', JSON.stringify([...completedLessons]));
+            
+            if (currentLesson < LESSONS.length - 1) {
+                navigate(1);
+            } else {
+                alert('🎉 Congratulations! You have completed the Vibe Coding course!');
+                renderLessonList();
+            }
         }
     </script>
 </body>
