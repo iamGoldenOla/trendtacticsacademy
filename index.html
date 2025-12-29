@@ -24,13 +24,13 @@
             <div class="logo">Trendtactics Academy</div>
             <nav class="nav">
                 <a href="https://trendtacticsdigital.com">Digital Services</a>
-                <a href="./index.html">Home</a>
-                <a href="./about.html">About</a>
-                <a href="./services.html">Services</a>
-                <a href="./courses.html">Courses</a>
-                <a href="./blog.html">Blog</a>
-                <a href="./contact.html">Contact</a>
-                <a href="./dashboard.html" id="dashboardLink" style="display:none;">Dashboard</a>
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/services">Services</a>
+                <a href="/courses">Courses</a>
+                <a href="/blog">Blog</a>
+                <a href="/contact">Contact</a>
+                <a href="/dashboard" id="dashboardLink" style="display:none;">Dashboard</a>
                 <button class="btn btn-secondary" id="authBtn" onclick="handleAuth()">Sign In</button>
             </nav>
         </div>
@@ -43,8 +43,8 @@
             <p class="hero-subtitle">Learn coding, design, and digital marketing with expert-led courses. Build real
                 projects with AI as your creative partner.</p>
             <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
-                <a href="./courses.html" class="btn btn-primary btn-lg">Explore Courses</a>
-                <a href="./signup.html" class="btn btn-secondary btn-lg">Start Free Today</a>
+                <a href="/courses" class="btn btn-primary btn-lg">Explore Courses</a>
+                <a href="/signup" class="btn btn-secondary btn-lg">Start Free Today</a>
             </div>
         </div>
     </section>
@@ -84,7 +84,7 @@
                     We're revolutionizing digital education by combining expert instruction with AI-powered learning.
                     Our mission is to make high-quality tech education accessible to everyone, everywhere.
                 </p>
-                <a href="./about.html">Read More About Us</a>
+                <a href="/about">Read More About Us</a>
             </div>
             <div class="card"
                 style="padding: 3rem; text-align: center; background: linear-gradient(135deg, var(--primary), var(--secondary));">
@@ -151,7 +151,7 @@
                 </div>
             </div>
             <div style="text-align: center; margin-top: 2rem;">
-                <a href="./services.html">View All Services</a>
+                <a href="/services">View All Services</a>
             </div>
         </div>
     </section>
@@ -179,7 +179,7 @@
                         ⏱️ 5 Modules • 📅 3 Weeks • 📜 Certificate
                     </p>
                 </div>
-                <a href="./course-detail.html" class="btn btn-primary" style="width: 100%; text-align: center;">
+                <a href="/course-detail" class="btn btn-primary" style="width: 100%; text-align: center;">
                     View Course
                 </a>
             </div>
@@ -506,7 +506,7 @@
                 if (loggedIn) {
                     const user = await Auth.getCurrentUser();
                     authBtn.textContent = user?.name || 'Account';
-                    authBtn.onclick = () => window.location.href = './dashboard.html';
+                    authBtn.onclick = () => window.location.href = '/dashboard';
                     dashboardLink.style.display = 'block';
                 }
             } catch (error) {
@@ -515,7 +515,7 @@
         }
 
         function handleAuth() {
-            window.location.href = './signup.html';
+            window.location.href = '/signup';
         }
 
         // Handle clean URL routing from GitHub Pages 404 redirect

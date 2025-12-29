@@ -390,7 +390,7 @@
                         
                         // Get redirect parameter from URL
                         const urlParams = new URLSearchParams(window.location.search);
-                        const redirectParam = urlParams.get('redirect') || './dashboard.html';
+                        const redirectParam = urlParams.get('redirect') || '/dashboard';
                                             
                         // Store session and user data in localStorage
                         if (data.session || data.user || data.id) {
@@ -415,7 +415,7 @@
                         alert('Login successful! Redirecting to dashboard...');
                                             
                         // Always redirect to dashboard after login to continue learning
-                        window.location.href = './dashboard.html';
+                        window.location.href = '/dashboard';
                     } catch (error) {
                         console.error('Login error:', error);
                         alert('Login failed: ' + error.message);

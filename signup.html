@@ -206,7 +206,7 @@
                 const session = localStorage.getItem('supabase_session');
                 if (session) {
                     // User is already logged in, redirect to dashboard
-                    window.location.href = './dashboard.html';
+                    window.location.href = '/dashboard';
                 }
             } catch (error) {
                 console.error('Error checking auth status:', error);
@@ -277,7 +277,7 @@
         form.addEventListener('submit', async (e) => {
             // Get redirect parameter from URL
             const urlParams = new URLSearchParams(window.location.search);
-            const redirectParam = urlParams.get('redirect') || './dashboard.html';
+            const redirectParam = urlParams.get('redirect') || '/dashboard';
             e.preventDefault();
 
             const email = emailInput.value.trim();
@@ -344,7 +344,7 @@
                     // Add a small delay to show the message before redirect
                     setTimeout(() => {
                         // Always redirect to dashboard after login to continue learning
-                        window.location.href = './dashboard.html';
+                    window.location.href = '/dashboard';
                     }, 1500);
 
                 } else {
@@ -408,7 +408,7 @@
                         showMessage('✅ Account created successfully! Redirecting to dashboard...', 'success');
                         setTimeout(() => {
                             // Always redirect to dashboard after signup to start learning
-                            window.location.href = './dashboard.html';
+                        window.location.href = '/dashboard';
                         }, 1500);
                     }
                 }

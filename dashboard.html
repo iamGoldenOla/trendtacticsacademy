@@ -23,13 +23,13 @@
             <div class="logo">Trendtactics Academy</div>
             <nav class="nav">
                 <a href="https://trendtacticsdigital.com">Digital Services</a>
-                <a href="./index.html">Home</a>
-                <a href="./about.html">About</a>
-                <a href="./services.html">Services</a>
-                <a href="./courses.html">Courses</a>
-                <a href="./blog.html">Blog</a>
-                <a href="./contact.html">Contact</a>
-                <a href="./dashboard.html" class="active" style="color: var(--primary);">Dashboard</a>
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/services">Services</a>
+                <a href="/courses">Courses</a>
+                <a href="/blog">Blog</a>
+                <a href="/contact">Contact</a>
+                <a href="/dashboard" class="active" style="color: var(--primary);">Dashboard</a>
                 <button class="btn btn-secondary" id="userBtn" onclick="Auth.logout()">Logout</button>
             </nav>
         </div>
@@ -60,7 +60,7 @@
             <div class="card" style="text-align: center;">
                 <h2 class="card-title" style="margin-bottom: 0.5rem;">No courses yet</h2>
                 <p class="card-description" style="margin-bottom: 1.5rem;">Start learning by enrolling in a course</p>
-                <a href="./courses.html" class="btn btn-primary btn-lg">Browse Courses</a>
+                <a href="/courses" class="btn btn-primary btn-lg">Browse Courses</a>
             </div>
         </div>
     </main>
@@ -79,7 +79,7 @@
             // Get current user
             currentUser = await Auth.getCurrentUser();
             if (!currentUser) {
-                window.location.href = './signup.html';
+                window.location.href = '/signup';
                 return;
             }
 
@@ -144,7 +144,7 @@
                             </div>
                             
                             <div style="display: flex; gap: 1rem;">
-                                <a href="lesson-viewer.html?course=${course.id}" class="btn btn-primary" style="flex: 1; text-align: center;">
+                                <a href="/lesson-viewer?course=${course.id}" class="btn btn-primary" style="flex: 1; text-align: center;">
                                     Start Learning
                                 </a>
                                 <button class="btn btn-secondary" onclick="viewCourseDetails('${course.id}')">
@@ -168,7 +168,7 @@
         }
 
         function viewCourseDetails(courseId) {
-            window.location.href = `./course-detail.html?id=${courseId}`;
+            window.location.href = `/course-detail?id=${courseId}`;
         }
 
         // Initialize dashboard
