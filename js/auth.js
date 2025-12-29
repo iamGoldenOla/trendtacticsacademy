@@ -31,14 +31,14 @@ const Auth = {
         // Clear stored session and user data
         localStorage.removeItem('supabase_session');
         localStorage.removeItem('supabase_user');
-        window.location.href = './index.html';
+        window.location.href = '/';
     },
 
     // Redirect to signup if not logged in
     async requireAuth() {
         const loggedIn = await this.isLoggedIn();
         if (!loggedIn) {
-            window.location.href = './signup.html?redirect=' + encodeURIComponent(window.location.pathname);
+            window.location.replace('/signup');
             return false;
         }
         return true;
