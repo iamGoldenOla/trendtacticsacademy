@@ -56,13 +56,13 @@ async function generateCompleteCourseData() {
             bigIdea: lesson.big_idea || "An important concept from this lesson.",
             steps: lesson.steps || ["Step 1", "Step 2", "Step 3"],
             example: lesson.real_world_example || "An example of this concept in action.",
-            video: lesson.resources?.video || "",
+            video: lesson.resources?.video?.url || "",
             reflection: lesson.reflection_question || "Think about how this applies to your goals.",
-            quiz: lesson.quiz ? [{
-              q: lesson.quiz.question,
-              a: lesson.quiz.answer,
-              opts: lesson.quiz.options
-            }] : [{ q: "What did you learn?", a: "Something valuable", opts: ["Option 1", "Option 2", "Option 3", "Option 4"] }],
+            quiz: lesson.quiz && lesson.quiz.questions && lesson.quiz.answers ? lesson.quiz.questions.map((q, idx) => ({
+              q: q,
+              a: lesson.quiz.answers[idx],
+              opts: [lesson.quiz.answers[idx], "Option 2", "Option 3", "Option 4"] // Simplified - in a real scenario, you might have options in your data
+            })) : [{ q: "What did you learn?", a: "Something valuable", opts: ["Option 1", "Option 2", "Option 3", "Option 4"] }],
             summary: lesson.summary || "This lesson covered important concepts."
           };
         })
@@ -80,13 +80,13 @@ async function generateCompleteCourseData() {
             bigIdea: lesson.big_idea || "An important concept from this lesson.",
             steps: lesson.steps || ["Step 1", "Step 2", "Step 3"],
             example: lesson.real_world_example || "An example of this concept in action.",
-            video: lesson.resources?.video || "",
+            video: lesson.resources?.video?.url || "",
             reflection: lesson.reflection_question || "Think about how this applies to your goals.",
-            quiz: lesson.quiz ? [{
-              q: lesson.quiz.question,
-              a: lesson.quiz.answer,
-              opts: lesson.quiz.options
-            }] : [{ q: "What did you learn?", a: "Something valuable", opts: ["Option 1", "Option 2", "Option 3", "Option 4"] }],
+            quiz: lesson.quiz && lesson.quiz.questions && lesson.quiz.answers ? lesson.quiz.questions.map((q, idx) => ({
+              q: q,
+              a: lesson.quiz.answers[idx],
+              opts: [lesson.quiz.answers[idx], "Option 2", "Option 3", "Option 4"] // Simplified - in a real scenario, you might have options in your data
+            })) : [{ q: "What did you learn?", a: "Something valuable", opts: ["Option 1", "Option 2", "Option 3", "Option 4"] }],
             summary: lesson.summary || "This lesson covered important concepts."
           };
         })
