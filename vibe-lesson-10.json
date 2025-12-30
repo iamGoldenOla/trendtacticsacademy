@@ -181,6 +181,38 @@
       "Large requests produce lower-quality results because AI struggles to maintain focus across many requirements",
       "Rephrase completely rather than adding more to a confusing prompt - start fresh with clearer language",
       "By pointing to existing code as a model, AI matches your project's patterns, style, and architecture"
+    ],
+    "options": [
+      [
+        "Technology, Framework, and Libraries",
+        "Intent (what you want), Context (what AI needs to know), and Constraints (what to avoid)",
+        "Input, Output, and Processing",
+        "Design, Code, and Deployment"
+      ],
+      [
+        "Asking AI to be creative",
+        "Showing input/output examples to clarify expected behavior - use when the function's behavior is complex or nuanced",
+        "Adding more technical details",
+        "Using longer prompts"
+      ],
+      [
+        "Large requests are more efficient",
+        "Large requests produce lower-quality results because AI struggles to maintain focus across many requirements",
+        "AI handles large requests better than small ones",
+        "Large requests save time"
+      ],
+      [
+        "Keep adding more details to the same prompt",
+        "Rephrase completely rather than adding more to a confusing prompt - start fresh with clearer language",
+        "Stop using AI and code manually",
+        "Try a different AI tool"
+      ],
+      [
+        "It confuses the AI with too much information",
+        "By pointing to existing code as a model, AI matches your project's patterns, style, and architecture",
+        "It makes the prompt too long",
+        "It slows down the AI's response"
+      ]
     ]
   },
   "key_takeaways": [

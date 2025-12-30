@@ -182,6 +182,38 @@
       "Loading related data with one query per item instead of bulk - fix with eager loading or batch queries",
       "Database connectivity, cache availability, and key external dependencies - anything the app needs to function",
       "For security it prevents injection attacks and malicious input; for reliability it prevents crashes from unexpected data formats"
+    ],
+    "options": [
+      [
+        "Speed, cost, and features",
+        "Security (protecting against attacks), Performance (handling load efficiently), and Reliability (working correctly when things go wrong)",
+        "Design, functionality, and user experience",
+        "Code quality, documentation, and testing"
+      ],
+      [
+        "AI is designed to create insecure code",
+        "AI optimizes for functionality and working code, not security - it takes the most direct path without considering attack vectors",
+        "AI doesn't understand security concepts",
+        "Security is not important for AI-generated code"
+      ],
+      [
+        "A type of computer virus",
+        "Loading related data with one query per item instead of bulk - fix with eager loading or batch queries",
+        "A performance testing technique",
+        "A security vulnerability"
+      ],
+      [
+        "User login credentials",
+        "Database connectivity, cache availability, and key external dependencies - anything the app needs to function",
+        "Code quality metrics",
+        "Security vulnerabilities"
+      ],
+      [
+        "Input validation is only important for security",
+        "For security it prevents injection attacks and malicious input; for reliability it prevents crashes from unexpected data formats",
+        "Input validation is only important for performance",
+        "Input validation is not important for either security or reliability"
+      ]
     ]
   },
   "key_takeaways": [

@@ -62,6 +62,38 @@
       "Because AI can produce code with bugs or that doesn't match your intent, requiring human verification",
       "The ability to clearly articulate what you want in natural language",
       "Systems thinking - understanding how components connect and affect each other"
+    ],
+    "options": [
+      [
+        "Syntax and programming languages",
+        "Intent, direction, and outcomes - focusing on what to build rather than how to write code",
+        "Debugging and error handling",
+        "Code optimization techniques"
+      ],
+      [
+        "Elon Musk, a tech entrepreneur",
+        "Andrej Karpathy, an AI researcher",
+        "Geoffrey Hinton, a computer scientist",
+        "Yann LeCun, a computer scientist"
+      ],
+      [
+        "Because traditional coding is more reliable",
+        "Because AI can produce code with bugs or that doesn't match your intent, requiring human verification",
+        "Because AI is too slow for real projects",
+        "Because AI cannot generate code at all"
+      ],
+      [
+        "The ability to memorize programming languages",
+        "The ability to clearly articulate what you want in natural language",
+        "The ability to debug code",
+        "The ability to optimize performance"
+      ],
+      [
+        "Syntax knowledge - memorizing programming language rules",
+        "Systems thinking - understanding how components connect and affect each other",
+        "Code optimization - making programs run faster",
+        "Memory management - controlling computer resources"
+      ]
     ]
   },
   "key_takeaways": [

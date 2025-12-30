@@ -131,6 +131,38 @@
       "Pointing to existing code as a model for what you want - helps AI match your project's patterns and style",
       "AI can introduce bugs, break existing functionality, or misunderstand requirements - review catches these issues",
       "Context helps AI understand not just what to do but why, leading to solutions that fit the real requirements"
+    ],
+    "options": [
+      [
+        "Chat, Debug, and Run",
+        "Chat (Cmd+L) for conversations, Edit (Cmd+K) for inline changes, and Composer (Cmd+I) for multi-file modifications",
+        "Prompt, Generate, and Execute",
+        "Read, Write, and Modify"
+      ],
+      [
+        "When you want to make changes to a single file",
+        "When changes span multiple files or require creating new files - Edit is for single-file inline changes",
+        "When you want to debug code",
+        "When you only need to read code"
+      ],
+      [
+        "Asking the AI to read all files",
+        "Pointing to existing code as a model for what you want - helps AI match your project's patterns and style",
+        "Adding comments to your code",
+        "Creating documentation"
+      ],
+      [
+        "Reviewing is not necessary with AI",
+        "AI can introduce bugs, break existing functionality, or misunderstand requirements - review catches these issues",
+        "Reviewing only takes extra time",
+        "AI never makes mistakes"
+      ],
+      [
+        "Context has no impact on AI output",
+        "Context helps AI understand not just what to do but why, leading to solutions that fit the real requirements",
+        "Context makes AI responses slower",
+        "AI works better without context"
+      ]
     ]
   },
   "key_takeaways": [
