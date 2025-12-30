@@ -31,15 +31,52 @@
   "playground_activity": "Create the same content piece using a generic prompt and a platform/audience-specific prompt. Compare the relevance and engagement potential of each output.",
   "reflection_question": "How do different content platforms require different prompt approaches?",
   "quiz": {
-    "question": "Why is it important to specify the target audience in content creation prompts?",
-    "options": [
-      "It makes the AI respond faster",
-      "It helps the AI create content that resonates with the intended audience",
-      "It reduces the cost of using AI",
-      "It makes the AI more creative"
+    "questions": [
+      "Why is it important to specify the target audience in content creation prompts?",
+      "How does platform-specific prompting improve content effectiveness?",
+      "Which of the following is NOT a core concept in content creation prompt engineering?",
+      "What is the relationship between content format specification and output quality?",
+      "How do detailed prompts compare to generic prompts in content creation?"
     ],
-    "answer": "It helps the AI create content that resonates with the intended audience",
-    "explanation": "Specifying the target audience allows the AI to tailor the content's tone, language, and topics to better resonate with the intended audience."
+    "answers": [
+      "It helps the AI create content that resonates with the intended audience",
+      "By tailoring content to platform-specific requirements and audience expectations",
+      "Using generic language for all platforms",
+      "Specifying format requirements leads to better structured and more relevant content",
+      "Detailed prompts produce more relevant and targeted content than generic prompts"
+    ],
+    "options": [
+      [
+        "It makes the AI respond faster",
+        "It helps the AI create content that resonates with the intended audience",
+        "It reduces the cost of using AI",
+        "It makes the AI more creative"
+      ],
+      [
+        "By making the AI respond faster",
+        "By tailoring content to platform-specific requirements and audience expectations",
+        "By reducing the cost of content creation",
+        "By making the content more creative"
+      ],
+      [
+        "Platform-specific content approaches",
+        "Audience segmentation techniques",
+        "Using generic language for all platforms",
+        "Content format specifications"
+      ],
+      [
+        "Format specification has no impact on output quality",
+        "Specifying format requirements leads to better structured and more relevant content",
+        "Generic formats produce higher quality content",
+        "Format requirements limit creativity"
+      ],
+      [
+        "Detailed prompts produce more relevant and targeted content than generic prompts",
+        "Generic prompts are always more effective",
+        "Detailed prompts reduce content quality",
+        "There is no difference between detailed and generic prompts"
+      ]
+    ]
   },
   "key_takeaways": [
     "Platform-specific prompts improve content effectiveness",

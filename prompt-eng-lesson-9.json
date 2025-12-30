@@ -31,15 +31,52 @@
   "playground_activity": "Try the same prompt with different creativity-inducing language. Compare responses to 'Provide standard approaches' versus 'Provide innovative, unconventional approaches' to see how language affects creativity.",
   "reflection_question": "How does the required level of creativity change based on the task and audience?",
   "quiz": {
-    "question": "What is the primary purpose of controlling creativity in AI responses?",
-    "options": [
-      "To make the AI respond faster",
-      "To match the response style to the requirements of the specific task",
-      "To reduce the cost of using AI",
-      "To make the AI more creative in all cases"
+    "questions": [
+      "What is the primary purpose of controlling creativity in AI responses?",
+      "How does temperature setting affect the randomness of AI responses?",
+      "Which of the following is NOT a method for controlling creativity in AI responses?",
+      "What is the relationship between task type and appropriate creativity level?",
+      "How do prompt techniques influence AI creativity compared to temperature settings?"
     ],
-    "answer": "To match the response style to the requirements of the specific task",
-    "explanation": "Different tasks require different levels of creativity. Controlling creativity ensures the AI's responses match the specific requirements of each task."
+    "answers": [
+      "To match the response style to the requirements of the specific task",
+      "Lower temperatures produce more predictable responses, higher temperatures produce more creative responses",
+      "Changing the font size in the prompt",
+      "Technical tasks need low creativity for accuracy, creative tasks benefit from high creativity",
+      "Prompt techniques use language to guide behavior while temperature controls randomness"
+    ],
+    "options": [
+      [
+        "To make the AI respond faster",
+        "To match the response style to the requirements of the specific task",
+        "To reduce the cost of using AI",
+        "To make the AI more creative in all cases"
+      ],
+      [
+        "Temperature has no effect on randomness",
+        "Lower temperatures produce more predictable responses, higher temperatures produce more creative responses",
+        "Higher temperatures make responses more predictable",
+        "Temperature only affects response speed"
+      ],
+      [
+        "Using temperature settings",
+        "Using specific language in prompts",
+        "Changing the font size in the prompt",
+        "Adjusting system parameters"
+      ],
+      [
+        "All tasks require the same level of creativity",
+        "Technical tasks need low creativity for accuracy, creative tasks benefit from high creativity",
+        "Creative tasks should always use low creativity",
+        "Creativity level doesn't affect task outcomes"
+      ],
+      [
+        "Prompt techniques use language to guide behavior while temperature controls randomness",
+        "Prompt techniques are more effective than temperature settings",
+        "Temperature settings are more effective than prompt techniques",
+        "There is no difference between the two approaches"
+      ]
+    ]
   },
   "key_takeaways": [
     "Temperature settings control response randomness",

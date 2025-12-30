@@ -31,15 +31,52 @@
   "playground_activity": "Take a prompt you've created and test it with 5 different inputs, including at least 2 edge cases. Document the results and identify any areas where the prompt could be improved.",
   "reflection_question": "How might systematic testing change the prompts you create?",
   "quiz": {
-    "question": "Why is testing important in prompt engineering?",
-    "options": [
-      "It makes the AI respond faster",
-      "It ensures prompts work reliably across different inputs and scenarios",
-      "It reduces the cost of using AI",
-      "It makes the AI more creative"
+    "questions": [
+      "Why is testing important in prompt engineering?",
+      "How does edge case testing improve prompt reliability?",
+      "Which of the following is NOT a core component of prompt validation?",
+      "What is the relationship between consistency validation and reliable prompt performance?",
+      "How do systematic testing approaches compare to ad-hoc testing?"
     ],
-    "answer": "It ensures prompts work reliably across different inputs and scenarios",
-    "explanation": "Testing ensures that prompts produce consistent, appropriate results across various inputs and scenarios, making them more reliable and robust."
+    "answers": [
+      "It ensures prompts work reliably across different inputs and scenarios",
+      "By identifying potential failures with unusual or extreme inputs",
+      "Avoiding edge case testing",
+      "Consistency validation ensures prompts produce reproducible outputs",
+      "Systematic testing is more thorough and reliable than ad-hoc testing"
+    ],
+    "options": [
+      [
+        "It makes the AI respond faster",
+        "It ensures prompts work reliably across different inputs and scenarios",
+        "It reduces the cost of using AI",
+        "It makes the AI more creative"
+      ],
+      [
+        "By making prompts respond faster",
+        "By identifying potential failures with unusual or extreme inputs",
+        "By reducing the complexity of prompts",
+        "By making prompts more creative"
+      ],
+      [
+        "Edge case testing",
+        "Consistency validation",
+        "Avoiding edge case testing",
+        "Performance testing"
+      ],
+      [
+        "There is no relationship between them",
+        "Consistency validation ensures prompts produce reproducible outputs",
+        "Consistency validation reduces performance",
+        "Reliable performance eliminates the need for consistency validation"
+      ],
+      [
+        "Systematic testing is more thorough and reliable than ad-hoc testing",
+        "Ad-hoc testing is always more effective",
+        "There is no difference between the approaches",
+        "Systematic testing is less effective than ad-hoc testing"
+      ]
+    ]
   },
   "key_takeaways": [
     "Testing identifies edge cases and potential failures",

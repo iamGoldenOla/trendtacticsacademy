@@ -32,15 +32,52 @@
   "playground_activity": "Design a complex prompt that combines at least 3 different techniques you've learned (e.g., few-shot learning, chain of thought, and role assignment) to address a challenge relevant to your field or interests.",
   "reflection_question": "How will you continue to develop your prompt engineering skills beyond this course?",
   "quiz": {
-    "question": "What is the main benefit of combining multiple prompt engineering techniques?",
-    "options": [
-      "It makes the AI respond faster",
-      "It allows for solving complex challenges that require multiple approaches",
-      "It reduces the cost of using AI",
-      "It makes the AI more creative in all cases"
+    "questions": [
+      "What is the main benefit of combining multiple prompt engineering techniques?",
+      "How does technique synthesis improve the ability to solve complex challenges?",
+      "Which of the following is NOT a core concept in advanced prompt engineering projects?",
+      "What is the relationship between iterative development and prompt improvement?",
+      "How does breaking down complex tasks help in prompt engineering?"
     ],
-    "answer": "It allows for solving complex challenges that require multiple approaches",
-    "explanation": "Combining multiple techniques allows you to address complex challenges that require different approaches for different aspects of the task."
+    "answers": [
+      "It allows for solving complex challenges that require multiple approaches",
+      "By allowing different approaches to be applied to different aspects of the task",
+      "Avoiding iterative refinement",
+      "Iterative development leads to increasingly sophisticated and effective prompts",
+      "It allows for specialized prompts to address each component effectively"
+    ],
+    "options": [
+      [
+        "It makes the AI respond faster",
+        "It allows for solving complex challenges that require multiple approaches",
+        "It reduces the cost of using AI",
+        "It makes the AI more creative in all cases"
+      ],
+      [
+        "By making the AI respond faster",
+        "By allowing different approaches to be applied to different aspects of the task",
+        "By reducing the complexity of each prompt",
+        "By making the AI more creative"
+      ],
+      [
+        "Technique synthesis",
+        "Complex task decomposition",
+        "Avoiding iterative refinement",
+        "Iterative development"
+      ],
+      [
+        "There is no relationship between them",
+        "Iterative development leads to increasingly sophisticated and effective prompts",
+        "Iterative development reduces prompt effectiveness",
+        "Iterative development eliminates the need for testing"
+      ],
+      [
+        "It makes the task more complex",
+        "It allows for specialized prompts to address each component effectively",
+        "It reduces the effectiveness of prompts",
+        "It eliminates the need for testing"
+      ]
+    ]
   },
   "key_takeaways": [
     "Combine techniques for complex challenges",

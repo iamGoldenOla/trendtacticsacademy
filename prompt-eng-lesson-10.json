@@ -33,15 +33,52 @@
   "playground_activity": "Try a complex analytical task using zero-shot prompting (no examples). Then try the same task with few-shot prompting (with examples). Compare the results and note when each technique is more effective.",
   "reflection_question": "When might zero-shot prompting be more appropriate than few-shot prompting?",
   "quiz": {
-    "question": "What is zero-shot prompting?",
-    "options": [
-      "Prompting without providing examples",
-      "Prompting with many examples",
-      "Prompting that makes the AI respond quickly",
-      "Prompting that reduces AI creativity"
+    "questions": [
+      "What is zero-shot prompting?",
+      "How does self-consistency technique improve AI response accuracy?",
+      "Which of the following is NOT a requirement for effective zero-shot prompting?",
+      "What is the relationship between instruction clarity and zero-shot prompting success?",
+      "How do zero-shot and few-shot prompting differ in their approach to examples?"
     ],
-    "answer": "Prompting without providing examples",
-    "explanation": "Zero-shot prompting involves getting the AI to perform a task without providing examples, relying entirely on clear instructions and context."
+    "answers": [
+      "Prompting without providing examples",
+      "By generating multiple responses and selecting the most consistent answer",
+      "Providing multiple examples for reference",
+      "Clear, comprehensive instructions are crucial for success",
+      "Zero-shot uses no examples while few-shot provides examples"
+    ],
+    "options": [
+      [
+        "Prompting without providing examples",
+        "Prompting with many examples",
+        "Prompting that makes the AI respond quickly",
+        "Prompting that reduces AI creativity"
+      ],
+      [
+        "By using more computational resources",
+        "By generating multiple responses and selecting the most consistent answer",
+        "By reducing response length",
+        "By limiting the AI's vocabulary"
+      ],
+      [
+        "Clear instructions",
+        "Sufficient context",
+        "Providing multiple examples for reference",
+        "Well-defined output format"
+      ],
+      [
+        "Clarity has no impact on success",
+        "Clear, comprehensive instructions are crucial for success",
+        "Complex instructions work better than clear ones",
+        "Instruction clarity only matters for creative tasks"
+      ],
+      [
+        "Zero-shot uses no examples while few-shot provides examples",
+        "Zero-shot is always more effective than few-shot",
+        "There is no practical difference between the two",
+        "Few-shot uses no examples while zero-shot provides examples"
+      ]
+    ]
   },
   "key_takeaways": [
     "Zero-shot prompting works without examples",
