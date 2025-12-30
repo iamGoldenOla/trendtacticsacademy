@@ -3,12 +3,28 @@ const path = require('path');
 
 async function loadLessonContent(courseType, lessonNumber) {
   try {
-    const fileName = courseType === 'vibe' 
-      ? `vibe-lesson-${lessonNumber}.json` 
-      : `prompt-eng-lesson-${lessonNumber}.json`;
+    let fileName;
+    
+    if (courseType === 'vibe') {
+      fileName = `vibe-lesson-${lessonNumber}.json`;
+    } else if (courseType === 'prompt-eng') {
+      fileName = `prompt-eng-lesson-${lessonNumber}.json`;
+    } else if (courseType === 'facebook-ads') {
+      fileName = `facebook-ads-course.json`;
+      if (lessonNumber > 1) return null; // Facebook Ads course is in a single file
+    } else {
+      return null;
+    }
     
     const filePath = path.join(__dirname, fileName);
     const content = await fs.readFile(filePath, 'utf8');
+    
+    if (courseType === 'facebook-ads' && lessonNumber === 1) {
+      // Facebook Ads course is stored as an array of lessons
+      const lessonsArray = JSON.parse(content);
+      return lessonsArray; // Return the entire array
+    }
+    
     return JSON.parse(content);
   } catch (error) {
     console.log(`⚠️ Could not load ${courseType} lesson ${lessonNumber}:`, error.message);
@@ -38,8 +54,16 @@ async function generateCompleteCourseData() {
       }
     }
     
+    // Load Facebook Ads lessons (from the single course file)
+    const facebookAdsLessons = [];
+    const facebookAdsCourse = await loadLessonContent('facebook-ads', 1);
+    if (Array.isArray(facebookAdsCourse)) {
+      facebookAdsLessons.push(...facebookAdsCourse);
+    }
+    
     console.log(`✅ Loaded ${vibeLessons.length} Vibe Coding lessons`);
     console.log(`✅ Loaded ${promptEngLessons.length} Prompt Engineering lessons`);
+    console.log(`✅ Loaded ${facebookAdsLessons.length} Facebook Ads lessons`);
     
     // Generate the complete course structure for lesson-viewer.html
     const completeCourses = {
@@ -98,6 +122,34 @@ async function generateCompleteCourseData() {
             summary: lesson.summary || "This lesson covered important concepts."
           };
         })
+      },
+      "facebook-ads": {
+        title: "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
+        lessons: facebookAdsLessons.map((lesson, index) => {
+          // Map the lesson structure to match what lesson-viewer.html expects
+          return {
+            id: index + 1,
+            module: lesson.module_title || `Module ${Math.floor(index/2) + 1}`,
+            title: lesson.lesson_title,
+            duration: "10-15 min",
+            intro: lesson.introduction || "Welcome to this lesson!",
+            bigIdea: lesson.core_concept || lesson.big_idea || "An important concept from this lesson.",
+            steps: lesson.steps || ["Step 1", "Step 2", "Step 3"],
+            example: lesson.practical_examples ? lesson.practical_examples.join(' ') : lesson.example || "An example of this concept in action.",
+            video: lesson.resources?.video?.url || "",
+            reflection: lesson.actionable_takeaway || lesson.reflection_question || "Think about how this applies to your goals.",
+            quiz: lesson.quiz && lesson.quiz.questions && lesson.quiz.answers ? lesson.quiz.questions.map((q, idx) => ({
+              q: q,
+              a: lesson.quiz.answers[idx],
+              opts: lesson.quiz.options ? lesson.quiz.options[idx] : [lesson.quiz.answers[idx], "Option 2", "Option 3", "Option 4"] // Use options array if available, otherwise generate basic options
+            })) : lesson.quiz && lesson.quiz.question && lesson.quiz.answer && lesson.quiz.options ? [{
+              q: lesson.quiz.question,
+              a: lesson.quiz.answer,
+              opts: lesson.quiz.options
+            }] : [{ q: "What did you learn?", a: "Something valuable", opts: ["Option 1", "Option 2", "Option 3", "Option 4"] }],
+            summary: lesson.summary || "This lesson covered important concepts."
+          };
+        })
       }
     };
     
@@ -142,6 +194,14 @@ async function generateCompleteCourseData() {
         level: 'Beginner',
         duration: '2-3 weeks',
         category: 'AI Skills'
+      },
+      {
+        id: 'facebook-ads',
+        title: '${completeCourses['facebook-ads'].title}',
+        description: 'Learn how Facebook Ads really work, proper account setup, campaign structure, audience targeting, and optimization strategies that deliver consistent results.',
+        level: 'Beginner',
+        duration: '4-6 weeks',
+        category: 'Marketing'
       }
     ];`;
     

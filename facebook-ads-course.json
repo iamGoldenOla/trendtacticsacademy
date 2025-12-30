@@ -1,0 +1,536 @@
+[
+  {
+    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
+    "module_title": "Module 1: Facebook Ads Foundations",
+    "lesson_number": 1,
+    "lesson_title": "How Facebook Ads Really Work (Under the Hood)",
+    "introduction": "Welcome to the future of Facebook Ads. In this lesson, you will discover how Facebook Ads actually work behind the scenes - not the surface-level tactics that change constantly, but the fundamental systems that remain consistent. This foundational understanding will help you build campaigns that work in 2025 and beyond.",
+    "why_it_matters": "Understanding how Facebook Ads work under the hood is crucial because tactics change, but systems remain constant. When you know the auction mechanics, you can adapt to any platform update. When you understand how Facebook makes money, you can align your campaigns with their incentives. This knowledge gives you a competitive advantage that surface-level strategies cannot provide.",
+    "core_concept": "Facebook Ads operate on an auction system where your ad competes against other advertisers for the same audience. Facebook's algorithm chooses which ads to show based on a combination of bid amount, ad relevance, and estimated action rate. The system is designed to maximize Facebook's revenue while providing value to users - understanding this balance is key to creating profitable campaigns.",
+    "steps": [
+      "Step 1: Understand that Facebook Ads is an auction system, not a direct purchase",
+      "Step 2: Recognize that Facebook's incentive is to maximize their revenue while keeping users engaged",
+      "Step 3: Learn that the auction considers your bid, relevance, and action rate equally",
+      "Step 4: Accept that your campaigns must provide value to Facebook's users to succeed",
+      "Step 5: Commit to always optimizing for Facebook's objectives as well as your own"
+    ],
+    "practical_examples": [
+      "Consider a coffee shop running ads to local customers. The auction system means their ad competes not only with other coffee shops but with e-commerce brands, entertainment companies, and any other advertiser targeting the same local audience. The coffee shop must offer an ad that Facebook believes will provide value to users (high relevance) and generate the desired action (high action rate) while bidding appropriately to win the auction.",
+      "Another example: A SaaS company advertising a project management tool. They're not just selling software - they're competing for attention in users' feeds. Their success depends on creating ads that Facebook's algorithm predicts will be engaging and valuable, which then leads to actions that justify the ad spend."
+    ],
+    "common_mistakes": [
+      "Mistake 1: Thinking you're buying impressions instead of competing in an auction. This leads to unrealistic expectations and poor budget planning.",
+      "Mistake 2: Focusing only on your bid without considering relevance and action rate. This results in expensive campaigns that don't perform well.",
+      "Mistake 3: Assuming Facebook wants you to succeed regardless of user experience. This causes campaigns to be rejected or limited.",
+      "Mistake 4: Believing that high bids guarantee placement. This wastes budget without improving performance."
+    ],
+    "system_connections": "This lesson forms the foundation for all other Facebook Ads knowledge. Understanding the auction system helps you make better decisions about bidding, targeting, and creative in future lessons. It explains why certain strategies work and others don't, providing a framework for decision-making throughout the course.",
+    "actionable_takeaway": "From now on, think of every campaign as a bid in an auction where you're competing for valuable audience attention. Consider not just what you want to achieve, but how your campaign provides value to Facebook's users and aligns with Facebook's revenue goals. This mindset shift will improve every aspect of your campaign strategy.",
+    "quiz": {
+      "questions": [
+        "What type of system does Facebook Ads operate on?",
+        "What three factors does Facebook's auction consider?",
+        "Why is understanding Facebook's revenue model important?",
+        "What happens when your ad doesn't provide value to users?",
+        "How should you approach campaign planning after understanding the auction system?"
+      ],
+      "answers": [
+        "An auction system where ads compete for audience attention",
+        "Bid amount, ad relevance, and estimated action rate",
+        "It helps align your campaigns with Facebook's incentives",
+        "Your campaign may be rejected or limited by the algorithm",
+        "Consider how your campaign provides value to users and Facebook's revenue goals"
+      ],
+      "options": [
+        [
+          "An auction system where ads compete for audience attention",
+          "A direct purchase system where you buy specific impressions",
+          "A lottery system where placement is random",
+          "A subscription system where you pay for guaranteed placement"
+        ],
+        [
+          "Bid amount, ad relevance, and estimated action rate",
+          "Daily budget, audience size, and ad spend",
+          "Creative type, targeting options, and campaign objective",
+          "Click-through rate, conversion rate, and cost per click"
+        ],
+        [
+          "It helps align your campaigns with Facebook's incentives",
+          "It allows you to trick the algorithm",
+          "It reduces your ad spend requirements",
+          "It guarantees ad approval"
+        ],
+        [
+          "Your campaign may be rejected or limited by the algorithm",
+          "Your ads will show more frequently",
+          "Your cost per click will decrease",
+          "Your audience targeting will expand"
+        ],
+        [
+          "Consider how your campaign provides value to users and Facebook's revenue goals",
+          "Focus only on your own business objectives",
+          "Ignore Facebook's requirements and optimize only for conversions",
+          "Bid as high as possible to guarantee placement"
+        ]
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Facebook Ads Auction Explained Simply",
+        "url": "https://www.youtube.com/watch?v=example",
+        "embed": true,
+        "reason": "Visual explanation of the auction system mechanics"
+      },
+      "extra_reading": [
+        "https://www.facebook.com/business/ads-guide - Official Facebook Ads Guide",
+        "https://www.adstage.io/resources/facebook-advertising-guide - Comprehensive Ads Strategy Guide"
+      ]
+    },
+    "summary": "Facebook Ads operates on an auction system where your success depends on balancing bid amount, ad relevance, and estimated action rate. Understanding this system gives you a competitive advantage by helping you align your campaigns with both your business goals and Facebook's revenue objectives. This foundational knowledge will inform every decision you make in future lessons."
+  },
+  {
+    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
+    "module_title": "Module 1: Facebook Ads Foundations",
+    "lesson_number": 2,
+    "lesson_title": "The Facebook Ads Ecosystem",
+    "introduction": "Now that you understand how Facebook Ads work under the hood, let's explore the ecosystem of tools and accounts that make campaigns possible. This lesson covers Business Manager, Ad Accounts, Pages, and how they work together to create a proper foundation for successful advertising.",
+    "why_it_matters": "The Facebook Ads ecosystem can seem complex, but understanding its structure is essential for account safety, team collaboration, and campaign success. Setting up accounts incorrectly can lead to account restrictions, security issues, and complications when scaling. A proper foundation prevents problems before they occur.",
+    "core_concept": "The Facebook Ads ecosystem consists of three main components: Business Manager (the central hub that manages everything), Ad Accounts (where campaigns run and spend occurs), and Facebook Pages (the identity that ads represent). Business Manager controls access, permissions, and relationships between Ad Accounts and Pages. Understanding these relationships helps you maintain account health and security.",
+    "steps": [
+      "Step 1: Create a Business Manager as the central hub for all accounts",
+      "Step 2: Set up Ad Accounts under Business Manager for campaign management",
+      "Step 3: Connect Facebook Pages that represent your business identity",
+      "Step 4: Configure proper roles and permissions for team members",
+      "Step 5: Establish clear relationships between accounts for compliance"
+    ],
+    "practical_examples": [
+      "Consider a marketing agency managing multiple client accounts. They create one Business Manager and add each client's Ad Account and Page to it. This allows them to manage all accounts from one place while maintaining clear boundaries and proper permissions. Each client can still access their own data and maintain control over their assets.",
+      "Another example: An e-commerce business with multiple product lines. They might create separate Ad Accounts for each product line under one Business Manager, allowing them to track performance separately while maintaining centralized management and billing."
+    ],
+    "common_mistakes": [
+      "Mistake 1: Running ads directly from a personal account instead of Business Manager. This limits your options and creates security risks.",
+      "Mistake 2: Using the same Ad Account for multiple unrelated businesses. This can cause account restrictions and tracking issues.",
+      "Mistake 3: Giving admin access to everyone who needs any access. This creates security vulnerabilities.",
+      "Mistake 4: Not properly connecting Pages to Ad Accounts. This can cause ad approval issues."
+    ],
+    "system_connections": "This lesson builds on the auction understanding from Lesson 1 by showing you the accounts and tools needed to participate in the auction. It prepares you for proper account setup in Lesson 4, where you'll learn the right way to configure everything. Understanding the ecosystem is crucial before diving into campaign structure.",
+    "actionable_takeaway": "Before running any ads, ensure you have a proper Business Manager setup with appropriate Ad Accounts and Pages connected. This foundation will save you from account problems and scaling issues as your advertising grows. Think of it as building a house - you need a solid foundation before adding the structure.",
+    "quiz": {
+      "questions": [
+        "What is the central hub of the Facebook Ads ecosystem?",
+        "What are the three main components of the ecosystem?",
+        "Why is Business Manager important for account safety?",
+        "What happens if you don't properly connect Pages to Ad Accounts?",
+        "How should you approach account structure for multiple product lines?"
+      ],
+      "answers": [
+        "Business Manager",
+        "Business Manager, Ad Accounts, and Facebook Pages",
+        "It controls access, permissions, and relationships",
+        "This can cause ad approval issues",
+        "Create separate Ad Accounts under one Business Manager"
+      ],
+      "options": [
+        [
+          "Business Manager",
+          "Ad Account",
+          "Facebook Page",
+          "Instagram Account"
+        ],
+        [
+          "Business Manager, Ad Accounts, and Facebook Pages",
+          "Ad Account, Campaign, Ad Set",
+          "Page, Post, Ad",
+          "Audience, Creative, Bid"
+        ],
+        [
+          "It controls access, permissions, and relationships",
+          "It increases your ad spend",
+          "It guarantees ad approval",
+          "It reduces your cost per click"
+        ],
+        [
+          "This can cause ad approval issues",
+          "Your ads will show more frequently",
+          "Your audience targeting will expand",
+          "Your campaigns will run faster"
+        ],
+        [
+          "Create separate Ad Accounts under one Business Manager",
+          "Use one Ad Account for everything",
+          "Create separate Business Managers for each product",
+          "Run ads directly from personal accounts"
+        ]
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Facebook Business Manager Setup Guide",
+        "url": "https://www.youtube.com/watch?v=example",
+        "embed": true,
+        "reason": "Step-by-step guide to proper ecosystem setup"
+      },
+      "extra_reading": [
+        "https://www.facebook.com/business/help/business-manager - Official Business Manager Guide",
+        "https://www.facebook.com/business/learn/facebook-ads-account-structure - Account Structure Best Practices"
+      ]
+    },
+    "summary": "The Facebook Ads ecosystem consists of Business Manager, Ad Accounts, and Facebook Pages working together. Proper setup prevents account issues and enables effective management. Understanding these relationships is crucial for account safety, team collaboration, and campaign success. This foundation prepares you for proper account configuration in upcoming lessons."
+  },
+  {
+    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
+    "module_title": "Module 1: Facebook Ads Foundations",
+    "lesson_number": 3,
+    "lesson_title": "The Facebook Algorithm (Explained Without Jargon)",
+    "introduction": "In this lesson, you'll learn how the Facebook algorithm actually works when it comes to your ads. We'll explain it in plain language without confusing technical terms. Understanding the algorithm is essential for creating campaigns that get results in 2025.",
+    "why_it_matters": "Many advertisers struggle because they don't understand how the algorithm makes decisions. They try to 'trick' or 'game' the system instead of working with it. When you understand what the algorithm optimizes for, you can create campaigns that align with its goals, leading to better performance and lower costs.",
+    "core_concept": "The Facebook algorithm has one main goal: keep users engaged on the platform while generating revenue. It learns from user behavior to predict which content (including ads) users will find valuable. The algorithm doesn't follow your instructions blindly - it learns from data and optimizes for outcomes. Understanding this learning process helps you provide the algorithm with the right data to optimize effectively.",
+    "steps": [
+      "Step 1: Recognize that the algorithm learns from user behavior, not your intentions",
+      "Step 2: Understand that the algorithm optimizes for engagement and value to users",
+      "Step 3: Learn how the learning phase works and why patience is crucial",
+      "Step 4: Accept that early data is often misleading and optimization takes time",
+      "Step 5: Commit to providing clear signals that align with your campaign goals"
+    ],
+    "practical_examples": [
+      "Consider a fitness app advertising to people interested in health. The algorithm learns that users who watch more than 3 seconds of their video ad are more likely to install the app. It then shows the ad to more users who exhibit similar behavior patterns. The algorithm didn't follow the advertiser's instruction to show to 'fitness enthusiasts' - it learned that certain behaviors predict app installs better than interests.",
+      "Another example: An e-commerce store selling kitchen gadgets. The algorithm notices that users who pause to look at product images in video ads are more likely to purchase. It learns to show the ad to users who engage with visual content in similar ways, optimizing for the behavior that predicts conversions."
+    ],
+    "common_mistakes": [
+      "Mistake 1: Expecting immediate results without allowing for the learning phase. This leads to premature campaign changes that break optimization.",
+      "Mistake 2: Believing the algorithm will follow targeting instructions exactly. This causes confusion when campaigns reach unexpected audiences.",
+      "Mistake 3: Changing campaigns too frequently during the learning phase. This prevents the algorithm from learning effectively.",
+      "Mistake 4: Focusing only on creative without considering user behavior patterns. This limits optimization potential."
+    ],
+    "system_connections": "This lesson connects to Lesson 1's auction understanding by showing how the algorithm decides which ads to show in the auction. It prepares you for optimization strategies in later lessons by explaining how the algorithm learns and improves performance over time. Understanding algorithm behavior is crucial for effective campaign management.",
+    "actionable_takeaway": "Instead of fighting the algorithm, work with it by providing clear signals for the outcomes you want. Allow adequate time for the learning phase before making changes. Focus on creating campaigns that provide value to users, as this aligns with the algorithm's primary goal and leads to better performance.",
+    "quiz": {
+      "questions": [
+        "What is the main goal of the Facebook algorithm?",
+        "How does the algorithm make decisions about which ads to show?",
+        "Why is the learning phase important?",
+        "What happens when you change campaigns too frequently?",
+        "How should you approach campaign optimization after understanding the algorithm?"
+      ],
+      "answers": [
+        "Keep users engaged on the platform while generating revenue",
+        "It learns from user behavior to predict valuable content",
+        "It allows the algorithm to learn what works best",
+        "It prevents the algorithm from learning effectively",
+        "Focus on providing value to users and allowing adequate learning time"
+      ],
+      "options": [
+        [
+          "Keep users engaged on the platform while generating revenue",
+          "Show ads to as many people as possible",
+          "Minimize advertising costs for businesses",
+          "Maximize the number of ad clicks"
+        ],
+        [
+          "It learns from user behavior to predict valuable content",
+          "It follows targeting instructions exactly",
+          "It shows ads randomly to test performance",
+          "It prioritizes the highest-paying advertisers"
+        ],
+        [
+          "It allows the algorithm to learn what works best",
+          "It increases your ad spend",
+          "It guarantees ad approval",
+          "It reduces your targeting options"
+        ],
+        [
+          "It prevents the algorithm from learning effectively",
+          "It improves campaign performance immediately",
+          "It reduces your cost per click",
+          "It expands your audience automatically"
+        ],
+        [
+          "Focus on providing value to users and allowing adequate learning time",
+          "Change campaigns frequently to improve performance",
+          "Focus only on creative and ignore targeting",
+          "Try to trick the algorithm with unusual strategies"
+        ]
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Facebook Algorithm Explained Simply",
+        "url": "https://www.youtube.com/watch?v=example",
+        "embed": true,
+        "reason": "Clear explanation of algorithm mechanics without jargon"
+      },
+      "extra_reading": [
+        "https://www.facebook.com/business/learn/facebook-algorithm - Official Algorithm Guide",
+        "https://www.socialmediaexaminer.com/facebook-news-feed-algorithm/ - Algorithm Behavior Insights"
+      ]
+    },
+    "summary": "The Facebook algorithm learns from user behavior to keep users engaged while generating revenue. It optimizes for outcomes based on data, not instructions. Understanding the learning phase and allowing adequate time for optimization is crucial for campaign success. Working with the algorithm rather than against it leads to better performance and lower costs."
+  },
+  {
+    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
+    "module_title": "Module 2: Account & Campaign Structure",
+    "lesson_number": 4,
+    "lesson_title": "Proper Account Setup (The Right Way)",
+    "introduction": "With a solid understanding of how Facebook Ads work, it's time to set up your accounts correctly. This lesson covers the proper way to create Business Manager, verify your business, set up pixels and conversions, and avoid common setup mistakes that cause tracking issues later.",
+    "why_it_matters": "Proper account setup prevents tracking issues, account restrictions, and scaling problems. Many advertisers skip important setup steps to get campaigns running quickly, only to face problems later when they try to scale. Getting setup right the first time saves time and money in the long run.",
+    "core_concept": "Proper account setup involves creating Business Manager first, verifying your business and domain, installing the Facebook Pixel on your website, setting up conversion events, and configuring Events Manager. Each step builds on the previous one to create a complete tracking and optimization system. Skipping steps or doing them out of order can cause tracking gaps and optimization problems.",
+    "steps": [
+      "Step 1: Create Business Manager as your central account hub",
+      "Step 2: Verify your business and domain for account legitimacy",
+      "Step 3: Install Facebook Pixel on your website",
+      "Step 4: Set up conversion events that matter to your business",
+      "Step 5: Configure Events Manager to track and optimize properly"
+    ],
+    "practical_examples": [
+      "Consider an e-commerce store selling home goods. They create Business Manager, verify their business, and install the Facebook Pixel on their website. They set up events for 'Purchase' (their main conversion), 'Add to Cart' (a key step in their funnel), and 'View Content' (to track product page visits). This setup allows Facebook to learn what leads to purchases and optimize for that outcome.",
+      "Another example: A SaaS company offering project management software. They set up their account structure, install Pixel, and create events for 'Lead' (form submission), 'Trial Signup' (key milestone), and 'Purchase' (final conversion). This multi-step funnel tracking allows them to optimize for the entire customer journey, not just the final purchase."
+    ],
+    "common_mistakes": [
+      "Mistake 1: Setting up Ad Accounts before Business Manager. This limits your management options and security features.",
+      "Mistake 2: Not verifying business and domain. This can lead to account restrictions and credibility issues.",
+      "Mistake 3: Installing Pixel but not setting up proper conversion events. This results in poor optimization and limited tracking.",
+      "Mistake 4: Using generic event tracking instead of business-specific events. This prevents effective optimization."
+    ],
+    "system_connections": "This lesson applies the ecosystem understanding from Lesson 2 by showing you how to set up accounts properly. It builds on the algorithm knowledge from Lesson 3 by showing how to provide the algorithm with the data it needs to optimize effectively. Proper setup is essential before creating campaign structure in Lesson 5.",
+    "actionable_takeaway": "Before running any campaigns, ensure your account structure is complete with verified business, installed Pixel, and properly configured conversion events. This setup provides the data foundation that enables effective optimization. Think of it as preparing the soil before planting seeds - proper preparation leads to better results.",
+    "quiz": {
+      "questions": [
+        "What should you create first in the account setup process?",
+        "Why is business verification important?",
+        "What does Facebook Pixel do?",
+        "What happens if you don't set up proper conversion events?",
+        "How does proper setup affect algorithm optimization?"
+      ],
+      "answers": [
+        "Business Manager",
+        "It prevents account restrictions and establishes credibility",
+        "It tracks user behavior on your website",
+        "You get poor optimization and limited tracking",
+        "It provides the algorithm with data to optimize effectively"
+      ],
+      "options": [
+        [
+          "Business Manager",
+          "Ad Account",
+          "Facebook Page",
+          "Instagram Account"
+        ],
+        [
+          "It prevents account restrictions and establishes credibility",
+          "It increases your ad spend",
+          "It guarantees ad approval",
+          "It reduces your cost per click"
+        ],
+        [
+          "It tracks user behavior on your website",
+          "It creates ad content automatically",
+          "It manages your ad spend",
+          "It designs your landing pages"
+        ],
+        [
+          "You get poor optimization and limited tracking",
+          "Your ads will show more frequently",
+          "Your audience targeting will expand",
+          "Your campaigns will run faster"
+        ],
+        [
+          "It provides the algorithm with data to optimize effectively",
+          "It allows you to bypass the auction system",
+          "It guarantees perfect campaign performance",
+          "It eliminates the need for creative"
+        ]
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Complete Facebook Ads Setup Guide",
+        "url": "https://www.youtube.com/watch?v=example",
+        "embed": true,
+        "reason": "Step-by-step account setup walkthrough"
+      },
+      "extra_reading": [
+        "https://www.facebook.com/business/help/pixel - Official Pixel Setup Guide",
+        "https://www.facebook.com/business/learn/facebook-pixel-conversion-tracking - Conversion Tracking Best Practices"
+      ]
+    },
+    "summary": "Proper account setup involves creating Business Manager, verifying business and domain, installing Facebook Pixel, setting up conversion events, and configuring Events Manager. Each step is crucial for tracking and optimization. Getting setup right the first time prevents problems and enables effective campaign management. This foundation is essential before creating campaign structure."
+  },
+  {
+    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
+    "module_title": "Module 2: Account & Campaign Structure",
+    "lesson_number": 5,
+    "lesson_title": "Campaign Structure That Scales",
+    "introduction": "Now that your accounts are set up correctly, let's explore the proper structure for Facebook ad campaigns. This lesson covers the Campaign → Ad Set → Ad hierarchy, budget placement rules, and why bad structure wastes money. You'll learn to create campaigns that scale effectively in 2025.",
+    "why_it_matters": "Campaign structure determines how your budget is allocated, how optimization occurs, and how easily you can scale successful campaigns. Poor structure leads to budget waste, optimization problems, and scaling difficulties. Understanding the hierarchy helps you make strategic decisions at the right level.",
+    "core_concept": "Facebook Ads follows a three-level hierarchy: Campaign (top level for objectives and budget), Ad Set (middle level for targeting and bidding), and Ad (bottom level for creative). Each level has specific functions and decisions that belong there. Campaign Budget Optimization (CBO) vs Ad Set Budget Optimization (ABO) affects how Facebook allocates your budget across ad sets.",
+    "steps": [
+      "Step 1: Understand the Campaign → Ad Set → Ad hierarchy and functions",
+      "Step 2: Learn which decisions belong at each level of the hierarchy",
+      "Step 3: Choose between CBO and ABO based on your scaling goals",
+      "Step 4: Set up proper budget allocation for optimal performance",
+      "Step 5: Structure for testing and scaling from the beginning"
+    ],
+    "practical_examples": [
+      "Consider an e-commerce store launching a new product. They create one Campaign with a 'Conversions' objective and total budget. Within that campaign, they create multiple Ad Sets for different audiences (interest-based, lookalike, retargeting). Each Ad Set has its own targeting and bid strategy. Within each Ad Set, they create multiple Ads with different creative approaches. This structure allows the algorithm to optimize within each audience while competing across audiences for the best results.",
+      "Another example: A SaaS company testing multiple campaign objectives. They create separate Campaigns for 'Traffic' (to warm audiences) and 'Conversions' (to drive signups). Each Campaign has Ad Sets for different audiences. This structure allows them to optimize each objective separately while maintaining consistent audience strategies across objectives."
+    ],
+    "common_mistakes": [
+      "Mistake 1: Making targeting decisions at the Campaign level instead of Ad Set level. This limits optimization and testing options.",
+      "Mistake 2: Using ABO when trying to scale multiple ad sets with different performance potential. This prevents budget shifting to best performers.",
+      "Mistake 3: Creating too many ads within each ad set. This dilutes learning and makes optimization harder.",
+      "Mistake 4: Not structuring for testing from the beginning. This makes it difficult to identify winning strategies."
+    ],
+    "system_connections": "This lesson builds on proper account setup from Lesson 4 by showing how to structure campaigns within your properly configured accounts. It connects to algorithm understanding from Lesson 3 by showing how structure affects optimization. Proper structure enables the auction participation learned in Lesson 1. This foundation prepares you for objective selection in Lesson 6.",
+    "actionable_takeaway": "Structure your campaigns with clear decision-making levels: Campaign for objectives and overall budget, Ad Set for targeting and bidding, Ad for creative. Use CBO for scaling across multiple ad sets and ABO when you need precise control over individual ad set budgets. Design your structure to allow for testing and optimization from the beginning.",
+    "quiz": {
+      "questions": [
+        "What is the Facebook Ads hierarchy structure?",
+        "What does CBO stand for?",
+        "Which level should hold targeting decisions?",
+        "What happens with too many ads in one ad set?",
+        "When should you use CBO vs ABO?"
+      ],
+      "answers": [
+        "Campaign → Ad Set → Ad",
+        "Campaign Budget Optimization",
+        "Ad Set level",
+        "It dilutes learning and makes optimization harder",
+        "Use CBO for scaling across ad sets, ABO for precise control"
+      ],
+      "options": [
+        [
+          "Campaign → Ad Set → Ad",
+          "Ad → Ad Set → Campaign",
+          "Campaign → Ad → Ad Set",
+          "Ad Set → Campaign → Ad"
+        ],
+        [
+          "Campaign Budget Optimization",
+          "Creative Budget Optimization",
+          "Customer Budget Optimization",
+          "Conversion Budget Optimization"
+        ],
+        [
+          "Ad Set level",
+          "Campaign level",
+          "Ad level",
+          "Account level"
+        ],
+        [
+          "It dilutes learning and makes optimization harder",
+          "It improves optimization significantly",
+          "It reduces your cost per click",
+          "It increases your ad reach automatically"
+        ],
+        [
+          "Use CBO for scaling across ad sets, ABO for precise control",
+          "Use ABO for scaling, CBO for control",
+          "Use CBO for small budgets, ABO for large budgets",
+          "Use ABO for all campaigns to maintain control"
+        ]
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Facebook Ads Structure Best Practices",
+        "url": "https://www.youtube.com/watch?v=example",
+        "embed": true,
+        "reason": "Visual guide to proper campaign structure"
+      },
+      "extra_reading": [
+        "https://www.facebook.com/business/learn/facebook-ad-campaign-structure - Official Structure Guide",
+        "https://www.facebook.com/business/learn/campaign-budget-optimization - CBO Best Practices"
+      ]
+    },
+    "summary": "Facebook Ads follows a Campaign → Ad Set → Ad hierarchy with specific functions at each level. Campaigns hold objectives and budgets, Ad Sets handle targeting and bidding, and Ads contain creative. CBO vs ABO affects budget allocation differently. Proper structure enables optimization and scaling. This hierarchy is essential for effective campaign management."
+  },
+  {
+    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
+    "module_title": "Module 2: Account & Campaign Structure",
+    "lesson_number": 6,
+    "lesson_title": "Objectives That Actually Match Business Goals",
+    "introduction": "In this lesson, you'll learn how to choose campaign objectives that align with your actual business goals. Many advertisers choose objectives without understanding their implications, leading to campaigns that don't deliver business results. We'll explain when each objective makes sense and why choosing the wrong one breaks results.",
+    "why_it_matters": "Campaign objectives determine how Facebook's algorithm optimizes your campaigns. Choosing the wrong objective means the algorithm optimizes for outcomes that don't match your business goals. This misalignment leads to campaigns that perform well by Facebook's metrics but fail to deliver business value. Understanding objectives is crucial for campaign success.",
+    "core_concept": "Facebook offers objectives in three categories: Awareness (build brand recognition), Consideration (drive traffic, engagement, leads), and Conversion (drive sales, app installs, etc.). Each objective optimizes for different outcomes and requires different campaign setups. The objective should match your business goal and funnel stage. Some objectives work better for certain business types than others.",
+    "steps": [
+      "Step 1: Identify your actual business goal (awareness, consideration, conversion)",
+      "Step 2: Map your goal to the appropriate Facebook objective category",
+      "Step 3: Choose the specific objective that matches your funnel stage",
+      "Step 4: Set up conversion events that align with your chosen objective",
+      "Step 5: Structure your campaign to support the chosen optimization goal"
+    ],
+    "practical_examples": [
+      "Consider a new SaaS company that needs to build awareness before driving signups. They start with a 'Reach' objective to build brand recognition, then move to 'Traffic' to drive website visits, and finally to 'Lead' to capture email addresses. Each objective aligns with their business goal at that stage of the customer journey. The algorithm optimizes differently for each objective, supporting their strategic progression.",
+      "Another example: An e-commerce store launching a new product. They use 'Conversions' objective with purchase tracking. The algorithm learns to optimize for actual purchases, not just clicks or views. This alignment means every optimization decision supports their business goal of generating revenue."
+    ],
+    "common_mistakes": [
+      "Mistake 1: Always choosing 'Conversions' regardless of business goal. This forces optimization for outcomes that may not be ready for.",
+      "Mistake 2: Using 'Traffic' when the goal is actually sales. This optimizes for clicks rather than revenue.",
+      "Mistake 3: Not setting up proper conversion tracking for the chosen objective. This limits optimization effectiveness.",
+      "Mistake 4: Choosing objectives based on what competitors use instead of business goals. This leads to misaligned campaigns."
+    ],
+    "system_connections": "This lesson connects to campaign structure from Lesson 5 by showing how objectives determine the entire campaign approach. It builds on algorithm understanding from Lesson 3 by showing how objectives direct optimization. Proper objective selection is essential for the auction participation learned in Lesson 1. This knowledge prepares you for audience selection in Module 3.",
+    "actionable_takeaway": "Always start with your business goal and work backward to choose the appropriate objective. Don't choose objectives based on what seems popular or what competitors use. Match your objective to your funnel stage and set up conversion tracking that aligns with your goal. The objective determines how everything else in your campaign functions.",
+    "quiz": {
+      "questions": [
+        "What are the three main objective categories?",
+        "What does the 'Conversions' objective optimize for?",
+        "Why is objective-goal alignment important?",
+        "What happens when you choose the wrong objective?",
+        "How should you approach objective selection?"
+      ],
+      "answers": [
+        "Awareness, Consideration, Conversion",
+        "Actions that lead to conversions on your website",
+        "It ensures algorithm optimizes for business outcomes",
+        "Algorithm optimizes for outcomes that don't match business goals",
+        "Start with business goal and work backward to objective"
+      ],
+      "options": [
+        [
+          "Awareness, Consideration, Conversion",
+          "Traffic, Engagement, Sales",
+          "Clicks, Views, Conversions",
+          "Brand, Product, Service"
+        ],
+        [
+          "Actions that lead to conversions on your website",
+          "Website visits regardless of actions",
+          "Social media engagement",
+          "Brand awareness metrics"
+        ],
+        [
+          "It ensures algorithm optimizes for business outcomes",
+          "It reduces your ad spend",
+          "It guarantees ad approval",
+          "It increases your reach automatically"
+        ],
+        [
+          "Algorithm optimizes for outcomes that don't match business goals",
+          "Your campaigns will perform better than expected",
+          "Your cost per click will decrease significantly",
+          "Your audience targeting will expand automatically"
+        ],
+        [
+          "Start with business goal and work backward to objective",
+          "Choose the most popular objective for your industry",
+          "Use the same objective for all campaigns",
+          "Select objectives based on competitor strategies"
+        ]
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Facebook Campaign Objectives Explained",
+        "url": "https://www.youtube.com/watch?v=example",
+        "embed": true,
+        "reason": "Detailed explanation of each campaign objective"
+      },
+      "extra_reading": [
+        "https://www.facebook.com/business/learn/facebook-ad-objectives - Official Objectives Guide",
+        "https://www.facebook.com/business/learn/facebook-campaign-objective-guide - Objective Selection Strategy"
+      ]
+    },
+    "summary": "Facebook offers objectives in Awareness, Consideration, and Conversion categories. Each objective optimizes for different outcomes and should align with your business goals. Choosing the wrong objective means the algorithm optimizes for outcomes that don't match your business needs. Always start with your business goal and select the objective that supports it. Proper objective selection is fundamental to campaign success."
+  }
+]
