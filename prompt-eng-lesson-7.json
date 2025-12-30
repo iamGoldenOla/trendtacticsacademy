@@ -31,15 +31,52 @@
   "playground_activity": "Try a task using few-shot learning with 1 example, then with 3 examples, then with 5 examples. Compare how the quality and consistency of responses change with the number of examples provided.",
   "reflection_question": "How do examples in prompts affect the AI's ability to generalize to new situations?",
   "quiz": {
-    "question": "What is the main purpose of few-shot learning in prompts?",
-    "options": [
-      "To make the AI respond faster",
-      "To provide examples that demonstrate the desired format or approach",
-      "To reduce the cost of using AI",
-      "To make the AI more creative"
+    "questions": [
+      "What is the main purpose of few-shot learning in prompts?",
+      "How does the quality of examples in few-shot prompting affect AI performance?",
+      "Which of the following is NOT a key consideration for effective few-shot learning?",
+      "What is the relationship between the number of examples provided and the quality of AI responses in few-shot learning?",
+      "How does few-shot learning differ from zero-shot learning in terms of example provision?"
     ],
-    "answer": "To provide examples that demonstrate the desired format or approach",
-    "explanation": "Few-shot learning uses examples within the prompt to demonstrate the desired behavior, allowing the AI to follow the pattern shown in the examples."
+    "answers": [
+      "To provide examples that demonstrate the desired format or approach",
+      "The quality and clarity of examples directly impact the AI's performance",
+      "Using as many examples as possible to ensure comprehensive coverage",
+      "More examples generally lead to more consistent and accurate responses",
+      "Few-shot learning provides examples in the prompt, while zero-shot learning does not provide any examples"
+    ],
+    "options": [
+      [
+        "To make the AI respond faster",
+        "To provide examples that demonstrate the desired format or approach",
+        "To reduce the cost of using AI",
+        "To make the AI more creative"
+      ],
+      [
+        "The quality of examples has minimal impact on performance",
+        "The quality and clarity of examples directly impact the AI's performance",
+        "Only the quantity of examples matters, not quality",
+        "AI models ignore example quality"
+      ],
+      [
+        "Using clear, relevant examples",
+        "Maintaining consistent formatting",
+        "Using as many examples as possible to ensure comprehensive coverage",
+        "Providing representative examples"
+      ],
+      [
+        "More examples always lead to decreased performance",
+        "More examples generally lead to more consistent and accurate responses",
+        "The number of examples has no impact on quality",
+        "Fewer examples always produce better results"
+      ],
+      [
+        "Few-shot learning provides examples in the prompt, while zero-shot learning does not provide any examples",
+        "Few-shot learning uses more computational resources",
+        "Zero-shot learning requires examples",
+        "There is no difference between the two approaches"
+      ]
+    ]
   },
   "key_takeaways": [
     "Examples demonstrate the desired format and approach",

@@ -31,15 +31,52 @@
   "playground_activity": "Take a dataset and ask for analysis with a general prompt, then with a specific prompt that includes context, objectives, and format requirements. Compare the relevance and actionability of the insights generated.",
   "reflection_question": "How does providing context about data improve the quality of AI-generated insights?",
   "quiz": {
-    "question": "Why is it important to provide context about a dataset in analysis prompts?",
-    "options": [
-      "It makes the AI respond faster",
-      "It helps the AI understand the significance and provide relevant insights",
-      "It reduces the cost of using AI",
-      "It makes the AI more creative"
+    "questions": [
+      "Why is it important to provide context about a dataset in analysis prompts?",
+      "How do clear analysis objectives improve the quality of AI-generated insights?",
+      "Which of the following is NOT a core concept in data analysis prompt engineering?",
+      "What is the relationship between output specifications and analysis usability?",
+      "How do structured prompts compare to general prompts in data analysis?"
     ],
-    "answer": "It helps the AI understand the significance and provide relevant insights",
-    "explanation": "Providing context helps the AI understand the business or research significance of the data, leading to more relevant and actionable insights."
+    "answers": [
+      "It helps the AI understand the significance and provide relevant insights",
+      "By guiding the AI to focus on the most relevant aspects of the data",
+      "Avoiding specific objectives",
+      "Specifying output format ensures results are in a usable format for the user",
+      "Structured prompts produce more relevant and actionable insights than general prompts"
+    ],
+    "options": [
+      [
+        "It makes the AI respond faster",
+        "It helps the AI understand the significance and provide relevant insights",
+        "It reduces the cost of using AI",
+        "It makes the AI more creative"
+      ],
+      [
+        "By making the AI respond faster",
+        "By guiding the AI to focus on the most relevant aspects of the data",
+        "By reducing the amount of data to process",
+        "By making the analysis simpler"
+      ],
+      [
+        "Data context setting",
+        "Analysis objectives",
+        "Avoiding specific objectives",
+        "Output requirements"
+      ],
+      [
+        "Output specifications have no impact on usability",
+        "Specifying output format ensures results are in a usable format for the user",
+        "Output specifications reduce analysis quality",
+        "Specifying format makes results less relevant"
+      ],
+      [
+        "Structured prompts produce more relevant and actionable insights than general prompts",
+        "General prompts are always more effective",
+        "Structured prompts reduce analysis quality",
+        "There is no difference between structured and general prompts"
+      ]
+    ]
   },
   "key_takeaways": [
     "Context helps AI understand data significance",

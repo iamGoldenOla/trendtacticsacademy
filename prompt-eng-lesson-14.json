@@ -31,15 +31,52 @@
   "playground_activity": "Take a prompt you've used that didn't produce the desired results. Identify which common mistake it might have contained, then rewrite it to avoid that mistake. Compare the results.",
   "reflection_question": "How might understanding common mistakes change your approach to creating prompts?",
   "quiz": {
-    "question": "What is a common mistake in prompt engineering?",
-    "options": [
-      "Providing too much context",
-      "Using ambiguous or unclear language",
-      "Being too specific",
-      "Using simple language"
+    "questions": [
+      "What is a common mistake in prompt engineering?",
+      "How does ambiguous language affect AI response quality?",
+      "Which of the following is NOT a common prompt engineering mistake?",
+      "What is the relationship between prompt complexity and response quality?",
+      "How do best practices in prompt engineering improve results?"
     ],
-    "answer": "Using ambiguous or unclear language",
-    "explanation": "Using ambiguous language is a common mistake that can lead to varied interpretations by the AI and inconsistent results."
+    "answers": [
+      "Using ambiguous or unclear language",
+      "It leads to varied interpretations and inconsistent results",
+      "Providing sufficient context",
+      "Overly complex prompts can confuse the AI and reduce response quality",
+      "By helping avoid common pitfalls and creating more effective prompts"
+    ],
+    "options": [
+      [
+        "Providing too much context",
+        "Using ambiguous or unclear language",
+        "Being too specific",
+        "Using simple language"
+      ],
+      [
+        "It has no effect on responses",
+        "It leads to varied interpretations and inconsistent results",
+        "It makes responses more consistent",
+        "It speeds up response time"
+      ],
+      [
+        "Using ambiguous language",
+        "Missing context",
+        "Providing sufficient context",
+        "Overly complex prompts"
+      ],
+      [
+        "Simple prompts always produce better results",
+        "Overly complex prompts can confuse the AI and reduce response quality",
+        "Complexity has no impact on quality",
+        "More complex prompts always produce better results"
+      ],
+      [
+        "By helping avoid common pitfalls and creating more effective prompts",
+        "By making prompts more complex",
+        "By reducing the need for testing",
+        "By making responses less accurate"
+      ]
+    ]
   },
   "key_takeaways": [
     "Avoid ambiguous language for consistent results",

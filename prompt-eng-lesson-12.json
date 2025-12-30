@@ -31,15 +31,52 @@
   "playground_activity": "Write a prompt for a simple function without specifying the language, then write the same prompt specifying the language and requirements. Compare the results and note the differences in quality and appropriateness.",
   "reflection_question": "How do detailed requirements in coding prompts affect the quality of generated code?",
   "quiz": {
-    "question": "What is the primary benefit of specifying programming language in code generation prompts?",
-    "options": [
-      "It makes the AI respond faster",
-      "It ensures the AI generates code in the correct syntax and style",
-      "It reduces the cost of using AI",
-      "It makes the AI more creative"
+    "questions": [
+      "What is the primary benefit of specifying programming language in code generation prompts?",
+      "How do clear functionality requirements improve code generation quality?",
+      "Which of the following is NOT a core concept in code generation prompt engineering?",
+      "What is the relationship between code quality requirements and generated code quality?",
+      "How do detailed coding prompts compare to generic coding prompts?"
     ],
-    "answer": "It ensures the AI generates code in the correct syntax and style",
-    "explanation": "Specifying the programming language ensures the AI generates code using the correct syntax, conventions, and best practices for that language."
+    "answers": [
+      "It ensures the AI generates code in the correct syntax and style",
+      "By providing clear specifications of what the code should do, including inputs, outputs, and constraints",
+      "Avoiding specific language requirements",
+      "Specifying quality requirements helps generate code that follows best practices",
+      "Detailed prompts produce more accurate and appropriate code than generic prompts"
+    ],
+    "options": [
+      [
+        "It makes the AI respond faster",
+        "It ensures the AI generates code in the correct syntax and style",
+        "It reduces the cost of using AI",
+        "It makes the AI more creative"
+      ],
+      [
+        "By making the AI respond faster",
+        "By providing clear specifications of what the code should do, including inputs, outputs, and constraints",
+        "By reducing the complexity of the code",
+        "By making the code shorter"
+      ],
+      [
+        "Language-specific prompts",
+        "Functionality requirements",
+        "Avoiding specific language requirements",
+        "Code quality considerations"
+      ],
+      [
+        "Quality requirements have no impact on generated code",
+        "Specifying quality requirements helps generate code that follows best practices",
+        "Quality requirements reduce code performance",
+        "Quality requirements make code less readable"
+      ],
+      [
+        "Detailed prompts produce more accurate and appropriate code than generic prompts",
+        "Generic prompts are always more effective",
+        "Detailed prompts reduce code quality",
+        "There is no difference between detailed and generic prompts"
+      ]
+    ]
   },
   "key_takeaways": [
     "Language specification ensures correct syntax",

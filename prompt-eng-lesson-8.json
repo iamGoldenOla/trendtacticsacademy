@@ -32,15 +32,52 @@
   "playground_activity": "Take a prompt you've used before and go through at least 3 iterations of refinement. Document what changes you made and how they affected the output quality.",
   "reflection_question": "How does the iterative approach to prompt engineering compare to other iterative processes you've used?",
   "quiz": {
-    "question": "What is the primary benefit of prompt chaining?",
-    "options": [
-      "It makes the AI respond faster",
-      "It allows complex tasks to be broken into specialized steps",
-      "It reduces the cost of using AI",
-      "It makes the AI more creative"
+    "questions": [
+      "What is the primary benefit of prompt chaining?",
+      "How does the iterative refinement process improve prompt effectiveness?",
+      "Which of the following is NOT a key component of systematic prompt testing?",
+      "What is the relationship between prompt complexity and the need for iterative refinement?",
+      "How does prompt chaining differ from using a single complex prompt for multi-step tasks?"
     ],
-    "answer": "It allows complex tasks to be broken into specialized steps",
-    "explanation": "Prompt chaining breaks complex tasks into multiple specialized prompts, allowing each to focus on a specific aspect and often producing higher quality results."
+    "answers": [
+      "It allows complex tasks to be broken into specialized steps",
+      "By testing, analyzing output, identifying issues, and adjusting prompts based on results",
+      "Using only one test input to validate the prompt",
+      "More complex prompts typically require more iterations to achieve desired results",
+      "Chaining allows specialized processing at each step, often producing higher quality results"
+    ],
+    "options": [
+      [
+        "It makes the AI respond faster",
+        "It allows complex tasks to be broken into specialized steps",
+        "It reduces the cost of using AI",
+        "It makes the AI more creative"
+      ],
+      [
+        "By testing, analyzing output, identifying issues, and adjusting prompts based on results",
+        "By making random changes to the prompt",
+        "By increasing the length of the prompt",
+        "By using more complex vocabulary"
+      ],
+      [
+        "Testing prompts with different inputs",
+        "Validating results across various scenarios",
+        "Using only one test input to validate the prompt",
+        "Identifying edge cases"
+      ],
+      [
+        "Simple prompts always require more iterations than complex ones",
+        "More complex prompts typically require more iterations to achieve desired results",
+        "Complexity has no impact on the number of iterations needed",
+        "Simple prompts are impossible to refine"
+      ],
+      [
+        "Chaining allows specialized processing at each step, often producing higher quality results",
+        "Single prompts are always more efficient",
+        "There is no practical difference between the approaches",
+        "Single prompts allow for better resource management"
+      ]
+    ]
   },
   "key_takeaways": [
     "Prompt engineering is an iterative process",
