@@ -62,7 +62,11 @@ async function generateCompleteCourseData() {
               q: q,
               a: lesson.quiz.answers[idx],
               opts: [lesson.quiz.answers[idx], "Option 2", "Option 3", "Option 4"] // Simplified - in a real scenario, you might have options in your data
-            })) : [{ q: "What did you learn?", a: "Something valuable", opts: ["Option 1", "Option 2", "Option 3", "Option 4"] }],
+            })) : lesson.quiz && lesson.quiz.question && lesson.quiz.answer && lesson.quiz.options ? [{
+              q: lesson.quiz.question,
+              a: lesson.quiz.answer,
+              opts: lesson.quiz.options
+            }] : [{ q: "What did you learn?", a: "Something valuable", opts: ["Option 1", "Option 2", "Option 3", "Option 4"] }],
             summary: lesson.summary || "This lesson covered important concepts."
           };
         })
@@ -86,7 +90,11 @@ async function generateCompleteCourseData() {
               q: q,
               a: lesson.quiz.answers[idx],
               opts: [lesson.quiz.answers[idx], "Option 2", "Option 3", "Option 4"] // Simplified - in a real scenario, you might have options in your data
-            })) : [{ q: "What did you learn?", a: "Something valuable", opts: ["Option 1", "Option 2", "Option 3", "Option 4"] }],
+            })) : lesson.quiz && lesson.quiz.question && lesson.quiz.answer && lesson.quiz.options ? [{
+              q: lesson.quiz.question,
+              a: lesson.quiz.answer,
+              opts: lesson.quiz.options
+            }] : [{ q: "What did you learn?", a: "Something valuable", opts: ["Option 1", "Option 2", "Option 3", "Option 4"] }],
             summary: lesson.summary || "This lesson covered important concepts."
           };
         })
