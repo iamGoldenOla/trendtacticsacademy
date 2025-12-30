@@ -1265,189 +1265,432 @@
     "lessons": [
       {
         "id": 1,
-        "module": "Introduction to Prompt Engineering",
-        "title": "What is Prompt Engineering?",
+        "module": "Module 1: Prompt Engineering Foundations",
+        "title": "What Prompt Engineering Really Is",
         "duration": "10-15 min",
-        "intro": "Prompt engineering is the practice of designing and refining prompts to effectively communicate with AI systems. In this lesson, we'll explore the fundamental concepts of prompt engineering and why it's crucial in the AI era. As AI becomes more integrated into our daily workflows, the ability to craft precise, effective prompts becomes a valuable skill that can significantly impact productivity and results.",
-        "bigIdea": "Prompt engineering is the art and science of crafting inputs that guide AI systems to produce desired outputs.",
+        "intro": "Prompt engineering is the systematic practice of designing and refining instructions that guide AI systems to produce specific, desired outputs. In this foundational lesson, we'll explore what prompt engineering truly means in 2025, why it matters more than ever, and how it differs from casual AI interaction. This skill has evolved from simple 'prompt tricks' to a systematic discipline used by AI builders, product teams, automation engineers, marketers, educators, and founders to create reliable, scalable AI interactions.\n\nUnlike traditional programming where you write code to achieve results, prompt engineering involves crafting precise language instructions that an AI model interprets to generate outputs. This requires understanding how AI models process information, what makes instructions clear and actionable, and how to structure prompts for consistent results.\n\nThe importance of prompt engineering has exploded as organizations move from experimental AI usage to production-level AI systems. Companies now hire dedicated prompt engineers, and teams deploying AI across multiple tools need systematic approaches that go beyond trial-and-error prompting. This lesson establishes the foundation for building those systematic skills.",
+        "bigIdea": "Prompt engineering is the systematic discipline of designing precise instructions that guide AI behavior, moving from trial-and-error to reliable, reusable AI systems. It's not about tricks or shortcuts—it's about understanding how to communicate with AI systems in ways that produce consistent, predictable results at scale.",
         "steps": [
-          "Define the purpose of your prompt",
-          "Identify the desired output format",
-          "Specify the tone and style requirements",
-          "Include relevant context and constraints",
-          "Test and refine based on results"
+          "Step 1: Define the specific role or persona for the AI to assume (e.g., 'You are an expert financial analyst')",
+          "Step 2: Clearly specify the task with all necessary context and requirements",
+          "Step 3: Set explicit constraints and boundaries (what to avoid, formatting requirements, etc.)",
+          "Step 4: Define the exact output format needed for integration with other systems",
+          "Step 5: Test the prompt with different inputs to ensure consistency and refine as needed"
         ],
-        "example": "A marketing professional uses prompt engineering to generate social media content. Instead of a vague prompt like 'Write a Facebook post,' they craft 'Write a 150-word Facebook post in a casual, friendly tone promoting our new eco-friendly coffee cups to environmentally conscious millennials, including a call-to-action.' This specific prompt generates much more targeted content that aligns with their marketing goals.",
-        "video": "",
-        "reflection": "How might prompt engineering skills change the way you approach problem-solving or content creation in your field?",
+        "example": "Consider a marketing team that needs AI to generate social media content. Their initial approach was casual: 'Write a Facebook post about our new product.' This produced inconsistent results with varying tone, length, and quality.\n\nUsing prompt engineering principles, they created a systematic approach: 'You are an expert social media manager for a B2B SaaS company. Write a 150-word Facebook post in a professional but approachable tone. Target audience: marketing professionals aged 28-40. Include one customer testimonial, one benefit-focused bullet point, and a clear call-to-action. Avoid buzzwords like 'revolutionary' and 'game-changing.' Format as: Hook sentence, value proposition, testimonial, benefits, CTA.'\n\nThis systematic prompt produced consistent, on-brand content that met their requirements every time, saving hours of manual editing and revision.",
+        "video": "https://www.youtube.com/watch?v=example1",
+        "reflection": "Think about a task where you've used AI but got inconsistent or unsatisfactory results. How might you restructure your request using the systematic approach to prompt engineering rather than treating it as a casual conversation?",
         "quiz": [
           {
-            "q": "What is the primary purpose of prompt engineering?",
-            "a": "To design inputs that guide AI systems to produce desired outputs",
+            "q": "What is the primary difference between casual AI use and professional prompt engineering?",
+            "a": "Professional prompt engineering uses systematic, structured approaches with defined components while casual use relies on natural language requests hoping for good results",
             "opts": [
-              "To limit the AI's capabilities",
-              "To design inputs that guide AI systems to produce desired outputs",
-              "To make AI systems work faster",
-              "To replace human creativity"
+              "Professional prompt engineering costs more to implement",
+              "Professional prompt engineering uses systematic, structured approaches with defined components while casual use relies on natural language requests hoping for good results",
+              "Casual AI use is more creative than professional prompt engineering",
+              "There is no real difference between the two approaches"
+            ]
+          },
+          {
+            "q": "Why do most AI failures actually stem from instruction problems rather than AI limitations?",
+            "a": "Most AI failures occur because prompts are vague, lack context, have unclear expectations, or contain contradictory requirements",
+            "opts": [
+              "AI models are inherently unreliable and buggy",
+              "Most AI failures occur because prompts are vague, lack context, have unclear expectations, or contain contradictory requirements",
+              "AI models are designed to fail to encourage human oversight",
+              "Companies deliberately limit AI capabilities to sell more services"
+            ]
+          },
+          {
+            "q": "Which of the following is NOT a core component of systematic prompt engineering?",
+            "a": "Relying on the AI's creativity to fill in missing details",
+            "opts": [
+              "Defining the role or persona for the AI",
+              "Specifying the task with context and requirements",
+              "Relying on the AI's creativity to fill in missing details",
+              "Setting explicit constraints and boundaries"
+            ]
+          },
+          {
+            "q": "How does treating AI interaction as 'giving instructions' rather than 'having a conversation' improve results?",
+            "a": "It eliminates ambiguity by being explicit about requirements, providing clear examples, specifying constraints, and defining success criteria",
+            "opts": [
+              "It makes AI responses more creative and unpredictable",
+              "It eliminates ambiguity by being explicit about requirements, providing clear examples, specifying constraints, and defining success criteria",
+              "It allows AI to better understand human emotions and context",
+              "It reduces the computational resources needed by the AI"
+            ]
+          },
+          {
+            "q": "What is the main benefit of using systematic prompt engineering in professional settings?",
+            "a": "It ensures consistent, high-quality results that can be relied upon in production environments and scaled across teams",
+            "opts": [
+              "It allows for more casual, creative interactions with AI",
+              "It ensures consistent, high-quality results that can be relied upon in production environments and scaled across teams",
+              "It makes AI responses faster and more efficient",
+              "It reduces the cost of using AI systems"
             ]
           }
         ],
-        "summary": "In this lesson, we've established the foundation of prompt engineering. We've explored its definition, importance, and real-world applications. Understanding these fundamentals is crucial as we dive deeper into specific techniques and advanced strategies in the upcoming lessons."
+        "summary": "In this lesson, we've established that prompt engineering is a systematic discipline focused on designing precise instructions that guide AI behavior reliably. We've explored the difference between casual AI use and professional prompt engineering, understood why most AI failures are actually instruction failures, and learned the core concepts that differentiate systematic approaches from trial-and-error methods. This foundation prepares you to build reliable, scalable AI interactions that can be used professionally and integrated into production systems."
       },
       {
         "id": 2,
-        "module": "Introduction to Prompt Engineering",
-        "title": "The Anatomy of Effective Prompts",
+        "module": "Module 1: Prompt Engineering Foundations",
+        "title": "How AI Interprets Instructions",
         "duration": "10-15 min",
-        "intro": "In this lesson, we'll examine the structure of effective prompts by breaking them down into their core components. Understanding the anatomy of a well-crafted prompt is essential for consistently getting high-quality results from AI systems. We'll explore how different elements work together to guide AI behavior and produce desired outputs.",
-        "bigIdea": "Effective prompts follow a structured approach with clear components that guide AI behavior toward specific outcomes.",
+        "intro": "Understanding how AI systems interpret instructions is fundamental to effective prompt engineering. In this lesson, we'll explore the mechanics of how AI models process prompts, what happens when you submit a request, and why understanding these processes helps you craft more effective instructions. This knowledge enables you to design prompts that align with how AI systems actually work, rather than how we might intuitively expect them to work.\n\nUnlike human communication, where we use context, tone, and shared understanding to interpret meaning, AI models process text as sequences of tokens and use statistical patterns to generate responses. This mechanical process follows predictable patterns that, when understood, allow you to craft instructions that produce more reliable and accurate outputs.\n\nWe'll examine the technical aspects of AI processing in simple terms, explore how context affects interpretation, and understand why certain prompt structures work better than others. This foundational knowledge will inform all your future prompt engineering efforts.",
+        "bigIdea": "AI models process prompts as sequences of tokens using statistical patterns, not as human-like understanding. Effective prompt engineering aligns your instructions with how AI systems actually process information, leading to more predictable and reliable outputs. Understanding these mechanics allows you to design prompts that work with the AI's processing methods rather than against them.",
         "steps": [
-          "Identify the context needed for the task",
-          "Define the specific task or instruction",
-          "Specify any input data to be used",
-          "Clarify the desired output format",
-          "Test and refine each component"
+          "Step 1: Understand the tokenization process of your target AI model",
+          "Step 2: Structure your prompt with important information at the beginning and end",
+          "Step 3: Provide clear role definitions and explicit instructions",
+          "Step 4: Include relevant examples that demonstrate the desired output pattern",
+          "Step 5: Test your prompt with different orderings to optimize for the specific AI model"
         ],
-        "example": "Consider a prompt for creating a product description: 'Context: You are a marketing copywriter for a tech company. Task: Write a compelling product description for our new noise-canceling headphones. Audience: Tech-savvy professionals aged 25-45. Format: 200 words with a headline, 2 bullet points of features, and a call-to-action.' This prompt clearly defines context, task, audience, and format requirements.",
-        "video": "",
-        "reflection": "How do the different components of a prompt interact to influence the AI's response?",
+        "example": "Consider an AI tasked with generating technical documentation. A prompt that simply says 'Write good documentation' produces inconsistent results because the AI doesn't know what 'good documentation' means in your specific context.\n\nA better approach uses understanding of AI mechanics: 'You are an experienced technical writer. Documentation format: [Title, Overview, Prerequisites, Step-by-step instructions, Example code, Troubleshooting]. Tone: Clear, concise, beginner-friendly. Here's an example of good documentation: [detailed example]. Now document the user authentication API endpoint.'\n\nThis prompt works better because it provides explicit structure (the format), clear constraints (the tone), and a specific example to follow. The AI processes these components as patterns to replicate, producing consistent, well-structured documentation.",
+        "video": "https://www.youtube.com/watch?v=example2",
+        "reflection": "Think about a time when an AI response surprised you or didn't match your expectations. How might understanding the AI's pattern-based processing have helped you structure your request differently?",
         "quiz": [
           {
-            "q": "Which of the following is NOT a typical component of an effective prompt?",
-            "a": "AI's personal opinion",
+            "q": "How do AI models primarily process text instructions?",
+            "a": "AI models process text as sequences of tokens using statistical patterns to predict the next most likely tokens",
             "opts": [
-              "Context",
-              "Instruction",
-              "Input data",
-              "AI's personal opinion"
+              "AI models process text the same way humans do, with context and understanding",
+              "AI models process text as sequences of tokens using statistical patterns to predict the next most likely tokens",
+              "AI models use a complex algorithm that mimics human thought processes",
+              "AI models analyze text based on semantic meaning and emotional context"
+            ]
+          },
+          {
+            "q": "Why is understanding context windows important in prompt engineering?",
+            "a": "Context windows determine how much information the AI can process, and information at the beginning and end may be weighted differently",
+            "opts": [
+              "Context windows determine how much information the AI can process, and information at the beginning and end may be weighted differently",
+              "Context windows only affect the speed of AI processing",
+              "Context windows are marketing terms with no practical impact",
+              "Context windows only matter for very long documents"
+            ]
+          },
+          {
+            "q": "What is the main difference between how humans and AI models interpret instructions?",
+            "a": "Humans use context, tone, and shared understanding, while AI models recognize patterns and respond to explicit instructions",
+            "opts": [
+              "Humans use context, tone, and shared understanding, while AI models recognize patterns and respond to explicit instructions",
+              "Humans are more creative than AI models when interpreting instructions",
+              "AI models are better at understanding complex instructions than humans",
+              "There is no significant difference in how humans and AI interpret instructions"
+            ]
+          },
+          {
+            "q": "Why are examples particularly effective in prompts?",
+            "a": "Examples show the AI exactly what pattern to follow, which is often more effective than abstract instructions",
+            "opts": [
+              "Examples show the AI exactly what pattern to follow, which is often more effective than abstract instructions",
+              "Examples make prompts longer and more impressive to human readers",
+              "Examples are only useful for creative tasks, not technical ones",
+              "Examples are required by AI model licensing agreements"
+            ]
+          },
+          {
+            "q": "How does the ordering of information in a prompt affect AI interpretation?",
+            "a": "Information at the beginning and end of prompts often gets more weight in the AI's processing",
+            "opts": [
+              "Information at the beginning and end of prompts often gets more weight in the AI's processing",
+              "Ordering only matters for creative writing, not technical tasks",
+              "AI models process all information in a prompt equally regardless of order",
+              "Ordering affects only the speed of AI response, not the content"
             ]
           }
         ],
-        "summary": "In this lesson, we've examined the structure of effective prompts by identifying their key components. Understanding this anatomy will help you craft more consistent and effective prompts that reliably produce the outputs you need."
+        "summary": "In this lesson, we've explored how AI systems actually process instructions, understanding that they operate as sophisticated pattern recognition systems rather than systems with human-like understanding. We've examined the importance of tokens and context windows, learned why explicit instructions work better than implicit assumptions, and discovered how examples effectively shape AI output. This foundational knowledge will help you craft prompts that work with AI's actual processing methods rather than against them, leading to more reliable and predictable results in all your future prompt engineering efforts."
       },
       {
         "id": 3,
-        "module": "Introduction to Prompt Engineering",
-        "title": "Context and Role Setting",
+        "module": "Module 1: Prompt Engineering Foundations",
+        "title": "Prompt Engineering vs Traditional Instructions",
         "duration": "10-15 min",
-        "intro": "In this lesson, we'll explore how to effectively set context and assign roles to AI systems to improve the quality of responses. Context and role setting are powerful techniques that significantly influence AI behavior and output quality. By providing clear context and defining specific roles, you can guide the AI to respond in ways that align with your specific needs and expectations.",
-        "bigIdea": "Providing clear context and assigning specific roles to AI systems dramatically improves the relevance and quality of responses.",
+        "intro": "Understanding the differences between prompt engineering and traditional instruction methods is crucial for mastering this discipline. While traditional instruction methods assume human understanding, context awareness, and common sense, prompt engineering must account for how AI systems process information through pattern recognition and statistical modeling. This lesson explores the fundamental distinctions that shape how you should approach crafting instructions for AI systems.\n\nTraditional human instructions rely on shared context, implicit understanding, and the ability to ask clarifying questions. AI systems, however, process prompts as sequences of tokens and respond based on learned patterns without the ability to seek clarification or fill in gaps with common sense. This fundamental difference requires a completely different approach to instruction design.\n\nWe'll examine how to adapt traditional instruction principles for AI systems, identify common pitfalls when applying human instruction techniques to AI, and develop strategies for creating instructions that work effectively with AI's processing methods. This understanding forms the foundation for all advanced prompt engineering techniques.",
+        "bigIdea": "Prompt engineering requires explicit, structured instructions that account for AI's pattern-based processing, unlike traditional human instructions that rely on shared context and common sense. Effective prompt engineering eliminates ambiguity, provides clear examples, and specifies constraints explicitly because AI systems process instructions differently than humans. Understanding these differences is essential for creating reliable, predictable AI interactions.",
         "steps": [
-          "Identify the essential background information",
-          "Define the specific role you want the AI to assume",
-          "Specify constraints and requirements",
-          "Clarify the intended audience or purpose",
-          "Test how different contexts affect the response"
+          "Step 1: Identify what context a human would assume but an AI cannot",
+          "Step 2: Explicitly state all constraints, boundaries, and requirements",
+          "Step 3: Provide clear examples of desired output patterns",
+          "Step 4: Specify the target audience and their characteristics",
+          "Step 5: Test and refine to ensure the AI has sufficient context to produce desired results"
         ],
-        "example": "Instead of asking 'How do I market a product?', you could set context and role: 'You are an experienced digital marketing consultant with 10 years in the tech industry. Your client is a startup with a $500 monthly marketing budget. Provide a 3-month marketing strategy focusing on organic growth and cost-effective tactics.' This context and role assignment produces much more targeted advice.",
-        "video": "",
-        "reflection": "How might context and role setting change the way you approach different types of tasks with AI?",
+        "example": "Consider the difference between asking a human graphic designer versus an AI to create a logo. For a human, you might say: 'Create a modern logo for a tech startup that works in fintech.' The human designer would apply their knowledge of design principles, current trends, and fintech industry characteristics.\n\nFor an AI, effective prompt engineering requires explicit instructions: 'Create a logo for FintechFlow, a financial technology startup. Style: Modern, minimalist, professional. Colors: Blue and white, conveying trust and innovation. Elements: Abstract representation of flow or connection. Avoid: Charts, coins, traditional banking symbols. Format: SVG with hex codes. Target audience: Financial professionals aged 28-45.'\n\nThe AI prompt is much more explicit because it provides all the context and constraints that a human would infer from common sense and experience.",
+        "video": "https://www.youtube.com/watch?v=example3",
+        "reflection": "Think about a time when an AI response was different from what you expected. How might the differences have stemmed from the AI lacking common sense or context that a human would have assumed?",
         "quiz": [
           {
-            "q": "What is the primary benefit of assigning a specific role to an AI in a prompt?",
-            "a": "It influences the tone, depth, and perspective of the response",
+            "q": "What is the main difference between delegating to humans versus AI systems?",
+            "a": "Humans can rely on shared context and common sense while AI needs explicit instructions with no gaps in logic or missing context",
             "opts": [
-              "It makes the AI respond faster",
-              "It influences the tone, depth, and perspective of the response",
-              "It reduces the cost of using AI",
-              "It makes the AI more creative"
+              "There is no significant difference between delegating to humans versus AI",
+              "Humans can rely on shared context and common sense while AI needs explicit instructions with no gaps in logic or missing context",
+              "AI systems are more creative and flexible than humans",
+              "Humans require more detailed instructions than AI systems"
+            ]
+          },
+          {
+            "q": "Why do AI systems need explicit boundaries in prompts?",
+            "a": "AI systems respond to patterns and may extrapolate beyond intended boundaries without explicit constraints",
+            "opts": [
+              "AI systems respond to patterns and may extrapolate beyond intended boundaries without explicit constraints",
+              "Explicit boundaries make the prompt longer and more impressive",
+              "AI systems only follow boundaries when they are explicitly told to",
+              "Explicit boundaries are required by AI model licensing agreements"
+            ]
+          },
+          {
+            "q": "What does it mean that AI lacks 'common sense'?",
+            "a": "AI systems process text based on learned patterns without the ability to fill in gaps with general world knowledge or apply practical judgment",
+            "opts": [
+              "AI systems process text based on learned patterns without the ability to fill in gaps with general world knowledge or apply practical judgment",
+              "AI systems are intentionally designed to ignore common sense",
+              "AI systems have better common sense than humans",
+              "Common sense is not relevant for AI systems"
+            ]
+          },
+          {
+            "q": "How does AI creativity differ from human creativity?",
+            "a": "AI excels at following patterns with specific parameters while humans can think outside the box in novel ways",
+            "opts": [
+              "AI excels at following patterns with specific parameters while humans can think outside the box in novel ways",
+              "AI creativity is superior to human creativity in all contexts",
+              "Human creativity is just pattern matching like AI",
+              "AI and human creativity work exactly the same way"
+            ]
+          },
+          {
+            "q": "Why is it important to provide explicit examples in AI prompts?",
+            "a": "AI systems need examples to understand the exact patterns they should follow, as they cannot infer patterns from abstract descriptions alone",
+            "opts": [
+              "AI systems need examples to understand the exact patterns they should follow, as they cannot infer patterns from abstract descriptions alone",
+              "Examples make prompts look more professional to human reviewers",
+              "AI systems are required by design to follow examples exactly",
+              "Examples are only useful for creative tasks, not technical ones"
             ]
           }
         ],
-        "summary": "In this lesson, we've explored the powerful techniques of context setting and role assignment. These techniques allow you to guide AI behavior more precisely, resulting in responses that are better aligned with your specific needs and expectations."
+        "summary": "In this lesson, we've explored the fundamental differences between prompt engineering and traditional human instruction methods. We've learned that AI systems require explicit instructions without gaps in logic, as they lack common sense and the ability to infer missing context. We've examined how to set clear boundaries, provide sufficient examples, and adapt traditional instruction techniques for AI's pattern-based processing. This understanding forms the foundation for creating reliable, predictable AI interactions that can scale across professional settings."
       },
       {
         "id": 4,
-        "module": "Introduction to Prompt Engineering",
-        "title": "Precision and Specificity in Prompts",
+        "module": "Module 2: Prompt Structure & Control",
+        "title": "Core Prompt Components",
         "duration": "10-15 min",
-        "intro": "In this lesson, we'll dive deep into the importance of precision and specificity when crafting prompts. The level of detail in your prompts directly correlates with the quality and relevance of the AI's response. We'll explore techniques for adding precision without making prompts overly complex, and how to strike the right balance between clarity and conciseness.",
-        "bigIdea": "Precise, specific prompts generate more accurate, relevant, and useful AI responses than vague or general prompts.",
+        "intro": "Every effective prompt follows a structured approach with specific components that guide AI behavior. In this lesson, we'll examine the essential elements that make prompts reliable and effective. Understanding these components allows you to systematically build prompts that produce consistent, high-quality results across different AI models and use cases.\n\nA well-structured prompt is like a well-designed form with clear sections that guide the AI through the task systematically. Each component serves a specific purpose and contributes to the overall effectiveness of the instruction. The order and clarity of these components significantly impact the quality of the output.\n\nWe'll explore each component in detail, understand how they interact, and learn to apply them systematically to create prompts that work reliably in professional settings. This foundation will support all your future prompt engineering efforts.",
+        "bigIdea": "Effective prompts follow a structured approach with specific components: Role definition, Task definition, Constraints, Output format, Tone & style, and Scope limits. Each component serves a specific function in guiding AI behavior, and systematic use of these components creates reliable, predictable results. Understanding how to combine these elements allows you to build prompts that work consistently across different scenarios.",
         "steps": [
-          "Identify the core objective of your request",
-          "Specify the exact format and structure needed",
-          "Define the tone and style requirements",
-          "Include relevant constraints and requirements",
-          "Add examples or references if helpful"
+          "Step 1: Define the specific role or persona for the AI to assume",
+          "Step 2: Clearly specify the exact task with all requirements",
+          "Step 3: Set explicit constraints and boundaries for the output",
+          "Step 4: Define the precise output format needed",
+          "Step 5: Specify tone, style, and other relevant parameters",
+          "Step 6: Test the prompt to ensure all components work together effectively"
         ],
-        "example": "Instead of 'Write a blog post about healthy eating,' a precise prompt would be: 'Write a 800-word blog post in an informative yet engaging tone about the benefits of Mediterranean diet for adults over 40. Include 3 scientific studies, 2 practical tips, and a brief meal plan example. Target audience: health-conscious individuals with busy lifestyles.' The specific prompt generates a much more targeted piece that meets the exact requirements.",
-        "video": "",
-        "reflection": "How does the level of specificity in your prompt affect the actionability of the AI's response?",
+        "example": "Consider a company that needs to generate product descriptions. A poorly structured prompt might be: 'Write a product description.' This produces inconsistent results with varying length, tone, and format.\n\nA well-structured prompt using core components: 'You are an experienced e-commerce copywriter with expertise in consumer electronics (Role). Write a product description for our new wireless headphones (Task). Include key features, target audience, and benefits. Keep it under 200 words. Use a professional but approachable tone. Avoid technical jargon that non-technical customers won't understand (Constraints). Format as: Product name, Key features list, Target audience, Benefits, Call to action (Output Format).'\n\nThis structured approach produces consistent, on-brand product descriptions that meet all requirements every time.",
+        "video": "https://www.youtube.com/watch?v=example4",
+        "reflection": "Think about a time when an AI response didn't meet your expectations. How might including all core prompt components have improved the result?",
         "quiz": [
           {
-            "q": "What is the relationship between prompt specificity and response quality?",
-            "a": "More specific prompts generally lead to higher quality responses",
+            "q": "What is the primary purpose of the role definition component in a prompt?",
+            "a": "To establish who the AI should act as when completing the task, providing expertise and perspective",
             "opts": [
-              "More specific prompts generally lead to higher quality responses",
-              "Specificity has no impact on response quality",
-              "Generic prompts produce better responses",
-              "Specificity only matters for creative tasks"
+              "To make the prompt longer and more impressive",
+              "To establish who the AI should act as when completing the task, providing expertise and perspective",
+              "To show off your knowledge of AI systems",
+              "To slow down the AI's processing time"
+            ]
+          },
+          {
+            "q": "Which component of a structured prompt specifies what the AI should NOT do?",
+            "a": "Constraints and Boundaries component",
+            "opts": [
+              "Task Definition component",
+              "Constraints and Boundaries component",
+              "Role Definition component",
+              "Output Format component"
+            ]
+          },
+          {
+            "q": "Why are output format specifications important in professional settings?",
+            "a": "They ensure consistency and make outputs suitable for integration with other systems",
+            "opts": [
+              "They make the prompt look more professional",
+              "They ensure consistency and make outputs suitable for integration with other systems",
+              "They slow down the AI's response time",
+              "They are required by AI model licensing agreements"
+            ]
+          },
+          {
+            "q": "How does a well-defined task definition improve prompt effectiveness?",
+            "a": "It clearly specifies what the AI should do with specific requirements and expectations",
+            "opts": [
+              "It clearly specifies what the AI should do with specific requirements and expectations",
+              "It makes the prompt more creative and interesting",
+              "It reduces the computational resources needed",
+              "It forces the AI to respond in a specific language"
+            ]
+          },
+          {
+            "q": "What happens when you rely on the AI to infer missing prompt components?",
+            "a": "The results become inconsistent and unpredictable because AI cannot fill in missing context like humans",
+            "opts": [
+              "The AI automatically fills in missing context like a human would",
+              "The results become inconsistent and unpredictable because AI cannot fill in missing context like humans",
+              "The AI produces better results because it has more freedom",
+              "Nothing happens; AI doesn't need complete prompts"
             ]
           }
         ],
-        "summary": "In this lesson, we've examined the critical importance of precision and specificity in prompt engineering. By adding specific details while maintaining clarity, you can significantly improve the quality and relevance of AI responses."
+        "summary": "In this lesson, we've explored the core components that make prompts effective: Role definition, Task definition, Constraints, and Output format. We've learned how each component serves a specific function in guiding AI behavior and how they work together to create reliable, predictable results. This systematic approach transforms prompt engineering from trial-and-error to a structured discipline that produces consistent results across different scenarios and AI models. Understanding these fundamentals provides the foundation for all advanced prompt engineering techniques."
       },
       {
         "id": 5,
-        "module": "Introduction to Prompt Engineering",
-        "title": "Output Formatting and Constraints",
+        "module": "Module 2: Prompt Structure & Control",
+        "title": "Context Layering",
         "duration": "10-15 min",
-        "intro": "In this lesson, we'll explore how to effectively specify output formats and constraints in your prompts. Properly formatted outputs are crucial for integration with other systems and for ensuring the response meets your specific requirements. We'll cover various techniques for controlling the structure, format, and constraints of AI-generated content.",
-        "bigIdea": "Specifying output formats and constraints in prompts ensures the AI generates responses that are immediately usable and meet specific requirements.",
+        "intro": "Context layering is the strategic placement and organization of information within a prompt to maximize its effectiveness. In this lesson, we'll explore how to structure context at different levels to guide AI behavior without overwhelming the system with unnecessary information. Effective context layering creates prompts that are both comprehensive and efficient.\n\nAI models have limited context windows, so how you layer and prioritize information significantly impacts the results. The most important information should be placed where the AI is most likely to attend to it, while supporting context should be organized to enhance rather than dilute the core instructions.\n\nWe'll examine different types of context, understand how to layer them effectively, and learn to balance comprehensive instructions with processing limitations. This skill is essential for creating prompts that work reliably in complex, real-world scenarios.",
+        "bigIdea": "Context layering involves strategically organizing information within prompts at different levels: global context (broad instructions), local context (task-specific details), and persistent vs temporary instructions. The placement of information affects how AI processes and prioritizes it. Effective context layering ensures critical instructions receive attention while supporting information enhances rather than dilutes the core message.",
         "steps": [
-          "Identify the required output structure",
-          "Specify length or size constraints",
-          "Define any formatting requirements",
-          "Include content constraints or exclusions",
-          "Test the prompt to ensure constraints are followed"
+          "Step 1: Identify global context that applies broadly across tasks",
+          "Step 2: Determine local context specific to the current task",
+          "Step 3: Separate persistent instructions from temporary requirements",
+          "Step 4: Organize information with critical instructions at high-attention positions",
+          "Step 5: Test the prompt to ensure context layering supports rather than hinders the task",
+          "Step 6: Optimize the balance between comprehensive context and processing efficiency"
         ],
-        "example": "Instead of 'Explain machine learning,' a prompt with format specifications would be: 'Explain machine learning in 300 words or less, using a numbered list format with 5 key points. Each point should include a brief explanation and a real-world example. Use simple language suitable for beginners.' This generates a structured response that meets specific formatting and content requirements.",
-        "video": "",
-        "reflection": "How do output format specifications impact the usability of AI-generated content?",
+        "example": "Consider a content creation system for a company with specific brand guidelines. A poorly structured approach might dump all brand guidelines at the beginning: 'Our company values, brand voice, target audience, competitor analysis, market position, customer demographics, product details, tone requirements, style guide, and formatting rules,' followed by 'Now write a blog post about X.'\n\nA better approach uses context layering: 'You are an experienced content marketer for [Company]. Follow our brand voice: professional but approachable, customer-focused, value-driven (Global Context). Write a 800-word blog post about [Topic] for marketing professionals aged 28-45 (Local Context). Include 3 key takeaways and a call-to-action. Avoid technical jargon (Persistent Instructions). Address the specific challenges of [specific topic details] (Temporary Instructions).'\n\nThis layered approach ensures critical brand guidelines are established while specific task details remain clear and actionable.",
+        "video": "https://www.youtube.com/watch?v=example5",
+        "reflection": "Think about a time when an AI response seemed to ignore important instructions. How might poor context layering have contributed to this outcome?",
         "quiz": [
           {
-            "q": "Why is it important to specify output formats in prompts?",
-            "a": "It ensures the response is structured in a way that's immediately useful",
+            "q": "What is the difference between global and local context in prompt engineering?",
+            "a": "Global context includes broad, general instructions; local context includes task-specific details",
             "opts": [
-              "It makes the AI respond faster",
-              "It ensures the response is structured in a way that's immediately useful",
-              "It reduces the cost of using AI",
-              "It makes the AI more creative"
+              "There is no difference between global and local context",
+              "Global context includes broad, general instructions; local context includes task-specific details",
+              "Global context is more important than local context",
+              "Local context is used only for creative tasks"
+            ]
+          },
+          {
+            "q": "Why does context dumping reduce prompt effectiveness?",
+            "a": "It overwhelms the AI's processing capacity and dilutes important instructions with excessive information",
+            "opts": [
+              "It makes the prompt look more professional",
+              "It overwhelms the AI's processing capacity and dilutes important instructions with excessive information",
+              "AI models prefer longer prompts with more context",
+              "Context dumping is required for complex tasks"
+            ]
+          },
+          {
+            "q": "How does the position of information in a prompt affect AI processing?",
+            "a": "Information at the beginning and end often receives more attention than information in the middle",
+            "opts": [
+              "Position has no impact on AI processing",
+              "Information at the beginning and end often receives more attention than information in the middle",
+              "Middle information is always processed most carefully",
+              "AI processes all information in a prompt equally regardless of position"
+            ]
+          },
+          {
+            "q": "What are persistent instructions in the context of prompt engineering?",
+            "a": "Instructions that should apply across multiple interactions or remain in effect for extended periods",
+            "opts": [
+              "Instructions that apply only to a single interaction",
+              "Instructions that should apply across multiple interactions or remain in effect for extended periods",
+              "Instructions that are only used for creative tasks",
+              "Instructions that are temporary and change frequently"
+            ]
+          },
+          {
+            "q": "What happens when you don't properly layer context in a prompt?",
+            "a": "Critical instructions may be ignored or diluted, leading to inconsistent or irrelevant results",
+            "opts": [
+              "The AI processes all information more carefully",
+              "Critical instructions may be ignored or diluted, leading to inconsistent or irrelevant results",
+              "The results become more creative and innovative",
+              "Nothing negative happens; AI handles context automatically"
             ]
           }
         ],
-        "summary": "In this lesson, we've explored how to effectively specify output formats and constraints in your prompts. By being explicit about the structure and requirements you need, you can generate AI responses that are immediately usable and require minimal post-processing."
+        "summary": "In this lesson, we've explored context layering - the strategic organization of information within prompts to maximize effectiveness. We've learned to distinguish between global and local context, understand the difference between persistent and temporary instructions, and recognize how information position affects AI processing. We've also examined why context dumping reduces quality and how to balance comprehensive instructions with processing limitations. This understanding enables you to create prompts that work reliably within AI processing constraints while providing sufficient context for high-quality results."
       },
       {
         "id": 6,
-        "module": "Intermediate Prompt Techniques",
-        "title": "Chain of Thought and Step-by-Step Reasoning",
+        "module": "Module 2: Prompt Structure & Control",
+        "title": "Constraints & Guardrails",
         "duration": "10-15 min",
-        "intro": "In this lesson, we'll explore advanced prompting techniques that encourage AI systems to think through problems step-by-step. Chain of thought prompting is a powerful technique that improves the accuracy and reliability of AI responses by encouraging the system to explain its reasoning process. This approach is particularly effective for complex problem-solving tasks.",
-        "bigIdea": "Encouraging AI systems to show their reasoning process leads to more accurate, explainable, and reliable responses.",
+        "intro": "Constraints and guardrails are essential elements that define boundaries and prevent unwanted behaviors in AI outputs. In this lesson, we'll explore how to implement effective constraints that guide AI behavior without stifling its capabilities. Well-designed constraints ensure outputs meet specific requirements while maintaining the AI's ability to generate creative and useful responses.\n\nUnlike human communication where we assume shared understanding of boundaries and social norms, AI systems need explicit constraints to prevent them from generating inappropriate, inaccurate, or off-topic content. These constraints act as guardrails that keep the AI within acceptable parameters while allowing it to operate effectively within those boundaries.\n\nWe'll examine different types of constraints, learn how to implement them effectively, and understand how to balance restrictive requirements with creative freedom. This knowledge is crucial for creating prompts that produce reliable results in professional and public contexts.",
+        "bigIdea": "Effective constraints and guardrails explicitly define boundaries for AI behavior, preventing hallucinations, enforcing formats, specifying what NOT to do, and ensuring outputs meet specific requirements. These constraints act as safety measures that guide AI behavior without eliminating its problem-solving capabilities. Well-designed constraints enhance rather than limit AI effectiveness by providing clear boundaries within which the AI can operate optimally.",
         "steps": [
-          "Break the problem into logical steps",
-          "Ask the AI to explain its reasoning",
-          "Request intermediate calculations or thoughts",
-          "Verify each step of the process",
-          "Synthesize the final answer"
+          "Step 1: Identify potential problematic behaviors or outputs to prevent",
+          "Step 2: Define specific format requirements for consistent outputs",
+          "Step 3: Specify content boundaries and what to avoid",
+          "Step 4: Set scope limits for appropriate depth and breadth",
+          "Step 5: Test constraints to ensure they guide rather than overly restrict behavior",
+          "Step 6: Refine constraints based on actual usage and results"
         ],
-        "example": "Instead of asking 'What's the answer to this math problem: 15% of 240?', you could use chain of thought: 'Calculate 15% of 240. First, explain how to calculate percentages. Then show the calculation step-by-step. Finally, provide the answer.' This approach ensures the AI demonstrates its reasoning and makes it easier to verify the calculation.",
-        "video": "",
-        "reflection": "How does requiring step-by-step reasoning change the quality and trustworthiness of AI responses?",
+        "example": "Consider an AI system used to generate customer support responses. Without constraints, it might provide medical advice when asked about health-related products, give specific pricing information it doesn't have, or create responses that don't match the company's brand voice.\n\nWith effective constraints: 'You are a customer support specialist for TechCorp. Only provide information from our official documentation. If uncertain about technical details, direct customers to our support team. Do not provide medical advice, legal opinions, or specific pricing not in our documentation. Maintain a helpful, professional tone. Format responses as: Acknowledgment, Information, Next steps. Limit to 150 words.'\n\nThis constrained approach produces consistent, appropriate responses that protect the company while helping customers effectively.",
+        "video": "https://www.youtube.com/watch?v=example6",
+        "reflection": "Think about a time when an AI generated something inappropriate or off-topic. How might explicit constraints have prevented this outcome?",
         "quiz": [
           {
-            "q": "What is the primary benefit of chain of thought prompting?",
-            "a": "It encourages the AI to think through problems step-by-step, often leading to more accurate answers",
+            "q": "What is the primary purpose of constraints in prompt engineering?",
+            "a": "To define boundaries and prevent unwanted behaviors while maintaining AI effectiveness",
             "opts": [
-              "It makes the AI respond faster",
-              "It encourages the AI to think through problems step-by-step, often leading to more accurate answers",
-              "It reduces the cost of using AI",
-              "It makes the AI more creative"
+              "To make prompts longer and more impressive",
+              "To define boundaries and prevent unwanted behaviors while maintaining AI effectiveness",
+              "To slow down AI processing time",
+              "To show off your knowledge of AI systems"
+            ]
+          },
+          {
+            "q": "How do format constraints improve professional AI interactions?",
+            "a": "They ensure outputs follow specific structures required for integration and consistency",
+            "opts": [
+              "They make the prompt look more professional",
+              "They ensure outputs follow specific structures required for integration and consistency",
+              "They force the AI to use specific words",
+              "They are required by AI model licensing agreements"
+            ]
+          },
+          {
+            "q": "Why is it important to specify what NOT to do in constraints?",
+            "a": "Negative constraints prevent inappropriate content and off-topic responses",
+            "opts": [
+              "It's not important to specify what NOT to do",
+              "Negative constraints prevent inappropriate content and off-topic responses",
+              "Positive constraints are always more effective than negative ones",
+              "AI systems automatically know what not to do"
+            ]
+          },
+          {
+            "q": "What are AI hallucinations in the context of prompt engineering?",
+            "a": "When the AI generates information that sounds plausible but is factually incorrect",
+            "opts": [
+              "When the AI refuses to respond to any prompts",
+              "When the AI generates information that sounds plausible but is factually incorrect",
+              "When the AI responds too slowly to prompts",
+              "When the AI uses too many technical terms"
+            ]
+          },
+          {
+            "q": "How do scope constraints improve AI output quality?",
+            "a": "They prevent responses from becoming too broad, too narrow, or off-topic",
+            "opts": [
+              "They make the AI respond more slowly",
+              "They prevent responses from becoming too broad, too narrow, or off-topic",
+              "They force the AI to use specific formatting",
+              "They are only important for creative tasks"
             ]
           }
         ],
-        "summary": "In this lesson, we've explored chain of thought prompting, a powerful technique that encourages AI systems to think through problems step-by-step. This approach often leads to more accurate results and provides valuable insights into the AI's reasoning process."
+        "summary": "In this lesson, we've explored constraints and guardrails - essential elements that define boundaries for AI behavior while maintaining its effectiveness. We've learned to prevent hallucinations, enforce specific formats, specify negative constraints (what NOT to do), and maintain scope control. We've examined how well-designed constraints enhance rather than limit AI capabilities by providing clear boundaries within which the AI can operate optimally. This knowledge is crucial for creating prompts that produce reliable, appropriate results in professional contexts."
       },
       {
         "id": 7,
