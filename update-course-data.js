@@ -61,7 +61,7 @@ async function generateCompleteCourseData() {
             quiz: lesson.quiz && lesson.quiz.questions && lesson.quiz.answers ? lesson.quiz.questions.map((q, idx) => ({
               q: q,
               a: lesson.quiz.answers[idx],
-              opts: [lesson.quiz.answers[idx], "Option 2", "Option 3", "Option 4"] // Simplified - in a real scenario, you might have options in your data
+              opts: lesson.quiz.options ? lesson.quiz.options[idx] : [lesson.quiz.answers[idx], "Option 2", "Option 3", "Option 4"] // Use options array if available, otherwise generate basic options
             })) : lesson.quiz && lesson.quiz.question && lesson.quiz.answer && lesson.quiz.options ? [{
               q: lesson.quiz.question,
               a: lesson.quiz.answer,
@@ -89,7 +89,7 @@ async function generateCompleteCourseData() {
             quiz: lesson.quiz && lesson.quiz.questions && lesson.quiz.answers ? lesson.quiz.questions.map((q, idx) => ({
               q: q,
               a: lesson.quiz.answers[idx],
-              opts: [lesson.quiz.answers[idx], "Option 2", "Option 3", "Option 4"] // Simplified - in a real scenario, you might have options in your data
+              opts: lesson.quiz.options ? lesson.quiz.options[idx] : [lesson.quiz.answers[idx], "Option 2", "Option 3", "Option 4"] // Use options array if available, otherwise generate basic options
             })) : lesson.quiz && lesson.quiz.question && lesson.quiz.answer && lesson.quiz.options ? [{
               q: lesson.quiz.question,
               a: lesson.quiz.answer,
