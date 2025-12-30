@@ -109,6 +109,38 @@
       "When speed matters more than polish, for quick experiments, personal tools, or simple utilities",
       "Properly structured React components with good separation, props handling, and maintainable code patterns",
       "First impressions affect user trust - professional design builds credibility for client work, SaaS products, and portfolio pieces"
+    ],
+    "options": [
+      [
+        "Faster generation speed",
+        "Higher design quality and better code architecture for production-ready applications",
+        "Better API integration capabilities",
+        "More programming language options"
+      ],
+      [
+        "Feature-focused language that emphasizes functionality",
+        "Design-focused language that emphasizes experience, feeling, and design style rather than just features",
+        "Technical language that focuses on code structure",
+        "Minimal language that gives Lovable freedom to choose"
+      ],
+      [
+        "When you need maximum design quality regardless of time",
+        "When speed matters more than polish, for quick experiments, personal tools, or simple utilities",
+        "When you need complex backend functionality",
+        "When building enterprise applications"
+      ],
+      [
+        "The visual appearance of the application",
+        "Properly structured React components with good separation, props handling, and maintainable code patterns",
+        "The speed of application generation",
+        "The number of features included in the application"
+      ],
+      [
+        "Design quality is only important for visual appeal",
+        "First impressions affect user trust - professional design builds credibility for client work, SaaS products, and portfolio pieces",
+        "Design quality affects the application's performance",
+        "Professional design is only needed for enterprise applications"
+      ]
     ]
   },
   "key_takeaways": [

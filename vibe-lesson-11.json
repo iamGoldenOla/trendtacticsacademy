@@ -173,6 +173,38 @@
       "Preserve behavior - refactoring changes structure but not what the code does",
       "Tests catch any accidental behavioral changes introduced during refactoring",
       "Explain the current behavior - ensures you and AI understand what must be preserved"
+    ],
+    "options": [
+      [
+        "The file name and date",
+        "Exact error message, relevant code, expected behavior, actual behavior, and what you've already tried",
+        "The programming language and version",
+        "The IDE and tools being used"
+      ],
+      [
+        "It saves time to apply all fixes at once",
+        "So you know which fix worked - multiple fixes at once obscure which change solved the problem",
+        "AI can handle multiple fixes simultaneously",
+        "Applying fixes one at a time is too slow"
+      ],
+      [
+        "Change the behavior to add new features",
+        "Preserve behavior - refactoring changes structure but not what the code does",
+        "Make the code as short as possible",
+        "Add more features during refactoring"
+      ],
+      [
+        "Tests slow down the refactoring process",
+        "Tests catch any accidental behavioral changes introduced during refactoring",
+        "Tests are only needed for new code",
+        "Tests are not necessary for simple refactoring"
+      ],
+      [
+        "Ask for fixes immediately",
+        "Explain the current behavior - ensures you and AI understand what must be preserved",
+        "Start refactoring right away",
+        "Apply all suggested changes"
+      ]
     ]
   },
   "key_takeaways": [

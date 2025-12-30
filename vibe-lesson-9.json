@@ -197,6 +197,38 @@
       "When the prototype is validated and you need production-quality code with proper security, architecture, and performance",
       "Well-specified, bounded tasks with clear requirements and measurable completion criteria",
       "Generators produce working software instantly for structure/design; IDEs are better for precision work but slower for initial creation"
+    ],
+    "options": [
+      [
+        "Using one tool is simpler and more efficient",
+        "Each tool excels at different phases - combining them uses each for what it does best, creating faster and better results",
+        "Combining tools creates more complexity and confusion",
+        "All tools have the same capabilities"
+      ],
+      [
+        "Building and refining phases",
+        "Exploration and prototyping phases - when you need working software quickly to validate ideas",
+        "Maintaining phase",
+        "Only for security-critical work"
+      ],
+      [
+        "When you want to start a new project",
+        "When the prototype is validated and you need production-quality code with proper security, architecture, and performance",
+        "When you need to explore ideas",
+        "When you only need a simple prototype"
+      ],
+      [
+        "Ambiguous tasks with unclear requirements",
+        "Well-specified, bounded tasks with clear requirements and measurable completion criteria",
+        "Creative and exploratory tasks",
+        "Tasks that require human judgment"
+      ],
+      [
+        "IDEs are faster than generators",
+        "Generators produce working software instantly for structure/design; IDEs are better for precision work but slower for initial creation",
+        "There is no difference in speed between generators and IDEs",
+        "Generators are always slower than IDEs"
+      ]
     ]
   },
   "key_takeaways": [

@@ -91,6 +91,38 @@
       "Flow state coding - minimal interruption with predictive suggestions that feel like an extension of your thoughts",
       "Agentic development - it can autonomously plan and execute multi-step tasks with minimal guidance",
       "When you need control, must work with existing code, require debugging/optimization, or are building production applications"
+    ],
+    "options": [
+      [
+        "AI-First IDEs are just traditional IDEs with chatbots",
+        "AI is a core feature built into the foundation, not an add-on - the entire experience is designed around AI assistance",
+        "AI-First IDEs are just AI tools with basic editors",
+        "There is no difference between traditional IDEs and AI-First IDEs"
+      ],
+      [
+        "Windsurf",
+        "Cursor - it can read entire projects, understand relationships between files, and make coordinated changes",
+        "Qoder",
+        "All three IDEs have equal codebase understanding"
+      ],
+      [
+        "Debugging complex issues",
+        "Flow state coding - minimal interruption with predictive suggestions that feel like an extension of your thoughts",
+        "Multi-file editing",
+        "Autonomous task completion"
+      ],
+      [
+        "It has better design capabilities",
+        "Agentic development - it can autonomously plan and execute multi-step tasks with minimal guidance",
+        "It is faster than other IDEs",
+        "It has more programming language support"
+      ],
+      [
+        "When you want maximum design quality",
+        "When you need control, must work with existing code, require debugging/optimization, or are building production applications",
+        "When speed is the only priority",
+        "When you only need frontend development"
+      ]
     ]
   },
   "key_takeaways": [

@@ -200,6 +200,38 @@
       "3-5 deployed applications with live links, diversity of complexity, documentation of process, and metrics where possible",
       "The ability to build quickly is a key differentiator that sets Vibe Coders apart from traditional developers",
       "Build your first complete project this week, applying everything learned in the course"
+    ],
+    "options": [
+      [
+        "Only working for large companies",
+        "Building products (your own applications), providing services (helping others build), and contributing to teams (being an AI-powered team member)",
+        "Only freelancing for clients",
+        "Only creating educational content"
+      ],
+      [
+        "Vibe Coding is not useful for entrepreneurs",
+        "One person can now build what previously required a team, with faster validation and lower risk",
+        "Entrepreneurs need large teams to succeed",
+        "Traditional development is better for startups"
+      ],
+      [
+        "Only GitHub repositories",
+        "3-5 deployed applications with live links, diversity of complexity, documentation of process, and metrics where possible",
+        "Only code snippets",
+        "Only theoretical projects"
+      ],
+      [
+        "Speed is not important in development",
+        "The ability to build quickly is a key differentiator that sets Vibe Coders apart from traditional developers",
+        "Traditional developers are faster than Vibe Coders",
+        "Speed does not matter in the job market"
+      ],
+      [
+        "Wait and see what happens",
+        "Build your first complete project this week, applying everything learned in the course",
+        "Take a break from coding",
+        "Focus only on learning new tools"
+      ]
     ]
   },
   "key_takeaways": [

@@ -30,6 +30,38 @@
       "Yes, it's a core principle of Vibe Coding",
       "Applying this concept in digital creation projects",
       "By focusing on ideas and providing guidance rather than complexity"
+    ],
+    "options": [
+      [
+        "Focusing on syntax and technical details",
+        "The specific concept covered in this lesson",
+        "Memorizing programming languages",
+        "Avoiding digital creation"
+      ],
+      [
+        "It increases anxiety for beginners",
+        "It reduces anxiety and makes learning accessible",
+        "It has no impact on beginners",
+        "It makes learning more complex"
+      ],
+      [
+        "No, it's not part of Vibe Coding",
+        "Yes, it's a core principle of Vibe Coding",
+        "It's only for advanced developers",
+        "It's an outdated approach"
+      ],
+      [
+        "Avoiding digital creation",
+        "Applying this concept in digital creation projects",
+        "Only theoretical understanding",
+        "Focusing on non-digital projects"
+      ],
+      [
+        "By increasing complexity and confusion",
+        "By focusing on ideas and providing guidance rather than complexity",
+        "By focusing only on technical skills",
+        "By avoiding guidance completely"
+      ]
     ]
   },
   "resources": {

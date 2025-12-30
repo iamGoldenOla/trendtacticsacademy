@@ -137,6 +137,38 @@
       "When you need backend logic, want to learn by modifying code, need team collaboration, or require custom functionality",
       "Real-time collaborative editing where multiple users can code together simultaneously, like Google Docs for code",
       "Bots, APIs, data processing, scheduled jobs, and any application requiring server-side logic running continuously"
+    ],
+    "options": [
+      [
+        "Replit generates code faster than Bolt",
+        "Replit is a full development environment where you can see, modify, and learn from code, not just consume generated output",
+        "Replit has better design capabilities than Lovable",
+        "Replit is a simple frontend generator like Bolt"
+      ],
+      [
+        "A chatbot that answers general programming questions",
+        "Replit's AI assistant that provides contextual code completion, explanations, generation, and debugging within your project",
+        "A code formatting tool",
+        "A project management tool"
+      ],
+      [
+        "When you want maximum design quality",
+        "When you need backend logic, want to learn by modifying code, need team collaboration, or require custom functionality",
+        "When speed is the only priority",
+        "When you only need frontend development"
+      ],
+      [
+        "A feature for playing coding games",
+        "Real-time collaborative editing where multiple users can code together simultaneously, like Google Docs for code",
+        "A multiplayer coding competition feature",
+        "A code review system"
+      ],
+      [
+        "Simple landing pages and websites",
+        "Frontend-only applications",
+        "Bots, APIs, data processing, scheduled jobs, and any application requiring server-side logic running continuously",
+        "Static content websites"
+      ]
     ]
   },
   "key_takeaways": [

@@ -110,6 +110,38 @@
       "Fix errors immediately before moving on to prevent compounding problems",
       "Complex backend logic, custom API integrations, large-scale enterprise applications, and performance-critical systems",
       "Effective prompts are specific about features, design, and user experience; vague prompts force Bolt to guess, often incorrectly"
+    ],
+    "options": [
+      [
+        "Title, Description, Features, Design, and Deployment",
+        "Purpose Statement, Core Features, User Experience Details, Design Direction, and Technical Requirements",
+        "Idea, Code, UI, Testing, and Deployment",
+        "Frontend, Backend, Database, API, and UI"
+      ],
+      [
+        "Complex prompts are more efficient and save time",
+        "Complex prompts produce confused, buggy results - incremental building allows for cleaner iteration",
+        "Simple features are boring and don't showcase Bolt's capabilities",
+        "Bolt only works with complex, detailed prompts"
+      ],
+      [
+        "Ignore errors and continue building",
+        "Fix errors immediately before moving on to prevent compounding problems",
+        "Deploy the application and fix errors later",
+        "Start over with a new prompt"
+      ],
+      [
+        "Simple websites and landing pages",
+        "Mobile applications and games",
+        "Complex backend logic, custom API integrations, large-scale enterprise applications, and performance-critical systems",
+        "Frontend applications and UI components"
+      ],
+      [
+        "Vague prompts are more creative and produce better results",
+        "Effective prompts are shorter and more concise",
+        "Effective prompts are specific about features, design, and user experience; vague prompts force Bolt to guess, often incorrectly",
+        "There is no difference between vague and effective prompts"
+      ]
     ]
   },
   "key_takeaways": [

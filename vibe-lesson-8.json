@@ -169,6 +169,38 @@
       "Well-specified, bounded tasks with clear objectives and measurable completion criteria",
       "Ambiguous requirements, creative/novel solutions, security-critical code, or early exploration phases",
       "Provide clear specifications, review plans, monitor progress, test outputs, and provide feedback for refinement"
+    ],
+    "options": [
+      [
+        "There is no difference between assistants and agents",
+        "Agents work autonomously towards high-level goals; assistants respond to individual prompts requiring continuous guidance",
+        "Assistants are more advanced than agents",
+        "Agents only respond to prompts like assistants"
+      ],
+      [
+        "Specification quality doesn't matter for AI",
+        "Vague specifications lead to wrong results - agents interpret and execute what you specify, so clarity is essential",
+        "AI agents can figure out requirements on their own",
+        "Specifications slow down development"
+      ],
+      [
+        "Creative projects with evolving requirements",
+        "Well-specified, bounded tasks with clear objectives and measurable completion criteria",
+        "Ambiguous exploration tasks",
+        "Security-critical implementations"
+      ],
+      [
+        "Well-specified, bounded tasks",
+        "Ambiguous requirements, creative/novel solutions, security-critical code, or early exploration phases",
+        "Tasks with clear objectives",
+        "Repetitive development patterns"
+      ],
+      [
+        "Do all the coding while the agent just watches",
+        "Provide clear specifications, review plans, monitor progress, test outputs, and provide feedback for refinement",
+        "Let the agent work completely independently",
+        "Only provide the initial prompt and walk away"
+      ]
     ]
   },
   "key_takeaways": [
