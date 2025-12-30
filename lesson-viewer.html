@@ -179,39 +179,933 @@
     </div>
 
     <script>
-        const COURSES={"vibe-coding":{title:"Vibe Coding",lessons:[{id:1,module:"Understanding Vibe Coding",title:"What Is Vibe Coding?",duration:"8 min",intro:"Welcome to Vibe Coding! We'll explore what it is and why it's perfect for beginners.",bigIdea:"Vibe Coding focuses on ideas and creativity with AI help instead of memorizing syntax.",steps:["Coding is telling computers what to do","Focus on ideas before technical details","AI makes creation easier","Avoid complex syntax initially","Build confidence first"],example:"Think of Vibe Coding like cooking with a recipe app.",video:"https://www.youtube.com/embed/iLCDSY2XX7E",videoCredit:"Vibe Coding Fundamentals",reflection:"Think about a digital product you use daily.",quiz:[{q:"What does Vibe Coding focus on first?",a:"Ideas and creativity",opts:["Complex syntax","Ideas and creativity","Memorizing code","Technical rules"]},{q:"Who is Vibe Coding for?",a:"Beginners",opts:["Experts only","Beginners","Scientists","Mathematicians"]},{q:"What helps in Vibe Coding?",a:"AI assistance",opts:["Memorization","AI assistance","Complex rules","Nothing"]},{q:"What should you avoid initially?",a:"Complex syntax",opts:["Ideas","Complex syntax","Creativity","Learning"]},{q:"What does Vibe Coding build?",a:"Confidence",opts:["Fear","Confidence","Complexity","Nothing"]}],summary:"Vibe Coding focuses on ideas and creativity. Ready for the next lesson!"},
-            {id:2,module:"Understanding Vibe Coding",title:"Why Vibe Coding Exists",duration:"7 min",intro:"Explore why Vibe Coding was created for beginners.",bigIdea:"Traditional coding overwhelms beginners. Vibe Coding focuses on ideas first.",steps:["Recognize beginner challenges","Ideas reduce anxiety","Guided learning helps","Vibe Coding addresses challenges","Build confidence"],example:"Would you memorize engine details before driving? No!",video:"",reflection:"When did complexity make learning harder?",quiz:[{q:"Why does Vibe Coding exist?",a:"To make coding accessible",opts:["Replace all coding","To make coding accessible","Teach complex syntax","Eliminate AI"]},{q:"What does traditional coding do?",a:"Overwhelms beginners",opts:["Helps immediately","Overwhelms beginners","Is easy","Nothing"]},{q:"What does focusing on ideas reduce?",a:"Anxiety",opts:["Learning","Anxiety","Progress","Creativity"]},{q:"Vibe Coding makes digital creation what?",a:"Accessible",opts:["Impossible","Accessible","Expensive","Hard"]},{q:"What approach does Vibe Coding use?",a:"Guided learning",opts:["Trial by fire","Guided learning","Memorization","No structure"]}],summary:"Vibe Coding makes digital creation accessible."},
-            { id: 3, module: "Understanding Vibe Coding", title: "How Vibe Coding Is Different", duration: "8 min", intro: "Let's compare Vibe Coding with traditional approaches to understand what makes it special.", bigIdea: "Traditional coding starts with technical details and syntax. Vibe Coding starts with your ideas and intentions, using AI to help you create without technical complexity.", steps: ["Examine traditional coding's focus on syntax", "Compare with Vibe Coding's focus on ideas", "Identify key differences in learning approaches", "Understand how these differences benefit beginners", "Recognize the value of guided, supportive learning"], example: "Traditional coding is like learning chemistry before making a sandwich. Vibe Coding is like starting with simple recipes.", video: "", reflection: "Which approach would help you feel more confident as a beginner?", quiz: [{ q: "How is Vibe Coding different?", a: "It focuses on ideas before syntax", opts: ["More complex syntax", "It focuses on ideas before syntax", "No AI assistance", "Harder for beginners"] }], summary: "You understand how Vibe Coding differs from traditional approaches by prioritizing ideas over syntax." },
-            { id: 4, module: "Thinking Before Coding", title: "Thinking in Ideas, Not Code", duration: "9 min", intro: "Learn to think about what you want to create first, then let tools help make it happen.", bigIdea: "In Vibe Coding, you think about what you want to create first, then use tools and guidance to make it happen. This builds confidence and purpose.", steps: ["Understand the concept of idea-first thinking", "Learn how this applies to Vibe Coding", "See practical examples in action", "Practice in the playground", "Reflect on your learning journey"], example: "Instead of thinking 'I need a for loop', think 'I want to show a list of items'. The tools translate your idea.", video: "https://www.youtube.com/embed/2v5Fs7Xr11Y", videoCredit: "Vibe Coding 101 - Replit", reflection: "How does thinking in ideas change your approach to creating?", quiz: [{ q: "What should you focus on first?", a: "Your idea and what you want to create", opts: ["Complex code syntax", "Your idea and what you want to create", "Memorizing functions", "Technical docs"] }], summary: "You've learned to think in ideas first, letting tools handle the technical translation." },
-            { id: 5, module: "Thinking Before Coding", title: "Ideas to Digital Instructions", duration: "8 min", intro: "Learn to break down your ideas into simple steps that become digital products.", bigIdea: "Vibe Coding teaches you to break ideas into simple steps that translate into digital form. This shows how creative ideas become real products.", steps: ["Break your idea into simple components", "Identify the main goal", "List the steps to achieve it", "Use AI to help implement each step", "Iterate and improve"], example: "Want to track expenses? Break it down: 1) Add expense, 2) See total, 3) View history.", video: "", reflection: "Think of an app idea. Can you break it into 3-5 simple steps?", quiz: [{ q: "How do you turn ideas into products?", a: "Break them into simple steps", opts: ["Write complex code first", "Break them into simple steps", "Memorize syntax", "Skip planning"] }], summary: "You can now break ideas into actionable steps that become digital products." },
-            { id: 6, module: "Thinking Before Coding", title: "Understanding Intent", duration: "7 min", intro: "Intent is the 'why' behind your creation. Understanding it leads to better products.", bigIdea: "Intent is the 'why' behind your digital creation. Understanding your intent helps you make better decisions and communicate effectively with AI tools.", steps: ["Identify why you want to create something", "Clarify who will use it", "Define what success looks like", "Use intent to guide decisions", "Communicate intent to AI clearly"], example: "Intent: 'I want to help friends share photos easily.' This guides every feature decision.", video: "", reflection: "What's the intent behind something you'd like to create?", quiz: [{ q: "What is intent in Vibe Coding?", a: "The 'why' behind your creation", opts: ["The code syntax", "The 'why' behind your creation", "The programming language", "The file structure"] }], summary: "Understanding intent helps you create purposeful digital products." },
-            { id: 7, module: "Working with AI", title: "What AI Really Is", duration: "9 min", intro: "Let's demystify AI and understand how it helps in Vibe Coding.", bigIdea: "AI is like a helpful assistant that processes information and helps with tasks. In Vibe Coding, AI serves as a tool to create digital products efficiently.", steps: ["Understand AI as a helpful tool", "Learn what AI can and can't do", "See how AI fits into Vibe Coding", "Practice communicating with AI", "Build confidence using AI assistance"], example: "AI is like a very knowledgeable friend who can help you build things, but you provide the ideas and direction.", video: "https://www.youtube.com/embed/iLCDSY2XX7E", videoCredit: "Vibe Coding Fundamentals", reflection: "How do you feel about using AI as a creative partner?", quiz: [{ q: "What is AI in Vibe Coding?", a: "A helpful assistant tool", opts: ["A replacement for thinking", "A helpful assistant tool", "Something scary", "Only for experts"] }], summary: "AI is a helpful tool that amplifies your creativity in Vibe Coding." },
-            { id: 8, module: "Working with AI", title: "How AI Helps You Create", duration: "8 min", intro: "Discover the many ways AI assists you in the Vibe Coding process.", bigIdea: "AI acts as a guide and helper - suggesting approaches, catching errors, and implementing ideas without you knowing complex technical details.", steps: ["Learn how AI suggests approaches", "See how AI catches and fixes errors", "Understand AI's role in implementation", "Practice getting help from AI", "Combine your creativity with AI's capabilities"], example: "Describe 'a blue button that bounces when clicked' and AI generates the HTML, CSS, and JavaScript for you.", video: "", reflection: "What would you like AI to help you create?", quiz: [{ q: "How does AI help in Vibe Coding?", a: "Suggests, catches errors, and implements", opts: ["Does everything for you", "Suggests, catches errors, and implements", "Replaces your ideas", "Makes things complex"] }], summary: "AI is your creative partner that handles technical details while you focus on ideas." },
-            { id: 9, module: "Working with AI", title: "Talking to AI Effectively", duration: "10 min", intro: "Learn simple techniques to communicate clearly with AI and get great results.", bigIdea: "Effective AI communication means being clear about what you want. Simple techniques help you get the best results from AI assistance.", steps: ["Be specific about what you want", "Describe the end result you envision", "Break complex requests into parts", "Iterate and refine your requests", "Learn from each interaction"], example: "Instead of 'make a website', try 'create a simple page with a blue header, my name centered, and three cards below'.", video: "", reflection: "Try rephrasing a vague request to be more specific.", quiz: [{ q: "How should you talk to AI?", a: "Be clear and specific", opts: ["Be vague", "Be clear and specific", "Use technical jargon", "Write long paragraphs"] }], summary: "Clear, specific communication gets the best results from AI." },
-            { id: 10, module: "Vibe Coding in Practice", title: "Real Examples", duration: "8 min", intro: "See real examples of Vibe Coding in action with actual projects.", bigIdea: "Real examples show how Vibe Coding principles create actual digital products. These demonstrate the power of focusing on ideas with guidance tools.", steps: ["Study real Vibe Coding projects", "Identify the idea behind each", "See how ideas became products", "Notice the role of AI assistance", "Apply insights to your own ideas"], example: "A student described 'a timer for my workouts' and created a functional fitness timer app in minutes.", video: "https://www.youtube.com/embed/2v5Fs7Xr11Y", videoCredit: "Vibe Coding 101 - Replit", reflection: "What project inspires you to try Vibe Coding?", quiz: [{ q: "What do real examples show?", a: "How ideas become products", opts: ["Complex code is required", "How ideas become products", "AI does all the work", "It's only for experts"] }], summary: "Real examples prove that Vibe Coding turns ideas into working products." },
-            { id: 11, module: "Vibe Coding in Practice", title: "Everyday Applications", duration: "7 min", intro: "Discover how Vibe Coding applies to everyday digital creations.", bigIdea: "Vibe Coding isn't just for apps - it applies to websites, automations, games, and any digital creation you can imagine.", steps: ["Identify everyday digital needs", "See how Vibe Coding solves them", "Practice with small projects", "Build confidence gradually", "Expand to bigger ideas"], example: "Birthday reminder, expense tracker, recipe organizer - all everyday apps you can create.", video: "", reflection: "What everyday problem could you solve with a simple digital tool?", quiz: [{ q: "What can Vibe Coding create?", a: "Any digital creation you imagine", opts: ["Only complex apps", "Any digital creation you imagine", "Only websites", "Only games"] }], summary: "Vibe Coding applies to any digital creation in your everyday life." },
-            { id: 12, module: "Your First Project", title: "Choosing Your First Project", duration: "8 min", intro: "Learn how to pick the perfect first project for your Vibe Coding journey.", bigIdea: "Your first project should be simple, personally meaningful, and achievable. Starting small builds confidence for bigger projects.", steps: ["Pick something personally useful", "Keep it simple (1-3 features)", "Ensure it's achievable in one session", "Focus on learning, not perfection", "Celebrate completing it"], example: "Good first projects: a personal greeting page, a simple counter, a color palette generator.", video: "", reflection: "What simple, personally meaningful project excites you?", quiz: [{ q: "What makes a good first project?", a: "Simple and personally meaningful", opts: ["Complex with many features", "Simple and personally meaningful", "Someone else's idea", "Perfect from the start"] }], summary: "Choose a simple, meaningful first project to build confidence." },
-            { id: 13, module: "Your First Project", title: "Describing What You Want", duration: "9 min", intro: "Master the art of describing your project clearly to get great AI-generated results.", bigIdea: "Clear descriptions lead to better AI-generated code. Learn to articulate your vision in simple, specific terms.", steps: ["Start with the main purpose", "Describe what users will see", "Explain what happens when they interact", "Specify colors, sizes, and styles", "Review and refine your description"], example: "'A page with a dark background, a large welcome message in blue, and a button that changes color when clicked.'", video: "", reflection: "Practice describing something you see around you in specific terms.", quiz: [{ q: "Why are clear descriptions important?", a: "They lead to better AI results", opts: ["They're not important", "They lead to better AI results", "AI prefers vague descriptions", "Only experts need them"] }], summary: "Clear descriptions are your superpower for great Vibe Coding results." },
-            { id: 14, module: "Your First Project", title: "Building and Iterating", duration: "10 min", intro: "Learn the build-test-improve cycle.", bigIdea: "Vibe Coding is iterative - build, test, improve.", steps: ["Generate first version", "Test it", "Identify improvements", "Describe changes to AI", "Repeat"], example: "First: basic button. Add color. Add hover. Better each time!", video: "https://www.youtube.com/embed/iLCDSY2XX7E", videoCredit: "Vibe Coding Fundamentals", reflection: "How do you feel about iterations vs perfection?", quiz: [{q:"What is iteration?",a:"Building and improving step by step",opts:["Perfect first try","Building and improving step by step","Giving up","Copying"]},{q:"After first version?",a:"Test it",opts:["Delete it","Test it","Ignore it","Give up"]},{q:"Iterations make projects?",a:"Better",opts:["Worse","Better","Same","Confusing"]},{q:"Describe changes to?",a:"AI",opts:["Nobody","AI","Void","Random"]},{q:"Repeat until?",a:"Satisfied",opts:["Frustrated","Satisfied","Confused","Never"]}], summary: "Iteration is the secret to great projects." },
-            { id: 15, module: "Moving Forward", title: "Your Vibe Coding Journey", duration: "6 min", intro: "Congratulations! You've completed the course.", bigIdea: "You now have the foundation. Keep creating!", steps: ["Review what you learned", "Celebrate progress", "Plan next projects", "Join community", "Keep learning"], example: "Students have created websites, games, tools, and businesses.", video: "", reflection: "What will you create?", quiz: [{q:"What comes next?",a:"Keep creating and learning",opts:["Stop","Keep creating and learning","Forget","Wait"]},{q:"You now have foundation for?",a:"Vibe Coding",opts:["Nothing","Vibe Coding","Confusion","Problems"]},{q:"Plan your next?",a:"Projects",opts:["Breaks","Projects","Complaints","Nothing"]},{q:"Join the?",a:"Community",opts:["Isolation","Community","Nothing","Void"]},{q:"Keep?",a:"Creating and learning",opts:["Stopping","Creating and learning","Forgetting","Waiting"]}], summary: "Congratulations! You're now a Vibe Coder!" }
-        ]},
-        "prompt-engineering":{title:"Prompt Engineering",lessons:[
-            {id:1,module:"Introduction to Prompts",title:"What Is a Prompt?",duration:"8 min",intro:"Learn what prompts are and why they matter.",bigIdea:"A prompt is the instruction you give to AI. Better prompts = better results.",steps:["Understand what a prompt is","Learn why prompts matter","See prompt-response connection","Recognize good vs poor prompts","Appreciate prompt engineering skill"],example:"Poor: 'Write about dogs.' Better: 'Write 100 words on why dogs make great pets.'",video:"",reflection:"How clear was your last prompt to AI?",quiz:[{q:"What is a prompt?",a:"Instruction to AI",opts:["A computer","Instruction to AI","A language","A database"]},{q:"What affects AI response quality?",a:"Prompt quality",opts:["Weather","Prompt quality","Random chance","Nothing"]},{q:"Better prompts lead to?",a:"Better results",opts:["Worse","Better results","No change","Confusion"]},{q:"Prompt engineering is a?",a:"Skill",opts:["Luck","Skill","Random","Problem"]},{q:"Poor prompts are usually?",a:"Vague",opts:["Specific","Vague","Perfect","Long"]}],summary:"Prompts are instructions to AI. Better prompts = better results."},
-            {id:2,module:"Introduction to Prompts",title:"Why Prompt Engineering Matters",duration:"7 min",intro:"Discover why prompt engineering is valuable in the AI age.",bigIdea:"Prompt engineering is the art of communicating effectively with AI.",steps:["Understand AI's growing importance","See how prompts unlock AI potential","Learn why this skill is valuable","Recognize opportunities","Commit to developing skill"],example:"A team mastering prompts generates 10x more content ideas.",video:"",reflection:"How might prompt skills help you?",quiz:[{q:"Prompt engineering is the art of?",a:"Communicating with AI",opts:["Building computers","Communicating with AI","Writing code","Drawing"]},{q:"Who has advantage with AI?",a:"Those who craft good prompts",opts:["Nobody","Those who craft good prompts","Only programmers","Only scientists"]},{q:"Good prompts can generate how many more ideas?",a:"10x more",opts:["No more","10x more","Fewer","Same"]},{q:"Prompt engineering is becoming?",a:"Valuable",opts:["Useless","Valuable","Outdated","Confusing"]},{q:"You should?",a:"Develop this skill",opts:["Ignore AI","Develop this skill","Avoid technology","Give up"]}],summary:"Prompt engineering unlocks AI's potential."},
-            {id:3,module:"Introduction to Prompts",title:"Anatomy of a Good Prompt",duration:"9 min",intro:"Learn the key components of effective prompts.",bigIdea:"Good prompts have context, instructions, format, and examples.",steps:["Learn four components","Understand context","Master instructions","Specify format","Use examples"],example:"Context: 'You are a cooking assistant.' Instruction: 'Give recipe.' Format: 'List ingredients, then steps.'",video:"",reflection:"What context would your task need?",quiz:[{q:"What are the four components?",a:"Context, instructions, format, examples",opts:["Random words","Context, instructions, format, examples","Just questions","Nothing"]},{q:"Context tells AI?",a:"The situation or role",opts:["Nothing","The situation or role","Random info","Confusion"]},{q:"Instructions should be?",a:"Specific and clear",opts:["Vague","Specific and clear","Missing","Confusing"]},{q:"Format specifies?",a:"How output should look",opts:["Nothing","How output should look","Random things","Confusion"]},{q:"Examples help AI understand?",a:"What you're looking for",opts:["Nothing","What you're looking for","Confusion","Problems"]}],summary:"Good prompts have context, instructions, format, and examples."},
-            {id:4,module:"Crafting Effective Prompts",title:"Being Specific and Clear",duration:"8 min",intro:"Specificity is the foundation of effective prompts.",bigIdea:"Vague prompts get vague results. Be specific!",steps:["Recognize vague vs specific","Add specific details","Include constraints","Specify quantities","Review clarity"],example:"Vague: 'Write about exercise.' Specific: 'Write 200 words on 3 benefits of walking 30 min daily.'",video:"",reflection:"Make a vague prompt more specific.",quiz:[{q:"Vague prompts get?",a:"Vague results",opts:["Perfect results","Vague results","Better results","No results"]},{q:"More specific means more?",a:"Accurate and useful",opts:["Confusing","Accurate and useful","Random","Wrong"]},{q:"Include relevant?",a:"Constraints",opts:["Confusion","Constraints","Problems","Nothing"]},{q:"Specifying quantities means?",a:"Including numbers",opts:["Random words","Including numbers","Nothing","Confusion"]},{q:"After writing prompt, you should?",a:"Review clarity",opts:["Forget it","Review clarity","Delete it","Ignore it"]}],summary:"Being specific leads to better AI responses."},
-            {id:5,module:"Crafting Effective Prompts",title:"Providing Context",duration:"7 min",intro:"Context helps AI respond appropriately.",bigIdea:"Context is like giving AI background information.",steps:["Understand context","Describe your situation","Assign roles","Include background","Balance with brevity"],example:"'You are a patient teacher helping a 10-year-old understand fractions.'",video:"",reflection:"What context would help AI with your task?",quiz:[{q:"Context is like giving AI?",a:"Background information",opts:["Confusion","Background information","Problems","Nothing"]},{q:"Context includes who you are and?",a:"Your situation",opts:["Random facts","Your situation","Nothing","Confusion"]},{q:"Assigning roles helps AI?",a:"Respond appropriately",opts:["Get confused","Respond appropriately","Fail","Nothing"]},{q:"Balance context with?",a:"Brevity",opts:["Length","Brevity","Confusion","Nothing"]},{q:"The example assigns AI the role of?",a:"Patient teacher",opts:["Robot","Patient teacher","Computer","Nothing"]}],summary:"Context helps AI understand and respond appropriately."},
-            {id:6,module:"Crafting Effective Prompts",title:"Specifying Output Format",duration:"8 min",intro:"Tell AI how you want the response structured.",bigIdea:"Specify length, style, and structure for best results.",steps:["Learn common formats","Specify length","Choose styles","Use templates","Combine requirements"],example:"'Give me 5 bullet points, under 20 words each, on meditation benefits.'",video:"",reflection:"What format would be most useful for you?",quiz:[{q:"Output format tells AI?",a:"How to structure response",opts:["What to say","How to structure response","Nothing","Random things"]},{q:"Format includes length, style, and?",a:"Structure",opts:["Nothing","Structure","Confusion","Problems"]},{q:"Specifying length means?",a:"How long response should be",opts:["Nothing","How long response should be","Random things","Confusion"]},{q:"You can use format?",a:"Templates",opts:["Nothing","Templates","Confusion","Problems"]},{q:"The example asks for how many bullet points?",a:"5",opts:["10","5","100","None"]}],summary:"Specifying format ensures proper response structure."},
-            {id:7,module:"Advanced Techniques",title:"Chain of Thought Prompting",duration:"9 min",intro:"Get AI to show reasoning step by step.",bigIdea:"Chain of thought leads to more accurate answers.",steps:["Understand chain of thought","When to use it","Add 'think step by step'","Review reasoning","Correct errors"],example:"'15 apples, sell 7, receive 10. How many? Think step by step.'",video:"",reflection:"What problem could benefit from step-by-step reasoning?",quiz:[{q:"Chain of thought asks AI to?",a:"Think step by step",opts:["Skip steps","Think step by step","Give random answers","Nothing"]},{q:"Useful for?",a:"Complex questions or math",opts:["Simple questions","Complex questions or math","Nothing","Random tasks"]},{q:"A simple phrase to add?",a:"Think step by step",opts:["Skip steps","Think step by step","Guess randomly","Nothing"]},{q:"After AI reasons, you should?",a:"Review its process",opts:["Ignore it","Review its process","Delete it","Nothing"]},{q:"This leads to more?",a:"Accurate answers",opts:["Wrong","Accurate answers","Random","Confusing"]}],summary:"Chain of thought improves accuracy."},
-            {id:8,module:"Advanced Techniques",title:"Few-Shot Learning",duration:"8 min",intro:"Provide examples to help AI understand patterns.",bigIdea:"AI learns patterns from your examples.",steps:["Understand few-shot","Create good examples","Show input-output pairs","Start with 2-3 examples","Increase for complex tasks"],example:"'Hey!' → 'Good morning.' | 'What's up?' → 'How are you?' Now convert: 'Yo!'",video:"",reflection:"What task could you teach AI with examples?",quiz:[{q:"Few-shot means giving AI?",a:"A few examples",opts:["No examples","A few examples","Confusion","Nothing"]},{q:"AI learns what from examples?",a:"The pattern",opts:["Nothing","The pattern","Confusion","Problems"]},{q:"Show what pairs?",a:"Input-output",opts:["Random","Input-output","Nothing","Confusion"]},{q:"Start with how many examples?",a:"2-3",opts:["100","2-3","0","1000"]},{q:"For complex tasks, do what with examples?",a:"Increase them",opts:["Decrease","Increase them","Remove","Ignore"]}],summary:"Few-shot learning teaches AI through examples."},
-            {id:9,module:"Advanced Techniques",title:"Role-Based Prompting",duration:"7 min",intro:"Assign specific roles to improve responses.",bigIdea:"Different roles give different results.",steps:["Understand role power","Choose appropriate roles","Define role clearly","Add expertise details","Combine with other techniques"],example:"'You are an experienced financial advisor helping young professionals.'",video:"",reflection:"What expert role would help you?",quiz:[{q:"Role-based prompting tells AI to act as?",a:"A specific expert",opts:["Nothing","A specific expert","Random person","Confusion"]},{q:"Different roles give?",a:"Different results",opts:["Same results","Different results","No results","Random"]},{q:"Define the role how?",a:"Clearly with details",opts:["Vaguely","Clearly with details","Not at all","Randomly"]},{q:"Combine roles with?",a:"Other techniques",opts:["Nothing","Other techniques","Confusion","Problems"]},{q:"The example assigns role of?",a:"Financial advisor",opts:["Random person","Financial advisor","Nobody","Confusion"]}],summary:"Roles shape AI responses effectively."},
-            {id:10,module:"Practical Applications",title:"Prompts for Writing",duration:"8 min",intro:"Master prompts for all writing tasks.",bigIdea:"Specify type, audience, tone, length, and key points.",steps:["Identify writing type","Define audience","Specify tone","List key points","Set length"],example:"'Write 150-word LinkedIn post announcing career change. Tone: excited but humble.'",video:"",reflection:"What writing task could AI help with?",quiz:[{q:"Writing prompts should specify type and?",a:"Tone, length, key points",opts:["Nothing","Tone, length, key points","Random things","Confusion"]},{q:"Defining audience helps AI?",a:"Write appropriately",opts:["Get confused","Write appropriately","Nothing","Fail"]},{q:"Listing key points ensures?",a:"Important content included",opts:["Nothing included","Important content included","Confusion","Problems"]},{q:"The example tone is excited but?",a:"Humble",opts:["Arrogant","Humble","Angry","Sad"]},{q:"Format requirements help AI know?",a:"How to structure",opts:["Nothing","How to structure","Random things","Confusion"]}],summary:"Effective writing prompts specify type, audience, tone, length, key points."},
-            {id:11,module:"Practical Applications",title:"Prompts for Analysis",duration:"8 min",intro:"Learn to prompt AI for effective analysis.",bigIdea:"State what you're analyzing, focus, format, and conclusions needed.",steps:["Define what to analyze","Specify focus","Request insights","Ask for recommendations","Set output structure"],example:"'Analyze this review. Focus: sentiment, complaint, improvement. Format: Sentiment: | Issue: | Recommendation:'",video:"",reflection:"What data could benefit from AI analysis?",quiz:[{q:"Analysis prompts should state what and?",a:"What to focus on",opts:["Nothing","What to focus on","Random things","Confusion"]},{q:"Specify the analysis?",a:"Focus",opts:["Nothing","Focus","Confusion","Problems"]},{q:"Requesting specific insights gets?",a:"Targeted useful analysis",opts:["Random analysis","Targeted useful analysis","Nothing","Confusion"]},{q:"Output structure should be?",a:"Clearly defined",opts:["Random","Clearly defined","Missing","Confusing"]},{q:"Example asks for sentiment, issue, and?",a:"Recommendation",opts:["Nothing","Recommendation","Confusion","Problems"]}],summary:"Effective analysis prompts specify what, focus, and output format."},
-            {id:12,module:"Practical Applications",title:"Prompts for Coding",duration:"9 min",intro:"Master prompts that help AI write code.",bigIdea:"Specify language, functionality, constraints, and documentation needs.",steps:["Specify programming language","Describe functionality","Include constraints","Request comments","Ask for explanations"],example:"'Write Python function that returns average of a list. Include validation, handle empty lists, add docstring and comments.'",video:"",reflection:"What coding task could AI help with?",quiz:[{q:"Coding prompts should specify first?",a:"Programming language",opts:["Nothing","Programming language","Random things","Confusion"]},{q:"Functionality should be described?",a:"Clearly",opts:["Vaguely","Clearly","Not at all","Randomly"]},{q:"Constraints include?",a:"Limits and specifications",opts:["Nothing","Limits and specifications","Confusion","Problems"]},{q:"Comments help with?",a:"Understanding code",opts:["Confusion","Understanding code","Nothing","Problems"]},{q:"Example asks for what kind of validation?",a:"Input validation",opts:["No validation","Input validation","Random","Nothing"]}],summary:"Effective coding prompts specify language, functionality, constraints, documentation."},
-            {id:13,module:"Mastering Prompt Engineering",title:"Iterating and Refining",duration:"8 min",intro:"Learn to improve prompts based on responses.",bigIdea:"Prompt engineering is iterative. Write, review, refine.",steps:["Accept first prompts aren't perfect","Review responses critically","Identify gaps","Refine prompt parts","Keep notes on what works"],example:"First: 'Write about cats.' Too generic. Refined: 'Write 3 fun facts about cats sleeping habits for kids.'",video:"",reflection:"How comfortable are you with iteration?",quiz:[{q:"Prompt engineering is?",a:"Iterative",opts:["One-time","Iterative","Random","Perfect immediately"]},{q:"First prompts are rarely?",a:"Perfect",opts:["Wrong","Perfect","Bad","The last"]},{q:"Review responses how?",a:"Critically",opts:["Not at all","Critically","Randomly","Quickly"]},{q:"Identify gaps then?",a:"Refine the prompt",opts:["Give up","Refine the prompt","Ignore","Nothing"]},{q:"Keeping notes helps?",a:"Remember what works",opts:["Nothing","Remember what works","Confusion","Problems"]}],summary:"Prompt engineering is iterative: write, review, refine."},
-            {id:14,module:"Mastering Prompt Engineering",title:"Common Mistakes to Avoid",duration:"7 min",intro:"Learn common prompt mistakes and avoid them.",bigIdea:"Avoid vagueness, conflicting instructions, and overloading.",steps:["Recognize vagueness","Avoid conflicts","Don't overload","Specify format","Test prompts"],example:"Mistake: 'Write something good but also bad, short but comprehensive.' Conflicting!",video:"",reflection:"What prompt mistakes have you made?",quiz:[{q:"Common prompt mistake?",a:"Being too vague",opts:["Being specific","Being too vague","Being clear","Nothing"]},{q:"Conflicting instructions cause?",a:"Confusing responses",opts:["Perfect responses","Confusing responses","Better results","Nothing"]},{q:"Overloading prompts does?",a:"Reduces quality",opts:["Improves quality","Reduces quality","Nothing","Perfect"]},{q:"Always specify?",a:"Output format",opts:["Nothing","Output format","Random things","Confusion"]},{q:"Testing prompts helps?",a:"Catch and fix mistakes",opts:["Make more mistakes","Catch and fix mistakes","Nothing","Get confused"]}],summary:"Avoid vagueness, conflicts, and overloading for better prompts."},
-            {id:15,module:"Mastering Prompt Engineering",title:"Your Prompt Engineering Journey",duration:"6 min",intro:"Congratulations! You've completed Prompt Engineering.",bigIdea:"You have strong foundation. Keep practicing!",steps:["Review what you learned","Build prompt library","Practice daily","Experiment","Share knowledge"],example:"Create a personal prompt template document. Update as you learn.",video:"",reflection:"What will you accomplish with these skills?",quiz:[{q:"Build a?",a:"Prompt library",opts:["Nothing","Prompt library","Random notes","Confusion"]},{q:"Practice how often?",a:"Daily",opts:["Never","Daily","Once a year","Randomly"]},{q:"Experimenting helps?",a:"Discover new techniques",opts:["Get confused","Discover new techniques","Fail","Nothing"]},{q:"Sharing knowledge helps?",a:"You and others learn",opts:["Nobody","You and others learn","Confusion","Problems"]},{q:"You now have foundation in?",a:"Prompt engineering",opts:["Nothing","Prompt engineering","Confusion","Random"]}],summary:"Congratulations! You're now a Prompt Engineer!"}
-        ]}};
+        const COURSES={
+  "vibe-coding": {
+    "title": "Vibe Coding: Building Real Software with AI",
+    "lessons": [
+      {
+        "id": 1,
+        "module": "Module 1: Vibe Coding Foundations",
+        "title": "What Is Vibe Coding?",
+        "duration": "10-15 min",
+        "intro": "Welcome to the future of software development. In this foundational lesson, you will discover a paradigm shift that is transforming how software gets built in 2024 and beyond. Vibe Coding is not just another programming methodology - it represents a fundamental change in the relationship between humans and computers when creating software.\n\nTraditionally, building software required years of study: learning syntax, memorizing functions, understanding complex architectures, and debugging cryptic error messages. This barrier kept millions of creative, intelligent people from bringing their ideas to life. Vibe Coding removes this barrier entirely.\n\nThe term 'Vibe Coding' was coined by AI researcher Andrej Karpathy to describe a new way of building software where humans focus on intent, direction, and outcomes while AI handles the technical execution. Instead of writing every line of code yourself, you describe what you want, guide the AI, and iterate on the results. This is not about replacing programming knowledge - it's about making software creation accessible to everyone while amplifying the capabilities of experienced developers.",
+        "bigIdea": "Vibe Coding is the practice of building real software by focusing on intent, systems thinking, and outcomes while AI handles the code execution. You become the architect and director; AI becomes your skilled builder. This approach democratizes software creation, allowing anyone with clear ideas to build functional applications, websites, and digital products without memorizing syntax or spending years learning traditional programming.",
+        "steps": [
+          "Step 1: Understand that Vibe Coding is about directing AI with clear intent, not writing code manually",
+          "Step 2: Recognize that your value comes from knowing what to build, not how to type it",
+          "Step 3: Accept that iteration is normal - expect to refine and adjust multiple times",
+          "Step 4: Commit to always testing and validating what AI produces",
+          "Step 5: Embrace systems thinking - understand how pieces connect even if you don't write them"
+        ],
+        "example": "Consider Sarah, a small business owner who needed a customer booking system. Traditional approach: hire a developer for $5,000-15,000 or spend 6+ months learning to code. Vibe Coding approach: Sarah described her booking requirements to an AI coding assistant, iterated on the design, and had a working system in two weeks. She didn't write a single line of code manually, but she directed every decision about features, user experience, and business logic. The result was a professional application that perfectly matched her needs.\n\nAnother example: Marcus, a marketing professional, needed to analyze thousands of customer reviews to find patterns. Instead of exporting data to Excel and spending weeks on manual analysis, he used Vibe Coding to create a Python script that categorized reviews by sentiment and topic. Total time: 3 hours. He couldn't explain every line of code, but he understood what the script did and verified its accuracy.",
+        "video": {
+          "title": "Andrej Karpathy on Vibe Coding",
+          "url": "https://www.youtube.com/watch?v=example",
+          "embed": true,
+          "reason": "Original explanation of Vibe Coding from the person who coined the term"
+        },
+        "reflection": "Think about a digital tool or app you wish existed for your work or personal life. How would you describe it to someone who could build it? What features would be essential? What should it look like? This is the kind of thinking that makes Vibe Coding powerful.",
+        "quiz": [
+          {}
+        ],
+        "summary": "In this lesson, you learned that Vibe Coding is a paradigm shift in software development where humans focus on intent, systems, and outcomes while AI handles code execution. You discovered that this approach democratizes software creation without eliminating the need for validation and testing. The key insight is that your value as a Vibe Coder comes from clear thinking and direction, not syntax memorization. You are now ready to explore the tools and ecosystem that make Vibe Coding possible."
+      },
+      {
+        "id": 2,
+        "module": "Module 1: Vibe Coding Foundations",
+        "title": "The Vibe Coding Ecosystem: Tools That Power Modern Development",
+        "duration": "10-15 min",
+        "intro": "Now that you understand what Vibe Coding is, it is time to explore the tools that make it possible. The Vibe Coding ecosystem has exploded in 2024, with dozens of powerful AI-powered tools designed for different use cases. Understanding this landscape is essential before you start building.\n\nThis lesson will give you a clear map of the major categories of tools, what each does best, and how to choose the right tool for your projects. By the end, you will have a mental framework for navigating this rapidly evolving space and making informed decisions about which tools to learn and use.\n\nThe tools we cover here are not theoretical - these are production-grade platforms used by startups, enterprises, and individual creators to build real software every day. Some of these tools did not exist 18 months ago, yet they are already transforming how software gets built.",
+        "bigIdea": "The Vibe Coding ecosystem consists of three main categories: Full-Stack AI Builders (like Bolt, Lovable, and Replit) that generate complete applications from descriptions, AI-First IDEs (like Cursor, Windsurf, and Qoder) that enhance coding with AI assistance, and Agentic Tools (like Devin and OpenHands) that can autonomously complete complex development tasks. Each category serves different needs, and skilled Vibe Coders know when to use each.",
+        "steps": [
+          "Step 1: Identify your goal - prototype, production code, or learning",
+          "Step 2: Assess your technical comfort level - no code, some code, or professional",
+          "Step 3: Match your goal and comfort level to a tool category",
+          "Step 4: Within that category, choose based on your specific needs",
+          "Step 5: Start with one tool, master it, then expand your toolkit"
+        ],
+        "example": "Let us follow two different projects to see tool selection in action.\n\nProject A: Maria wants to build a portfolio website to showcase her photography. She has no coding experience and needs it done this weekend. Best choice: Bolt.new. She can describe her vision, iterate on the design, and have a deployed website in a few hours.\n\nProject B: James is a developer with a complex e-commerce codebase. He needs to refactor the payment processing module and add new features. Best choice: Cursor. The AI can understand his existing code, suggest improvements, and help implement changes while he maintains full control.\n\nProject C: A startup needs to integrate their app with five different APIs and set up a data pipeline. They have clear specifications but limited engineering bandwidth. Best choice: Devin. They can delegate the entire integration task and review the results.",
+        "video": {
+          "title": "Comparing AI Coding Tools in 2024",
+          "url": "https://www.youtube.com/watch?v=example",
+          "embed": true,
+          "reason": "Comprehensive comparison of major tools in the ecosystem"
+        },
+        "reflection": "Based on your current goals and technical comfort level, which tool category seems most appropriate for your first Vibe Coding projects? What specific project would you want to build with it?",
+        "quiz": [
+          {}
+        ],
+        "summary": "In this lesson, you mapped the Vibe Coding ecosystem and learned to categorize tools into Full-Stack AI Builders, AI-First IDEs, and Agentic Coding Tools. You now have a decision framework for choosing the right tool based on your goals and technical comfort. The key insight is that different tools serve different purposes - there is no single 'best' tool, only the best tool for your specific situation. In the next lesson, we will dive deep into Full-Stack AI Builders and learn to use them effectively."
+      },
+      {
+        "id": 3,
+        "module": "Module 2: Full-Stack AI Builders",
+        "title": "Mastering Bolt.new: From Idea to Deployed App",
+        "duration": "10-15 min",
+        "intro": "Bolt.new has emerged as one of the most powerful Full-Stack AI Builders available today. In this hands-on lesson, you will learn to use Bolt effectively - from crafting your first prompt to deploying a working application. This is where theory becomes practice.\n\nWhat makes Bolt special is its speed and simplicity. You can go from a blank page to a deployed web application in under 30 minutes, often faster. But speed without quality produces disposable prototypes. This lesson teaches you to use Bolt strategically - knowing when to use it, how to prompt it effectively, and how to iterate towards production-quality results.\n\nBy the end of this lesson, you will have built and deployed your first real application using Bolt. You will understand the prompting patterns that produce the best results, and you will know the limitations that help you decide when Bolt is the right tool versus when you need something more powerful.",
+        "bigIdea": "Bolt.new transforms natural language descriptions into complete, deployed web applications. Your effectiveness depends on prompt quality - specific, structured prompts with clear requirements produce dramatically better results than vague descriptions. The key is learning to think like a product manager: defining what users need, how they will interact with it, and what success looks like.",
+        "steps": [
+          "Step 1: Go to bolt.new and create an account (free tier available)",
+          "Step 2: Craft your initial prompt using the structure above",
+          "Step 3: Review the generated application thoroughly",
+          "Step 4: Iterate with specific refinement requests",
+          "Step 5: Test all features across devices",
+          "Step 6: Deploy when satisfied"
+        ],
+        "example": "Let us build a practical application step-by-step.\n\nProject: Personal Task Tracker\n\nStep 1 - Initial Prompt: 'Build a personal task tracker. Features: add tasks with title and due date, mark tasks complete, filter by status (all, active, completed), delete tasks. Clean, minimal design with a blue accent color. Store tasks in local storage.'\n\nStep 2 - Review and Iterate: The first version appears. The design is good but tasks need priority levels. Refinement: 'Add a priority field to tasks (low, medium, high). Show priority with colored badges. Sort tasks by priority by default.'\n\nStep 3 - Polish: 'Make the add-task form slide down when clicking the Add button. Add a subtle animation when tasks are marked complete. Show a friendly empty state when no tasks exist.'\n\nStep 4 - Deploy: Click deploy, get a live URL, share with others.\n\nTotal time: 15-25 minutes. Result: A fully functional, well-designed task tracker that works on any device.",
+        "video": {
+          "title": "Bolt.new Complete Tutorial 2024",
+          "url": "https://www.youtube.com/watch?v=example",
+          "embed": true,
+          "reason": "Comprehensive walkthrough of Bolt features and best practices"
+        },
+        "reflection": "What simple tool or application would make your daily life easier? How would you describe it to Bolt using the prompting patterns from this lesson?",
+        "quiz": [
+          {}
+        ],
+        "summary": "In this lesson, you learned to use Bolt.new effectively - from crafting structured prompts to deploying working applications. You now understand the 5-part prompt structure, common mistakes to avoid, and Bolt's limitations. The key insight is that your prompting skill directly determines the quality of output. In the next lesson, we will explore Lovable, another Full-Stack Builder with different strengths."
+      },
+      {
+        "id": 4,
+        "module": "Module 2: Full-Stack AI Builders",
+        "title": "Lovable: Building Beautiful, Production-Ready Applications",
+        "duration": "10-15 min",
+        "intro": "While Bolt excels at speed, Lovable excels at quality. Lovable.dev is a Full-Stack AI Builder designed specifically for creating beautiful, well-architected applications that feel production-ready from the start. In this lesson, you will learn what makes Lovable different and when to choose it over other tools.\n\nLovable approaches AI-generated applications differently. Instead of optimizing purely for speed, it focuses on thoughtful component architecture, professional UI design, and code structure that developers would actually want to maintain. This makes it ideal for projects that need to look polished and potentially scale beyond the initial prototype.\n\nBy the end of this lesson, you will understand Lovable's unique strengths, know how to prompt it effectively, and have a clear framework for deciding between Lovable, Bolt, and other Full-Stack Builders based on your project needs.",
+        "bigIdea": "Lovable generates applications with a focus on design quality and code architecture. It produces React components with proper structure, implements design systems consistently, and creates applications that look and feel professional. The tradeoff is that it may be slower than Bolt and has a steeper learning curve, but the output is often more suitable for production use.",
+        "steps": [
+          "Step 1: Go to lovable.dev and create an account",
+          "Step 2: Start with a design-focused prompt emphasizing the experience",
+          "Step 3: Reference specific design styles (minimal SaaS, editorial, etc.)",
+          "Step 4: Iterate on design details before adding features",
+          "Step 5: Polish micro-interactions and transitions",
+          "Step 6: Test responsiveness across device sizes"
+        ],
+        "example": "Let us build a professional application with Lovable.\n\nProject: Freelancer Client Portal\n\nStep 1 - Initial Prompt: 'Build a client portal for freelancers that feels professional and builds trust. For solo designers/developers who need to share work with clients. Modern, minimal design with a neutral color palette and blue accents. Features: project dashboard showing active projects, file upload with preview, comment system for feedback, simple status updates. Clean typography, generous spacing, subtle shadows.'\n\nStep 2 - Review: The initial output shows a polished dashboard. The design is cohesive and professional. But we need better navigation. Refinement: 'Add a sidebar navigation with icons for Dashboard, Projects, Files, and Settings. Make the current page indicator subtle but clear.'\n\nStep 3 - Enhance: 'Add a notification bell in the header that shows when clients leave new comments. Include a quick-action button for uploading files that's always accessible.'\n\nStep 4 - Final Polish: 'Add skeleton loading states for the project cards. Implement a dark mode toggle in settings.'\n\nResult: A portfolio-worthy client portal that looks like a real SaaS product. Total time: 30-45 minutes.",
+        "video": {
+          "title": "Lovable vs Bolt: Which Should You Use?",
+          "url": "https://www.youtube.com/watch?v=example",
+          "embed": true,
+          "reason": "Direct comparison showing output quality differences"
+        },
+        "reflection": "Think about a project you want to build that needs to impress users or clients. How would you describe the feeling and experience you want to create, beyond just the features?",
+        "quiz": [
+          {}
+        ],
+        "summary": "In this lesson, you learned that Lovable excels at creating beautiful, production-ready applications with professional design and maintainable code architecture. You now understand how to write design-focused prompts and have a clear framework for choosing between Lovable and Bolt. The key insight is that different projects have different needs - knowing when to prioritize polish over speed is a valuable skill. In the next lesson, we will explore Replit, which offers a unique blend of learning, collaboration, and deployment capabilities."
+      },
+      {
+        "id": 5,
+        "module": "Module 2: Full-Stack AI Builders",
+        "title": "Replit: Learning, Building, and Deploying in One Platform",
+        "duration": "10-15 min",
+        "intro": "Replit stands apart from other Full-Stack Builders because it is not just a generation tool - it is a complete development environment. While Bolt and Lovable focus on outputting finished applications, Replit gives you a workspace where you can learn, experiment, collaborate, and deploy all in one place. This makes it uniquely valuable for learners and teams.\n\nIn this lesson, you will understand what makes Replit different, when it is the best choice, and how to leverage its unique features. You will also learn about Replit's AI assistant (Ghostwriter) and how it integrates with the broader development experience.\n\nReplit's power comes from its flexibility. You can start with AI-generated code, then learn by modifying it. You can collaborate in real-time with others. You can deploy instantly without configuring servers. This combination makes it an excellent bridge between pure no-code tools and professional development environments.",
+        "bigIdea": "Replit is a browser-based development environment with integrated AI assistance, real-time collaboration, and instant deployment. Unlike pure generation tools, Replit lets you see, understand, and modify the code - making it ideal for learning, team projects, and applications that need backend logic. Its AI assistant (Ghostwriter) provides contextual coding help while you maintain full control.",
+        "steps": [
+          "Step 1: Create a Replit account at replit.com",
+          "Step 2: Create a new Repl, choosing an appropriate template",
+          "Step 3: Use Ghostwriter to generate initial code",
+          "Step 4: Read through the generated code to understand it",
+          "Step 5: Iterate with specific prompts for additional features",
+          "Step 6: Test thoroughly using the live preview",
+          "Step 7: Deploy and optionally enable Always On for backend projects"
+        ],
+        "example": "Let us build a practical backend application with Replit.\n\nProject: Discord Bot for Community Management\n\nThis project requires backend logic - it needs to run continuously, respond to events, and interact with external APIs. Bolt and Lovable cannot do this. Replit excels here.\n\nStep 1 - Create New Repl: Choose Python template (or Node.js). Name it 'community-bot'.\n\nStep 2 - Use Ghostwriter: 'Create a Discord bot that welcomes new members, tracks message count, and responds to !stats command showing top contributors.'\n\nStep 3 - Review Generated Code: Ghostwriter creates the bot structure. Read through it to understand how Discord.py works.\n\nStep 4 - Iterate: 'Add a moderation feature: when users type banned words, auto-delete the message and warn them.'\n\nStep 5 - Add Database: 'Store user warning counts in Replit's database. After 3 warnings, notify moderators.'\n\nStep 6 - Deploy: Click Run and enable Always On. Your bot runs 24/7.\n\nStep 7 - Invite Collaborators: Share the Repl with team members who can see your code and contribute.\n\nResult: A fully functional Discord bot running continuously, with real-time collaboration capability.",
+        "video": {
+          "title": "Building Full-Stack Apps with Replit and AI",
+          "url": "https://www.youtube.com/watch?v=example",
+          "embed": true,
+          "reason": "Comprehensive walkthrough of Replit's AI-assisted development workflow"
+        },
+        "reflection": "Consider a project idea that needs more than just a frontend - maybe a bot, an API, or a data processing tool. How would you approach building it with Replit? What questions would you ask Ghostwriter?",
+        "quiz": [
+          {}
+        ],
+        "summary": "In this lesson, you learned that Replit offers a unique combination of AI assistance, full development environment, real-time collaboration, and instant deployment. Unlike pure generators, Replit lets you see and modify code - making it ideal for learning and complex projects. You now understand when to choose Replit over Bolt or Lovable, and how to leverage Ghostwriter for AI-assisted development. In the next module, we will explore AI-First IDEs that offer even more control and power for those ready to dive deeper into code."
+      },
+      {
+        "id": 6,
+        "module": "Module 3: AI-First IDEs",
+        "title": "Introduction to AI-First IDEs: Cursor, Windsurf, and Qoder",
+        "duration": "10-15 min",
+        "intro": "Having explored Full-Stack Builders that generate complete applications, we now move to a more powerful category of tools: AI-First IDEs. These are professional development environments enhanced with AI capabilities that give you full control while dramatically accelerating your workflow.\n\nAI-First IDEs represent the sweet spot for many developers and ambitious Vibe Coders. They offer the power to build complex, production-grade applications while AI assists with the tedious parts - writing boilerplate, suggesting implementations, explaining unfamiliar code, and debugging issues. Unlike Full-Stack Builders, you work directly with code, but AI makes that work significantly more productive.\n\nThis lesson introduces the three leading AI-First IDEs: Cursor, Windsurf, and Qoder. By the end, you will understand their distinct approaches to AI-assisted development and know which might be best for your needs.",
+        "bigIdea": "AI-First IDEs are code editors built from the ground up with AI integration. They understand your entire codebase, can make multi-file changes, explain complex code, and assist with debugging. Unlike traditional IDEs with AI plugins, these tools treat AI as a core feature, not an afterthought. The result is a fundamentally different coding experience where AI is always available and deeply integrated.",
+        "steps": [
+          "Step 1: Download one AI-First IDE to start (Cursor is recommended for most people)",
+          "Step 2: Open an existing project or clone a starter template",
+          "Step 3: Explore the AI chat feature - ask questions about the code",
+          "Step 4: Try inline generation - start typing and see AI suggestions",
+          "Step 5: Make a multi-file change using AI assistance",
+          "Step 6: Use AI to debug something that is not working"
+        ],
+        "example": "Consider a real scenario: You are building a SaaS application and need to implement Stripe payment integration.\n\nWith a Full-Stack Builder: You describe 'add Stripe payments' and get generated code. If it does not work or needs customization, you are stuck without understanding why.\n\nWith an AI-First IDE (Cursor): You open your existing project. You ask Cursor: 'How should I structure Stripe integration in this codebase?' It analyzes your project and suggests an approach. You then say: 'Create the payment processing module with subscription management.' Cursor generates code that fits your existing patterns. When Stripe's webhook does not work, you ask: 'Why is this webhook failing?' and Cursor helps you debug by analyzing the code and error logs.\n\nThe difference: You maintain understanding and control while AI accelerates every step.",
+        "video": {
+          "title": "AI-First IDE Comparison 2024",
+          "url": "https://www.youtube.com/watch?v=example",
+          "embed": true,
+          "reason": "Side-by-side comparison of leading AI-First IDEs"
+        },
+        "reflection": "Think about a coding task that has frustrated you in the past - maybe debugging, understanding unfamiliar code, or implementing a complex feature. How might an AI-First IDE have changed that experience?",
+        "quiz": [
+          {}
+        ],
+        "summary": "In this lesson, you learned about AI-First IDEs - professional development environments with AI deeply integrated into every workflow. You explored Cursor, Windsurf, and Qoder, understanding their distinct approaches and strengths. The key insight is that AI-First IDEs give you control and understanding while keeping AI's productivity benefits. In the next lesson, we will dive deep into Cursor and learn to use it effectively for real projects."
+      },
+      {
+        "id": 7,
+        "module": "Module 3: AI-First IDEs",
+        "title": "Mastering Cursor: Your AI Pair Programmer",
+        "duration": "10-15 min",
+        "intro": "Cursor has rapidly become the most popular AI-First IDE among professional developers. In this hands-on lesson, you will learn to use Cursor effectively - from basic chat interactions to advanced multi-file editing and the powerful Composer mode.\n\nWhat makes Cursor special is its deep understanding of your codebase. Unlike general-purpose AI assistants, Cursor reads and indexes your entire project. When you ask a question or request a change, it understands the context: your file structure, your coding patterns, the relationships between modules, and even your configuration files. This context-awareness produces dramatically better results than generic AI assistance.\n\nBy the end of this lesson, you will be comfortable using Cursor's key features: Chat, Edit, and Composer. You will know the prompting strategies that produce the best results, and you will understand how to iterate effectively when AI output needs refinement.",
+        "bigIdea": "Cursor is an AI pair programmer that understands your entire codebase. Its power comes from three core features: Chat for conversations about your code, Edit for inline changes, and Composer for complex multi-file modifications. Mastering these features transforms your development workflow, making you significantly more productive while maintaining full understanding and control.",
+        "steps": [
+          "Step 1: Download and install Cursor from cursor.com",
+          "Step 2: Open an existing project (or clone a starter template)",
+          "Step 3: Practice Chat (Cmd+L): Ask questions about the codebase",
+          "Step 4: Practice Edit (Cmd+K): Select code and request modifications",
+          "Step 5: Practice Composer (Cmd+I): Make a multi-file change",
+          "Step 6: Use the Reference and Context strategies in your prompts"
+        ],
+        "example": "Let us walk through a real development session with Cursor.\n\nTask: Add a 'Forgot Password' feature to an existing application.\n\nStep 1 - Understand Current Auth: Open Chat, ask: 'How does authentication currently work in this project? Where are the auth-related files?'\nCursor explains the auth flow and lists relevant files.\n\nStep 2 - Plan the Feature: Ask: 'What would I need to add for forgot password functionality? List the files and changes needed.'\nCursor outlines: email template, reset token generation, API endpoint, password reset page, email sending service.\n\nStep 3 - Generate Email Template: Open Composer: 'Create an email template for password reset following the style of existing email templates in /templates.'\nCursor creates the template file.\n\nStep 4 - Create API Endpoint: 'Add POST /api/auth/forgot-password endpoint that generates a reset token, stores it with expiration, and sends the email.'\nCursor creates the endpoint with proper error handling.\n\nStep 5 - Add Reset Page: 'Create a password reset page at /reset-password that accepts the token, validates it, and allows setting a new password.'\nCursor creates the frontend component and connects it to the API.\n\nStep 6 - Test and Refine: You test the feature. Token expiration is not working. Ask: 'The reset token is not expiring after the timeout. Can you check the token validation logic?'\nCursor identifies and fixes the issue.\n\nTotal time: 30-45 minutes for a feature that might take 4+ hours without AI assistance.",
+        "video": {
+          "title": "Cursor Power User Guide",
+          "url": "https://www.youtube.com/watch?v=example",
+          "embed": true,
+          "reason": "Advanced techniques for maximizing Cursor productivity"
+        },
+        "reflection": "Consider a recent coding task that took you several hours. How could you have broken it down into Cursor Chat, Edit, and Composer interactions? What would your prompts have been?",
+        "quiz": [
+          {}
+        ],
+        "summary": "In this lesson, you mastered Cursor's three core features: Chat for conversations and understanding, Edit for inline modifications, and Composer for multi-file changes. You learned prompting strategies that produce better results and common mistakes to avoid. The key insight is that effective Cursor use requires clear, contextual prompts and always reviewing AI output. In the next lesson, we will explore Agentic Coding Tools that take AI assistance even further."
+      },
+      {
+        "id": 8,
+        "module": "Module 4: Agentic Coding Tools",
+        "title": "Understanding Agentic AI: Devin, OpenHands, and Autonomous Development",
+        "duration": "10-15 min",
+        "intro": "We have now reached the cutting edge of Vibe Coding: Agentic AI tools. These are not assistants that wait for your instructions - they are autonomous agents that can plan, execute, and iterate on development tasks with minimal human guidance.\n\nAgentic coding represents a fundamental shift in how software gets built. Instead of prompting for each step, you describe an outcome and the agent figures out how to achieve it. It can browse documentation, write code, run tests, debug errors, and refine its approach - all autonomously. This is the future that many predicted but few expected to arrive so quickly.\n\nIn this lesson, you will understand what agentic AI is, explore the leading tools (Devin and OpenHands), and learn when autonomous development is appropriate versus when human guidance is essential.",
+        "bigIdea": "Agentic AI tools are autonomous software development agents that can independently plan, execute, and iterate on complex tasks. Unlike assistants that respond to prompts, agents take high-level goals and work towards them independently, asking for human input only when truly necessary. This represents the highest level of AI delegation in Vibe Coding, requiring clear specifications but offering transformative productivity gains.",
+        "steps": [
+          "Step 1: Evaluate whether your task is well-suited for agentic development",
+          "Step 2: Write a detailed specification with clear requirements and constraints",
+          "Step 3: Review the agent's plan before execution when possible",
+          "Step 4: Monitor progress and provide guidance when agent requests it",
+          "Step 5: Thoroughly review and test the output",
+          "Step 6: Iterate with specific feedback if adjustments are needed"
+        ],
+        "example": "An example of this concept in action.",
+        "video": {
+          "title": "Devin: The First AI Software Engineer Explained",
+          "url": "https://www.youtube.com/watch?v=example",
+          "embed": true,
+          "reason": "Understanding the capabilities and limitations of the leading agentic tool"
+        },
+        "reflection": "Think about tasks in your work or projects that are well-defined but time-consuming. Which would be good candidates for agentic development? What would you need to specify clearly?",
+        "quiz": [
+          {}
+        ],
+        "summary": "In this lesson, you explored agentic AI - autonomous agents that can plan and execute complex development tasks independently. You learned the difference between assistants and agents, explored Devin and OpenHands, and understood when agentic development is appropriate. The key insight is that effective delegation requires clear specifications and human oversight remains essential. In the next lesson, we will focus on real-world workflows that combine different Vibe Coding tools for maximum effectiveness."
+      },
+      {
+        "id": 9,
+        "module": "Module 5: Real-World Workflows",
+        "title": "Building Complete Projects: Combining Vibe Coding Tools",
+        "duration": "10-15 min",
+        "intro": "You have now learned about Full-Stack Builders, AI-First IDEs, and Agentic Tools individually. In real projects, the most effective approach is often combining multiple tools strategically - using each for what it does best.\n\nThis lesson teaches you how professional Vibe Coders think about tool selection and combination. We will walk through complete project workflows from idea to deployment, showing when to switch tools and why. This synthesis of everything you have learned prepares you for real-world development.\n\nThe key insight is that there is no single 'best' tool - only the best tool for each phase of a project. Learning to flow between tools based on your current needs is what separates hobbyists from professionals.",
+        "bigIdea": "Effective Vibe Coding combines multiple tools strategically: Full-Stack Builders for rapid prototyping, AI-First IDEs for refinement and custom logic, and Agentic Tools for well-specified automation. Knowing when to use each tool and how to transition between them creates a workflow that is faster and produces better results than using any single tool exclusively.",
+        "steps": [
+          "Step 1: Identify which project phase you are in",
+          "Step 2: Choose the tool best suited for that phase",
+          "Step 3: Set clear goals for what you want to achieve before transitioning",
+          "Step 4: When goals are met, export/transition to the next tool",
+          "Step 5: Use the decision framework when uncertain"
+        ],
+        "example": "An example of this concept in action.",
+        "video": {
+          "title": "Complete Project Workflow: Idea to Deployment",
+          "url": "https://www.youtube.com/watch?v=example",
+          "embed": true,
+          "reason": "Watch a real project built using multiple Vibe Coding tools"
+        },
+        "reflection": "Think about a project you built (or wanted to build) in the past. How would you approach it differently now using this multi-tool workflow? What phases would you handle differently?",
+        "quiz": [
+          {}
+        ],
+        "summary": "In this lesson, you learned to combine Vibe Coding tools strategically for complete project workflows. You now understand which tools suit which project phases and how to transition between them smoothly. The key insight is that mastering the multi-tool workflow is what separates professional Vibe Coders from hobbyists. In the next lesson, we will focus on prompt engineering specifically for code generation."
+      },
+      {
+        "id": 10,
+        "module": "Module 6: Prompting for Software",
+        "title": "Prompt Engineering for Code: Writing Instructions That Work",
+        "duration": "10-15 min",
+        "intro": "Everything in Vibe Coding depends on your ability to communicate effectively with AI. This skill - prompt engineering for code - is what separates those who struggle with AI tools from those who use them masterfully.\n\nPrompt engineering is not about tricks or magic phrases. It is a systematic approach to writing instructions that AI interprets correctly. In this lesson, you will learn the principles, patterns, and practices that produce reliable, high-quality code from AI systems.\n\nThe concepts here apply across all Vibe Coding tools: Full-Stack Builders, AI-First IDEs, and Agentic Tools. While each tool has nuances, the core principles of effective prompting are universal.",
+        "bigIdea": "Effective code prompts have three elements: clear intent (what you want), sufficient context (what the AI needs to know), and explicit constraints (what you do not want). Mastering this formula transforms AI from unpredictable into reliable. The more precisely you can express your requirements, the better your results will be.",
+        "steps": [
+          "Step 1: Before prompting, clarify Intent, Context, and Constraints in your mind",
+          "Step 2: Write the prompt using one or more proven patterns",
+          "Step 3: Review AI output - does it match your intent?",
+          "Step 4: If not, identify what was misunderstood and refine",
+          "Step 5: Use iteration to add features or fix issues incrementally"
+        ],
+        "example": "An example of this concept in action.",
+        "video": {
+          "title": "Prompt Engineering for Developers",
+          "url": "https://www.youtube.com/watch?v=example",
+          "embed": true,
+          "reason": "Comprehensive guide to writing effective prompts for code generation"
+        },
+        "reflection": "Think about a time when AI gave you completely wrong code. Looking back, what was missing from your prompt? How would you write it differently now?",
+        "quiz": [
+          {}
+        ],
+        "summary": "In this lesson, you learned the formula for effective code prompts: Intent + Context + Constraints. You explored proven patterns (Example, Reference, Step-by-Step, Persona, Negative) and common mistakes to avoid. The key insight is that prompt quality directly determines output quality - investing in better prompts pays off exponentially. In the next module, we will look at the future of Vibe Coding and how to stay ahead of this rapidly evolving field."
+      },
+      {
+        "id": 11,
+        "module": "Module 6: Prompting for Software",
+        "title": "Debugging and Refactoring with AI Assistance",
+        "duration": "10-15 min",
+        "intro": "Writing code is only half the battle. Real-world software development involves extensive debugging and refactoring - finding and fixing bugs, improving code quality, and adapting code as requirements change. AI assistance transforms these traditionally tedious tasks.\n\nThis lesson teaches you how to leverage AI for debugging and refactoring effectively. You will learn prompting techniques that help AI diagnose issues, systematic approaches to AI-assisted debugging, and how to use AI for safe, incremental refactoring without breaking existing functionality.\n\nThese skills are particularly valuable because debugging and refactoring are where many developers spend most of their time. Improving your effectiveness here creates outsized productivity gains.",
+        "bigIdea": "AI excels at debugging when given the right information: error messages, relevant code, expected vs actual behavior, and what you have already tried. For refactoring, AI provides a safety net - you can confidently restructure code because AI helps you maintain functionality while changing structure. The key is learning to provide AI with the context it needs to help effectively.",
+        "steps": [
+          "Step 1: For debugging - gather all relevant information before engaging AI",
+          "Step 2: Present problems with full context: error, code, expected vs actual",
+          "Step 3: Ask for diagnosis before fixes",
+          "Step 4: For refactoring - understand current behavior first",
+          "Step 5: Have tests before refactoring",
+          "Step 6: Make incremental changes, testing after each"
+        ],
+        "example": "Scenario: You have a 200-line function that handles user registration. It is hard to maintain and has bugs.\n\nStep 1: Ask AI to explain the function's complete behavior, documenting all cases.\n\nStep 2: Ask AI to generate comprehensive tests covering all cases.\n\nStep 3: Run tests to verify they pass with current code.\n\nStep 4: Ask AI: 'Refactor this registration function by extracting these concerns into separate functions: validation, duplicate checking, password hashing, email sending. The tests should still pass.'\n\nStep 5: Review the refactored code. Run tests. All pass.\n\nStep 6: Commit with confidence.\n\nResult: The 200-line function becomes 5 smaller, focused functions that are easier to understand, test, and maintain individually.",
+        "video": {
+          "title": "AI-Assisted Debugging Masterclass",
+          "url": "https://www.youtube.com/watch?v=example",
+          "embed": true,
+          "reason": "Comprehensive guide to debugging with AI assistance"
+        },
+        "reflection": "Think about a bug you spent hours debugging in the past. How would you present that bug to AI using the structured approach from this lesson? What information would you include?",
+        "quiz": [
+          {}
+        ],
+        "summary": "In this lesson, you learned systematic approaches to AI-assisted debugging and refactoring. For debugging, you now know how to gather context and present problems effectively. For refactoring, you understand the importance of tests, incremental changes, and behavior preservation. These skills apply across all Vibe Coding tools and represent some of the highest-value applications of AI assistance in development."
+      },
+      {
+        "id": 12,
+        "module": "Module 7: Building for Production",
+        "title": "From Prototype to Production: Security, Performance, and Best Practices",
+        "duration": "10-15 min",
+        "intro": "Building a working prototype is exciting, but shipping it to real users requires more. Production software must be secure against attacks, performant under load, and reliable in ways prototypes do not need to be. This lesson bridges that gap.\n\nMany Vibe Coders build impressive prototypes but struggle with production readiness. AI-generated code often prioritizes functionality over security, performance over scalability, and working code over maintainable code. Knowing how to identify and address these gaps is essential for building software that can actually be deployed.\n\nBy the end of this lesson, you will have a checklist for production readiness and know how to use AI assistance to harden your applications for real-world use.",
+        "bigIdea": "Production-ready software differs from prototypes in three key areas: security (protecting against attacks and data breaches), performance (handling real-world load efficiently), and reliability (working correctly even when things go wrong). AI-generated code often needs hardening in all three areas. Knowing what to check and how to fix it is the difference between a demo and a product.",
+        "steps": [
+          "Step 1: Run security audit prompt on your codebase",
+          "Step 2: Fix all identified security issues",
+          "Step 3: Run performance review prompt",
+          "Step 4: Implement performance optimizations",
+          "Step 5: Add reliability patterns (error handling, validation, health checks)",
+          "Step 6: Complete production readiness checklist"
+        ],
+        "example": "Scenario: You built a task management app with Bolt and need to make it production-ready.\n\nStep 1 - Security Audit: 'Review this application for security vulnerabilities, focusing on authentication, authorization, and input handling.'\nAI identifies: hardcoded JWT secret, missing auth on API routes, no input validation.\n\nStep 2 - Fix Security Issues: 'Move JWT secret to environment variable. Add authentication middleware to /api routes. Add input validation for task creation.'\n\nStep 3 - Performance Review: 'Identify performance issues, especially around database queries.'\nAI identifies: N+1 query loading user's tasks with assigned members.\n\nStep 4 - Fix Performance: 'Refactor getTasksWithMembers to use a single query with JOIN instead of multiple queries.'\n\nStep 5 - Add Reliability: 'Add error handling, input validation, and a health check endpoint.'\n\nStep 6 - Final Review: Run through checklist, deploy with confidence.\n\nResult: A production-ready application that is secure, fast, and reliable.",
+        "video": {
+          "title": "Production Readiness for AI-Built Apps",
+          "url": "https://www.youtube.com/watch?v=example",
+          "embed": true,
+          "reason": "Comprehensive guide to hardening AI-generated applications"
+        },
+        "reflection": "Think about a website or application you use daily. What would happen if it had a security breach? What about if it went offline? This is why production readiness matters.",
+        "quiz": [
+          {}
+        ],
+        "summary": "In this lesson, you learned to bridge the gap between prototypes and production software. You now understand security vulnerabilities common in AI-generated code, performance optimizations needed for real users, and reliability patterns that keep your software running. Use the production readiness checklist before every deployment. This knowledge separates demo builders from product shippers."
+      },
+      {
+        "id": 13,
+        "module": "Module 8: The Future of Vibe Coding",
+        "title": "The Evolving AI Landscape: Staying Current in a Rapidly Changing Field",
+        "duration": "10-15 min",
+        "intro": "The Vibe Coding landscape changes faster than any technology field in history. Tools that were cutting-edge six months ago may be obsolete today. New capabilities emerge weekly. This presents both opportunity and challenge.\n\nThis lesson prepares you for continuous learning in this rapidly evolving space. You will develop strategies for staying current, frameworks for evaluating new tools, and principles that remain constant even as specific tools change.\n\nThe goal is not to know every tool - that is impossible. The goal is to build learning habits and evaluation skills that let you quickly adopt valuable new capabilities while avoiding distraction from shiny objects that do not deliver real value.",
+        "bigIdea": "While specific Vibe Coding tools change rapidly, the underlying principles remain stable: clear intent, systematic testing, iterative refinement, and human oversight. Building strong foundations in principles means you can quickly adapt to any new tool. Developing learning habits and evaluation frameworks matters more than mastering any single tool.",
+        "steps": [
+          "Step 1: Curate your information diet - select 3-5 high-quality sources",
+          "Step 2: Schedule regular learning time (weekly scan, monthly deep-dive)",
+          "Step 3: When new tools emerge, apply the evaluation framework before investing time",
+          "Step 4: Try promising tools on real projects, not just tutorials",
+          "Step 5: Invest in foundational skills that remain valuable as tools change"
+        ],
+        "example": "An example of this concept in action.",
+        "video": {
+          "title": "The Future of AI-Assisted Development",
+          "url": "https://www.youtube.com/watch?v=example",
+          "embed": true,
+          "reason": "Expert perspectives on where AI development is heading"
+        },
+        "reflection": "Think about a technology you learned 5 years ago. How much of that specific knowledge is still useful? What general skills from that learning remain valuable? This illustrates the difference between tool-specific and principle-based learning.",
+        "quiz": [
+          {}
+        ],
+        "summary": "In this lesson, you learned strategies for staying current in the rapidly evolving Vibe Coding landscape without burning out. You now have an evaluation framework for new tools and understand which skills remain valuable regardless of which specific tools dominate. The key insight is that principles endure while tools change - invest accordingly. In the final lesson, we will discuss building your career as a Vibe Coder."
+      },
+      {
+        "id": 14,
+        "module": "Module 8: The Future of Vibe Coding",
+        "title": "Building Your Career as a Vibe Coder: Opportunities and Paths Forward",
+        "duration": "10-15 min",
+        "intro": "Congratulations on reaching the final lesson of this course. You have learned to use Full-Stack Builders, AI-First IDEs, and Agentic Tools. You understand prompting, debugging, production readiness, and staying current. Now it is time to turn these skills into real-world impact.\n\nThis lesson focuses on the career opportunities that Vibe Coding opens up. Whether you want to build your own products, freelance for clients, contribute to a team, or start a company, these skills create new paths that did not exist even two years ago.\n\nThe key insight is that Vibe Coding skills are not just about coding faster - they enable entirely new approaches to building products, serving clients, and creating value. Understanding these opportunities helps you make strategic choices about where to invest your energy next.",
+        "bigIdea": "Vibe Coding creates three distinct opportunity paths: building products (creating your own applications and businesses), providing services (helping others build with AI), and contributing to teams (being the AI-powered developer that organizations need). Each path has different requirements and rewards. Understanding all three helps you choose the path that matches your goals.",
+        "steps": [
+          "Step 1: Complete your first full project this week",
+          "Step 2: Deploy it and gather feedback from real users",
+          "Step 3: Choose which opportunity path fits your goals",
+          "Step 4: Build your portfolio with 3-5 deployed projects",
+          "Step 5: Establish ongoing learning habits",
+          "Step 6: Take the first step on your chosen path"
+        ],
+        "example": "An example of this concept in action.",
+        "video": {
+          "title": "From Vibe Coder to Product Builder",
+          "url": "https://www.youtube.com/watch?v=example",
+          "embed": true,
+          "reason": "Success stories and practical advice for your next steps"
+        },
+        "reflection": "Where do you want to be in one year? How do your Vibe Coding skills help you get there? What is the first step you will take after completing this course?",
+        "quiz": [
+          {}
+        ],
+        "summary": "In this final lesson, you explored the career opportunities that Vibe Coding enables: building your own products, providing services to others, and contributing to teams as an AI-powered developer. You have a framework for building a compelling portfolio and a clear action plan for what to do next. The most important thing now is to take action - build something this week, deploy it, and start your journey. Thank you for completing this course. The future of software development is in your hands."
+      },
+      {
+        "id": 15,
+        "module": "Exploring and Building with Confidence",
+        "title": "Your First Complete Vibe-Coded Project",
+        "duration": "10-15 min",
+        "intro": "Welcome to \"Your First Complete Vibe-Coded Project\" in the Vibe Coding course! In this lesson, we'll explore this important concept in a beginner-friendly way. Remember, there's no need to feel anxious - we'll take this step by step with plenty of guidance and support.",
+        "bigIdea": "Your first complete project brings together all the Vibe Coding principles you've learned. It demonstrates how to create a functional digital product while maintaining focus on ideas and creativity.",
+        "steps": [
+          "Step 1: Understand the main concept of this lesson",
+          "Step 2: Learn how this concept applies to Vibe Coding",
+          "Step 3: See practical examples of this concept in action",
+          "Step 4: Practice applying this concept in the playground",
+          "Step 5: Reflect on how this fits into your learning journey"
+        ],
+        "example": "An example of this concept in action.",
+        "video": {
+          "title": "Understanding Your First Complete Vibe-Coded Project - Vibe Coding Fundamentals",
+          "creator": "Vibe Coding Tutorials",
+          "embed": true,
+          "reason": "Relevant video content for this lesson topic"
+        },
+        "reflection": "How does the concept of \"Your First Complete Vibe-Coded Project\" change the way you think about creating digital products? Can you think of an example from your own experience where this approach might have been helpful?",
+        "quiz": [
+          {}
+        ],
+        "summary": "In this lesson on \"Your First Complete Vibe-Coded Project\", you've learned an important concept in Vibe Coding. You now understand how this fits into the bigger picture of creating digital products with confidence. You're building a strong foundation for your journey in Vibe Coding."
+      }
+    ]
+  },
+  "prompt-engineering": {
+    "title": "Prompt Engineering Mastery",
+    "lessons": [
+      {
+        "id": 1,
+        "module": "Introduction to Prompt Engineering",
+        "title": "What is Prompt Engineering?",
+        "duration": "10-15 min",
+        "intro": "Prompt engineering is the practice of designing and refining prompts to effectively communicate with AI systems. In this lesson, we'll explore the fundamental concepts of prompt engineering and why it's crucial in the AI era. As AI becomes more integrated into our daily workflows, the ability to craft precise, effective prompts becomes a valuable skill that can significantly impact productivity and results.",
+        "bigIdea": "Prompt engineering is the art and science of crafting inputs that guide AI systems to produce desired outputs.",
+        "steps": [
+          "Define the purpose of your prompt",
+          "Identify the desired output format",
+          "Specify the tone and style requirements",
+          "Include relevant context and constraints",
+          "Test and refine based on results"
+        ],
+        "example": "A marketing professional uses prompt engineering to generate social media content. Instead of a vague prompt like 'Write a Facebook post,' they craft 'Write a 150-word Facebook post in a casual, friendly tone promoting our new eco-friendly coffee cups to environmentally conscious millennials, including a call-to-action.' This specific prompt generates much more targeted content that aligns with their marketing goals.",
+        "video": "https://www.youtube.com/watch?v=example1",
+        "reflection": "How might prompt engineering skills change the way you approach problem-solving or content creation in your field?",
+        "quiz": [
+          {
+            "q": "What is the primary purpose of prompt engineering?",
+            "a": "To design inputs that guide AI systems to produce desired outputs",
+            "opts": [
+              "To limit the AI's capabilities",
+              "To design inputs that guide AI systems to produce desired outputs",
+              "To make AI systems work faster",
+              "To replace human creativity"
+            ]
+          }
+        ],
+        "summary": "In this lesson, we've established the foundation of prompt engineering. We've explored its definition, importance, and real-world applications. Understanding these fundamentals is crucial as we dive deeper into specific techniques and advanced strategies in the upcoming lessons."
+      },
+      {
+        "id": 2,
+        "module": "Introduction to Prompt Engineering",
+        "title": "The Anatomy of Effective Prompts",
+        "duration": "10-15 min",
+        "intro": "In this lesson, we'll examine the structure of effective prompts by breaking them down into their core components. Understanding the anatomy of a well-crafted prompt is essential for consistently getting high-quality results from AI systems. We'll explore how different elements work together to guide AI behavior and produce desired outputs.",
+        "bigIdea": "Effective prompts follow a structured approach with clear components that guide AI behavior toward specific outcomes.",
+        "steps": [
+          "Identify the context needed for the task",
+          "Define the specific task or instruction",
+          "Specify any input data to be used",
+          "Clarify the desired output format",
+          "Test and refine each component"
+        ],
+        "example": "Consider a prompt for creating a product description: 'Context: You are a marketing copywriter for a tech company. Task: Write a compelling product description for our new noise-canceling headphones. Audience: Tech-savvy professionals aged 25-45. Format: 200 words with a headline, 2 bullet points of features, and a call-to-action.' This prompt clearly defines context, task, audience, and format requirements.",
+        "video": "https://www.youtube.com/watch?v=example2",
+        "reflection": "How do the different components of a prompt interact to influence the AI's response?",
+        "quiz": [
+          {
+            "q": "Which of the following is NOT a typical component of an effective prompt?",
+            "a": "AI's personal opinion",
+            "opts": [
+              "Context",
+              "Instruction",
+              "Input data",
+              "AI's personal opinion"
+            ]
+          }
+        ],
+        "summary": "In this lesson, we've examined the structure of effective prompts by identifying their key components. Understanding this anatomy will help you craft more consistent and effective prompts that reliably produce the outputs you need."
+      },
+      {
+        "id": 3,
+        "module": "Introduction to Prompt Engineering",
+        "title": "Context and Role Setting",
+        "duration": "10-15 min",
+        "intro": "In this lesson, we'll explore how to effectively set context and assign roles to AI systems to improve the quality of responses. Context and role setting are powerful techniques that significantly influence AI behavior and output quality. By providing clear context and defining specific roles, you can guide the AI to respond in ways that align with your specific needs and expectations.",
+        "bigIdea": "Providing clear context and assigning specific roles to AI systems dramatically improves the relevance and quality of responses.",
+        "steps": [
+          "Identify the essential background information",
+          "Define the specific role you want the AI to assume",
+          "Specify constraints and requirements",
+          "Clarify the intended audience or purpose",
+          "Test how different contexts affect the response"
+        ],
+        "example": "Instead of asking 'How do I market a product?', you could set context and role: 'You are an experienced digital marketing consultant with 10 years in the tech industry. Your client is a startup with a $500 monthly marketing budget. Provide a 3-month marketing strategy focusing on organic growth and cost-effective tactics.' This context and role assignment produces much more targeted advice.",
+        "video": "https://www.youtube.com/watch?v=example3",
+        "reflection": "How might context and role setting change the way you approach different types of tasks with AI?",
+        "quiz": [
+          {
+            "q": "What is the primary benefit of assigning a specific role to an AI in a prompt?",
+            "a": "It influences the tone, depth, and perspective of the response",
+            "opts": [
+              "It makes the AI respond faster",
+              "It influences the tone, depth, and perspective of the response",
+              "It reduces the cost of using AI",
+              "It makes the AI more creative"
+            ]
+          }
+        ],
+        "summary": "In this lesson, we've explored the powerful techniques of context setting and role assignment. These techniques allow you to guide AI behavior more precisely, resulting in responses that are better aligned with your specific needs and expectations."
+      },
+      {
+        "id": 4,
+        "module": "Introduction to Prompt Engineering",
+        "title": "Precision and Specificity in Prompts",
+        "duration": "10-15 min",
+        "intro": "In this lesson, we'll dive deep into the importance of precision and specificity when crafting prompts. The level of detail in your prompts directly correlates with the quality and relevance of the AI's response. We'll explore techniques for adding precision without making prompts overly complex, and how to strike the right balance between clarity and conciseness.",
+        "bigIdea": "Precise, specific prompts generate more accurate, relevant, and useful AI responses than vague or general prompts.",
+        "steps": [
+          "Identify the core objective of your request",
+          "Specify the exact format and structure needed",
+          "Define the tone and style requirements",
+          "Include relevant constraints and requirements",
+          "Add examples or references if helpful"
+        ],
+        "example": "Instead of 'Write a blog post about healthy eating,' a precise prompt would be: 'Write a 800-word blog post in an informative yet engaging tone about the benefits of Mediterranean diet for adults over 40. Include 3 scientific studies, 2 practical tips, and a brief meal plan example. Target audience: health-conscious individuals with busy lifestyles.' The specific prompt generates a much more targeted piece that meets the exact requirements.",
+        "video": "https://www.youtube.com/watch?v=example4",
+        "reflection": "How does the level of specificity in your prompt affect the actionability of the AI's response?",
+        "quiz": [
+          {
+            "q": "What is the relationship between prompt specificity and response quality?",
+            "a": "More specific prompts generally lead to higher quality responses",
+            "opts": [
+              "More specific prompts generally lead to higher quality responses",
+              "Specificity has no impact on response quality",
+              "Generic prompts produce better responses",
+              "Specificity only matters for creative tasks"
+            ]
+          }
+        ],
+        "summary": "In this lesson, we've examined the critical importance of precision and specificity in prompt engineering. By adding specific details while maintaining clarity, you can significantly improve the quality and relevance of AI responses."
+      },
+      {
+        "id": 5,
+        "module": "Introduction to Prompt Engineering",
+        "title": "Output Formatting and Constraints",
+        "duration": "10-15 min",
+        "intro": "In this lesson, we'll explore how to effectively specify output formats and constraints in your prompts. Properly formatted outputs are crucial for integration with other systems and for ensuring the response meets your specific requirements. We'll cover various techniques for controlling the structure, format, and constraints of AI-generated content.",
+        "bigIdea": "Specifying output formats and constraints in prompts ensures the AI generates responses that are immediately usable and meet specific requirements.",
+        "steps": [
+          "Identify the required output structure",
+          "Specify length or size constraints",
+          "Define any formatting requirements",
+          "Include content constraints or exclusions",
+          "Test the prompt to ensure constraints are followed"
+        ],
+        "example": "Instead of 'Explain machine learning,' a prompt with format specifications would be: 'Explain machine learning in 300 words or less, using a numbered list format with 5 key points. Each point should include a brief explanation and a real-world example. Use simple language suitable for beginners.' This generates a structured response that meets specific formatting and content requirements.",
+        "video": "https://www.youtube.com/watch?v=example5",
+        "reflection": "How do output format specifications impact the usability of AI-generated content?",
+        "quiz": [
+          {
+            "q": "Why is it important to specify output formats in prompts?",
+            "a": "It ensures the response is structured in a way that's immediately useful",
+            "opts": [
+              "It makes the AI respond faster",
+              "It ensures the response is structured in a way that's immediately useful",
+              "It reduces the cost of using AI",
+              "It makes the AI more creative"
+            ]
+          }
+        ],
+        "summary": "In this lesson, we've explored how to effectively specify output formats and constraints in your prompts. By being explicit about the structure and requirements you need, you can generate AI responses that are immediately usable and require minimal post-processing."
+      },
+      {
+        "id": 6,
+        "module": "Intermediate Prompt Techniques",
+        "title": "Chain of Thought and Step-by-Step Reasoning",
+        "duration": "10-15 min",
+        "intro": "In this lesson, we'll explore advanced prompting techniques that encourage AI systems to think through problems step-by-step. Chain of thought prompting is a powerful technique that improves the accuracy and reliability of AI responses by encouraging the system to explain its reasoning process. This approach is particularly effective for complex problem-solving tasks.",
+        "bigIdea": "Encouraging AI systems to show their reasoning process leads to more accurate, explainable, and reliable responses.",
+        "steps": [
+          "Break the problem into logical steps",
+          "Ask the AI to explain its reasoning",
+          "Request intermediate calculations or thoughts",
+          "Verify each step of the process",
+          "Synthesize the final answer"
+        ],
+        "example": "Instead of asking 'What's the answer to this math problem: 15% of 240?', you could use chain of thought: 'Calculate 15% of 240. First, explain how to calculate percentages. Then show the calculation step-by-step. Finally, provide the answer.' This approach ensures the AI demonstrates its reasoning and makes it easier to verify the calculation.",
+        "video": "https://www.youtube.com/watch?v=example6",
+        "reflection": "How does requiring step-by-step reasoning change the quality and trustworthiness of AI responses?",
+        "quiz": [
+          {
+            "q": "What is the primary benefit of chain of thought prompting?",
+            "a": "It encourages the AI to think through problems step-by-step, often leading to more accurate answers",
+            "opts": [
+              "It makes the AI respond faster",
+              "It encourages the AI to think through problems step-by-step, often leading to more accurate answers",
+              "It reduces the cost of using AI",
+              "It makes the AI more creative"
+            ]
+          }
+        ],
+        "summary": "In this lesson, we've explored chain of thought prompting, a powerful technique that encourages AI systems to think through problems step-by-step. This approach often leads to more accurate results and provides valuable insights into the AI's reasoning process."
+      },
+      {
+        "id": 7,
+        "module": "Intermediate Prompt Techniques",
+        "title": "Few-Shot Learning and Examples",
+        "duration": "10-15 min",
+        "intro": "In this lesson, we'll explore few-shot learning techniques, which involve providing examples within your prompt to guide the AI's response. Few-shot prompting is a powerful technique that allows you to demonstrate the desired format, style, or approach by showing examples directly in the prompt. This method is particularly effective for tasks that require specific formatting or complex patterns.",
+        "bigIdea": "Providing examples in your prompt teaches the AI the desired format, style, or approach for the response.",
+        "steps": [
+          "Identify the pattern you want the AI to learn",
+          "Create 2-5 clear, representative examples",
+          "Format examples consistently",
+          "Clearly separate examples from the actual task",
+          "Test and refine the examples for clarity"
+        ],
+        "example": "For creating product descriptions, you might provide: 'Example 1: Product: Wireless headphones. Description: Premium noise-canceling headphones with 30-hour battery life. Perfect for travelers and office workers. Example 2: Product: Smart water bottle. Description: Hydration tracker that reminds you to drink water and monitors your daily intake. Ideal for fitness enthusiasts. Now write a description for: Product: Ergonomic keyboard.' This shows the AI the desired style and format.",
+        "video": "https://www.youtube.com/watch?v=example7",
+        "reflection": "How do examples in prompts affect the AI's ability to generalize to new situations?",
+        "quiz": [
+          {
+            "q": "What is the main purpose of few-shot learning in prompts?",
+            "a": "To provide examples that demonstrate the desired format or approach",
+            "opts": [
+              "To make the AI respond faster",
+              "To provide examples that demonstrate the desired format or approach",
+              "To reduce the cost of using AI",
+              "To make the AI more creative"
+            ]
+          }
+        ],
+        "summary": "In this lesson, we've explored few-shot learning, a technique that uses examples within prompts to guide AI behavior. By providing clear, relevant examples, you can significantly improve the AI's ability to produce outputs that match your specific requirements."
+      },
+      {
+        "id": 8,
+        "module": "Intermediate Prompt Techniques",
+        "title": "Iterative Refinement and Prompt Chaining",
+        "duration": "10-15 min",
+        "intro": "In this lesson, we'll explore how to refine prompts through iteration and how to chain multiple prompts together for complex tasks. Iterative refinement involves testing prompts, analyzing the results, and making adjustments to improve output quality. Prompt chaining combines multiple prompts to tackle complex tasks that require multiple steps or different types of processing.",
+        "bigIdea": "Prompt engineering is an iterative process that improves with testing, analysis, and refinement.",
+        "steps": [
+          "Start with a basic prompt that addresses your core need",
+          "Test the prompt with sample inputs",
+          "Analyze the output quality and identify issues",
+          "Refine the prompt based on the analysis",
+          "Repeat the test-refine cycle until satisfied",
+          "For complex tasks, break into chained prompts"
+        ],
+        "example": "For creating a comprehensive report, you might chain prompts: 1) 'Analyze this data set and identify key trends' → 2) 'Create an executive summary based on these trends' → 3) 'Generate recommendations based on the analysis and summary.' Each prompt focuses on a specific aspect of the task, leading to higher quality results than a single complex prompt.",
+        "video": "https://www.youtube.com/watch?v=example8",
+        "reflection": "How does the iterative approach to prompt engineering compare to other iterative processes you've used?",
+        "quiz": [
+          {
+            "q": "What is the primary benefit of prompt chaining?",
+            "a": "It allows complex tasks to be broken into specialized steps",
+            "opts": [
+              "It makes the AI respond faster",
+              "It allows complex tasks to be broken into specialized steps",
+              "It reduces the cost of using AI",
+              "It makes the AI more creative"
+            ]
+          }
+        ],
+        "summary": "In this lesson, we've explored the iterative nature of prompt engineering and the technique of chaining multiple prompts together. These approaches allow you to systematically improve prompt effectiveness and tackle complex tasks that require multiple steps."
+      },
+      {
+        "id": 9,
+        "module": "Advanced Prompt Techniques",
+        "title": "Temperature and Creativity Control",
+        "duration": "10-15 min",
+        "intro": "In this lesson, we'll explore how to control the creativity and randomness of AI responses through temperature settings and prompt techniques. Understanding how to adjust creativity levels is crucial for achieving the right balance between predictable, reliable outputs and innovative, creative responses. This knowledge allows you to fine-tune AI behavior for different types of tasks.",
+        "bigIdea": "Temperature settings and prompt techniques can control the balance between creativity and predictability in AI responses.",
+        "steps": [
+          "Identify the appropriate level of creativity for your task",
+          "Use temperature settings if available (0.2 for factual, 0.7-0.9 for creative)",
+          "Use appropriate language in prompts to encourage desired behavior",
+          "Test responses to ensure they match your requirements",
+          "Adjust as needed for optimal results"
+        ],
+        "example": "For a technical manual, you might use: 'Provide the standard procedure for changing a tire, using established safety protocols.' For brainstorming marketing ideas, you might use: 'Generate 10 innovative, unconventional marketing approaches for a new eco-friendly product that will surprise customers and create buzz.' The first encourages factual, conservative responses; the second encourages creative, innovative thinking.",
+        "video": "https://www.youtube.com/watch?v=example9",
+        "reflection": "How does the required level of creativity change based on the task and audience?",
+        "quiz": [
+          {
+            "q": "What is the primary purpose of controlling creativity in AI responses?",
+            "a": "To match the response style to the requirements of the specific task",
+            "opts": [
+              "To make the AI respond faster",
+              "To match the response style to the requirements of the specific task",
+              "To reduce the cost of using AI",
+              "To make the AI more creative in all cases"
+            ]
+          }
+        ],
+        "summary": "In this lesson, we've explored how to control creativity and randomness in AI responses. By understanding temperature settings and prompt techniques, you can fine-tune AI behavior to match the specific requirements of your tasks."
+      },
+      {
+        "id": 10,
+        "module": "Advanced Prompt Techniques",
+        "title": "Zero-Shot and Self-Consistency Techniques",
+        "duration": "10-15 min",
+        "intro": "In this lesson, we'll explore zero-shot prompting and self-consistency techniques. Zero-shot prompting involves getting AI to perform tasks without providing examples, relying solely on clear instructions and context. Self-consistency techniques involve generating multiple responses and selecting the most consistent or highest quality one. These advanced techniques can significantly improve the reliability and accuracy of AI outputs.",
+        "bigIdea": "Advanced prompting techniques like zero-shot and self-consistency can improve the reliability and accuracy of AI responses.",
+        "steps": [
+          "For zero-shot: Ensure instructions are comprehensive and clear",
+          "Provide sufficient context for the AI to understand the task",
+          "Define the role or expertise level required",
+          "Specify the desired output format",
+          "For self-consistency: Generate multiple responses",
+          "Compare responses to identify consistent elements",
+          "Select the most accurate or consistent answer"
+        ],
+        "example": "For zero-shot prompting: 'You are an expert financial analyst. Analyze the implications of a 2% increase in interest rates on small business loans. Consider cash flow, expansion plans, and investment decisions. Format your response as a 3-point analysis with specific recommendations.' For self-consistency: Running the same prompt 3-5 times and comparing responses to find the most consistent facts or recommendations.",
+        "video": "https://www.youtube.com/watch?v=example10",
+        "reflection": "When might zero-shot prompting be more appropriate than few-shot prompting?",
+        "quiz": [
+          {
+            "q": "What is zero-shot prompting?",
+            "a": "Prompting without providing examples",
+            "opts": [
+              "Prompting without providing examples",
+              "Prompting with many examples",
+              "Prompting that makes the AI respond quickly",
+              "Prompting that reduces AI creativity"
+            ]
+          }
+        ],
+        "summary": "In this lesson, we've explored zero-shot prompting and self-consistency techniques. These advanced methods allow you to get quality results without examples and improve accuracy by comparing multiple responses."
+      },
+      {
+        "id": 11,
+        "module": "Specialized Applications",
+        "title": "Prompt Engineering for Content Creation",
+        "duration": "10-15 min",
+        "intro": "In this lesson, we'll explore specialized prompt engineering techniques for content creation across various formats and platforms. Content creation is one of the most common applications of AI, and mastering prompt techniques for this domain can significantly improve the quality, relevance, and engagement of AI-generated content. We'll cover techniques for different content types, platforms, and audiences.",
+        "bigIdea": "Specialized prompt techniques can significantly improve the quality and relevance of AI-generated content.",
+        "steps": [
+          "Identify the platform and its specific requirements",
+          "Define the target audience and their interests",
+          "Specify the content format and structure needed",
+          "Include engagement elements if required",
+          "Test and refine based on performance"
+        ],
+        "example": "Instead of 'Write a social media post,' a more effective prompt would be: 'Write a LinkedIn post for marketing professionals aged 28-40 about the importance of data-driven marketing decisions. Include a hook, 2 key insights, and a question to encourage engagement. Use a professional but approachable tone, 150-200 words.' This specific prompt generates content tailored to the platform, audience, and format.",
+        "video": "https://www.youtube.com/watch?v=example11",
+        "reflection": "How do different content platforms require different prompt approaches?",
+        "quiz": [
+          {
+            "q": "Why is it important to specify the target audience in content creation prompts?",
+            "a": "It helps the AI create content that resonates with the intended audience",
+            "opts": [
+              "It makes the AI respond faster",
+              "It helps the AI create content that resonates with the intended audience",
+              "It reduces the cost of using AI",
+              "It makes the AI more creative"
+            ]
+          }
+        ],
+        "summary": "In this lesson, we've explored specialized prompt engineering techniques for content creation. By tailoring prompts to specific platforms, audiences, and formats, you can significantly improve the quality and effectiveness of AI-generated content."
+      },
+      {
+        "id": 12,
+        "module": "Specialized Applications",
+        "title": "Prompt Engineering for Code Generation",
+        "duration": "10-15 min",
+        "intro": "In this lesson, we'll explore specialized prompt engineering techniques for code generation. Coding with AI assistance is becoming increasingly common, and effective prompts can significantly improve the quality, efficiency, and correctness of AI-generated code. We'll cover techniques for different programming languages, frameworks, and development scenarios.",
+        "bigIdea": "Specialized prompt techniques can significantly improve the quality and correctness of AI-generated code.",
+        "steps": [
+          "Specify the programming language and any frameworks",
+          "Define the exact functionality needed",
+          "Include requirements for inputs, outputs, and error handling",
+          "Specify any style or quality requirements",
+          "Test the generated code to ensure it meets requirements"
+        ],
+        "example": "Instead of 'Write a function to sort data,' a more effective prompt would be: 'Write a Python function named bubble_sort that takes a list of integers and returns the sorted list in ascending order. Include error handling for non-list inputs. Use comments to explain each step. Follow PEP 8 style guidelines.' This prompt specifies language, functionality, error handling, documentation, and style requirements.",
+        "video": "https://www.youtube.com/watch?v=example12",
+        "reflection": "How do detailed requirements in coding prompts affect the quality of generated code?",
+        "quiz": [
+          {
+            "q": "What is the primary benefit of specifying programming language in code generation prompts?",
+            "a": "It ensures the AI generates code in the correct syntax and style",
+            "opts": [
+              "It makes the AI respond faster",
+              "It ensures the AI generates code in the correct syntax and style",
+              "It reduces the cost of using AI",
+              "It makes the AI more creative"
+            ]
+          }
+        ],
+        "summary": "In this lesson, we've explored specialized prompt engineering techniques for code generation. By providing clear language specifications, functionality requirements, and quality expectations, you can significantly improve the quality and correctness of AI-generated code."
+      },
+      {
+        "id": 13,
+        "module": "Specialized Applications",
+        "title": "Prompt Engineering for Data Analysis",
+        "duration": "10-15 min",
+        "intro": "In this lesson, we'll explore specialized prompt engineering techniques for data analysis tasks. As data becomes increasingly important in decision-making, AI-powered data analysis can accelerate insights and improve accuracy. We'll cover techniques for asking AI to interpret data, identify patterns, perform calculations, and generate insights from datasets.",
+        "bigIdea": "Specialized prompts can effectively guide AI systems to analyze data and generate meaningful insights.",
+        "steps": [
+          "Provide context about the dataset and its significance",
+          "Define specific analysis objectives and questions",
+          "Specify the type of insights needed",
+          "Request specific calculations or metrics",
+          "Define the required output format"
+        ],
+        "example": "Instead of 'Analyze this sales data,' a more effective prompt would be: 'Analyze the quarterly sales data for 2023, focusing on identifying seasonal trends, top-performing products, and customer segments with declining sales. Provide insights in a 5-point summary with specific recommendations for Q1 2024. Include calculations of percentage changes and highlight any anomalies.' This prompt provides context, specifies objectives, and defines the output format.",
+        "video": "https://www.youtube.com/watch?v=example13",
+        "reflection": "How does providing context about data improve the quality of AI-generated insights?",
+        "quiz": [
+          {
+            "q": "Why is it important to provide context about a dataset in analysis prompts?",
+            "a": "It helps the AI understand the significance and provide relevant insights",
+            "opts": [
+              "It makes the AI respond faster",
+              "It helps the AI understand the significance and provide relevant insights",
+              "It reduces the cost of using AI",
+              "It makes the AI more creative"
+            ]
+          }
+        ],
+        "summary": "In this lesson, we've explored specialized prompt engineering techniques for data analysis. By providing clear context, specific objectives, and defined output requirements, you can significantly improve the quality and relevance of AI-generated data insights."
+      },
+      {
+        "id": 14,
+        "module": "Troubleshooting and Best Practices",
+        "title": "Common Prompt Engineering Mistakes and How to Avoid Them",
+        "duration": "10-15 min",
+        "intro": "In this lesson, we'll examine common mistakes in prompt engineering and learn how to avoid them. Understanding these pitfalls is crucial for developing effective prompts and achieving consistent results with AI systems. We'll explore the most frequent errors and their solutions, helping you become a more proficient prompt engineer.",
+        "bigIdea": "Recognizing and avoiding common prompt engineering mistakes leads to more effective and reliable AI interactions.",
+        "steps": [
+          "Review your prompt for ambiguous language",
+          "Ensure sufficient context is provided",
+          "Check that the prompt is focused and clear",
+          "Test the prompt with sample inputs",
+          "Refine based on the results"
+        ],
+        "example": "A common mistake: 'Tell me about marketing.' Better approach: 'Explain the key components of a digital marketing strategy for a B2B software company targeting enterprise clients. Include discussion of content marketing, social media, and account-based marketing. Format as a 3-point summary with brief explanations.' The improved prompt provides context, specifies the audience, and defines the output format.",
+        "video": "https://www.youtube.com/watch?v=example14",
+        "reflection": "How might understanding common mistakes change your approach to creating prompts?",
+        "quiz": [
+          {
+            "q": "What is a common mistake in prompt engineering?",
+            "a": "Using ambiguous or unclear language",
+            "opts": [
+              "Providing too much context",
+              "Using ambiguous or unclear language",
+              "Being too specific",
+              "Using simple language"
+            ]
+          }
+        ],
+        "summary": "In this lesson, we've examined common prompt engineering mistakes and how to avoid them. By recognizing these pitfalls and applying best practices, you can create more effective prompts that consistently produce high-quality results."
+      },
+      {
+        "id": 15,
+        "module": "Troubleshooting and Best Practices",
+        "title": "Testing and Validating Prompts",
+        "duration": "10-15 min",
+        "intro": "In this lesson, we'll explore systematic approaches to testing and validating prompts to ensure they work reliably across different scenarios. Testing is a critical component of prompt engineering that ensures consistency and reliability. We'll cover various testing strategies and validation techniques to help you create robust prompts that perform well in different situations.",
+        "bigIdea": "Systematic testing and validation ensure prompts work reliably across different inputs and scenarios.",
+        "steps": [
+          "Identify typical use cases for the prompt",
+          "Create test cases for edge cases and unusual scenarios",
+          "Test the prompt multiple times with the same input to check consistency",
+          "Evaluate the quality and appropriateness of responses",
+          "Refine the prompt based on test results"
+        ],
+        "example": "For a customer service prompt, test with various types of customer inquiries: standard requests, angry customers, complex technical questions, and requests with incomplete information. This ensures the prompt generates appropriate responses for all scenarios. Additionally, run the same inquiry multiple times to ensure consistency in the response quality and tone.",
+        "video": "https://www.youtube.com/watch?v=example15",
+        "reflection": "How might systematic testing change the prompts you create?",
+        "quiz": [
+          {
+            "q": "Why is testing important in prompt engineering?",
+            "a": "It ensures prompts work reliably across different inputs and scenarios",
+            "opts": [
+              "It makes the AI respond faster",
+              "It ensures prompts work reliably across different inputs and scenarios",
+              "It reduces the cost of using AI",
+              "It makes the AI more creative"
+            ]
+          }
+        ],
+        "summary": "In this lesson, we've explored systematic approaches to testing and validating prompts. By thoroughly testing prompts across different scenarios and inputs, you can ensure they work reliably and consistently produce high-quality results."
+      },
+      {
+        "id": 16,
+        "module": "Course Conclusion",
+        "title": "Putting It All Together: Advanced Prompt Engineering Projects",
+        "duration": "10-15 min",
+        "intro": "In this final lesson, we'll synthesize all the concepts learned throughout the course by exploring advanced prompt engineering projects. You'll learn how to combine multiple techniques, approach complex challenges, and develop your own advanced prompts. This lesson serves as a capstone that brings together all the skills and knowledge you've gained throughout the course.",
+        "bigIdea": "Advanced prompt engineering involves combining multiple techniques to solve complex challenges and achieve sophisticated results.",
+        "steps": [
+          "Identify the overall objective and requirements",
+          "Break the challenge into smaller, manageable components",
+          "Select appropriate prompt techniques for each component",
+          "Develop and test individual prompts",
+          "Integrate the components into a complete solution",
+          "Refine the overall approach based on results"
+        ],
+        "example": "A complex business challenge might require: 1) A data analysis prompt to identify market trends, 2) A creative brainstorming prompt to generate strategy options, 3) A detailed analysis prompt to evaluate each option, and 4) A presentation prompt to format findings. Each prompt uses different techniques tailored to its specific role in the overall process.",
+        "video": "https://www.youtube.com/watch?v=example16",
+        "reflection": "How will you continue to develop your prompt engineering skills beyond this course?",
+        "quiz": [
+          {
+            "q": "What is the main benefit of combining multiple prompt engineering techniques?",
+            "a": "It allows for solving complex challenges that require multiple approaches",
+            "opts": [
+              "It makes the AI respond faster",
+              "It allows for solving complex challenges that require multiple approaches",
+              "It reduces the cost of using AI",
+              "It makes the AI more creative in all cases"
+            ]
+          }
+        ],
+        "summary": "Congratulations! You've completed the Prompt Engineering Mastery course. You now have a comprehensive toolkit of techniques to create effective, sophisticated prompts for a wide variety of applications. Remember that prompt engineering is a skill that improves with practice, so continue experimenting and refining your approaches."
+      }
+    ]
+  }
+};
 
         let currentCourse = "vibe-coding";
         let currentLesson = 0;
