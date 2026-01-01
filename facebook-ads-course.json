@@ -535,451 +535,6 @@
   },
   {
     "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
-    "module_title": "Module 7: Scaling & Stability",
-    "lesson_number": 19,
-    "lesson_title": "Scaling Ads Without Breaking Them",
-    "introduction": "In this lesson, you'll learn how to scale your Facebook Ads without breaking performance. Scaling is one of the most challenging aspects of Facebook Ads - many advertisers successfully build profitable campaigns but struggle to grow them without seeing performance deteriorate. We'll explore the difference between vertical and horizontal scaling, when to duplicate versus increase budget, and how to recognize the signs of successful versus failing scaling efforts.",
-    "why_it_matters": "Scaling is the difference between a profitable small campaign and a profitable business. Many advertisers get stuck at the same spend level because they don't understand how scaling works. Without proper scaling knowledge, you'll either plateau at low spend or break profitable campaigns by scaling incorrectly. Understanding scaling allows you to grow revenue while maintaining profitability.",
-    "core_concept": "Scaling in Facebook Ads involves two main approaches: vertical scaling (increasing budget within existing parameters) and horizontal scaling (expanding to new audiences, creatives, or ad sets). The key to successful scaling is to maintain the same performance signals that made your original campaign successful while giving the algorithm more opportunities to find new audiences. Scaling should be gradual and strategic, not aggressive and random.",
-    "steps": [
-      "Step 1: Ensure your base campaign is profitable and stable before attempting to scale",
-      "Step 2: Choose between vertical scaling (budget increase) or horizontal scaling (expansion)",
-      "Step 3: For vertical scaling, increase budget by 20-30% every 2-3 days if performance remains stable",
-      "Step 4: For horizontal scaling, duplicate successful ad sets with slight variations in audience or creative",
-      "Step 5: Monitor performance closely during scaling and revert changes if performance deteriorates"
-    ],
-    "practical_examples": [
-      "Consider a profitable e-commerce campaign spending $50/day with a 3:1 ROAS. To scale vertically, you might increase the budget to $65/day and monitor for 2-3 days. If performance remains stable (3:1 ROAS), you can continue gradual increases. For horizontal scaling, you might create 2-3 new ad sets with similar audiences but different interests, allowing the algorithm to find new customer segments while maintaining the proven creative approach.",
-      "Another example: A SaaS company with a profitable lead generation campaign. They've identified that their 25-34 age demographic performs best. For horizontal scaling, they create new ad sets targeting 35-44 and 45-54 demographics with similar interests. For vertical scaling, they gradually increase budget within the original demographic, monitoring CPM and lead quality metrics to ensure the algorithm continues finding quality audiences."
-    ],
-    "common_mistakes": [
-      "Mistake 1: Scaling too quickly by doubling or tripling budgets at once. This overwhelms the algorithm and often breaks performance.",
-      "Mistake 2: Scaling a campaign that isn't profitable yet. This amplifies losses rather than profits.",
-      "Mistake 3: Horizontal scaling with too many variations at once. This dilutes the learning phase and makes optimization harder.",
-      "Mistake 4: Not monitoring metrics closely during scaling. This leads to extended periods of poor performance before corrections are made."
-    ],
-    "system_connections": "This lesson builds on audience knowledge from Module 3 and creative understanding from Module 4. It applies the optimization principles learned in Module 6 to scaling scenarios. Understanding scaling is crucial for the real-world workflows in Module 8, where you'll learn to manage client campaigns. Proper scaling techniques ensure that your successful campaigns can grow while maintaining the performance that made them profitable.",
-    "actionable_takeaway": "Before scaling any campaign, ensure it's profitable and stable for at least 3-5 days. Scale gradually (20-30% increases) and choose between vertical or horizontal scaling based on your current performance. Always monitor key metrics during scaling and be ready to pause if performance deteriorates. Remember: good scaling maintains profitability while growing volume.",
-    "quiz": {
-      "questions": [
-        "What are the two main approaches to scaling Facebook Ads?",
-        "What should you ensure before attempting to scale a campaign?",
-        "How much should you increase budget for vertical scaling?",
-        "What happens when you scale too quickly?",
-        "Why is horizontal scaling often more stable than vertical scaling?"
-      ],
-      "answers": [
-        "Vertical scaling and horizontal scaling",
-        "The campaign is profitable and stable",
-        "20-30% every 2-3 days if performance remains stable",
-        "It overwhelms the algorithm and often breaks performance",
-        "It maintains learning while expanding to new opportunities"
-      ],
-      "options": [
-        [
-          "Vertical scaling and horizontal scaling",
-          "Budget scaling and creative scaling",
-          "Audience scaling and ad scaling",
-          "Fast scaling and slow scaling"
-        ],
-        [
-          "The campaign is profitable and stable",
-          "The campaign has been running for 30 days",
-          "The campaign has perfect creative",
-          "The campaign has maximum reach"
-        ],
-        [
-          "20-30% every 2-3 days if performance remains stable",
-          "50-100% immediately",
-          "10% every day",
-          "200% after one week"
-        ],
-        [
-          "It overwhelms the algorithm and often breaks performance",
-          "It guarantees better results",
-          "It reduces your cost per click",
-          "It increases your audience targeting"
-        ],
-        [
-          "It maintains learning while expanding to new opportunities",
-          "It reduces your ad spend",
-          "It guarantees perfect performance",
-          "It eliminates the need for monitoring"
-        ]
-      ]
-    },
-    "resources": {
-      "video": {
-        "title": "Facebook Ads Scaling Strategies",
-        "url": "https://www.youtube.com/watch?v=example",
-        "embed": true,
-        "reason": "Visual guide to proper scaling techniques"
-      },
-      "extra_reading": [
-        "https://www.facebook.com/business/learn/facebook-ad-scaling - Official Scaling Guide",
-        "https://www.facebook.com/business/learn/facebook-ads-budget-strategy - Budget Management Best Practices"
-      ]
-    },
-    "summary": "Scaling Facebook Ads involves vertical scaling (budget increases) and horizontal scaling (expansion to new audiences/creatives). Before scaling, ensure campaigns are profitable and stable. Scale gradually (20-30% increases) and monitor performance closely. Good scaling maintains profitability while growing volume. Proper scaling techniques allow profitable campaigns to grow without breaking performance."
-  },
-  {
-    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
-    "module_title": "Module 7: Scaling & Stability",
-    "lesson_number": 20,
-    "lesson_title": "Handling Drops, Fatigue & Inconsistency",
-    "introduction": "Even the best Facebook Ads campaigns experience performance drops, creative fatigue, and inconsistency. In this lesson, you'll learn why ads suddenly stop working, how to distinguish between different types of performance issues, and how to recover performance calmly without panic-editing. Understanding these challenges is crucial for maintaining stable, profitable campaigns over time.",
-    "why_it_matters": "Performance fluctuations are normal in Facebook Ads, but many advertisers panic when they see drops and make changes that make problems worse. Understanding the difference between creative fatigue, audience fatigue, and algorithm changes helps you respond appropriately. Without this knowledge, you'll either overreact to normal fluctuations or underreact to real problems, both of which hurt profitability.",
-    "core_concept": "Facebook Ads performance naturally fluctuates due to creative fatigue (audiences getting tired of seeing the same creative), audience fatigue (same audience seeing ads repeatedly), and algorithm changes (Facebook updating their systems). The key is to identify which type of issue you're facing and respond with the appropriate solution. Some fluctuations are normal and temporary, while others require specific interventions. Staying calm and analytical during performance changes leads to better decisions.",
-    "steps": [
-      "Step 1: Identify the type of performance issue (creative fatigue, audience fatigue, or algorithm change)",
-      "Step 2: Assess whether the drop is within normal fluctuations or a real problem",
-      "Step 3: For creative fatigue, introduce new creative variations gradually",
-      "Step 4: For audience fatigue, expand to new audiences or refresh existing ones",
-      "Step 5: For algorithm changes, monitor for stability rather than making immediate changes"
-    ],
-    "practical_examples": [
-      "Consider an e-commerce campaign that has been running the same creative for 2 weeks. The CTR drops from 2% to 1.2%, and the cost per click increases. This indicates creative fatigue. The solution is to introduce 2-3 new creative variations while keeping the best-performing creative running. This refreshes the audience's interest without completely disrupting the campaign.",
-      "Another example: A lead generation campaign starts showing higher CPMs and lower conversion rates after 30 days. Analysis shows the same audiences have been targeted without refresh. This indicates audience fatigue. The solution is to create new lookalike audiences based on recent converters and pause ad sets that have reached their frequency cap, allowing the algorithm to find fresh audiences while maintaining the proven creative approach."
-    ],
-    "common_mistakes": [
-      "Mistake 1: Panic-editing campaigns at the first sign of a performance drop. This disrupts the learning phase and often makes problems worse.",
-      "Mistake 2: Confusing normal fluctuations with real performance issues. This leads to unnecessary changes that hurt stable campaigns.",
-      "Mistake 3: Changing too many elements at once when addressing performance issues. This makes it impossible to identify what worked.",
-      "Mistake 4: Ignoring real performance problems hoping they will resolve themselves. This leads to extended periods of poor performance."
-    ],
-    "system_connections": "This lesson connects to creative knowledge from Module 4 and audience understanding from Module 3. It applies the optimization principles from Module 6 to problem-solving scenarios. Understanding performance fluctuations is crucial for the client management workflows in Module 8, where you'll need to explain performance changes to stakeholders. This knowledge helps maintain stable campaigns over time.",
-    "actionable_takeaway": "When you see performance changes, resist the urge to panic-edit. First, identify the type of issue you're facing and assess whether it's normal fluctuation or a real problem. Make targeted changes based on the specific issue rather than changing everything at once. Remember that some fluctuations are normal, but persistent problems require specific interventions. Keep detailed records of changes and their results to improve your response over time.",
-    "quiz": {
-      "questions": [
-        "What are the three main causes of performance drops?",
-        "What is creative fatigue?",
-        "How should you respond to algorithm changes?",
-        "Why is panic-editing harmful to campaigns?",
-        "What should you do before making changes to a dropping campaign?"
-      ],
-      "answers": [
-        "Creative fatigue, audience fatigue, and algorithm changes",
-        "Audiences getting tired of seeing the same creative",
-        "Monitor for stability rather than making immediate changes",
-        "It disrupts the learning phase and often makes problems worse",
-        "Identify the type of issue and assess if it's a real problem"
-      ],
-      "options": [
-        [
-          "Creative fatigue, audience fatigue, and algorithm changes",
-          "Budget issues, targeting problems, and creative issues",
-          "Audience size, bid strategy, and campaign objective",
-          "Ad placement, frequency, and optimization goal"
-        ],
-        [
-          "Audiences getting tired of seeing the same creative",
-          "Audiences seeing too many different creatives",
-          "Audiences not engaging with any creative",
-          "Audiences being targeted with wrong interests"
-        ],
-        [
-          "Monitor for stability rather than making immediate changes",
-          "Immediately change all campaign settings",
-          "Double the budget to overcome the issue",
-          "Pause all campaigns until changes are complete"
-        ],
-        [
-          "It disrupts the learning phase and often makes problems worse",
-          "It guarantees better performance immediately",
-          "It reduces your cost per click",
-          "It increases your audience targeting"
-        ],
-        [
-          "Identify the type of issue and assess if it's a real problem",
-          "Immediately change all settings",
-          "Increase the budget significantly",
-          "Create multiple new campaigns"
-        ]
-      ]
-    },
-    "resources": {
-      "video": {
-        "title": "Recovering Facebook Ad Performance",
-        "url": "https://www.youtube.com/watch?v=example",
-        "embed": true,
-        "reason": "Strategies for handling performance drops calmly"
-      },
-      "extra_reading": [
-        "https://www.facebook.com/business/learn/facebook-ads-troubleshooting - Performance Troubleshooting Guide",
-        "https://www.facebook.com/business/learn/facebook-creative-fatigue - Creative Fatigue Solutions"
-      ]
-    },
-    "summary": "Performance drops in Facebook Ads are caused by creative fatigue, audience fatigue, and algorithm changes. Understanding the difference helps you respond appropriately rather than panic-editing. Creative fatigue requires new variations, audience fatigue needs fresh targeting, and algorithm changes often just need monitoring. Staying calm and analytical during performance changes leads to better decisions and more stable campaigns."
-  },
-  {
-    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
-    "module_title": "Module 8: Real-World Facebook Ads Workflows",
-    "lesson_number": 21,
-    "lesson_title": "Running Ads for Your Own Business",
-    "introduction": "In this lesson, you'll learn how to run Facebook Ads for your own business across different business models. We'll explore specific strategies for e-commerce, services, digital products, courses, and local businesses. Understanding how to adapt your Facebook Ads approach to your specific business model is crucial for achieving the results you need to grow.",
-    "why_it_matters": "The same Facebook Ads approach doesn't work for every business model. E-commerce businesses have different funnels, conversion metrics, and optimization goals compared to service businesses or course creators. Understanding the unique challenges and opportunities of your business model allows you to create campaigns that align with your specific customer journey and business objectives.",
-    "core_concept": "Different business models require different approaches to Facebook Ads: e-commerce focuses on product catalogs and purchase events, services often emphasize lead generation and consultations, digital products may target specific user behaviors, courses need to address education and trust factors, and local businesses must consider geographic targeting and foot traffic. The key is to understand your unique sales cycle and design campaigns that support it.",
-    "steps": [
-      "Step 1: Identify your specific business model and customer journey",
-      "Step 2: Map your business model to the appropriate campaign objectives",
-      "Step 3: Set up conversion tracking that aligns with your business goals",
-      "Step 4: Create audience strategies that match your customer acquisition model",
-      "Step 5: Design creative that speaks to your specific audience's pain points"
-    ],
-    "practical_examples": [
-      "Consider an e-commerce clothing store. They focus on product catalog integration, optimize for purchase events, use dynamic product ads to retarget browsers, and create audiences based on website behavior. Their campaigns might include prospecting for new customers, retargeting cart abandoners, and promoting specific product collections to relevant interests.",
-      "Another example: A local fitness studio offering personal training. They create location-based campaigns, optimize for lead generation (contact form fills), use local audience targeting, and focus on driving both online signups and in-person visits. Their creative emphasizes local community, personal transformation, and includes testimonials from local clients."
-    ],
-    "common_mistakes": [
-      "Mistake 1: Using e-commerce strategies for service businesses. This leads to campaigns optimized for purchases rather than consultations or appointments.",
-      "Mistake 2: Not tracking the right conversion events for your business model. E-commerce stores might focus on clicks instead of purchases, while service businesses might track form fills instead of actual appointments.",
-      "Mistake 3: Creating audiences that don't match your actual customer acquisition model. This results in targeting the wrong people.",
-      "Mistake 4: Using generic creative that doesn't address business-model-specific pain points."
-    ],
-    "system_connections": "This lesson applies all previous knowledge (audiences, creatives, optimization, scaling) to specific business contexts. It builds on the scaling and stability concepts from Module 7 by showing how to adapt scaling strategies to different business models. Understanding your business model is crucial for the AI integration in Module 9, where you'll learn to automate workflows specific to your model.",
-    "actionable_takeaway": "Before creating any campaign, clearly identify your business model and primary revenue driver. Design your entire campaign strategy (objectives, tracking, audiences, creative) around this model. Test different approaches to see what works best for your specific business type, and don't copy strategies from businesses with different models without adaptation.",
-    "quiz": {
-      "questions": [
-        "Why do different business models require different Facebook Ads approaches?",
-        "What should e-commerce businesses focus on for conversion tracking?",
-        "How should service businesses approach campaign objectives?",
-        "What happens when you use e-commerce strategies for service businesses?",
-        "Why is it important to map your business model to campaign objectives?"
-      ],
-      "answers": [
-        "Different models have different funnels, conversion metrics, and optimization goals",
-        "Purchase events and product catalog integration",
-        "Lead generation and consultation optimization",
-        "Campaigns are optimized for purchases rather than consultations",
-        "It ensures campaigns align with your specific customer journey"
-      ],
-      "options": [
-        [
-          "Different models have different funnels, conversion metrics, and optimization goals",
-          "Facebook charges different rates for different models",
-          "Different models require different ad platforms",
-          "E-commerce businesses get better results than services"
-        ],
-        [
-          "Purchase events and product catalog integration",
-          "Website visits and video views",
-          "Form fills and email captures",
-          "Page likes and engagement"
-        ],
-        [
-          "Lead generation and consultation optimization",
-          "Always use traffic objectives",
-          "Focus only on brand awareness",
-          "Use the same approach as e-commerce"
-        ],
-        [
-          "Campaigns are optimized for purchases rather than consultations",
-          "It improves campaign performance immediately",
-          "It reduces your ad spend significantly",
-          "It increases your audience targeting"
-        ],
-        [
-          "It ensures campaigns align with your specific customer journey",
-          "It allows you to use more ad spend",
-          "It guarantees ad approval",
-          "It eliminates the need for creative testing"
-        ]
-      ]
-    },
-    "resources": {
-      "video": {
-        "title": "Facebook Ads for Different Business Models",
-        "url": "https://www.youtube.com/watch?v=example",
-        "embed": true,
-        "reason": "Examples of ads strategies for various business types"
-      },
-      "extra_reading": [
-        "https://www.facebook.com/business/learn/facebook-ads-for-ecommerce - E-commerce Guide",
-        "https://www.facebook.com/business/learn/facebook-ads-for-local-businesses - Local Business Guide"
-      ]
-    },
-    "summary": "Different business models require tailored Facebook Ads approaches: e-commerce focuses on product catalogs and purchases, services on lead generation and consultations, digital products on user behaviors, courses on education and trust, and local businesses on geographic targeting. Understanding your business model helps you design campaigns that align with your specific customer journey and business objectives."
-  },
-  {
-    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
-    "module_title": "Module 8: Real-World Facebook Ads Workflows",
-    "lesson_number": 22,
-    "lesson_title": "Running Ads for Clients",
-    "introduction": "Managing Facebook Ads for clients comes with unique challenges and responsibilities that differ significantly from running ads for your own business. In this lesson, you'll learn client onboarding processes, how to set realistic expectations, effective reporting methods, and how to protect yourself as a freelancer or agency. These skills are essential for building a successful Facebook Ads service business.",
-    "why_it_matters": "Client work requires different skills than managing your own campaigns. You need to manage client expectations, explain complex concepts in simple terms, justify your strategies, and deliver results that justify your fees. Without proper client management skills, even successful campaigns can lead to difficult relationships, scope creep, and payment issues. Understanding client work is crucial for building a sustainable Facebook Ads service business.",
-    "core_concept": "Running ads for clients involves three main components: onboarding and setup (understanding their business, goals, and access requirements), expectation management (setting realistic timelines and performance benchmarks), and reporting and communication (providing regular updates and explaining performance in business terms). Success in client work requires both technical skills and relationship management abilities.",
-    "steps": [
-      "Step 1: Conduct thorough onboarding to understand the client's business and goals",
-      "Step 2: Set realistic expectations about timeline, results, and budget requirements",
-      "Step 3: Establish clear communication protocols and reporting schedules",
-      "Step 4: Document all strategies, changes, and performance in a client-friendly way",
-      "Step 5: Regularly review performance and adjust strategies based on business impact"
-    ],
-    "practical_examples": [
-      "Consider a freelance Facebook Ads manager working with a local restaurant. During onboarding, they learn the client wants to increase lunch traffic by 20% in 3 months. They set expectations that it will take 2-3 weeks for campaigns to stabilize, explain the testing process, and agree on weekly performance reports. They focus campaigns on local audiences interested in dining out and track both online engagement and estimated foot traffic through check-ins.",
-      "Another example: A small agency managing ads for an e-commerce client. They create a comprehensive onboarding document, set up proper access to the client's accounts, establish monthly strategy calls, and provide detailed reports showing ROAS, customer acquisition cost, and lifetime value. They also include recommendations for non-advertising improvements to the client's website and customer experience."
-    ],
-    "common_mistakes": [
-      "Mistake 1: Not setting clear expectations upfront. This leads to disappointed clients and scope creep.",
-      "Mistake 2: Providing too much technical detail in reports. This confuses clients and doesn't show business value.",
-      "Mistake 3: Not documenting strategies and changes properly. This makes it hard to explain results and learn from campaigns.",
-      "Mistake 4: Failing to protect yourself with contracts and payment terms. This leads to payment disputes and unlimited work obligations."
-    ],
-    "system_connections": "This lesson applies all technical knowledge from previous modules to client service scenarios. It builds on the scaling and stability concepts from Module 7 by showing how to manage client expectations during performance fluctuations. Understanding client work is essential for the ethics and compliance knowledge in the next lesson, as client work has additional regulatory considerations.",
-    "actionable_takeaway": "Always establish clear expectations during onboarding, focusing on realistic timelines and performance benchmarks. Create client-friendly reports that show business impact rather than just ad metrics. Document your strategies and changes so you can explain your approach. Protect yourself with proper contracts and payment terms. Remember that your success depends on both technical results and client satisfaction.",
-    "quiz": {
-      "questions": [
-        "What are the three main components of client work?",
-        "Why is expectation management important in client work?",
-        "How should you approach reporting to clients?",
-        "What happens when you don't set clear expectations?",
-        "Why is documentation important in client work?"
-      ],
-      "answers": [
-        "Onboarding and setup, expectation management, and reporting and communication",
-        "It prevents disappointed clients and scope creep",
-        "Show business impact rather than just ad metrics",
-        "It leads to disappointed clients and scope creep",
-        "It helps explain results and learn from campaigns"
-      ],
-      "options": [
-        [
-          "Onboarding and setup, expectation management, and reporting and communication",
-          "Creative, targeting, and bidding",
-          "Campaigns, ad sets, and ads",
-          "Budget, audience, and creative"
-        ],
-        [
-          "It prevents disappointed clients and scope creep",
-          "It reduces your ad spend",
-          "It guarantees perfect performance",
-          "It eliminates the need for testing"
-        ],
-        [
-          "Show business impact rather than just ad metrics",
-          "Provide as much technical detail as possible",
-          "Focus only on cost metrics",
-          "Use only Facebook's standard reports"
-        ],
-        [
-          "It leads to disappointed clients and scope creep",
-          "It improves campaign performance immediately",
-          "It reduces your workload significantly",
-          "It increases your audience targeting"
-        ],
-        [
-          "It helps explain results and learn from campaigns",
-          "It reduces your ad spend",
-          "It guarantees ad approval",
-          "It eliminates the need for testing"
-        ]
-      ]
-    },
-    "resources": {
-      "video": {
-        "title": "Client Management for Facebook Ads Professionals",
-        "url": "https://www.youtube.com/watch?v=example",
-        "embed": true,
-        "reason": "Best practices for managing client relationships"
-      },
-      "extra_reading": [
-        "https://www.facebook.com/business/learn/facebook-ads-agency-best-practices - Agency Best Practices",
-        "https://www.facebook.com/business/learn/facebook-ads-client-management - Client Management Guide"
-      ]
-    },
-    "summary": "Running ads for clients requires onboarding, expectation management, and effective reporting. Success depends on both technical skills and relationship management. Set realistic expectations, create business-focused reports, document strategies, and protect yourself with proper contracts. Client work requires different skills than managing your own campaigns."
-  },
-  {
-    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
-    "module_title": "Module 8: Real-World Facebook Ads Workflows",
-    "lesson_number": 23,
-    "lesson_title": "Ethics, Compliance & Account Safety",
-    "introduction": "In this final module lesson, you'll learn about Facebook's ad policies, how to avoid bans and restrictions, and how to maintain long-term account health. Ethics and compliance aren't just about following rules - they're about building sustainable, trustworthy advertising practices that protect both you and your clients. Understanding these principles is crucial for long-term success in Facebook Ads.",
-    "why_it_matters": "Facebook Ads policies exist to protect users and maintain platform integrity, but they can also impact your ability to run successful campaigns. Violating policies can result in account restrictions, ad rejections, or complete account bans. Understanding these policies helps you create compliant campaigns while still achieving your business goals. Ethical advertising practices also build trust with your audience and protect your reputation.",
-    "core_concept": "Facebook's ad policies cover prohibited content (scams, misleading claims, restricted products), restricted content (health claims, financial services), and technical requirements (proper landing pages, accurate business information). Account safety involves maintaining good standing through consistent compliance, avoiding policy violations, and having backup plans for account issues. Ethical advertising means creating honest, transparent campaigns that provide real value to users.",
-    "steps": [
-      "Step 1: Familiarize yourself with Facebook's advertising policies and guidelines",
-      "Step 2: Create a compliance checklist for all campaigns before publishing",
-      "Step 3: Regularly review policy updates and adjust strategies accordingly",
-      "Step 4: Maintain backup accounts and alternative strategies for business continuity",
-      "Step 5: Always prioritize honest, transparent advertising that provides real value"
-    ],
-    "practical_examples": [
-      "Consider a health supplement company advertising their products. They must navigate Facebook's health-related advertising restrictions by avoiding medical claims, providing scientific evidence for benefits, and ensuring their landing pages comply with health advertising requirements. They create campaigns focused on general wellness rather than specific medical conditions, and always include appropriate disclaimers.",
-      "Another example: A financial services company offering investment advice. They must comply with financial advertising policies by providing proper certifications, avoiding guaranteed return claims, and ensuring their ads don't promote get-rich-quick schemes. They focus on educational content about financial planning rather than promises of high returns, and always include risk disclosures."
-    ],
-    "common_mistakes": [
-      "Mistake 1: Not staying updated on policy changes. This leads to accidental violations and account issues.",
-      "Mistake 2: Making exaggerated or false claims to improve performance. This results in ad rejections and potential account restrictions.",
-      "Mistake 3: Not having backup plans when accounts are restricted. This causes business disruption.",
-      "Mistake 4: Prioritizing short-term performance over long-term account health. This leads to risky strategies that eventually cause problems."
-    ],
-    "system_connections": "This lesson connects to all previous modules by emphasizing the importance of maintaining account health while implementing all the strategies learned. It builds on the client work knowledge from the previous lesson by showing how to protect both your and your clients' accounts. Understanding compliance is essential for the AI integration in Module 9, where automated systems must also follow policy requirements. This knowledge is crucial for long-term mastery in the final module.",
-    "actionable_takeaway": "Always stay updated on Facebook's advertising policies and create a compliance checklist for your campaigns. Focus on honest, transparent advertising that provides real value rather than trying to game the system. Have backup accounts and strategies in place for business continuity. Remember that sustainable, ethical advertising practices lead to long-term success rather than short-term gains that might violate policies.",
-    "quiz": {
-      "questions": [
-        "What are Facebook's ad policy categories?",
-        "Why is it important to have backup accounts?",
-        "What should you do to maintain account health?",
-        "What happens when you make false claims in ads?",
-        "Why is ethical advertising important for long-term success?"
-      ],
-      "answers": [
-        "Prohibited content, restricted content, and technical requirements",
-        "For business continuity when accounts are restricted",
-        "Stay updated on policies and follow compliance checklists",
-        "Results in ad rejections and potential account restrictions",
-        "It leads to sustainable success and avoids policy violations"
-      ],
-      "options": [
-        [
-          "Prohibited content, restricted content, and technical requirements",
-          "Budget, audience, and creative requirements",
-          "Campaign, ad set, and ad policies",
-          "Targeting, bidding, and optimization rules"
-        ],
-        [
-          "For business continuity when accounts are restricted",
-          "To increase your ad spend",
-          "To guarantee ad approval",
-          "To reduce your cost per click"
-        ],
-        [
-          "Stay updated on policies and follow compliance checklists",
-          "Ignore policy updates and focus on performance",
-          "Use the same strategies as competitors",
-          "Focus only on creative and ignore policies"
-        ],
-        [
-          "Results in ad rejections and potential account restrictions",
-          "It improves campaign performance immediately",
-          "It reduces your ad spend significantly",
-          "It increases your audience targeting"
-        ],
-        [
-          "It leads to sustainable success and avoids policy violations",
-          "It guarantees perfect performance",
-          "It eliminates the need for testing",
-          "It reduces your cost per click"
-        ]
-      ]
-    },
-    "resources": {
-      "video": {
-        "title": "Facebook Ad Policies and Account Safety",
-        "url": "https://www.youtube.com/watch?v=example",
-        "embed": true,
-        "reason": "Comprehensive guide to policy compliance"
-      },
-      "extra_reading": [
-        "https://www.facebook.com/policies/ads - Official Facebook Ad Policies",
-        "https://www.facebook.com/business/help/ads-policy - Ad Policy Center"
-      ]
-    },
-    "summary": "Facebook's ad policies cover prohibited content, restricted content, and technical requirements. Maintaining account safety requires compliance with these policies, having backup plans, and focusing on ethical advertising practices. Understanding policies helps you create compliant campaigns while achieving business goals. Long-term success requires sustainable, policy-compliant advertising strategies."
-  },
-  {
-    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
     "module_title": "Module 3: Audiences & Targeting (The Right Way in 2025)",
     "lesson_number": 7,
     "lesson_title": "Understanding Audiences Deeply",
@@ -2045,6 +1600,451 @@
       ]
     },
     "summary": "Different metrics matter for different campaign objectives and stages. Focus on metrics that align with your business goals rather than vanity metrics. During the learning phase, monitor delivery metrics (CPM, CTR) but avoid making decisions based on conversion metrics until you have statistical significance. For conversion campaigns, prioritize conversion metrics like cost per purchase and ROAS once the campaign matures. Understanding leading vs. lagging indicators helps guide optimization decisions."
+  },
+  {
+    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
+    "module_title": "Module 7: Scaling & Stability",
+    "lesson_number": 19,
+    "lesson_title": "Scaling Ads Without Breaking Them",
+    "introduction": "In this lesson, you'll learn how to scale your Facebook Ads without breaking performance. Scaling is one of the most challenging aspects of Facebook Ads - many advertisers successfully build profitable campaigns but struggle to grow them without seeing performance deteriorate. We'll explore the difference between vertical and horizontal scaling, when to duplicate versus increase budget, and how to recognize the signs of successful versus failing scaling efforts.",
+    "why_it_matters": "Scaling is the difference between a profitable small campaign and a profitable business. Many advertisers get stuck at the same spend level because they don't understand how scaling works. Without proper scaling knowledge, you'll either plateau at low spend or break profitable campaigns by scaling incorrectly. Understanding scaling allows you to grow revenue while maintaining profitability.",
+    "core_concept": "Scaling in Facebook Ads involves two main approaches: vertical scaling (increasing budget within existing parameters) and horizontal scaling (expanding to new audiences, creatives, or ad sets). The key to successful scaling is to maintain the same performance signals that made your original campaign successful while giving the algorithm more opportunities to find new audiences. Scaling should be gradual and strategic, not aggressive and random.",
+    "steps": [
+      "Step 1: Ensure your base campaign is profitable and stable before attempting to scale",
+      "Step 2: Choose between vertical scaling (budget increase) or horizontal scaling (expansion)",
+      "Step 3: For vertical scaling, increase budget by 20-30% every 2-3 days if performance remains stable",
+      "Step 4: For horizontal scaling, duplicate successful ad sets with slight variations in audience or creative",
+      "Step 5: Monitor performance closely during scaling and revert changes if performance deteriorates"
+    ],
+    "practical_examples": [
+      "Consider a profitable e-commerce campaign spending $50/day with a 3:1 ROAS. To scale vertically, you might increase the budget to $65/day and monitor for 2-3 days. If performance remains stable (3:1 ROAS), you can continue gradual increases. For horizontal scaling, you might create 2-3 new ad sets with similar audiences but different interests, allowing the algorithm to find new customer segments while maintaining the proven creative approach.",
+      "Another example: A SaaS company with a profitable lead generation campaign. They've identified that their 25-34 age demographic performs best. For horizontal scaling, they create new ad sets targeting 35-44 and 45-54 demographics with similar interests. For vertical scaling, they gradually increase budget within the original demographic, monitoring CPM and lead quality metrics to ensure the algorithm continues finding quality audiences."
+    ],
+    "common_mistakes": [
+      "Mistake 1: Scaling too quickly by doubling or tripling budgets at once. This overwhelms the algorithm and often breaks performance.",
+      "Mistake 2: Scaling a campaign that isn't profitable yet. This amplifies losses rather than profits.",
+      "Mistake 3: Horizontal scaling with too many variations at once. This dilutes the learning phase and makes optimization harder.",
+      "Mistake 4: Not monitoring metrics closely during scaling. This leads to extended periods of poor performance before corrections are made."
+    ],
+    "system_connections": "This lesson builds on audience knowledge from Module 3 and creative understanding from Module 4. It applies the optimization principles learned in Module 6 to scaling scenarios. Understanding scaling is crucial for the real-world workflows in Module 8, where you'll learn to manage client campaigns. Proper scaling techniques ensure that your successful campaigns can grow while maintaining the performance that made them profitable.",
+    "actionable_takeaway": "Before scaling any campaign, ensure it's profitable and stable for at least 3-5 days. Scale gradually (20-30% increases) and choose between vertical or horizontal scaling based on your current performance. Always monitor key metrics during scaling and be ready to pause if performance deteriorates. Remember: good scaling maintains profitability while growing volume.",
+    "quiz": {
+      "questions": [
+        "What are the two main approaches to scaling Facebook Ads?",
+        "What should you ensure before attempting to scale a campaign?",
+        "How much should you increase budget for vertical scaling?",
+        "What happens when you scale too quickly?",
+        "Why is horizontal scaling often more stable than vertical scaling?"
+      ],
+      "answers": [
+        "Vertical scaling and horizontal scaling",
+        "The campaign is profitable and stable",
+        "20-30% every 2-3 days if performance remains stable",
+        "It overwhelms the algorithm and often breaks performance",
+        "It maintains learning while expanding to new opportunities"
+      ],
+      "options": [
+        [
+          "Vertical scaling and horizontal scaling",
+          "Budget scaling and creative scaling",
+          "Audience scaling and ad scaling",
+          "Fast scaling and slow scaling"
+        ],
+        [
+          "The campaign is profitable and stable",
+          "The campaign has been running for 30 days",
+          "The campaign has perfect creative",
+          "The campaign has maximum reach"
+        ],
+        [
+          "20-30% every 2-3 days if performance remains stable",
+          "50-100% immediately",
+          "10% every day",
+          "200% after one week"
+        ],
+        [
+          "It overwhelms the algorithm and often breaks performance",
+          "It guarantees better results",
+          "It reduces your cost per click",
+          "It increases your audience targeting"
+        ],
+        [
+          "It maintains learning while expanding to new opportunities",
+          "It reduces your ad spend",
+          "It guarantees perfect performance",
+          "It eliminates the need for monitoring"
+        ]
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Facebook Ads Scaling Strategies",
+        "url": "https://www.youtube.com/watch?v=example",
+        "embed": true,
+        "reason": "Visual guide to proper scaling techniques"
+      },
+      "extra_reading": [
+        "https://www.facebook.com/business/learn/facebook-ad-scaling - Official Scaling Guide",
+        "https://www.facebook.com/business/learn/facebook-ads-budget-strategy - Budget Management Best Practices"
+      ]
+    },
+    "summary": "Scaling Facebook Ads involves vertical scaling (budget increases) and horizontal scaling (expansion to new audiences/creatives). Before scaling, ensure campaigns are profitable and stable. Scale gradually (20-30% increases) and monitor performance closely. Good scaling maintains profitability while growing volume. Proper scaling techniques allow profitable campaigns to grow without breaking performance."
+  },
+  {
+    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
+    "module_title": "Module 7: Scaling & Stability",
+    "lesson_number": 20,
+    "lesson_title": "Handling Drops, Fatigue & Inconsistency",
+    "introduction": "Even the best Facebook Ads campaigns experience performance drops, creative fatigue, and inconsistency. In this lesson, you'll learn why ads suddenly stop working, how to distinguish between different types of performance issues, and how to recover performance calmly without panic-editing. Understanding these challenges is crucial for maintaining stable, profitable campaigns over time.",
+    "why_it_matters": "Performance fluctuations are normal in Facebook Ads, but many advertisers panic when they see drops and make changes that make problems worse. Understanding the difference between creative fatigue, audience fatigue, and algorithm changes helps you respond appropriately. Without this knowledge, you'll either overreact to normal fluctuations or underreact to real problems, both of which hurt profitability.",
+    "core_concept": "Facebook Ads performance naturally fluctuates due to creative fatigue (audiences getting tired of seeing the same creative), audience fatigue (same audience seeing ads repeatedly), and algorithm changes (Facebook updating their systems). The key is to identify which type of issue you're facing and respond with the appropriate solution. Some fluctuations are normal and temporary, while others require specific interventions. Staying calm and analytical during performance changes leads to better decisions.",
+    "steps": [
+      "Step 1: Identify the type of performance issue (creative fatigue, audience fatigue, or algorithm change)",
+      "Step 2: Assess whether the drop is within normal fluctuations or a real problem",
+      "Step 3: For creative fatigue, introduce new creative variations gradually",
+      "Step 4: For audience fatigue, expand to new audiences or refresh existing ones",
+      "Step 5: For algorithm changes, monitor for stability rather than making immediate changes"
+    ],
+    "practical_examples": [
+      "Consider an e-commerce campaign that has been running the same creative for 2 weeks. The CTR drops from 2% to 1.2%, and the cost per click increases. This indicates creative fatigue. The solution is to introduce 2-3 new creative variations while keeping the best-performing creative running. This refreshes the audience's interest without completely disrupting the campaign.",
+      "Another example: A lead generation campaign starts showing higher CPMs and lower conversion rates after 30 days. Analysis shows the same audiences have been targeted without refresh. This indicates audience fatigue. The solution is to create new lookalike audiences based on recent converters and pause ad sets that have reached their frequency cap, allowing the algorithm to find fresh audiences while maintaining the proven creative approach."
+    ],
+    "common_mistakes": [
+      "Mistake 1: Panic-editing campaigns at the first sign of a performance drop. This disrupts the learning phase and often makes problems worse.",
+      "Mistake 2: Confusing normal fluctuations with real performance issues. This leads to unnecessary changes that hurt stable campaigns.",
+      "Mistake 3: Changing too many elements at once when addressing performance issues. This makes it impossible to identify what worked.",
+      "Mistake 4: Ignoring real performance problems hoping they will resolve themselves. This leads to extended periods of poor performance."
+    ],
+    "system_connections": "This lesson connects to creative knowledge from Module 4 and audience understanding from Module 3. It applies the optimization principles from Module 6 to problem-solving scenarios. Understanding performance fluctuations is crucial for the client management workflows in Module 8, where you'll need to explain performance changes to stakeholders. This knowledge helps maintain stable campaigns over time.",
+    "actionable_takeaway": "When you see performance changes, resist the urge to panic-edit. First, identify the type of issue you're facing and assess whether it's normal fluctuation or a real problem. Make targeted changes based on the specific issue rather than changing everything at once. Remember that some fluctuations are normal, but persistent problems require specific interventions. Keep detailed records of changes and their results to improve your response over time.",
+    "quiz": {
+      "questions": [
+        "What are the three main causes of performance drops?",
+        "What is creative fatigue?",
+        "How should you respond to algorithm changes?",
+        "Why is panic-editing harmful to campaigns?",
+        "What should you do before making changes to a dropping campaign?"
+      ],
+      "answers": [
+        "Creative fatigue, audience fatigue, and algorithm changes",
+        "Audiences getting tired of seeing the same creative",
+        "Monitor for stability rather than making immediate changes",
+        "It disrupts the learning phase and often makes problems worse",
+        "Identify the type of issue and assess if it's a real problem"
+      ],
+      "options": [
+        [
+          "Creative fatigue, audience fatigue, and algorithm changes",
+          "Budget issues, targeting problems, and creative issues",
+          "Audience size, bid strategy, and campaign objective",
+          "Ad placement, frequency, and optimization goal"
+        ],
+        [
+          "Audiences getting tired of seeing the same creative",
+          "Audiences seeing too many different creatives",
+          "Audiences not engaging with any creative",
+          "Audiences being targeted with wrong interests"
+        ],
+        [
+          "Monitor for stability rather than making immediate changes",
+          "Immediately change all campaign settings",
+          "Double the budget to overcome the issue",
+          "Pause all campaigns until changes are complete"
+        ],
+        [
+          "It disrupts the learning phase and often makes problems worse",
+          "It guarantees better performance immediately",
+          "It reduces your cost per click",
+          "It increases your audience targeting"
+        ],
+        [
+          "Identify the type of issue and assess if it's a real problem",
+          "Immediately change all settings",
+          "Increase the budget significantly",
+          "Create multiple new campaigns"
+        ]
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Recovering Facebook Ad Performance",
+        "url": "https://www.youtube.com/watch?v=example",
+        "embed": true,
+        "reason": "Strategies for handling performance drops calmly"
+      },
+      "extra_reading": [
+        "https://www.facebook.com/business/learn/facebook-ads-troubleshooting - Performance Troubleshooting Guide",
+        "https://www.facebook.com/business/learn/facebook-creative-fatigue - Creative Fatigue Solutions"
+      ]
+    },
+    "summary": "Performance drops in Facebook Ads are caused by creative fatigue, audience fatigue, and algorithm changes. Understanding the difference helps you respond appropriately rather than panic-editing. Creative fatigue requires new variations, audience fatigue needs fresh targeting, and algorithm changes often just need monitoring. Staying calm and analytical during performance changes leads to better decisions and more stable campaigns."
+  },
+  {
+    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
+    "module_title": "Module 8: Real-World Facebook Ads Workflows",
+    "lesson_number": 21,
+    "lesson_title": "Running Ads for Your Own Business",
+    "introduction": "In this lesson, you'll learn how to run Facebook Ads for your own business across different business models. We'll explore specific strategies for e-commerce, services, digital products, courses, and local businesses. Understanding how to adapt your Facebook Ads approach to your specific business model is crucial for achieving the results you need to grow.",
+    "why_it_matters": "The same Facebook Ads approach doesn't work for every business model. E-commerce businesses have different funnels, conversion metrics, and optimization goals compared to service businesses or course creators. Understanding the unique challenges and opportunities of your business model allows you to create campaigns that align with your specific customer journey and business objectives.",
+    "core_concept": "Different business models require different approaches to Facebook Ads: e-commerce focuses on product catalogs and purchase events, services often emphasize lead generation and consultations, digital products may target specific user behaviors, courses need to address education and trust factors, and local businesses must consider geographic targeting and foot traffic. The key is to understand your unique sales cycle and design campaigns that support it.",
+    "steps": [
+      "Step 1: Identify your specific business model and customer journey",
+      "Step 2: Map your business model to the appropriate campaign objectives",
+      "Step 3: Set up conversion tracking that aligns with your business goals",
+      "Step 4: Create audience strategies that match your customer acquisition model",
+      "Step 5: Design creative that speaks to your specific audience's pain points"
+    ],
+    "practical_examples": [
+      "Consider an e-commerce clothing store. They focus on product catalog integration, optimize for purchase events, use dynamic product ads to retarget browsers, and create audiences based on website behavior. Their campaigns might include prospecting for new customers, retargeting cart abandoners, and promoting specific product collections to relevant interests.",
+      "Another example: A local fitness studio offering personal training. They create location-based campaigns, optimize for lead generation (contact form fills), use local audience targeting, and focus on driving both online signups and in-person visits. Their creative emphasizes local community, personal transformation, and includes testimonials from local clients."
+    ],
+    "common_mistakes": [
+      "Mistake 1: Using e-commerce strategies for service businesses. This leads to campaigns optimized for purchases rather than consultations or appointments.",
+      "Mistake 2: Not tracking the right conversion events for your business model. E-commerce stores might focus on clicks instead of purchases, while service businesses might track form fills instead of actual appointments.",
+      "Mistake 3: Creating audiences that don't match your actual customer acquisition model. This results in targeting the wrong people.",
+      "Mistake 4: Using generic creative that doesn't address business-model-specific pain points."
+    ],
+    "system_connections": "This lesson applies all previous knowledge (audiences, creatives, optimization, scaling) to specific business contexts. It builds on the scaling and stability concepts from Module 7 by showing how to adapt scaling strategies to different business models. Understanding your business model is crucial for the AI integration in Module 9, where you'll learn to automate workflows specific to your model.",
+    "actionable_takeaway": "Before creating any campaign, clearly identify your business model and primary revenue driver. Design your entire campaign strategy (objectives, tracking, audiences, creative) around this model. Test different approaches to see what works best for your specific business type, and don't copy strategies from businesses with different models without adaptation.",
+    "quiz": {
+      "questions": [
+        "Why do different business models require different Facebook Ads approaches?",
+        "What should e-commerce businesses focus on for conversion tracking?",
+        "How should service businesses approach campaign objectives?",
+        "What happens when you use e-commerce strategies for service businesses?",
+        "Why is it important to map your business model to campaign objectives?"
+      ],
+      "answers": [
+        "Different models have different funnels, conversion metrics, and optimization goals",
+        "Purchase events and product catalog integration",
+        "Lead generation and consultation optimization",
+        "Campaigns are optimized for purchases rather than consultations",
+        "It ensures campaigns align with your specific customer journey"
+      ],
+      "options": [
+        [
+          "Different models have different funnels, conversion metrics, and optimization goals",
+          "Facebook charges different rates for different models",
+          "Different models require different ad platforms",
+          "E-commerce businesses get better results than services"
+        ],
+        [
+          "Purchase events and product catalog integration",
+          "Website visits and video views",
+          "Form fills and email captures",
+          "Page likes and engagement"
+        ],
+        [
+          "Lead generation and consultation optimization",
+          "Always use traffic objectives",
+          "Focus only on brand awareness",
+          "Use the same approach as e-commerce"
+        ],
+        [
+          "Campaigns are optimized for purchases rather than consultations",
+          "It improves campaign performance immediately",
+          "It reduces your ad spend significantly",
+          "It increases your audience targeting"
+        ],
+        [
+          "It ensures campaigns align with your specific customer journey",
+          "It allows you to use more ad spend",
+          "It guarantees ad approval",
+          "It eliminates the need for creative testing"
+        ]
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Facebook Ads for Different Business Models",
+        "url": "https://www.youtube.com/watch?v=example",
+        "embed": true,
+        "reason": "Examples of ads strategies for various business types"
+      },
+      "extra_reading": [
+        "https://www.facebook.com/business/learn/facebook-ads-for-ecommerce - E-commerce Guide",
+        "https://www.facebook.com/business/learn/facebook-ads-for-local-businesses - Local Business Guide"
+      ]
+    },
+    "summary": "Different business models require tailored Facebook Ads approaches: e-commerce focuses on product catalogs and purchases, services on lead generation and consultations, digital products on user behaviors, courses on education and trust, and local businesses on geographic targeting. Understanding your business model helps you design campaigns that align with your specific customer journey and business objectives."
+  },
+  {
+    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
+    "module_title": "Module 8: Real-World Facebook Ads Workflows",
+    "lesson_number": 22,
+    "lesson_title": "Running Ads for Clients",
+    "introduction": "Managing Facebook Ads for clients comes with unique challenges and responsibilities that differ significantly from running ads for your own business. In this lesson, you'll learn client onboarding processes, how to set realistic expectations, effective reporting methods, and how to protect yourself as a freelancer or agency. These skills are essential for building a successful Facebook Ads service business.",
+    "why_it_matters": "Client work requires different skills than managing your own campaigns. You need to manage client expectations, explain complex concepts in simple terms, justify your strategies, and deliver results that justify your fees. Without proper client management skills, even successful campaigns can lead to difficult relationships, scope creep, and payment issues. Understanding client work is crucial for building a sustainable Facebook Ads service business.",
+    "core_concept": "Running ads for clients involves three main components: onboarding and setup (understanding their business, goals, and access requirements), expectation management (setting realistic timelines and performance benchmarks), and reporting and communication (providing regular updates and explaining performance in business terms). Success in client work requires both technical skills and relationship management abilities.",
+    "steps": [
+      "Step 1: Conduct thorough onboarding to understand the client's business and goals",
+      "Step 2: Set realistic expectations about timeline, results, and budget requirements",
+      "Step 3: Establish clear communication protocols and reporting schedules",
+      "Step 4: Document all strategies, changes, and performance in a client-friendly way",
+      "Step 5: Regularly review performance and adjust strategies based on business impact"
+    ],
+    "practical_examples": [
+      "Consider a freelance Facebook Ads manager working with a local restaurant. During onboarding, they learn the client wants to increase lunch traffic by 20% in 3 months. They set expectations that it will take 2-3 weeks for campaigns to stabilize, explain the testing process, and agree on weekly performance reports. They focus campaigns on local audiences interested in dining out and track both online engagement and estimated foot traffic through check-ins.",
+      "Another example: A small agency managing ads for an e-commerce client. They create a comprehensive onboarding document, set up proper access to the client's accounts, establish monthly strategy calls, and provide detailed reports showing ROAS, customer acquisition cost, and lifetime value. They also include recommendations for non-advertising improvements to the client's website and customer experience."
+    ],
+    "common_mistakes": [
+      "Mistake 1: Not setting clear expectations upfront. This leads to disappointed clients and scope creep.",
+      "Mistake 2: Providing too much technical detail in reports. This confuses clients and doesn't show business value.",
+      "Mistake 3: Not documenting strategies and changes properly. This makes it hard to explain results and learn from campaigns.",
+      "Mistake 4: Failing to protect yourself with contracts and payment terms. This leads to payment disputes and unlimited work obligations."
+    ],
+    "system_connections": "This lesson applies all technical knowledge from previous modules to client service scenarios. It builds on the scaling and stability concepts from Module 7 by showing how to manage client expectations during performance fluctuations. Understanding client work is essential for the ethics and compliance knowledge in the next lesson, as client work has additional regulatory considerations.",
+    "actionable_takeaway": "Always establish clear expectations during onboarding, focusing on realistic timelines and performance benchmarks. Create client-friendly reports that show business impact rather than just ad metrics. Document your strategies and changes so you can explain your approach. Protect yourself with proper contracts and payment terms. Remember that your success depends on both technical results and client satisfaction.",
+    "quiz": {
+      "questions": [
+        "What are the three main components of client work?",
+        "Why is expectation management important in client work?",
+        "How should you approach reporting to clients?",
+        "What happens when you don't set clear expectations?",
+        "Why is documentation important in client work?"
+      ],
+      "answers": [
+        "Onboarding and setup, expectation management, and reporting and communication",
+        "It prevents disappointed clients and scope creep",
+        "Show business impact rather than just ad metrics",
+        "It leads to disappointed clients and scope creep",
+        "It helps explain results and learn from campaigns"
+      ],
+      "options": [
+        [
+          "Onboarding and setup, expectation management, and reporting and communication",
+          "Creative, targeting, and bidding",
+          "Campaigns, ad sets, and ads",
+          "Budget, audience, and creative"
+        ],
+        [
+          "It prevents disappointed clients and scope creep",
+          "It reduces your ad spend",
+          "It guarantees perfect performance",
+          "It eliminates the need for testing"
+        ],
+        [
+          "Show business impact rather than just ad metrics",
+          "Provide as much technical detail as possible",
+          "Focus only on cost metrics",
+          "Use only Facebook's standard reports"
+        ],
+        [
+          "It leads to disappointed clients and scope creep",
+          "It improves campaign performance immediately",
+          "It reduces your workload significantly",
+          "It increases your audience targeting"
+        ],
+        [
+          "It helps explain results and learn from campaigns",
+          "It reduces your ad spend",
+          "It guarantees ad approval",
+          "It eliminates the need for testing"
+        ]
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Client Management for Facebook Ads Professionals",
+        "url": "https://www.youtube.com/watch?v=example",
+        "embed": true,
+        "reason": "Best practices for managing client relationships"
+      },
+      "extra_reading": [
+        "https://www.facebook.com/business/learn/facebook-ads-agency-best-practices - Agency Best Practices",
+        "https://www.facebook.com/business/learn/facebook-ads-client-management - Client Management Guide"
+      ]
+    },
+    "summary": "Running ads for clients requires onboarding, expectation management, and effective reporting. Success depends on both technical skills and relationship management. Set realistic expectations, create business-focused reports, document strategies, and protect yourself with proper contracts. Client work requires different skills than managing your own campaigns."
+  },
+  {
+    "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
+    "module_title": "Module 8: Real-World Facebook Ads Workflows",
+    "lesson_number": 23,
+    "lesson_title": "Ethics, Compliance & Account Safety",
+    "introduction": "In this final module lesson, you'll learn about Facebook's ad policies, how to avoid bans and restrictions, and how to maintain long-term account health. Ethics and compliance aren't just about following rules - they're about building sustainable, trustworthy advertising practices that protect both you and your clients. Understanding these principles is crucial for long-term success in Facebook Ads.",
+    "why_it_matters": "Facebook Ads policies exist to protect users and maintain platform integrity, but they can also impact your ability to run successful campaigns. Violating policies can result in account restrictions, ad rejections, or complete account bans. Understanding these policies helps you create compliant campaigns while still achieving your business goals. Ethical advertising practices also build trust with your audience and protect your reputation.",
+    "core_concept": "Facebook's ad policies cover prohibited content (scams, misleading claims, restricted products), restricted content (health claims, financial services), and technical requirements (proper landing pages, accurate business information). Account safety involves maintaining good standing through consistent compliance, avoiding policy violations, and having backup plans for account issues. Ethical advertising means creating honest, transparent campaigns that provide real value to users.",
+    "steps": [
+      "Step 1: Familiarize yourself with Facebook's advertising policies and guidelines",
+      "Step 2: Create a compliance checklist for all campaigns before publishing",
+      "Step 3: Regularly review policy updates and adjust strategies accordingly",
+      "Step 4: Maintain backup accounts and alternative strategies for business continuity",
+      "Step 5: Always prioritize honest, transparent advertising that provides real value"
+    ],
+    "practical_examples": [
+      "Consider a health supplement company advertising their products. They must navigate Facebook's health-related advertising restrictions by avoiding medical claims, providing scientific evidence for benefits, and ensuring their landing pages comply with health advertising requirements. They create campaigns focused on general wellness rather than specific medical conditions, and always include appropriate disclaimers.",
+      "Another example: A financial services company offering investment advice. They must comply with financial advertising policies by providing proper certifications, avoiding guaranteed return claims, and ensuring their ads don't promote get-rich-quick schemes. They focus on educational content about financial planning rather than promises of high returns, and always include risk disclosures."
+    ],
+    "common_mistakes": [
+      "Mistake 1: Not staying updated on policy changes. This leads to accidental violations and account issues.",
+      "Mistake 2: Making exaggerated or false claims to improve performance. This results in ad rejections and potential account restrictions.",
+      "Mistake 3: Not having backup plans when accounts are restricted. This causes business disruption.",
+      "Mistake 4: Prioritizing short-term performance over long-term account health. This leads to risky strategies that eventually cause problems."
+    ],
+    "system_connections": "This lesson connects to all previous modules by emphasizing the importance of maintaining account health while implementing all the strategies learned. It builds on the client work knowledge from the previous lesson by showing how to protect both your and your clients' accounts. Understanding compliance is essential for the AI integration in Module 9, where automated systems must also follow policy requirements. This knowledge is crucial for long-term mastery in the final module.",
+    "actionable_takeaway": "Always stay updated on Facebook's advertising policies and create a compliance checklist for your campaigns. Focus on honest, transparent advertising that provides real value rather than trying to game the system. Have backup accounts and strategies in place for business continuity. Remember that sustainable, ethical advertising practices lead to long-term success rather than short-term gains that might violate policies.",
+    "quiz": {
+      "questions": [
+        "What are Facebook's ad policy categories?",
+        "Why is it important to have backup accounts?",
+        "What should you do to maintain account health?",
+        "What happens when you make false claims in ads?",
+        "Why is ethical advertising important for long-term success?"
+      ],
+      "answers": [
+        "Prohibited content, restricted content, and technical requirements",
+        "For business continuity when accounts are restricted",
+        "Stay updated on policies and follow compliance checklists",
+        "Results in ad rejections and potential account restrictions",
+        "It leads to sustainable success and avoids policy violations"
+      ],
+      "options": [
+        [
+          "Prohibited content, restricted content, and technical requirements",
+          "Budget, audience, and creative requirements",
+          "Campaign, ad set, and ad policies",
+          "Targeting, bidding, and optimization rules"
+        ],
+        [
+          "For business continuity when accounts are restricted",
+          "To increase your ad spend",
+          "To guarantee ad approval",
+          "To reduce your cost per click"
+        ],
+        [
+          "Stay updated on policies and follow compliance checklists",
+          "Ignore policy updates and focus on performance",
+          "Use the same strategies as competitors",
+          "Focus only on creative and ignore policies"
+        ],
+        [
+          "Results in ad rejections and potential account restrictions",
+          "It improves campaign performance immediately",
+          "It reduces your ad spend significantly",
+          "It increases your audience targeting"
+        ],
+        [
+          "It leads to sustainable success and avoids policy violations",
+          "It guarantees perfect performance",
+          "It eliminates the need for testing",
+          "It reduces your cost per click"
+        ]
+      ]
+    },
+    "resources": {
+      "video": {
+        "title": "Facebook Ad Policies and Account Safety",
+        "url": "https://www.youtube.com/watch?v=example",
+        "embed": true,
+        "reason": "Comprehensive guide to policy compliance"
+      },
+      "extra_reading": [
+        "https://www.facebook.com/policies/ads - Official Facebook Ad Policies",
+        "https://www.facebook.com/business/help/ads-policy - Ad Policy Center"
+      ]
+    },
+    "summary": "Facebook's ad policies cover prohibited content, restricted content, and technical requirements. Maintaining account safety requires compliance with these policies, having backup plans, and focusing on ethical advertising practices. Understanding policies helps you create compliant campaigns while achieving business goals. Long-term success requires sustainable, policy-compliant advertising strategies."
   },
   {
     "course_title": "Facebook Ads: Building Profitable, Predictable Ad Systems in 2025",
