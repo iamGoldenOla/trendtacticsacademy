@@ -41,7 +41,8 @@ LIMIT 10;
 -- VALUES 
 --   ('ACTUAL_USER_ID_FROM_QUERY_1', 'ACTUAL_COURSE_ID_FROM_QUERY_2', 'active');
 
--- Example with actual UUID format (replace with real IDs from your queries):
+-- IMPORTANT: The UUIDs must be real IDs from your database, not placeholder text!
+-- Example format (replace with YOUR actual IDs from the queries above):
 -- INSERT INTO student_course_access (user_id, course_id, access_status)
 -- VALUES 
---   ('12345678-1234-1234-1234-123456789012', '87654321-4321-4321-4321-210987654321', 'active');
+--   ('REAL_USER_ID_FROM_AUTH_USERS', 'REAL_COURSE_ID_FROM_COURSES', 'active');
