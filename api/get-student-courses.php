@@ -1,6 +1,5 @@
 <?php
 // api/get-student-courses.php
-require_once '../vendor/autoload.php'; // Adjust path as needed
 require_once 'config.php'; // Supabase configuration
 
 header('Content-Type: application/json');
@@ -39,29 +38,54 @@ try {
         exit();
     }
 
-    // Query to get courses the user has access to
-    $query = "
-        SELECT 
-            c.id as course_id,
-            c.title as course_title,
-            c.description as course_description,
-            c.level as course_level,
-            c.category as course_category,
-            c.image_url as course_image_url,
-            sca.purchase_date as enrollment_date,
-            sca.access_status
-        FROM courses c
-        INNER JOIN student_course_access sca ON c.id = sca.course_id
-        WHERE sca.user_id = :user_id
-          AND sca.access_status = 'active'
-        ORDER BY c.created_at
-    ";
-
-    $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':user_id', $user_id, PDO::PARAM_STR);
-    $stmt->execute();
+    // Build the Supabase REST API URL to get courses for the user
+    $supabaseUrl = constant('SUPABASE_URL');
+    $anonKey = constant('SUPABASE_ANON_KEY');
     
-    $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Query the student_course_access and courses tables directly using Supabase REST API
+    // Using the foreign key relationship between tables
+    $queryUrl = $supabaseUrl . '/rest/v1/student_course_access?select=course_id,access_status,purchase_date,courses!inner(id,title,description,level,category,image_url)&user_id=eq.' . $user_id . '&access_status=eq.active';
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $queryUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'apikey: ' . $anonKey,
+        'Authorization: Bearer ' . $anonKey
+    ]);
+    
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlError = curl_error($ch);
+    curl_close($ch);
+    
+    if ($curlError) {
+        throw new Exception('Curl error: ' . $curlError);
+    }
+    
+    if ($httpCode !== 200) {
+        throw new Exception('Supabase request failed with HTTP code: ' . $httpCode . '. Response: ' . $response);
+    }
+    
+    $rawData = json_decode($response, true);
+    
+    // Process the data to match the expected format
+    $courses = [];
+    if (is_array($rawData)) {
+        foreach ($rawData as $item) {
+            $course = $item['courses'];
+            $courses[] = [
+                'course_id' => $course['id'],
+                'course_title' => $course['title'],
+                'course_description' => $course['description'],
+                'course_level' => $course['level'],
+                'course_category' => $course['category'],
+                'course_image_url' => $course['image_url'],
+                'enrollment_date' => $item['purchase_date'],
+                'access_status' => $item['access_status']
+            ];
+        }
+    }
 
     // Return the courses
     echo json_encode([

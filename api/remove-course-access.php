@@ -1,6 +1,5 @@
 <?php
 // api/remove-course-access.php
-require_once '../vendor/autoload.php'; // Adjust path as needed
 require_once 'config.php'; // Supabase configuration
 
 header('Content-Type: application/json');
@@ -48,6 +47,10 @@ try {
         exit();
     }
 
+    // Build the Supabase REST API URL to update course access
+    $supabaseUrl = constant('SUPABASE_URL');
+    $anonKey = constant('SUPABASE_ANON_KEY');
+
     // Determine the new status based on action
     $new_status = 'active';
     switch ($action) {
@@ -61,42 +64,77 @@ try {
             break;
         case 'delete':
             // For delete, we'll remove the record entirely
-            $deleteQuery = "DELETE FROM student_course_access WHERE user_id = :user_id AND course_id = :course_id";
-            $deleteStmt = $pdo->prepare($deleteQuery);
-            $deleteStmt->bindParam(':user_id', $user_id, PDO::PARAM_STR);
-            $deleteStmt->bindParam(':course_id', $course_id, PDO::PARAM_STR);
+            $deleteUrl = $supabaseUrl . '/rest/v1/student_course_access?user_id=eq.' . $user_id . '&course_id=eq.' . $course_id . '&apikey=' . $anonKey;
             
-            if ($deleteStmt->execute()) {
-                echo json_encode([
-                    'success' => true,
-                    'message' => 'Course access removed successfully',
-                    'action' => 'deleted'
-                ]);
-                exit();
-            } else {
-                throw new Exception('Failed to delete course access');
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $deleteUrl);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                'apikey: ' . $anonKey,
+                'Authorization: Bearer ' . $anonKey
+            ]);
+            
+            $response = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $curlError = curl_error($ch);
+            curl_close($ch);
+            
+            if ($curlError) {
+                throw new Exception('Curl error during delete: ' . $curlError);
             }
-            break;
+            
+            if ($httpCode !== 200 && $httpCode !== 204) {
+                throw new Exception('Supabase delete request failed with HTTP code: ' . $httpCode);
+            }
+            
+            echo json_encode([
+                'success' => true,
+                'message' => 'Course access removed successfully',
+                'action' => 'deleted'
+            ]);
+            exit();
         default:
             $new_status = 'cancelled'; // default to cancelled
     }
 
     // Update the access status
-    $updateQuery = "UPDATE student_course_access SET access_status = :status, updated_at = NOW() WHERE user_id = :user_id AND course_id = :course_id";
-    $updateStmt = $pdo->prepare($updateQuery);
-    $updateStmt->bindParam(':status', $new_status, PDO::PARAM_STR);
-    $updateStmt->bindParam(':user_id', $user_id, PDO::PARAM_STR);
-    $updateStmt->bindParam(':course_id', $course_id, PDO::PARAM_STR);
+    $updateUrl = $supabaseUrl . '/rest/v1/student_course_access?user_id=eq.' . $user_id . '&course_id=eq.' . $course_id . '&apikey=' . $anonKey;
     
-    if ($updateStmt->execute()) {
-        echo json_encode([
-            'success' => true,
-            'message' => 'Course access status updated successfully',
-            'action' => $new_status
-        ]);
-    } else {
-        throw new Exception('Failed to update course access status');
+    $updateData = json_encode([
+        'access_status' => $new_status,
+        'updated_at' => date('c') // ISO 8601 format
+    ]);
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $updateUrl);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $updateData);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'apikey: ' . $anonKey,
+        'Authorization: Bearer ' . $anonKey
+    ]);
+    
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlError = curl_error($ch);
+    curl_close($ch);
+    
+    if ($curlError) {
+        throw new Exception('Curl error during update: ' . $curlError);
     }
+    
+    if ($httpCode !== 200 && $httpCode !== 204) {
+        throw new Exception('Supabase update request failed with HTTP code: ' . $httpCode);
+    }
+    
+    echo json_encode([
+        'success' => true,
+        'message' => 'Course access status updated successfully',
+        'action' => $new_status
+    ]);
 
 } catch (Exception $e) {
     error_log('Error updating course access: ' . $e->getMessage());
