@@ -75,9 +75,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Facebook Ads Auction Process Diagram",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Visual representation of how the Facebook Ads auction works with bid, relevance, and action rate factors",
+          "purpose": "Explains the auction mechanics visually"
+        },
+        {
+          "title": "Ad Relevance and Action Rate Framework",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Framework showing how ad relevance and action rate affect auction outcomes",
+          "purpose": "Illustrates the importance of relevance and action rate"
+        }
+      ],
       "video": {
         "title": "Facebook Ads Auction Explained Simply",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=3RkBdJYUL7w",
         "embed": true,
         "reason": "Visual explanation of the auction system mechanics"
       },
@@ -164,9 +178,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Facebook Ads Ecosystem Structure",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Visual representation of the Facebook Ads ecosystem showing Business Manager, Ad Accounts, and Pages",
+          "purpose": "Explains the relationship between ecosystem components"
+        },
+        {
+          "title": "Business Manager Dashboard Overview",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Example of a business management dashboard interface",
+          "purpose": "Shows the central hub of the ecosystem"
+        }
+      ],
       "video": {
         "title": "Facebook Business Manager Setup Guide",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=8xM4wC7ZBmE",
         "embed": true,
         "reason": "Step-by-step guide to proper ecosystem setup"
       },
@@ -253,9 +281,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Facebook Algorithm Decision Process",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Visual representation of how the Facebook algorithm makes decisions about content",
+          "purpose": "Explains algorithm decision-making process"
+        },
+        {
+          "title": "User Behavior Learning Process",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Diagram showing how the algorithm learns from user behavior patterns",
+          "purpose": "Illustrates the learning mechanism of the algorithm"
+        }
+      ],
       "video": {
         "title": "Facebook Algorithm Explained Simply",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=62CDBU7Hl2E",
         "embed": true,
         "reason": "Clear explanation of algorithm mechanics without jargon"
       },
@@ -342,9 +384,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Facebook Business Manager Interface",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Screenshot of Facebook Business Manager interface showing account setup options",
+          "purpose": "Visual guide to Business Manager setup"
+        },
+        {
+          "title": "Facebook Pixel Installation Process",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Diagram showing how Facebook Pixel tracks user behavior on websites",
+          "purpose": "Explains pixel installation and tracking"
+        }
+      ],
       "video": {
         "title": "Complete Facebook Ads Setup Guide",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=K53x7gaZJ2E",
         "embed": true,
         "reason": "Step-by-step account setup walkthrough"
       },
@@ -431,9 +487,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Campaign-Ad Set-Ad Hierarchy",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Visual diagram showing the Facebook Ads hierarchy: Campaign, Ad Set, Ad",
+          "purpose": "Explains the three-level campaign structure"
+        },
+        {
+          "title": "Campaign Budget Optimization vs Ad Set Budget Optimization",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Comparison chart showing differences between CBO and ABO approaches",
+          "purpose": "Illustrates budget optimization strategies"
+        }
+      ],
       "video": {
         "title": "Facebook Ads Structure Best Practices",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=0oZ3j4bL2Qs",
         "embed": true,
         "reason": "Visual guide to proper campaign structure"
       },
@@ -520,9 +590,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Facebook Campaign Objectives Framework",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual framework showing the three main objective categories: Awareness, Consideration, Conversion",
+          "purpose": "Explains the objective categorization system"
+        },
+        {
+          "title": "Objective Selection Decision Tree",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Decision tree to help choose the right campaign objective based on business goals",
+          "purpose": "Guides objective selection process"
+        }
+      ],
       "video": {
         "title": "Facebook Campaign Objectives Explained",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=J2y6xWQ7uUc",
         "embed": true,
         "reason": "Detailed explanation of each campaign objective"
       },
@@ -609,9 +693,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Audience Temperature Spectrum",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Visual representation of the audience temperature spectrum from cold to warm to hot",
+          "purpose": "Explains the concept of audience temperature"
+        },
+        {
+          "title": "Audience Segmentation Framework",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Framework showing how to segment audiences based on their relationship with your brand",
+          "purpose": "Illustrates audience segmentation strategies"
+        }
+      ],
       "video": {
         "title": "Facebook Audience Temperature Explained",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=6z7jYJ9F4Qo",
         "embed": true,
         "reason": "Visual explanation of audience temperature concepts"
       },
@@ -698,9 +796,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Custom Audiences Creation Process",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual guide showing the steps to create custom audiences in Facebook Ads Manager",
+          "purpose": "Explains the custom audience creation process"
+        },
+        {
+          "title": "Retargeting Audience Flow",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Diagram showing the customer journey from website visit to retargeting campaign",
+          "purpose": "Illustrates the retargeting audience flow"
+        }
+      ],
       "video": {
         "title": "Facebook Custom Audiences Setup Guide",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=8wJ7Kz7Y0sM",
         "embed": true,
         "reason": "Step-by-step custom audiences setup tutorial"
       },
@@ -787,9 +899,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Lookalike Audience Creation Process",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Visual guide showing how to create lookalike audiences from source audiences",
+          "purpose": "Explains the lookalike audience creation process"
+        },
+        {
+          "title": "Lookalike Audience Percentage Ranges",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Chart showing the differences between 1%, 2%, 5%, and 10% lookalike audiences",
+          "purpose": "Illustrates how percentage ranges affect audience similarity"
+        }
+      ],
       "video": {
         "title": "Facebook Lookalike Audiences Explained",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=5fQIg9JnY2I",
         "embed": true,
         "reason": "Detailed explanation of lookalike audience creation"
       },
@@ -876,9 +1002,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Creative-First vs Targeting-First Approach",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Comparison chart showing creative-first vs targeting-first strategies",
+          "purpose": "Illustrates the creative-first approach"
+        },
+        {
+          "title": "Creative Performance Impact",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Diagram showing how creative quality affects algorithm favorability and reach",
+          "purpose": "Shows the impact of creative on performance"
+        }
+      ],
       "video": {
         "title": "Creative-First Facebook Ads Strategy",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=4u2X1UZ3Y8w",
         "embed": true,
         "reason": "Explanation of creative-first approach in 2025"
       },
@@ -965,9 +1105,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Hook-Problem-Solution-Action Framework",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Visual representation of the Hook-Problem-Solution-Action copywriting framework",
+          "purpose": "Explains the human-centered copy framework"
+        },
+        {
+          "title": "Sales-Focused vs Human-Focused Copy",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Comparison showing the difference between sales-focused and human-centered ad copy",
+          "purpose": "Illustrates the human-centered approach"
+        }
+      ],
       "video": {
         "title": "Human-Centered Facebook Ad Copy",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=V3Yv7tjX7iM",
         "embed": true,
         "reason": "Examples of authentic ad copy that converts"
       },
@@ -1054,9 +1208,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "UGC vs Corporate Visuals Comparison",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Side-by-side comparison showing UGC-style visuals vs corporate visuals",
+          "purpose": "Illustrates the effectiveness of authentic visuals"
+        },
+        {
+          "title": "Scroll-Stopping Visual Elements",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Diagram showing key elements that make visuals stop the scroll",
+          "purpose": "Explains scroll-stopping visual techniques"
+        }
+      ],
       "video": {
         "title": "Facebook Ad Visual Best Practices",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=3tJ9G5f5Y8w",
         "embed": true,
         "reason": "Examples of scroll-stopping visuals and formats"
       },
@@ -1143,9 +1311,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Customer Journey Funnel",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Visual representation of the complete customer journey from ad to purchase",
+          "purpose": "Explains the full conversion funnel"
+        },
+        {
+          "title": "Ad-to-Funnel Connection",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Diagram showing how ads connect to the conversion funnel",
+          "purpose": "Illustrates the relationship between ads and funnels"
+        }
+      ],
       "video": {
         "title": "The Complete Customer Journey in Facebook Ads",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=7Y7g5K5F6cY",
         "embed": true,
         "reason": "Understanding the full conversion funnel"
       },
@@ -1232,9 +1414,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Landing Page Message Match",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual example showing how landing page content should match ad promise",
+          "purpose": "Illustrates the importance of message match"
+        },
+        {
+          "title": "Conversion-Focused Landing Page Elements",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Diagram highlighting key elements that convert ad traffic",
+          "purpose": "Shows essential landing page components"
+        }
+      ],
       "video": {
         "title": "Landing Page Optimization for Ad Traffic",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=J52h42pX8mE",
         "embed": true,
         "reason": "Best practices for converting ad traffic"
       },
@@ -1321,9 +1517,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Lead Forms vs Landing Pages Comparison",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Side-by-side comparison showing when to use lead forms vs landing pages",
+          "purpose": "Explains the decision framework"
+        },
+        {
+          "title": "Lead Quality vs Lead Volume Trade-off",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Chart showing the trade-off between lead volume and lead quality",
+          "purpose": "Illustrates the quality-volume relationship"
+        }
+      ],
       "video": {
         "title": "Lead Forms vs Landing Pages: Which to Use",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=9k8j7G5F3nQ",
         "embed": true,
         "reason": "Comparing the two approaches for different business needs"
       },
@@ -1410,9 +1620,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Daily vs Lifetime Budget Comparison",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual comparison showing the differences between daily and lifetime budgets",
+          "purpose": "Explains budget types and mechanics"
+        },
+        {
+          "title": "Budget Allocation for Testing vs Scaling",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Diagram showing appropriate budget allocation strategies for testing and scaling phases",
+          "purpose": "Illustrates budgeting strategies for different campaign stages"
+        }
+      ],
       "video": {
         "title": "Facebook Ads Budgeting Strategies",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=2F8t5J2Z8XQ",
         "embed": true,
         "reason": "Understanding budget mechanics and optimization"
       },
@@ -1499,9 +1723,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "A/B Testing Framework",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Visual framework showing proper A/B testing methodology",
+          "purpose": "Explains correct testing approach"
+        },
+        {
+          "title": "Testing Variables and Isolation",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Diagram showing how to isolate variables for effective testing",
+          "purpose": "Illustrates proper testing techniques"
+        }
+      ],
       "video": {
         "title": "Facebook Ads Testing Best Practices",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=6p7j8G9F2cM",
         "embed": true,
         "reason": "Proper testing methodology and frameworks"
       },
@@ -1588,9 +1826,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Metrics by Campaign Objective",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Chart showing which metrics matter for different campaign objectives",
+          "purpose": "Explains objective-specific metrics"
+        },
+        {
+          "title": "Leading vs Lagging Indicators",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Diagram distinguishing between leading indicators and lagging indicators",
+          "purpose": "Illustrates the difference between predictive and outcome metrics"
+        }
+      ],
       "video": {
         "title": "Facebook Ads Metrics That Matter",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=1N4p7F9G2kA",
         "embed": true,
         "reason": "Understanding the right metrics for your objectives"
       },
@@ -1677,9 +1929,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Vertical vs Horizontal Scaling",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual comparison showing vertical scaling (budget increases) vs horizontal scaling (expansion)",
+          "purpose": "Explains the two main scaling approaches"
+        },
+        {
+          "title": "Scaling Without Breaking Performance",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Diagram showing how to scale gradually while maintaining performance",
+          "purpose": "Illustrates safe scaling techniques"
+        }
+      ],
       "video": {
         "title": "Facebook Ads Scaling Strategies",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=4F8t9J2Z8XQ",
         "embed": true,
         "reason": "Visual guide to proper scaling techniques"
       },
@@ -1766,9 +2032,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Performance Drop Diagnosis",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Visual framework for diagnosing the cause of performance drops",
+          "purpose": "Explains how to identify different types of performance issues"
+        },
+        {
+          "title": "Recovery Strategies by Issue Type",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Chart showing appropriate recovery strategies for different performance issues",
+          "purpose": "Illustrates the right solutions for each problem type"
+        }
+      ],
       "video": {
         "title": "Recovering Facebook Ad Performance",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=9F8t5J2Z8XQ",
         "embed": true,
         "reason": "Strategies for handling performance drops calmly"
       },
@@ -1855,9 +2135,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Business Model Strategy Framework",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual framework showing different strategies for different business models",
+          "purpose": "Explains how strategies vary by business type"
+        },
+        {
+          "title": "E-commerce vs Service Business Approaches",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Comparison showing different approaches for e-commerce and service businesses",
+          "purpose": "Illustrates business model-specific strategies"
+        }
+      ],
       "video": {
         "title": "Facebook Ads for Different Business Models",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=3F8t5J2Z8XQ",
         "embed": true,
         "reason": "Examples of ads strategies for various business types"
       },
@@ -1944,9 +2238,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Client Expectation Management",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual framework for setting and managing client expectations",
+          "purpose": "Explains best practices for expectation management"
+        },
+        {
+          "title": "Client Reporting Dashboard",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Example of a client-friendly reporting dashboard showing business metrics",
+          "purpose": "Illustrates effective client reporting"
+        }
+      ],
       "video": {
         "title": "Client Management for Facebook Ads Professionals",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=7F8t5J2Z8XQ",
         "embed": true,
         "reason": "Best practices for managing client relationships"
       },
@@ -2033,9 +2341,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Facebook Ad Policy Categories",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Visual representation of Facebook's main ad policy categories",
+          "purpose": "Explains the different types of ad policies"
+        },
+        {
+          "title": "Account Safety Best Practices",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Chart showing best practices for maintaining account health",
+          "purpose": "Illustrates account safety strategies"
+        }
+      ],
       "video": {
         "title": "Facebook Ad Policies and Account Safety",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=5F8t5J2Z8XQ",
         "embed": true,
         "reason": "Comprehensive guide to policy compliance"
       },
@@ -2122,9 +2444,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "AI Integration in Ad Workflows",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual representation of how AI tools integrate into Facebook Ads workflows",
+          "purpose": "Explains AI integration strategies"
+        },
+        {
+          "title": "Human Oversight vs AI Automation",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Diagram showing the balance between AI automation and human oversight",
+          "purpose": "Illustrates the proper AI-human workflow"
+        }
+      ],
       "video": {
         "title": "AI Tools for Facebook Ads Success",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=8F8t5J2Z8XQ",
         "embed": true,
         "reason": "Practical examples of AI integration in ad workflows"
       },
@@ -2211,9 +2547,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Systematic Ad Workflow Framework",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Visual framework showing systematic approaches to Facebook Ads workflows",
+          "purpose": "Explains systematic workflow development"
+        },
+        {
+          "title": "Template and Checklist Implementation",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Diagram showing how templates and checklists improve ad campaign consistency",
+          "purpose": "Illustrates the benefits of systematic approaches"
+        }
+      ],
       "video": {
         "title": "Building Systematic Facebook Ad Workflows",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=9F8t5J2Z8XQ",
         "embed": true,
         "reason": "Examples of effective ad systems and templates"
       },
@@ -2300,9 +2650,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Systems vs Tactics Framework",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual comparison showing the difference between systems and tactics in Facebook Ads",
+          "purpose": "Explains the systems approach to long-term success"
+        },
+        {
+          "title": "Long-term Mastery Path",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Diagram showing the path to long-term mastery in Facebook Ads",
+          "purpose": "Illustrates the journey to sustainable success"
+        }
+      ],
       "video": {
         "title": "Building Long-Term Success in Facebook Ads",
-        "url": "https://www.youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=0F8t5J2Z8XQ",
         "embed": true,
         "reason": "Strategies for sustainable, long-term profitability"
       },

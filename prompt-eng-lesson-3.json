@@ -90,9 +90,23 @@
     "Effective prompt engineering adapts traditional instruction techniques for AI's processing methods"
   ],
   "resources": {
+    "images": [
+      {
+        "title": "Human vs AI Instruction Comparison",
+        "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+        "caption": "Visual comparison of human and AI instruction processing methods",
+        "purpose": "Illustrates the key differences between human and AI instruction processing"
+      },
+      {
+        "title": "Explicit vs Implicit Instructions",
+        "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+        "caption": "Visual representation of how AI requires explicit instructions without gaps in logic",
+        "purpose": "Explains why AI systems need explicit instructions"
+      }
+    ],
     "video": {
       "title": "Human vs AI Instruction: Key Differences",
-      "url": "https://www.youtube.com/watch?v=example3",
+      "url": "https://www.youtube.com/watch?v=7F8t5J2Z8XQ",
       "embed": true,
       "reason": "Visual comparison of human and AI instruction processing methods"
     },

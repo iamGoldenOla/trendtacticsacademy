@@ -695,72 +695,77 @@
             await loadCourses();
         }
 
-        // Fallback courses when database is empty - ALL COURSES
-        const FALLBACK_COURSES = [
-      {
-        id: 'vibe-coding',
-        title: 'Vibe Coding: Building Real Software with AI',
-        description: 'A beginner-friendly approach to creating digital products by focusing on ideas, intention, creativity, and guidance with AI assistance.',
-        level: 'Beginner',
-        duration: '4-6 weeks',
-        category: 'Programming'
-      },
-      {
-        id: 'prompt-engineering',
-        title: 'Prompt Engineering Mastery',
-        description: 'Master the art of communicating with AI. Learn to craft effective prompts that get better results from AI tools like ChatGPT, Claude, and more.',
-        level: 'Beginner',
-        duration: '2-3 weeks',
-        category: 'AI Skills'
-      },
-      {
-        id: 'facebook-ads',
-        title: 'Facebook Ads: Building Profitable, Predictable Ad Systems in 2025',
-        description: 'Learn how Facebook Ads really work, proper account setup, campaign structure, audience targeting, and optimization strategies that deliver consistent results.',
-        level: 'Beginner',
-        duration: '4-6 weeks',
-        category: 'Marketing'
-      }
-    ];
-
         async function loadCourses() {
             const loadingState = document.getElementById('loadingState');
             const coursesContainer = document.getElementById('coursesContainer');
             const emptyState = document.getElementById('emptyState');
+            const errorState = document.getElementById('errorState');
 
-            // Always use our defined courses (Vibe Coding + Prompt Engineering)
-            const courses = FALLBACK_COURSES;
+            try {
+                // Fetch student's courses from the database
+                const response = await fetch('./api/get-student-courses.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('supabase_session')}`
+                    },
+                    body: JSON.stringify({
+                        user_id: currentUser.id
+                    })
+                });
 
-            loadingState.style.display = 'none';
+                if (!response.ok) {
+                    throw new Error(`Failed to load courses: ${response.status}`);
+                }
 
-            // Update stats
-            document.getElementById('coursesCount').textContent = courses.length;
+                const data = await response.json();
+                const courses = data.courses || [];
 
-            // Render courses
-            coursesContainer.innerHTML = courses.map(course => {
-                return `
-                    <div class="course-card">
-                        <div class="course-header">
-                            <h3 class="course-title">${course.title}</h3>
-                            <span class="course-badge">${course.level || 'Beginner'}</span>
-                        </div>
-                        <p class="course-description">${course.description || 'No description available'}</p>
-                        <div class="progress-container">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 0%"></div>
+                loadingState.style.display = 'none';
+                errorState.style.display = 'none';
+
+                // Update stats
+                document.getElementById('coursesCount').textContent = courses.length;
+
+                if (courses.length === 0) {
+                    // Show empty state if no courses
+                    emptyState.style.display = 'block';
+                    coursesContainer.style.display = 'none';
+                } else {
+                    // Render courses
+                    coursesContainer.innerHTML = courses.map(course => {
+                        return `
+                            <div class="course-card">
+                                <div class="course-header">
+                                    <h3 class="course-title">${course.course_title}</h3>
+                                    <span class="course-badge">${course.course_level || 'Beginner'}</span>
+                                </div>
+                                <p class="course-description">${course.course_description || 'No description available'}</p>
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                    <p class="progress-text">Ready to start</p>
+                                </div>
+                                <div class="course-actions">
+                                    <a href="/lesson-viewer?course=${course.course_id}" class="btn btn-primary">
+                                        Start Learning
+                                    </a>
+                                </div>
                             </div>
-                            <p class="progress-text">Ready to start</p>
-                        </div>
-                        <div class="course-actions">
-                            <a href="/lesson-viewer?course=${course.id}" class="btn btn-primary">
-                                Start Learning
-                            </a>
-                        </div>
-                    </div>
-                `;
-            }).join('');
+                        `;
+                    }).join('');
 
-            coursesContainer.style.display = 'grid';
+                    coursesContainer.style.display = 'grid';
+                    emptyState.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error loading courses:', error);
+                loadingState.style.display = 'none';
+                coursesContainer.style.display = 'none';
+                emptyState.style.display = 'none';
+                showError('Failed to load your courses. Please try again later.');
+            }
         }
 
         function showError(message) {

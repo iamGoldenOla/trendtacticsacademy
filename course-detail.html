@@ -234,27 +234,44 @@
             }
         }
 
-        // Check if user is already enrolled
+        // Check if user has access to this course
         async function checkEnrollment() {
             try {
                 const user = await Auth.getCurrentUser();
                 if (!user) return;
 
-                const { data, error } = await window.sbClient
-                    .from('enrollments')
-                    .select('*')
-                    .eq('user_id', user.id)
-                    .eq('course_id', COURSE_ID)
-                    .single();
+                // Check if user has access to this course
+                const response = await fetch('./api/get-student-courses.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('supabase_session')}`
+                    },
+                    body: JSON.stringify({
+                        user_id: user.id
+                    })
+                });
 
-                if (data) {
+                if (!response.ok) {
+                    throw new Error(`Failed to check enrollment: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const courses = data.courses || [];
+                const hasAccess = courses.some(course => course.course_id === COURSE_ID);
+
+                if (hasAccess) {
                     const enrollBtn = document.getElementById('enrollBtn');
                     const enrollBtnText = document.getElementById('enrollBtnText');
                     enrollBtnText.textContent = 'Continue Learning';
-                    enrollBtn.onclick = () => window.location.href = '/dashboard';
+                    enrollBtn.onclick = () => window.location.href = '/lesson-viewer?course=' + COURSE_ID;
+                    
+                    // Change button style to indicate enrolled status
+                    enrollBtn.style.background = 'white';
+                    enrollBtn.style.color = 'var(--primary)';
                 }
             } catch (error) {
-                console.log('Not enrolled yet');
+                console.log('Error checking enrollment:', error);
             }
         }
 
@@ -263,16 +280,67 @@
             window.location.href = '/signup';
         }
 
-        // Handle purchase - redirect to checkout
-        function handlePurchase() {
-            // Store course info and redirect to checkout
-            sessionStorage.setItem('checkout_course', JSON.stringify({
-                id: COURSE_ID,
-                name: 'Vibe Coding: Building Real Software with AI',
-                price_usd: 3,
-                price_ngn: 5000
-            }));
-            window.location.href = '/checkout';
+        // Handle purchase - add course access
+        async function handlePurchase() {
+            try {
+                const user = await Auth.getCurrentUser();
+                if (!user) {
+                    window.location.href = '/signup';
+                    return;
+                }
+
+                // Add course access to the database
+                const response = await fetch('./api/add-course-access.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('supabase_session')}`
+                    },
+                    body: JSON.stringify({
+                        user_id: user.id,
+                        course_id: COURSE_ID
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Failed to enroll: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Update button text and redirect
+                    const enrollBtn = document.getElementById('enrollBtn');
+                    const enrollBtnText = document.getElementById('enrollBtnText');
+                    enrollBtnText.textContent = 'Continue Learning';
+                    enrollBtn.onclick = () => window.location.href = '/lesson-viewer?course=' + COURSE_ID;
+                    
+                    // Change button style to indicate enrolled status
+                    enrollBtn.style.background = 'white';
+                    enrollBtn.style.color = 'var(--primary)';
+                    
+                    // Show success message
+                    const messageDiv = document.getElementById('enrollMessage');
+                    messageDiv.textContent = 'Successfully enrolled! Redirecting to course...';
+                    messageDiv.style.background = 'rgba(16, 185, 129, 0.2)';
+                    messageDiv.style.color = '#10B981';
+                    messageDiv.style.display = 'block';
+                    
+                    // Redirect after a short delay
+                    setTimeout(() => {
+                        window.location.href = '/lesson-viewer?course=' + COURSE_ID;
+                    }, 1500);
+                }
+            } catch (error) {
+                console.error('Enrollment error:', error);
+                
+                // Show error message
+                const messageDiv = document.getElementById('enrollMessage');
+                messageDiv.textContent = 'Error enrolling in course. Please try again.';
+                messageDiv.style.background = 'rgba(239, 68, 68, 0.2)';
+                messageDiv.style.color = '#EF4444';
+                messageDiv.style.display = 'block';
+            }
         }
 
         // Initialize page

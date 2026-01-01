@@ -87,7 +87,37 @@
     "Apply lessons learned to future prompts to continuously improve results"
   ],
   "resources": {
-    "video": "https://www.youtube.com/watch?v=example14",
+    "images": [
+      {
+        "url": "https://placehold.co/600x400/4a86e8/ffffff?text=Common+Mistakes",
+        "caption": "Common Prompt Engineering Mistakes: Visualizes the most frequent errors in prompt creation",
+        "purpose": "Illustrates common mistakes that lead to ineffective prompts"
+      },
+      {
+        "url": "https://placehold.co/600x400/e06666/ffffff?text=Avoiding+Ambiguity",
+        "caption": "Avoiding Ambiguous Language: Shows how clear, specific language improves AI responses",
+        "purpose": "Demonstrates the impact of clear language in prompts"
+      },
+      {
+        "url": "https://placehold.co/600x400/93c47d/ffffff?text=Context+Importance",
+        "caption": "Context Importance: Demonstrates how sufficient context improves prompt effectiveness",
+        "purpose": "Explains why context is crucial for effective prompts"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Common Prompt Engineering Mistakes and How to Avoid Them",
+        "url": "https://www.youtube.com/watch?v=example14",
+        "embed": true,
+        "reason": "Demonstration of common mistakes in prompt engineering and their solutions"
+      },
+      {
+        "title": "Prompt Engineering Best Practices",
+        "url": "https://www.youtube.com/watch?v=prompt_best_practices",
+        "embed": true,
+        "reason": "Detailed guide on avoiding common mistakes and creating effective prompts"
+      }
+    ],
     "extra_reading": [
       "https://example.com/common-prompt-mistakes",
       "https://example.com/avoiding-prompt-errors"

@@ -91,12 +91,37 @@
     "Scope constraints ensure appropriate depth and relevance in outputs"
   ],
   "resources": {
-    "video": {
-      "title": "Implementing Effective Constraints and Guardrails",
-      "url": "https://www.youtube.com/watch?v=example6",
-      "embed": true,
-      "reason": "Visual demonstration of constraint implementation techniques"
-    },
+    "images": [
+      {
+        "url": "https://placehold.co/600x400/4a86e8/ffffff?text=AI+Guardrails",
+        "caption": "AI Guardrails Visualization: Shows constraints as boundaries that guide AI behavior within acceptable parameters",
+        "purpose": "Illustrates how constraints define boundaries for AI behavior"
+      },
+      {
+        "url": "https://placehold.co/600x400/e06666/ffffff?text=Hallucination+Prevention",
+        "caption": "Preventing AI Hallucinations: Demonstrates techniques to prevent AI from generating factually incorrect information",
+        "purpose": "Shows methods to prevent hallucinations in AI outputs"
+      },
+      {
+        "url": "https://placehold.co/600x400/93c47d/ffffff?text=Format+Constraints",
+        "caption": "Format Constraints Diagram: Shows how format requirements ensure outputs follow specific structures",
+        "purpose": "Explains how format constraints maintain consistency in AI outputs"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Implementing Effective Constraints and Guardrails",
+        "url": "https://www.youtube.com/watch?v=example6",
+        "embed": true,
+        "reason": "Visual demonstration of constraint implementation techniques"
+      },
+      {
+        "title": "AI Safety: Advanced Constraint Implementation",
+        "url": "https://www.youtube.com/watch?v=ai_safety_constraints",
+        "embed": true,
+        "reason": "Detailed guide on implementing safety measures and constraints in AI prompts"
+      }
+    ],
     "extra_reading": [
       "https://example.com/ai-safety-constraints - Comprehensive guide to AI safety measures",
       "https://example.com/format-enforcement-techniques - Advanced format constraint methods"

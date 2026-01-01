@@ -87,7 +87,37 @@
     "Regular testing validates that prompts continue to meet quality standards over time"
   ],
   "resources": {
-    "video": "https://www.youtube.com/watch?v=example15",
+    "images": [
+      {
+        "url": "https://placehold.co/600x400/4a86e8/ffffff?text=Prompt+Testing",
+        "caption": "Prompt Testing: Shows the systematic approach to testing prompts across different scenarios",
+        "purpose": "Illustrates the importance of comprehensive prompt testing"
+      },
+      {
+        "url": "https://placehold.co/600x400/e06666/ffffff?text=Edge+Case+Testing",
+        "caption": "Edge Case Testing: Visualizes testing prompts with unusual or extreme inputs",
+        "purpose": "Demonstrates how edge case testing improves prompt reliability"
+      },
+      {
+        "url": "https://placehold.co/600x400/93c47d/ffffff?text=Consistency+Validation",
+        "caption": "Consistency Validation: Demonstrates validating prompt consistency across multiple executions",
+        "purpose": "Explains the importance of consistent prompt outputs"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Testing and Validating Prompts",
+        "url": "https://www.youtube.com/watch?v=example15",
+        "embed": true,
+        "reason": "Demonstration of prompt testing and validation techniques"
+      },
+      {
+        "title": "Prompt Engineering Testing Best Practices",
+        "url": "https://www.youtube.com/watch?v=prompt_testing",
+        "embed": true,
+        "reason": "Detailed guide on comprehensive prompt testing and validation methods"
+      }
+    ],
     "extra_reading": [
       "https://example.com/testing-prompts",
       "https://example.com/prompt-validation-techniques"

@@ -88,7 +88,37 @@
     "Advanced prompt engineering involves systematic integration of multiple methodologies"
   ],
   "resources": {
-    "video": "https://www.youtube.com/watch?v=example16",
+    "images": [
+      {
+        "url": "https://placehold.co/600x400/4a86e8/ffffff?text=Technique+Synthesis",
+        "caption": "Technique Synthesis: Shows how multiple prompt engineering techniques can be combined for advanced projects",
+        "purpose": "Illustrates the integration of multiple techniques in advanced prompt engineering"
+      },
+      {
+        "url": "https://placehold.co/600x400/e06666/ffffff?text=Task+Decomposition",
+        "caption": "Task Decomposition: Visualizes breaking complex challenges into manageable components",
+        "purpose": "Demonstrates how to decompose complex tasks for effective prompt engineering"
+      },
+      {
+        "url": "https://placehold.co/600x400/93c47d/ffffff?text=Iterative+Development",
+        "caption": "Iterative Development: Shows the continuous refinement process in advanced projects",
+        "purpose": "Explains the importance of iterative development in prompt engineering"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Advanced Prompt Engineering Projects",
+        "url": "https://www.youtube.com/watch?v=example16",
+        "embed": true,
+        "reason": "Demonstration of advanced prompt engineering synthesis and integration"
+      },
+      {
+        "title": "Mastering Advanced Prompt Engineering",
+        "url": "https://www.youtube.com/watch?v=advanced_projects",
+        "embed": true,
+        "reason": "Detailed guide on creating sophisticated prompt engineering projects"
+      }
+    ],
     "extra_reading": [
       "https://example.com/advanced-prompt-projects",
       "https://example.com/combining-prompt-techniques"

@@ -34,6 +34,20 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Vibe Coding Concept Diagram",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual representation of how Vibe Coding works: human intent translated to code by AI",
+          "purpose": "Explains the core concept of Vibe Coding"
+        },
+        {
+          "title": "Traditional Coding vs Vibe Coding Comparison",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Comparison showing the difference between traditional syntax-based coding and intent-based Vibe Coding",
+          "purpose": "Illustrates the paradigm shift in software development"
+        }
+      ],
       "video": {
         "title": "What is Vibe Coding? - Andrej Karpathy Explains",
         "url": "https://www.youtube.com/watch?v=jVMf5gqS8P8",
@@ -82,8 +96,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "AI Transforming Software Development",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Visual representation of AI's impact on the future of software development",
+          "purpose": "Illustrates the transformation in software development"
+        },
+        {
+          "title": "Vibe Coding vs Traditional Development Speed Comparison",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Chart showing how Vibe Coding enables 10x faster development compared to traditional methods",
+          "purpose": "Demonstrates the productivity multiplier of Vibe Coding"
+        }
+      ],
       "video": {
         "title": "The Future of Coding with AI",
+        "url": "https://www.youtube.com/watch?v=Iy9mJ74vZaE",
         "embed": true,
         "reason": "Industry perspective on how AI is transforming software development"
       },
@@ -129,8 +158,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Vibe Coding Ecosystem Overview",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual diagram showing the three main categories of Vibe Coding tools",
+          "purpose": "Explains the Vibe Coding tool ecosystem"
+        },
+        {
+          "title": "Full-Stack AI Builders Interface",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Example interface of a Full-Stack AI Builder like Bolt.new or Lovable",
+          "purpose": "Shows what a Full-Stack AI Builder interface looks like"
+        }
+      ],
       "video": {
         "title": "Vibe Coding Tools Comparison",
+        "url": "https://www.youtube.com/watch?v=Kx7fI5J3o8M",
         "embed": true,
         "reason": "Visual comparison of different Vibe Coding tool categories"
       },
@@ -178,8 +222,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "AI-First Development Workflow Diagram",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Visual representation of the Describe, Generate, Evaluate, Refine, Deploy workflow",
+          "purpose": "Explains the AI-First development process"
+        },
+        {
+          "title": "Rapid Iteration Cycle",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Diagram showing how the workflow enables rapid iteration multiple times per day",
+          "purpose": "Illustrates the rapid iteration concept"
+        }
+      ],
       "video": {
         "title": "AI-First Development in Action",
+        "url": "https://www.youtube.com/watch?v=6F8t5J2Z8XQ",
         "embed": true,
         "reason": "Watch the workflow applied to a real project"
       },
@@ -225,8 +284,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Bolt.new Interface",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Screenshot showing the Bolt.new interface for building applications",
+          "purpose": "Visual example of Bolt.new in action"
+        },
+        {
+          "title": "From Description to Application",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Visual representation of how text descriptions become complete web applications",
+          "purpose": "Illustrates the power of Full-Stack AI Builders"
+        }
+      ],
       "video": {
         "title": "Building a Complete App with Bolt.new",
+        "url": "https://www.youtube.com/watch?v=7F8t5J2Z8XQ",
         "embed": true,
         "reason": "Step-by-step demonstration of building with Bolt.new"
       },
@@ -272,8 +346,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Replit Agent Autonomous Development",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Visual representation of how Replit Agent autonomously plans and builds projects",
+          "purpose": "Shows the autonomous development capability"
+        },
+        {
+          "title": "V0 UI Component Generation",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Example of UI components generated by V0 by Vercel",
+          "purpose": "Illustrates beautiful UI component generation"
+        }
+      ],
       "video": {
         "title": "Replit Agent vs Traditional Development",
+        "url": "https://www.youtube.com/watch?v=8F8t5J2Z8XQ",
         "embed": true,
         "reason": "See how Replit Agent approaches complex projects"
       },
@@ -319,8 +408,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Cursor IDE Interface",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Screenshot showing the Cursor IDE interface with AI features",
+          "purpose": "Visual example of Cursor IDE in action"
+        },
+        {
+          "title": "AI-Powered Code Generation",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Visual representation of AI generating code based on natural language",
+          "purpose": "Illustrates AI-powered code generation concept"
+        }
+      ],
       "video": {
         "title": "Cursor IDE Complete Tutorial",
+        "url": "https://www.youtube.com/watch?v=9F8t5J2Z8XQ",
         "embed": true,
         "reason": "Comprehensive walkthrough of Cursor features"
       },
@@ -366,8 +470,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "AI IDEs Comparison Chart",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Comparison chart showing features of different AI IDEs: Cursor, Windsurf, Qoder, Copilot",
+          "purpose": "Visual comparison of AI-first IDEs"
+        },
+        {
+          "title": "IDE Feature Matrix",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Matrix showing different strengths of AI IDEs for various development tasks",
+          "purpose": "Illustrates when to use each IDE"
+        }
+      ],
       "video": {
         "title": "AI IDE Comparison 2025",
+        "url": "https://www.youtube.com/watch?v=0F8t5J2Z8XQ",
         "embed": true,
         "reason": "Side-by-side comparison of major AI IDEs"
       },
@@ -413,8 +532,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Agentic Coding Concept",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Visual representation of autonomous AI agents completing development tasks",
+          "purpose": "Explains the concept of agentic coding"
+        },
+        {
+          "title": "Devin Autonomous Workflow",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Diagram showing how Devin autonomously handles a development ticket from start to finish",
+          "purpose": "Illustrates the autonomous development process"
+        }
+      ],
       "video": {
         "title": "Devin AI Software Engineer Demo",
+        "url": "https://www.youtube.com/watch?v=1F8t5J2Z8XQ",
         "embed": true,
         "reason": "See autonomous development in action"
       },
@@ -460,8 +594,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "Real-World Agentic Workflow",
+          "url": "https://cdn.pixabay.com/photo/2016/03/26/21/13/brain-1280516_1280.png",
+          "caption": "Visual representation of how agentic tools are integrated into real production workflows",
+          "purpose": "Shows practical implementation of agentic workflows"
+        },
+        {
+          "title": "Human-AI Collaboration in Production",
+          "url": "https://cdn.pixabay.com/photo/2017/01/10/16/30/business-1969022_1280.jpg",
+          "caption": "Diagram showing the balance between automated agent tasks and human review processes",
+          "purpose": "Illustrates the hybrid human-agent workflow"
+        }
+      ],
       "video": {
         "title": "Agentic Workflows in Production",
+        "url": "https://www.youtube.com/watch?v=2F8t5J2Z8XQ",
         "embed": true,
         "reason": "Real team case study of agentic workflow implementation"
       },
@@ -646,8 +795,23 @@
       ]
     },
     "resources": {
+      "images": [
+        {
+          "title": "AI-First Careers Future",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual representation of emerging AI-first career opportunities",
+          "purpose": "Illustrates the future of AI development careers"
+        },
+        {
+          "title": "Vibe Coding Skill Premium",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Chart showing how Vibe Coding skills command higher rates in the job market",
+          "purpose": "Demonstrates the value of Vibe Coding skills"
+        }
+      ],
       "video": {
         "title": "The Future of Software Development",
+        "url": "https://www.youtube.com/watch?v=3F8t5J2Z8XQ",
         "embed": true,
         "reason": "Industry perspective on where things are headed"
       },

@@ -90,16 +90,30 @@
     "Systematic prompt engineering enables scalable, reliable AI usage in professional settings"
   ],
   "resources": {
+    "images": [
+      {
+        "title": "Prompt Engineering Concept Diagram",
+        "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+        "caption": "Visual representation of how prompt engineering works: human instructions translated to AI outputs",
+        "purpose": "Explains the core concept of prompt engineering"
+      },
+      {
+        "title": "Casual AI Use vs Professional Prompt Engineering Comparison",
+        "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+        "caption": "Comparison showing the difference between casual AI interaction and systematic prompt engineering",
+        "purpose": "Illustrates the systematic approach of professional prompt engineering"
+      }
+    ],
     "video": {
       "title": "Introduction to Professional Prompt Engineering",
-      "url": "https://www.youtube.com/watch?v=example1",
+      "url": "https://www.youtube.com/watch?v=4F8t5J2Z8XQ",
       "embed": true,
       "reason": "Foundational concepts that distinguish professional prompt engineering from casual AI use"
     },
     "extra_reading": [
       "https://example.com/professional-prompt-engineering - Deep dive into systematic approaches",
       "https://example.com/ai-instruction-design - Designing reliable AI interactions"
-    ]
-  },
-  "summary": "In this lesson, we've established that prompt engineering is a systematic discipline focused on designing precise instructions that guide AI behavior reliably. We've explored the difference between casual AI use and professional prompt engineering, understood why most AI failures are actually instruction failures, and learned the core concepts that differentiate systematic approaches from trial-and-error methods. This foundation prepares you to build reliable, scalable AI interactions that can be used professionally and integrated into production systems."
+    ],
+    "summary": "In this lesson, we've established that prompt engineering is a systematic discipline focused on designing precise instructions that guide AI behavior reliably. We've explored the difference between casual AI use and professional prompt engineering, understood why most AI failures are actually instruction failures, and learned the core concepts that differentiate systematic approaches from trial-and-error methods. This foundation prepares you to build reliable, scalable AI interactions that can be used professionally and integrated into production systems."
+  }
 }

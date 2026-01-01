@@ -87,7 +87,37 @@
     "Both iterative refinement and prompt chaining require a systematic approach for best results"
   ],
   "resources": {
-    "video": "https://www.youtube.com/watch?v=example8",
+    "images": [
+      {
+        "url": "https://placehold.co/600x400/4a86e8/ffffff?text=Iterative+Refinement",
+        "caption": "Iterative Refinement Process: Shows the cycle of testing, analyzing, and refining prompts to improve quality",
+        "purpose": "Illustrates the iterative approach to prompt engineering"
+      },
+      {
+        "url": "https://placehold.co/600x400/e06666/ffffff?text=Prompt+Chaining",
+        "caption": "Prompt Chaining Diagram: Visualizes how multiple specialized prompts are linked together for complex tasks",
+        "purpose": "Shows how prompt chaining breaks complex tasks into specialized steps"
+      },
+      {
+        "url": "https://placehold.co/600x400/93c47d/ffffff?text=Testing+Validation",
+        "caption": "Testing and Validation: Demonstrates systematic testing of prompts with diverse inputs",
+        "purpose": "Explains the importance of validation in prompt engineering"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Iterative Prompt Refinement Techniques",
+        "url": "https://www.youtube.com/watch?v=example8",
+        "embed": true,
+        "reason": "Demonstration of iterative refinement processes in AI prompting"
+      },
+      {
+        "title": "Advanced Prompt Chaining Methods",
+        "url": "https://www.youtube.com/watch?v=prompt_chaining",
+        "embed": true,
+        "reason": "Detailed guide on chaining multiple prompts for complex tasks"
+      }
+    ],
     "extra_reading": [
       "https://example.com/iterative-prompt-refinement",
       "https://example.com/prompt-chaining-techniques"

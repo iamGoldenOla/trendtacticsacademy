@@ -89,7 +89,37 @@
     "Both techniques require different approaches but enhance your ability to get reliable AI outputs"
   ],
   "resources": {
-    "video": "https://www.youtube.com/watch?v=example10",
+    "images": [
+      {
+        "url": "https://placehold.co/600x400/4a86e8/ffffff?text=Zero-Shot+Prompting",
+        "caption": "Zero-Shot Prompting: Shows how AI performs tasks without examples using clear instructions and context",
+        "purpose": "Illustrates the concept of zero-shot prompting without examples"
+      },
+      {
+        "url": "https://placehold.co/600x400/e06666/ffffff?text=Self-Consistency",
+        "caption": "Self-Consistency Technique: Visualizes generating multiple responses and identifying the most consistent answer",
+        "purpose": "Shows how self-consistency improves response accuracy"
+      },
+      {
+        "url": "https://placehold.co/600x400/93c47d/ffffff?text=Instruction+Clarity",
+        "caption": "Instruction Clarity: Demonstrates the importance of detailed, unambiguous instructions in zero-shot prompting",
+        "purpose": "Explains how clear instructions enable effective zero-shot prompting"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Zero-Shot and Self-Consistency Techniques",
+        "url": "https://www.youtube.com/watch?v=example10",
+        "embed": true,
+        "reason": "Demonstration of zero-shot prompting and self-consistency methods"
+      },
+      {
+        "title": "Advanced Prompt Engineering Techniques",
+        "url": "https://www.youtube.com/watch?v=advanced_techniques",
+        "embed": true,
+        "reason": "Detailed guide on advanced prompt engineering including zero-shot and self-consistency"
+      }
+    ],
     "extra_reading": [
       "https://example.com/zero-shot-prompting",
       "https://example.com/self-consistency-in-ai"

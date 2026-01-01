@@ -91,9 +91,23 @@
     "Output format specifications ensure consistency and integration compatibility"
   ],
   "resources": {
+    "images": [
+      {
+        "title": "Core Components of Effective Prompts",
+        "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+        "caption": "Visual representation of the core components of effective prompts: Role, Task, Constraints, Output Format",
+        "purpose": "Illustrates the core components that make prompts effective"
+      },
+      {
+        "title": "Prompt Structure Framework",
+        "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+        "caption": "Framework showing how role definition, task definition, constraints, and output format work together",
+        "purpose": "Explains how core components work together"
+      }
+    ],
     "video": {
       "title": "Core Components of Effective Prompts",
-      "url": "https://www.youtube.com/watch?v=example4",
+      "url": "https://www.youtube.com/watch?v=8F8t5J2Z8XQ",
       "embed": true,
       "reason": "Visual demonstration of how core components work together"
     },

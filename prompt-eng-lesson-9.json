@@ -87,7 +87,37 @@
     "Understanding your end goal is essential for determining appropriate creativity levels"
   ],
   "resources": {
-    "video": "https://www.youtube.com/watch?v=example9",
+    "images": [
+      {
+        "url": "https://placehold.co/600x400/4a86e8/ffffff?text=Temperature+Settings",
+        "caption": "Temperature Control Visualization: Shows how different temperature settings affect AI response creativity and randomness",
+        "purpose": "Illustrates the impact of temperature on AI creativity"
+      },
+      {
+        "url": "https://placehold.co/600x400/e06666/ffffff?text=Creativity+vs+Accuracy",
+        "caption": "Creativity vs. Accuracy Spectrum: Demonstrates the balance between creative and factual AI responses",
+        "purpose": "Shows the trade-off between creativity and accuracy in AI outputs"
+      },
+      {
+        "url": "https://placehold.co/600x400/93c47d/ffffff?text=Prompt+Language",
+        "caption": "Prompt Language Influence: Visualizes how specific language choices in prompts affect AI creativity",
+        "purpose": "Explains how prompt language guides AI behavior and creativity"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Temperature Control in AI Responses",
+        "url": "https://www.youtube.com/watch?v=example9",
+        "embed": true,
+        "reason": "Demonstration of temperature settings and their impact on AI creativity"
+      },
+      {
+        "title": "Mastering AI Creativity Control",
+        "url": "https://www.youtube.com/watch?v=creativity_control",
+        "embed": true,
+        "reason": "Detailed guide on controlling creativity levels in AI responses"
+      }
+    ],
     "extra_reading": [
       "https://example.com/temperature-control-ai",
       "https://example.com/creativity-in-ai-responses"

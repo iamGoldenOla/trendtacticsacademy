@@ -86,7 +86,37 @@
     "The number and variety of examples directly impacts the AI's ability to generalize and apply the pattern correctly"
   ],
   "resources": {
-    "video": "https://www.youtube.com/watch?v=example7",
+    "images": [
+      {
+        "url": "https://placehold.co/600x400/4a86e8/ffffff?text=Few-Shot+Learning",
+        "caption": "Few-Shot Learning Diagram: Shows how examples are provided within a prompt to guide AI behavior and pattern recognition",
+        "purpose": "Illustrates the concept of providing examples to guide AI responses"
+      },
+      {
+        "url": "https://placehold.co/600x400/e06666/ffffff?text=Input-Output+Examples",
+        "caption": "Input-Output Example Pattern: Demonstrates the relationship between input and desired output in few-shot prompting",
+        "purpose": "Shows how input-output pairs guide the AI's response pattern"
+      },
+      {
+        "url": "https://placehold.co/600x400/93c47d/ffffff?text=Example+Quality",
+        "caption": "Example Quality Impact: Visualizes how high-quality examples lead to better AI performance",
+        "purpose": "Explains the relationship between example quality and output quality"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Few-Shot Learning in AI Prompting",
+        "url": "https://www.youtube.com/watch?v=example7",
+        "embed": true,
+        "reason": "Demonstration of few-shot learning techniques in AI prompting"
+      },
+      {
+        "title": "Mastering Examples in AI Prompts",
+        "url": "https://www.youtube.com/watch?v=few_shot_examples",
+        "embed": true,
+        "reason": "Detailed guide on creating effective examples for few-shot learning"
+      }
+    ],
     "extra_reading": [
       "https://example.com/few-shot-learning-prompting",
       "https://example.com/example-based-ai-tasks"

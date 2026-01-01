@@ -87,7 +87,37 @@
     "Well-crafted prompts reduce post-generation editing and debugging time"
   ],
   "resources": {
-    "video": "https://www.youtube.com/watch?v=example12",
+    "images": [
+      {
+        "url": "https://placehold.co/600x400/4a86e8/ffffff?text=Language-Specific+Prompts",
+        "caption": "Language-Specific Prompts: Shows how code generation differs across programming languages like Python, JavaScript, and Java",
+        "purpose": "Illustrates the need for language-specific approaches in code generation"
+      },
+      {
+        "url": "https://placehold.co/600x400/e06666/ffffff?text=Functionality+Requirements",
+        "caption": "Functionality Requirements: Visualizes the importance of specifying detailed requirements for code generation",
+        "purpose": "Shows how clear requirements lead to better code quality and accuracy"
+      },
+      {
+        "url": "https://placehold.co/600x400/93c47d/ffffff?text=Code+Quality+Standards",
+        "caption": "Code Quality Standards: Demonstrates how quality considerations improve maintainability and security",
+        "purpose": "Explains how quality requirements affect the final code output"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Prompt Engineering for Code Generation",
+        "url": "https://www.youtube.com/watch?v=example12",
+        "embed": true,
+        "reason": "Demonstration of code generation prompt techniques for different programming languages and requirements"
+      },
+      {
+        "title": "AI-Assisted Programming Best Practices",
+        "url": "https://www.youtube.com/watch?v=code_generation",
+        "embed": true,
+        "reason": "Detailed guide on creating effective prompts for code generation with quality standards"
+      }
+    ],
     "extra_reading": [
       "https://example.com/code-generation-prompts",
       "https://example.com/ai-assisted-programming"

@@ -91,12 +91,37 @@
     "Proper context layering prevents information overload that reduces effectiveness"
   ],
   "resources": {
-    "video": {
-      "title": "Strategic Context Layering in Prompts",
-      "url": "https://www.youtube.com/watch?v=example5",
-      "embed": true,
-      "reason": "Visual demonstration of context layering techniques"
-    },
+    "images": [
+      {
+        "url": "https://placehold.co/600x400/4a86e8/ffffff?text=Context+Layering+Diagram",
+        "caption": "Context Layering Structure: Shows global context (broad instructions) and local context (task-specific details) positioned strategically within a prompt",
+        "purpose": "Explains how different types of context should be organized within prompts"
+      },
+      {
+        "url": "https://placehold.co/600x400/e06666/ffffff?text=AI+Processing+Window",
+        "caption": "AI Context Window Visualization: Demonstrates how AI models process information with limited capacity, highlighting attention to beginning and end positions",
+        "purpose": "Illustrates why positional impact matters in prompt engineering"
+      },
+      {
+        "url": "https://placehold.co/600x400/93c47d/ffffff?text=Context+vs+Dumping",
+        "caption": "Effective Context vs. Context Dumping: Compares well-layered context with information overload that reduces effectiveness",
+        "purpose": "Shows the difference between strategic context layering and ineffective context dumping"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Strategic Context Layering in Prompts",
+        "url": "https://www.youtube.com/watch?v=example5",
+        "embed": true,
+        "reason": "Visual demonstration of context layering techniques"
+      },
+      {
+        "title": "Advanced Prompt Engineering: Context Management",
+        "url": "https://www.youtube.com/watch?v=context_management",
+        "embed": true,
+        "reason": "Detailed walkthrough of how to organize context effectively in AI prompts"
+      }
+    ],
     "extra_reading": [
       "https://example.com/context-layering-advanced - Deep dive into context optimization",
       "https://example.com/positional-effects-ai - Research on position impact in AI processing"
