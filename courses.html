@@ -72,7 +72,7 @@
     <section class="container" style="padding: 4rem 0;">
         <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem; color: var(--primary);">Available Courses</h2>
 
-        <div class="grid grid-2">
+        <div id="coursesGrid" class="grid grid-2">
             <!-- Vibe Coding Course -->
             <div class="card" style="transition: all 0.3s ease;">
                 <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
@@ -261,11 +261,157 @@
                     authBtn.textContent = user?.name || 'Account';
                     authBtn.onclick = () => window.location.href = '/dashboard';
                     dashboardLink.style.display = 'block';
+                    
+                    // Load personalized courses for logged-in users
+                    await loadPersonalizedCourses(user.id);
+                } else {
+                    // Show all available courses for non-logged-in users
+                    await loadAllCourses();
                 }
             } catch (error) {
                 console.error('Auth initialization error:', error);
                 // Continue without auth functionality if there's an error
+                await loadAllCourses();
             }
+        }
+        
+        // Load courses based on user access
+        async function loadPersonalizedCourses(userId) {
+            try {
+                const response = await fetch('./api/get-student-courses.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('supabase_session')}`
+                    },
+                    body: JSON.stringify({
+                        user_id: userId
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Failed to load courses: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const courses = data.courses || [];
+                
+                if (courses.length > 0) {
+                    // Show personalized courses
+                    displayPersonalizedCourses(courses);
+                } else {
+                    // Show all available courses with enrollment options
+                    await loadAllCourses();
+                }
+            } catch (error) {
+                console.error('Error loading personalized courses:', error);
+                // Fallback to showing all courses
+                await loadAllCourses();
+            }
+        }
+        
+        // Load all available courses
+        async function loadAllCourses() {
+            // For now, just show the existing course grid
+            // In a real implementation, this would fetch from the database
+            document.getElementById('coursesGrid').innerHTML = `
+                <div class="card" style="transition: all 0.3s ease;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <span class="badge badge-primary">Beginner</span>
+                        <span class="badge" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white;">$3 / N5,000</span>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></div>
+                        <h3 class="card-title" style="margin: 0; color: var(--primary);">Vibe Coding: Building Real Software with AI</h3>
+                    </div>
+                    <p class="card-description" style="line-height: 1.7; margin-bottom: 1.5rem;">
+                        The modern way of building software where humans focus on intent, systems, and outcomes while AI handles execution. Learn how real products are built in 2025 using AI-powered builders, IDEs, and autonomous agents.
+                    </p>
+                    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(22, 32, 68, 0.5); border-radius: var(--radius); border: 1px solid var(--border-light);">
+                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">1.</span> 8 Modules | 14 Lessons
+                        </p>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">2.</span> 4-6 Weeks Self-Paced
+                        </p>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">3.</span> Certificate of Completion
+                        </p>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">4.</span> Real-World Projects
+                        </p>
+                    </div>
+                    <a href="/course-detail" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">
+                        Start Learning
+                    </a>
+                </div>
+                <div class="card" style="transition: all 0.3s ease;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <span class="badge badge-primary">Beginner</span>
+                        <span class="badge" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white;">$3 / N5,000</span>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+                        <h3 class="card-title" style="margin: 0; color: var(--primary);">Prompt Engineering Mastery</h3>
+                    </div>
+                    <p class="card-description" style="line-height: 1.7; margin-bottom: 1.5rem;">
+                        Master the art of communicating with AI. Learn to write effective prompts that get consistent, high-quality results. Essential for anyone working with ChatGPT, Claude, or any AI tool.
+                    </p>
+                    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(22, 32, 68, 0.5); border-radius: var(--radius); border: 1px solid var(--border-light);">
+                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">1.</span> 7 Modules | 16 Lessons
+                        </p>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">2.</span> 2-3 Weeks Self-Paced
+                        </p>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">3.</span> Certificate of Completion
+                        </p>
+                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">4.</span> Prompt Templates Library
+                        </p>
+                    </div>
+                    <a href="/prompt-engineering" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">
+                        Start Learning
+                    </a>
+                </div>
+            `;
+        }
+        
+        // Display personalized courses
+        function displayPersonalizedCourses(courses) {
+            let coursesHTML = '';
+            
+            courses.forEach(course => {
+                coursesHTML += `
+                    <div class="card" style="transition: all 0.3s ease;">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                            <span class="badge badge-primary">${course.course_level || 'Beginner'}</span>
+                            <span class="badge" style="background: linear-gradient(135deg, var(--success), var(--primary)); color: white;">Access Granted</span>
+                        </div>
+                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></div>
+                            <h3 class="card-title" style="margin: 0; color: var(--primary);">${course.course_title}</h3>
+                        </div>
+                        <p class="card-description" style="line-height: 1.7; margin-bottom: 1.5rem;">
+                            ${course.course_description || 'No description available'}
+                        </p>
+                        <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(22, 32, 68, 0.5); border-radius: var(--radius); border: 1px solid var(--border-light);">
+                            <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                                <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">Status:</span> Enrolled
+                            </p>
+                            <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                                <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">Since:</span> ${new Date(course.enrollment_date).toLocaleDateString()}
+                            </p>
+                        </div>
+                        <a href="/lesson-viewer?course=${course.course_id}" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">
+                            Continue Learning
+                        </a>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('coursesGrid').innerHTML = coursesHTML;
         }
 
         function handleAuth() {

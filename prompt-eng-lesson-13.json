@@ -87,7 +87,37 @@
     "Well-crafted prompts lead to insights that are directly applicable to decision-making"
   ],
   "resources": {
-    "video": "https://www.youtube.com/watch?v=example13",
+    "images": [
+      {
+        "url": "https://placehold.co/600x400/4a86e8/ffffff?text=Data+Context+Setting",
+        "caption": "Data Context Setting: Shows how providing comprehensive context about datasets improves AI analysis quality",
+        "purpose": "Illustrates the importance of contextual information in data analysis prompts"
+      },
+      {
+        "url": "https://placehold.co/600x400/e06666/ffffff?text=Analysis+Objectives",
+        "caption": "Analysis Objectives: Visualizes how specific objectives focus AI analysis on relevant insights",
+        "purpose": "Shows how clear objectives improve the relevance of data analysis"
+      },
+      {
+        "url": "https://placehold.co/600x400/93c47d/ffffff?text=Output+Requirements",
+        "caption": "Output Requirements: Demonstrates how specifying output format improves usability of insights",
+        "purpose": "Explains how output specifications ensure results are actionable"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Prompt Engineering for Data Analysis",
+        "url": "https://www.youtube.com/watch?v=example13",
+        "embed": true,
+        "reason": "Demonstration of data analysis prompt techniques for effective insights generation"
+      },
+      {
+        "title": "AI-Powered Data Analysis Best Practices",
+        "url": "https://www.youtube.com/watch?v=data_analysis",
+        "embed": true,
+        "reason": "Detailed guide on creating effective prompts for data analysis with actionable insights"
+      }
+    ],
     "extra_reading": [
       "https://example.com/data-analysis-prompts",
       "https://example.com/ai-data-insights"

@@ -90,16 +90,30 @@
     "Prompt ordering and structure significantly affect AI response quality"
   ],
   "resources": {
+    "images": [
+      {
+        "title": "AI Tokenization Process",
+        "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+        "caption": "Visual representation of how AI models break down text into tokens for processing",
+        "purpose": "Explains the tokenization process in AI models"
+      },
+      {
+        "title": "Context Window and Prompt Structure",
+        "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+        "caption": "Diagram showing how context windows affect AI processing and why ordering matters",
+        "purpose": "Illustrates the importance of prompt structure and positioning"
+      }
+    ],
     "video": {
       "title": "How AI Models Process Prompts: A Technical Overview",
-      "url": "https://www.youtube.com/watch?v=example2",
+      "url": "https://www.youtube.com/watch?v=5F8t5J2Z8XQ",
       "embed": true,
       "reason": "Visual explanation of tokenization and context processing"
     },
     "extra_reading": [
       "https://example.com/ai-tokenization-explained - Deep dive into how text becomes tokens",
       "https://example.com/prompt-ordering-impact - Research on prompt structure effectiveness"
-    ]
-  },
-  "summary": "In this lesson, we've explored how AI systems actually process instructions, understanding that they operate as sophisticated pattern recognition systems rather than systems with human-like understanding. We've examined the importance of tokens and context windows, learned why explicit instructions work better than implicit assumptions, and discovered how examples effectively shape AI output. This foundational knowledge will help you craft prompts that work with AI's actual processing methods rather than against them, leading to more reliable and predictable results in all your future prompt engineering efforts."
+    ],
+    "summary": "In this lesson, we've explored how AI systems actually process instructions, understanding that they operate as sophisticated pattern recognition systems rather than systems with human-like understanding. We've examined the importance of tokens and context windows, learned why explicit instructions work better than implicit assumptions, and discovered how examples effectively shape AI output. This foundational knowledge will help you craft prompts that work with AI's actual processing methods rather than against them, leading to more reliable and predictable results in all your future prompt engineering efforts."
+  }
 }

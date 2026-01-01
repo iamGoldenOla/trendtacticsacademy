@@ -87,7 +87,37 @@
     "Understanding platform algorithms and audience behaviors is crucial for effective content creation"
   ],
   "resources": {
-    "video": "https://www.youtube.com/watch?v=example11",
+    "images": [
+      {
+        "url": "https://placehold.co/600x400/4a86e8/ffffff?text=Platform-Specific+Content",
+        "caption": "Platform-Specific Content: Shows how content needs to be tailored for different platforms like LinkedIn, Twitter, and Instagram",
+        "purpose": "Illustrates the need for platform-specific content creation approaches"
+      },
+      {
+        "url": "https://placehold.co/600x400/e06666/ffffff?text=Audience+Segmentation",
+        "caption": "Audience Segmentation: Visualizes how different audience segments require tailored content approaches",
+        "purpose": "Shows the importance of audience-specific content in prompt engineering"
+      },
+      {
+        "url": "https://placehold.co/600x400/93c47d/ffffff?text=Content+Formats",
+        "caption": "Content Formats: Demonstrates different content structures like listicles, how-to guides, and storytelling",
+        "purpose": "Explains how format specifications affect content structure and effectiveness"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Prompt Engineering for Content Creation",
+        "url": "https://www.youtube.com/watch?v=example11",
+        "embed": true,
+        "reason": "Demonstration of content creation prompt techniques for different platforms and audiences"
+      },
+      {
+        "title": "Advanced Content Creation with AI",
+        "url": "https://www.youtube.com/watch?v=content_creation",
+        "embed": true,
+        "reason": "Detailed guide on creating effective content for different platforms and audiences"
+      }
+    ],
     "extra_reading": [
       "https://example.com/content-creation-prompts",
       "https://example.com/platform-specific-ai-content"
