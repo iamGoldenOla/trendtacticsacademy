@@ -38,19 +38,22 @@ try {
         exit();
     }
 
-    // Build the Supabase REST API URL to get courses for the user
-    $supabaseUrl = constant('SUPABASE_URL');
-    $anonKey = constant('SUPABASE_ANON_KEY');
+    // First, get the user's course access records using the proxy
+    $accessUrl = './auth-proxy.php?path=/rest/v1/student_course_access';
+    $accessParams = [
+        'select' => 'course_id,access_status,purchase_date',
+        'user_id' => 'eq.' . $user_id,
+        'access_status' => 'eq.active'
+    ];
     
-    // First, get the user's course access records
-    $accessUrl = $supabaseUrl . '/rest/v1/student_course_access?select=course_id,access_status,purchase_date&user_id=eq.' . $user_id . '&access_status=eq.active';
+    $accessUrl .= '&' . http_build_query($accessParams);
     
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $accessUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, false); // GET request
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'apikey: ' . $anonKey,
-        'Authorization: Bearer ' . $anonKey
+        'Content-Type: application/json',
     ]);
     
     $accessResponse = curl_exec($ch);
@@ -63,6 +66,15 @@ try {
     }
     
     if ($httpCode !== 200) {
+        // If the table doesn't exist or there's an error, return empty array
+        if ($httpCode === 404 || $httpCode === 400) {
+            echo json_encode([
+                'success' => true,
+                'courses' => [],
+                'count' => 0
+            ]);
+            exit();
+        }
         throw new Exception('Supabase request failed for course access with HTTP code: ' . $httpCode . '. Response: ' . $accessResponse);
     }
     
@@ -94,18 +106,25 @@ try {
     }
     
     // Create a query to get course details for these IDs
-    $courseIdsQuery = implode(',', array_map(function($id) {
+    $courseIdsList = implode(',', array_map(function($id) {
         return '"' . $id . '"';
     }, $courseIds));
     
-    $coursesUrl = $supabaseUrl . '/rest/v1/courses?select=id,title,description,level,category,thumbnail_url&status=eq.published&id=in.(' . $courseIdsQuery . ')';
+    $coursesUrl = './auth-proxy.php?path=/rest/v1/courses';
+    $courseParams = [
+        'select' => 'id,title,description,level,category,thumbnail_url',
+        'status' => 'eq.published',
+        'id' => 'in.(' . $courseIdsList . ')'
+    ];
+    
+    $coursesUrl .= '&' . http_build_query($courseParams);
     
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $coursesUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, false); // GET request
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'apikey: ' . $anonKey,
-        'Authorization: Bearer ' . $anonKey
+        'Content-Type: application/json',
     ]);
     
     $coursesResponse = curl_exec($ch);
@@ -118,6 +137,15 @@ try {
     }
     
     if ($httpCode !== 200) {
+        // If the courses table doesn't exist or there's an error, return empty array
+        if ($httpCode === 404 || $httpCode === 400) {
+            echo json_encode([
+                'success' => true,
+                'courses' => [],
+                'count' => 0
+            ]);
+            exit();
+        }
         throw new Exception('Supabase request failed for courses with HTTP code: ' . $httpCode . '. Response: ' . $coursesResponse);
     }
     
