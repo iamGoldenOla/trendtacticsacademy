@@ -282,7 +282,8 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('supabase_session')}`
+                        // Note: The API doesn't require authorization header as it uses user_id from the body
+                        // Authorization header was removed to avoid confusion
                     },
                     body: JSON.stringify({
                         user_id: userId
