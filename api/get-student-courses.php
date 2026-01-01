@@ -38,22 +38,28 @@ try {
         exit();
     }
 
-    // First, get the user's course access records using the proxy
-    $accessUrl = './auth-proxy.php?path=/rest/v1/student_course_access';
+    // Build the Supabase REST API URL to get courses for the user
+    $supabaseUrl = constant('SUPABASE_URL');
+    $anonKey = constant('SUPABASE_ANON_KEY');
+    
+    // First, get the user's course access records
+    $accessUrl = $supabaseUrl . '/rest/v1/student_course_access';
     $accessParams = [
         'select' => 'course_id,access_status,purchase_date',
         'user_id' => 'eq.' . $user_id,
         'access_status' => 'eq.active'
     ];
     
-    $accessUrl .= '&' . http_build_query($accessParams);
+    $accessQuery = http_build_query($accessParams);
+    $fullAccessUrl = $accessUrl . '?' . $accessQuery;
     
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $accessUrl);
+    curl_setopt($ch, CURLOPT_URL, $fullAccessUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, false); // GET request
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Content-Type: application/json',
+        'apikey: ' . $anonKey,
+        'Authorization: Bearer ' . $anonKey,
+        'Content-Type: application/json'
     ]);
     
     $accessResponse = curl_exec($ch);
@@ -67,7 +73,7 @@ try {
     
     if ($httpCode !== 200) {
         // If the table doesn't exist or there's an error, return empty array
-        if ($httpCode === 404 || $httpCode === 400) {
+        if ($httpCode === 404 || $httpCode === 400 || $httpCode === 409) {
             echo json_encode([
                 'success' => true,
                 'courses' => [],
@@ -110,21 +116,23 @@ try {
         return '"' . $id . '"';
     }, $courseIds));
     
-    $coursesUrl = './auth-proxy.php?path=/rest/v1/courses';
+    $coursesUrl = $supabaseUrl . '/rest/v1/courses';
     $courseParams = [
         'select' => 'id,title,description,level,category,thumbnail_url',
         'status' => 'eq.published',
         'id' => 'in.(' . $courseIdsList . ')'
     ];
     
-    $coursesUrl .= '&' . http_build_query($courseParams);
+    $coursesQuery = http_build_query($courseParams);
+    $fullCoursesUrl = $coursesUrl . '?' . $coursesQuery;
     
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $coursesUrl);
+    curl_setopt($ch, CURLOPT_URL, $fullCoursesUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, false); // GET request
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Content-Type: application/json',
+        'apikey: ' . $anonKey,
+        'Authorization: Bearer ' . $anonKey,
+        'Content-Type: application/json'
     ]);
     
     $coursesResponse = curl_exec($ch);
@@ -138,7 +146,7 @@ try {
     
     if ($httpCode !== 200) {
         // If the courses table doesn't exist or there's an error, return empty array
-        if ($httpCode === 404 || $httpCode === 400) {
+        if ($httpCode === 404 || $httpCode === 400 || $httpCode === 409) {
             echo json_encode([
                 'success' => true,
                 'courses' => [],
