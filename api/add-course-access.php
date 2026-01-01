@@ -1,6 +1,5 @@
 <?php
 // api/add-course-access.php
-require_once '../vendor/autoload.php'; // Adjust path as needed
 require_once 'config.php'; // Supabase configuration
 
 header('Content-Type: application/json');
@@ -47,20 +46,68 @@ try {
         exit();
     }
 
-    // Check if user already has access to this course
-    $checkQuery = "SELECT id FROM student_course_access WHERE user_id = :user_id AND course_id = :course_id";
-    $checkStmt = $pdo->prepare($checkQuery);
-    $checkStmt->bindParam(':user_id', $user_id, PDO::PARAM_STR);
-    $checkStmt->bindParam(':course_id', $course_id, PDO::PARAM_STR);
-    $checkStmt->execute();
+    // Build the Supabase REST API URL to insert course access
+    $supabaseUrl = constant('SUPABASE_URL');
+    $anonKey = constant('SUPABASE_ANON_KEY');
     
-    if ($checkStmt->rowCount() > 0) {
-        // User already has access, update the status if needed
-        $updateQuery = "UPDATE student_course_access SET access_status = 'active', updated_at = NOW() WHERE user_id = :user_id AND course_id = :course_id";
-        $updateStmt = $pdo->prepare($updateQuery);
-        $updateStmt->bindParam(':user_id', $user_id, PDO::PARAM_STR);
-        $updateStmt->bindParam(':course_id', $course_id, PDO::PARAM_STR);
-        $updateStmt->execute();
+    // First, check if the user already has access to this course
+    $checkUrl = $supabaseUrl . '/rest/v1/student_course_access?select=id&user_id=eq.' . $user_id . '&course_id=eq.' . $course_id . '&apikey=' . $anonKey;
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $checkUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'apikey: ' . $anonKey,
+        'Authorization: Bearer ' . $anonKey
+    ]);
+    
+    $checkResponse = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlError = curl_error($ch);
+    curl_close($ch);
+    
+    if ($curlError) {
+        throw new Exception('Curl error during check: ' . $curlError);
+    }
+    
+    if ($httpCode !== 200) {
+        throw new Exception('Supabase check request failed with HTTP code: ' . $httpCode);
+    }
+    
+    $existingRecords = json_decode($checkResponse, true);
+    
+    if (!empty($existingRecords)) {
+        // User already has access, update the status to active
+        $updateUrl = $supabaseUrl . '/rest/v1/student_course_access?user_id=eq.' . $user_id . '&course_id=eq.' . $course_id . '&apikey=' . $anonKey;
+        
+        $updateData = json_encode([
+            'access_status' => 'active',
+            'updated_at' => date('c') // ISO 8601 format
+        ]);
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $updateUrl);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $updateData);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'apikey: ' . $anonKey,
+            'Authorization: Bearer ' . $anonKey
+        ]);
+        
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curlError = curl_error($ch);
+        curl_close($ch);
+        
+        if ($curlError) {
+            throw new Exception('Curl error during update: ' . $curlError);
+        }
+        
+        if ($httpCode !== 200 && $httpCode !== 204) {
+            throw new Exception('Supabase update request failed with HTTP code: ' . $httpCode);
+        }
         
         echo json_encode([
             'success' => true,
@@ -69,24 +116,43 @@ try {
         ]);
     } else {
         // Insert new course access record
-        $insertQuery = "
-            INSERT INTO student_course_access (user_id, course_id, access_status)
-            VALUES (:user_id, :course_id, 'active')
-        ";
+        $insertUrl = $supabaseUrl . '/rest/v1/student_course_access?apikey=' . $anonKey;
         
-        $insertStmt = $pdo->prepare($insertQuery);
-        $insertStmt->bindParam(':user_id', $user_id, PDO::PARAM_STR);
-        $insertStmt->bindParam(':course_id', $course_id, PDO::PARAM_STR);
+        $insertData = json_encode([
+            'user_id' => $user_id,
+            'course_id' => $course_id,
+            'access_status' => 'active'
+        ]);
         
-        if ($insertStmt->execute()) {
-            echo json_encode([
-                'success' => true,
-                'message' => 'Course access granted successfully',
-                'action' => 'created'
-            ]);
-        } else {
-            throw new Exception('Failed to insert course access');
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $insertUrl);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $insertData);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'apikey: ' . $anonKey,
+            'Authorization: Bearer ' . $anonKey
+        ]);
+        
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curlError = curl_error($ch);
+        curl_close($ch);
+        
+        if ($curlError) {
+            throw new Exception('Curl error during insert: ' . $curlError);
         }
+        
+        if ($httpCode !== 201) {
+            throw new Exception('Supabase insert request failed with HTTP code: ' . $httpCode);
+        }
+        
+        echo json_encode([
+            'success' => true,
+            'message' => 'Course access granted successfully',
+            'action' => 'created'
+        ]);
     }
 
 } catch (Exception $e) {
