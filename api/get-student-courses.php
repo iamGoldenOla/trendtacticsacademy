@@ -42,6 +42,60 @@ try {
     $supabaseUrl = constant('SUPABASE_URL');
     $anonKey = constant('SUPABASE_ANON_KEY');
     
+    // Try using the RPC function first
+    $rpcUrl = $supabaseUrl . '/rest/v1/rpc/get_student_courses';
+    $rpcParams = [
+        'p_user_id' => $user_id
+    ];
+    
+    $rpcQuery = http_build_query($rpcParams);
+    $fullRpcUrl = $rpcUrl . '?' . $rpcQuery;
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $fullRpcUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'apikey: ' . $anonKey,
+        'Authorization: Bearer ' . $anonKey,
+        'Content-Type: application/json'
+    ]);
+    
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlError = curl_error($ch);
+    curl_close($ch);
+    
+    if ($curlError) {
+        // If RPC fails, try the direct table approach
+        $courses = tryDirectTableApproach($user_id, $supabaseUrl, $anonKey);
+    } else {
+        if ($httpCode === 200) {
+            // RPC worked, return the data
+            $courses = json_decode($response, true);
+        } else {
+            // RPC failed, try the direct table approach
+            $courses = tryDirectTableApproach($user_id, $supabaseUrl, $anonKey);
+        }
+    }
+    
+    // Return the courses
+    echo json_encode([
+        'success' => true,
+        'courses' => $courses,
+        'count' => count($courses)
+    ]);
+
+} catch (Exception $e) {
+    error_log('Error fetching student courses: ' . $e->getMessage());
+    http_response_code(500);
+    echo json_encode([
+        'error' => 'Failed to fetch courses',
+        'message' => $e->getMessage()
+    ]);
+}
+
+// Function to try the direct table approach as fallback
+function tryDirectTableApproach($user_id, $supabaseUrl, $anonKey) {
     // First, get the user's course access records
     $accessUrl = $supabaseUrl . '/rest/v1/student_course_access';
     $accessParams = [
@@ -63,37 +117,18 @@ try {
     ]);
     
     $accessResponse = curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    $curlError = curl_error($ch);
+    $accessHttpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $accessCurlError = curl_error($ch);
     curl_close($ch);
     
-    if ($curlError) {
-        throw new Exception('Curl error when fetching course access: ' . $curlError);
-    }
-    
-    if ($httpCode !== 200) {
-        // If the table doesn't exist or there's an error, return empty array
-        if ($httpCode === 404 || $httpCode === 400 || $httpCode === 409) {
-            echo json_encode([
-                'success' => true,
-                'courses' => [],
-                'count' => 0
-            ]);
-            exit();
-        }
-        throw new Exception('Supabase request failed for course access with HTTP code: ' . $httpCode . '. Response: ' . $accessResponse);
+    if ($accessCurlError || $accessHttpCode !== 200) {
+        return []; // Return empty array if we can't access the student_course_access table
     }
     
     $accessData = json_decode($accessResponse, true);
     
     if (empty($accessData)) {
-        // No enrolled courses, return empty array
-        echo json_encode([
-            'success' => true,
-            'courses' => [],
-            'count' => 0
-        ]);
-        exit();
+        return []; // No enrolled courses
     }
     
     // Extract course IDs
@@ -102,13 +137,7 @@ try {
     }, $accessData);
     
     if (empty($courseIds)) {
-        // No course IDs to fetch, return empty array
-        echo json_encode([
-            'success' => true,
-            'courses' => [],
-            'count' => 0
-        ]);
-        exit();
+        return []; // No course IDs to fetch
     }
     
     // Create a query to get course details for these IDs
@@ -136,25 +165,12 @@ try {
     ]);
     
     $coursesResponse = curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    $curlError = curl_error($ch);
+    $coursesHttpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $coursesCurlError = curl_error($ch);
     curl_close($ch);
     
-    if ($curlError) {
-        throw new Exception('Curl error when fetching courses: ' . $curlError);
-    }
-    
-    if ($httpCode !== 200) {
-        // If the courses table doesn't exist or there's an error, return empty array
-        if ($httpCode === 404 || $httpCode === 400 || $httpCode === 409) {
-            echo json_encode([
-                'success' => true,
-                'courses' => [],
-                'count' => 0
-            ]);
-            exit();
-        }
-        throw new Exception('Supabase request failed for courses with HTTP code: ' . $httpCode . '. Response: ' . $coursesResponse);
+    if ($coursesCurlError || $coursesHttpCode !== 200) {
+        return []; // Return empty array if we can't access the courses table
     }
     
     $coursesData = json_decode($coursesResponse, true);
@@ -179,20 +195,7 @@ try {
             }
         }
     }
-
-    // Return the courses
-    echo json_encode([
-        'success' => true,
-        'courses' => $courses,
-        'count' => count($courses)
-    ]);
-
-} catch (Exception $e) {
-    error_log('Error fetching student courses: ' . $e->getMessage());
-    http_response_code(500);
-    echo json_encode([
-        'error' => 'Failed to fetch courses',
-        'message' => $e->getMessage()
-    ]);
+    
+    return $courses;
 }
 ?>
