@@ -406,23 +406,39 @@
 
             .nav {
                 justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.25rem;
             }
 
             .nav a {
                 padding: 0.4rem 0.6rem;
                 font-size: 0.8rem;
+                margin: 0.1rem;
+            }
+
+            .logout-btn {
+                margin-top: 0.5rem;
+                width: 100%;
             }
 
             .welcome-section {
                 padding: 1.5rem;
             }
 
-            .welcome-text h1 {
-                font-size: 1.5rem;
+            .welcome-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .welcome-text {
+                text-align: center;
             }
 
             .quick-stats {
                 justify-content: center;
+                width: 100%;
             }
 
             .quick-actions {
@@ -444,27 +460,113 @@
             }
         }
 
-        @media (max-width: 480px) {
+        /* Collapsible Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 1rem;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 600px) {
+            .mobile-nav-toggle {
+                display: block;
+            }
+            
+            .nav {
+                display: none;
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-top: 0.5rem;
+            }
+            
+            .nav.active {
+                display: flex;
+            }
+            
+            .nav a {
+                width: 100%;
+                text-align: center;
+                margin: 0;
+            }
+            
+            .logout-btn {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+            
             .container {
                 padding: 1rem;
             }
 
             .nav a {
-                padding: 0.35rem 0.5rem;
-                font-size: 0.75rem;
+                padding: 0.5rem;
+                font-size: 0.8rem;
             }
 
             .quick-actions {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
                 gap: 0.75rem;
             }
 
             .action-card h3 {
-                font-size: 0.875rem;
+                font-size: 0.9rem;
             }
 
             .action-card p {
-                display: none;
+                display: block;
+                font-size: 0.75rem;
+            }
+            
+            .welcome-text h1 {
+                font-size: 1.4rem;
+            }
+            
+            .stat-value {
+                font-size: 1.25rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.75rem;
+            }
+
+            .nav a {
+                padding: 0.4rem 0.5rem;
+                font-size: 0.75rem;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .action-card h3 {
+                font-size: 0.85rem;
+            }
+
+            .action-card p {
+                font-size: 0.7rem;
+            }
+            
+            .welcome-text h1 {
+                font-size: 1.3rem;
+            }
+            
+            .section-title {
+                font-size: 1.1rem;
+            }
+            
+            .course-card {
+                padding: 1rem;
             }
         }
     </style>
@@ -474,6 +576,7 @@
     <header class="header">
         <div class="header-content">
             <div class="logo">Student Dashboard</div>
+            <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰ Menu</button>
             <nav class="nav">
                 <a href="/">Home</a>
                 <a href="/about">About</a>
@@ -671,7 +774,34 @@
             localStorage.removeItem('supabase_user');
             window.location.replace('/');
         }
-
+        
+        function toggleMobileNav() {
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('active');
+            
+            // Update button text based on state
+            const toggleBtn = document.querySelector('.mobile-nav-toggle');
+            if (nav.classList.contains('active')) {
+                toggleBtn.textContent = '✕ Close';
+            } else {
+                toggleBtn.textContent = '☰ Menu';
+            }
+        }
+        
+        // Close navigation when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('.nav');
+            const toggleBtn = document.querySelector('.mobile-nav-toggle');
+            
+            if (window.innerWidth <= 600 && 
+                nav.classList.contains('active') && 
+                !nav.contains(event.target) && 
+                event.target !== toggleBtn) {
+                nav.classList.remove('active');
+                toggleBtn.textContent = '☰ Menu';
+            }
+        });
+        
         // Initialize on load
         init();
     </script>

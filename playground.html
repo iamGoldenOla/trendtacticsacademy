@@ -338,6 +338,7 @@
     <header class="header">
         <div class="header-content">
             <div class="logo">AI Code Playground</div>
+            <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰ Menu</button>
             <nav class="nav">
                 <a href="/">Home</a>
                 <a href="/about">About</a>
@@ -404,6 +405,11 @@
     </div>
 
     <script>
+        function toggleMobileNav() {
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('active');
+        }
+        
         const htmlCode = document.getElementById('htmlCode');
         const cssCode = document.getElementById('cssCode');
         const jsCode = document.getElementById('jsCode');

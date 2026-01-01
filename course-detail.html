@@ -20,6 +20,7 @@
     <header class="header">
         <div class="container header-content">
             <div class="logo">Trendtactics Academy</div>
+            <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰ Menu</button>
             <nav class="nav">
                 <a href="https://trendtacticsdigital.com">Digital Services</a>
                 <a href="/">Home</a>
@@ -275,6 +276,33 @@
         }
 
         // Initialize page
+        function toggleMobileNav() {
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('active');
+            
+            // Update button text based on state
+            const toggleBtn = document.querySelector('.mobile-nav-toggle');
+            if (nav.classList.contains('active')) {
+                toggleBtn.textContent = '✕ Close';
+            } else {
+                toggleBtn.textContent = '☰ Menu';
+            }
+        }
+        
+        // Close navigation when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('.nav');
+            const toggleBtn = document.querySelector('.mobile-nav-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                nav.classList.contains('active') && 
+                !nav.contains(event.target) && 
+                event.target !== toggleBtn) {
+                nav.classList.remove('active');
+                toggleBtn.textContent = '☰ Menu';
+            }
+        });
+        
         initPage();
         
         // Add click handlers to module cards

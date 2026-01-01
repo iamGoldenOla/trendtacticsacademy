@@ -23,7 +23,7 @@
             --border: rgba(0, 217, 255, 0.2);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg-darker); min-height: 100vh; color: var(--text-primary); display: flex; flex-direction: column; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-darker); min-height: 100vh; color: var(--text-primary); display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
         
         /* Header */
         .header { background: var(--bg-dark); border-bottom: 1px solid var(--border); padding: 0.6rem 1rem; }
@@ -112,18 +112,86 @@
         /* Mobile Responsive */
         @media (max-width: 900px) {
             .main-layout { flex-direction: column; }
-            .sidebar { width: 100%; max-height: 200px; border-right: none; border-bottom: 1px solid var(--border); }
+            .sidebar { width: 100%; max-height: 300px; border-right: none; border-bottom: 1px solid var(--border); }
+            .sidebar-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
             .lesson-list { display: flex; gap: 0.5rem; flex-wrap: nowrap; overflow-x: auto; padding: 0.5rem; }
             .module-group { display: contents; }
             .module-title { display: none; }
-            .lesson-item { flex-shrink: 0; padding: 0.5rem 0.75rem; }
-            .lesson-info { display: none; }
+            .lesson-item { flex-shrink: 0; padding: 0.5rem 0.75rem; min-width: 200px; }
+            .lesson-info { display: block; }
+            .lesson-name { font-size: 0.75rem; white-space: normal; }
+            .lesson-duration { font-size: 0.65rem; }
+            .lesson-num { min-width: 20px; height: 20px; font-size: 0.6rem; }
         }
+        
+        /* Collapsible Mobile Sidebar */
+        .sidebar-toggle {
+            display: none;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 0.5rem;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar-toggle {
+                display: block;
+            }
+            
+            .sidebar {
+                width: 100%;
+                max-height: none;
+                display: none;
+            }
+            
+            .sidebar.active {
+                display: flex;
+                max-height: 70vh;
+            }
+            
+            .lesson-list {
+                flex-direction: column;
+                overflow-y: auto;
+                max-height: 60vh;
+            }
+            
+            .lesson-item {
+                flex-shrink: 0;
+                padding: 0.75rem;
+                min-width: auto;
+            }
+            
+            .lesson-info {
+                display: block;
+            }
+            
+            .main-layout {
+                flex-direction: column;
+            }
+            
+            .content-area {
+                min-height: auto;
+            }
+        }
+        
         @media (max-width: 600px) {
-            .header-content { flex-direction: column; }
-            .nav { justify-content: center; }
+            .header-content { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .nav { flex-wrap: wrap; justify-content: flex-start; width: 100%; }
+            .nav a { padding: 0.4rem; font-size: 0.75rem; }
             .learning-board { padding: 1rem; }
             .lesson-header h1 { font-size: 1.25rem; }
+            .content-section { padding: 1rem; }
+            .section-title { font-size: 0.9rem; }
+            .section-text { font-size: 0.85rem; }
+            .content-tab { padding: 0.75rem 1rem; font-size: 0.8rem; }
+            .lesson-nav { flex-direction: column; gap: 0.5rem; }
+            .nav-btn { width: 100%; text-align: center; }
         }
     </style>
 </head>
@@ -145,7 +213,8 @@
 
     <div class="main-layout">
         <!-- Sidebar with Lesson List -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="lessonSidebar">
+            <button class="sidebar-toggle" onclick="toggleSidebar()">📚 Lessons Menu</button>
             <div class="sidebar-header">
                 <h2>Course Lessons</h2>
                 <p id="progressText">0/15 completed</p>
@@ -2837,6 +2906,574 @@
           }
         ],
         "summary": "Facebook offers objectives in Awareness, Consideration, and Conversion categories. Each objective optimizes for different outcomes and should align with your business goals. Choosing the wrong objective means the algorithm optimizes for outcomes that don't match your business needs. Always start with your business goal and select the objective that supports it. Proper objective selection is fundamental to campaign success."
+      },
+      {
+        "id": 7,
+        "module": "Module 7: Scaling & Stability",
+        "title": "Scaling Ads Without Breaking Them",
+        "duration": "10-15 min",
+        "intro": "In this lesson, you'll learn how to scale your Facebook Ads without breaking performance. Scaling is one of the most challenging aspects of Facebook Ads - many advertisers successfully build profitable campaigns but struggle to grow them without seeing performance deteriorate. We'll explore the difference between vertical and horizontal scaling, when to duplicate versus increase budget, and how to recognize the signs of successful versus failing scaling efforts.",
+        "bigIdea": "Scaling in Facebook Ads involves two main approaches: vertical scaling (increasing budget within existing parameters) and horizontal scaling (expanding to new audiences, creatives, or ad sets). The key to successful scaling is to maintain the same performance signals that made your original campaign successful while giving the algorithm more opportunities to find new audiences. Scaling should be gradual and strategic, not aggressive and random.",
+        "steps": [
+          "Step 1: Ensure your base campaign is profitable and stable before attempting to scale",
+          "Step 2: Choose between vertical scaling (budget increase) or horizontal scaling (expansion)",
+          "Step 3: For vertical scaling, increase budget by 20-30% every 2-3 days if performance remains stable",
+          "Step 4: For horizontal scaling, duplicate successful ad sets with slight variations in audience or creative",
+          "Step 5: Monitor performance closely during scaling and revert changes if performance deteriorates"
+        ],
+        "example": "Consider a profitable e-commerce campaign spending $50/day with a 3:1 ROAS. To scale vertically, you might increase the budget to $65/day and monitor for 2-3 days. If performance remains stable (3:1 ROAS), you can continue gradual increases. For horizontal scaling, you might create 2-3 new ad sets with similar audiences but different interests, allowing the algorithm to find new customer segments while maintaining the proven creative approach. Another example: A SaaS company with a profitable lead generation campaign. They've identified that their 25-34 age demographic performs best. For horizontal scaling, they create new ad sets targeting 35-44 and 45-54 demographics with similar interests. For vertical scaling, they gradually increase budget within the original demographic, monitoring CPM and lead quality metrics to ensure the algorithm continues finding quality audiences.",
+        "video": "https://www.youtube.com/watch?v=example",
+        "reflection": "Before scaling any campaign, ensure it's profitable and stable for at least 3-5 days. Scale gradually (20-30% increases) and choose between vertical or horizontal scaling based on your current performance. Always monitor key metrics during scaling and be ready to pause if performance deteriorates. Remember: good scaling maintains profitability while growing volume.",
+        "quiz": [
+          {
+            "q": "What are the two main approaches to scaling Facebook Ads?",
+            "a": "Vertical scaling and horizontal scaling",
+            "opts": [
+              "Vertical scaling and horizontal scaling",
+              "Budget scaling and creative scaling",
+              "Audience scaling and ad scaling",
+              "Fast scaling and slow scaling"
+            ]
+          },
+          {
+            "q": "What should you ensure before attempting to scale a campaign?",
+            "a": "The campaign is profitable and stable",
+            "opts": [
+              "The campaign is profitable and stable",
+              "The campaign has been running for 30 days",
+              "The campaign has perfect creative",
+              "The campaign has maximum reach"
+            ]
+          },
+          {
+            "q": "How much should you increase budget for vertical scaling?",
+            "a": "20-30% every 2-3 days if performance remains stable",
+            "opts": [
+              "20-30% every 2-3 days if performance remains stable",
+              "50-100% immediately",
+              "10% every day",
+              "200% after one week"
+            ]
+          },
+          {
+            "q": "What happens when you scale too quickly?",
+            "a": "It overwhelms the algorithm and often breaks performance",
+            "opts": [
+              "It overwhelms the algorithm and often breaks performance",
+              "It guarantees better results",
+              "It reduces your cost per click",
+              "It increases your audience targeting"
+            ]
+          },
+          {
+            "q": "Why is horizontal scaling often more stable than vertical scaling?",
+            "a": "It maintains learning while expanding to new opportunities",
+            "opts": [
+              "It maintains learning while expanding to new opportunities",
+              "It reduces your ad spend",
+              "It guarantees perfect performance",
+              "It eliminates the need for monitoring"
+            ]
+          }
+        ],
+        "summary": "Scaling Facebook Ads involves vertical scaling (budget increases) and horizontal scaling (expansion to new audiences/creatives). Before scaling, ensure campaigns are profitable and stable. Scale gradually (20-30% increases) and monitor performance closely. Good scaling maintains profitability while growing volume. Proper scaling techniques allow profitable campaigns to grow without breaking performance."
+      },
+      {
+        "id": 8,
+        "module": "Module 7: Scaling & Stability",
+        "title": "Handling Drops, Fatigue & Inconsistency",
+        "duration": "10-15 min",
+        "intro": "Even the best Facebook Ads campaigns experience performance drops, creative fatigue, and inconsistency. In this lesson, you'll learn why ads suddenly stop working, how to distinguish between different types of performance issues, and how to recover performance calmly without panic-editing. Understanding these challenges is crucial for maintaining stable, profitable campaigns over time.",
+        "bigIdea": "Facebook Ads performance naturally fluctuates due to creative fatigue (audiences getting tired of seeing the same creative), audience fatigue (same audience seeing ads repeatedly), and algorithm changes (Facebook updating their systems). The key is to identify which type of issue you're facing and respond with the appropriate solution. Some fluctuations are normal and temporary, while others require specific interventions. Staying calm and analytical during performance changes leads to better decisions.",
+        "steps": [
+          "Step 1: Identify the type of performance issue (creative fatigue, audience fatigue, or algorithm change)",
+          "Step 2: Assess whether the drop is within normal fluctuations or a real problem",
+          "Step 3: For creative fatigue, introduce new creative variations gradually",
+          "Step 4: For audience fatigue, expand to new audiences or refresh existing ones",
+          "Step 5: For algorithm changes, monitor for stability rather than making immediate changes"
+        ],
+        "example": "Consider an e-commerce campaign that has been running the same creative for 2 weeks. The CTR drops from 2% to 1.2%, and the cost per click increases. This indicates creative fatigue. The solution is to introduce 2-3 new creative variations while keeping the best-performing creative running. This refreshes the audience's interest without completely disrupting the campaign. Another example: A lead generation campaign starts showing higher CPMs and lower conversion rates after 30 days. Analysis shows the same audiences have been targeted without refresh. This indicates audience fatigue. The solution is to create new lookalike audiences based on recent converters and pause ad sets that have reached their frequency cap, allowing the algorithm to find fresh audiences while maintaining the proven creative approach.",
+        "video": "https://www.youtube.com/watch?v=example",
+        "reflection": "When you see performance changes, resist the urge to panic-edit. First, identify the type of issue you're facing and assess whether it's normal fluctuation or a real problem. Make targeted changes based on the specific issue rather than changing everything at once. Remember that some fluctuations are normal, but persistent problems require specific interventions. Keep detailed records of changes and their results to improve your response over time.",
+        "quiz": [
+          {
+            "q": "What are the three main causes of performance drops?",
+            "a": "Creative fatigue, audience fatigue, and algorithm changes",
+            "opts": [
+              "Creative fatigue, audience fatigue, and algorithm changes",
+              "Budget issues, targeting problems, and creative issues",
+              "Audience size, bid strategy, and campaign objective",
+              "Ad placement, frequency, and optimization goal"
+            ]
+          },
+          {
+            "q": "What is creative fatigue?",
+            "a": "Audiences getting tired of seeing the same creative",
+            "opts": [
+              "Audiences getting tired of seeing the same creative",
+              "Audiences seeing too many different creatives",
+              "Audiences not engaging with any creative",
+              "Audiences being targeted with wrong interests"
+            ]
+          },
+          {
+            "q": "How should you respond to algorithm changes?",
+            "a": "Monitor for stability rather than making immediate changes",
+            "opts": [
+              "Monitor for stability rather than making immediate changes",
+              "Immediately change all campaign settings",
+              "Double the budget to overcome the issue",
+              "Pause all campaigns until changes are complete"
+            ]
+          },
+          {
+            "q": "Why is panic-editing harmful to campaigns?",
+            "a": "It disrupts the learning phase and often makes problems worse",
+            "opts": [
+              "It disrupts the learning phase and often makes problems worse",
+              "It guarantees better performance immediately",
+              "It reduces your cost per click",
+              "It increases your audience targeting"
+            ]
+          },
+          {
+            "q": "What should you do before making changes to a dropping campaign?",
+            "a": "Identify the type of issue and assess if it's a real problem",
+            "opts": [
+              "Identify the type of issue and assess if it's a real problem",
+              "Immediately change all settings",
+              "Increase the budget significantly",
+              "Create multiple new campaigns"
+            ]
+          }
+        ],
+        "summary": "Performance drops in Facebook Ads are caused by creative fatigue, audience fatigue, and algorithm changes. Understanding the difference helps you respond appropriately rather than panic-editing. Creative fatigue requires new variations, audience fatigue needs fresh targeting, and algorithm changes often just need monitoring. Staying calm and analytical during performance changes leads to better decisions and more stable campaigns."
+      },
+      {
+        "id": 9,
+        "module": "Module 8: Real-World Facebook Ads Workflows",
+        "title": "Running Ads for Your Own Business",
+        "duration": "10-15 min",
+        "intro": "In this lesson, you'll learn how to run Facebook Ads for your own business across different business models. We'll explore specific strategies for e-commerce, services, digital products, courses, and local businesses. Understanding how to adapt your Facebook Ads approach to your specific business model is crucial for achieving the results you need to grow.",
+        "bigIdea": "Different business models require different approaches to Facebook Ads: e-commerce focuses on product catalogs and purchase events, services often emphasize lead generation and consultations, digital products may target specific user behaviors, courses need to address education and trust factors, and local businesses must consider geographic targeting and foot traffic. The key is to understand your unique sales cycle and design campaigns that support it.",
+        "steps": [
+          "Step 1: Identify your specific business model and customer journey",
+          "Step 2: Map your business model to the appropriate campaign objectives",
+          "Step 3: Set up conversion tracking that aligns with your business goals",
+          "Step 4: Create audience strategies that match your customer acquisition model",
+          "Step 5: Design creative that speaks to your specific audience's pain points"
+        ],
+        "example": "Consider an e-commerce clothing store. They focus on product catalog integration, optimize for purchase events, use dynamic product ads to retarget browsers, and create audiences based on website behavior. Their campaigns might include prospecting for new customers, retargeting cart abandoners, and promoting specific product collections to relevant interests. Another example: A local fitness studio offering personal training. They create location-based campaigns, optimize for lead generation (contact form fills), use local audience targeting, and focus on driving both online signups and in-person visits. Their creative emphasizes local community, personal transformation, and includes testimonials from local clients.",
+        "video": "https://www.youtube.com/watch?v=example",
+        "reflection": "Before creating any campaign, clearly identify your business model and primary revenue driver. Design your entire campaign strategy (objectives, tracking, audiences, creative) around this model. Test different approaches to see what works best for your specific business type, and don't copy strategies from businesses with different models without adaptation.",
+        "quiz": [
+          {
+            "q": "Why do different business models require different Facebook Ads approaches?",
+            "a": "Different models have different funnels, conversion metrics, and optimization goals",
+            "opts": [
+              "Different models have different funnels, conversion metrics, and optimization goals",
+              "Facebook charges different rates for different models",
+              "Different models require different ad platforms",
+              "E-commerce businesses get better results than services"
+            ]
+          },
+          {
+            "q": "What should e-commerce businesses focus on for conversion tracking?",
+            "a": "Purchase events and product catalog integration",
+            "opts": [
+              "Purchase events and product catalog integration",
+              "Website visits and video views",
+              "Form fills and email captures",
+              "Page likes and engagement"
+            ]
+          },
+          {
+            "q": "How should service businesses approach campaign objectives?",
+            "a": "Lead generation and consultation optimization",
+            "opts": [
+              "Lead generation and consultation optimization",
+              "Always use traffic objectives",
+              "Focus only on brand awareness",
+              "Use the same approach as e-commerce"
+            ]
+          },
+          {
+            "q": "What happens when you use e-commerce strategies for service businesses?",
+            "a": "Campaigns are optimized for purchases rather than consultations",
+            "opts": [
+              "Campaigns are optimized for purchases rather than consultations",
+              "It improves campaign performance immediately",
+              "It reduces your ad spend significantly",
+              "It increases your audience targeting"
+            ]
+          },
+          {
+            "q": "Why is it important to map your business model to campaign objectives?",
+            "a": "It ensures campaigns align with your specific customer journey",
+            "opts": [
+              "It ensures campaigns align with your specific customer journey",
+              "It allows you to use more ad spend",
+              "It guarantees ad approval",
+              "It eliminates the need for creative testing"
+            ]
+          }
+        ],
+        "summary": "Different business models require tailored Facebook Ads approaches: e-commerce focuses on product catalogs and purchases, services on lead generation and consultations, digital products on user behaviors, courses on education and trust, and local businesses on geographic targeting. Understanding your business model helps you design campaigns that align with your specific customer journey and business objectives."
+      },
+      {
+        "id": 10,
+        "module": "Module 8: Real-World Facebook Ads Workflows",
+        "title": "Running Ads for Clients",
+        "duration": "10-15 min",
+        "intro": "Managing Facebook Ads for clients comes with unique challenges and responsibilities that differ significantly from running ads for your own business. In this lesson, you'll learn client onboarding processes, how to set realistic expectations, effective reporting methods, and how to protect yourself as a freelancer or agency. These skills are essential for building a successful Facebook Ads service business.",
+        "bigIdea": "Running ads for clients involves three main components: onboarding and setup (understanding their business, goals, and access requirements), expectation management (setting realistic timelines and performance benchmarks), and reporting and communication (providing regular updates and explaining performance in business terms). Success in client work requires both technical skills and relationship management abilities.",
+        "steps": [
+          "Step 1: Conduct thorough onboarding to understand the client's business and goals",
+          "Step 2: Set realistic expectations about timeline, results, and budget requirements",
+          "Step 3: Establish clear communication protocols and reporting schedules",
+          "Step 4: Document all strategies, changes, and performance in a client-friendly way",
+          "Step 5: Regularly review performance and adjust strategies based on business impact"
+        ],
+        "example": "Consider a freelance Facebook Ads manager working with a local restaurant. During onboarding, they learn the client wants to increase lunch traffic by 20% in 3 months. They set expectations that it will take 2-3 weeks for campaigns to stabilize, explain the testing process, and agree on weekly performance reports. They focus campaigns on local audiences interested in dining out and track both online engagement and estimated foot traffic through check-ins. Another example: A small agency managing ads for an e-commerce client. They create a comprehensive onboarding document, set up proper access to the client's accounts, establish monthly strategy calls, and provide detailed reports showing ROAS, customer acquisition cost, and lifetime value. They also include recommendations for non-advertising improvements to the client's website and customer experience.",
+        "video": "https://www.youtube.com/watch?v=example",
+        "reflection": "Always establish clear expectations during onboarding, focusing on realistic timelines and performance benchmarks. Create client-friendly reports that show business impact rather than just ad metrics. Document your strategies and changes so you can explain your approach. Protect yourself with proper contracts and payment terms. Remember that your success depends on both technical results and client satisfaction.",
+        "quiz": [
+          {
+            "q": "What are the three main components of client work?",
+            "a": "Onboarding and setup, expectation management, and reporting and communication",
+            "opts": [
+              "Onboarding and setup, expectation management, and reporting and communication",
+              "Creative, targeting, and bidding",
+              "Campaigns, ad sets, and ads",
+              "Budget, audience, and creative"
+            ]
+          },
+          {
+            "q": "Why is expectation management important in client work?",
+            "a": "It prevents disappointed clients and scope creep",
+            "opts": [
+              "It prevents disappointed clients and scope creep",
+              "It reduces your ad spend",
+              "It guarantees perfect performance",
+              "It eliminates the need for testing"
+            ]
+          },
+          {
+            "q": "How should you approach reporting to clients?",
+            "a": "Show business impact rather than just ad metrics",
+            "opts": [
+              "Show business impact rather than just ad metrics",
+              "Provide as much technical detail as possible",
+              "Focus only on cost metrics",
+              "Use only Facebook's standard reports"
+            ]
+          },
+          {
+            "q": "What happens when you don't set clear expectations?",
+            "a": "It leads to disappointed clients and scope creep",
+            "opts": [
+              "It leads to disappointed clients and scope creep",
+              "It improves campaign performance immediately",
+              "It reduces your workload significantly",
+              "It increases your audience targeting"
+            ]
+          },
+          {
+            "q": "Why is documentation important in client work?",
+            "a": "It helps explain results and learn from campaigns",
+            "opts": [
+              "It helps explain results and learn from campaigns",
+              "It reduces your ad spend",
+              "It guarantees ad approval",
+              "It eliminates the need for testing"
+            ]
+          }
+        ],
+        "summary": "Running ads for clients requires onboarding, expectation management, and effective reporting. Success depends on both technical skills and relationship management. Set realistic expectations, create business-focused reports, document strategies, and protect yourself with proper contracts. Client work requires different skills than managing your own campaigns."
+      },
+      {
+        "id": 11,
+        "module": "Module 8: Real-World Facebook Ads Workflows",
+        "title": "Ethics, Compliance & Account Safety",
+        "duration": "10-15 min",
+        "intro": "In this final module lesson, you'll learn about Facebook's ad policies, how to avoid bans and restrictions, and how to maintain long-term account health. Ethics and compliance aren't just about following rules - they're about building sustainable, trustworthy advertising practices that protect both you and your clients. Understanding these principles is crucial for long-term success in Facebook Ads.",
+        "bigIdea": "Facebook's ad policies cover prohibited content (scams, misleading claims, restricted products), restricted content (health claims, financial services), and technical requirements (proper landing pages, accurate business information). Account safety involves maintaining good standing through consistent compliance, avoiding policy violations, and having backup plans for account issues. Ethical advertising means creating honest, transparent campaigns that provide real value to users.",
+        "steps": [
+          "Step 1: Familiarize yourself with Facebook's advertising policies and guidelines",
+          "Step 2: Create a compliance checklist for all campaigns before publishing",
+          "Step 3: Regularly review policy updates and adjust strategies accordingly",
+          "Step 4: Maintain backup accounts and alternative strategies for business continuity",
+          "Step 5: Always prioritize honest, transparent advertising that provides real value"
+        ],
+        "example": "Consider a health supplement company advertising their products. They must navigate Facebook's health-related advertising restrictions by avoiding medical claims, providing scientific evidence for benefits, and ensuring their landing pages comply with health advertising requirements. They create campaigns focused on general wellness rather than specific medical conditions, and always include appropriate disclaimers. Another example: A financial services company offering investment advice. They must comply with financial advertising policies by providing proper certifications, avoiding guaranteed return claims, and ensuring their ads don't promote get-rich-quick schemes. They focus on educational content about financial planning rather than promises of high returns, and always include risk disclosures.",
+        "video": "https://www.youtube.com/watch?v=example",
+        "reflection": "Always stay updated on Facebook's advertising policies and create a compliance checklist for your campaigns. Focus on honest, transparent advertising that provides real value rather than trying to game the system. Have backup accounts and strategies in place for business continuity. Remember that sustainable, ethical advertising practices lead to long-term success rather than short-term gains that might violate policies.",
+        "quiz": [
+          {
+            "q": "What are Facebook's ad policy categories?",
+            "a": "Prohibited content, restricted content, and technical requirements",
+            "opts": [
+              "Prohibited content, restricted content, and technical requirements",
+              "Budget, audience, and creative requirements",
+              "Campaign, ad set, and ad policies",
+              "Targeting, bidding, and optimization rules"
+            ]
+          },
+          {
+            "q": "Why is it important to have backup accounts?",
+            "a": "For business continuity when accounts are restricted",
+            "opts": [
+              "For business continuity when accounts are restricted",
+              "To increase your ad spend",
+              "To guarantee ad approval",
+              "To reduce your cost per click"
+            ]
+          },
+          {
+            "q": "What should you do to maintain account health?",
+            "a": "Stay updated on policies and follow compliance checklists",
+            "opts": [
+              "Stay updated on policies and follow compliance checklists",
+              "Ignore policy updates and focus on performance",
+              "Use the same strategies as competitors",
+              "Focus only on creative and ignore policies"
+            ]
+          },
+          {
+            "q": "What happens when you make false claims in ads?",
+            "a": "Results in ad rejections and potential account restrictions",
+            "opts": [
+              "Results in ad rejections and potential account restrictions",
+              "It improves campaign performance immediately",
+              "It reduces your ad spend significantly",
+              "It increases your audience targeting"
+            ]
+          },
+          {
+            "q": "Why is ethical advertising important for long-term success?",
+            "a": "It leads to sustainable success and avoids policy violations",
+            "opts": [
+              "It leads to sustainable success and avoids policy violations",
+              "It guarantees perfect performance",
+              "It eliminates the need for testing",
+              "It reduces your cost per click"
+            ]
+          }
+        ],
+        "summary": "Facebook's ad policies cover prohibited content, restricted content, and technical requirements. Maintaining account safety requires compliance with these policies, having backup plans, and focusing on ethical advertising practices. Understanding policies helps you create compliant campaigns while achieving business goals. Long-term success requires sustainable, policy-compliant advertising strategies."
+      },
+      {
+        "id": 12,
+        "module": "Module 3: Audiences & Targeting (The Right Way in 2025)",
+        "title": "Understanding Audiences Deeply",
+        "duration": "10-15 min",
+        "intro": "In this lesson, you'll learn about the different types of audiences in Facebook Ads and how to think about them strategically. We'll explore cold vs warm vs hot audiences, understand why interests aren't magic, and learn when targeting matters versus when it doesn't. This foundational understanding of audiences is crucial for creating campaigns that reach the right people at the right time.",
+        "bigIdea": "Facebook audiences exist on a spectrum from cold to warm to hot: Cold audiences (people who don't know you) need awareness and education, Warm audiences (people who have interacted with you) need nurturing and consideration, Hot audiences (people ready to buy) need clear calls to action. The key is to match your audience type to your campaign objective and creative approach. Audience size and saturation also play important roles in performance.",
+        "steps": [
+          "Step 1: Identify where your audience sits on the cold-to-hot spectrum",
+          "Step 2: Match your audience type to your campaign objective",
+          "Step 3: Adjust your creative and offer based on audience temperature",
+          "Step 4: Monitor audience saturation and refresh when performance drops",
+          "Step 5: Create audience sequences that move people from cold to hot over time"
+        ],
+        "example": "Consider an online fitness coach. Their cold audience might be people interested in health and wellness but who don't know the coach yet. These people need educational content about fitness. Their warm audience might be people who downloaded a free workout guide - these people are considering the coach's services and need testimonials and success stories. Their hot audience might be people who attended a free webinar - these people are ready for a specific offer and need clear pricing and limited-time bonuses. Another example: An e-commerce store selling kitchen gadgets. Their cold audience might be people interested in cooking and home improvement. These people see top-of-funnel content about cooking tips. Their warm audience might be people who visited the website but didn't purchase - these people see retargeting ads with social proof and reviews. Their hot audience might be people who added items to cart but didn't check out - these people see specific product ads with incentives like free shipping or discounts.",
+        "video": "https://www.youtube.com/watch?v=example",
+        "reflection": "Always consider audience temperature when creating campaigns. Match your creative and offer to where your audience is in their journey. Start with broader audiences for awareness and move to more specific, warmer audiences for conversions. Monitor audience performance regularly and refresh or expand when you see signs of saturation.",
+        "quiz": [
+          {
+            "q": "What are the three audience temperature types?",
+            "a": "Cold, warm, and hot audiences",
+            "opts": [
+              "Cold, warm, and hot audiences",
+              "New, returning, and loyal audiences",
+              "High, medium, and low value audiences",
+              "Engaged, interested, and purchased audiences"
+            ]
+          },
+          {
+            "q": "Why is audience temperature important for campaign performance?",
+            "a": "Different audiences need different messaging based on their readiness",
+            "opts": [
+              "Different audiences need different messaging based on their readiness",
+              "It reduces your ad spend",
+              "It guarantees ad approval",
+              "It increases your reach automatically"
+            ]
+          },
+          {
+            "q": "What happens when you show the same creative to cold and warm audiences?",
+            "a": "It leads to poor performance because messaging doesn't match audience readiness",
+            "opts": [
+              "It leads to poor performance because messaging doesn't match audience readiness",
+              "It improves campaign performance immediately",
+              "It reduces your cost per click",
+              "It increases your audience targeting"
+            ]
+          },
+          {
+            "q": "How should you approach audience targeting for different campaign objectives?",
+            "a": "Match audience temperature to campaign objective",
+            "opts": [
+              "Match audience temperature to campaign objective",
+              "Always use the same audience for all objectives",
+              "Use only cold audiences for all campaigns",
+              "Ignore audience temperature and focus on interests"
+            ]
+          },
+          {
+            "q": "What are signs of audience saturation?",
+            "a": "Declining performance and increasing costs",
+            "opts": [
+              "Declining performance and increasing costs",
+              "Higher reach and better engagement",
+              "More conversions and lower costs",
+              "Increased ad approval rates"
+            ]
+          }
+        ],
+        "summary": "Facebook audiences exist on a spectrum from cold (unaware) to warm (interested) to hot (ready to buy). Matching audience temperature to campaign objective and creative approach is crucial for performance. Understanding audience saturation and refreshing audiences when needed helps maintain performance. Different audience types require different messaging and offers."
+      },
+      {
+        "id": 13,
+        "module": "Module 3: Audiences & Targeting (The Right Way in 2025)",
+        "title": "Custom Audiences & Retargeting",
+        "duration": "10-15 min",
+        "intro": "Retargeting is the most profitable type of Facebook advertising, and custom audiences are the foundation of effective retargeting. In this lesson, you'll learn how to create and use custom audiences based on website visitors, video viewers, app users, and customer lists. Understanding custom audiences will dramatically improve your campaign performance and return on ad spend.",
+        "bigIdea": "Custom audiences are groups of people created based on their behavior with your business: Website visitors (people who came to your site), Video viewers (people who watched your content), Engagement audiences (people who interacted with your social media), Customer lists (people from your email database). Each type has specific use cases and optimal campaign objectives. The key is to layer multiple custom audiences and create audience sequences that move people through your funnel.",
+        "steps": [
+          "Step 1: Set up Facebook Pixel to capture all website events",
+          "Step 2: Create custom audiences for different website pages and actions",
+          "Step 3: Upload customer lists to create lookalike audiences",
+          "Step 4: Layer multiple custom audiences for more specific targeting",
+          "Step 5: Create audience sequences that move people from awareness to conversion"
+        ],
+        "example": "Consider an online course creator. They create custom audiences for: Website visitors (all traffic), Video viewers (people who watched 50%+ of their free training), Email subscribers (people on their list), Cart abandoners (people who added courses to cart), and Purchase completers (customers). They use these audiences for different campaigns: Website visitors for awareness, video viewers for warm nurture, email subscribers for launches, cart abandoners for recovery, and customers for upsells. Another example: An e-commerce store selling skincare products. They create audiences for: Homepage visitors, Product page visitors, Add-to-cart users, and Purchasers. They run campaigns targeting these audiences with different creatives: Homepage visitors see general brand awareness ads, product page visitors see product-specific ads, cart abandoners see discount offers, and purchasers see related product recommendations.",
+        "video": "https://www.youtube.com/watch?v=example",
+        "reflection": "Start with basic website custom audiences and gradually add more specific ones as you gather data. Always have at least 1,000 people in an audience before launching campaigns. Create audience sequences that move people from broader to more specific audiences. Use different creatives and offers for audiences at different stages of your funnel.",
+        "quiz": [
+          {
+            "q": "What are the main types of custom audiences?",
+            "a": "Website visitors, video viewers, engagement audiences, and customer lists",
+            "opts": [
+              "Website visitors, video viewers, engagement audiences, and customer lists",
+              "New, returning, and loyal customers",
+              "High, medium, and low value audiences",
+              "Engaged, interested, and purchased audiences"
+            ]
+          },
+          {
+            "q": "Why do custom audiences typically outperform cold audiences?",
+            "a": "They're made up of people who have already shown interest in your business",
+            "opts": [
+              "They're made up of people who have already shown interest in your business",
+              "Facebook gives them better placement",
+              "They're cheaper to target than cold audiences",
+              "They always convert better than cold audiences"
+            ]
+          },
+          {
+            "q": "What is the minimum recommended size for a custom audience?",
+            "a": "At least 1,000 people",
+            "opts": [
+              "At least 1,000 people",
+              "At least 100 people",
+              "At least 10,000 people",
+              "At least 50,000 people"
+            ]
+          },
+          {
+            "q": "How should you approach creative for different custom audiences?",
+            "a": "Use different creatives based on audience readiness level",
+            "opts": [
+              "Use different creatives based on audience readiness level",
+              "Use the same creative for all audiences",
+              "Focus only on visual elements",
+              "Ignore audience differences"
+            ]
+          },
+          {
+            "q": "What happens when you don't refresh audiences regularly?",
+            "a": "It leads to overexposure and declining performance",
+            "opts": [
+              "It leads to overexposure and declining performance",
+              "It improves campaign performance immediately",
+              "It reduces your cost per click",
+              "It increases your audience targeting"
+            ]
+          }
+        ],
+        "summary": "Custom audiences are based on user behavior with your business: website visitors, video viewers, engagement audiences, and customer lists. They consistently outperform cold audiences because they're warm prospects who've shown interest. Setting up proper tracking, creating audiences of at least 1,000 people, and using audience sequences are key to success. Custom audiences are foundational for effective retargeting campaigns."
+      },
+      {
+        "id": 14,
+        "module": "Module 3: Audiences & Targeting (The Right Way in 2025)",
+        "title": "Lookalike Audiences (Without Guessing)",
+        "duration": "10-15 min",
+        "intro": "Lookalike audiences allow you to find new customers who behave like your best existing customers. In this lesson, you'll learn what lookalikes actually are, how to create them properly, and how to choose the right percentage ranges for your campaigns. Understanding lookalikes will help you scale your profitable campaigns to reach new audiences beyond your existing customer base.",
+        "bigIdea": "Lookalike audiences are created from your best-performing audiences (customers, purchasers, email subscribers) and use Facebook's algorithm to find people with similar characteristics. The percentage range determines how closely the lookalike matches your source audience: 1% is most similar to your source, 10% is less similar but larger. Source quality is more important than size - a smaller, higher-quality source audience often creates better lookalikes than a larger, lower-quality one.",
+        "steps": [
+          "Step 1: Identify your best-performing audience as the source for lookalikes",
+          "Step 2: Choose the appropriate percentage range (1-10%) based on your goals",
+          "Step 3: Create lookalikes from different source types (customers, email subscribers, etc.)",
+          "Step 4: Test different percentage ranges to find optimal performance",
+          "Step 5: Use lookalikes as the foundation for your prospecting campaigns"
+        ],
+        "example": "Consider an online fitness coach with a list of 5,000 email subscribers. The coach identifies that subscribers who opened 3+ emails and clicked on links have the highest conversion rate. They create a lookalike audience from this high-quality segment rather than all subscribers. They start with a 1% lookalike for high-intent campaigns and expand to 3% for broader reach, testing performance between the two. Another example: An e-commerce store with 2,000 customers. They create a lookalike from their top 200 customers (highest lifetime value) rather than all customers. This high-quality source creates better lookalikes than using all customers. They test 1% and 3% lookalikes for different campaign objectives: 1% for direct conversions, 3% for awareness and consideration.",
+        "video": "https://www.youtube.com/watch?v=example",
+        "reflection": "Always use your highest-quality audience as the source for lookalikes, not just any audience. Start with 1-3% lookalikes for most campaigns, testing higher percentages as needed for scale. Test different source audiences and percentage ranges to find what works best for your specific business. Remember that source quality matters more than size when creating lookalikes.",
+        "quiz": [
+          {
+            "q": "What determines the quality of a lookalike audience?",
+            "a": "The quality of the source audience used to create the lookalike",
+            "opts": [
+              "The quality of the source audience used to create the lookalike",
+              "The percentage range selected",
+              "The amount of ad spend used",
+              "The creative used in campaigns"
+            ]
+          },
+          {
+            "q": "What does a 1% lookalike mean compared to a 10% lookalike?",
+            "a": "1% is most similar to the source, 10% is less similar but larger",
+            "opts": [
+              "1% is most similar to the source, 10% is less similar but larger",
+              "10% is most similar to the source, 1% is less similar but larger",
+              "They are equally similar to the source audience",
+              "The percentage doesn't affect similarity"
+            ]
+          },
+          {
+            "q": "Which is more important for lookalikes: source quality or source size?",
+            "a": "Source quality is more important than size",
+            "opts": [
+              "Source quality is more important than size",
+              "Source size is more important than quality",
+              "Both are equally important",
+              "Neither is important for lookalikes"
+            ]
+          },
+          {
+            "q": "What is the recommended minimum size for a lookalike source audience?",
+            "a": "At least 1,000 people for basic lookalikes, 2,000+ for better results",
+            "opts": [
+              "At least 1,000 people for basic lookalikes, 2,000+ for better results",
+              "At least 100 people",
+              "At least 10,000 people",
+              "At least 50,000 people"
+            ]
+          },
+          {
+            "q": "How should you approach testing different lookalike percentage ranges?",
+            "a": "Test different ranges to find optimal performance for your goals",
+            "opts": [
+              "Test different ranges to find optimal performance for your goals",
+              "Always use 1% for best results",
+              "Always use 10% for maximum reach",
+              "Don't test different ranges"
+            ]
+          }
+        ],
+        "summary": "Lookalike audiences find new people who behave like your best customers. Source quality matters more than size, with 1% being most similar to source and 10% being less similar but larger. Use your highest-quality audience as the source and test different percentage ranges to find optimal performance. Lookalikes are crucial for scaling profitable campaigns to new audiences."
       }
     ]
   }
@@ -2947,6 +3584,33 @@
                 renderLessonList();
             }
         }
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('lessonSidebar');
+            sidebar.classList.toggle('active');
+            
+            // Update button text based on state
+            const toggleBtn = document.querySelector('.sidebar-toggle');
+            if (sidebar.classList.contains('active')) {
+                toggleBtn.textContent = 'Hide Lessons';
+            } else {
+                toggleBtn.textContent = 'Show Lessons';
+            }
+        }
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('lessonSidebar');
+            const toggleBtn = document.querySelector('.sidebar-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                sidebar.classList.contains('active') && 
+                !sidebar.contains(event.target) && 
+                event.target !== toggleBtn) {
+                sidebar.classList.remove('active');
+                toggleBtn.textContent = 'Show Lessons';
+            }
+        });
     </script>
 </body>
 </html>
