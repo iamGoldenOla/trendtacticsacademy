@@ -210,7 +210,7 @@
     <script src="js/supabase-client.js"></script>
     <script src="js/auth.js"></script>
     <script>
-        const COURSE_ID = 'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d'; // Vibe Coding course ID
+        const COURSE_TITLE = 'Vibe Coding'; // Use course title to find the correct ID
 
         // Check auth status on load
         async function initPage() {
@@ -240,6 +240,22 @@
                 const user = await Auth.getCurrentUser();
                 if (!user) return;
 
+                // First, get the course ID by title
+                const courseResponse = await fetch('./api/courses.php?title=' + encodeURIComponent(COURSE_TITLE));
+                let courseId = null;
+                
+                if (courseResponse.ok) {
+                    const courseData = await courseResponse.json();
+                    if (courseData && courseData.id) {
+                        courseId = courseData.id;
+                    }
+                }
+                
+                if (!courseId) {
+                    // Fallback to a known course ID if the API call fails
+                    courseId = 'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d';
+                }
+                
                 // Check if user has access to this course
                 const response = await fetch('./api/get-student-courses.php', {
                     method: 'POST',
@@ -259,7 +275,7 @@
 
                 const data = await response.json();
                 const courses = data.courses || [];
-                const hasAccess = courses.some(course => course.course_id === COURSE_ID);
+                const hasAccess = courses.some(course => course.course_id === courseId);
 
                 if (hasAccess) {
                     const enrollBtn = document.getElementById('enrollBtn');
@@ -290,16 +306,37 @@
                     return;
                 }
 
+                // Get the course ID by title first
+                let courseId = null;
+                try {
+                    const courseResponse = await fetch('./api/courses.php?title=' + encodeURIComponent(COURSE_TITLE));
+                    
+                    if (courseResponse.ok) {
+                        const courseData = await courseResponse.json();
+                        if (courseData && courseData.id) {
+                            courseId = courseData.id;
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error fetching course ID:', error);
+                }
+                
+                if (!courseId) {
+                    // Fallback to a known course ID if the API call fails
+                    courseId = 'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d';
+                }
+                
                 // Add course access to the database
                 const response = await fetch('./api/add-course-access.php', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('supabase_session')}`
+                        'Content-Type': 'application/json'
+                        // Note: The API doesn't require authorization header as it validates user_id directly
+                        // Authorization header was removed to avoid confusion
                     },
                     body: JSON.stringify({
                         user_id: user.id,
-                        course_id: COURSE_ID
+                        course_id: courseId
                     })
                 });
 
@@ -314,7 +351,7 @@
                     const enrollBtn = document.getElementById('enrollBtn');
                     const enrollBtnText = document.getElementById('enrollBtnText');
                     enrollBtnText.textContent = 'Continue Learning';
-                    enrollBtn.onclick = () => window.location.href = '/lesson-viewer?course=' + COURSE_ID;
+                    enrollBtn.onclick = () => window.location.href = '/lesson-viewer?course=' + courseId;
                     
                     // Change button style to indicate enrolled status
                     enrollBtn.style.background = 'white';
@@ -329,7 +366,7 @@
                     
                     // Redirect after a short delay
                     setTimeout(() => {
-                        window.location.href = '/lesson-viewer?course=' + COURSE_ID;
+                        window.location.href = '/lesson-viewer?course=' + courseId;
                     }, 1500);
                 }
             } catch (error) {
