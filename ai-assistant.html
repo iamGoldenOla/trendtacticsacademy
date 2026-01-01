@@ -97,6 +97,7 @@
     <header class="header">
         <div class="header-content">
             <div class="logo">🤖 Trendy AI Assistant</div>
+            <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰ Menu</button>
             <nav class="nav">
                 <a href="/">Home</a>
                 <a href="/about">About</a>
@@ -180,6 +181,12 @@
 
     <script src="/js/trendy-ai-system.js"></script>
     <script>
+        function toggleMobileNav() {
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('active');
+        }
+        
+
         // Initialize lessons in sidebar
         const lessons = [
             { num: 1, title: "What Is Vibe Coding?" },
