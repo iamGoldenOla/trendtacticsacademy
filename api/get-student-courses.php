@@ -42,48 +42,105 @@ try {
     $supabaseUrl = constant('SUPABASE_URL');
     $anonKey = constant('SUPABASE_ANON_KEY');
     
-    // Query the student_course_access and courses tables directly using Supabase REST API
-    // Using the foreign key relationship between tables
-    $queryUrl = $supabaseUrl . '/rest/v1/student_course_access?select=course_id,access_status,purchase_date,courses!inner(id,title,description,level,category,image_url)&user_id=eq.' . $user_id . '&access_status=eq.active';
+    // First, get the user's course access records
+    $accessUrl = $supabaseUrl . '/rest/v1/student_course_access?select=course_id,access_status,purchase_date&user_id=eq.' . $user_id . '&access_status=eq.active';
     
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $queryUrl);
+    curl_setopt($ch, CURLOPT_URL, $accessUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         'apikey: ' . $anonKey,
         'Authorization: Bearer ' . $anonKey
     ]);
     
-    $response = curl_exec($ch);
+    $accessResponse = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     $curlError = curl_error($ch);
     curl_close($ch);
     
     if ($curlError) {
-        throw new Exception('Curl error: ' . $curlError);
+        throw new Exception('Curl error when fetching course access: ' . $curlError);
     }
     
     if ($httpCode !== 200) {
-        throw new Exception('Supabase request failed with HTTP code: ' . $httpCode . '. Response: ' . $response);
+        throw new Exception('Supabase request failed for course access with HTTP code: ' . $httpCode . '. Response: ' . $accessResponse);
     }
     
-    $rawData = json_decode($response, true);
+    $accessData = json_decode($accessResponse, true);
     
-    // Process the data to match the expected format
+    if (empty($accessData)) {
+        // No enrolled courses, return empty array
+        echo json_encode([
+            'success' => true,
+            'courses' => [],
+            'count' => 0
+        ]);
+        exit();
+    }
+    
+    // Extract course IDs
+    $courseIds = array_map(function($item) {
+        return $item['course_id'];
+    }, $accessData);
+    
+    if (empty($courseIds)) {
+        // No course IDs to fetch, return empty array
+        echo json_encode([
+            'success' => true,
+            'courses' => [],
+            'count' => 0
+        ]);
+        exit();
+    }
+    
+    // Create a query to get course details for these IDs
+    $courseIdsQuery = implode(',', array_map(function($id) {
+        return '"' . $id . '"';
+    }, $courseIds));
+    
+    $coursesUrl = $supabaseUrl . '/rest/v1/courses?select=id,title,description,level,category,thumbnail_url&status=eq.published&id=in.(' . $courseIdsQuery . ')';
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $coursesUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'apikey: ' . $anonKey,
+        'Authorization: Bearer ' . $anonKey
+    ]);
+    
+    $coursesResponse = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlError = curl_error($ch);
+    curl_close($ch);
+    
+    if ($curlError) {
+        throw new Exception('Curl error when fetching courses: ' . $curlError);
+    }
+    
+    if ($httpCode !== 200) {
+        throw new Exception('Supabase request failed for courses with HTTP code: ' . $httpCode . '. Response: ' . $coursesResponse);
+    }
+    
+    $coursesData = json_decode($coursesResponse, true);
+    
+    // Combine the data
     $courses = [];
-    if (is_array($rawData)) {
-        foreach ($rawData as $item) {
-            $course = $item['courses'];
-            $courses[] = [
-                'course_id' => $course['id'],
-                'course_title' => $course['title'],
-                'course_description' => $course['description'],
-                'course_level' => $course['level'],
-                'course_category' => $course['category'],
-                'course_image_url' => $course['image_url'],
-                'enrollment_date' => $item['purchase_date'],
-                'access_status' => $item['access_status']
-            ];
+    foreach ($coursesData as $course) {
+        // Find the corresponding access data
+        foreach ($accessData as $access) {
+            if ($access['course_id'] === $course['id']) {
+                $courses[] = [
+                    'course_id' => $course['id'],
+                    'course_title' => $course['title'],
+                    'course_description' => $course['description'],
+                    'course_level' => $course['level'],
+                    'course_category' => $course['category'],
+                    'course_image_url' => $course['thumbnail_url'],
+                    'enrollment_date' => $access['purchase_date'],
+                    'access_status' => $access['access_status']
+                ];
+                break;
+            }
         }
     }
 
