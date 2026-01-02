@@ -210,7 +210,7 @@
     <script src="js/supabase-client.js"></script>
     <script src="js/auth.js"></script>
     <script>
-        const COURSE_TITLE = 'Vibe Coding'; // Use course title to find the correct ID
+        const COURSE_TITLE = 'Vibe Coding: Building Real Software with AI'; // Use full course title to find the correct ID
 
         // Check auth status on load
         async function initPage() {
@@ -241,7 +241,7 @@
                 if (!user) return;
 
                 // First, get the course ID by title
-                const courseResponse = await fetch('./api/courses.php?title=' + encodeURIComponent(COURSE_TITLE));
+                const courseResponse = await fetch('/api/courses.php?title=' + encodeURIComponent(COURSE_TITLE));
                 let courseId = null;
                 
                 if (courseResponse.ok) {
@@ -257,7 +257,7 @@
                 }
                 
                 // Check if user has access to this course
-                const response = await fetch('./api/get-student-courses.php', {
+                const response = await fetch('/api/get-student-courses.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -309,7 +309,7 @@
                 // Get the course ID by title
                 let courseId = null;
                 try {
-                    const courseResponse = await fetch('./api/courses.php?title=' + encodeURIComponent(COURSE_TITLE));
+                    const courseResponse = await fetch('/api/courses.php?title=' + encodeURIComponent(COURSE_TITLE));
                     
                     if (courseResponse.ok) {
                         const courseData = await courseResponse.json();
@@ -327,7 +327,7 @@
                 }
                 
                 // Check if user has access to this course
-                const response = await fetch('./api/get-student-courses.php', {
+                const response = await fetch('/api/get-student-courses.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -371,7 +371,7 @@
                 // Get the course ID by title first
                 let courseId = null;
                 try {
-                    const courseResponse = await fetch('./api/courses.php?title=' + encodeURIComponent(COURSE_TITLE));
+                    const courseResponse = await fetch('/api/courses.php?title=' + encodeURIComponent(COURSE_TITLE));
                     
                     if (courseResponse.ok) {
                         const courseData = await courseResponse.json();
@@ -389,7 +389,7 @@
                 }
                 
                 // Add course access to the database
-                const response = await fetch('./api/add-course-access.php', {
+                const response = await fetch('/api/add-course-access.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

@@ -51,14 +51,15 @@ try {
     $anonKey = constant('SUPABASE_ANON_KEY');
     
     // First, check if the user already has access to this course
-    $checkUrl = $supabaseUrl . '/rest/v1/student_course_access?select=id&user_id=eq.' . $user_id . '&course_id=eq.' . $course_id . '&apikey=' . $anonKey;
+    $checkUrl = $supabaseUrl . '/rest/v1/student_course_access?select=id&user_id=eq.' . $user_id . '&course_id=eq.' . $course_id;
     
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $checkUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         'apikey: ' . $anonKey,
-        'Authorization: Bearer ' . $anonKey
+        'Authorization: Bearer ' . $anonKey,
+        'Content-Type: application/json'
     ]);
     
     $checkResponse = curl_exec($ch);
@@ -78,7 +79,7 @@ try {
     
     if (!empty($existingRecords)) {
         // User already has access, update the status to active
-        $updateUrl = $supabaseUrl . '/rest/v1/student_course_access?user_id=eq.' . $user_id . '&course_id=eq.' . $course_id . '&apikey=' . $anonKey;
+        $updateUrl = $supabaseUrl . '/rest/v1/student_course_access?user_id=eq.' . $user_id . '&course_id=eq.' . $course_id;
         
         $updateData = json_encode([
             'access_status' => 'active',
@@ -116,7 +117,7 @@ try {
         ]);
     } else {
         // Insert new course access record
-        $insertUrl = $supabaseUrl . '/rest/v1/student_course_access?apikey=' . $anonKey;
+        $insertUrl = $supabaseUrl . '/rest/v1/student_course_access';
         
         $insertData = json_encode([
             'user_id' => $user_id,
