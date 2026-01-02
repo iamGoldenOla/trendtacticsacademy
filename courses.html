@@ -302,7 +302,7 @@
         // Load courses based on user access
         async function loadPersonalizedCourses(userId) {
             try {
-                const response = await fetch('/api/get-student-courses.php', {
+                const response = await fetch('https://uimdbodamoeyukrghchb.supabase.co/functions/v1/get-student-courses', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

@@ -2,21 +2,16 @@
 
 This guide explains how to properly configure your Trendtactics Academy installation after deployment.
 
-## 1. Configure Supabase Service Role Key
+## 1. Configure Supabase Service Role Key for Edge Functions
 
-The service role key is required for course enrollment functionality but is not included in the repository for security reasons.
+The service role key is required for course enrollment functionality but is not included in the repository for security reasons. The course enrollment functionality now uses Supabase Edge Functions instead of PHP API.
 
-### Option A: Using Environment Variables (Recommended)
-1. **On your hosting server (cPanel):**
-   - Go to "Environment Variables" section
-   - Add a new variable:
-     - Name: `SUPABASE_SERVICE_ROLE_KEY`
+### Option A: Using Supabase Edge Function Secrets (Recommended)
+1. **In your Supabase Dashboard:**
+   - Go to Settings → Secrets
+   - Add a new secret:
+     - Key: `SUPABASE_SERVICE_ROLE_KEY`
      - Value: Your actual Supabase Service Role Key
-
-2. **In Apache .htaccess file (if supported by your host):**
-   ```
-   SetEnv SUPABASE_SERVICE_ROLE_KEY your_actual_service_role_key_here
-   ```
 
 ### Option B: Direct Configuration (Less Secure)
 1. Download the code to your server
@@ -33,7 +28,18 @@ To get your Service Role Key:
 3. Copy the "Service Role Key" (not the anon key)
 4. Use this key in the configuration above
 
-## 3. YouTube Video Playback
+## 3. Deploy Supabase Edge Functions
+
+To use the new Edge Functions architecture:
+1. Install Supabase CLI: `npm install -g supabase`
+2. Log in to your Supabase account: `supabase login`
+3. Deploy the functions:
+   ```bash
+   supabase functions deploy add-course-access --project-ref your-project-id
+   supabase functions deploy get-student-courses --project-ref your-project-id
+   ```
+
+## 4. YouTube Video Playback
 
 The Content Security Policy has been configured to allow YouTube embeds. If videos still don't play:
 
@@ -41,26 +47,27 @@ The Content Security Policy has been configured to allow YouTube embeds. If vide
 2. Verify the .htaccess file is in your web root directory
 3. Check that your hosting provider allows YouTube embedding
 
-## 4. Security Best Practices
+## 5. Security Best Practices
 
 - Never commit your actual service role key to any repository
-- Use environment variables when possible
+- Use Edge Function secrets when possible
 - Regularly rotate your service role key
 - Monitor your Supabase project for unauthorized access
 
-## 5. Troubleshooting
+## 6. Troubleshooting
 
 ### Enrollment Error Persists
-- Verify the service role key is correctly configured
-- Check that your Supabase RLS (Row Level Security) policies are properly set
+- Verify the Edge Functions are properly deployed to Supabase
+- Check that your service role key is correctly configured in Edge Function secrets
 - Ensure the `student_course_access` table exists in your database
+- Confirm CORS settings allow your domain
 
 ### YouTube Videos Still Not Working
 - Check browser console for CSP errors
 - Verify your hosting provider doesn't block YouTube embeds
 - Confirm .htaccess file is active (test by temporarily adding an invalid directive)
 
-## 6. Verification Steps
+## 7. Verification Steps
 
 After configuration:
 1. Test course enrollment with a new user
