@@ -72,7 +72,8 @@ try {
     }
     
     if ($httpCode !== 200) {
-        throw new Exception('Supabase check request failed with HTTP code: ' . $httpCode);
+        error_log('Supabase check request failed with HTTP code: ' . $httpCode . '. Response: ' . $checkResponse);
+        throw new Exception('Supabase check request failed with HTTP code: ' . $httpCode . '. Check server logs for details.');
     }
     
     $existingRecords = json_decode($checkResponse, true);
@@ -107,7 +108,8 @@ try {
         }
         
         if ($httpCode !== 200 && $httpCode !== 204) {
-            throw new Exception('Supabase update request failed with HTTP code: ' . $httpCode);
+            error_log('Supabase update request failed with HTTP code: ' . $httpCode . '. Response: ' . $response);
+            throw new Exception('Supabase update request failed with HTTP code: ' . $httpCode . '. Check server logs for details.');
         }
         
         echo json_encode([
@@ -146,7 +148,8 @@ try {
         }
         
         if ($httpCode !== 201) {
-            throw new Exception('Supabase insert request failed with HTTP code: ' . $httpCode);
+            error_log('Supabase insert request failed with HTTP code: ' . $httpCode . '. Response: ' . $response);
+            throw new Exception('Supabase insert request failed with HTTP code: ' . $httpCode . '. Check server logs for details.');
         }
         
         echo json_encode([
