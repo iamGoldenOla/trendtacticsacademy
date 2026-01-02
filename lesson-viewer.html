@@ -4335,31 +4335,146 @@
         let currentLesson = 0;
         let completedLessons = {};
 
+        async function checkEnrollment(userId, courseId) {
+            try {
+                const response = await fetch('./api/get-student-courses.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id: userId
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to check enrollment: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                const enrolledCourses = data.courses || [];
+                return enrolledCourses.some(course => course.course_id === courseId);
+            } catch (error) {
+                console.error('Error checking enrollment:', error);
+                return false; // Default to false if there's an error
+            }
+        }
+        
+        async function getEnrolledCourses(userId) {
+            try {
+                const response = await fetch('./api/get-student-courses.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id: userId
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to get enrolled courses: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                return data.courses || [];
+            } catch (error) {
+                console.error('Error getting enrolled courses:', error);
+                return []; // Return empty array if there's an error
+            }
+        }
+        
+        function updateCourseDropdown(enrolledCourses) {
+            const courseSelect = document.getElementById('courseSelect');
+            
+            // Clear existing options
+            courseSelect.innerHTML = '';
+            
+            // Add enrolled courses to the dropdown
+            for (const course of enrolledCourses) {
+                const courseId = course.course_id;
+                if (COURSES[courseId]) {
+                    const option = document.createElement('option');
+                    option.value = courseId;
+                    option.textContent = COURSES[courseId].title;
+                    courseSelect.appendChild(option);
+                }
+            }
+            
+            // If no enrolled courses, show a message
+            if (enrolledCourses.length === 0) {
+                const option = document.createElement('option');
+                option.value = '';
+                option.textContent = 'No enrolled courses';
+                option.disabled = true;
+                courseSelect.appendChild(option);
+            }
+        }
+        
         (function init() {
             const s = localStorage.getItem('supabase_session');
             const u = localStorage.getItem('supabase_user');
             if (!s || !u) { window.location.replace('/signup'); return; }
+            
+            // Parse user data to get user ID
+            const userData = JSON.parse(u);
+            const userId = userData.user.id;
+            
             const saved = localStorage.getItem('course_progress');
             if (saved) completedLessons = JSON.parse(saved);
             const p = new URLSearchParams(window.location.search);
-            if (p.get('course') && COURSES[p.get('course')]) currentCourse = p.get('course');
-            document.getElementById('courseSelect').value = currentCourse;
-            currentLesson = Math.max(0, Math.min((parseInt(p.get('lesson')) || 1) - 1, COURSES[currentCourse].lessons.length - 1));
-            updateLogo();
-            renderLessonList();
-            renderLesson();
+            
+            // Get course from URL parameter
+            const courseId = p.get('course');
+            
+            // Verify user is enrolled in the specified course
+            if (courseId) {
+                checkEnrollment(userId, courseId).then(isEnrolled => {
+                    if (!isEnrolled) {
+                        alert("You are not enrolled in this course. Please purchase the course first.");
+                        window.location.href = "courses.html";
+                        return;
+                    }
+                    
+                    // If enrolled, set the course and continue with initialization
+                    if (COURSES[courseId]) currentCourse = courseId;
+                    document.getElementById('courseSelect').value = currentCourse;
+                    currentLesson = Math.max(0, Math.min((parseInt(p.get('lesson')) || 1) - 1, COURSES[currentCourse].lessons.length - 1));
+                    updateLogo();
+                    renderLessonList();
+                    renderLesson();
+                });
+            } else {
+                // If no course specified, redirect to dashboard
+                window.location.href = "dashboard.html";
+            }
         })();
 
         function updateLogo() { document.getElementById('courseLogo').textContent = '📖 ' + COURSES[currentCourse].title; }
 
-        function switchCourse(courseId) {
+        async function switchCourse(courseId) {
             if (COURSES[courseId]) {
-                currentCourse = courseId;
-                currentLesson = 0;
-                updateLogo();
-                renderLessonList();
-                renderLesson();
-                history.replaceState({}, '', `?course=${courseId}&lesson=1`);
+                // Get current user ID from session
+                const u = localStorage.getItem('supabase_user');
+                if (!u) { window.location.replace('/signup'); return; }
+                
+                const userData = JSON.parse(u);
+                const userId = userData.user.id;
+                
+                // Check if user is enrolled in the selected course
+                checkEnrollment(userId, courseId).then(isEnrolled => {
+                    if (!isEnrolled) {
+                        alert("You are not enrolled in this course. Please purchase the course first.");
+                        return;
+                    }
+                    
+                    currentCourse = courseId;
+                    currentLesson = 0;
+                    updateLogo();
+                    renderLessonList();
+                    renderLesson();
+                    history.replaceState({}, '', `?course=${courseId}&lesson=1`);
+                });
             }
         }
 

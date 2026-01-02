@@ -117,7 +117,7 @@
                 </div>
 
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <a href="/lesson-viewer?course=vibe-coding&lesson=1" class="btn btn-lg" style="flex: 1; min-width: 120px; background: white; color: var(--primary); text-align: center;">View Course</a>
+                    <button class="btn btn-lg" onclick="handleViewCourse()" style="flex: 1; min-width: 120px; background: white; color: var(--primary); text-align: center;">View Course</button>
                     <button class="btn btn-lg" id="enrollBtn" onclick="handlePurchase()" style="flex: 1; min-width: 120px; background: rgba(255,255,255,0.2); color: white; border: 2px solid white;">
                         <span id="enrollBtnText">Buy Now</span>
                     </button>
@@ -295,6 +295,68 @@
         // Handle auth button click
         function handleAuthClick() {
             window.location.href = '/signup';
+        }
+
+        // Handle view course - check enrollment first
+        async function handleViewCourse() {
+            try {
+                const user = await Auth.getCurrentUser();
+                if (!user) {
+                    window.location.href = '/signup';
+                    return;
+                }
+
+                // Get the course ID by title
+                let courseId = null;
+                try {
+                    const courseResponse = await fetch('./api/courses.php?title=' + encodeURIComponent(COURSE_TITLE));
+                    
+                    if (courseResponse.ok) {
+                        const courseData = await courseResponse.json();
+                        if (courseData && courseData.id) {
+                            courseId = courseData.id;
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error fetching course ID:', error);
+                }
+                
+                if (!courseId) {
+                    // Fallback to a known course ID if the API call fails
+                    courseId = 'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d';
+                }
+                
+                // Check if user has access to this course
+                const response = await fetch('./api/get-student-courses.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: user.id
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Failed to check enrollment: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const courses = data.courses || [];
+                const hasAccess = courses.some(course => course.course_id === courseId);
+
+                if (hasAccess) {
+                    // User is enrolled, redirect to lesson viewer
+                    window.location.href = '/lesson-viewer?course=' + courseId;
+                } else {
+                    // User is not enrolled, show message and redirect to signup
+                    alert('You need to enroll in this course first to access the content.');
+                    window.location.href = '/signup';
+                }
+            } catch (error) {
+                console.error('Error checking enrollment:', error);
+                alert('Error checking enrollment status. Please try again.');
+            }
         }
 
         // Handle purchase - add course access
