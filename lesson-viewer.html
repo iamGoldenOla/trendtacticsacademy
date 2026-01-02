@@ -199,13 +199,14 @@
     <header class="header">
         <div class="header-content">
             <div class="logo" id="courseLogo">📖 Course Viewer</div>
+            <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰ Menu</button>
             <nav class="nav">
                 <a href="/">Home</a>
                 <a href="/about">About</a>
                 <a href="/services">Services</a>
                 <a href="/courses">Courses</a>
                 <a href="/blog">Blog</a>
-                <a href="/cross-platform-integration">Digital Services</a>
+                <a href="https://trendtacticsdigital.com" target="_blank">Digital Services</a>
                 <a href="/contact">Contact</a>
             </nav>
         </div>
@@ -4337,10 +4338,12 @@
 
         async function checkEnrollment(userId, courseId) {
             try {
-                const response = await fetch('./api/get-student-courses.php', {
+                const user = JSON.parse(localStorage.getItem('supabase_user'))?.user;
+                const response = await fetch('/api/get-student-courses.php', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${user?.access_token || user?.token || ''}`
                     },
                     body: JSON.stringify({
                         user_id: userId
@@ -4362,10 +4365,12 @@
         
         async function getEnrolledCourses(userId) {
             try {
-                const response = await fetch('./api/get-student-courses.php', {
+                const user = JSON.parse(localStorage.getItem('supabase_user'))?.user;
+                const response = await fetch('/api/get-student-courses.php', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${user?.access_token || user?.token || ''}`
                     },
                     body: JSON.stringify({
                         user_id: userId
@@ -4576,6 +4581,33 @@
                 event.target !== toggleBtn) {
                 sidebar.classList.remove('active');
                 toggleBtn.textContent = 'Show Lessons';
+            }
+        });
+        
+        function toggleMobileNav() {
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('active');
+            
+            // Update button text based on state
+            const toggleBtn = document.querySelector('.mobile-nav-toggle');
+            if (nav.classList.contains('active')) {
+                toggleBtn.textContent = '✕ Close';
+            } else {
+                toggleBtn.textContent = '☰ Menu';
+            }
+        }
+        
+        // Close navigation when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('.nav');
+            const toggleBtn = document.querySelector('.mobile-nav-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                nav.classList.contains('active') && 
+                !nav.contains(event.target) && 
+                event.target !== toggleBtn) {
+                nav.classList.remove('active');
+                toggleBtn.textContent = '☰ Menu';
             }
         });
     </script>
