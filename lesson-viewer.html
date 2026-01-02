@@ -4483,6 +4483,51 @@
             }
         }
 
+        async function checkEnrollment(userId, courseId) {
+            try {
+                // Get the course ID by title from the API
+                const courseResponse = await fetch(`/api/courses.php?title=${encodeURIComponent(COURSES[courseId].title)}`);
+                let actualCourseId = null;
+                
+                if (courseResponse.ok) {
+                    const courseData = await courseResponse.json();
+                    if (courseData && courseData.id) {
+                        actualCourseId = courseData.id;
+                    }
+                }
+                
+                if (!actualCourseId) {
+                    // Fallback to a known course ID if the API call fails
+                    console.error('Could not get course ID from API');
+                    return false;
+                }
+                
+                // Check if user has access to this course
+                const response = await fetch('/api/get-student-courses.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${userData.user.access_token || userData.user.token || ''}`
+                    },
+                    body: JSON.stringify({
+                        user_id: userId
+                    })
+                });
+
+                if (!response.ok) {
+                    console.error('Failed to check enrollment:', response.status);
+                    return false;
+                }
+
+                const data = await response.json();
+                const courses = data.courses || [];
+                return courses.some(course => course.course_id === actualCourseId);
+            } catch (error) {
+                console.error('Error checking enrollment:', error);
+                return false;
+            }
+        }
+
         function renderLessonList() {
             const lessons = COURSES[currentCourse].lessons;
             const completed = completedLessons[currentCourse] || [];
