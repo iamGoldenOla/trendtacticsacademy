@@ -262,6 +262,7 @@
     <script src="js/auth.js"></script>
     <script>
         const COURSE_ID = 'b2c3d4e5-f6a7-8901-2345-67890abcdef1'; // Facebook Ads course UUID
+        const COURSE_TITLE = 'Facebook Ads Mastery'; // Use course title for API lookup
 
         async function initPage() {
             try {
@@ -284,8 +285,24 @@
                 const user = await Auth.getCurrentUser();
                 if (!user) return;
 
+                // First, get the course ID by title
+                const courseResponse = await fetch('/api/courses.php?title=' + encodeURIComponent(COURSE_TITLE));
+                let courseId = null;
+                
+                if (courseResponse.ok) {
+                    const courseData = await courseResponse.json();
+                    if (courseData && courseData.id) {
+                        courseId = courseData.id;
+                    }
+                }
+                
+                if (!courseId) {
+                    // Fallback to the hardcoded ID if the API call fails
+                    courseId = COURSE_ID;
+                }
+                
                 // Check if user has access to this course
-                const response = await fetch('./api/get-student-courses.php', {
+                const response = await fetch('/api/get-student-courses.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -301,12 +318,12 @@
 
                 const data = await response.json();
                 const courses = data.courses || [];
-                const hasAccess = courses.some(course => course.course_id === COURSE_ID);
+                const hasAccess = courses.some(course => course.course_id === courseId);
 
                 if (hasAccess) {
                     const enrollBtnText = document.getElementById('enrollBtnText');
                     enrollBtnText.textContent = 'Continue Learning';
-                    document.getElementById('enrollBtn').onclick = () => window.location.href = '/lesson-viewer?course=' + COURSE_ID;
+                    document.getElementById('enrollBtn').onclick = () => window.location.href = '/lesson-viewer?course=' + courseId;
                 }
             } catch (error) {
                 console.log('Not enrolled yet');
@@ -326,15 +343,35 @@
                     return;
                 }
 
+                // Get the course ID by title first
+                let courseId = null;
+                try {
+                    const courseResponse = await fetch('/api/courses.php?title=' + encodeURIComponent(COURSE_TITLE));
+                    
+                    if (courseResponse.ok) {
+                        const courseData = await courseResponse.json();
+                        if (courseData && courseData.id) {
+                            courseId = courseData.id;
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error fetching course ID:', error);
+                }
+                
+                if (!courseId) {
+                    // Fallback to the hardcoded ID if the API call fails
+                    courseId = COURSE_ID;
+                }
+
                 // Add course access to the database using the API
-                const response = await fetch('./api/add-course-access.php', {
+                const response = await fetch('/api/add-course-access.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         user_id: user.id,
-                        course_id: COURSE_ID
+                        course_id: courseId
                     })
                 });
 
@@ -348,7 +385,7 @@
                     // Update button text and redirect
                     const enrollBtnText = document.getElementById('enrollBtnText');
                     enrollBtnText.textContent = 'Continue Learning';
-                    document.getElementById('enrollBtn').onclick = () => window.location.href = '/lesson-viewer?course=' + COURSE_ID;
+                    document.getElementById('enrollBtn').onclick = () => window.location.href = '/lesson-viewer?course=' + courseId;
                     
                     // Show success message
                     const messageDiv = document.getElementById('enrollMessage');
@@ -359,7 +396,7 @@
                     
                     // Redirect after a short delay
                     setTimeout(() => {
-                        window.location.href = '/lesson-viewer?course=' + COURSE_ID;
+                        window.location.href = '/lesson-viewer?course=' + courseId;
                     }, 1500);
                 }
             } catch (error) {
