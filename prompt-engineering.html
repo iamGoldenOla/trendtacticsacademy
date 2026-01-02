@@ -387,7 +387,9 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error(`Failed to enroll: ${response.status}`);
+                    const errorText = await response.text();
+                    console.error('Enrollment API error:', response.status, errorText);
+                    throw new Error(`Failed to enroll: ${response.status} - ${errorText}`);
                 }
 
                 const data = await response.json();
