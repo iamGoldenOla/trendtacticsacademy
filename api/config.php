@@ -8,13 +8,13 @@ define('SUPABASE_ANON_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdX
 
 // Supabase Service Role Key for administrative operations
 // IMPORTANT: This key has full access to your database and should be kept secure
-// In production, use environment variables instead of hardcoding the key
-// define('SUPABASE_SERVICE_ROLE_KEY', 'your_service_role_key_here');
-// For now, using anon key as service key (not recommended for production)
-// You should replace this with your actual service role key from Supabase Dashboard
-// To get your service role key: Project Settings -> API -> Service Role Key
+// For production, use environment variables instead of hardcoding the key
+// Example of how to use environment variables:
+// define('SUPABASE_SERVICE_ROLE_KEY', getenv('SUPABASE_SERVICE_ROLE_KEY') ?: '');
 
-define('SUPABASE_SERVICE_ROLE_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NTQ1NjAzOSwiZXhwIjoyMDgxMDMyMDM5fQ.1234567890'); // Placeholder - replace with actual service role key
+// For local development only - REPLACE with your actual service role key or use environment variables
+// NEVER COMMIT YOUR ACTUAL SERVICE ROLE KEY TO VERSION CONTROL
+define('SUPABASE_SERVICE_ROLE_KEY', ''); // Replace with your actual service role key
 
 // CORS headers
 header('Access-Control-Allow-Origin: *');
