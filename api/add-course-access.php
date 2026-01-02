@@ -48,7 +48,7 @@ try {
 
     // Build the Supabase REST API URL to insert course access
     $supabaseUrl = constant('SUPABASE_URL');
-    $anonKey = constant('SUPABASE_ANON_KEY');
+    $serviceRoleKey = constant('SUPABASE_SERVICE_ROLE_KEY');
     
     // First, check if the user already has access to this course
     $checkUrl = $supabaseUrl . '/rest/v1/student_course_access?select=id&user_id=eq.' . $user_id . '&course_id=eq.' . $course_id;
@@ -57,8 +57,8 @@ try {
     curl_setopt($ch, CURLOPT_URL, $checkUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'apikey: ' . $anonKey,
-        'Authorization: Bearer ' . $anonKey,
+        'apikey: ' . $serviceRoleKey,
+        'Authorization: Bearer ' . $serviceRoleKey,
         'Content-Type: application/json'
     ]);
     
@@ -94,8 +94,8 @@ try {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
-            'apikey: ' . $anonKey,
-            'Authorization: Bearer ' . $anonKey
+            'apikey: ' . $serviceRoleKey,
+            'Authorization: Bearer ' . $serviceRoleKey
         ]);
         
         $response = curl_exec($ch);
@@ -134,8 +134,8 @@ try {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
-            'apikey: ' . $anonKey,
-            'Authorization: Bearer ' . $anonKey
+            'apikey: ' . $serviceRoleKey,
+            'Authorization: Bearer ' . $serviceRoleKey
         ]);
         
         $response = curl_exec($ch);
