@@ -20,15 +20,16 @@
     <header class="header">
         <div class="container header-content">
             <div class="logo">Trendtactics Academy</div>
+            <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰ Menu</button>
             <nav class="nav">
                 <a href="/">Home</a>
                 <a href="/about">About</a>
                 <a href="/services">Services</a>
                 <a href="/courses">Courses</a>
                 <a href="/blog">Blog</a>
-                <a href="https://trendtacticsdigital.com">Digital Services</a>
+                <a href="https://trendtacticsdigital.com" target="_blank">Digital Services</a>
                 <a href="/contact">Contact</a>
-                <button class="btn btn-secondary" id="authBtn" onclick="handleAuthClick()">Sign In</button>
+                <button class="btn btn-secondary" id="authBtn" onclick="handleAuth()">Sign In</button>
             </nav>
         </div>
     </header>
@@ -99,11 +100,11 @@
                     </div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
                         <span style="color: rgba(255,255,255,0.9);">Modules</span>
-                        <span style="color: white; font-weight: 600;">6 Modules</span>
+                        <span style="color: white; font-weight: 600;">9 Modules</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
                         <span style="color: rgba(255,255,255,0.9);">Lessons</span>
-                        <span style="color: white; font-weight: 600;">12 Lessons</span>
+                        <span style="color: white; font-weight: 600;">26 Lessons</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
                         <span style="color: rgba(255,255,255,0.9);">Level</span>
@@ -134,55 +135,97 @@
                 <!-- Module 1 -->
                 <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; border-left: 4px solid var(--primary);">
                     <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 1: Facebook Ads Fundamentals</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">2 lessons | Understand the Facebook Ads ecosystem</p>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">3 lessons | Understand the Facebook Ads ecosystem</p>
                     <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
-                        <li>Lesson 1: Facebook Ads Overview and Benefits</li>
-                        <li>Lesson 2: Understanding the Facebook Ads Manager Interface</li>
+                        <li>Lesson 1: How Facebook Ads Really Work (Under the Hood)</li>
+                        <li>Lesson 2: The Facebook Ads Ecosystem</li>
+                        <li>Lesson 3: The Facebook Algorithm (Explained Without Jargon)</li>
                     </ul>
                 </div>
                 <!-- Module 2 -->
                 <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; border-left: 4px solid var(--primary);">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 2: Audience Targeting Mastery</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">2 lessons | Create and optimize your target audiences</p>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 2: Account & Campaign Structure</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">3 lessons | Set up accounts and structure campaigns properly</p>
                     <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
-                        <li>Lesson 3: Custom Audiences and Lookalike Audiences</li>
-                        <li>Lesson 4: Interest and Behavior Targeting Strategies</li>
+                        <li>Lesson 4: Proper Account Setup (The Right Way)</li>
+                        <li>Lesson 5: Campaign Structure That Scales</li>
+                        <li>Lesson 6: Objectives That Actually Match Business Goals</li>
                     </ul>
                 </div>
                 <!-- Module 3 -->
                 <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; border-left: 4px solid var(--primary);">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 3: Campaign Setup and Optimization</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">2 lessons | Set up and optimize different campaign types</p>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 3: Audiences & Targeting (The Right Way in 2025)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">3 lessons | Master audience targeting strategies</p>
                     <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
-                        <li>Lesson 5: Campaign Objectives and Ad Sets</li>
-                        <li>Lesson 6: Creative Optimization and Testing</li>
+                        <li>Lesson 7: Understanding Audiences Deeply</li>
+                        <li>Lesson 8: Custom Audiences & Retargeting</li>
+                        <li>Lesson 9: Lookalike Audiences (Without Guessing)</li>
                     </ul>
                 </div>
                 <!-- Module 4 -->
                 <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; border-left: 4px solid var(--primary);">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 4: AI-Powered Campaign Optimization</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">2 lessons | Use AI tools to optimize your campaigns</p>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 4: Ad Creatives That Convert</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">3 lessons | Create compelling ad creatives</p>
                     <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
-                        <li>Lesson 7: Facebook's AI and Machine Learning</li>
-                        <li>Lesson 8: Automated Bidding and Optimization</li>
+                        <li>Lesson 10: Why Creatives Matter More Than Targeting</li>
+                        <li>Lesson 11: Writing Ad Copy That Feels Human</li>
+                        <li>Lesson 12: Visuals & Video Ads That Work</li>
                     </ul>
                 </div>
                 <!-- Module 5 -->
                 <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; border-left: 4px solid var(--primary);">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 5: Analytics and Tracking</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">2 lessons | Track and analyze campaign performance</p>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 5: Funnels, Pages & Conversion Flow</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">3 lessons | Design effective conversion funnels</p>
                     <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
-                        <li>Lesson 9: Facebook Pixel Setup and Tracking</li>
-                        <li>Lesson 10: Conversion Events and Attribution</li>
+                        <li>Lesson 13: Ads Do Not Convert — Funnels Do</li>
+                        <li>Lesson 14: Landing Pages That Convert Ad Traffic</li>
+                        <li>Lesson 15: Lead Forms vs Websites</li>
                     </ul>
                 </div>
                 <!-- Module 6 -->
-                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); border-left: 4px solid var(--primary);">
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 6: Scaling and Advanced Strategies</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">2 lessons | Scale profitable campaigns and advanced tactics</p>
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; border-left: 4px solid var(--primary);">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 6: Budgeting, Testing & Optimization</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">3 lessons | Master budgeting and optimization</p>
                     <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
-                        <li>Lesson 11: Scaling Strategies and Best Practices</li>
-                        <li>Lesson 12: Advanced Facebook Ads Tactics</li>
+                        <li>Lesson 16: Budgeting Without Fear</li>
+                        <li>Lesson 17: Testing the Right Way</li>
+                        <li>Lesson 18: Reading Metrics That Matter</li>
+                    </ul>
+                </div>
+                <!-- Module 7 -->
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; border-left: 4px solid var(--primary);">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 7: Scaling & Stability</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">2 lessons | Scale ads without breaking them</p>
+                    <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
+                        <li>Lesson 19: Scaling Ads Without Breaking Them</li>
+                        <li>Lesson 20: Handling Drops, Fatigue & Inconsistency</li>
+                    </ul>
+                </div>
+                <!-- Module 8 -->
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; border-left: 4px solid var(--primary);">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 8: Real-World Facebook Ads Workflows</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">3 lessons | Apply knowledge in real scenarios</p>
+                    <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
+                        <li>Lesson 21: Running Ads for Your Own Business</li>
+                        <li>Lesson 22: Running Ads for Clients</li>
+                        <li>Lesson 23: Ethics, Compliance & Account Safety</li>
+                    </ul>
+                </div>
+                <!-- Module 9 -->
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; border-left: 4px solid var(--primary);">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module 9: AI & Facebook Ads (Modern Workflow)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">2 lessons | Integrate AI in your ad workflows</p>
+                    <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
+                        <li>Lesson 24: Using AI to Improve Facebook Ads</li>
+                        <li>Lesson 25: Building Repeatable Ad Systems</li>
+                    </ul>
+                </div>
+                <!-- Final Module -->
+                <div class="module-card" style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); border-left: 4px solid var(--primary);">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Final Module: Long-Term Mastery</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">1 lesson | Become consistently profitable</p>
+                    <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
+                        <li>Lesson 26: Becoming Consistently Profitable</li>
                     </ul>
                 </div>
             </div>
@@ -306,6 +349,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${user.access_token || user.token || ''}`
                     },
                     body: JSON.stringify({
                         user_id: user.id
@@ -367,7 +411,8 @@
                 const response = await fetch('/api/add-course-access.php', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${user.access_token || user.token || ''}`
                     },
                     body: JSON.stringify({
                         user_id: user.id,
@@ -411,6 +456,37 @@
             }
         }
 
+        function handleAuth() {
+            window.location.href = '/signup';
+        }
+
+        function toggleMobileNav() {
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('active');
+            
+            // Update button text based on state
+            const toggleBtn = document.querySelector('.mobile-nav-toggle');
+            if (nav.classList.contains('active')) {
+                toggleBtn.textContent = '✕ Close';
+            } else {
+                toggleBtn.textContent = '☰ Menu';
+            }
+        }
+        
+        // Close navigation when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('.nav');
+            const toggleBtn = document.querySelector('.mobile-nav-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                nav.classList.contains('active') && 
+                !nav.contains(event.target) && 
+                event.target !== toggleBtn) {
+                nav.classList.remove('active');
+                toggleBtn.textContent = '☰ Menu';
+            }
+        });
+        
         initPage();
     </script>
 </body>
