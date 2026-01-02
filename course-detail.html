@@ -403,7 +403,9 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error(`Failed to enroll: ${response.status}`);
+                    const errorText = await response.text();
+                    console.error('Enrollment API error:', response.status, errorText);
+                    throw new Error(`Failed to enroll: ${response.status} - ${errorText}`);
                 }
 
                 const data = await response.json();
@@ -436,7 +438,7 @@
                 
                 // Show error message
                 const messageDiv = document.getElementById('enrollMessage');
-                messageDiv.textContent = 'Error enrolling in course. Please try again.';
+                messageDiv.textContent = 'Error enrolling in course. Please try again. Details: ' + error.message;
                 messageDiv.style.background = 'rgba(239, 68, 68, 0.2)';
                 messageDiv.style.color = '#EF4444';
                 messageDiv.style.display = 'block';
