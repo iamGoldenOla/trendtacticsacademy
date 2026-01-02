@@ -28,9 +28,8 @@
                 <a href="/services">Services</a>
                 <a href="/courses" class="active" style="color: var(--primary);">Courses</a>
                 <a href="/blog">Blog</a>
-                <a href="https://trendtacticsdigital.com">Digital Services</a>
+                <a href="https://trendtacticsdigital.com" target="_blank">Digital Services</a>
                 <a href="/contact">Contact</a>
-                <a href="/dashboard" id="dashboardLink" style="display:none;">Dashboard</a>
                 <button class="btn btn-secondary" id="authBtn" onclick="handleAuth()">Sign In</button>
             </nav>
         </div>
@@ -263,7 +262,7 @@
             <div class="footer-bottom">
                 <p>© 2025 Trendtactics Academy. All rights reserved.</p>
                 <p style="margin-top: 0.5rem;">
-                    <a href="https://trendtacticsdigital.com" style="color: var(--primary); text-decoration: none;">
+                    <a href="https://trendtacticsdigital.com" style="color: var(--primary); text-decoration: none;" target="_blank">
                         Powered by Trendtactics Digital
                     </a>
                 </p>
@@ -307,8 +306,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        // Note: The API doesn't require authorization header as it uses user_id from the body
-                        // Authorization header was removed to avoid confusion
+                        'Authorization': `Bearer ${user.access_token || user.token || ''}`
                     },
                     body: JSON.stringify({
                         user_id: userId

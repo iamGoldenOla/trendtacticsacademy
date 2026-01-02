@@ -22,13 +22,13 @@
             <div class="logo">Trendtactics Academy</div>
             <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰ Menu</button>
             <nav class="nav">
-                <a href="https://trendtacticsdigital.com">Digital Services</a>
                 <a href="/">Home</a>
                 <a href="/about">About</a>
                 <a href="/services">Services</a>
                 <a href="/courses">Courses</a>
+                <a href="/blog">Blog</a>
+                <a href="https://trendtacticsdigital.com" target="_blank">Digital Services</a>
                 <a href="/contact">Contact</a>
-                <a href="/dashboard" id="dashboardLink" style="display:none;">Dashboard</a>
                 <button class="btn btn-secondary" id="authBtn" onclick="handleAuthClick()">Sign In</button>
             </nav>
         </div>
@@ -261,8 +261,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        // Note: The API doesn't require authorization header as it uses user_id from the body
-                        // Authorization header was removed to avoid confusion
+                        'Authorization': `Bearer ${user.access_token || user.token || ''}`
                     },
                     body: JSON.stringify({
                         user_id: user.id
@@ -331,6 +330,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${user.access_token || user.token || ''}`
                     },
                     body: JSON.stringify({
                         user_id: user.id
@@ -392,9 +392,8 @@
                 const response = await fetch('/api/add-course-access.php', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
-                        // Note: The API doesn't require authorization header as it validates user_id directly
-                        // Authorization header was removed to avoid confusion
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${user.access_token || user.token || ''}`
                     },
                     body: JSON.stringify({
                         user_id: user.id,
@@ -503,4 +502,5 @@
     </script>
 </body>
 
+</html>
 </html>
