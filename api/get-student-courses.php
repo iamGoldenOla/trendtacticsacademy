@@ -40,7 +40,7 @@ try {
 
     // Build the Supabase REST API URL to get courses for the user
     $supabaseUrl = constant('SUPABASE_URL');
-    $anonKey = constant('SUPABASE_ANON_KEY');
+    $serviceRoleKey = constant('SUPABASE_SERVICE_ROLE_KEY');
     
     // Try using the RPC function first
     $rpcUrl = $supabaseUrl . '/rest/v1/rpc/get_student_courses';
@@ -55,8 +55,8 @@ try {
     curl_setopt($ch, CURLOPT_URL, $fullRpcUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'apikey: ' . $anonKey,
-        'Authorization: Bearer ' . $anonKey,
+        'apikey: ' . $serviceRoleKey,
+        'Authorization: Bearer ' . $serviceRoleKey,
         'Content-Type: application/json'
     ]);
     
@@ -67,14 +67,14 @@ try {
     
     if ($curlError) {
         // If RPC fails, try the direct table approach
-        $courses = tryDirectTableApproach($user_id, $supabaseUrl, $anonKey);
+        $courses = tryDirectTableApproach($user_id, $supabaseUrl, $serviceRoleKey);
     } else {
         if ($httpCode === 200) {
             // RPC worked, return the data
             $courses = json_decode($response, true);
         } else {
             // RPC failed, try the direct table approach
-            $courses = tryDirectTableApproach($user_id, $supabaseUrl, $anonKey);
+            $courses = tryDirectTableApproach($user_id, $supabaseUrl, $serviceRoleKey);
         }
     }
     
@@ -95,7 +95,7 @@ try {
 }
 
 // Function to try the direct table approach as fallback
-function tryDirectTableApproach($user_id, $supabaseUrl, $anonKey) {
+function tryDirectTableApproach($user_id, $supabaseUrl, $serviceRoleKey) {
     // First, get the user's course access records
     $accessUrl = $supabaseUrl . '/rest/v1/student_course_access';
     $accessParams = [
@@ -111,8 +111,8 @@ function tryDirectTableApproach($user_id, $supabaseUrl, $anonKey) {
     curl_setopt($ch, CURLOPT_URL, $fullAccessUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'apikey: ' . $anonKey,
-        'Authorization: Bearer ' . $anonKey,
+        'apikey: ' . $serviceRoleKey,
+        'Authorization: Bearer ' . $serviceRoleKey,
         'Content-Type: application/json'
     ]);
     
@@ -159,8 +159,8 @@ function tryDirectTableApproach($user_id, $supabaseUrl, $anonKey) {
     curl_setopt($ch, CURLOPT_URL, $fullCoursesUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'apikey: ' . $anonKey,
-        'Authorization: Bearer ' . $anonKey,
+        'apikey: ' . $serviceRoleKey,
+        'Authorization: Bearer ' . $serviceRoleKey,
         'Content-Type: application/json'
     ]);
     
