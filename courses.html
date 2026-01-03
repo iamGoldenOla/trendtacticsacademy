@@ -31,6 +31,7 @@
                 <a href="https://trendtacticsdigital.com" target="_blank">Digital Services</a>
                 <a href="/contact">Contact</a>
                 <button class="btn btn-secondary" id="authBtn" onclick="handleAuth()">Sign In</button>
+                <a href="/dashboard" id="dashboardLink" style="display: none; margin-left: 1rem; color: var(--primary); text-decoration: none;">Dashboard</a>
             </nav>
         </div>
     </header>
@@ -276,25 +277,50 @@
     <script>
         async function initPage() {
             try {
-                const loggedIn = await Auth.isLoggedIn();
+                // Check if user is logged in by checking for session and user data
+                const s = localStorage.getItem('supabase_session');
+                const u = localStorage.getItem('supabase_user');
+                const loggedIn = !!(s && u);
+                
                 const authBtn = document.getElementById('authBtn');
                 const dashboardLink = document.getElementById('dashboardLink');
 
                 if (loggedIn) {
-                    const user = await Auth.getCurrentUser();
-                    authBtn.textContent = user?.name || 'Account';
-                    authBtn.onclick = () => window.location.href = '/dashboard';
-                    dashboardLink.style.display = 'block';
+                    const user = JSON.parse(u)?.user;
+                    if (authBtn) {
+                        authBtn.textContent = user?.user_metadata?.name || user?.email || 'Account';
+                        authBtn.onclick = () => window.location.href = '/dashboard';
+                    }
+                    if (dashboardLink) {
+                        dashboardLink.style.display = 'block';
+                    }
                     
                     // Load personalized courses for logged-in users
                     await loadPersonalizedCourses(user.id);
                 } else {
+                    if (authBtn) {
+                        authBtn.textContent = 'Sign In';
+                        authBtn.onclick = () => window.location.href = '/signup';
+                    }
+                    if (dashboardLink) {
+                        dashboardLink.style.display = 'none';
+                    }
                     // Show all available courses for non-logged-in users
                     await loadAllCourses();
                 }
             } catch (error) {
                 console.error('Auth initialization error:', error);
                 // Continue without auth functionality if there's an error
+                const authBtn = document.getElementById('authBtn');
+                const dashboardLink = document.getElementById('dashboardLink');
+                
+                if (authBtn) {
+                    authBtn.textContent = 'Sign In';
+                    authBtn.onclick = () => window.location.href = '/signup';
+                }
+                if (dashboardLink) {
+                    dashboardLink.style.display = 'none';
+                }
                 await loadAllCourses();
             }
         }
@@ -302,11 +328,16 @@
         // Load courses based on user access
         async function loadPersonalizedCourses(userId) {
             try {
+                // Get session from localStorage
+                const s = localStorage.getItem('supabase_session');
+                const session = JSON.parse(s);
+                const token = session?.access_token || session?.session?.access_token;
+                
                 const response = await fetch('https://uimdbodamoeyukrghchb.supabase.co/functions/v1/get-student-courses', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${user.access_token || user.token || ''}`
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify({
                         user_id: userId
@@ -469,7 +500,18 @@
         }
 
         function handleAuth() {
-            window.location.href = '/signup';
+            // Check if user is logged in by checking for session and user data
+            const s = localStorage.getItem('supabase_session');
+            const u = localStorage.getItem('supabase_user');
+            const loggedIn = !!(s && u);
+            
+            if (loggedIn) {
+                // If logged in, go to dashboard
+                window.location.href = '/dashboard';
+            } else {
+                // If not logged in, go to signup/login
+                window.location.href = '/signup';
+            }
         }
 
         // Scroll to top on page load
