@@ -4339,7 +4339,7 @@
         async function checkEnrollment(userId, courseId) {
             try {
                 const user = JSON.parse(localStorage.getItem('supabase_user'))?.user;
-                const response = await fetch('https://uimdbodamoeyukrghchb.supabase.co/functions/v1/get-student-courses', {
+                const response = await fetch('/api/get-student-courses.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -4486,7 +4486,7 @@
         async function checkEnrollment(userId, courseId) {
             try {
                 // Get the course ID by title from the API
-                const courseResponse = await fetch(`https://uimdbodamoeyukrghchb.supabase.co/functions/v1/courses?title=${encodeURIComponent(COURSES[courseId].title)}`);
+                const courseResponse = await fetch(`/api/courses.php?title=${encodeURIComponent(COURSES[courseId].title)}`);
                 let actualCourseId = null;
                 
                 if (courseResponse.ok) {
@@ -4503,7 +4503,7 @@
                 }
                 
                 // Check if user has access to this course
-                const response = await fetch('https://uimdbodamoeyukrghchb.supabase.co/functions/v1/get-student-courses', {
+                const response = await fetch('/api/get-student-courses.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

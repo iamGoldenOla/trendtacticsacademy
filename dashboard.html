@@ -663,7 +663,7 @@
 
         // Helper function to make API calls through proxy
         async function apiCall(path, options = {}) {
-            const url = `./api/auth-proxy.php?path=${encodeURIComponent(path)}`;
+            const url = `https://uimdbodamoeyukrghchb.supabase.co/functions/v1/auth-proxy?path=${encodeURIComponent(path)}`;
             const response = await fetch(url, {
                 method: options.method || 'GET',
                 headers: {
@@ -703,12 +703,11 @@
 
             try {
                 // Fetch student's courses from the database
-                const response = await fetch('./api/get-student-courses.php', {
+                const response = await fetch('https://uimdbodamoeyukrghchb.supabase.co/functions/v1/get-student-courses', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        // Note: The API doesn't require authorization header as it uses user_id from the body
-                        // Authorization header was removed to avoid confusion
+                        'Authorization': `Bearer ${currentUser.access_token || currentUser.token || ''}`
                     },
                     body: JSON.stringify({
                         user_id: currentUser.id
