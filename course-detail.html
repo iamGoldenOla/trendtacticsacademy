@@ -424,10 +424,10 @@
             }
         }
 
-        // Handle purchase - add course access
+        // Handle purchase - add course access via local API endpoint
         async function handlePurchase() {
             try {
-                // Check if user is logged in by checking for session and user data
+                // Check if user is logged in
                 const s = localStorage.getItem('supabase_session');
                 const u = localStorage.getItem('supabase_user');
                 const loggedIn = !!(s && u);
@@ -436,6 +436,12 @@
                     alert("Please log in to enroll");
                     window.location.href = '/signup';
                     return;
+                }
+
+                // Parse user data
+                const user = JSON.parse(u)?.user;
+                if (!user || !user.id) {
+                    throw new Error('Invalid user session');
                 }
 
                 // Get the course ID by title first
@@ -454,33 +460,49 @@
                 }
                 
                 if (!courseId) {
-                    // Fallback to a known course ID if the API call fails
+                    // Fallback to a known course ID
                     courseId = 'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d';
                 }
                 
+                // Get auth token
                 const session = JSON.parse(s);
                 const token = session?.access_token || session?.session?.access_token;
                 
+                if (!token) {
+                    throw new Error('No auth token found');
+                }
+
+                // Call local PHP endpoint instead of Supabase directly
+                // This bypasses all CSP restrictions
                 const res = await fetch(
-                  "https://uimdbodamoeyukrghchb.supabase.co/functions/v1/add-course-access",
+                  "/api/enroll.php",
                   {
                     method: "POST",
                     headers: {
-                      "Authorization": `Bearer ${token}`,
                       "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                      course_id: courseId
+                      course_id: courseId,
+                      user_id: user.id,
+                      auth_token: token
                     })
                   }
                 );
 
+                const responseData = await res.json();
+                
                 if (!res.ok) {
-                  const err = await res.text();
-                  throw new Error(err);
+                    throw new Error(responseData.error || 'Enrollment failed');
                 }
 
-                alert("Enrollment successful!");
+                // Check if already enrolled
+                if (responseData.already_enrolled) {
+                    alert("You are already enrolled in this course!");
+                    location.reload();
+                    return;
+                }
+
+                alert("Enrollment successful! Redirecting to your course...");
                 location.reload();
             } catch (err) {
                 console.error("Enrollment error:", err);
