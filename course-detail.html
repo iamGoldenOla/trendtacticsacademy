@@ -119,13 +119,37 @@
                 </div>
 
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <button class="btn btn-lg" id="enrollBtn" onclick="handlePurchase()" style="flex: 1; min-width: 120px; background: rgba(255,255,255,0.2); color: white; border: 2px solid white;">
-                        <span id="enrollBtnText">Buy Now</span>
+                    <button class="btn btn-lg" id="enrollBtn" onclick="handleEnrollAndPay()" style="flex: 1; min-width: 120px; background: white; color: var(--primary); border: 2px solid white; font-weight: 600;">
+                        <span id="enrollBtnText">Enroll & Pay</span>
                     </button>
                 </div>
 
                 <div id="enrollMessage" style="margin-top: 1rem; padding: 1rem; border-radius: var(--radius); display: none;"></div>
             </div>
+        </div>
+
+        <!-- Instructor Section -->
+        <div class="card">
+            <h2 class="card-title">Meet Your Instructor</h2>
+            <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
+                <div style="flex-shrink: 0;">
+                    <img src="images/instructor-akinola.jpg" alt="Akinola Olujobi" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                </div>
+                <div style="flex: 1; min-width: 250px;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Akinola Olujobi</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">Founder & AI Development Expert at Trendtactics</p>
+                    <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+                        Akinola is a software development expert passionate about helping builders leverage AI to create real products faster. With years of experience in full-stack development and AI integration, he's trained hundreds of developers on modern development practices.
+                    </p>
+                    <ul style="list-style: none; padding: 0; color: var(--text-secondary); font-size: 0.9rem;">
+                        <li style="margin-bottom: 0.5rem;">✓ 10+ years in software development</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Expert in AI-powered tools and workflows</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Built multiple AI-first products</li>
+                        <li>✓ Regular speaker on AI and development trends</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         </div>
 
         <!-- Course Modules -->
@@ -424,8 +448,8 @@
             }
         }
 
-        // Handle purchase - add course access via local API endpoint
-        async function handlePurchase() {
+        // Handle enroll and pay - redirect to checkout
+        async function handleEnrollAndPay() {
             try {
                 // Check if user is logged in
                 const s = localStorage.getItem('supabase_session');
@@ -436,12 +460,6 @@
                     alert("Please log in to enroll");
                     window.location.href = '/signup';
                     return;
-                }
-
-                // Parse user data
-                const user = JSON.parse(u)?.user;
-                if (!user || !user.id) {
-                    throw new Error('Invalid user session');
                 }
 
                 // Get the course ID by title first
@@ -464,57 +482,11 @@
                     courseId = 'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d';
                 }
                 
-                // Get auth token
-                const session = JSON.parse(s);
-                const token = session?.access_token || session?.session?.access_token;
-                
-                if (!token) {
-                    throw new Error('No auth token found');
-                }
-
-                // Call local PHP endpoint instead of Supabase directly
-                // This bypasses all CSP restrictions
-                const res = await fetch(
-                  "/api/enroll.php",
-                  {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                      course_id: courseId,
-                      user_id: user.id,
-                      auth_token: token
-                    })
-                  }
-                );
-
-                const responseData = await res.json();
-                
-                if (!res.ok) {
-                    throw new Error(responseData.error || 'Enrollment failed');
-                }
-
-                // Check if already enrolled
-                if (responseData.already_enrolled) {
-                    alert("You are already enrolled in this course!");
-                    location.reload();
-                    return;
-                }
-
-                alert("Enrollment successful! Redirecting to your course...");
-                location.reload();
+                // Redirect to checkout page with course ID
+                window.location.href = '/checkout.html?course=' + encodeURIComponent(courseId) + '&title=' + encodeURIComponent(COURSE_TITLE);
             } catch (err) {
-                console.error("Enrollment error:", err);
-                
-                // Show error message
-                const messageDiv = document.getElementById('enrollMessage');
-                if (messageDiv) {
-                    messageDiv.textContent = 'Error enrolling in course. Please try again. Details: ' + err.message;
-                    messageDiv.style.background = 'rgba(239, 68, 68, 0.2)';
-                    messageDiv.style.color = '#EF4444';
-                    messageDiv.style.display = 'block';
-                }
+                console.error("Enroll error:", err);
+                alert('Error preparing enrollment. Please try again.');
             }
         }
 

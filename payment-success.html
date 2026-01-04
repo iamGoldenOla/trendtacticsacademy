@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - Trendtactics Academy</title>
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .success-container {
+            max-width: 600px;
+            margin: 4rem auto;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            animation: bounce 0.6s ease-out;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .success-message h1 {
+            color: var(--primary);
+            margin: 1rem 0;
+            font-size: 2rem;
+        }
+
+        .success-message p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+
+        .payment-details {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: var(--radius);
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 500;
+        }
+
+        .detail-value {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .action-buttons .btn {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .next-steps {
+            background: rgba(59, 130, 246, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .next-steps h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .next-steps ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .next-steps li {
+            margin: 0.5rem 0;
+            line-height: 1.6;
+        }
+
+        .email-confirmation {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin: 1.5rem 0;
+            color: #10B981;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">Trendtactics Academy</div>
+            <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰ Menu</button>
+            <nav class="nav">
+                <a href="/">Home</a>
+                <a href="/courses">Courses</a>
+                <a href="/dashboard">Dashboard</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="success-container">
+            <!-- Success Icon -->
+            <div class="success-icon">✓</div>
+
+            <!-- Success Message -->
+            <div class="success-message">
+                <h1>Payment Successful!</h1>
+                <p>Thank you for your purchase. Your enrollment is being processed.</p>
+                <p id="courseMessage" style="color: var(--primary); font-weight: 500;"></p>
+            </div>
+
+            <!-- Email Confirmation -->
+            <div class="email-confirmation">
+                <strong>✓ Confirmation email sent</strong><br>
+                Check your inbox for payment receipt and course access details.
+            </div>
+
+            <!-- Payment Details -->
+            <div class="payment-details">
+                <div class="detail-row">
+                    <span class="detail-label">Course:</span>
+                    <span class="detail-value" id="courseName">Vibe Coding Course</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Amount Paid:</span>
+                    <span class="detail-value">₦5,000</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Payment Reference:</span>
+                    <span class="detail-value" id="paymentRef" style="font-size: 0.85rem; font-family: monospace;">---</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Payment Date:</span>
+                    <span class="detail-value" id="paymentDate">---</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Status:</span>
+                    <span class="detail-value" style="color: #10B981;">Completed</span>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="next-steps">
+                <h3>Next Steps:</h3>
+                <ol>
+                    <li><strong>Check your email</strong> for course access instructions and welcome message</li>
+                    <li><strong>Log in to your dashboard</strong> to access the course materials</li>
+                    <li><strong>Start learning</strong> at your own pace with lifetime access</li>
+                    <li><strong>Contact support</strong> if you have any questions or issues</li>
+                </ol>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="window.location.href='/dashboard'" style="padding: 1rem;">
+                    Go to Dashboard
+                </button>
+                <button class="btn btn-secondary" onclick="window.location.href='/courses'" style="padding: 1rem;">
+                    Browse More Courses
+                </button>
+            </div>
+
+            <!-- Support -->
+            <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                    <strong>Need help?</strong><br>
+                    Contact our support team at <a href="mailto:support@trendtacticsacademy.com" style="color: var(--primary); text-decoration: none;">support@trendtacticsacademy.com</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: var(--bg-secondary); margin-top: 4rem; padding: 2rem 0; text-align: center; color: var(--text-secondary);">
+        <div class="container">
+            <p>&copy; 2026 Trendtactics Academy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Get payment reference and course from URL
+        function getParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                reference: params.get('reference'),
+                course: params.get('course')
+            };
+        }
+
+        function initPage() {
+            const params = getParams();
+
+            // Update reference
+            if (params.reference) {
+                document.getElementById('paymentRef').textContent = params.reference;
+            }
+
+            // Update date
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            document.getElementById('paymentDate').textContent = dateStr;
+
+            // Update course info if available
+            if (params.course) {
+                document.getElementById('courseMessage').textContent = 
+                    'You now have lifetime access to this course!';
+                document.getElementById('courseName').textContent = 
+                    decodeURIComponent(params.course).replace(/^\w/, c => c.toUpperCase());
+            }
+
+            // Optionally redirect to dashboard after 10 seconds
+            // setTimeout(() => {
+            //     window.location.href = '/dashboard';
+            // }, 10000);
+        }
+
+        function toggleMobileNav() {
+            const nav = document.querySelector('.nav');
+            nav.classList.toggle('active');
+        }
+
+        // Initialize
+        initPage();
+    </script>
+</body>
+
+</html>
