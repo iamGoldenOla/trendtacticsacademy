@@ -163,6 +163,7 @@
     </main>
 
     <!-- Scripts -->
+    <script src="/js/env.js"></script>
     <script src="/js/supabase-client.js"></script>
     <script>
         // Global state
@@ -225,39 +226,20 @@
 
         async function loadCourseData(slug) {
             try {
-                // First, try to fetch course by slug (using title as fallback)
-                // Since the slug is typically a transformed version of the title, we try to match by title
-                const response = await fetch(`${SUPABASE_URL}/functions/v1/courses?slug=${encodeURIComponent(slug)}`);
+                // Use the Supabase client to fetch course by slug
+                const { data, error } = await window.sbClient
+                    .from('courses')
+                    .select('*')
+                    .eq('slug', slug)
+                    .single();
 
-                if (!response.ok) throw new Error('Failed to fetch course');
-
-                const data = await response.json();
-                
-                if (data.courses && data.courses.length > 0) {
-                    currentCourse = data.courses[0];
-                } else {
-                    // If not found by slug, try to match by title
-                    const titleResponse = await fetch(`${SUPABASE_URL}/functions/v1/courses`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ title: slug.replace(/-/g, ' ') })
-                    });
-                    
-                    if (titleResponse.ok) {
-                        const titleData = await titleResponse.json();
-                        if (titleData.courses && titleData.courses.length > 0) {
-                            currentCourse = titleData.courses[0];
-                        }
-                    }
-                }
-
-                if (!currentCourse) {
+                if (error || !data) {
+                    console.error('Error fetching course:', error);
                     showError('Course not found');
                     return;
                 }
 
+                currentCourse = data;
                 renderCourse(currentCourse);
             } catch (error) {
                 console.error('Error loading course:', error);
