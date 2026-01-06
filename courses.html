@@ -307,100 +307,74 @@
 
         // Load all available courses
         async function loadAllCourses() {
-            // For now, just show the existing course grid
-            // In a real implementation, this would fetch from the database
-            document.getElementById('coursesGrid').innerHTML = `
-                <div class="card" style="transition: all 0.3s ease;">
-                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                        <span class="badge badge-primary">Beginner</span>
-                        <span class="badge" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white;">$3 / N5,000</span>
+            try {
+                // Fetch all published courses from Supabase
+                const response = await fetch('https://uimdbodamoeyukrghchb.supabase.co/functions/v1/courses');
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to load courses: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                const courses = data.courses || [];
+                
+                if (courses.length === 0) {
+                    document.getElementById('coursesGrid').innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+                            <p>No courses available at the moment.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Generate HTML for each course
+                const coursesHTML = courses.map(course => {
+                    // Generate a slug from the course title
+                    const slug = course.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                    
+                    return `
+                        <div class="card" style="transition: all 0.3s ease;">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                <span class="badge badge-primary">${course.level || 'Beginner'}</span>
+                                <span class="badge" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white;">$${course.price || '0'} / N${(course.price || 0) * 1666 || '0'}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></div>
+                                <h3 class="card-title" style="margin: 0; color: var(--primary);">${course.title}</h3>
+                            </div>
+                            <p class="card-description" style="line-height: 1.7; margin-bottom: 1.5rem;">
+                                ${course.description || 'No description available'}
+                            </p>
+                            <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(22, 32, 68, 0.5); border-radius: var(--radius); border: 1px solid var(--border-light);">
+                                <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                                    <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">1.</span> ${course.modules_count || 0} Modules | ${course.lessons_count || 0} Lessons
+                                </p>
+                                <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                                    <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">2.</span> ${course.duration || 'Self-Paced'}
+                                </p>
+                                <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                                    <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">3.</span> Certificate of Completion
+                                </p>
+                                <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
+                                    <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">4.</span> Real-World Projects
+                                </p>
+                            </div>
+                            <a href="/course/${slug}" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">
+                                Start Learning
+                            </a>
+                        </div>
+                    `;
+                }).join('');
+                
+                document.getElementById('coursesGrid').innerHTML = coursesHTML;
+            } catch (error) {
+                console.error('Error loading courses:', error);
+                document.getElementById('coursesGrid').innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+                        <p>Failed to load courses. Please try again later.</p>
                     </div>
-                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></div>
-                        <h3 class="card-title" style="margin: 0; color: var(--primary);">Vibe Coding: Building Real Software with AI</h3>
-                    </div>
-                    <p class="card-description" style="line-height: 1.7; margin-bottom: 1.5rem;">
-                        The modern way of building software where humans focus on intent, systems, and outcomes while AI handles execution. Learn how real products are built in 2025 using AI-powered builders, IDEs, and autonomous agents.
-                    </p>
-                    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(22, 32, 68, 0.5); border-radius: var(--radius); border: 1px solid var(--border-light);">
-                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
-                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">1.</span> 8 Modules | 14 Lessons
-                        </p>
-                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
-                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">2.</span> 4-6 Weeks Self-Paced
-                        </p>
-                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
-                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">3.</span> Certificate of Completion
-                        </p>
-                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
-                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">4.</span> Real-World Projects
-                        </p>
-                    </div>
-                    <a href="/prompt-engineering" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">
-                        Start Learning
-                    </a>
-                </div>
-                <div class="card" style="transition: all 0.3s ease;">
-                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                        <span class="badge badge-primary">Beginner</span>
-                        <span class="badge" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white;">$3 / N5,000</span>
-                    </div>
-                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
-                        <h3 class="card-title" style="margin: 0; color: var(--primary);">Prompt Engineering Mastery</h3>
-                    </div>
-                    <p class="card-description" style="line-height: 1.7; margin-bottom: 1.5rem;">
-                        Master the art of communicating with AI. Learn to write effective prompts that get consistent, high-quality results. Essential for anyone working with ChatGPT, Claude, or any AI tool.
-                    </p>
-                    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(22, 32, 68, 0.5); border-radius: var(--radius); border: 1px solid var(--border-light);">
-                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
-                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">1.</span> 7 Modules | 16 Lessons
-                        </p>
-                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
-                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">2.</span> 2-3 Weeks Self-Paced
-                        </p>
-                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
-                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">3.</span> Certificate of Completion
-                        </p>
-                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
-                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">4.</span> Prompt Templates Library
-                        </p>
-                    </div>
-                    <a href="/prompt-engineering" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">
-                        Start Learning
-                    </a>
-                </div>
-                <div class="card" style="transition: all 0.3s ease; margin-top: 2rem;">
-                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                        <span class="badge badge-primary">Beginner</span>
-                        <span class="badge" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white;">$3 / N5,000</span>
-                    </div>
-                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></div>
-                        <h3 class="card-title" style="margin: 0; color: var(--primary);">Facebook Ads Mastery</h3>
-                    </div>
-                    <p class="card-description" style="line-height: 1.7; margin-bottom: 1.5rem;">
-                        Run profitable ad campaigns with AI optimization and advanced targeting strategies. Master Facebook advertising with advanced strategies, AI-powered optimization, and data-driven targeting.
-                    </p>
-                    <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(22, 32, 68, 0.5); border-radius: var(--radius); border: 1px solid var(--border-light);">
-                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
-                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">1.</span> 9 Modules | 26 Lessons
-                        </p>
-                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
-                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">2.</span> 3-4 Weeks Self-Paced
-                        </p>
-                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
-                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">3.</span> Certificate of Completion
-                        </p>
-                        <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
-                            <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">4.</span> AI Optimization Techniques
-                        </p>
-                    </div>
-                    <a href="/facebook-ads" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">
-                        Start Learning
-                    </a>
-                </div>
-            `;
+                `;
+            }
         }
 
         // Display personalized courses

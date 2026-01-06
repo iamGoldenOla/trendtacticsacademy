@@ -728,11 +728,14 @@
 
             try {
                 // Fetch student's courses from the database
+                const session = JSON.parse(localStorage.getItem('supabase_session'));
+                const token = session?.access_token || session?.session?.access_token || currentUser.access_token || currentUser.token || '';
+                
                 const response = await fetch('https://uimdbodamoeyukrghchb.supabase.co/functions/v1/get-student-courses', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${currentUser.access_token || currentUser.token || ''}`
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify({
                         user_id: currentUser.id

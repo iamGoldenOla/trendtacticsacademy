@@ -25,6 +25,11 @@ RewriteRule ^(.+?)/?$ $1.html [L]
 RewriteRule ^course/([^/]+)/?$ /course.html?slug=$1 [L,QSA]
 RewriteRule ^learn/([^/]+)/?$ /learn.html?course_id=$1 [L,QSA]
 
+# Redirect old hardcoded course routes to new dynamic routes
+RewriteRule ^course-detail/?$ /course/vibe-coding [R=301,L]
+RewriteRule ^prompt-engineering/?$ /course/prompt-engineering [R=301,L]
+RewriteRule ^facebook-ads/?$ /course/facebook-ads [R=301,L]
+
 # For the React app - fallback to index.html only for root and unmatched routes
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -53,6 +58,12 @@ Options -MultiViews
     </FilesMatch>
     
     Header always set Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdnjs.cloudflare.com https://fonts.googleapis.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://js.puter.com https://www.youtube.com https://s.ytimg.com https://*.youtube.com https://youtube-nocookie.com https://*.youtube-nocookie.com https://*.googleapis.com https://*.google-analytics.com https://*.googletagmanager.com https://uimdbodamoeyukrghchb.supabase.co https://*.supabase.co https://supabase.co; connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co https://*.supabase.co https://supabase.co wss://*.supabase.co https://www.youtube.com https://*.youtube.com https://youtube-nocookie.com https://*.youtube-nocookie.com https://app.supabase.com https://supabase.com; img-src 'self' data: https: http:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://*.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; frame-src 'self' https://www.youtube.com https://*.youtube.com https://youtube-nocookie.com https://*.youtube-nocookie.com; child-src 'self' https://www.youtube.com https://*.youtube.com https://youtube-nocookie.com https://*.youtube-nocookie.com;"
+    
+    # Add CORS headers for Supabase Edge Functions
+    Header always set Access-Control-Allow-Origin "https://academy.trendtacticsdigital.com"
+    Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type, Authorization"
+
 </IfModule>
 
 # Additional security headers for specific pages

@@ -225,26 +225,32 @@
 
         async function loadCourseData(slug) {
             try {
-                // Fetch course by slug (we'll fetch all and filter client side for now as simpler option)
-                // In production, you'd want a specific endpoint
-                const response = await fetch(`${SUPABASE_URL}/functions/v1/courses`);
+                // First, try to fetch course by slug (using title as fallback)
+                // Since the slug is typically a transformed version of the title, we try to match by title
+                const response = await fetch(`${SUPABASE_URL}/functions/v1/courses?slug=${encodeURIComponent(slug)}`);
 
-                if (!response.ok) throw new Error('Failed to fetch courses');
+                if (!response.ok) throw new Error('Failed to fetch course');
 
                 const data = await response.json();
-                const courses = data.courses || [];
-
-                // Find matching course by slug/id (assuming slug in URL matches a property or derived slug)
-                // Since we don't have a 'slug' column yet, we might match by ID or simple title-to-slug conversion
-                currentCourse = courses.find(c => {
-                    const cSlug = c.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-                    return cSlug === slug || c.id === slug;
-                });
-
-                if (!currentCourse) {
-                    // Try exact title matching if slug matching fails
-                    // This is a robust fallback for existing links
-                    currentCourse = courses.find(c => c.title.toLowerCase().includes(slug.replace(/-/g, ' ')));
+                
+                if (data.courses && data.courses.length > 0) {
+                    currentCourse = data.courses[0];
+                } else {
+                    // If not found by slug, try to match by title
+                    const titleResponse = await fetch(`${SUPABASE_URL}/functions/v1/courses`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ title: slug.replace(/-/g, ' ') })
+                    });
+                    
+                    if (titleResponse.ok) {
+                        const titleData = await titleResponse.json();
+                        if (titleData.courses && titleData.courses.length > 0) {
+                            currentCourse = titleData.courses[0];
+                        }
+                    }
                 }
 
                 if (!currentCourse) {
@@ -398,7 +404,7 @@
                 window.location.href = `/learn/${currentCourse.id}`;
             } else {
                 // If not enrolled, go to enrollment/checkout
-                // Passing course ID and Title
+                // Using only course ID (not title-based)
                 window.location.href = `/checkout.html?course=${currentCourse.id}&title=${encodeURIComponent(currentCourse.title)}`;
             }
         }
