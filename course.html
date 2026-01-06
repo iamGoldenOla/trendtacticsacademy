@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Details - Trendtactics Academy</title>
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdnjs.cloudflare.com https://fonts.googleapis.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://js.puter.com https://www.youtube.com https://s.ytimg.com https://*.youtube.com https://youtube-nocookie.com https://*.youtube-nocookie.com https://*.googleapis.com https://*.google-analytics.com https://*.googletagmanager.com https://uimdbodamoeyukrghchb.supabase.co https://*.supabase.co https://supabase.co; connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co https://*.supabase.co https://supabase.co wss://*.supabase.co https://www.youtube.com https://*.youtube.com https://youtube-nocookie.com https://*.youtube-nocookie.com https://app.supabase.com https://supabase.com; img-src 'self' data: https: http:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://*.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; frame-src 'self' https://www.youtube.com https://*.youtube.com https://youtube-nocookie.com https://*.youtube-nocookie.com; child-src 'self' https://www.youtube.com https://*.youtube.com https://youtube-nocookie.com https://*.youtube-nocookie.com;">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">Trendtactics Academy</div>
+            <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰ Menu</button>
+            <nav class="nav">
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/services">Services</a>
+                <a href="/courses">Courses</a>
+                <a href="/blog">Blog</a>
+                <a href="https://trendtacticsdigital.com" target="_blank">Digital Services</a>
+                <a href="/contact">Contact</a>
+                <button class="btn btn-secondary" id="authBtn" onclick="handleAuthClick()">Sign In</button>
+                <a href="/dashboard" id="dashboardLink"
+                    style="display: none; margin-left: 1rem; color: var(--primary); text-decoration: none;">Dashboard</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container" style="padding: 3rem 0; min-height: 80vh;">
+        <!-- Loading State -->
+        <div id="loadingState" style="text-align: center; padding: 4rem;">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">⌛</div>
+            <p>Loading course details...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" style="display: none; text-align: center; padding: 4rem; color: var(--error);">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">❌</div>
+            <h2 id="errorMessage">Course not found</h2>
+            <a href="/courses" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Back to
+                Courses</a>
+        </div>
+
+        <!-- Content (Hidden initially) -->
+        <div id="courseContent" style="display: none;">
+            <!-- Course Hero -->
+            <div class="hero">
+                <span class="badge badge-primary" id="courseLevel">Beginner Friendly</span>
+                <h1 class="hero-title" id="courseTitle">Course Title</h1>
+                <p class="hero-subtitle" id="courseDescription">Course detailed description goes here.</p>
+            </div>
+
+            <!-- YouTube Video Section (Optional) -->
+            <div class="card" id="videoSection" style="margin-bottom: 2rem; display: none;">
+                <h2 class="card-title" style="text-align: center; margin-bottom: 1.5rem;" id="videoTitle">Watch Preview
+                </h2>
+                <div
+                    style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius);">
+                    <iframe id="videoFrame"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Course Info Grid -->
+            <div class="grid grid-2" style="margin-bottom: 3rem;">
+                <!-- Course Details Card -->
+                <div class="card">
+                    <h2 class="card-title">Course Overview</h2>
+                    <p class="card-description" id="longDescription">
+                        Detailed overview content.
+                    </p>
+
+                    <div style="margin-top: 2rem;">
+                        <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">What You'll Learn</h3>
+                        <ul style="list-style: none; padding: 0;" id="learningPoints">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Enrollment Card -->
+                <div class="card"
+                    style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none;">
+                    <h2 class="card-title" style="color: white;">Ready to Start?</h2>
+                    <p style="color: rgba(255,255,255,0.9); margin-bottom: 2rem;">
+                        Join thousands of learners and begin your journey.
+                    </p>
+
+                    <div
+                        style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: var(--radius); margin-bottom: 2rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <span style="color: rgba(255,255,255,0.9);">Duration</span>
+                            <span style="color: white; font-weight: 600;" id="metaDuration">4-6 weeks</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <span style="color: rgba(255,255,255,0.9);">Modules</span>
+                            <span style="color: white; font-weight: 600;" id="metaModules">8 Modules</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                            <span style="color: rgba(255,255,255,0.9);">Lessons</span>
+                            <span style="color: white; font-weight: 600;" id="metaLessons">14 Lessons</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: rgba(255,255,255,0.9);">Price</span>
+                            <div style="text-align: right;">
+                                <span style="color: white; font-weight: 600; font-size: 1.5rem;"
+                                    id="coursePrice">$0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <button class="btn btn-lg" id="enrollBtn" onclick="handleEnrollment()"
+                            style="flex: 1; min-width: 120px; background: white; color: var(--primary); border: 2px solid white; font-weight: 600;">
+                            <span id="enrollBtnText">Enroll Now</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructor Section (Static for now, can be made dynamic later) -->
+            <div class="card">
+                <h2 class="card-title">Meet Your Instructor</h2>
+                <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
+                    <div style="flex-shrink: 0;">
+                        <img src="/images/instructor-akinola.jpg" alt="Akinola Olujobi"
+                            style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.15);"
+                            onError="this.src='https://via.placeholder.com/150'">
+                    </div>
+                    <div style="flex: 1; min-width: 250px;">
+                        <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Akinola Olujobi
+                        </h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">Founder & AI
+                            Development Expert at Trendtactics</p>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+                            Akinola is a software development expert passionate about helping builders leverage AI to
+                            create real products faster. With years of experience in full-stack development and AI
+                            integration, he's trained hundreds of developers on modern development practices.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Modules -->
+            <div class="card">
+                <h2 class="card-title">Course Structure</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem;">A comprehensive curriculum designed to
+                    take you from beginner to expert.</p>
+                <div style="margin-top: 2rem;" id="modulesList">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/supabase-client.js"></script>
+    <script>
+        // Global state
+        let currentCourse = null;
+        let isEnrolled = false;
+
+        // Configuration
+        const SUPABASE_URL = 'https://uimdbodamoeyukrghchb.supabase.co';
+
+        async function initPage() {
+            try {
+                // Get slug from URL
+                const params = new URLSearchParams(window.location.search);
+                const slug = params.get('slug');
+
+                if (!slug) {
+                    showError('No course specified');
+                    return;
+                }
+
+                // Check auth status
+                updateAuthUI();
+
+                // Fetch course data
+                await loadCourseData(slug);
+
+                // Check enrollment if logged in
+                if (localStorage.getItem('supabase_session')) {
+                    await checkEnrollmentStatus();
+                }
+            } catch (error) {
+                console.error('Initialization error:', error);
+                showError('Failed to load course details');
+            }
+        }
+
+        function updateAuthUI() {
+            const s = localStorage.getItem('supabase_session');
+            const u = localStorage.getItem('supabase_user');
+            const loggedIn = !!(s && u);
+
+            const authBtn = document.getElementById('authBtn');
+            const dashboardLink = document.getElementById('dashboardLink');
+
+            if (loggedIn) {
+                const user = JSON.parse(u)?.user;
+                if (authBtn) {
+                    authBtn.textContent = user?.user_metadata?.name || user?.email || 'Account';
+                    authBtn.onclick = () => window.location.href = '/dashboard';
+                }
+                if (dashboardLink) dashboardLink.style.display = 'block';
+            } else {
+                if (authBtn) {
+                    authBtn.textContent = 'Sign In';
+                    authBtn.onclick = () => window.location.href = '/login';
+                }
+                if (dashboardLink) dashboardLink.style.display = 'none';
+            }
+        }
+
+        async function loadCourseData(slug) {
+            try {
+                // Fetch course by slug (we'll fetch all and filter client side for now as simpler option)
+                // In production, you'd want a specific endpoint
+                const response = await fetch(`${SUPABASE_URL}/functions/v1/courses`);
+
+                if (!response.ok) throw new Error('Failed to fetch courses');
+
+                const data = await response.json();
+                const courses = data.courses || [];
+
+                // Find matching course by slug/id (assuming slug in URL matches a property or derived slug)
+                // Since we don't have a 'slug' column yet, we might match by ID or simple title-to-slug conversion
+                currentCourse = courses.find(c => {
+                    const cSlug = c.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                    return cSlug === slug || c.id === slug;
+                });
+
+                if (!currentCourse) {
+                    // Try exact title matching if slug matching fails
+                    // This is a robust fallback for existing links
+                    currentCourse = courses.find(c => c.title.toLowerCase().includes(slug.replace(/-/g, ' ')));
+                }
+
+                if (!currentCourse) {
+                    showError('Course not found');
+                    return;
+                }
+
+                renderCourse(currentCourse);
+            } catch (error) {
+                console.error('Error loading course:', error);
+                showError('Failed to load course data');
+            }
+        }
+
+        function renderCourse(course) {
+            document.title = `${course.title} - Trendtactics Academy`;
+
+            // Text Content
+            document.getElementById('courseTitle').textContent = course.title;
+            document.getElementById('courseDescription').textContent = course.description;
+            document.getElementById('longDescription').textContent = course.description; // or long_description if available
+            document.getElementById('courseLevel').textContent = course.level || 'All Levels';
+            document.getElementById('coursePrice').textContent = course.price > 0 ? `$${course.price}` : 'Free';
+
+            // Metadata
+            if (course.duration) document.getElementById('metaDuration').textContent = course.duration;
+
+            // Learning Points
+            const pointsList = document.getElementById('learningPoints');
+            pointsList.innerHTML = '';
+            // If we have learning points in DB, use them. Otherwise generic
+            const points = course.learning_points || [
+                "Master core concepts and practical applications",
+                "Build real-world projects",
+                "Understand best practices and industry standards",
+                "Gain confidence in using new tools"
+            ];
+
+            points.forEach((point, i) => {
+                const li = document.createElement('li');
+                li.style.cssText = 'padding: 0.5rem 0; color: var(--text-secondary); display: flex; align-items: center;';
+                li.innerHTML = `<span style="color: var(--primary); margin-right: 0.75rem; font-weight: bold;">${i + 1}.</span> ${point}`;
+                pointsList.appendChild(li);
+            });
+
+            // Modules
+            const modulesList = document.getElementById('modulesList');
+            modulesList.innerHTML = '';
+
+            // Check if modules are parsed JSON or need parsing
+            let modules = course.modules || [];
+            if (typeof modules === 'string') {
+                try { modules = JSON.parse(modules); } catch (e) { modules = []; }
+            }
+
+            // Update metadata count
+            document.getElementById('metaModules').textContent = `${modules.length} Modules`;
+            let lessonCount = 0;
+
+            modules.forEach((mod, i) => {
+                const lessons = mod.lessons || [];
+                lessonCount += lessons.length;
+
+                const modDiv = document.createElement('div');
+                modDiv.className = 'module-card';
+                modDiv.style.cssText = 'padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; border-left: 4px solid var(--primary);';
+
+                modDiv.innerHTML = `
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module ${i + 1}: ${mod.title || 'Untitled Module'}</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">${lessons.length} lessons</p>
+                    <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
+                        ${lessons.slice(0, 3).map(l => `<li>${l.title}</li>`).join('')}
+                        ${lessons.length > 3 ? `<li>+ ${lessons.length - 3} more...</li>` : ''}
+                    </ul>
+                `;
+                modulesList.appendChild(modDiv);
+            });
+
+            document.getElementById('metaLessons').textContent = `${lessonCount} Lessons`;
+
+            // Video Preview
+            if (course.preview_video_url) {
+                const videoSection = document.getElementById('videoSection');
+                const videoFrame = document.getElementById('videoFrame');
+
+                // Simple YouTube ID extraction
+                let videoId = '';
+                if (course.preview_video_url.includes('v=')) {
+                    videoId = course.preview_video_url.split('v=')[1].split('&')[0];
+                } else if (course.preview_video_url.includes('youtu.be/')) {
+                    videoId = course.preview_video_url.split('youtu.be/')[1];
+                }
+
+                if (videoId) {
+                    videoFrame.src = `https://www.youtube.com/embed/${videoId}`;
+                    videoSection.style.display = 'block';
+                }
+            }
+
+            // Show content
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('courseContent').style.display = 'block';
+        }
+
+        async function checkEnrollmentStatus() {
+            if (!currentCourse) return;
+
+            try {
+                const session = JSON.parse(localStorage.getItem('supabase_session'));
+                const user = JSON.parse(localStorage.getItem('supabase_user'));
+                if (!session || !user) return;
+
+                const response = await fetch(`${SUPABASE_URL}/functions/v1/get-student-courses`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${session.access_token}`
+                    },
+                    body: JSON.stringify({ user_id: user.user?.id || user.id })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const enrolledCourses = data.courses || [];
+                    isEnrolled = enrolledCourses.some(c => c.course_id === currentCourse.id);
+
+                    if (isEnrolled) {
+                        const btn = document.getElementById('enrollBtn');
+                        document.getElementById('enrollBtnText').textContent = 'Continue Learning';
+                        btn.style.background = 'white';
+                        btn.style.color = 'var(--primary)';
+                    }
+                }
+            } catch (error) {
+                console.error('Error checking enrollment:', error);
+            }
+        }
+
+        async function handleEnrollment() {
+            // Handle Auth
+            const s = localStorage.getItem('supabase_session');
+            if (!s) {
+                // Determine user intent: Login or Sign up?
+                // Default to Signup for growth
+                window.location.href = '/signup?redirect=' + encodeURIComponent(window.location.href);
+                return;
+            }
+
+            if (isEnrolled) {
+                // If enrolled, go to learning page
+                window.location.href = `/learn/${currentCourse.id}`;
+            } else {
+                // If not enrolled, go to enrollment/checkout
+                // Passing course ID and Title
+                window.location.href = `/checkout.html?course=${currentCourse.id}&title=${encodeURIComponent(currentCourse.title)}`;
+            }
+        }
+
+        function handleAuthClick() {
+            const s = localStorage.getItem('supabase_session');
+            if (s) {
+                window.location.href = '/dashboard';
+            } else {
+                window.location.href = '/login';
+            }
+        }
+
+        function showError(msg) {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('courseContent').style.display = 'none';
+            document.getElementById('errorState').style.display = 'block';
+            document.getElementById('errorMessage').textContent = msg;
+        }
+
+        function toggleMobileNav() {
+            document.querySelector('.nav').classList.toggle('active');
+        }
+
+        // Initialize
+        window.addEventListener('load', initPage);
+    </script>
+</body>
+
+</html>

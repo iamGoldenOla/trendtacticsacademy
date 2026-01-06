@@ -21,9 +21,15 @@ RewriteRule ^ - [L]
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.+?)/?$ $1.html [L]
 
+# Dynamic Course Routes
+RewriteRule ^course/([^/]+)/?$ /course.html?slug=$1 [L,QSA]
+RewriteRule ^learn/([^/]+)/?$ /learn.html?course_id=$1 [L,QSA]
+
 # For the React app - fallback to index.html only for root and unmatched routes
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/course/
+RewriteCond %{REQUEST_URI} !^/learn/
 RewriteRule ^(.*)$ /index.html [L]
 
 Options -MultiViews
