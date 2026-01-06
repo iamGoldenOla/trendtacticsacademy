@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Details - Trendtactics Academy</title>
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Environment config -->
+    <script src="/js/env.js"></script>
+    <!-- Supabase client -->
+    <script src="/js/supabase-client.js"></script>
+</head>
+<body>
+    <h1 id="course-title"></h1>
+    <p id="course-description"></p>
+    <button id="course-action"></button>
+
+    <script src="/js/course-loader.js"></script>
+    <script>
+        // Extract slug from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get('slug');
+        
+        if (slug) {
+            loadCourse(slug);
+        } else {
+            // If no slug provided, try to extract from the URL path
+            const path = window.location.pathname;
+            const pathParts = path.split('/');
+            const slugFromPath = pathParts[pathParts.length - 1];
+            
+            if (slugFromPath && slugFromPath !== 'course') {
+                loadCourse(slugFromPath);
+            } else {
+                document.body.innerHTML = "Course slug not provided";
+            }
+        }
+    </script>
+</body>
+</html>

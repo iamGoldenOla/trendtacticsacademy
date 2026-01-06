@@ -6,7 +6,7 @@ const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
 const supabaseServiceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
 
-serve(async (req) => {
+serve(async (req: any) => {
   try {
     // Handle CORS preflight requests
     if (req.method === "OPTIONS") {
@@ -29,7 +29,7 @@ serve(async (req) => {
     }
 
     // Get request body for POST or query params for GET
-    let queryParams = {};
+    let queryParams: { [key: string]: any } = {};
     if (req.method === "POST") {
       queryParams = await req.json();
     } else {
@@ -46,10 +46,24 @@ serve(async (req) => {
       }
     }
 
-    // Build query to fetch courses
+    // Build query to fetch courses with module and lesson counts
     let query = supabase
       .from("courses")
-      .select("id, title, description, level, category, thumbnail_url, duration, modules_count, lessons_count, price, created_at, updated_at, status")
+      .select(`
+        id, 
+        title, 
+        description, 
+        level, 
+        category, 
+        thumbnail_url, 
+        duration, 
+        price, 
+        created_at, 
+        updated_at, 
+        status,
+        (select count(*) from modules where modules.course_id = courses.id)::int as modules_count,
+        (select count(*) from modules inner join lessons on modules.id = lessons.module_id where modules.course_id = courses.id)::int as lessons_count
+      `)
       .eq("status", "published");
 
     // If both title and slug are provided, prioritize slug
@@ -59,6 +73,8 @@ serve(async (req) => {
     } else if (queryParams.title) {
       query = query.ilike("title", `%${queryParams.title}%`);
     }
+
+    // If no slug or title provided, return all published courses (don't add extra filters)
 
     const { data, error } = await query;
 
@@ -77,10 +93,12 @@ serve(async (req) => {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "https://academy.trendtacticsdigital.com",
+          "Access-Control-Allow-Methods": "GET, POST",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
         },
       }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching courses:", error);
     return new Response(
       JSON.stringify({
@@ -92,6 +110,8 @@ serve(async (req) => {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "https://academy.trendtacticsdigital.com",
+          "Access-Control-Allow-Methods": "GET, POST",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
         },
       }
     );
