@@ -189,15 +189,10 @@
 
     <script>
         // Initialize Supabase using the global supabase object
-        const { createClient } = supabase;
-        const SUPABASE_ANON_KEY = window.__ENV__?.SUPABASE_ANON_KEY || null;
-        if (!SUPABASE_ANON_KEY) {
-        console.error('Missing SUPABASE_ANON_KEY. Provide via window.__ENV__ injected server-side.');
+        if (!window.supabaseClient) {
+            console.error('Supabase client not initialized. Check that supabase-client.js is loaded.');
         }
-        const sbClient = createClient(
-            'https://uimdbodamoeyukrghchb.supabase.co',
-            SUPABASE_ANON_KEY
-        );
+        const sbClient = window.supabaseClient;
 
         let isLoginMode = false;
 

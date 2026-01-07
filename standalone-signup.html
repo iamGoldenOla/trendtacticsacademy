@@ -192,13 +192,11 @@
     </div>
 
     <script>
-        // Initialize Supabase
-        const supabaseUrl = 'https://uimdbodamoeyukrghchb.supabase.co';
-        const SUPABASE_ANON_KEY = window.__ENV__?.SUPABASE_ANON_KEY || null;
-        if (!SUPABASE_ANON_KEY) {
-        console.error('Missing SUPABASE_ANON_KEY. Provide via window.__ENV__ injected server-side.');
+        // Initialize Supabase using the global supabase object
+        if (!window.supabaseClient) {
+            console.error('Supabase client not initialized. Check that supabase-client.js is loaded.');
         }
-        const supabase = window.supabase.createClient(supabaseUrl, SUPABASE_ANON_KEY);
+        const supabase = window.supabaseClient;
 
         let isLoginMode = false;
 
