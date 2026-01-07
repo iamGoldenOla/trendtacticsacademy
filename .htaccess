@@ -1,6 +1,43 @@
+# Enable CORS and set CSP headers
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' https://unpkg.com https://www.google.com https://www.gstatic.com; connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com"
+</IfModule>
+
+# Deny access to sensitive files
+<Files ~ "^\.">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Serve static multi-page HTML; disable SPA rewrites
+# Let Apache serve files and directories as-is; no catch-all to index.html
+# Use a proper 404 page for missing routes
+ErrorDocument 404 /404.html
+
+# Proper routing for dynamic pages - exclude static assets
 RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^course/([^/]+)/?$ course.html?slug= [L,QSA]
-RewriteRule ^learn/([^/]+)/?$ learn.html?id= [L,QSA]
-RewriteRule ^enroll/?$ enroll.html [L,QSA]
+
+# Don't rewrite if requesting existing files or directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Don't rewrite static assets (CSS, JS, images, etc.)
+RewriteRule ^(.+)\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ - [L,NC]
+
+# Handle dynamic routes for all pages
+RewriteRule ^dashboard/?$ /dashboard.html [L,QSA]
+RewriteRule ^about/?$ /about.html [L,QSA]
+RewriteRule ^courses/?$ /courses.html [L,QSA]
+RewriteRule ^course/([^/]+)/?$ /course.html?slug=$1 [L,QSA]
+RewriteRule ^learn/([^/]+)/?$ /learn.html?id=$1 [L,QSA]
+RewriteRule ^enroll/?$ /enroll.html [L,QSA]
+RewriteRule ^profile/?$ /profile.html [L,QSA]
+RewriteRule ^settings/?$ /settings.html [L,QSA]
+RewriteRule ^contact/?$ /contact.html [L,QSA]
+RewriteRule ^help/?$ /help.html [L,QSA]
+RewriteRule ^blog/?$ /blog.html [L,QSA]
+RewriteRule ^signup/?$ /signup.html [L,QSA]
+RewriteRule ^login/?$ /login.html [L,QSA]
+RewriteRule ^services/?$ /services.html [L,QSA]
