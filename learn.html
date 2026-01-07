@@ -417,19 +417,47 @@
                 return;
             }
 
-            // Check Auth
-            const session = localStorage.getItem('supabase_session');
-            if (!session) {
-                window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href);
-                return;
-            }
-
             // Load Course Content
             await loadCourseContent(courseId);
         }
 
         async function loadCourseContent(id) {
             try {
+                // Check Auth
+                const session = localStorage.getItem('supabase_session');
+                if (!session) {
+                    window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href);
+                    return;
+                }
+                
+                // Get user info
+                const user = JSON.parse(localStorage.getItem('supabase_user'));
+                if (!user) {
+                    window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href);
+                    return;
+                }
+                
+                // Check if user is enrolled in the course
+                const { data: enrollment, error: enrollmentError } = await window.supabaseClient
+                    .from('course_access')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .eq('course_id', id)
+                    .single();
+                
+                if (enrollmentError || !enrollment) {
+                    alert('You must be enrolled in this course to access the content.');
+                    // Try to get course slug for redirect
+                    const { data: courseInfo, error: courseError } = await window.supabaseClient
+                        .from('courses')
+                        .select('slug')
+                        .eq('id', id)
+                        .single();
+                    const courseSlug = courseInfo?.slug || id;
+                    window.location.href = `/course/${courseSlug}`;
+                    return;
+                }
+                
                 // Fetch course details + modules
                 // Using Supabase client assuming public access to course content metadata
                 // but restricting actual content via RLS if needed.

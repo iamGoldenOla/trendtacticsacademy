@@ -375,9 +375,9 @@
                 const user = JSON.parse(localStorage.getItem('supabase_user'));
                 if (!session || !user) return;
 
-                // Use Supabase client to check enrollment directly from course_enrollments table
+                // Use Supabase client to check enrollment directly from course_access table
                 const { data, error } = await window.supabaseClient
-                    .from('course_enrollments')
+                    .from('course_access')
                     .select('*')
                     .eq('user_id', user.user?.id || user.id)
                     .eq('course_id', currentCourse.id);

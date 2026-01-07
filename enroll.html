@@ -265,7 +265,7 @@
                 
                 // Check if already enrolled
                 const { data: existingEnrollment, error: checkError } = await window.supabaseClient
-                    .from('course_enrollments')
+                    .from('course_access')
                     .select('*')
                     .eq('user_id', user.id)
                     .eq('course_id', courseId)
@@ -279,7 +279,7 @@
                 
                 // Proceed with enrollment
                 const { data, error } = await window.supabaseClient
-                    .from('course_enrollments')
+                    .from('course_access')
                     .insert([{
                         user_id: user.id,
                         course_id: courseId,
