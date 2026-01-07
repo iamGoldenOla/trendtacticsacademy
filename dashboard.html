@@ -730,29 +730,52 @@
                 const token = session?.access_token || session?.session?.access_token || currentUser.access_token || currentUser.token || '';
                 
                 const { data, error } = await window.supabaseClient
-                    .from('course_access')
-                    .select(`
-                        course_id,
-                        courses ( id, title, description, level, price, duration, modules_count, lessons_count, long_description, video_preview, created_at )
-                    `)
+                    .from('course_enrollments')
+                    .select('course_id')
                     .eq('user_id', currentUser.id);
                 
                 if (error) {
                     throw new Error(`Failed to load courses: ${error.message}`);
                 }
                 
+                if (!data || data.length === 0) {
+                    // No enrolled courses found
+                    loadingState.style.display = 'none';
+                    errorState.style.display = 'none';
+                    
+                    // Update stats
+                    document.getElementById('coursesCount').textContent = '0';
+                    
+                    // Show empty state if no courses
+                    emptyState.style.display = 'block';
+                    coursesContainer.style.display = 'none';
+                    return;
+                }
+                
+                // Get the course details for each enrolled course
+                const courseIds = data.map(item => item.course_id);
+                
+                const { data: courseData, error: courseError } = await window.supabaseClient
+                    .from('courses')
+                    .select('*')
+                    .in('id', courseIds);
+                
+                if (courseError) {
+                    throw new Error(`Failed to load course details: ${courseError.message}`);
+                }
+                
                 // Transform the data to match expected structure
-                const courses = data.map(item => ({
-                    course_id: item.course_id,
-                    course_title: item.courses.title,
-                    course_description: item.courses.description,
-                    course_level: item.courses.level,
-                    price: item.courses.price,
-                    duration: item.courses.duration,
-                    modules_count: item.courses.modules_count,
-                    lessons_count: item.courses.lessons_count,
-                    long_description: item.courses.long_description,
-                    video_preview: item.courses.video_preview
+                const courses = courseData.map(course => ({
+                    course_id: course.id,
+                    course_title: course.title,
+                    course_description: course.description,
+                    course_level: course.level,
+                    price: course.price,
+                    duration: course.duration,
+                    modules_count: course.modules_count || 0,
+                    lessons_count: course.lessons_count || 0,
+                    long_description: course.long_description,
+                    video_preview: course.video_preview
                 }));
 
                 loadingState.style.display = 'none';

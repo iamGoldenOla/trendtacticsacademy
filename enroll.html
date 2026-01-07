@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enroll in Course - Trendtactics Academy</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+    <script src="/js/env.js"></script>
+    <script src="/js/supabase-client.js"></script>
+    <style>
+        :root {
+            --primary: #00D9FF;
+            --primary-dark: #00B8D9;
+            --secondary: #7C3AED;
+            --bg-dark: #0B1437;
+            --bg-darker: #060D24;
+            --bg-card: rgba(15, 25, 55, 0.95);
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --success: #10B981;
+            --error: #EF4444;
+            --border: rgba(0, 217, 255, 0.2);
+            --radius: 12px;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-darker);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.15);
+        }
+        
+        .enroll-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .enroll-header h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .course-info {
+            background: rgba(0, 217, 255, 0.05);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+        }
+        
+        .price-tag {
+            text-align: center;
+            margin: 1.5rem 0;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .enroll-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: var(--radius);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: #000;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--error);
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin: 1rem 0;
+            color: var(--error);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="enroll-header">
+                <h1>Enroll in Course</h1>
+                <p>Complete your enrollment and start learning today</p>
+            </div>
+            
+            <div id="loading" class="loading">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">🔄</div>
+                <p>Loading course details...</p>
+            </div>
+            
+            <div id="content" style="display: none;">
+                <div class="course-info">
+                    <h2 id="course-title">Course Title</h2>
+                    <p id="course-description">Course description</p>
+                    <div style="display: flex; justify-content: space-between; margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">
+                        <span>Level: <span id="course-level">Beginner</span></span>
+                        <span>Duration: <span id="course-duration">Self-Paced</span></span>
+                    </div>
+                </div>
+                
+                <div class="price-tag">
+                    <div>$3 / ₦5,000</div>
+                </div>
+                
+                <div class="enroll-actions">
+                    <a href="#" id="enroll-btn" class="btn btn-primary">Enroll Now</a>
+                    <a href="/courses" class="btn btn-secondary">Back to Courses</a>
+                </div>
+            </div>
+            
+            <div id="error" style="display: none;" class="error">
+                <p id="error-message">Error message</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let courseId = null;
+        let courseData = null;
+        
+        // Initialize
+        async function init() {
+            try {
+                // Get course ID from URL parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                courseId = urlParams.get('course_id');
+                
+                if (!courseId) {
+                    throw new Error('No course ID specified');
+                }
+                
+                // Check if user is logged in
+                const session = localStorage.getItem('supabase_session');
+                if (!session) {
+                    // Redirect to login with return URL
+                    window.location.href = `/login?redirect=${encodeURIComponent(window.location.href)}`;
+                    return;
+                }
+                
+                // Load course details
+                await loadCourseDetails(courseId);
+                
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+        
+        // Load course details
+        async function loadCourseDetails(id) {
+            try {
+                const { data, error } = await window.supabaseClient
+                    .from('courses')
+                    .select('*')
+                    .eq('id', id)
+                    .single();
+                
+                if (error) {
+                    throw new Error(`Failed to load course: ${error.message}`);
+                }
+                
+                if (!data) {
+                    throw new Error('Course not found');
+                }
+                
+                courseData = data;
+                
+                // Update UI with course info
+                document.getElementById('course-title').textContent = data.title;
+                document.getElementById('course-description').textContent = data.description;
+                document.getElementById('course-level').textContent = data.level || 'Beginner';
+                document.getElementById('course-duration').textContent = data.duration || 'Self-Paced';
+                
+                // Update enroll button to process enrollment
+                const enrollBtn = document.getElementById('enroll-btn');
+                enrollBtn.href = '#';
+                enrollBtn.onclick = (e) => {
+                    e.preventDefault();
+                    processEnrollment(id);
+                };
+                
+                // Show content and hide loading
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+                
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+        
+        // Process enrollment
+        async function processEnrollment(courseId) {
+            try {
+                const session = localStorage.getItem('supabase_session');
+                if (!session) {
+                    throw new Error('Not logged in');
+                }
+                
+                const user = JSON.parse(localStorage.getItem('supabase_user'));
+                if (!user) {
+                    throw new Error('User data not available');
+                }
+                
+                // Check if already enrolled
+                const { data: existingEnrollment, error: checkError } = await window.supabaseClient
+                    .from('course_enrollments')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .eq('course_id', courseId)
+                    .single();
+                
+                if (existingEnrollment) {
+                    // Already enrolled, redirect to learning page
+                    window.location.href = `/learn/${courseId}`;
+                    return;
+                }
+                
+                // Proceed with enrollment
+                const { data, error } = await window.supabaseClient
+                    .from('course_enrollments')
+                    .insert([{
+                        user_id: user.id,
+                        course_id: courseId,
+                        enrolled_at: new Date().toISOString()
+                    }]);
+                
+                if (error) {
+                    throw new Error(`Enrollment failed: ${error.message}`);
+                }
+                
+                // Redirect to learning page
+                window.location.href = `/learn/${courseId}`;
+                
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+        
+        // Show error message
+        function showError(message) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error-message').textContent = message;
+            document.getElementById('error').style.display = 'block';
+        }
+        
+        // Initialize when page loads
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

@@ -224,6 +224,7 @@
 
     // Use the first result
     const course = courseCheck[0];
+    currentCourse = course; // Set the global variable
     console.log("✅ Course loaded:", course);
     renderCourse(course);
   } catch (err) {
@@ -251,7 +252,16 @@
             if (levelElement) levelElement.textContent = course.level || 'Beginner Friendly';
             
             const priceElement = document.getElementById('coursePrice');
-            if (priceElement) priceElement.textContent = course.price > 0 ? `$${course.price}` : 'Free';
+            if (priceElement) {
+                if (course.price > 0) {
+                    // Display both USD and NGN prices
+                    const usdPrice = 3; // Fixed at $3 as requested
+                    const ngPrice = 5000; // Fixed at ₦5000 as requested
+                    priceElement.textContent = `$${usdPrice} / ₦${ngPrice.toLocaleString()}`;
+                } else {
+                    priceElement.textContent = 'Free';
+                }
+            }
 
             // Metadata
             if (course.duration) document.getElementById('metaDuration').textContent = course.duration;
@@ -283,6 +293,17 @@
                 let modules = course.modules || [];
                 if (typeof modules === 'string') {
                     try { modules = JSON.parse(modules); } catch (e) { modules = []; }
+                }
+                
+                // Handle different possible structures of modules data
+                if (modules && typeof modules === 'object' && !Array.isArray(modules)) {
+                    // If modules is an object with a 'modules' property
+                    if (modules.modules && Array.isArray(modules.modules)) {
+                        modules = modules.modules;
+                    } else {
+                        // If it's a single module object, convert to array
+                        modules = [modules];
+                    }
                 }
 
                 // Update metadata count
@@ -390,9 +411,9 @@
                 // If enrolled, go to learning page
                 window.location.href = `/learn/${currentCourse.id}`;
             } else {
-                // If not enrolled, go to enrollment/checkout
+                // If not enrolled, go to enrollment page
                 // Using only course ID (not title-based)
-                window.location.href = `/enroll?course_id=${currentCourse.id}`;
+                window.location.href = `/enroll.html?course_id=${currentCourse.id}`;
             }
         }
 
