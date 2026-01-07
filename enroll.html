@@ -282,8 +282,7 @@
                     .from('enrollments')
                     .insert([{
                         user_id: user.id,
-                        course_id: courseId,
-                        enrolled_at: new Date().toISOString()
+                        course_id: courseId
                     }]);
                 
                 if (error) {
