@@ -566,16 +566,31 @@
 
         // Check if user is already logged in
         (async function checkAuthOnLoad() {
-            const { data: { session } } = await supabase.auth.getSession();
-            if (session) {
-                // Also update local storage for compatibility
-                localStorage.setItem('supabase_session', JSON.stringify(session));
-                localStorage.setItem('supabase_user', JSON.stringify({
-                    id: session.user.id,
-                    email: session.user.email,
-                    role: 'student'
-                }));
-                window.location.replace('/dashboard');
+            // Ensure Supabase client is ready
+            if (!supabase) {
+                console.error('Supabase client not available');
+                return;
+            }
+            
+            try {
+                const { data: { session }, error } = await supabase.auth.getSession();
+                if (error) {
+                    console.error('Error getting session:', error);
+                    return;
+                }
+                
+                if (session) {
+                    // Also update local storage for compatibility
+                    localStorage.setItem('supabase_session', JSON.stringify(session));
+                    localStorage.setItem('supabase_user', JSON.stringify({
+                        id: session.user.id,
+                        email: session.user.email,
+                        role: 'student'
+                    }));
+                    window.location.replace('/dashboard');
+                }
+            } catch (err) {
+                console.error('Error checking auth session:', err);
             }
         })();
 
@@ -677,21 +692,26 @@
             try {
                 if (isLoginMode) {
                     // LOGIN
+                    if (!supabase) {
+                        throw new Error('Supabase client not initialized');
+                    }
+                    
                     const { data, error } = await supabase.auth.signInWithPassword({
                         email: email,
                         password: password
                     });
 
                     if (error) throw error;
+                    if (!data) throw new Error('No login data received');
 
                     console.log('Login successful:', data);
 
                     // Store session
                     localStorage.setItem('supabase_session', JSON.stringify(data.session));
                     localStorage.setItem('supabase_user', JSON.stringify({
-                        id: data.user.id,
-                        email: data.user.email,
-                        name: data.user.user_metadata?.name || data.user.email.split('@')[0],
+                        id: data.user?.id,
+                        email: data.user?.email,
+                        name: data.user?.user_metadata?.name || data.user?.email?.split('@')[0],
                         role: 'student'
                     }));
 
@@ -702,6 +722,10 @@
 
                 } else {
                     // SIGNUP
+                    if (!supabase) {
+                        throw new Error('Supabase client not initialized');
+                    }
+                    
                     if (password.length < 8) {
                         throw new Error('Password must be at least 8 characters long');
                     }
@@ -718,6 +742,7 @@
                     });
 
                     if (error) throw error;
+                    if (!data) throw new Error('No signup data received');
 
                     console.log('Signup successful:', data);
 
