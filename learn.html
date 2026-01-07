@@ -395,6 +395,7 @@
         let flatLessons = []; // Array of all lessons for easier navigation
         let completedLessons = new Set();
         let courseId = null;
+        let originalModules = null; // Store original modules structure to access full content
 
         // Init
         async function init() {
@@ -499,6 +500,9 @@
                 document.getElementById('courseHeaderTitle').textContent = course.title;
                 document.title = `${course.title} - Learning`;
 
+                // Store original modules structure to access full content later
+                originalModules = course.modules || {};
+                
                 // Parse modules
                 let modules = course.modules || [];
                 if (typeof modules === 'string') {
@@ -544,6 +548,9 @@
                 if (!Array.isArray(modules)) {
                     modules = [];
                 }
+                
+                // Debug: Log the final modules structure before rendering
+                console.log('Final modules array before rendering:', modules);
 
                 // Debug: Log the modules structure
                 console.log('Modules structure:', modules);
@@ -581,11 +588,11 @@
             const list = document.getElementById('lessonList');
             list.innerHTML = '';
             flatLessons = [];
-            
+                    
             // Safely check if modules is an array
             if (!modules || !Array.isArray(modules) || modules.length === 0) {
                 console.log('No modules found or modules is not an array:', modules);
-                                
+                        
                 // Check if modules might be a single object instead of an array
                 if (modules && typeof modules === 'object' && !Array.isArray(modules)) {
                     console.log('Modules is a single object, converting to array:', modules);
@@ -611,7 +618,7 @@
                         }
                     }
                 }
-                                
+                        
                 // If still no modules, create a default one
                 if (!modules || modules.length === 0) {
                     list.innerHTML = '<div style="padding: 1rem; color: var(--text-secondary); text-align: center;">No modules available for this course.</div>';
@@ -619,14 +626,14 @@
                     return;
                 }
             }
-
+        
             modules.forEach((mod, mIndex) => {
                 // Module Header
                 const header = document.createElement('div');
                 header.className = 'module-header';
                 header.textContent = `Module ${mIndex + 1}: ${mod.title || 'Untitled Module'}`;
                 list.appendChild(header);
-
+        
                 // Lessons
                 const lessons = mod.lessons || [];
                 if (Array.isArray(lessons) && lessons.length > 0) {
@@ -636,7 +643,7 @@
                             ...lesson,
                             moduleTitle: mod.title || 'Untitled Module'
                         });
-
+        
                         const item = document.createElement('div');
                         item.className = 'lesson-item';
                         item.id = `lesson-nav-${globalIndex}`;
@@ -656,7 +663,7 @@
                     list.appendChild(item);
                 }
             });
-
+        
             updateProgress();
         }
 
