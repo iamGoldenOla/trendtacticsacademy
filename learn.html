@@ -1775,6 +1775,17 @@ const Navigation = () => {
                 return;
             }
             
+            // Check if Puter.js is available
+            const isPuterAvailable = typeof puter !== 'undefined' && puter && puter.ai;
+            
+            if (!isPuterAvailable) {
+                // Fallback when Puter.js is not available
+                loadingDiv.style.display = 'none';
+                responseDiv.style.display = 'block';
+                responseDiv.innerHTML = `<strong>Note:</strong><br><br>Puter.js is not currently loaded. The playground requires the Puter.js library to function properly. Please ensure the script is loaded from https://js.puter.com/v2/.<br><br>Your input: ${escapeHtml(codeInput.value)}<br><br>✓ Processing completed!`;                
+                return;
+            }
+            
             // Show output div and loading indicator
             outputDiv.style.display = 'block';
             responseDiv.style.display = 'none';
@@ -1940,14 +1951,17 @@ const Navigation = () => {
             // Show loading message
             console.log('Generating content for:', { courseTitle, moduleTitle, lessonTitle });
             
-            // Simulate AI processing delay
-            await new Promise(resolve => setTimeout(resolve, 500));
+            // Check if Puter.js is available
+            const isPuterAvailable = typeof puter !== 'undefined' && puter && puter.ai;
             
             // Generate content based on lesson title and course context
             const topic = lessonTitle.toLowerCase().replace('what is ', '').replace('?', '').trim();
             
-            // Use Puter.js AI to generate unique content for each lesson
-            try {
+            // If Puter.js is available, try to use it
+            if (isPuterAvailable) {
+                try {
+                    // Simulate AI processing delay
+                    await new Promise(resolve => setTimeout(resolve, 500));
                 // Create a detailed prompt for the AI to generate unique lesson content
                 const aiPrompt = `Create comprehensive educational content for a lesson titled "${lessonTitle}" in the course "${courseTitle}". The module is "${moduleTitle}". 
 
