@@ -479,6 +479,9 @@
                 // Debug: Log the raw course data structure
                 console.log('Raw course data structure:', courseData);
                 
+                // Check what properties are available in the course data
+                console.log('Available course properties:', Object.keys(courseData || {}));
+                
                 // Convert to expected format
                 const course = courseData;
 
