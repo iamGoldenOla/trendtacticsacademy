@@ -7,6 +7,7 @@
     <title>Learning Space - Trendtactics Academy</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="icon" href="/images/Trendtactics-logo - Copy.jpg" type="image/x-icon">
     <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
     <script src="/js/env.js"></script>
     <script src="/js/supabase-client.js"></script>
@@ -505,6 +506,30 @@
                     } else {
                         // If it's a single module object, convert to array
                         modules = [modules];
+                    }
+                }
+                
+                // Also check if lessons are directly in the course object
+                if (modules.length === 0 && (course.lessons || course.content || course.course_content)) {
+                    // Create a default module with direct lessons
+                    const directLessons = course.lessons || course.content || course.course_content;
+                    if (Array.isArray(directLessons)) {
+                        modules = [{
+                            title: 'Course Content',
+                            lessons: directLessons
+                        }];
+                    } else if (typeof directLessons === 'string') {
+                        try {
+                            const parsedLessons = JSON.parse(directLessons);
+                            if (Array.isArray(parsedLessons)) {
+                                modules = [{
+                                    title: 'Course Content',
+                                    lessons: parsedLessons
+                                }];
+                            }
+                        } catch (e) {
+                            console.log('Could not parse direct lessons:', e);
+                        }
                     }
                 }
                 
