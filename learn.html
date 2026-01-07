@@ -603,22 +603,56 @@
             document.getElementById(`lesson-nav-${index}`).classList.add('active');
 
             // Content Population
-            document.getElementById('lessonTitle').textContent = lesson.title;
+            document.getElementById('lessonTitle').textContent = lesson.title || 'Untitled Lesson';
 
             // Video
             const vidContainer = document.getElementById('videoContainer');
-            if (lesson.video || lesson.video_url) {
-                const url = lesson.video || lesson.video_url;
-                let embedUrl = url;
+            let hasVideo = false;
+            
+            // Check multiple possible video properties
+            const videoUrl = lesson.video || lesson.video_url || lesson.videoUrl || lesson.content?.video || lesson.resources?.video;
+            
+            if (videoUrl) {
+                let embedUrl = videoUrl;
 
-                if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                    // Simple parser
-                    const v = url.split('v=')[1]?.split('&')[0] || url.split('/').pop();
-                    embedUrl = `https://www.youtube.com/embed/${v}`;
+                if (typeof videoUrl === 'string' && (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be'))) {
+                    // YouTube URL parser
+                    let videoId = '';
+                    if (videoUrl.includes('v=')) {
+                        videoId = videoUrl.split('v=')[1].split('&')[0];
+                    } else if (videoUrl.includes('youtu.be/')) {
+                        videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
+                    } else {
+                        // Extract from various possible formats
+                        const regExp = /^.*(youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#&?]*).*/;
+                        const match = videoUrl.match(regExp);
+                        if (match && match[2].length === 11) {
+                            videoId = match[2];
+                        }
+                    }
+                    
+                    if (videoId) {
+                        embedUrl = `https://www.youtube.com/embed/${videoId}`;
+                        hasVideo = true;
+                    }
+                } else if (typeof videoUrl === 'string') {
+                    // For other video types, check if it's a valid URL
+                    try {
+                        new URL(videoUrl);
+                        embedUrl = videoUrl;
+                        hasVideo = true;
+                    } catch(e) {
+                        console.log('Invalid video URL:', videoUrl);
+                    }
                 }
-
-                document.getElementById('videoPlayer').src = embedUrl;
-                vidContainer.style.display = 'block';
+                
+                if (hasVideo) {
+                    document.getElementById('videoPlayer').src = embedUrl;
+                    vidContainer.style.display = 'block';
+                } else {
+                    vidContainer.style.display = 'none';
+                    document.getElementById('videoPlayer').src = '';
+                }
             } else {
                 vidContainer.style.display = 'none';
                 document.getElementById('videoPlayer').src = '';
@@ -628,18 +662,48 @@
             const textContainer = document.getElementById('textContent');
             textContainer.innerHTML = ''; // basic safety, in prod use sanitizer
 
-            // Render rich content elements
-            if (lesson.intro) textContainer.innerHTML += `<p>${lesson.intro}</p>`;
-            if (lesson.bigIdea) {
+            // Check multiple possible content properties
+            const contentText = lesson.content || lesson.text || lesson.description || lesson.intro || lesson.summary || 
+                          lesson.content?.text || lesson.content?.description || lesson.lesson_content;
+            
+            if (contentText) {
+                textContainer.innerHTML += `<div>${contentText}</div>`;
+            }
+            
+            // Check for other content fields
+            if (lesson.bigIdea || lesson.big_idea) {
                 textContainer.innerHTML += `
                     <div style="background: rgba(0, 217, 255, 0.1); border-left: 4px solid var(--primary); padding: 1rem; border-radius: 4px; margin: 1.5rem 0;">
                         <h3 style="color: var(--primary); margin-top: 0; font-size: 1rem;">Big Idea</h3>
-                        <p style="margin-bottom: 0;">${lesson.bigIdea}</p>
+                        <p style="margin-bottom: 0;">${lesson.bigIdea || lesson.big_idea}</p>
                     </div>
                  `;
             }
-            if (lesson.steps && Array.isArray(lesson.steps)) {
-                textContainer.innerHTML += `<h3>Key Steps</h3><ul>${lesson.steps.map(s => `<li>${s}</li>`).join('')}</ul>`;
+            
+            // Check for steps or lesson steps
+            const steps = lesson.steps || lesson.lesson_steps || lesson.content?.steps;
+            if (steps && Array.isArray(steps)) {
+                textContainer.innerHTML += `<h3>Key Steps</h3><ul>${steps.map(s => `<li>${typeof s === 'object' ? s.title || s.step || s.text : s}</li>`).join('')}</ul>`;
+            }
+            
+            // Check for other common content fields
+            if (lesson.objectives) {
+                textContainer.innerHTML += `<h3>Objectives</h3><ul>${Array.isArray(lesson.objectives) ? 
+                    lesson.objectives.map(obj => `<li>${obj}</li>`).join('') : 
+                    `<li>${lesson.objectives}</li>`}</ul>`;
+            }
+            
+            if (lesson.notes) {
+                textContainer.innerHTML += `<h3>Notes</h3><div>${lesson.notes}</div>`;
+            }
+            
+            if (lesson.code_examples || lesson.example_code) {
+                textContainer.innerHTML += `<h3>Code Examples</h3><pre style="background: #000; color: #fff; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code>${lesson.code_examples || lesson.example_code}</code></pre>`;
+            }
+
+            // If no content was found, show a message
+            if (!contentText && !lesson.bigIdea && !lesson.big_idea && !steps && !lesson.objectives && !lesson.notes && !lesson.code_examples && !lesson.example_code) {
+                textContainer.innerHTML += '<p>No content available for this lesson. Please check back later or contact support.</p>';
             }
 
             // Nav buttons
