@@ -468,7 +468,7 @@
                 // For now, we fetch public course data
                 const { data: courseData, error } = await window.supabaseClient
                   .from('courses')
-                  .select('id, title, description, modules, content, created_at, updated_at')
+                  .select('id, title, description, modules, status, level, created_at, updated_at')
                   .eq('id', id)
                   .single();
                 
@@ -481,6 +481,10 @@
                 
                 // Check what properties are available in the course data
                 console.log('Available course properties:', Object.keys(courseData || {}));
+                
+                // Check the type and content of the modules field specifically
+                console.log('Modules field type:', typeof courseData?.modules);
+                console.log('Modules field value:', courseData?.modules);
                 
                 // Convert to expected format
                 const course = courseData;
@@ -513,9 +517,9 @@
                 }
                 
                 // Also check if lessons are directly in the course object
-                if (modules.length === 0 && (course.content)) {
+                if (modules.length === 0 && (course.description)) {
                     // Create a default module with direct lessons
-                    const directLessons = course.content;
+                    const directLessons = course.description;
                     if (Array.isArray(directLessons)) {
                         modules = [{
                             title: 'Course Content',
