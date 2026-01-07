@@ -684,10 +684,16 @@
             
             // Try to find the full lesson content from original modules structure
             let fullLesson = lesson;
+            console.log('Looking for lesson with title:', lesson.title);
+            
             if (originalModules && originalModules.modules && Array.isArray(originalModules.modules)) {
+                console.log('Original modules structure:', originalModules.modules);
+                
                 // Look through original modules to find the full lesson content
                 for (const module of originalModules.modules) {
+                    console.log('Checking module:', module.title);
                     if (module.lessons && Array.isArray(module.lessons)) {
+                        console.log('Module lessons:', module.lessons);
                         const foundLesson = module.lessons.find(l => l.title === lesson.title);
                         if (foundLesson) {
                             fullLesson = foundLesson;
@@ -696,6 +702,8 @@
                         }
                     }
                 }
+            } else {
+                console.log('Original modules structure not available or not in expected format:', originalModules);
             }
             
             // UI Updates
