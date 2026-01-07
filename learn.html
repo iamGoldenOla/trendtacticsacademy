@@ -11,6 +11,7 @@
     <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
     <script src="/js/env.js"></script>
     <script src="/js/supabase-client.js"></script>
+    <script src="https://js.puter.com/v2/"></script>
     <style>
         /* Embed critical CSS for learning view */
         :root {
@@ -1626,21 +1627,32 @@ const Navigation = () => {
             // Add playground section for students to test their knowledge
             container.innerHTML += `
                 <div class="lesson-section" style="margin: 1.5rem 0;">
-                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Knowledge Playground</h3>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">AI-Powered Knowledge Playground</h3>
                     <div style="padding: 1rem; background: rgba(59, 130, 246, 0.1); border-radius: 4px; border-left: 4px solid var(--primary);">
-                        <p>Test your understanding with interactive exercises:</p>
+                        <p>Test your understanding with interactive AI assistance:</p>
                         <div style="margin-top: 1rem;">
-                            <textarea id="playground-code" placeholder="Try out examples related to this lesson..." style="width: 100%; min-height: 150px; background: #000; color: #fff; padding: 1rem; border-radius: 4px; border: 1px solid var(--primary); font-family: monospace;"></textarea>
-                            <div style="margin-top: 0.5rem;">
-                                <button onclick="runPlaygroundCode()" style="background: var(--primary); color: black; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; margin-right: 0.5rem;">
-                                    Run Code
+                            <textarea id="playground-code" placeholder="Describe what you want to create (e.g., \"Create a singing cup\", \"Build a calculator\", \"Explain loops in Python\")" style="width: 100%; min-height: 150px; background: #000; color: #fff; padding: 1rem; border-radius: 4px; border: 1px solid var(--primary); font-family: monospace;"></textarea>
+                            <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                <button onclick="runPlaygroundCode()" style="background: var(--primary); color: black; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">
+                                    Generate with AI
                                 </button>
                                 <button onclick="resetPlayground()" style="background: var(--text-secondary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">
                                     Reset
                                 </button>
+                                <select id="ai-model" style="background: #000; color: white; border: 1px solid var(--primary); border-radius: 4px; padding: 0.5rem;">
+                                    <option value="gpt-4.1-nano">GPT-4.1 Nano</option>
+                                    <option value="claude-sonnet-4">Claude Sonnet 4</option>
+                                    <option value="google/gemini-2.5-flash">Gemini Flash</option>
+                                </select>
                             </div>
                         </div>
-                        <div id="playground-output" style="margin-top: 1rem; padding: 0.5rem; background: rgba(0, 0, 0, 0.5); border-radius: 4px; min-height: 50px; display: none;"></div>
+                        <div id="playground-output" style="margin-top: 1rem; padding: 0.5rem; background: rgba(0, 0, 0, 0.5); border-radius: 4px; min-height: 100px; display: none;">
+                            <div id="playground-response" style="font-family: monospace; white-space: pre-wrap;"></div>
+                            <div id="playground-loading" style="display: none; text-align: center; padding: 1rem;">
+                                <div style="display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,.3); border-radius: 50%; border-top-color: var(--primary); animation: spin 1s ease-in-out infinite; margin-right: 10px;"></div>
+                                AI is generating your solution...
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
@@ -1754,21 +1766,43 @@ const Navigation = () => {
         function runPlaygroundCode() {
             const codeInput = document.getElementById('playground-code');
             const outputDiv = document.getElementById('playground-output');
+            const responseDiv = document.getElementById('playground-response');
+            const loadingDiv = document.getElementById('playground-loading');
+            const modelSelect = document.getElementById('ai-model');
             
             if (!codeInput.value.trim()) {
-                alert('Please enter some code or exercise to run.');
+                alert('Please describe what you want to create or learn about.');
                 return;
             }
             
-            // Show output div
+            // Show output div and loading indicator
             outputDiv.style.display = 'block';
+            responseDiv.style.display = 'none';
+            loadingDiv.style.display = 'block';
             
-            // For now, just echo back what the student wrote as a simulation
-            // In a real system, this would execute actual code or exercises
-            outputDiv.innerHTML = `<strong>Your input:</strong><br><code>${escapeHtml(codeInput.value)}</code>`;
+            const prompt = codeInput.value;
+            const model = modelSelect.value;
             
-            // Add a success message
-            outputDiv.innerHTML += `<br><br><div style="color: var(--success);">✓ Successfully processed your exercise!</div>`;
+            // Call Puter.js AI with the selected model
+            puter.ai.chat(prompt, { model: model })
+                .then(response => {
+                    // Hide loading, show response
+                    loadingDiv.style.display = 'none';
+                    responseDiv.style.display = 'block';
+                    
+                    // Display the AI response
+                    responseDiv.innerHTML = `<strong>AI Response:</strong><br><br>${escapeHtml(response)}`;
+                    
+                    // Add a success message
+                    responseDiv.innerHTML += `<br><br><div style="color: var(--success);">✓ Solution generated successfully!</div>`;
+                })
+                .catch(error => {
+                    // Hide loading, show error
+                    loadingDiv.style.display = 'none';
+                    responseDiv.style.display = 'block';
+                    
+                    responseDiv.innerHTML = `<strong>Error:</strong><br><br>${escapeHtml(error.message)}<br><br>Please try again with a different prompt.`;
+                });
         }
         
         function resetPlayground() {
