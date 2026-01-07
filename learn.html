@@ -503,6 +503,22 @@
                 // Store original modules structure to access full content later
                 originalModules = course.modules || {};
                 
+                // If modules is a string, it might be JSON containing the full structure
+                if (typeof originalModules === 'string') {
+                    try {
+                        originalModules = JSON.parse(originalModules);
+                        console.log('Parsed modules from string:', originalModules);
+                    } catch (e) {
+                        console.log('Modules is not a JSON string:', e);
+                    }
+                }
+                
+                // Make sure we have the modules array from the right place
+                if (originalModules.modules && Array.isArray(originalModules.modules)) {
+                    originalModules = originalModules.modules;
+                    console.log('Using modules.modules array:', originalModules);
+                }
+                
                 // Parse modules
                 let modules = course.modules || [];
                 if (typeof modules === 'string') {
