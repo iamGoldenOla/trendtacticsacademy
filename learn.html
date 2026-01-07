@@ -468,7 +468,7 @@
                 // For now, we fetch public course data
                 const { data: courseData, error } = await window.supabaseClient
                   .from('courses')
-                  .select('id, title, description, modules, lessons, content, course_content, created_at, updated_at')
+                  .select('id, title, description, modules, content, created_at, updated_at')
                   .eq('id', id)
                   .single();
                 
@@ -510,9 +510,9 @@
                 }
                 
                 // Also check if lessons are directly in the course object
-                if (modules.length === 0 && (course.lessons || course.content || course.course_content)) {
+                if (modules.length === 0 && (course.content)) {
                     // Create a default module with direct lessons
-                    const directLessons = course.lessons || course.content || course.course_content;
+                    const directLessons = course.content;
                     if (Array.isArray(directLessons)) {
                         modules = [{
                             title: 'Course Content',
