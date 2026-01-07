@@ -269,22 +269,15 @@
                 const session = JSON.parse(s);
                 const token = session?.access_token || session?.session?.access_token;
 
-                const { data, error } = await window.sbClient.functions.invoke('get-student-courses', {
-                    body: { user_id: userId }
-                });
+                const { data, error } = await window.supabaseClient
+                    .from('course_enrollments')
+                    .select('courses(*)')
+                    .eq('user_id', userId)
+                    .order('created_at', { foreignTable: 'courses', ascending: false });
                 
-                if (error) {
-                    throw new Error(`Failed to load courses: ${error.message}`);
-                }
+                if (error) throw error;
                 
-                const response = { ok: true, json: () => Promise.resolve(data) };
-
-                if (!response.ok) {
-                    throw new Error(`Failed to load courses: ${response.status}`);
-                }
-
-                const responseData = await response.json();
-                const courses = responseData.courses || [];
+                const courses = data?.map(item => item.courses).filter(Boolean) || [];
 
                 if (courses.length > 0) {
                     // Show personalized courses
@@ -379,15 +372,15 @@
                 coursesHTML += `
                     <div class="card" style="transition: all 0.3s ease;">
                         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-                            <span class="badge badge-primary">${course.course_level || 'Beginner'}</span>
+                            <span class="badge badge-primary">${course.level || 'Beginner'}</span>
                             <span class="badge" style="background: linear-gradient(135deg, var(--success), var(--primary)); color: white;">Access Granted</span>
                         </div>
                         <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
                             <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></div>
-                            <h3 class="card-title" style="margin: 0; color: var(--primary);">${course.course_title}</h3>
+                            <h3 class="card-title" style="margin: 0; color: var(--primary);">${course.title}</h3>
                         </div>
                         <p class="card-description" style="line-height: 1.7; margin-bottom: 1.5rem;">
-                            ${course.course_description || 'No description available'}
+                            ${course.description || 'No description available'}
                         </p>
                         <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(22, 32, 68, 0.5); border-radius: var(--radius); border: 1px solid var(--border-light);">
                             <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: center;">
