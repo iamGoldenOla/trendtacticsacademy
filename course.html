@@ -141,7 +141,7 @@
                 <h2 class="card-title">Meet Your Instructor</h2>
                 <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
                     <div style="flex-shrink: 0;">
-                        <img src="/images/instructor-akinola.jpg" alt="Akinola Olujobi"
+                        <img src="/lms-frontend/public/images/akinola.jpg" alt="Akinola Olujobi"
                             style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.15);"
                             
                     </div>
@@ -281,38 +281,48 @@
 
             // Modules
             const modulesList = document.getElementById('modulesList');
-            modulesList.innerHTML = '';
+            if (modulesList) {
+                modulesList.innerHTML = '';
 
-            // Check if modules are parsed JSON or need parsing
-            let modules = course.modules || [];
-            if (typeof modules === 'string') {
-                try { modules = JSON.parse(modules); } catch (e) { modules = []; }
+                // Check if modules are parsed JSON or need parsing
+                let modules = course.modules || [];
+                if (typeof modules === 'string') {
+                    try { modules = JSON.parse(modules); } catch (e) { modules = []; }
+                }
+
+                // Update metadata count
+                const modulesElement = document.getElementById('metaModules');
+                if (modulesElement) modulesElement.textContent = `${modules.length} Modules`;
+                let lessonCount = 0;
+
+                if (modules.length > 0) {
+                    modules.forEach((mod, i) => {
+                        const lessons = mod.lessons || [];
+                        lessonCount += lessons.length;
+
+                        const modDiv = document.createElement('div');
+                        modDiv.className = 'module-card';
+                        modDiv.style.cssText = 'padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; border-left: 4px solid var(--primary);';
+
+                        modDiv.innerHTML = `
+                            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module ${i + 1}: ${mod.title || 'Untitled Module'}</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">${lessons.length} lessons</p>
+                            <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
+                                ${lessons.map(l => `<li style="margin-bottom: 0.25rem;">${l.title}</li>`).join('')}
+                            </ul>
+                        `;
+                        modulesList.appendChild(modDiv);
+                    });
+                } else {
+                    // If no modules in the course record, display a message
+                    modulesList.innerHTML = `<div class="card" style="padding: 1.5rem; text-align: center; color: var(--text-secondary);">
+                        <p>No modules have been added to this course yet.</p>
+                    </div>`;
+                }
+
+                const lessonsElement = document.getElementById('metaLessons');
+                if (lessonsElement) lessonsElement.textContent = `${lessonCount} Lessons`;
             }
-
-            // Update metadata count
-            document.getElementById('metaModules').textContent = `${modules.length} Modules`;
-            let lessonCount = 0;
-
-            modules.forEach((mod, i) => {
-                const lessons = mod.lessons || [];
-                lessonCount += lessons.length;
-
-                const modDiv = document.createElement('div');
-                modDiv.className = 'module-card';
-                modDiv.style.cssText = 'padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; border-left: 4px solid var(--primary);';
-
-                modDiv.innerHTML = `
-                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module ${i + 1}: ${mod.title || 'Untitled Module'}</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">${lessons.length} lessons</p>
-                    <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
-                        ${lessons.slice(0, 3).map(l => `<li>${l.title}</li>`).join('')}
-                        ${lessons.length > 3 ? `<li>+ ${lessons.length - 3} more...</li>` : ''}
-                    </ul>
-                `;
-                modulesList.appendChild(modDiv);
-            });
-
-            document.getElementById('metaLessons').textContent = `${lessonCount} Lessons`;
 
             // Video Preview
             if (course.preview_video_url) {
