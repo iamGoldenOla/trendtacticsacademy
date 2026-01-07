@@ -469,7 +469,7 @@
                 // For now, we fetch public course data
                 const { data: fetchedCourseData, error } = await window.supabaseClient
                   .from('courses')
-                  .select('id, title, description, modules, content, status, level, created_at, updated_at')
+                  .select('id, title, description, modules, status, level, created_at, updated_at')
                   .eq('id', id)
                   .single();
                 
