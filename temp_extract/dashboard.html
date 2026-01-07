@@ -16,8 +16,8 @@
             <div class="logo">Trendtactics Academy</div>
             <nav class="nav">
                 <a href="/">Home</a>
-                <a href="/courses.html">Courses</a>
-                <a href="/dashboard.html">Dashboard</a>
+                <a href="/courses">Courses</a>
+                <a href="/dashboard">Dashboard</a>
                 <button class="btn btn-secondary" id="userBtn" onclick="Auth.logout()">Logout</button>
             </nav>
         </div>
@@ -132,7 +132,7 @@
                             </div>
                             
                             <div style="display: flex; gap: 1rem;">
-                                <a href="/lesson-viewer.html?course=${course.id}" class="btn btn-primary" style="flex: 1; text-align: center;">
+                                <a href="/learn/${course.id}" class="btn btn-primary" style="flex: 1; text-align: center;">
                                     Continue Learning
                                 </a>
                                 <button class="btn btn-secondary" onclick="viewCourseDetails('${course.id}')">
@@ -156,7 +156,7 @@
         }
 
         function viewCourseDetails(courseId) {
-            window.location.href = `/course-detail.html?id=${courseId}`;
+            window.location.href = `/course/${courseId}`;
         }
 
         // Initialize dashboard

@@ -5,867 +5,162 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Trendtactics Academy</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%2300D9FF%22 width=%22100%22 height=%22100%22 rx=%2215%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 fill=%22white%22 text-anchor=%22middle%22 font-weight=%22bold%22>TA</text></svg>"
-        type="image/svg+xml">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
     <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
-    <script src="/js/env.js"></script>
-    <script src="/js/supabase-client.js"></script>
-    <style>
-        :root {
-            --primary: #00D9FF;
-            --primary-dark: #00B8D9;
-            --secondary: #7C3AED;
-            --bg-dark: #0B1437;
-            --bg-darker: #060D24;
-            --bg-card: rgba(15, 25, 55, 0.95);
-            --text-primary: #FFFFFF;
-            --text-secondary: #94A3B8;
-            --text-muted: #64748B;
-            --success: #10B981;
-            --error: #EF4444;
-            --warning: #F59E0B;
-            --border: rgba(0, 217, 255, 0.2);
-            --glow: 0 0 40px rgba(0, 217, 255, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-darker);
-            min-height: 100vh;
-            color: var(--text-primary);
-        }
-
-        /* Header */
-        .header {
-            background: var(--bg-dark);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            padding: 0.5rem 0.75rem;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            transition: all 0.2s;
-        }
-
-        .nav a:hover,
-        .nav a.active {
-            color: var(--primary);
-            background: rgba(0, 217, 255, 0.1);
-        }
-
-        .logout-btn {
-            background: rgba(239, 68, 68, 0.2);
-            color: var(--error);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.875rem;
-            font-family: inherit;
-            transition: all 0.2s;
-        }
-
-        .logout-btn:hover {
-            background: rgba(239, 68, 68, 0.3);
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1.5rem;
-        }
-
-        /* Welcome Section */
-        .welcome-section {
-            background: linear-gradient(135deg, var(--bg-card), rgba(124, 58, 237, 0.1));
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--glow);
-        }
-
-        .welcome-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .welcome-text h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .welcome-text h1 span {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .welcome-text p {
-            color: var(--text-secondary);
-        }
-
-        .quick-stats {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        /* Quick Actions Grid */
-        .section-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .action-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 0.75rem;
-        }
-
-        .action-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
-        }
-
-        .action-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .action-card h3 {
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .action-card p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* Courses Section */
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .course-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .course-card:hover {
-            border-color: var(--primary);
-        }
-
-        .course-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .course-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            flex: 1;
-        }
-
-        .course-badge {
-            background: rgba(0, 217, 255, 0.2);
-            color: var(--primary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        .course-description {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-
-        .progress-container {
-            margin-bottom: 1rem;
-        }
-
-        .progress-bar {
-            background: var(--bg-darker);
-            height: 8px;
-            border-radius: 999px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            height: 100%;
-            border-radius: 999px;
-            transition: width 0.3s ease;
-        }
-
-        .progress-text {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-        }
-
-        .course-actions {
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .btn {
-            padding: 0.75rem 1.25rem;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-            text-align: center;
-            border: none;
-            font-family: inherit;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: var(--bg-darker);
-            flex: 1;
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 8px 20px rgba(0, 217, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 3rem 1rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-        }
-
-        .empty-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .empty-state h2 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .empty-state p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        /* Loading State */
-        .loading {
-            text-align: center;
-            padding: 3rem;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid var(--border);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Error State */
-        .error-card {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            color: var(--error);
-            text-align: center;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .logo {
-                text-align: center;
-            }
-
-            .nav {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 0.25rem;
-            }
-
-            .nav a {
-                padding: 0.4rem 0.6rem;
-                font-size: 0.8rem;
-                margin: 0.1rem;
-            }
-
-            .logout-btn {
-                margin-top: 0.5rem;
-                width: 100%;
-            }
-
-            .welcome-section {
-                padding: 1.5rem;
-            }
-
-            .welcome-header {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 1rem;
-            }
-
-            .welcome-text {
-                text-align: center;
-            }
-
-            .quick-stats {
-                justify-content: center;
-                width: 100%;
-            }
-
-            .quick-actions {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .action-card {
-                padding: 1rem;
-            }
-
-            .action-icon {
-                width: 48px;
-                height: 48px;
-                font-size: 1.25rem;
-            }
-
-            .courses-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Collapsible Mobile Navigation */
-        .mobile-nav-toggle {
-            display: none;
-            background: var(--bg-dark);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            padding: 0.75rem;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            margin-bottom: 1rem;
-            font-family: inherit;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 600px) {
-            .mobile-nav-toggle {
-                display: block;
-            }
-
-            .nav {
-                display: none;
-                flex-direction: column;
-                gap: 0.5rem;
-                margin-top: 0.5rem;
-            }
-
-            .nav.active {
-                display: flex;
-            }
-
-            .nav a {
-                width: 100%;
-                text-align: center;
-                margin: 0;
-            }
-
-            .logout-btn {
-                width: 100%;
-                margin-top: 0.5rem;
-            }
-
-            .container {
-                padding: 1rem;
-            }
-
-            .nav a {
-                padding: 0.5rem;
-                font-size: 0.8rem;
-            }
-
-            .quick-actions {
-                grid-template-columns: 1fr;
-                gap: 0.75rem;
-            }
-
-            .action-card h3 {
-                font-size: 0.9rem;
-            }
-
-            .action-card p {
-                display: block;
-                font-size: 0.75rem;
-            }
-
-            .welcome-text h1 {
-                font-size: 1.4rem;
-            }
-
-            .stat-value {
-                font-size: 1.25rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0.75rem;
-            }
-
-            .nav a {
-                padding: 0.4rem 0.5rem;
-                font-size: 0.75rem;
-            }
-
-            .quick-actions {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-            }
-
-            .action-card h3 {
-                font-size: 0.85rem;
-            }
-
-            .action-card p {
-                font-size: 0.7rem;
-            }
-
-            .welcome-text h1 {
-                font-size: 1.3rem;
-            }
-
-            .section-title {
-                font-size: 1.1rem;
-            }
-
-            .course-card {
-                padding: 1rem;
-            }
-        }
-    </style>
 </head>
 
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="header-content">
-            <div class="logo">Student Dashboard</div>
-            <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰ Menu</button>
+        <div class="container header-content">
+            <div class="logo">Trendtactics Academy</div>
             <nav class="nav">
                 <a href="/">Home</a>
-                <a href="/about">About</a>
-                <a href="/services">Services</a>
                 <a href="/courses">Courses</a>
-                <a href="/blog">Blog</a>
-                <a href="/cross-platform-integration">Digital Services</a>
-                <a href="/contact">Contact</a>
-                <button class="logout-btn" onclick="logout()">Logout</button>
+                <a href="/dashboard">Dashboard</a>
+                <button class="btn btn-secondary" id="userBtn" onclick="Auth.logout()">Logout</button>
             </nav>
         </div>
     </header>
 
-    <main class="container">
+    <!-- Main Content -->
+    <main class="container" style="padding: 3rem 0;">
         <!-- Welcome Section -->
-        <div class="welcome-section">
-            <div class="welcome-header">
-                <div class="welcome-text">
-                    <h1>Welcome back, <span id="userName">Student</span>!</h1>
-                    <p>Continue your learning journey and build amazing things</p>
-                </div>
-                <div class="quick-stats">
-                    <div class="stat">
-                        <div class="stat-value" id="coursesCount">0</div>
-                        <div class="stat-label">Courses</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value" id="progressPercent">0%</div>
-                        <div class="stat-label">Progress</div>
-                    </div>
-                </div>
-            </div>
+        <div style="margin-bottom: 3rem;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Welcome back, <span id="userName">Student</span>! 👋
+            </h1>
+            <p style="color: var(--text-secondary); font-size: 1.125rem;">Continue your learning journey</p>
         </div>
-
-        <!-- Quick Actions -->
-        <h2 class="section-title">Quick Actions</h2>
-        <div class="quick-actions">
-            <a href="/ai-assistant" class="action-card">
-                <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white"
-                        stroke-width="2">
-                        <circle cx="12" cy="12" r="3" />
-                        <path
-                            d="M12 2v2m0 16v2M2 12h2m16 0h2m-4.2-5.8l1.4-1.4M4.8 19.2l1.4-1.4m12 0l1.4 1.4M4.8 4.8l1.4 1.4" />
-                    </svg></div>
-                <h3>AI Assistant</h3>
-                <p>Get help with your learning</p>
-            </a>
-            <a href="/playground" class="action-card">
-                <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white"
-                        stroke-width="2">
-                        <rect x="2" y="3" width="20" height="14" rx="2" />
-                        <path d="M8 21h8m-4-4v4" />
-                    </svg></div>
-                <h3>Code Playground</h3>
-                <p>Practice coding skills</p>
-            </a>
-            <a href="/courses" class="action-card">
-                <div class="action-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white"
-                        stroke-width="2">
-                        <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
-                    </svg></div>
-                <h3>Browse Courses</h3>
-                <p>Discover new skills</p>
-            </a>
-        </div>
-
-        <!-- My Courses Section -->
-        <h2 class="section-title">My Courses</h2>
 
         <!-- Loading State -->
-        <div id="loadingState" class="loading">
-            <div class="spinner"></div>
-            <p style="color: var(--text-secondary);">Loading your courses...</p>
+        <div id="loadingState" style="text-align: center; padding: 4rem 0;">
+            <div class="spinner" style="width: 40px; height: 40px; border-width: 4px;"></div>
+            <p style="margin-top: 1rem; color: var(--text-secondary);">Loading your courses...</p>
         </div>
 
-        <!-- Courses Container -->
-        <div id="coursesContainer" class="courses-grid" style="display: none;"></div>
-
-        <!-- Empty State -->
-        <div id="emptyState" class="empty-state" style="display: none;">
-            <div class="empty-icon" style="font-size: 2.5rem; color: var(--primary);"><svg width="64" height="64"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
-                </svg></div>
-            <h2>No courses yet</h2>
-            <p>Start learning by enrolling in your first course</p>
-            <a href="/courses" class="btn btn-primary">Browse Courses</a>
+        <!-- Enrolled Courses -->
+        <div id="coursesContainer" style="display: none;">
+            <h2 style="font-size: 1.75rem; margin-bottom: 2rem;">My Courses</h2>
+            <div id="coursesList" class="grid grid-2"></div>
         </div>
 
-        <!-- Error State -->
-        <div id="errorState" class="error-card" style="display: none;"></div>
+        <!-- No Courses State -->
+        <div id="noCoursesState" style="display: none; text-align: center; padding: 4rem 0;">
+
+            <h2 style="font-size: 1.75rem; margin-bottom: 1rem;">No courses yet</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Start learning by enrolling in a course</p>
+            <a href="/courses.html" class="btn btn-primary btn-lg">Browse Courses</a>
+        </div>
     </main>
 
+    <!-- Scripts -->
+    <script src="js/supabase-client.js"></script>
+    <script src="js/auth.js"></script>
     <script>
         let currentUser = null;
 
-        // Helper function to make API calls through proxy
-        async function apiCall(path, options = {}) {
-            const url = `https://uimdbodamoeyukrghchb.supabase.co/functions/v1/auth-proxy?path=${encodeURIComponent(path)}`;
-            const response = await fetch(url, {
-                method: options.method || 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...options.headers
-                },
-                body: options.body ? JSON.stringify(options.body) : undefined
-            });
-            return response.json();
-        }
+        async function initDashboard() {
+            // Require authentication
+            const isAuth = await Auth.requireAuth();
+            if (!isAuth) return;
 
-        // Initialize
-        async function init() {
-            // Check auth
-            const session = localStorage.getItem('supabase_session');
-            const userData = localStorage.getItem('supabase_user');
-
-            if (!session || !userData) {
-                window.location.replace('/signup');
+            // Get current user
+            currentUser = await Auth.getCurrentUser();
+            if (!currentUser) {
+                window.location.href = '/signup.html';
                 return;
             }
 
-            currentUser = JSON.parse(userData);
+            // Update UI with user name
+            document.getElementById('userName').textContent = currentUser.name || 'Student';
+            document.getElementById('userBtn').textContent = currentUser.name || 'Account';
 
-            // Update UI with user info
-            document.getElementById('userName').textContent = currentUser.name || currentUser.email?.split('@')[0] || 'Student';
-
-            // Load courses
-            await loadCourses();
+            // Load enrolled courses
+            await loadEnrolledCourses();
         }
 
-        async function loadCourses() {
+        async function loadEnrolledCourses() {
             const loadingState = document.getElementById('loadingState');
             const coursesContainer = document.getElementById('coursesContainer');
-            const emptyState = document.getElementById('emptyState');
-            const errorState = document.getElementById('errorState');
+            const noCoursesState = document.getElementById('noCoursesState');
+            const coursesList = document.getElementById('coursesList');
 
             try {
-                // Fetch student's courses from the database
-                const session = JSON.parse(localStorage.getItem('supabase_session'));
-                const token = session?.access_token || session?.session?.access_token || currentUser.access_token || currentUser.token || '';
-                
-                const { data, error } = await window.supabaseClient
+                // Get enrollments with course details
+                const { data: enrollments, error } = await window.sbClient
                     .from('enrollments')
-                    .select('course_id')
-                    .eq('user_id', currentUser.id);
-                
-                if (error) {
-                    throw new Error(`Failed to load courses: ${error.message}`);
-                }
-                
-                if (!data || data.length === 0) {
-                    // No enrolled courses found
-                    loadingState.style.display = 'none';
-                    errorState.style.display = 'none';
-                    
-                    // Update stats
-                    document.getElementById('coursesCount').textContent = '0';
-                    
-                    // Show empty state if no courses
-                    emptyState.style.display = 'block';
-                    coursesContainer.style.display = 'none';
-                    return;
-                }
-                
-                // Get the course details for each enrolled course
-                const courseIds = data.map(item => item.course_id);
-                
-                const { data: courseData, error: courseError } = await window.supabaseClient
-                    .from('courses')
-                    .select('*')
-                    .in('id', courseIds);
-                
-                if (courseError) {
-                    throw new Error(`Failed to load course details: ${courseError.message}`);
-                }
-                
-                // Transform the data to match expected structure
-                const courses = courseData.map(course => ({
-                    course_id: course.id,
-                    course_title: course.title,
-                    course_description: course.description,
-                    course_level: course.level,
-                    price: course.price,
-                    duration: course.duration,
-                    modules_count: course.modules_count || 0,
-                    lessons_count: course.lessons_count || 0,
-                    long_description: course.long_description,
-                    video_preview: course.video_preview
-                }));
+                    .select(`
+                        *,
+                        courses (
+                            id,
+                            title,
+                            description,
+                            level,
+                            duration,
+                            category
+                        )
+                    `)
+                    .eq('user_id', currentUser.id)
+                    .eq('status', 'active');
+
+                if (error) throw error;
 
                 loadingState.style.display = 'none';
-                errorState.style.display = 'none';
 
-                // Update stats
-                document.getElementById('coursesCount').textContent = courses.length;
-
-                if (courses.length === 0) {
-                    // Show empty state if no courses
-                    emptyState.style.display = 'block';
-                    coursesContainer.style.display = 'none';
-                } else {
-                    // Render courses
-                    coursesContainer.innerHTML = courses.map(course => {
-                        return `
-                            <div class="course-card">
-                                <div class="course-header">
-                                    <h3 class="course-title">${course.course_title}</h3>
-                                    <span class="course-badge">${course.course_level || 'Beginner'}</span>
-                                </div>
-                                <p class="course-description">${course.course_description || 'No description available'}</p>
-                                <div class="progress-container">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 0%"></div>
-                                    </div>
-                                    <p class="progress-text">Ready to start</p>
-                                </div>
-                                <div class="course-actions">
-                                    <a href="/learn/${course.course_id}" class="btn btn-primary">
-                                        Start Learning
-                                    </a>
-                                </div>
-                            </div>
-                        `;
-                    }).join('');
-
-                    coursesContainer.style.display = 'grid';
-                    emptyState.style.display = 'none';
+                if (!enrollments || enrollments.length === 0) {
+                    noCoursesState.style.display = 'block';
+                    return;
                 }
+
+                // Display courses
+                coursesContainer.style.display = 'block';
+                coursesList.innerHTML = enrollments.map(enrollment => {
+                    const course = enrollment.courses;
+                    return `
+                        <div class="card">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                                <h3 class="card-title">${course.title}</h3>
+                                <span class="badge badge-primary">${course.level}</span>
+                            </div>
+                            <p class="card-description">${course.description}</p>
+                            
+                            <div style="margin: 1.5rem 0;">
+                                <div style="background: var(--bg-tertiary); height: 8px; border-radius: 999px; overflow: hidden;">
+                                    <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); height: 100%; width: 0%; transition: width 0.3s;"></div>
+                                </div>
+                                <p style="color: var(--text-muted); font-size: 0.875rem; margin-top: 0.5rem;">0% complete</p>
+                            </div>
+                            
+                            <div style="display: flex; gap: 1rem;">
+                                <a href="/learn/${course.id}" class="btn btn-primary" style="flex: 1; text-align: center;">
+                                    Continue Learning
+                                </a>
+                                <button class="btn btn-secondary" onclick="viewCourseDetails('${course.id}')">
+                                    Details
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
             } catch (error) {
                 console.error('Error loading courses:', error);
                 loadingState.style.display = 'none';
-                coursesContainer.style.display = 'none';
-                emptyState.style.display = 'none';
-                showError('Failed to load your courses. Please try again later.');
+                coursesContainer.innerHTML = `
+                    <div class="card" style="background: rgba(239, 68, 68, 0.1); border-color: var(--error);">
+                        <p style="color: var(--error);">❌ Error loading courses: ${error.message}</p>
+                    </div>
+                `;
+                coursesContainer.style.display = 'block';
             }
         }
 
-        function showError(message) {
-            const errorState = document.getElementById('errorState');
-            errorState.innerHTML = `Error: ${message}`;
-            errorState.style.display = 'block';
+        function viewCourseDetails(courseId) {
+            window.location.href = `/course/${courseId}`;
         }
 
-        function logout() {
-            localStorage.removeItem('supabase_session');
-            localStorage.removeItem('supabase_user');
-            window.location.replace('/');
-        }
-
-        function toggleMobileNav() {
-            const nav = document.querySelector('.nav');
-            nav.classList.toggle('active');
-
-            // Update button text based on state
-            const toggleBtn = document.querySelector('.mobile-nav-toggle');
-            if (nav.classList.contains('active')) {
-                toggleBtn.textContent = '✕ Close';
-            } else {
-                toggleBtn.textContent = '☰ Menu';
-            }
-        }
-
-        // Close navigation when clicking outside on mobile
-        document.addEventListener('click', function (event) {
-            const nav = document.querySelector('.nav');
-            const toggleBtn = document.querySelector('.mobile-nav-toggle');
-
-            if (window.innerWidth <= 600 &&
-                nav.classList.contains('active') &&
-                !nav.contains(event.target) &&
-                event.target !== toggleBtn) {
-                nav.classList.remove('active');
-                toggleBtn.textContent = '☰ Menu';
-            }
-        });
-
-        // Initialize on load
-        init();
+        // Initialize dashboard
+        initDashboard();
     </script>
 </body>
 

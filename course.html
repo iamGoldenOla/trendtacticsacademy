@@ -4,13 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Details - Trendtactics Academy</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <script src="/js/env.js"></script>
-
-<script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
-
-<script src="/js/supabase-client.js"></script>
+    <title>Vibe Coding - Trendtactics Academy</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
 </head>
 
 <body>
@@ -18,427 +14,242 @@
     <header class="header">
         <div class="container header-content">
             <div class="logo">Trendtactics Academy</div>
-            <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰ Menu</button>
             <nav class="nav">
                 <a href="/">Home</a>
-                <a href="/about">About</a>
-                <a href="/services">Services</a>
                 <a href="/courses">Courses</a>
-                <a href="/blog">Blog</a>
-                <a href="https://trendtacticsdigital.com" target="_blank">Digital Services</a>
-                <a href="/contact">Contact</a>
+                <a href="/dashboard" id="dashboardLink" style="display:none;">Dashboard</a>
                 <button class="btn btn-secondary" id="authBtn" onclick="handleAuthClick()">Sign In</button>
-                <a href="/dashboard" id="dashboardLink"
-                    style="display: none; margin-left: 1rem; color: var(--primary); text-decoration: none;">Dashboard</a>
             </nav>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="container" style="padding: 3rem 0; min-height: 80vh;">
-        <!-- Loading State -->
-        <div id="loadingState" style="text-align: center; padding: 4rem;">
-            <div style="font-size: 2rem; margin-bottom: 1rem;">⌛</div>
-            <p>Loading course details...</p>
+    <main class="container" style="padding: 3rem 0;">
+        <!-- Course Hero -->
+        <div class="hero">
+            <span class="badge badge-primary">Beginner Friendly</span>
+            <h1 class="hero-title">Vibe Coding</h1>
+            <p class="hero-subtitle">Learn to create digital products by focusing on ideas, intention, creativity, and
+                guidance</p>
         </div>
 
-        <!-- Error State -->
-        <div id="errorState" style="display: none; text-align: center; padding: 4rem; color: var(--error);">
-            <div style="font-size: 2rem; margin-bottom: 1rem;">❌</div>
-            <h2 id="course-error">Course not found</h2>
-            <a href="/courses" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Back to
-                Courses</a>
-        </div>
+        <!-- Course Info Grid -->
+        <div class="grid grid-2" style="margin-bottom: 3rem;">
+            <!-- Course Details Card -->
+            <div class="card">
+                <h2 class="card-title">Course Overview</h2>
+                <p class="card-description">
+                    Vibe Coding is a revolutionary approach to learning programming. Instead of memorizing syntax,
+                    you'll focus on expressing your ideas clearly and using AI as a creative partner.
+                </p>
 
-        <!-- Content (Hidden initially) -->
-        <div id="course-container" style="display: none;">
-            <!-- Course Hero -->
-            <div class="hero">
-                <span class="badge badge-primary" id="courseLevel">Beginner Friendly</span>
-                <h1 class="hero-title" id="course-title">Course Title</h1>
-                <p class="hero-subtitle" id="course-description">Course detailed description goes here.</p>
+                <div style="margin-top: 2rem;">
+                    <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">What You'll Learn</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 0.5rem 0; color: var(--text-secondary);">
+                            Think before you code
+                        </li>
+                        <li style="padding: 0.5rem 0; color: var(--text-secondary);">
+                            Work with AI as a creative partner
+                        </li>
+                        <li style="padding: 0.5rem 0; color: var(--text-secondary);">
+                            Build real projects with confidence
+                        </li>
+                        <li style="padding: 0.5rem 0; color: var(--text-secondary);">
+                            Use safe environments to experiment
+                        </li>
+                    </ul>
+                </div>
             </div>
 
-            <!-- YouTube Video Section (Optional) -->
-            <div class="card" id="videoSection" style="margin-bottom: 2rem; display: none;">
-                <h2 class="card-title" style="text-align: center; margin-bottom: 1.5rem;" id="videoTitle">Watch Preview
-                </h2>
+            <!-- Enrollment Card -->
+            <div class="card"
+                style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none;">
+                <h2 class="card-title" style="color: white;">Ready to Start?</h2>
+                <p style="color: rgba(255,255,255,0.9); margin-bottom: 2rem;">
+                    Join thousands of learners and begin your creative coding journey today.
+                </p>
+
                 <div
-                    style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius);">
-                    <iframe id="videoFrame"
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
+                    style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: var(--radius); margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <span style="color: rgba(255,255,255,0.9);">Duration</span>
+                        <span style="color: white; font-weight: 600;">6 weeks</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <span style="color: rgba(255,255,255,0.9);">Level</span>
+                        <span style="color: white; font-weight: 600;">Beginner</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: rgba(255,255,255,0.9);">Price</span>
+                        <span style="color: white; font-weight: 600; font-size: 1.5rem;">FREE</span>
+                    </div>
                 </div>
+
+                <button class="btn btn-lg" id="enrollBtn" onclick="handleEnroll()"
+                    style="width: 100%; background: white; color: var(--primary);">
+                    <span id="enrollBtnText">Enroll Now</span>
+                </button>
+
+                <div id="enrollMessage"
+                    style="margin-top: 1rem; padding: 1rem; border-radius: var(--radius); display: none;"></div>
             </div>
+        </div>
 
-            <!-- Course Info Grid -->
-            <div class="grid grid-2" style="margin-bottom: 3rem;">
-                <!-- Course Details Card -->
-                <div class="card">
-                    <h2 class="card-title">Course Overview</h2>
-                    <p class="card-description" id="longDescription">
-                        Detailed overview content.
-                    </p>
-
-                    <div style="margin-top: 2rem;">
-                        <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">What You'll Learn</h3>
-                        <ul style="list-style: none; padding: 0;" id="learningPoints">
-                            <!-- Populated by JS -->
-                        </ul>
-                    </div>
+        <!-- Course Modules -->
+        <div class="card">
+            <h2 class="card-title">Course Structure</h2>
+            <div style="margin-top: 2rem;">
+                <div
+                    style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem;">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 1: Understanding Vibe Coding</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
                 </div>
-
-                <!-- Enrollment Card -->
-                <div class="card"
-                    style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none;">
-                    <h2 class="card-title" style="color: white;">Ready to Start?</h2>
-                    <p style="color: rgba(255,255,255,0.9); margin-bottom: 2rem;">
-                        Join thousands of learners and begin your journey.
-                    </p>
-
-                    <div
-                        style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: var(--radius); margin-bottom: 2rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                            <span style="color: rgba(255,255,255,0.9);">Duration</span>
-                            <span style="color: white; font-weight: 600;" id="metaDuration">4-6 weeks</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                            <span style="color: rgba(255,255,255,0.9);">Modules</span>
-                            <span style="color: white; font-weight: 600;" id="metaModules">8 Modules</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                            <span style="color: rgba(255,255,255,0.9);">Lessons</span>
-                            <span style="color: white; font-weight: 600;" id="metaLessons">14 Lessons</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span style="color: rgba(255,255,255,0.9);">Price</span>
-                            <div style="text-align: right;">
-                                <span style="color: white; font-weight: 600; font-size: 1.5rem;"
-                                    id="coursePrice">$0</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                        <button class="btn btn-lg" id="enrollBtn" onclick="handleEnrollment()"
-                            style="flex: 1; min-width: 120px; background: white; color: var(--primary); border: 2px solid white; font-weight: 600;">
-                            <span id="enrollBtnText">Enroll Now</span>
-                        </button>
-                    </div>
+                <div
+                    style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem;">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 2: Thinking Before Coding</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
                 </div>
-            </div>
-
-            <!-- Instructor Section (Static for now, can be made dynamic later) -->
-            <div class="card">
-                <h2 class="card-title">Meet Your Instructor</h2>
-                <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
-                    <div style="flex-shrink: 0;">
-                        <img src="/images/instructor-akinola.jpg" alt="Akinola Olujobi"
-                            style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.15);"
-                            
-                    </div>
-                    <div style="flex: 1; min-width: 250px;">
-                        <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--primary);">Akinola Olujobi
-                        </h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">Founder & AI
-                            Development Expert at Trendtactics</p>
-                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
-                            Akinola is an Ai AI-assisted Software Development expert passionate about helping builders leverage AI to
-                            create real products faster. With years of experience in full-stack development and AI
-                            integration, he's trained hundreds of developers on modern development practices.
-                        </p>
-                    </div>
+                <div
+                    style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem;">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 3: Working with AI</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
                 </div>
-            </div>
-
-            <!-- Course Modules -->
-            <div class="card">
-                <h2 class="card-title">Course Structure</h2>
-                <p style="color: var(--text-secondary); margin-bottom: 2rem;">A comprehensive curriculum designed to
-                    take you from beginner to expert.</p>
-                <div style="margin-top: 2rem;" id="modulesList">
-                    <!-- Populated by JS -->
+                <div
+                    style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem;">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 4: Vibe Coding in Real Life</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 1 week</p>
+                </div>
+                <div style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius);">
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Module 5: Building with Confidence</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">3 lessons • 2 weeks</p>
                 </div>
             </div>
         </div>
     </main>
 
     <!-- Scripts -->
+    <script src="js/supabase-client.js"></script>
+    <script src="js/auth.js"></script>
     <script>
-        // Global state
-        let currentCourse = null;
-        let isEnrolled = false;
+        const COURSE_ID = 'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d'; // Vibe Coding course ID
 
-        function toggleMobileNav() {
-            document.querySelector('.nav').classList.toggle('active');
-        }
-
-        async function loadCourse() {
-            const slug = window.location.pathname.split("/").pop();
-            
-            await loadCourseBySlug(slug);
-        }
-
-        function updateAuthUI() {
-            const s = localStorage.getItem('supabase_session');
-            const u = localStorage.getItem('supabase_user');
-            const loggedIn = !!(s && u);
-
+        // Check auth status on load
+        async function initPage() {
+            const loggedIn = await Auth.isLoggedIn();
             const authBtn = document.getElementById('authBtn');
             const dashboardLink = document.getElementById('dashboardLink');
 
             if (loggedIn) {
-                const user = JSON.parse(u)?.user;
-                if (authBtn) {
-                    authBtn.textContent = user?.user_metadata?.name || user?.email || 'Account';
-                    authBtn.onclick = () => window.location.href = '/dashboard';
-                }
-                if (dashboardLink) dashboardLink.style.display = 'block';di
-            } else {
-                if (authBtn) {
-                    authBtn.textContent = 'Sign In';
-                    authBtn.onclick = () => window.location.href = '/login';
-                }
-                if (dashboardLink) dashboardLink.style.display = 'none';
+                const user = await Auth.getCurrentUser();
+                authBtn.textContent = user?.name || 'Account';
+                authBtn.onclick = () => window.location.href = '/dashboard';
+                dashboardLink.style.display = 'block';
+
+                // Check if already enrolled
+                await checkEnrollment();
             }
         }
 
-        async function loadCourseBySlug(slug) {
-  try {
-    console.log('Loading course with slug:', slug);
-    // First, check if course exists using a non-single query
-    const { data: courseCheck, error: checkError } = await window.supabaseClient
-      .from("courses")
-      .select("*")
-      .eq("slug", slug);
-
-    if (checkError) {
-        console.error("Course check error:", checkError);
-        throw checkError;
-    }
-
-    if (!courseCheck || courseCheck.length === 0) {
-        throw new Error('No course found with this slug');
-    }
-
-    // Use the first result
-    const course = courseCheck[0];
-    currentCourse = course; // Set the global variable
-    console.log("✅ Course loaded:", course);
-    renderCourse(course);
-  } catch (err) {
-    console.error("❌ Failed to load course:", err);
-    document.getElementById("loadingState").style.display = "none";
-    document.getElementById("errorState").style.display = "block";
-    document.getElementById("course-error").innerText = "Course not found. Error: " + err.message;
-  }
-}
-
-        function renderCourse(course) {
-            document.title = `${course.title} - Trendtactics Academy`;
-
-            // Text Content
-            const titleElement = document.getElementById('course-title');
-            if (titleElement) titleElement.textContent = course.title;
-            
-            const descriptionElement = document.getElementById('course-description');
-            if (descriptionElement) descriptionElement.textContent = course.description;
-            
-            const longDescElement = document.getElementById('longDescription');
-            if (longDescElement) longDescElement.textContent = course.description; // or long_description if available
-            
-            const levelElement = document.getElementById('courseLevel');
-            if (levelElement) levelElement.textContent = course.level || 'Beginner Friendly';
-            
-            const priceElement = document.getElementById('coursePrice');
-            if (priceElement) {
-                if (course.price > 0) {
-                    // Display both USD and NGN prices
-                    const usdPrice = 3; // Fixed at $3 as requested
-                    const ngPrice = 5000; // Fixed at ₦5000 as requested
-                    priceElement.textContent = `$${usdPrice} / ₦${ngPrice.toLocaleString()}`;
-                } else {
-                    priceElement.textContent = 'Free';
-                }
-            }
-
-            // Metadata
-            if (course.duration) document.getElementById('metaDuration').textContent = course.duration;
-
-            // Learning Points
-            const pointsList = document.getElementById('learningPoints');
-            pointsList.innerHTML = '';
-            // If we have learning points in DB, use them. Otherwise generic
-            const points = course.learning_points || [
-                "Master core concepts and practical applications",
-                "Build real-world projects",
-                "Understand best practices and industry standards",
-                "Gain confidence in using new tools"
-            ];
-
-            points.forEach((point, i) => {
-                const li = document.createElement('li');
-                li.style.cssText = 'padding: 0.5rem 0; color: var(--text-secondary); display: flex; align-items: center;';
-                li.innerHTML = `<span style="color: var(--primary); margin-right: 0.75rem; font-weight: bold;">${i + 1}.</span> ${point}`;
-                pointsList.appendChild(li);
-            });
-
-            // Modules
-            const modulesList = document.getElementById('modulesList');
-            if (modulesList) {
-                modulesList.innerHTML = '';
-
-                // Check if modules are parsed JSON or need parsing
-                let modules = course.modules || [];
-                if (typeof modules === 'string') {
-                    try { modules = JSON.parse(modules); } catch (e) { modules = []; }
-                }
-                
-                // Handle different possible structures of modules data
-                if (modules && typeof modules === 'object' && !Array.isArray(modules)) {
-                    // If modules is an object with a 'modules' property
-                    if (modules.modules && Array.isArray(modules.modules)) {
-                        modules = modules.modules;
-                    } else {
-                        // If it's a single module object, convert to array
-                        modules = [modules];
-                    }
-                }
-
-                // Update metadata count
-                const modulesElement = document.getElementById('metaModules');
-                if (modulesElement) modulesElement.textContent = `${modules.length} Modules`;
-                let lessonCount = 0;
-
-                if (modules.length > 0) {
-                    modules.forEach((mod, i) => {
-                        const lessons = mod.lessons || [];
-                        lessonCount += lessons.length;
-
-                        const modDiv = document.createElement('div');
-                        modDiv.className = 'module-card';
-                        modDiv.style.cssText = 'padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--radius); margin-bottom: 1rem; border-left: 4px solid var(--primary);';
-
-                        modDiv.innerHTML = `
-                            <h3 style="font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--primary);">Module ${i + 1}: ${mod.title || 'Untitled Module'}</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">${lessons.length} lessons</p>
-                            <ul style="font-size: 0.8rem; color: var(--text-muted); list-style: none; padding: 0; margin: 0;">
-                                ${lessons.map(l => `<li style="margin-bottom: 0.25rem;">${l.title}</li>`).join('')}
-                            </ul>
-                        `;
-                        modulesList.appendChild(modDiv);
-                    });
-                } else {
-                    // If no modules in the course record, display a message
-                    modulesList.innerHTML = `<div class="card" style="padding: 1.5rem; text-align: center; color: var(--text-secondary);">
-                        <p>No modules have been added to this course yet.</p>
-                    </div>`;
-                }
-
-                const lessonsElement = document.getElementById('metaLessons');
-                if (lessonsElement) lessonsElement.textContent = `${lessonCount} Lessons`;
-            }
-
-            // Video Preview
-            if (course.preview_video_url) {
-                const videoSection = document.getElementById('videoSection');
-                const videoFrame = document.getElementById('videoFrame');
-
-                // Simple YouTube ID extraction
-                let videoId = '';
-                if (course.preview_video_url.includes('v=')) {
-                    videoId = course.preview_video_url.split('v=')[1].split('&')[0];
-                } else if (course.preview_video_url.includes('youtu.be/')) {
-                    videoId = course.preview_video_url.split('youtu.be/')[1];
-                }
-
-                if (videoId) {
-                    videoFrame.src = `https://www.youtube.com/embed/${videoId}`;
-                    videoSection.style.display = 'block';
-                }
-            }
-
-            // Show content
-            const loadingState = document.getElementById('loadingState');
-            const courseContainer = document.getElementById('course-container');
-            
-            if (loadingState) loadingState.style.display = 'none';
-            if (courseContainer) courseContainer.style.display = 'block';
-        }
-
-        async function checkEnrollmentStatus() {
-            if (!currentCourse) return;
-
+        // Check if user is already enrolled
+        async function checkEnrollment() {
             try {
-                const session = JSON.parse(localStorage.getItem('supabase_session'));
-                const user = JSON.parse(localStorage.getItem('supabase_user'));
-                if (!session || !user) return;
+                const user = await Auth.getCurrentUser();
+                if (!user) return;
 
-                // Use Supabase client to check enrollment directly from enrollments table
-                const { data, error } = await window.supabaseClient
+                const { data, error } = await window.sbClient
                     .from('enrollments')
                     .select('*')
-                    .eq('user_id', user.user?.id || user.id)
-                    .eq('course_id', currentCourse.id);
+                    .eq('user_id', user.id)
+                    .eq('course_id', COURSE_ID)
+                    .single();
 
-                if (!error && data) {
-                    isEnrolled = data.length > 0;
-
-                    if (isEnrolled) {
-                        const btn = document.getElementById('enrollBtn');
-                        document.getElementById('enrollBtnText').textContent = 'Continue Learning';
-                        btn.style.background = 'white';
-                        btn.style.color = 'var(--primary)';
-                    }
+                if (data) {
+                    const enrollBtn = document.getElementById('enrollBtn');
+                    const enrollBtnText = document.getElementById('enrollBtnText');
+                    enrollBtnText.textContent = 'Continue Learning';
+                    enrollBtn.onclick = () => window.location.href = '/dashboard';
                 }
             } catch (error) {
-                console.error('Error checking enrollment:', error);
+                console.log('Not enrolled yet');
             }
         }
 
-        async function handleEnrollment() {
-            // Handle Auth
-            const s = localStorage.getItem('supabase_session');
-            if (!s) {
-                // Determine user intent: Login or Sign up?
-                // Default to Signup for growth
-                window.location.href = '/signup?redirect=' + encodeURIComponent(window.location.href);
+        // Handle auth button click
+        function handleAuthClick() {
+            window.location.href = '/signup';
+        }
+
+        // Handle enrollment
+        async function handleEnroll() {
+            const enrollBtn = document.getElementById('enrollBtn');
+            const enrollBtnText = document.getElementById('enrollBtnText');
+            const enrollMessage = document.getElementById('enrollMessage');
+
+            // Check if logged in
+            const loggedIn = await Auth.isLoggedIn();
+            if (!loggedIn) {
+                window.location.href = '/signup?redirect=' + encodeURIComponent(window.location.pathname);
                 return;
             }
 
-            if (isEnrolled) {
-                // If enrolled, go to learning page
-                window.location.href = `/learn/${currentCourse.id}`;
-            } else {
-                // If not enrolled, go to enrollment page
-                // Using only course ID (not title-based)
-                window.location.href = `/enroll.html?course_id=${currentCourse.id}`;
+            // Disable button
+            enrollBtn.disabled = true;
+            enrollBtnText.innerHTML = '<span class="spinner"></span> Enrolling...';
+
+            try {
+                const user = await Auth.getCurrentUser();
+
+                // Create enrollment
+                const { data, error } = await window.sbClient
+                    .from('enrollments')
+                    .insert({
+                        user_id: user.id,
+                        course_id: COURSE_ID,
+                        enrolled_at: new Date().toISOString(),
+                        status: 'active'
+                    })
+                    .select()
+                    .single();
+
+                if (error) {
+                    // Check if already enrolled
+                    if (error.code === '23505') {
+                        enrollMessage.style.display = 'block';
+                        enrollMessage.style.background = 'rgba(16, 185, 129, 0.1)';
+                        enrollMessage.style.color = 'var(--success)';
+                        enrollMessage.textContent = '✅ You are already enrolled!';
+
+                        setTimeout(() => {
+                            window.location.href = '/dashboard';
+                        }, 1500);
+                    } else {
+                        throw error;
+                    }
+                } else {
+                    enrollMessage.style.display = 'block';
+                    enrollMessage.style.background = 'rgba(16, 185, 129, 0.1)';
+                    enrollMessage.style.color = 'var(--success)';
+                    enrollMessage.textContent = '✅ Enrollment successful! Redirecting...';
+
+                    setTimeout(() => {
+                        window.location.href = '/dashboard';
+                    }, 1500);
+                }
+            } catch (error) {
+                console.error('Enrollment error:', error);
+                enrollMessage.style.display = 'block';
+                enrollMessage.style.background = 'rgba(239, 68, 68, 0.1)';
+                enrollMessage.style.color = 'var(--error)';
+                enrollMessage.textContent = '❌ ' + error.message;
+
+                enrollBtn.disabled = false;
+                enrollBtnText.textContent = 'Try Again';
             }
         }
 
-        function handleAuthClick() {
-            const s = localStorage.getItem('supabase_session');
-            if (s) {
-                window.location.href = '/dashboard';
-            } else {
-                window.location.href = '/login';
-            }
-        }
-
-        function showError(msg) {
-            const loadingState = document.getElementById('loadingState');
-            const courseContainer = document.getElementById('course-container');
-            const errorState = document.getElementById('errorState');
-            const errorMessage = document.getElementById('course-error');
-            
-            if (loadingState) loadingState.style.display = 'none';
-            if (courseContainer) courseContainer.style.display = 'none';
-            if (errorState) errorState.style.display = 'block';
-            if (errorMessage) errorMessage.textContent = msg;
-        }
-
-        document.addEventListener("DOMContentLoaded", loadCourse);
+        // Initialize page
+        initPage();
     </script>
 </body>
 
