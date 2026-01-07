@@ -243,11 +243,20 @@
             document.title = `${course.title} - Trendtactics Academy`;
 
             // Text Content
-            document.getElementById('courseTitle').textContent = course.title;
-            document.getElementById('courseDescription').textContent = course.description;
-            document.getElementById('longDescription').textContent = course.description; // or long_description if available
-            document.getElementById('courseLevel').textContent = course.level || 'All Levels';
-            document.getElementById('coursePrice').textContent = course.price > 0 ? `$${course.price}` : 'Free';
+            const titleElement = document.getElementById('course-title');
+            if (titleElement) titleElement.textContent = course.title;
+            
+            const descriptionElement = document.getElementById('course-description');
+            if (descriptionElement) descriptionElement.textContent = course.description;
+            
+            const longDescElement = document.getElementById('longDescription');
+            if (longDescElement) longDescElement.textContent = course.description; // or long_description if available
+            
+            const levelElement = document.getElementById('courseLevel');
+            if (levelElement) levelElement.textContent = course.level || 'Beginner Friendly';
+            
+            const priceElement = document.getElementById('coursePrice');
+            if (priceElement) priceElement.textContent = course.price > 0 ? `$${course.price}` : 'Free';
 
             // Metadata
             if (course.duration) document.getElementById('metaDuration').textContent = course.duration;
@@ -325,8 +334,11 @@
             }
 
             // Show content
-            document.getElementById('loadingState').style.display = 'none';
-            document.getElementById('courseContent').style.display = 'block';
+            const loadingState = document.getElementById('loadingState');
+            const courseContainer = document.getElementById('course-container');
+            
+            if (loadingState) loadingState.style.display = 'none';
+            if (courseContainer) courseContainer.style.display = 'block';
         }
 
         async function checkEnrollmentStatus() {
@@ -388,10 +400,15 @@
         }
 
         function showError(msg) {
-            document.getElementById('loadingState').style.display = 'none';
-            document.getElementById('courseContent').style.display = 'none';
-            document.getElementById('errorState').style.display = 'block';
-            document.getElementById('errorMessage').textContent = msg;
+            const loadingState = document.getElementById('loadingState');
+            const courseContainer = document.getElementById('course-container');
+            const errorState = document.getElementById('errorState');
+            const errorMessage = document.getElementById('course-error');
+            
+            if (loadingState) loadingState.style.display = 'none';
+            if (courseContainer) courseContainer.style.display = 'none';
+            if (errorState) errorState.style.display = 'block';
+            if (errorMessage) errorMessage.textContent = msg;
         }
 
         document.addEventListener("DOMContentLoaded", loadCourse);
