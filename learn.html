@@ -495,7 +495,7 @@
                     throw new Error('Course not found');
                 }
 
-                courseData = course;
+                courseData = fetchedCourseData;
                 document.getElementById('courseHeaderTitle').textContent = course.title;
                 document.title = `${course.title} - Learning`;
 
