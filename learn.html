@@ -949,7 +949,46 @@
                 !steps && !fullLesson.objectives && !lesson.objectives && !fullLesson.notes && !lesson.notes && 
                 !fullLesson.code_examples && !fullLesson.example_code && !lesson.code_examples && !lesson.example_code && 
                 !lessonToCheck?.properties?.content && !lessonToCheck?.data?.content && !lessonToCheck?.data) {
-                textContainer.innerHTML += '<p>No content available for this lesson. Please check back later or contact support.</p>';
+                // Provide sample/placeholder content for AI-generated lessons
+                textContainer.innerHTML += `
+                    <div class="lesson-intro">
+                        <h2>Welcome to: ${lesson.title || 'Lesson'}</h2>
+                        <p>This lesson covers essential concepts about ${lesson.title.replace('What is ', '').replace('?', '') || 'the topic'}.</p>
+                    </div>
+                    
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Key Learning Points</h3>
+                        <ul style="line-height: 1.8;">
+                            <li>Understand fundamental concepts</li>
+                            <li>Learn practical applications</li>
+                            <li>Apply knowledge to real-world scenarios</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Summary</h3>
+                        <p>In this lesson, you learned about ${lesson.title.replace('What is ', '').replace('?', '') || 'the topic'}. These concepts form an important foundation for your learning journey.</p>
+                    </div>
+                `;
+                
+                // Add a sample YouTube video if no video is found
+                if (!hasVideo) {
+                    // Use a relevant placeholder video based on the lesson title
+                    const topic = lesson.title.toLowerCase();
+                    let videoId = 'jJXI2zfzQVY'; // Default educational video
+                    
+                    if (topic.includes('prompt') || topic.includes('ai')) {
+                        videoId = 'b8T1qg8Y9ak'; // AI/prompt engineering video
+                    } else if (topic.includes('youtube')) {
+                        videoId = 'kN0tUUnupoE'; // YouTube tutorial
+                    } else if (topic.includes('coding') || topic.includes('code')) {
+                        videoId = 'ER96tgeUkXM'; // Coding tutorial
+                    }
+                    
+                    document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${videoId}?rel=0&showinfo=0`;
+                    document.getElementById('videoContainer').style.display = 'block';
+                    hasVideo = true;
+                }
             }
 
             // Nav buttons
