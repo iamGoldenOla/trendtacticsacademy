@@ -1475,27 +1475,30 @@ const Navigation = () => {
                         <h3 style="color: var(--primary); margin-bottom: 1rem;">Knowledge Check</h3>
                         <div style="padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 4px;">
                             <h4>${content.quiz.title || 'Quiz'}</h4>
-                            ${content.quiz.questions ? content.quiz.questions.map((q, idx) => `
-                                <div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 0, 0, 0.3); border-radius: 4px;">
+                            ${(content.quiz.questions || []).map(q => {
+                                let idx = content.quiz.questions.indexOf(q);
+                                let optionsHTML = (q.options || []).map((opt, optIdx) => {
+                                    return `<div style="margin: 0.25rem 0; padding: 0.25rem 0;">
+                                        <label style="display: flex; align-items: center; cursor: pointer;">
+                                            <input type="radio" name="question_${idx}" value="${optIdx}" style="margin-right: 0.5rem;">
+                                            ${opt}
+                                        </label>
+                                    </div>`;
+                                }).join('');
+                                
+                                return `<div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 0, 0, 0.3); border-radius: 4px;">
                                     <p><strong>Question ${idx + 1}:</strong> ${q.question}</p>
                                     <div style="margin: 0.5rem 0 1rem 0;">
-                                        ${q.options.map((opt, optIdx) => `
-                                            <div style="margin: 0.25rem 0; padding: 0.25rem 0;">
-                                                <label style="display: flex; align-items: center; cursor: pointer;">
-                                                    <input type="radio" name="question_${idx}" value="${optIdx}" style="margin-right: 0.5rem;">
-                                                    ${opt}
-                                                </label>
-                                            </div>
-                                        `).join('')}
+                                        ${optionsHTML}
                                     </div>
                                     <div style="font-size: 0.9em; color: var(--success);">
-                                        <strong>Correct Answer:</strong> ${q.options[q.correctAnswer] || 'Not specified'}
+                                        <strong>Correct Answer:</strong> ${q.options && q.correctAnswer !== undefined ? (q.options[q.correctAnswer] || 'Not specified') : 'Not specified'}
                                     </div>
                                     <div style="font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem;">
                                         <strong>Explanation:</strong> ${q.explanation || 'No explanation provided'}
                                     </div>
-                                </div>
-                            `).join('')}
+                                </div>`;
+                            }).join('')}
                         </div>
                         <div style="margin-top: 1rem; text-align: center;">
                             <button onclick="submitQuiz(this.parentElement.parentElement)" style="background: var(--primary); color: black; border: none; padding: 0.75rem 1.5rem; border-radius: 4px; cursor: pointer; font-weight: bold;">
