@@ -1,33 +1,30 @@
-// Wait for DOM to be ready and ensure Supabase library is loaded
-function initializeSupabase() {
-  if (typeof supabase === 'undefined') {
-    console.error('Supabase library not loaded. Please include the Supabase CDN script first.');
+// /js/supabase-client.js
+// Must load AFTER the Supabase CDN
+
+(function () {
+  if (typeof supabase === "undefined") {
+    console.error("❌ Supabase SDK not loaded");
     return;
   }
 
-  // Check if environment config exists
   if (!window.__ENV__) {
-    console.error("Missing environment config");
+    console.error("❌ window.__ENV__ is missing");
     return;
   }
 
   const { SUPABASE_URL, SUPABASE_ANON_KEY } = window.__ENV__;
 
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-    console.error("Missing Supabase credentials");
+    console.error("❌ Supabase credentials missing");
     return;
   }
 
-  // Create Supabase client instance
-  window.supabase = supabase.createClient(
+  // ✅ DO NOT overwrite `supabase`
+  // ✅ Single global client
+  window.supabaseClient = supabase.createClient(
     SUPABASE_URL,
     SUPABASE_ANON_KEY
   );
-}
 
-// Initialize when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeSupabase);
-} else {
-  initializeSupabase();
-}
+  console.log("✅ Supabase client ready");
+})();

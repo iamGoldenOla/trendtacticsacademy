@@ -21,6 +21,9 @@ if (!SUPABASE_ANON_KEY) {
   window.sbClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 }
 
+// Backward compatibility alias
+window.supabaseClient = window.sbClient;
+
 // Scroll to top when page loads
 window.addEventListener('load', function() {
   window.scrollTo(0, 0);
