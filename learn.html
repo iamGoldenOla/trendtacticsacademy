@@ -548,6 +548,9 @@
                 // Debug: Log the modules structure
                 console.log('Modules structure:', modules);
                 
+                // Debug: Log full modules structure for better understanding
+                console.log('Full modules object:', JSON.stringify(modules, null, 2));
+                
                 // Flatten lessons and render sidebar
                 renderSidebar(modules);
 
