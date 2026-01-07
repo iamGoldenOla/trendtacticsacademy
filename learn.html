@@ -1547,23 +1547,26 @@ const Navigation = () => {
                                 let idx = content.quiz.questions.indexOf(q);
                                 let optionsHTML = (q.options || []).map((opt, optIdx) => {
                                     return `<div style="margin: 0.25rem 0; padding: 0.25rem 0;">
-                                        <label style="display: flex; align-items: center; cursor: pointer;">
-                                            <input type="radio" name="question_${idx}" value="${optIdx}" style="margin-right: 0.5rem;">
+                                        <label style="display: flex; align-items: center; cursor: pointer;" onclick="checkAnswer(${idx}, ${optIdx}, ${q.correctAnswer})">
+                                            <input type="radio" name="question_${idx}" value="${optIdx}" style="margin-right: 0.5rem;" onchange="checkAnswer(${idx}, ${optIdx}, ${q.correctAnswer})">
                                             ${opt}
                                         </label>
                                     </div>`;
                                 }).join('');
                                 
-                                return `<div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 0, 0, 0.3); border-radius: 4px;">
+                                return `<div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 0, 0, 0.3); border-radius: 4px;" id="question-${idx}-container">
                                     <p><strong>Question ${idx + 1}:</strong> ${q.question}</p>
-                                    <div style="margin: 0.5rem 0 1rem 0;">
+                                    <div style="margin: 0.5rem 0 1rem 0;" id="question-${idx}-options">
                                         ${optionsHTML}
                                     </div>
-                                    <div style="font-size: 0.9em; color: var(--success);">
+                                    <div style="font-size: 0.9em; color: var(--success); display: none;" id="question-${idx}-correct">
                                         <strong>Correct Answer:</strong> ${q.options && q.correctAnswer !== undefined ? (q.options[q.correctAnswer] || 'Not specified') : 'Not specified'}
                                     </div>
-                                    <div style="font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem;">
+                                    <div style="font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; display: none;" id="question-${idx}-explanation">
                                         <strong>Explanation:</strong> ${q.explanation || 'No explanation provided'}
+                                    </div>
+                                    <div style="font-size: 0.9em; color: var(--error); display: none;" id="question-${idx}-incorrect">
+                                        <strong>Incorrect. Please try again.</strong>
                                     </div>
                                 </div>`;
                             }).join('')}
@@ -1586,23 +1589,26 @@ const Navigation = () => {
                             ${(contentData.quiz.questions || []).map((q, idx) => {
                                 let optionsHTML = (q.options || []).map((opt, optIdx) => {
                                     return `<div style="margin: 0.25rem 0; padding: 0.25rem 0;">
-                                        <label style="display: flex; align-items: center; cursor: pointer;">
-                                            <input type="radio" name="question_${idx}" value="${optIdx}" style="margin-right: 0.5rem;">
+                                        <label style="display: flex; align-items: center; cursor: pointer;" onclick="checkAnswer(${idx}, ${optIdx}, ${q.correctAnswer})">
+                                            <input type="radio" name="question_${idx}" value="${optIdx}" style="margin-right: 0.5rem;" onchange="checkAnswer(${idx}, ${optIdx}, ${q.correctAnswer})">
                                             ${opt}
                                         </label>
                                     </div>`;
                                 }).join('');
                                 
-                                return `<div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 0, 0, 0.3); border-radius: 4px;">
+                                return `<div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 0, 0, 0.3); border-radius: 4px;" id="question-${idx}-container">
                                     <p><strong>Question ${idx + 1}:</strong> ${q.question}</p>
-                                    <div style="margin: 0.5rem 0 1rem 0;">
+                                    <div style="margin: 0.5rem 0 1rem 0;" id="question-${idx}-options">
                                         ${optionsHTML}
                                     </div>
-                                    <div style="font-size: 0.9em; color: var(--success);">
+                                    <div style="font-size: 0.9em; color: var(--success); display: none;" id="question-${idx}-correct">
                                         <strong>Correct Answer:</strong> ${q.correctAnswer !== undefined ? (q.options && q.options[q.correctAnswer] || 'Not specified') : 'Not specified'}
                                     </div>
-                                    <div style="font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem;">
+                                    <div style="font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; display: none;" id="question-${idx}-explanation">
                                         <strong>Explanation:</strong> ${q.explanation || 'No explanation provided'}
+                                    </div>
+                                    <div style="font-size: 0.9em; color: var(--error); display: none;" id="question-${idx}-incorrect">
+                                        <strong>Incorrect. Please try again.</strong>
                                     </div>
                                 </div>`;
                             }).join('')}
@@ -1612,6 +1618,53 @@ const Navigation = () => {
                                 Submit Quiz
                             </button>
                         </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Add playground section for students to test their knowledge
+            container.innerHTML += `
+                <div class="lesson-section" style="margin: 1.5rem 0;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Knowledge Playground</h3>
+                    <div style="padding: 1rem; background: rgba(59, 130, 246, 0.1); border-radius: 4px; border-left: 4px solid var(--primary);">
+                        <p>Test your understanding with interactive exercises:</p>
+                        <div style="margin-top: 1rem;">
+                            <textarea id="playground-code" placeholder="Try out examples related to this lesson..." style="width: 100%; min-height: 150px; background: #000; color: #fff; padding: 1rem; border-radius: 4px; border: 1px solid var(--primary); font-family: monospace;"></textarea>
+                            <div style="margin-top: 0.5rem;">
+                                <button onclick="runPlaygroundCode()" style="background: var(--primary); color: black; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; margin-right: 0.5rem;">
+                                    Run Code
+                                </button>
+                                <button onclick="resetPlayground()" style="background: var(--text-secondary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                        <div id="playground-output" style="margin-top: 1rem; padding: 0.5rem; background: rgba(0, 0, 0, 0.5); border-radius: 4px; min-height: 50px; display: none;"></div>
+                    </div>
+                </div>
+            `;
+            
+            // Add extra reading & downloadable resources section
+            if (content.resources && content.resources.downloads && content.resources.downloads.length > 0) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Extra Reading & Downloadable Resources</h3>
+                        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 4px; border-left: 4px solid var(--success);">
+                            <p>Supplementary materials to deepen your understanding:</p>
+                            <ul style="margin-top: 1rem;">
+                                ${content.resources.downloads.map(resource => `
+                                    <li style="margin: 0.5rem 0;">
+                                        <a href="${resource.url || '#'}" target="_blank" style="color: var(--success); text-decoration: none; display: flex; align-items: center;">
+                                            <span style="margin-right: 0.5rem;">📄</span>
+                                            <div>
+                                                <strong>${resource.title || 'Resource'}</strong>
+                                                <p style="margin: 0.25rem 0 0 0; font-size: 0.9em; color: var(--text-secondary);">${resource.description || 'Download additional material'}</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                `).join('')}
+                            </ul>
                         </div>
                     </div>
                 `;
@@ -1630,6 +1683,59 @@ const Navigation = () => {
             }
         }
         
+        function checkAnswer(questionIdx, selectedOptionIdx, correctAnswerIdx) {
+            // Get the question container
+            const questionContainer = document.getElementById(`question-${questionIdx}-container`);
+            const optionsContainer = document.getElementById(`question-${questionIdx}-options`);
+            const correctDiv = document.getElementById(`question-${questionIdx}-correct`);
+            const incorrectDiv = document.getElementById(`question-${questionIdx}-incorrect`);
+            const explanationDiv = document.getElementById(`question-${questionIdx}-explanation`);
+            
+            // Reset previous feedback
+            correctDiv.style.display = 'none';
+            incorrectDiv.style.display = 'none';
+            explanationDiv.style.display = 'none';
+            
+            // Get all labels in the options container
+            const labels = optionsContainer.querySelectorAll('label');
+            
+            // Reset all label styles
+            labels.forEach(label => {
+                label.style.backgroundColor = 'transparent';
+                label.style.padding = '0.25rem 0';
+            });
+            
+            // Apply feedback based on answer
+            if (selectedOptionIdx == correctAnswerIdx) {
+                // Correct answer - highlight in green
+                labels[selectedOptionIdx].style.backgroundColor = 'rgba(34, 197, 94, 0.3)'; // Green
+                correctDiv.style.display = 'block';
+                explanationDiv.style.display = 'block';
+                
+                // Disable further selection for this question
+                const inputs = optionsContainer.querySelectorAll('input');
+                inputs.forEach(input => {
+                    input.disabled = true;
+                });
+                labels.forEach(label => {
+                    label.style.cursor = 'default';
+                });
+            } else {
+                // Incorrect answer - highlight in red
+                labels[selectedOptionIdx].style.backgroundColor = 'rgba(239, 68, 68, 0.3)'; // Red
+                incorrectDiv.style.display = 'block';
+                
+                // Show correct answer
+                setTimeout(() => {
+                    if (labels[correctAnswerIdx]) {
+                        labels[correctAnswerIdx].style.backgroundColor = 'rgba(34, 197, 94, 0.3)'; // Green
+                        correctDiv.style.display = 'block';
+                        explanationDiv.style.display = 'block';
+                    }
+                }, 1500);
+            }
+        }
+        
         function submitQuiz(quizElement) {
             const radios = quizElement.querySelectorAll('input[type="radio"]');
             let answered = 0;
@@ -1643,6 +1749,43 @@ const Navigation = () => {
             }
             
             alert('Quiz submitted! You can now proceed to the next lesson.');
+        }
+        
+        function runPlaygroundCode() {
+            const codeInput = document.getElementById('playground-code');
+            const outputDiv = document.getElementById('playground-output');
+            
+            if (!codeInput.value.trim()) {
+                alert('Please enter some code or exercise to run.');
+                return;
+            }
+            
+            // Show output div
+            outputDiv.style.display = 'block';
+            
+            // For now, just echo back what the student wrote as a simulation
+            // In a real system, this would execute actual code or exercises
+            outputDiv.innerHTML = `<strong>Your input:</strong><br><code>${escapeHtml(codeInput.value)}</code>`;
+            
+            // Add a success message
+            outputDiv.innerHTML += `<br><br><div style="color: var(--success);">✓ Successfully processed your exercise!</div>`;
+        }
+        
+        function resetPlayground() {
+            const codeInput = document.getElementById('playground-code');
+            const outputDiv = document.getElementById('playground-output');
+            
+            codeInput.value = '';
+            outputDiv.style.display = 'none';
+            outputDiv.innerHTML = '';
+        }
+        
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/\n/g, '<br>');
         }
         
         function showAnswer(idx, correctAnswer) {
@@ -1758,10 +1901,30 @@ const Navigation = () => {
                         `Recognize when and how to use ${topic} effectively`
                     ]
                 },
-                core_concepts: `The core concept of ${topic} revolves around the fundamental principles that make it effective in ${courseTitle}. This includes understanding the underlying mechanics, best practices, and common applications in real-world scenarios.`,
+                core_concepts: `The core concept of ${topic} is fundamental to understanding how modern digital systems work. This concept involves several key components that work together to create powerful and efficient solutions.
+
+First, it's important to understand that ${topic} is not just a single technique, but rather a comprehensive approach that combines multiple methodologies to achieve optimal results. The foundational principle behind ${topic} is to streamline processes, reduce complexity, and enhance productivity through systematic approaches.
+
+For beginners, think of ${topic} as a framework that helps you organize and execute tasks more efficiently. The core idea is to break down complex problems into manageable components that can be addressed systematically. This approach has several key benefits:
+
+1. **Simplicity**: Complex tasks are simplified into understandable steps
+2. **Efficiency**: Time and resources are optimized through structured approaches
+3. **Scalability**: Solutions can grow and adapt as needs change
+4. **Reliability**: Consistent methods lead to predictable and dependable outcomes
+
+The practical application of ${topic} involves understanding how different elements interact with each other. For example, in the context of ${courseTitle}, ${topic} serves as a bridge between theoretical knowledge and practical implementation. It connects abstract concepts to real-world applications, making it easier for practitioners to implement effective solutions.
+
+The underlying mechanics involve several interconnected processes that work together seamlessly. These processes have been refined over time to maximize effectiveness while minimizing complexity. Understanding these mechanics is crucial for anyone looking to master ${courseTitle} concepts.
+
+Best practices for implementing ${topic} include starting with simple applications and gradually building complexity, maintaining clear documentation of processes, and continuously evaluating and refining approaches based on results. These practices ensure that ${topic} remains effective and relevant in various contexts.
+
+In real-world scenarios, ${topic} has proven to be invaluable across multiple industries and applications. Its versatility and adaptability make it a cornerstone of modern ${courseTitle} methodologies.`,
                 visual_explanations: [
                     `Visual representations help clarify the ${topic} concepts`,
-                    `Diagrams showing the relationship between different ${topic} components`
+                    `Diagrams showing the relationship between different ${topic} components`,
+                    `Interactive diagrams that show how ${topic} works step-by-step`,
+                    `Flowcharts demonstrating the ${topic} process`,
+                    `Comparative visuals showing ${topic} vs traditional approaches`
                 ],
                 step_by_step: [
                     {
