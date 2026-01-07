@@ -303,7 +303,7 @@
         // Load all available courses
         async function loadAllCourses() {
             try {
-                const { data, error } = await supabaseClient
+                const { data, error } = await window.supabaseClient
                     .from("courses")
                     .select("*")
                     .order("created_at", { ascending: false });

@@ -213,20 +213,29 @@
 
         async function loadCourseBySlug(slug) {
   try {
-    const { data, error } = await supabaseClient
+    console.log('Loading course with slug:', slug);
+    const { data, error } = await window.supabaseClient
       .from("courses")
       .select("*")
       .eq("slug", slug)
       .single();
 
-    if (error) throw error;
+    if (error) {
+        console.error("Course fetch error:", error);
+        throw error;
+    }
+
+    if (!data) {
+        throw new Error('No course found');
+    }
 
     console.log("✅ Course loaded:", data);
     renderCourse(data);
   } catch (err) {
     console.error("❌ Failed to load course:", err);
-    document.getElementById("course-error").innerText =
-      "Course not found.";
+    document.getElementById("loadingState").style.display = "none";
+    document.getElementById("errorState").style.display = "block";
+    document.getElementById("course-error").innerText = "Course not found. Error: " + err.message;
   }
 }
 
