@@ -439,7 +439,7 @@
                 
                 // Check if user is enrolled in the course
                 const { data: enrollment, error: enrollmentError } = await window.supabaseClient
-                    .from('course_access')
+                    .from('enrollments')
                     .select('*')
                     .eq('user_id', user.id)
                     .eq('course_id', id)

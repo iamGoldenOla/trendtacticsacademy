@@ -730,7 +730,7 @@
                 const token = session?.access_token || session?.session?.access_token || currentUser.access_token || currentUser.token || '';
                 
                 const { data, error } = await window.supabaseClient
-                    .from('course_access')
+                    .from('enrollments')
                     .select('course_id')
                     .eq('user_id', currentUser.id);
                 
