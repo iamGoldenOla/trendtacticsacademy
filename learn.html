@@ -681,7 +681,23 @@
             
             // Debug: Log the entire lesson object for better understanding
             console.log('Full lesson object:', JSON.stringify(lesson, null, 2));
-
+            
+            // Try to find the full lesson content from original modules structure
+            let fullLesson = lesson;
+            if (originalModules && originalModules.modules && Array.isArray(originalModules.modules)) {
+                // Look through original modules to find the full lesson content
+                for (const module of originalModules.modules) {
+                    if (module.lessons && Array.isArray(module.lessons)) {
+                        const foundLesson = module.lessons.find(l => l.title === lesson.title);
+                        if (foundLesson) {
+                            fullLesson = foundLesson;
+                            console.log('Found full lesson in original modules:', fullLesson);
+                            break;
+                        }
+                    }
+                }
+            }
+            
             // UI Updates
             document.getElementById('loading').style.display = 'none';
             document.getElementById('contentContainer').style.display = 'block';
@@ -697,8 +713,10 @@
             const vidContainer = document.getElementById('videoContainer');
             let hasVideo = false;
             
-            // Check multiple possible video properties
-            const videoUrl = lesson.video || lesson.video_url || lesson.videoUrl || lesson.content?.video || lesson.resources?.video;
+            // Check multiple possible video properties from the full lesson
+            const videoUrl = fullLesson.video || fullLesson.video_url || fullLesson.videoUrl || 
+                           lesson.video || lesson.video_url || lesson.videoUrl || 
+                           fullLesson.content?.video || fullLesson.resources?.video;
             
             if (videoUrl) {
                 let embedUrl = videoUrl;
@@ -750,54 +768,59 @@
             const textContainer = document.getElementById('textContent');
             textContainer.innerHTML = ''; // basic safety, in prod use sanitizer
 
-            // Check multiple possible content properties
-            const contentText = lesson.content || lesson.text || lesson.description || lesson.intro || lesson.summary || 
+            // Check multiple possible content properties from the full lesson
+            const contentText = fullLesson.content || fullLesson.text || fullLesson.description || fullLesson.intro || fullLesson.summary || 
+                          fullLesson.content?.text || fullLesson.content?.description || fullLesson.lesson_content || fullLesson.body || fullLesson.content_html ||
+                          lesson.content || lesson.text || lesson.description || lesson.intro || lesson.summary || 
                           lesson.content?.text || lesson.content?.description || lesson.lesson_content || lesson.body || lesson.content_html;
             
             if (contentText) {
                 textContainer.innerHTML += `<div>${contentText}</div>`;
             }
             
-            // Check for other content fields
-            if (lesson.bigIdea || lesson.big_idea) {
+            // Check for other content fields from the full lesson
+            if (fullLesson.bigIdea || fullLesson.big_idea || lesson.bigIdea || lesson.big_idea) {
                 textContainer.innerHTML += `
                     <div style="background: rgba(0, 217, 255, 0.1); border-left: 4px solid var(--primary); padding: 1rem; border-radius: 4px; margin: 1.5rem 0;">
                         <h3 style="color: var(--primary); margin-top: 0; font-size: 1rem;">Big Idea</h3>
-                        <p style="margin-bottom: 0;">${lesson.bigIdea || lesson.big_idea}</p>
+                        <p style="margin-bottom: 0;">${fullLesson.bigIdea || fullLesson.big_idea || lesson.bigIdea || lesson.big_idea}</p>
                     </div>
                  `;
             }
             
-            // Check for steps or lesson steps
-            const steps = lesson.steps || lesson.lesson_steps || lesson.content?.steps;
+            // Check for steps or lesson steps from the full lesson
+            const steps = fullLesson.steps || fullLesson.lesson_steps || fullLesson.content?.steps ||
+                          lesson.steps || lesson.lesson_steps || lesson.content?.steps;
             if (steps && Array.isArray(steps)) {
                 textContainer.innerHTML += `<h3>Key Steps</h3><ul>${steps.map(s => `<li>${typeof s === 'object' ? s.title || s.step || s.text : s}</li>`).join('')}</ul>`;
             }
             
-            // Check for other common content fields
-            if (lesson.objectives) {
-                textContainer.innerHTML += `<h3>Objectives</h3><ul>${Array.isArray(lesson.objectives) ? 
-                    lesson.objectives.map(obj => `<li>${obj}</li>`).join('') : 
-                    `<li>${lesson.objectives}</li>`}</ul>`;
+            // Check for other common content fields from the full lesson
+            if (fullLesson.objectives || lesson.objectives) {
+                const objectives = fullLesson.objectives || lesson.objectives;
+                textContainer.innerHTML += `<h3>Objectives</h3><ul>${Array.isArray(objectives) ? 
+                    objectives.map(obj => `<li>${obj}</li>`).join('') : 
+                    `<li>${objectives}</li>`}</ul>`;
             }
             
-            if (lesson.notes) {
-                textContainer.innerHTML += `<h3>Notes</h3><div>${lesson.notes}</div>`;
+            if (fullLesson.notes || lesson.notes) {
+                textContainer.innerHTML += `<h3>Notes</h3><div>${fullLesson.notes || lesson.notes}</div>`;
             }
             
-            if (lesson.code_examples || lesson.example_code) {
-                textContainer.innerHTML += `<h3>Code Examples</h3><pre style="background: #000; color: #fff; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code>${lesson.code_examples || lesson.example_code}</code></pre>`;
+            if (fullLesson.code_examples || fullLesson.example_code || lesson.code_examples || lesson.example_code) {
+                textContainer.innerHTML += `<h3>Code Examples</h3><pre style="background: #000; color: #fff; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code>${fullLesson.code_examples || fullLesson.example_code || lesson.code_examples || lesson.example_code}</code></pre>`;
             }
             
             // Check for content in lesson properties that might contain the lesson data
-            if (lesson.properties) {
+            const lessonToCheck = fullLesson || lesson;
+            if (lessonToCheck.properties) {
                 // Handle AI-generated content that might be stored in properties
-                if (lesson.properties.content) {
-                    textContainer.innerHTML += `<div>${lesson.properties.content}</div>`;
+                if (lessonToCheck.properties.content) {
+                    textContainer.innerHTML += `<div>${lessonToCheck.properties.content}</div>`;
                 }
-                if (lesson.properties.video) {
+                if (lessonToCheck.properties.video) {
                     // Video might be stored in properties
-                    const videoUrl = lesson.properties.video;
+                    const videoUrl = lessonToCheck.properties.video;
                     if (videoUrl && !hasVideo) { // Only set if no video was found before
                         if (typeof videoUrl === 'string' && (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be'))) {
                             let videoId = '';
@@ -824,12 +847,12 @@
             }
             
             // Check for content in various other fields
-            if (lesson.data) {
+            if (lessonToCheck.data) {
                 // If lesson has a data property, check for content there
-                if (typeof lesson.data === 'string') {
+                if (typeof lessonToCheck.data === 'string') {
                     // If data is a string, it might be JSON
                     try {
-                        const parsedData = JSON.parse(lesson.data);
+                        const parsedData = JSON.parse(lessonToCheck.data);
                         if (parsedData.content) {
                             textContainer.innerHTML += `<div>${parsedData.content}</div>`;
                         }
@@ -858,16 +881,18 @@
                         }
                     } catch (e) {
                         // If it's not JSON, treat as content
-                        textContainer.innerHTML += `<div>${lesson.data}</div>`;
+                        textContainer.innerHTML += `<div>${lessonToCheck.data}</div>`;
                     }
-                } else if (typeof lesson.data === 'object' && lesson.data.content) {
-                    textContainer.innerHTML += `<div>${lesson.data.content}</div>`;
+                } else if (typeof lessonToCheck.data === 'object' && lessonToCheck.data.content) {
+                    textContainer.innerHTML += `<div>${lessonToCheck.data.content}</div>`;
                 }
             }
 
             // If no content was found, show a message
-            if (!contentText && !lesson.bigIdea && !lesson.big_idea && !steps && !lesson.objectives && !lesson.notes && !lesson.code_examples && !lesson.example_code && 
-                !lesson.properties?.content && !lesson.data?.content && !lesson.data) {
+            if (!contentText && !fullLesson.bigIdea && !fullLesson.big_idea && !lesson.bigIdea && !lesson.big_idea && 
+                !steps && !fullLesson.objectives && !lesson.objectives && !fullLesson.notes && !lesson.notes && 
+                !fullLesson.code_examples && !fullLesson.example_code && !lesson.code_examples && !lesson.example_code && 
+                !lessonToCheck?.properties?.content && !lessonToCheck?.data?.content && !lessonToCheck?.data) {
                 textContainer.innerHTML += '<p>No content available for this lesson. Please check back later or contact support.</p>';
             }
 
