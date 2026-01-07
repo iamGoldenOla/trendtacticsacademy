@@ -176,9 +176,16 @@
 
         async function initPage() {
             try {
-                // Get slug from URL
-                const params = new URLSearchParams(window.location.search);
-                const slug = params.get('slug');
+                // Get slug from URL - first try query parameter, then fallback to path
+                let slug = new URLSearchParams(window.location.search).get('slug');
+                
+                if (!slug) {
+                    // Extract from path: /course/{slug}
+                    const pathParts = window.location.pathname.split('/');
+                    if (pathParts.length >= 3 && pathParts[1] === 'course') {
+                        slug = pathParts[2];
+                    }
+                }
 
                 if (!slug) {
                     showError('No course specified');
