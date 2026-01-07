@@ -665,6 +665,12 @@
             
             // Debug: Log the lesson structure
             console.log('Lesson structure:', lesson);
+            
+            // Debug: Log lesson keys to see what properties are available
+            console.log('Lesson keys:', Object.keys(lesson || {}));
+            
+            // Debug: Log the entire lesson object for better understanding
+            console.log('Full lesson object:', JSON.stringify(lesson, null, 2));
 
             // UI Updates
             document.getElementById('loading').style.display = 'none';
