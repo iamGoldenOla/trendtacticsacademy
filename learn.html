@@ -466,7 +466,7 @@
 
                 // TODO: Replace with secure Edge Function that validates enrollment
                 // For now, we fetch public course data
-                const { data: courseData, error } = await window.supabaseClient
+                const { data: fetchedCourseData, error } = await window.supabaseClient
                   .from('courses')
                   .select('id, title, description, modules, status, level, created_at, updated_at')
                   .eq('id', id)
@@ -477,17 +477,17 @@
                 }
                 
                 // Debug: Log the raw course data structure
-                console.log('Raw course data structure:', courseData);
+                console.log('Raw course data structure:', fetchedCourseData);
                 
                 // Check what properties are available in the course data
-                console.log('Available course properties:', Object.keys(courseData || {}));
+                console.log('Available course properties:', Object.keys(fetchedCourseData || {}));
                 
                 // Check the type and content of the modules field specifically
-                console.log('Modules field type:', typeof courseData?.modules);
-                console.log('Modules field value:', courseData?.modules);
+                console.log('Modules field type:', typeof fetchedCourseData?.modules);
+                console.log('Modules field value:', fetchedCourseData?.modules);
                 
                 // Convert to expected format
-                const course = courseData;
+                const course = fetchedCourseData;
 
 
 
