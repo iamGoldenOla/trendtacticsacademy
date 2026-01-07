@@ -346,17 +346,12 @@
                 const user = JSON.parse(localStorage.getItem('supabase_user'));
                 if (!session || !user) return;
 
-                const response = await fetch(`${SUPABASE_URL}/functions/v1/get-student-courses`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${session.access_token}`
-                    },
-                    body: JSON.stringify({ user_id: user.user?.id || user.id })
+                // Use Supabase client to call the Edge Function
+                const { data, error } = await window.sbClient.functions.invoke('get-student-courses', {
+                    body: { user_id: user.user?.id || user.id }
                 });
 
-                if (response.ok) {
-                    const data = await response.json();
+                if (!error && data) {
                     const enrolledCourses = data.courses || [];
                     isEnrolled = enrolledCourses.some(c => c.course_id === currentCourse.id);
 
