@@ -92,7 +92,12 @@
             <div class="logo">Trendtactics Academy</div>
             <nav class="nav">
                 <a href="/">Home</a>
-                <a href="/dashboard">Dashboard</a>
+                <a href="/about">About</a>
+                <a href="/services">Services</a>
+                <a href="/courses">Courses</a>
+                <a href="/blog">Blog</a>
+                <a href="https://trendtacticsdigital.com" target="_blank">Digital Services</a>
+                <a href="/contact">Contact</a>
                 <button class="btn btn-secondary" onclick="Auth.logout()">Logout</button>
             </nav>
         </div>
@@ -166,7 +171,7 @@
             const lessonId = urlParams.get('lesson');
 
             if (!courseId) {
-                window.location.href = '/dashboard.html';
+                window.location.href = '/dashboard';
                 return;
             }
 
