@@ -1256,51 +1256,90 @@ const Navigation = () => {
             // Clear existing content
             container.innerHTML = '';
             
+            // Handle both direct content properties and nested content.content structure
+            const contentData = content.content || content;
+            
             // Add introduction section
-            if (content.introduction) {
+            if (contentData.introduction) {
                 container.innerHTML += `
                     <div class="lesson-intro">
-                        <h2>${content.introduction.title || content.title}</h2>
-                        <p>${content.introduction.description || content.title}</p>
-                        <p>${content.introduction.importance || 'This topic is important for your learning journey.'}</p>
+                        <h2>${contentData.introduction.title || content.title}</h2>
+                        <p>${contentData.introduction.description || content.title}</p>
+                        <p>${contentData.introduction.importance || 'This topic is important for your learning journey.'}</p>
+                        ${contentData.introduction.learningOutcomes ? `
+                        <div style="margin-top: 1rem;">
+                            <strong>Learning Outcomes:</strong>
+                            <ul>
+                                ${contentData.introduction.learningOutcomes.map(outcome => `<li>${outcome}</li>`).join('')}
+                            </ul>
+                        </div>` : ''}
                     </div>
                 `;
             }
             
             // Add core explanation
-            if (content.coreExplanation) {
+            if (contentData.coreExplanation) {
                 container.innerHTML += `
                     <div class="lesson-section" style="margin: 1.5rem 0;">
                         <h3 style="color: var(--primary); margin-bottom: 1rem;">Core Explanation</h3>
-                        <p>${content.coreExplanation.technicalExplanation || 'Detailed explanation of the concept.'}</p>
-                        <p><strong>Real-world analogy:</strong> ${content.coreExplanation.realWorldAnalogy || 'No analogy provided.'}</p>
+                        <p>${contentData.coreExplanation.technicalExplanation || 'Detailed explanation of the concept.'}</p>
+                        <p><strong>Real-world analogy:</strong> ${contentData.coreExplanation.realWorldAnalogy || 'No analogy provided.'}</p>
+                        
+                        ${contentData.coreExplanation.keyPrinciples ? `
+                        <div style="margin: 1rem 0;">
+                            <strong>Key Principles:</strong>
+                            <ul>
+                                ${contentData.coreExplanation.keyPrinciples.map(principle => `<li>${principle}</li>`).join('')}
+                            </ul>
+                        </div>` : ''}
+                        
+                        ${contentData.coreExplanation.commonMistakes ? `
+                        <div style="margin: 1rem 0;">
+                            <strong>Common Mistakes to Avoid:</strong>
+                            <ul>
+                                ${contentData.coreExplanation.commonMistakes.map(mistake => `<li>${mistake}</li>`).join('')}
+                            </ul>
+                        </div>` : ''}
+                        
+                        ${contentData.coreExplanation.bestPractices ? `
+                        <div style="margin: 1rem 0;">
+                            <strong>Best Practices:</strong>
+                            <ul>
+                                ${contentData.coreExplanation.bestPractices.map(practice => `<li>${practice}</li>`).join('')}
+                            </ul>
+                        </div>` : ''}
                     </div>
                 `;
             }
             
             // Add visual explanation
-            if (content.visualExplanation) {
+            if (contentData.visualExplanation) {
                 container.innerHTML += `
                     <div class="lesson-section" style="margin: 1.5rem 0;">
                         <h3 style="color: var(--primary); margin-bottom: 1rem;">Visual Explanation</h3>
-                        <p>${content.visualExplanation.description || 'Visual representation of concepts.'}</p>
-                        ${content.visualExplanation.diagrams ? content.visualExplanation.diagrams.map(diag => `
+                        <p>${contentData.visualExplanation.description || 'Visual representation of concepts.'}</p>
+                        ${(contentData.visualExplanation.diagrams || []).map(diag => `
                             <div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 217, 255, 0.1); border-radius: 4px;">
                                 <strong>${diag.title || 'Diagram'}</strong>: ${diag.description || 'Diagram description'}
+                                <p><em>Purpose:</em> ${diag.purpose || 'No purpose specified'}</p>
                             </div>
-                        `).join('') : ''}
+                        `).join('')}
                     </div>
                 `;
             }
             
             // Add step-by-step breakdown
-            if (content.stepByStepBreakdown && Array.isArray(content.stepByStepBreakdown)) {
+            if (contentData.stepByStepBreakdown && Array.isArray(contentData.stepByStepBreakdown)) {
                 container.innerHTML += `
                     <div class="lesson-section" style="margin: 1.5rem 0;">
                         <h3 style="color: var(--primary); margin-bottom: 1rem;">Step-by-Step Breakdown</h3>
                         <ol style="line-height: 1.8;">
-                            ${content.stepByStepBreakdown.map(step => `
-                                <li><strong>Step ${step.step || 'N/A'}:</strong> ${step.title || step.description || 'Step details'}</li>
+                            ${contentData.stepByStepBreakdown.map(step => `
+                                <li>
+                                    <strong>Step ${step.step || 'N/A'}: ${step.title || step.description || 'Step details'}</strong>
+                                    <p>${step.description || step.action || ''}</p>
+                                    <p><em>Action:</em> ${step.action || 'No specific action'}</p>
+                                </li>
                             `).join('')}
                         </ol>
                     </div>
@@ -1308,11 +1347,11 @@ const Navigation = () => {
             }
             
             // Add practical examples
-            if (content.practicalExamples && Array.isArray(content.practicalExamples)) {
+            if (contentData.practicalExamples && Array.isArray(contentData.practicalExamples)) {
                 container.innerHTML += `
                     <div class="lesson-section" style="margin: 1.5rem 0;">
                         <h3 style="color: var(--primary); margin-bottom: 1rem;">Practical Examples</h3>
-                        ${content.practicalExamples.map(example => `
+                        ${contentData.practicalExamples.map(example => `
                             <div style="margin: 1rem 0; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 4px;">
                                 <h4>${example.title || 'Example'}</h4>
                                 <p><strong>Scenario:</strong> ${example.scenario || 'No scenario provided'}</p>
@@ -1325,43 +1364,160 @@ const Navigation = () => {
             }
             
             // Add case study
-            if (content.caseStudy) {
+            if (contentData.caseStudy) {
                 container.innerHTML += `
                     <div class="lesson-section" style="margin: 1.5rem 0;">
                         <h3 style="color: var(--primary); margin-bottom: 1rem;">Case Study</h3>
                         <div style="padding: 1rem; background: rgba(255, 165, 0, 0.1); border-radius: 4px; border-left: 4px solid orange;">
-                            <h4>${content.caseStudy.title || 'Case Study'}</h4>
-                            <p><strong>Scenario:</strong> ${content.caseStudy.scenario || 'No scenario provided'}</p>
-                            <p><strong>Challenges:</strong> ${content.caseStudy.challenges || 'No challenges mentioned'}</p>
-                            <p><strong>Solution:</strong> ${content.caseStudy.solution || 'No solution provided'}</p>
-                            <p><strong>Results:</strong> ${content.caseStudy.results || 'No results mentioned'}</p>
-                            <p><strong>Lessons Learned:</strong> ${content.caseStudy.lessonsLearned || 'No lessons mentioned'}</p>
+                            <h4>${contentData.caseStudy.title || 'Case Study'}</h4>
+                            <p><strong>Scenario:</strong> ${contentData.caseStudy.scenario || 'No scenario provided'}</p>
+                            <p><strong>Challenges:</strong> ${contentData.caseStudy.challenges || 'No challenges mentioned'}</p>
+                            <p><strong>Solution:</strong> ${contentData.caseStudy.solution || 'No solution provided'}</p>
+                            <p><strong>Results:</strong> ${contentData.caseStudy.results || 'No results mentioned'}</p>
+                            <p><strong>Lessons Learned:</strong> ${contentData.caseStudy.lessonsLearned || 'No lessons mentioned'}</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Add examples section
+            if (content.examples && Array.isArray(content.examples)) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Code Examples</h3>
+                        ${content.examples.map(example => `
+                            <div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 0, 0, 0.8); border-radius: 4px;">
+                                <h4>${example.title || 'Example'}</h4>
+                                <pre style="color: #00ff00; margin: 0.5rem 0; overflow-x: auto;"><code>${example.code || 'No code provided'}</code></pre>
+                                <p>${example.explanation || 'No explanation provided'}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            // Add exercises/assignments
+            if (content.exercises && Array.isArray(content.exercises)) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Assignments & Exercises</h3>
+                        ${content.exercises.map(exercise => `
+                            <div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 255, 255, 0.1); border-radius: 4px; border-left: 4px solid var(--primary);">
+                                <h4>${exercise.title || 'Exercise'}</h4>
+                                <p><strong>Description:</strong> ${exercise.description || 'No description provided'}</p>
+                                <p><strong>Instructions:</strong> ${exercise.instructions || 'No instructions provided'}</p>
+                                <p><strong>Difficulty:</strong> ${exercise.difficulty || 'Unknown'} | <strong>Time:</strong> ${exercise.estimatedTime || 'Not specified'}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            // Add resources
+            if (content.resources && Array.isArray(content.resources)) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Additional Resources</h3>
+                        <ul>
+                            ${content.resources.map(resource => `
+                                <li style="margin: 0.5rem 0;">
+                                    <a href="${resource.url || '#'}" target="_blank" style="color: var(--primary); text-decoration: none;">
+                                        <strong>${resource.title || 'Resource'}</strong>
+                                    </a>
+                                    <p style="margin: 0.25rem 0 0 0; font-size: 0.9em; color: var(--text-secondary);">${resource.description || 'No description'}</p>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            // Add tools recommendations
+            if (content.tools && Array.isArray(content.tools)) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Recommended Tools</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.5rem; margin-top: 0.5rem;">
+                            ${(content.tools || []).map(tool => `
+                                <div style="padding: 0.75rem; background: rgba(124, 58, 237, 0.1); border-radius: 4px; border: 1px solid rgba(124, 58, 237, 0.2);">
+                                    ${tool}
+                                </div>
+                            `).join('')}
                         </div>
                     </div>
                 `;
             }
             
             // Add summary
-            if (content.summary) {
+            if (contentData.summary) {
                 container.innerHTML += `
                     <div class="lesson-section" style="margin: 1.5rem 0;">
                         <h3 style="color: var(--primary); margin-bottom: 1rem;">Summary</h3>
                         <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 4px; border-left: 4px solid var(--success);">
                             <h4>Key Takeaways</h4>
                             <ul style="line-height: 1.8;">
-                                ${(content.summary.keyTakeaways || []).map(takeaway => `<li>${takeaway}</li>`).join('')}
+                                ${(contentData.summary.keyTakeaways || []).map(takeaway => `<li>${takeaway}</li>`).join('')}
                             </ul>
                             <h4>Next Steps</h4>
                             <ul style="line-height: 1.8;">
-                                ${(content.summary.nextSteps || []).map(step => `<li>${step}</li>`).join('')}
+                                ${(contentData.summary.nextSteps || []).map(step => `<li>${step}</li>`).join('')}
                             </ul>
-                            <p>${content.summary.confidenceBuilder || 'You now have a solid understanding of this concept.'}</p>
+                            <p>${contentData.summary.confidenceBuilder || 'You now have a solid understanding of this concept.'}</p>
                         </div>
                     </div>
                 `;
             }
             
-
+            // Add quiz if available
+            if (content.quiz) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Knowledge Check</h3>
+                        <div style="padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 4px;">
+                            <h4>${content.quiz.title || 'Quiz'}</h4>
+                            ${content.quiz.questions ? content.quiz.questions.map((q, idx) => `
+                                <div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 0, 0, 0.3); border-radius: 4px;">
+                                    <p><strong>Question ${idx + 1}:</strong> ${q.question}</p>
+                                    <div style="margin: 0.5rem 0 1rem 0;">
+                                        ${q.options.map((opt, optIdx) => `
+                                            <div style="margin: 0.25rem 0; padding: 0.25rem 0;">
+                                                <label style="display: flex; align-items: center; cursor: pointer;">
+                                                    <input type="radio" name="question_${idx}" value="${optIdx}" style="margin-right: 0.5rem;">
+                                                    ${opt}
+                                                </label>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                    <div style="font-size: 0.9em; color: var(--success);">
+                                        <strong>Correct Answer:</strong> ${q.options[q.correctAnswer] || 'Not specified'}
+                                    </div>
+                                    <div style="font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem;">
+                                        <strong>Explanation:</strong> ${q.explanation || 'No explanation provided'}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div style="margin-top: 1rem; text-align: center;">
+                            <button onclick="submitQuiz(this.parentElement.parentElement)" style="background: var(--primary); color: black; border: none; padding: 0.75rem 1.5rem; border-radius: 4px; cursor: pointer; font-weight: bold;">
+                                Submit Quiz
+                            </button>
+                        </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Add notes section
+            if (content.notes) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Important Notes</h3>
+                        <div style="padding: 1rem; background: rgba(255, 255, 0, 0.1); border-radius: 4px; border-left: 4px solid yellow;">
+                            ${content.notes}
+                        </div>
+                    </div>
+                `;
+            }
         }
         
         function submitQuiz(quizElement) {
