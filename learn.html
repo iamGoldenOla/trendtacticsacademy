@@ -702,11 +702,20 @@
             let fullLesson = lesson;
             console.log('Looking for lesson with title:', lesson.title);
             
-            if (originalModules && originalModules.modules && Array.isArray(originalModules.modules)) {
-                console.log('Original modules structure:', originalModules.modules);
+            // originalModules might be an array of modules or an object with modules property
+            let modulesToSearch = [];
+            
+            if (Array.isArray(originalModules)) {
+                modulesToSearch = originalModules;
+            } else if (originalModules && originalModules.modules && Array.isArray(originalModules.modules)) {
+                modulesToSearch = originalModules.modules;
+            }
+            
+            if (modulesToSearch && Array.isArray(modulesToSearch) && modulesToSearch.length > 0) {
+                console.log('Searching in modules array:', modulesToSearch);
                 
-                // Look through original modules to find the full lesson content
-                for (const module of originalModules.modules) {
+                // Look through modules to find the full lesson content
+                for (const module of modulesToSearch) {
                     console.log('Checking module:', module.title);
                     if (module.lessons && Array.isArray(module.lessons)) {
                         console.log('Module lessons:', module.lessons);
@@ -719,7 +728,7 @@
                     }
                 }
             } else {
-                console.log('Original modules structure not available or not in expected format:', originalModules);
+                console.log('No modules to search in original modules structure:', originalModules);
             }
             
             // UI Updates
