@@ -270,14 +270,14 @@
                 const token = session?.access_token || session?.session?.access_token;
 
                 const { data, error } = await window.supabaseClient
-                    .from('course_enrollments')
-                    .select('courses(*)')
-                    .eq('user_id', userId)
-                    .order('created_at', { foreignTable: 'courses', ascending: false });
+                    .from('courses')
+                    .select('*')
+                    .eq('status', 'published')
+                    .order('created_at', { ascending: false });
                 
                 if (error) throw error;
                 
-                const courses = data?.map(item => item.courses).filter(Boolean) || [];
+                const courses = data || [];
 
                 if (courses.length > 0) {
                     // Show personalized courses
@@ -316,8 +316,8 @@
                 
                 // Generate HTML for each course
                 const coursesHTML = courses.map(course => {
-                    // Generate a slug from the course title
-                    const slug = course.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                    // Use the course's slug if available, otherwise generate from title
+                    const slug = course.slug || course.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
                     
                     return `
                         <div class="card" style="transition: all 0.3s ease;">
@@ -347,7 +347,7 @@
                                 </p>
                             </div>
                             <a href="/course/${slug}" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">
-                                Start Learning
+                                View Course
                             </a>
                         </div>
                     `;

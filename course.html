@@ -151,7 +151,6 @@
                     </div>
                 </div>
             </div>
-            </
 
             <!-- Course Modules -->
             <div class="card">
@@ -195,7 +194,7 @@
                     authBtn.textContent = user?.user_metadata?.name || user?.email || 'Account';
                     authBtn.onclick = () => window.location.href = '/dashboard';
                 }
-                if (dashboardLink) dashboardLink.style.display = 'block';
+                if (dashboardLink) dashboardLink.style.display = 'block';di
             } else {
                 if (authBtn) {
                     authBtn.textContent = 'Sign In';
@@ -208,23 +207,25 @@
         async function loadCourseBySlug(slug) {
   try {
     console.log('Loading course with slug:', slug);
-    const { data, error } = await window.supabaseClient
+    // First, check if course exists using a non-single query
+    const { data: courseCheck, error: checkError } = await window.supabaseClient
       .from("courses")
       .select("*")
-      .eq("slug", slug)
-      .single();
+      .eq("slug", slug);
 
-    if (error) {
-        console.error("Course fetch error:", error);
-        throw error;
+    if (checkError) {
+        console.error("Course check error:", checkError);
+        throw checkError;
     }
 
-    if (!data) {
-        throw new Error('No course found');
+    if (!courseCheck || courseCheck.length === 0) {
+        throw new Error('No course found with this slug');
     }
 
-    console.log("✅ Course loaded:", data);
-    renderCourse(data);
+    // Use the first result
+    const course = courseCheck[0];
+    console.log("✅ Course loaded:", course);
+    renderCourse(course);
   } catch (err) {
     console.error("❌ Failed to load course:", err);
     document.getElementById("loadingState").style.display = "none";
@@ -353,14 +354,15 @@
                 const user = JSON.parse(localStorage.getItem('supabase_user'));
                 if (!session || !user) return;
 
-                // Use Supabase client to call the Edge Function
-                const { data, error } = await window.supabaseClient.functions.invoke('get-student-courses', {
-                    body: { user_id: user.user?.id || user.id }
-                });
+                // Use Supabase client to check enrollment directly from course_enrollments table
+                const { data, error } = await window.supabaseClient
+                    .from('course_enrollments')
+                    .select('*')
+                    .eq('user_id', user.user?.id || user.id)
+                    .eq('course_id', currentCourse.id);
 
                 if (!error && data) {
-                    const enrolledCourses = data.courses || [];
-                    isEnrolled = enrolledCourses.some(c => c.course_id === currentCourse.id);
+                    isEnrolled = data.length > 0;
 
                     if (isEnrolled) {
                         const btn = document.getElementById('enrollBtn');
@@ -390,7 +392,7 @@
             } else {
                 // If not enrolled, go to enrollment/checkout
                 // Using only course ID (not title-based)
-                window.location.href = `/checkout.html?course=${currentCourse.id}&title=${encodeURIComponent(currentCourse.title)}`;
+                window.location.href = `/enroll?course_id=${currentCourse.id}`;
             }
         }
 
