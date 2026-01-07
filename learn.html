@@ -477,6 +477,9 @@
                 
                 // Convert to expected format
                 const course = data;
+                
+                // Debug: Log the course data structure
+                console.log('Course data structure:', course);
 
 
 
@@ -510,6 +513,9 @@
                     modules = [];
                 }
 
+                // Debug: Log the modules structure
+                console.log('Modules structure:', modules);
+                
                 // Flatten lessons and render sidebar
                 renderSidebar(modules);
 
@@ -593,6 +599,9 @@
 
             currentLessonIndex = index;
             const lesson = flatLessons[index];
+            
+            // Debug: Log the lesson structure
+            console.log('Lesson structure:', lesson);
 
             // UI Updates
             document.getElementById('loading').style.display = 'none';
