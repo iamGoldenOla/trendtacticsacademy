@@ -581,9 +581,40 @@
             
             // Safely check if modules is an array
             if (!modules || !Array.isArray(modules) || modules.length === 0) {
-                list.innerHTML = '<div style="padding: 1rem; color: var(--text-secondary); text-align: center;">No modules available for this course.</div>';
-                updateProgress();
-                return;
+                console.log('No modules found or modules is not an array:', modules);
+                                
+                // Check if modules might be a single object instead of an array
+                if (modules && typeof modules === 'object' && !Array.isArray(modules)) {
+                    console.log('Modules is a single object, converting to array:', modules);
+                    modules = [modules];
+                } else {
+                    // Try to get modules from other possible fields
+                    if (courseData && courseData.description) {
+                        try {
+                            const parsedDesc = JSON.parse(courseData.description);
+                            if (Array.isArray(parsedDesc)) {
+                                modules = parsedDesc;
+                                console.log('Found modules in course description:', modules);
+                            }
+                        } catch (e) {
+                            console.log('Course description is not JSON, trying as single module');
+                            modules = [{
+                                title: 'Course Content',
+                                lessons: [{
+                                    title: 'Introduction',
+                                    content: courseData.description
+                                }]
+                            }];
+                        }
+                    }
+                }
+                                
+                // If still no modules, create a default one
+                if (!modules || modules.length === 0) {
+                    list.innerHTML = '<div style="padding: 1rem; color: var(--text-secondary); text-align: center;">No modules available for this course.</div>';
+                    updateProgress();
+                    return;
+                }
             }
 
             modules.forEach((mod, mIndex) => {
