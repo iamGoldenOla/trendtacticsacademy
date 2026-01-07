@@ -1,13 +1,6 @@
-﻿RewriteEngine On
-
-# Don't rewrite if the requested file or directory exists
+RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-
-# Handle specific dynamic routes
-RewriteRule ^course/([^/]+)/?$ course.html?slug=$1 [L,QSA]
-RewriteRule ^learn/([^/]+)/?$ learn.html?id=$1 [L,QSA]
+RewriteRule ^course/([^/]+)/?$ course.html?slug= [L,QSA]
+RewriteRule ^learn/([^/]+)/?$ learn.html?id= [L,QSA]
 RewriteRule ^enroll/?$ enroll.html [L,QSA]
-
-# Don't rewrite static assets (CSS, JS, images, etc.)
-RewriteRule ^(.+)\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ - [L]
