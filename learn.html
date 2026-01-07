@@ -736,7 +736,7 @@
 
             // Check multiple possible content properties
             const contentText = lesson.content || lesson.text || lesson.description || lesson.intro || lesson.summary || 
-                          lesson.content?.text || lesson.content?.description || lesson.lesson_content;
+                          lesson.content?.text || lesson.content?.description || lesson.lesson_content || lesson.body || lesson.content_html;
             
             if (contentText) {
                 textContainer.innerHTML += `<div>${contentText}</div>`;
@@ -772,9 +772,86 @@
             if (lesson.code_examples || lesson.example_code) {
                 textContainer.innerHTML += `<h3>Code Examples</h3><pre style="background: #000; color: #fff; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code>${lesson.code_examples || lesson.example_code}</code></pre>`;
             }
+            
+            // Check for content in lesson properties that might contain the lesson data
+            if (lesson.properties) {
+                // Handle AI-generated content that might be stored in properties
+                if (lesson.properties.content) {
+                    textContainer.innerHTML += `<div>${lesson.properties.content}</div>`;
+                }
+                if (lesson.properties.video) {
+                    // Video might be stored in properties
+                    const videoUrl = lesson.properties.video;
+                    if (videoUrl && !hasVideo) { // Only set if no video was found before
+                        if (typeof videoUrl === 'string' && (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be'))) {
+                            let videoId = '';
+                            if (videoUrl.includes('v=')) {
+                                videoId = videoUrl.split('v=')[1].split('&')[0];
+                            } else if (videoUrl.includes('youtu.be/')) {
+                                videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
+                            } else {
+                                const regExp = /^.*(youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#&?]*).*/;
+                                const match = videoUrl.match(regExp);
+                                if (match && match[2].length === 11) {
+                                    videoId = match[2];
+                                }
+                            }
+                            
+                            if (videoId) {
+                                document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${videoId}`;
+                                document.getElementById('videoContainer').style.display = 'block';
+                                hasVideo = true;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Check for content in various other fields
+            if (lesson.data) {
+                // If lesson has a data property, check for content there
+                if (typeof lesson.data === 'string') {
+                    // If data is a string, it might be JSON
+                    try {
+                        const parsedData = JSON.parse(lesson.data);
+                        if (parsedData.content) {
+                            textContainer.innerHTML += `<div>${parsedData.content}</div>`;
+                        }
+                        if (parsedData.video) {
+                            const videoUrl = parsedData.video;
+                            if (typeof videoUrl === 'string' && (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be'))) {
+                                let videoId = '';
+                                if (videoUrl.includes('v=')) {
+                                    videoId = videoUrl.split('v=')[1].split('&')[0];
+                                } else if (videoUrl.includes('youtu.be/')) {
+                                    videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
+                                } else {
+                                    const regExp = /^.*(youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#&?]*).*/;
+                                    const match = videoUrl.match(regExp);
+                                    if (match && match[2].length === 11) {
+                                        videoId = match[2];
+                                    }
+                                }
+                                
+                                if (videoId) {
+                                    document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${videoId}`;
+                                    document.getElementById('videoContainer').style.display = 'block';
+                                    hasVideo = true;
+                                }
+                            }
+                        }
+                    } catch (e) {
+                        // If it's not JSON, treat as content
+                        textContainer.innerHTML += `<div>${lesson.data}</div>`;
+                    }
+                } else if (typeof lesson.data === 'object' && lesson.data.content) {
+                    textContainer.innerHTML += `<div>${lesson.data.content}</div>`;
+                }
+            }
 
             // If no content was found, show a message
-            if (!contentText && !lesson.bigIdea && !lesson.big_idea && !steps && !lesson.objectives && !lesson.notes && !lesson.code_examples && !lesson.example_code) {
+            if (!contentText && !lesson.bigIdea && !lesson.big_idea && !steps && !lesson.objectives && !lesson.notes && !lesson.code_examples && !lesson.example_code && 
+                !lesson.properties?.content && !lesson.data?.content && !lesson.data) {
                 textContainer.innerHTML += '<p>No content available for this lesson. Please check back later or contact support.</p>';
             }
 
