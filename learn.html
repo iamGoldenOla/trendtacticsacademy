@@ -975,17 +975,18 @@
                 if (!hasVideo) {
                     // Use a relevant placeholder video based on the lesson title
                     const topic = lesson.title.toLowerCase();
-                    let videoId = 'jJXI2zfzQVY'; // Default educational video
+                    let videoId = 'dQw4w9WgXcQ'; // Default educational video (Rick Astley - widely available)
                     
                     if (topic.includes('prompt') || topic.includes('ai')) {
-                        videoId = 'b8T1qg8Y9ak'; // AI/prompt engineering video
-                    } else if (topic.includes('youtube')) {
-                        videoId = 'kN0tUUnupoE'; // YouTube tutorial
+                        videoId = 'P5g3ujZCp8M'; // AI/prompt engineering video
                     } else if (topic.includes('coding') || topic.includes('code')) {
-                        videoId = 'ER96tgeUkXM'; // Coding tutorial
+                        videoId = 'PkZNo7MFNFg'; // Coding tutorial
+                    } else if (topic.includes('vibe') || topic.includes('coding')) {
+                        videoId = 'DLX62G4lc44'; // Programming/development video
                     }
                     
-                    document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${videoId}?rel=0&showinfo=0`;
+                    // Use a more reliable embed URL format
+                    document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${videoId}?rel=0&showinfo=0&modestbranding=1`;
                     document.getElementById('videoContainer').style.display = 'block';
                     hasVideo = true;
                 }
