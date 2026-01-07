@@ -106,8 +106,7 @@
                             category
                         )
                     `)
-                    .eq('user_id', currentUser.id)
-                    .eq('status', 'active');
+                    .eq('user_id', currentUser.id);
 
                 if (error) throw error;
 

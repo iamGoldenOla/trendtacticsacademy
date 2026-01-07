@@ -302,8 +302,7 @@
                         .insert({
                             user_id: user.id,
                             course_id: window.COURSE_ID,
-                            enrolled_at: new Date().toISOString(),
-                            status: 'active'
+                            enrolled_at: new Date().toISOString()
                         })
                         .select()
                         .single();
