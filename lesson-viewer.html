@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lesson Viewer - Trendtactics Academy</title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
     <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+    <script src="/js/env.js"></script>
+    <script src="/js/supabase-client.js"></script>
     <style>
         .lesson-content {
             background: var(--bg-secondary);
@@ -190,7 +192,7 @@
 
         async function loadCourse(courseId) {
             try {
-                const { data: course, error } = await window.sbClient
+                const { data: course, error } = await window.supabaseClient
                     .from('courses')
                     .select('*')
                     .eq('id', courseId)
@@ -200,7 +202,7 @@
                 currentCourse = course;
 
                 // Load all lessons for this course
-                const { data: modules, error: modulesError } = await window.sbClient
+                const { data: modules, error: modulesError } = await window.supabaseClient
                     .from('modules')
                     .select(`
                         *,
@@ -225,7 +227,7 @@
             const lessonContainer = document.getElementById('lessonContainer');
 
             try {
-                const { data: lesson, error } = await window.sbClient
+                const { data: lesson, error } = await window.supabaseClient
                     .from('lessons')
                     .select('*')
                     .eq('id', lessonId)
