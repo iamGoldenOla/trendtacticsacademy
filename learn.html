@@ -493,6 +493,22 @@
                 if (typeof modules === 'string') {
                     try { modules = JSON.parse(modules); } catch (e) { modules = []; }
                 }
+                
+                // Handle different possible structures of modules data
+                if (modules && typeof modules === 'object' && !Array.isArray(modules)) {
+                    // If modules is an object with a 'modules' property
+                    if (modules.modules && Array.isArray(modules.modules)) {
+                        modules = modules.modules;
+                    } else {
+                        // If it's a single module object, convert to array
+                        modules = [modules];
+                    }
+                }
+                
+                // Ensure modules is an array
+                if (!Array.isArray(modules)) {
+                    modules = [];
+                }
 
                 // Flatten lessons and render sidebar
                 renderSidebar(modules);
@@ -502,7 +518,21 @@
 
             } catch (error) {
                 console.error('Error loading course:', error);
-                alert('Failed to load course content');
+                // Hide loading and show error
+                document.getElementById('loading').style.display = 'none';
+                const contentContainer = document.getElementById('contentContainer');
+                if (contentContainer) contentContainer.style.display = 'block';
+                
+                // Show error in the content area
+                const lessonContent = document.querySelector('.lesson-content');
+                if (lessonContent) {
+                    lessonContent.innerHTML = `
+                        <h1>Error Loading Course</h1>
+                        <p>We encountered an issue loading this course. Please try again later.</p>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <a href="/dashboard" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Return to Dashboard</a>
+                    `;
+                }
             }
         }
 
@@ -510,34 +540,49 @@
             const list = document.getElementById('lessonList');
             list.innerHTML = '';
             flatLessons = [];
+            
+            // Safely check if modules is an array
+            if (!modules || !Array.isArray(modules) || modules.length === 0) {
+                list.innerHTML = '<div style="padding: 1rem; color: var(--text-secondary); text-align: center;">No modules available for this course.</div>';
+                updateProgress();
+                return;
+            }
 
             modules.forEach((mod, mIndex) => {
                 // Module Header
                 const header = document.createElement('div');
                 header.className = 'module-header';
-                header.textContent = `Module ${mIndex + 1}: ${mod.title}`;
+                header.textContent = `Module ${mIndex + 1}: ${mod.title || 'Untitled Module'}`;
                 list.appendChild(header);
 
                 // Lessons
                 const lessons = mod.lessons || [];
-                lessons.forEach((lesson, lIndex) => {
-                    const globalIndex = flatLessons.length;
-                    flatLessons.push({
-                        ...lesson,
-                        moduleTitle: mod.title
-                    });
+                if (Array.isArray(lessons) && lessons.length > 0) {
+                    lessons.forEach((lesson, lIndex) => {
+                        const globalIndex = flatLessons.length;
+                        flatLessons.push({
+                            ...lesson,
+                            moduleTitle: mod.title || 'Untitled Module'
+                        });
 
+                        const item = document.createElement('div');
+                        item.className = 'lesson-item';
+                        item.id = `lesson-nav-${globalIndex}`;
+                        item.innerHTML = `
+                            <div class="status-icon">✓</div>
+                            <div style="flex: 1; font-size: 0.9rem;">${lesson.title || 'Untitled Lesson'}</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">${lesson.duration || '10 min'}</div>
+                        `;
+                        item.onclick = () => loadLesson(globalIndex);
+                        list.appendChild(item);
+                    });
+                } else {
                     const item = document.createElement('div');
                     item.className = 'lesson-item';
-                    item.id = `lesson-nav-${globalIndex}`;
-                    item.innerHTML = `
-                        <div class="status-icon">✓</div>
-                        <div style="flex: 1; font-size: 0.9rem;">${lesson.title}</div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted);">${lesson.duration || '10 min'}</div>
-                    `;
-                    item.onclick = () => loadLesson(globalIndex);
+                    item.style.opacity = '0.6';
+                    item.innerHTML = `<div style="flex: 1; font-size: 0.9rem; color: var(--text-muted);">No lessons in this module</div>`;
                     list.appendChild(item);
-                });
+                }
             });
 
             updateProgress();
