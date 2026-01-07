@@ -437,7 +437,7 @@
 
                 // TODO: Replace with secure Edge Function that validates enrollment
                 // For now, we fetch public course data
-                const { data, error } = await window.supabase
+                const { data, error } = await window.sbClient
                   .from('courses')
                   .select('*')
                   .eq('id', id)
