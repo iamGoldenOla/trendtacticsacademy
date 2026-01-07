@@ -8,7 +8,31 @@
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdnjs.cloudflare.com https://fonts.googleapis.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.jsdelivr.net https://js.puter.com https://www.youtube.com https://s.ytimg.com https://*.youtube.com https://youtube-nocookie.com https://*.youtube-nocookie.com https://*.googleapis.com https://*.google-analytics.com https://*.googletagmanager.com https://uimdbodamoeyukrghchb.supabase.co https://*.supabase.co https://supabase.co; connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co https://*.supabase.co https://supabase.co https://app.supabase.com wss://*.supabase.co https://www.youtube.com https://*.youtube.com https://youtube-nocookie.com https://*.youtube-nocookie.com; img-src 'self' data: https: http:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://*.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; frame-src 'self' https://www.youtube.com https://*.youtube.com https://youtube-nocookie.com https://*.youtube-nocookie.com; child-src 'self' https://www.youtube.com https://*.youtube.com https://youtube-nocookie.com https://*.youtube-nocookie.com;">
     <link rel="stylesheet" href="/css/main.css">
-    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+    <script>
+/**
+ * Supabase environment config
+ * DO NOT hardcode keys in multiple places
+ */
+window.__ENV__ = {
+  SUPABASE_URL: "https://uimdbodamoeyukrghchb.supabase.co",
+  SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94"
+};
+</script>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+
+<script>
+const { createClient } = supabase;
+
+if (!window.__ENV__.SUPABASE_ANON_KEY) {
+  throw new Error("Missing SUPABASE_ANON_KEY");
+}
+
+window.supabaseClient = createClient(
+  window.__ENV__.SUPABASE_URL,
+  window.__ENV__.SUPABASE_ANON_KEY
+);
+</script>
 </head>
 
 <body>
@@ -49,12 +73,12 @@
         </div>
 
         <!-- Content (Hidden initially) -->
-        <div id="courseContent" style="display: none;">
+        <div id="course-container" style="display: none;">
             <!-- Course Hero -->
             <div class="hero">
                 <span class="badge badge-primary" id="courseLevel">Beginner Friendly</span>
-                <h1 class="hero-title" id="courseTitle">Course Title</h1>
-                <p class="hero-subtitle" id="courseDescription">Course detailed description goes here.</p>
+                <h1 class="hero-title" id="course-title">Course Title</h1>
+                <p class="hero-subtitle" id="course-description">Course detailed description goes here.</p>
             </div>
 
             <!-- YouTube Video Section (Optional) -->
@@ -163,8 +187,6 @@
     </main>
 
     <!-- Scripts -->
-    <script src="/js/env.js"></script>
-    <script src="/js/supabase-client.js"></script>
     <script>
         // Global state
         let currentCourse = null;
@@ -174,38 +196,10 @@
             document.querySelector('.nav').classList.toggle('active');
         }
 
-        async function initPage() {
-            try {
-                // Get slug from URL - first try query parameter, then fallback to path
-                let slug = new URLSearchParams(window.location.search).get('slug');
-                
-                if (!slug) {
-                    // Extract from path: /course/{slug}
-                    const pathParts = window.location.pathname.split('/');
-                    if (pathParts.length >= 3 && pathParts[1] === 'course') {
-                        slug = pathParts[2];
-                    }
-                }
-
-                if (!slug) {
-                    showError('No course specified');
-                    return;
-                }
-
-                // Check auth status
-                updateAuthUI();
-
-                // Fetch course data
-                await loadCourseData(slug);
-
-                // Check enrollment if logged in
-                if (localStorage.getItem('supabase_session')) {
-                    await checkEnrollmentStatus();
-                }
-            } catch (error) {
-                console.error('Initialization error:', error);
-                showError('Failed to load course details');
-            }
+        async function loadCourse() {
+            const slug = window.location.pathname.split("/").pop();
+            
+            await loadCourseData(slug);
         }
 
         function updateAuthUI() {
@@ -233,26 +227,21 @@
         }
 
         async function loadCourseData(slug) {
-            try {
-                // Use the Supabase client to fetch course by slug
-                const { data, error } = await window.sbClient
-                    .from('courses')
-                    .select('*')
-                    .eq('slug', slug)
-                    .single();
+            const { data, error } = await window.supabaseClient
+                .from("courses")
+                .select("*")
+                .eq("slug", slug)
+                .single();
 
-                if (error || !data) {
-                    console.error('Error fetching course:', error);
-                    showError('Course not found');
-                    return;
-                }
-
-                currentCourse = data;
-                renderCourse(currentCourse);
-            } catch (error) {
-                console.error('Error loading course:', error);
-                showError('Failed to load course data');
+            if (error || !data) {
+                console.error("Course fetch error:", error);
+                document.getElementById("course-container").innerHTML =
+                    "<h2>Course not found</h2>";
+                return;
             }
+
+            document.getElementById("course-title").innerText = data.title;
+            document.getElementById("course-description").innerText = data.description;
         }
 
         function renderCourse(course) {
@@ -354,7 +343,7 @@
                 if (!session || !user) return;
 
                 // Use Supabase client to call the Edge Function
-                const { data, error } = await window.sbClient.functions.invoke('get-student-courses', {
+                const { data, error } = await window.supabaseClient.functions.invoke('get-student-courses', {
                     body: { user_id: user.user?.id || user.id }
                 });
 
@@ -410,8 +399,7 @@
             document.getElementById('errorMessage').textContent = msg;
         }
 
-        // Initialize
-        window.addEventListener('load', initPage);
+        document.addEventListener("DOMContentLoaded", loadCourse);
     </script>
 </body>
 
