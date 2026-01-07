@@ -731,6 +731,29 @@
                 console.log('No modules to search in original modules structure:', originalModules);
             }
             
+            // If we still only have the basic lesson, check if the course data has additional content
+            if (fullLesson === lesson && courseData && courseData.content) {
+                // The course might have content stored as a stringified JSON
+                try {
+                    const courseContent = JSON.parse(courseData.content);
+                    if (courseContent && courseContent.modules) {
+                        // Look for the lesson in the parsed course content
+                        for (const module of courseContent.modules) {
+                            if (module.lessons && Array.isArray(module.lessons)) {
+                                const foundLesson = module.lessons.find(l => l.title === lesson.title);
+                                if (foundLesson) {
+                                    fullLesson = foundLesson;
+                                    console.log('Found full lesson in course content:', fullLesson);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.log('Course content is not valid JSON or does not contain modules:', e);
+                }
+            }
+            
             // UI Updates
             document.getElementById('loading').style.display = 'none';
             document.getElementById('contentContainer').style.display = 'block';
