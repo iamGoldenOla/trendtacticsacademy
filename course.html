@@ -7,6 +7,8 @@
     <title id="pageTitle">Loading Course - Trendtactics Academy</title>
     <link rel="stylesheet" href="/css/main.css">
     <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+    <script src="/js/env.js"></script>
+    <script src="/js/supabase-client.js"></script>
 </head>
 
 <body>
@@ -103,7 +105,6 @@
         </div>
 
         <!-- Scripts -->
-        <script src="/js/supabase-client.js"></script>
         <script src="/js/auth.js"></script>
         <script>
             // Get course slug from URL
@@ -114,7 +115,7 @@
             async function loadCourseBySlug(slug) {
                 try {
                     // Try to find course by slug first
-                    const { data: courseBySlug, error: slugError } = await window.sbClient
+                    const { data: courseBySlug, error: slugError } = await window.supabaseClient
                         .from('courses')
                         .select('*')
                         .eq('slug', slug)
@@ -126,7 +127,7 @@
                     }
 
                     // If not found by slug, try by title (for backward compatibility)
-                    const { data: courseByTitle, error: titleError } = await window.sbClient
+                    const { data: courseByTitle, error: titleError } = await window.supabaseClient
                         .from('courses')
                         .select('*')
                         .ilike('title', `%${slug}%`) // Case insensitive partial match
@@ -139,7 +140,7 @@
 
                     // If still not found, default to Vibe Coding as fallback
                     console.warn('Course not found, loading default course');
-                    const { data: defaultCourse, error: defaultError } = await window.sbClient
+                    const { data: defaultCourse, error: defaultError } = await window.supabaseClient
                         .from('courses')
                         .select('*')
                         .ilike('title', '%Vibe Coding%')
@@ -247,7 +248,7 @@
                     const user = await Auth.getCurrentUser();
                     if (!user) return;
 
-                    const { data, error } = await window.sbClient
+                    const { data, error } = await window.supabaseClient
                         .from('enrollments')
                         .select('*')
                         .eq('user_id', user.id)
@@ -296,7 +297,7 @@
                     const user = await Auth.getCurrentUser();
 
                     // Create enrollment
-                    const { data, error } = await window.sbClient
+                    const { data, error } = await window.supabaseClient
                         .from('enrollments')
                         .insert({
                             user_id: user.id,
