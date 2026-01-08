@@ -539,8 +539,10 @@
                     if (isPuterAvailable) {
                         console.log('Puter.js is available, attempting to generate content');
                         try {
-                    // Create a detailed prompt for the AI to generate unique lesson content
-                    const aiPrompt = `Create comprehensive educational content for a lesson titled "${lessonTitle}" in the course "${courseTitle}". The module is "${moduleTitle}".
+                            // Safely check if user is authenticated before making AI calls
+                            if (puter?.auth?.isSignedIn && puter.auth.isSignedIn()) {
+                                // Create a detailed prompt for the AI to generate unique lesson content
+                                const aiPrompt = `Create comprehensive educational content for a lesson titled "${lessonTitle}" in the course "${courseTitle}". The module is "${moduleTitle}".
 
 Provide the content in the following JSON format with unique, specific content for this particular lesson:
 
@@ -555,18 +557,7 @@ Provide the content in the following JSON format with unique, specific content f
       "Recognize when and how to use ${topic} effectively"
     ]
   },
-  "core_concepts": "The core concept of ${topic} in the context of ${moduleTitle} and ${courseTitle} is unique and specific to this lesson. This concept involves several key components that work together to create powerful and efficient solutions.\n\nFirst, it's important to understand that ${topic} is not just a single technique, but rather a comprehensive approach that combines multiple methodologies to achieve optimal results. The foundational principle behind ${topic} is to streamline processes, reduce complexity, and enhance productivity through systematic approaches.\n\nFor beginners, think of ${topic} as a framework that helps you organize and execute tasks more efficiently. The core idea is to break down complex problems into manageable components that can be addressed systematically. This approach has several key benefits:\n\n1. **Simplicity**: Complex tasks are simplified into understandable steps
-2. **Efficiency**: Time and resources are optimized through structured approaches
-3. **Scalability**: Solutions can grow and adapt as needs change
-4. **Reliability**: Consistent methods lead to predictable and dependable outcomes
-
-The practical application of ${topic} in ${moduleTitle} involves understanding how different elements interact with each other. For example, in the context of ${courseTitle}, ${topic} serves as a bridge between theoretical knowledge and practical implementation. It connects abstract concepts to real-world applications, making it easier for practitioners to implement effective solutions.
-
-The underlying mechanics involve several interconnected processes that work together seamlessly. These processes have been refined over time to maximize effectiveness while minimizing complexity. Understanding these mechanics is crucial for anyone looking to master ${courseTitle} concepts.
-
-Best practices for implementing ${topic} include starting with simple applications and gradually building complexity, maintaining clear documentation of processes, and continuously evaluating and refining approaches based on results. These practices ensure that ${topic} remains effective and relevant in various contexts.
-
-In real-world scenarios, ${topic} has proven to be invaluable across multiple industries and applications. Its versatility and adaptability make it a cornerstone of modern ${courseTitle} methodologies.",
+  "core_concepts": "The core concept of ${topic} in the context of ${moduleTitle} and ${courseTitle} is unique and specific to this lesson. This concept involves several key components that work together to create powerful and efficient solutions.\n\nFirst, it's important to understand that ${topic} is not just a single technique, but rather a comprehensive approach that combines multiple methodologies to achieve optimal results. The foundational principle behind ${topic} is to streamline processes, reduce complexity, and enhance productivity through systematic approaches.\n\nFor beginners, think of ${topic} as a framework that helps you organize and execute tasks more efficiently. The core idea is to break down complex problems into manageable components that can be addressed systematically. This approach has several key benefits:\n\n1. **Simplicity**: Complex tasks are simplified into understandable steps\n2. **Efficiency**: Time and resources are optimized through structured approaches\n3. **Scalability**: Solutions can grow and adapt as needs change\n4. **Reliability**: Consistent methods lead to predictable and dependable outcomes\n\nThe practical application of ${topic} in ${moduleTitle} involves understanding how different elements interact with each other. For example, in the context of ${courseTitle}, ${topic} serves as a bridge between theoretical knowledge and practical implementation. It connects abstract concepts to real-world applications, making it easier for practitioners to implement effective solutions.\n\nThe underlying mechanics involve several interconnected processes that work together seamlessly. These processes have been refined over time to maximize effectiveness while minimizing complexity. Understanding these mechanics is crucial for anyone looking to master ${courseTitle} concepts.\n\nBest practices for implementing ${topic} include starting with simple applications and gradually building complexity, maintaining clear documentation of processes, and continuously evaluating and refining approaches based on results. These practices ensure that ${topic} remains effective and relevant in various contexts.\n\nIn real-world scenarios, ${topic} has proven to be invaluable across multiple industries and applications. Its versatility and adaptability make it a cornerstone of modern ${courseTitle} methodologies.",
   "unique_aspect": "In this specific lesson about \"${lessonTitle}\", we'll explore the distinctive characteristics that differentiate it from other concepts in the ${courseTitle} curriculum. This lesson builds upon previous knowledge while introducing specialized applications and nuanced understanding that are unique to ${topic}.",
   "visual_explanations": [
     "Visual representations help clarify the ${topic} concepts",
@@ -679,38 +670,45 @@ In real-world scenarios, ${topic} has proven to be invaluable across multiple in
 }
 
 Make sure the content is unique, detailed, educational, and specifically tailored to this lesson title rather than generic content. Write in a conversational and friendly tone without sounding robotic, generic or like typical AI content. Focus on making the content feel human and relatable.`;
-                    
-                    // Get AI-generated content using Puter.js
-                    const aiResponse = await puter.ai.chat(aiPrompt, { model: 'gpt-4.1-nano' });
-                    
-                    // Parse the AI response to extract JSON content
-                    const responseText = typeof aiResponse === 'string' ? aiResponse : JSON.stringify(aiResponse);
-                    
-                    // Extract JSON from response
-                    const jsonMatch = responseText.match(/\{[\s\S]*?\}/g);
-                    if (jsonMatch) {
-                        // Try to parse each potential JSON object
-                        for (const jsonString of jsonMatch) {
-                            try {
-                                const parsed = JSON.parse(jsonString);
-                                if (parsed.introduction && parsed.core_concepts) {
-                                    return parsed; // Return the first valid JSON object
+
+                                // Get AI-generated content using Puter.js
+                                const aiResponse = await puter.ai.chat(aiPrompt, { model: 'gpt-4.1-nano' });
+                                
+                                // Parse the AI response to extract JSON content
+                                const responseText = typeof aiResponse === 'string' ? aiResponse : JSON.stringify(aiResponse);
+                                
+                                // Extract JSON from response
+                                const jsonMatch = responseText.match(/\{[\s\S]*?\}/g);
+                                if (jsonMatch) {
+                                    // Try to parse each potential JSON object
+                                    for (const jsonString of jsonMatch) {
+                                        try {
+                                            const parsed = JSON.parse(jsonString);
+                                            if (parsed.introduction && parsed.core_concepts) {
+                                                return parsed; // Return the first valid JSON object
+                                            }
+                                        } catch (e) {
+                                            continue; // Continue to next match if parsing fails
+                                        }
+                                    }
                                 }
-                            } catch (e) {
-                                continue; // Continue to next match if parsing fails
+                                
+                                // If parsing fails, return fallback content
+                                console.warn('Could not parse JSON from AI response, using fallback content');
+                                throw new Error('Failed to parse AI response');
+                            } else {
+                                console.log('Puter.js not authenticated, using fallback content');
+                                throw new Error('Puter.js not authenticated');
                             }
+                        } catch (error) {
+                            console.error('Error generating lesson with AI:', error);
+                            // Re-throw the error to trigger the fallback
+                            throw error;
                         }
+                    } else {
+                        console.log('Puter.js not available, using fallback content');
+                        throw new Error('Puter.js not available');
                     }
-                    
-                    // If parsing fails, return fallback content
-                    console.warn('Could not parse JSON from AI response, using fallback content');
-                } catch (error) {
-                    console.error('Error generating lesson with AI:', error);
-                }
-            }
-            
-            // If Puter.js is not available, throw error to trigger fallback
-            throw new Error('Puter.js not available');
                 },
                 
                 // Fallback function
