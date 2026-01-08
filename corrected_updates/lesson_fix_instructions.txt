@@ -1,0 +1,25 @@
+LESSON CONTENT REPETITION FIX INSTRUCTIONS
+
+To fix the lesson content repetition issue:
+
+1. FIRST: Make sure your database has the proper lesson content
+   - Check that lessons in the 'lessons' table have unique content
+   - If lessons are just placeholders with titles like "Setting up your development environment", they need real content
+
+2. RUN the AI content generation:
+   - The vibe-coding-course.json file contains comprehensive lesson content
+   - You need to run the lesson population script to add this content to your database
+
+3. If lessons still show repetition, run this SQL to check your lessons:
+   
+   -- Check for lessons in the Vibe Coding course
+   SELECT l.id, l.title, l.content, m.title as module_title 
+   FROM lessons l
+   JOIN modules m ON l.module_id = m.id
+   JOIN courses c ON m.course_id = c.id
+   WHERE c.title ILIKE '%Vibe Coding%'
+   ORDER BY m.ordering, l.ordering;
+
+4. If lessons have NULL or empty content, you need to populate them using the data in vibe-coding-course.json
+
+5. Make sure your lesson-viewer.html is properly configured to display the content from the database, not from static placeholders.

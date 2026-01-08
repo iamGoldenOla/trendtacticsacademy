@@ -13,7 +13,7 @@
 - **File**: `lms-frontend/public/_headers`
 - **Changes**: Added proper Content Security Policy headers allowing:
   - Supabase connections (`connect-src`)
-  - External scripts (`script-src` for puter.com, Supabase, CDNs)
+  - External scripts (`script-src` for Supabase, CDNs)
   - Proper framing permissions (`frame-src`)
 
 ### 2. Created Interactive Learning Components

@@ -1,8 +1,8 @@
 # Super Intelligent Trendy Implementation Guide
 
-## Leveraging Advanced puter.js Capabilities
+## Leveraging Advanced AI Capabilities
 
-Based on the puter.js examples you provided, we can transform Trendy from a basic chatbot into a truly super intelligent educational assistant. Here's how to implement each capability:
+Based on the AI examples you provided, we can transform Trendy from a basic chatbot into a truly super intelligent educational assistant. Here's how to implement each capability:
 
 ## 1. Multi-Model AI Architecture
 
@@ -19,11 +19,11 @@ Your examples show access to multiple cutting-edge AI models:
 ```javascript
 // Initialize multiple models for different purposes
 this.aiModels = {
-  fast: await puter.ai.create({ model: 'gpt-5-nano' }),        // Quick responses
-  reasoning: await puter.ai.create({ model: 'deepseek-reasoner' }), // Complex analysis
-  creative: await puter.ai.create({ model: 'claude-sonnet-4' }),   // Creative content
-  education: await puter.ai.create({ model: 'gemini-2.0-flash' }), // Educational expertise
-  unconventional: await puter.ai.create({ model: 'grok-beta' })    // Creative thinking
+  fast: await aiService.create({ model: 'gpt-5-nano' }),        // Quick responses
+  reasoning: await aiService.create({ model: 'deepseek-reasoner' }), // Complex analysis
+  creative: await aiService.create({ model: 'claude-sonnet-4' }),   // Creative content
+  education: await aiService.create({ model: 'gemini-2.0-flash' }), // Educational expertise
+  unconventional: await aiService.create({ model: 'grok-beta' })    // Creative thinking
 };
 ```
 
@@ -210,7 +210,7 @@ echo "5. Testing educational expertise..."
 # Expected: Gemini 2.0 Flash educational expertise
 ```
 
-## 7. Advanced puter.js Features to Implement
+## 7. Advanced AI Features to Implement
 
 ### Model Comparison System
 ```javascript
@@ -221,7 +221,7 @@ async compareModels(query) {
   
   for (const model of models) {
     // eslint-disable-next-line no-undef
-    const response = await puter.ai.chat(query, { model });
+    const response = await aiService.chat(query, { model });
     responses[model] = response.choices[0].text.trim();
   }
   
@@ -342,7 +342,7 @@ const secureTools = [{
 
 ## Conclusion
 
-By implementing these advanced puter.js capabilities, Trendy will become a truly super intelligent educational assistant that:
+By implementing these advanced AI capabilities, Trendy will become a truly super intelligent educational assistant that:
 
 1. **Understands Context**: Maintains conversation history and user preferences
 2. **Leverages Specialization**: Uses the right AI model for each task

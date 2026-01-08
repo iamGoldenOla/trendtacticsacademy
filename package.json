@@ -30,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/your-username/trendtactics-academy/issues"
   },
-  "homepage": "https://github.com/your-username/trendtactics-academy#readme"
+  "homepage": "https://github.com/your-username/trendtactics-academy#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.90.0"
+  }
 }

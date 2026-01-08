@@ -156,7 +156,7 @@
     </main>
 
     <!-- Scripts -->
-    <script src="https://js.puter.com/v2/" onload="if(window.puter && window.puter.auth) { puter.auth.autoLogin = false; }"></script>
+
     <script src="/js/supabase-client.js"></script>
     <script src="/js/auth.js"></script>
     <script>
@@ -261,9 +261,31 @@
                 if (lesson.lesson_json) {
                     displayLessonContent(lesson.lesson_json);
                 } else {
-                    document.getElementById('lessonContent').innerHTML = `
-                        <p>${lesson.content || 'No content available for this lesson.'}</p>
-                    `;
+                    // If no content exists or it's generic/duplicate content, generate unique AI content
+                    const lessonContent = lesson.content || '';
+                    
+                    // Check if content seems generic or duplicated
+                    if (!lessonContent || lessonContent.includes('No content available') || 
+                        lessonContent.includes('core concept') || lessonContent.includes('fundamental to understanding')) {
+                        // Generate unique AI content for this specific lesson
+                        generateLessonContent(currentCourse.id, currentCourse.title, getModuleTitleById(lesson.module_id), lesson.title)
+                            .then(generatedContent => {
+                                displayLessonContent(generatedContent);
+                                
+                                // Optionally save the generated content back to the database
+                                saveGeneratedContent(lesson.id, generatedContent);
+                            })
+                            .catch(error => {
+                                console.error('Error generating lesson content:', error);
+                                document.getElementById('lessonContent').innerHTML = `
+                                    <p>${lessonContent || 'No content available for this lesson.'}</p>
+                                `;
+                            });
+                    } else {
+                        document.getElementById('lessonContent').innerHTML = `
+                            <p>${lessonContent}</p>
+                        `;
+                    }
                 }
 
                 // Update navigation buttons
@@ -444,6 +466,399 @@
                 const newLesson = allLessons[newIndex];
                 window.location.href = `?course=${currentCourse.id}&lesson=${newLesson.id}`;
             }
+        }
+
+        // Helper function to get module title by ID
+        async function getModuleTitleById(moduleId) {
+            if (!moduleId) return 'Unknown Module';
+            
+            try {
+                const { data: module, error } = await window.supabaseClient
+                    .from('modules')
+                    .select('title')
+                    .eq('id', moduleId)
+                    .single();
+                    
+                if (error) throw error;
+                return module.title || 'Unknown Module';
+            } catch (error) {
+                console.error('Error fetching module title:', error);
+                return 'Unknown Module';
+            }
+        }
+
+        // Function to save generated content back to the database
+        async function saveGeneratedContent(lessonId, content) {
+            try {
+                const { error } = await window.supabaseClient
+                    .from('lessons')
+                    .update({ 
+                        lesson_json: content,
+                        content: JSON.stringify(content) // Also store as string for compatibility
+                    })
+                    .eq('id', lessonId);
+                    
+                if (error) throw error;
+                console.log('Generated content saved successfully');
+            } catch (error) {
+                console.error('Error saving generated content:', error);
+            }
+        }
+
+        // Generate lesson content using AI
+        async function generateLessonContent(courseId, courseTitle, moduleTitle, lessonTitle) {
+            console.log('Generating unique content for:', { courseTitle, moduleTitle, lessonTitle });
+            
+            // Check if Puter.js is available
+            const isPuterAvailable = typeof puter !== 'undefined' && puter && puter.ai;
+            
+            // Generate content based on lesson title and course context
+            const topic = lessonTitle.toLowerCase().replace('what is ', '').replace('?', '').trim();
+            
+            // If Puter.js is available, try to use it
+            if (isPuterAvailable) {
+                try {
+                    // Create a detailed prompt for the AI to generate unique lesson content
+                    const aiPrompt = `Create comprehensive educational content for a lesson titled "${lessonTitle}" in the course "${courseTitle}". The module is "${moduleTitle}".
+
+Provide the content in the following JSON format with unique, specific content for this particular lesson:
+
+{
+  \"introduction\": {
+    \"title\": \"Introduction to ${lessonTitle}\",
+    \"description\": \"In this lesson, you'll learn about ${topic}. This topic is fundamental to the ${courseTitle} course and will provide you with practical skills you can apply immediately.\",
+    \"importance\": \"Understanding ${topic} is crucial because it forms the foundation for advanced concepts in ${courseTitle} and provides real-world applications that will enhance your knowledge in this field.\",
+    \"learningOutcomes\": [
+      \"Understand the core principles of ${topic}\",
+      \"Apply ${courseTitle} techniques in practical scenarios\",
+      \"Recognize when and how to use ${topic} effectively\"
+    ]
+  },
+  \"core_concepts\": \"The core concept of ${topic} in the context of ${moduleTitle} and ${courseTitle} is unique and specific to this lesson. This concept involves several key components that work together to create powerful and efficient solutions.\n\nFirst, it's important to understand that ${topic} is not just a single technique, but rather a comprehensive approach that combines multiple methodologies to achieve optimal results. The foundational principle behind ${topic} is to streamline processes, reduce complexity, and enhance productivity through systematic approaches.\n\nFor beginners, think of ${topic} as a framework that helps you organize and execute tasks more efficiently. The core idea is to break down complex problems into manageable components that can be addressed systematically. This approach has several key benefits:\n\n1. **Simplicity**: Complex tasks are simplified into understandable steps
+2. **Efficiency**: Time and resources are optimized through structured approaches
+3. **Scalability**: Solutions can grow and adapt as needs change
+4. **Reliability**: Consistent methods lead to predictable and dependable outcomes
+
+The practical application of ${topic} in ${moduleTitle} involves understanding how different elements interact with each other. For example, in the context of ${courseTitle}, ${topic} serves as a bridge between theoretical knowledge and practical implementation. It connects abstract concepts to real-world applications, making it easier for practitioners to implement effective solutions.
+
+The underlying mechanics involve several interconnected processes that work together seamlessly. These processes have been refined over time to maximize effectiveness while minimizing complexity. Understanding these mechanics is crucial for anyone looking to master ${courseTitle} concepts.
+
+Best practices for implementing ${topic} include starting with simple applications and gradually building complexity, maintaining clear documentation of processes, and continuously evaluating and refining approaches based on results. These practices ensure that ${topic} remains effective and relevant in various contexts.
+
+In real-world scenarios, ${topic} has proven to be invaluable across multiple industries and applications. Its versatility and adaptability make it a cornerstone of modern ${courseTitle} methodologies.\",
+  \"unique_aspect\": \"In this specific lesson about \"${lessonTitle}\", we'll explore the distinctive characteristics that differentiate it from other concepts in the ${courseTitle} curriculum. This lesson builds upon previous knowledge while introducing specialized applications and nuanced understanding that are unique to ${topic}.\",
+  \"visual_explanations\": [
+    \"Visual representations help clarify the ${topic} concepts\",
+    \"Diagrams showing the relationship between different ${topic} components\",
+    \"Interactive diagrams that show how ${topic} works step-by-step\",
+    \"Flowcharts demonstrating the ${topic} process\",
+    \"Comparative visuals showing ${topic} vs traditional approaches\"
+  ],
+  \"step_by_step\": [
+    {
+      \"title\": \"Getting Started\",
+      \"description\": \"Begin by understanding the basics of ${topic}\"
+    },
+    {
+      \"title\": \"Implementation\",
+      \"description\": \"Apply ${topic} in a practical context\"
+    },
+    {
+      \"title\": \"Advanced Applications\",
+      \"description\": \"Explore advanced uses of ${topic} in ${courseTitle}\"
+    }
+  ],
+  \"practical_examples\": [
+    {
+      \"title\": \"Example 1: Basic ${topic} Usage\",
+      \"scenario\": \"A beginner scenario demonstrating ${topic}\",
+      \"implementation\": \"Simple implementation showing core concepts\",
+      \"outcome\": \"Understanding of basic ${topic} principles\"
+    },
+    {
+      \"title\": \"Example 2: Advanced ${topic} Application\",
+      \"scenario\": \"A complex scenario showcasing advanced ${topic} usage\",
+      \"implementation\": \"Sophisticated implementation with best practices\",
+      \"outcome\": \"Mastery of advanced ${topic} concepts\"
+    }
+  ],
+  \"case_study\": {
+    \"title\": \"Case Study: Implementing ${topic} in Real Projects\",
+    \"scenario\": \"A real-world scenario demonstrating ${topic} in action\",
+    \"challenges\": \"Initial challenges in implementing ${topic}\",
+    \"solution\": \"Effective solution using ${topic} principles\",
+    \"results\": \"Successful implementation with measurable outcomes\",
+    \"lessonsLearned\": \"Key insights about ${topic} best practices\"
+  },
+  \"resources\": {
+    \"youtube_videos\": [
+      {
+        \"title\": \"${topic} Explained in Detail\",
+        \"url\": \"https://www.youtube.com/embed/\",
+        \"embeddable\": true,
+        \"why_relevant\": \"Provides comprehensive overview of ${topic} concepts suitable for ${courseTitle}\"
+      }
+    ],
+    \"images\": [],
+    \"downloads\": []
+  },
+  \"summary\": {
+    \"keyTakeaways\": [
+      \"${topic} enhances your ${courseTitle} workflow through systematic approaches\",
+      \"The approach emphasizes practical application and continuous learning\",
+      \"${topic} should be integrated thoughtfully with your existing knowledge\",
+      \"Critical thinking remains essential even with structured approaches\"
+    ],
+    \"nextSteps\": [
+      \"Practice applying ${topic} in different contexts\",
+      \"Explore advanced features of ${courseTitle} methodologies\",
+      \"Share experiences with the ${courseTitle} community\",
+      \"Build a personal toolkit of ${courseTitle} strategies\"
+    ],
+    \"confidenceBuilder\": \"You now have a solid understanding of ${topic}. With practice, you will become proficient at leveraging these concepts in your work.\"
+  },
+  \"quiz\": {
+    \"title\": \"${topic} Fundamentals Quiz\",
+    \"questions\": [
+      {
+        \"question\": \"What is the primary principle of ${topic}?\",
+        \"options\": [
+          \"Fundamental concepts and systematic approach\",
+          \"Random trial and error\",
+          \"Following outdated methods\",
+          \"Complete automation of all tasks\"
+        ],
+        \"correctAnswer\": 0,
+        \"explanation\": \"${topic} emphasizes fundamental concepts and systematic approaches to problem-solving.\"
+      },
+      {
+        \"question\": \"Which of the following is a best practice in this area?\",
+        \"options\": [
+          \"Over-relying on shortcuts without understanding\",
+          \"Starting with clear foundational knowledge\",
+          \"Ignoring basic principles\",
+          \"Avoiding structured learning\"
+        ],
+        \"correctAnswer\": 1,
+        \"explanation\": \"Starting with clear foundational knowledge helps build stronger understanding.\"
+      },
+      {
+        \"question\": \"What should you do after learning the basics?\",
+        \"options\": [
+          \"Stop learning and apply only basic techniques\",
+          \"Verify and practice the concepts thoroughly\",
+          \"Assume you know everything\",
+          \"Ignore further development\"
+        ],
+        \"correctAnswer\": 1,
+        \"explanation\": \"It's essential to verify and practice concepts thoroughly before advancing.\"
+      }
+    ]
+  }
+}
+
+Make sure the content is unique, detailed, educational, and specifically tailored to this lesson title rather than generic content. Write in a conversational and friendly tone without sounding robotic, generic or like typical AI content. Focus on making the content feel human and relatable.`;
+                    
+                    // Get AI-generated content using Puter.js
+                    const aiResponse = await puter.ai.chat(aiPrompt, { model: 'gpt-4.1-nano' });
+                    
+                    // Parse the AI response to extract JSON content
+                    const responseText = typeof aiResponse === 'string' ? aiResponse : JSON.stringify(aiResponse);
+                    
+                    // Extract JSON from response
+                    const jsonMatch = responseText.match(/\{[\s\S]*?\}/g);
+                    if (jsonMatch) {
+                        // Try to parse each potential JSON object
+                        for (const jsonString of jsonMatch) {
+                            try {
+                                const parsed = JSON.parse(jsonString);
+                                if (parsed.introduction && parsed.core_concepts) {
+                                    return parsed; // Return the first valid JSON object
+                                }
+                            } catch (e) {
+                                continue; // Continue to next match if parsing fails
+                            }
+                        }
+                    }
+                    
+                    // If parsing fails, return fallback content
+                    console.warn('Could not parse JSON from AI response, using fallback content');
+                } catch (error) {
+                    console.error('Error generating lesson with AI:', error);
+                }
+            }
+            
+            // Fallback to the original content structure with unique elements
+            const content = {
+                course_id: courseId,
+                course_title: courseTitle,
+                module_title: moduleTitle,
+                lesson_title: lessonTitle,
+                introduction: {
+                    title: `Introduction to ${lessonTitle}`,
+                    description: `In this lesson, you'll learn about ${topic}. This topic is fundamental to the ${courseTitle} course and will provide you with practical skills you can apply immediately.`,
+                    importance: `Understanding ${topic} is crucial because it forms the foundation for advanced concepts in ${courseTitle} and provides real-world applications that will enhance your knowledge in this field.`,
+                    learningOutcomes: [
+                        `Understand the core principles of ${topic}`,
+                        `Apply ${courseTitle} techniques in practical scenarios`,
+                        `Recognize when and how to use ${topic} effectively`
+                    ]
+                },
+                core_concepts: `The core concept of ${topic} in the context of ${moduleTitle} and ${courseTitle} is unique and specific to this lesson. This concept involves several key components that work together to create powerful and efficient solutions.
+
+First, it's important to understand that ${topic} is not just a single technique, but rather a comprehensive approach that combines multiple methodologies to achieve optimal results. The foundational principle behind ${topic} is to streamline processes, reduce complexity, and enhance productivity through systematic approaches.
+
+For beginners, think of ${topic} as a framework that helps you organize and execute tasks more efficiently. The core idea is to break down complex problems into manageable components that can be addressed systematically. This approach has several key benefits:
+
+1. **Simplicity**: Complex tasks are simplified into understandable steps
+2. **Efficiency**: Time and resources are optimized through structured approaches
+3. **Scalability**: Solutions can grow and adapt as needs change
+4. **Reliability**: Consistent methods lead to predictable and dependable outcomes
+
+The practical application of ${topic} in ${moduleTitle} involves understanding how different elements interact with each other. For example, in the context of ${courseTitle}, ${topic} serves as a bridge between theoretical knowledge and practical implementation. It connects abstract concepts to real-world applications, making it easier for practitioners to implement effective solutions.
+
+The underlying mechanics involve several interconnected processes that work together seamlessly. These processes have been refined over time to maximize effectiveness while minimizing complexity. Understanding these mechanics is crucial for anyone looking to master ${courseTitle} concepts.
+
+Best practices for implementing ${topic} include starting with simple applications and gradually building complexity, maintaining clear documentation of processes, and continuously evaluating and refining approaches based on results. These practices ensure that ${topic} remains effective and relevant in various contexts.
+
+In real-world scenarios, ${topic} has proven to be invaluable across multiple industries and applications. Its versatility and adaptability make it a cornerstone of modern ${courseTitle} methodologies.`,
+                unique_aspect: `In this specific lesson about "${lessonTitle}", we'll explore the distinctive characteristics that differentiate it from other concepts in the ${courseTitle} curriculum. This lesson builds upon previous knowledge while introducing specialized applications and nuanced understanding that are unique to ${topic}.`,
+                visual_explanations: [
+                    `Visual representations help clarify the ${topic} concepts`,
+                    `Diagrams showing the relationship between different ${topic} components`,
+                    `Interactive diagrams that show how ${topic} works step-by-step`,
+                    `Flowcharts demonstrating the ${topic} process`,
+                    `Comparative visuals showing ${topic} vs traditional approaches`
+                ],
+                step_by_step: [
+                    {
+                        title: 'Getting Started',
+                        description: `Begin by understanding the basics of ${topic}`
+                    },
+                    {
+                        title: 'Implementation',
+                        description: `Apply ${topic} in a practical context`
+                    },
+                    {
+                        title: 'Advanced Applications',
+                        description: `Explore advanced uses of ${topic} in ${courseTitle}`
+                    }
+                ],
+                practical_examples: [
+                    {
+                        title: `Example 1: Basic ${topic} Usage`,
+                        scenario: `A beginner scenario demonstrating ${topic}`,
+                        implementation: `Simple implementation showing core concepts`,
+                        outcome: `Understanding of basic ${topic} principles`
+                    },
+                    {
+                        title: `Example 2: Advanced ${topic} Application`,
+                        scenario: `A complex scenario showcasing advanced ${topic} usage`,
+                        implementation: `Sophisticated implementation with best practices`,
+                        outcome: `Mastery of advanced ${topic} concepts`
+                    }
+                ],
+                case_study: {
+                    title: `Case Study: Implementing ${topic} in Real Projects`,
+                    scenario: `A real-world scenario demonstrating ${topic} in action`,
+                    challenges: `Initial challenges in implementing ${topic}`,
+                    solution: `Effective solution using ${topic} principles`,
+                    results: `Successful implementation with measurable outcomes`,
+                    lessonsLearned: `Key insights about ${topic} best practices`
+                },
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: `${topic} Explained in Detail`,
+                            url: getRelevantVideoUrl(topic),
+                            embeddable: true,
+                            why_relevant: `Provides comprehensive overview of ${topic} concepts suitable for ${courseTitle}`
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                },
+                summary: {
+                    keyTakeaways: [
+                        `${topic} enhances your ${courseTitle} workflow through systematic approaches`,
+                        `The approach emphasizes practical application and continuous learning`,
+                        `${topic} should be integrated thoughtfully with your existing knowledge`,
+                        `Critical thinking remains essential even with structured approaches`
+                    ],
+                    nextSteps: [
+                        `Practice applying ${topic} in different contexts`,
+                        `Explore advanced features of ${courseTitle} methodologies`,
+                        `Share experiences with the ${courseTitle} community`,
+                        `Build a personal toolkit of ${courseTitle} strategies`
+                    ],
+                    confidenceBuilder: `You now have a solid understanding of ${topic}. With practice, you will become proficient at leveraging these concepts in your work.`
+                },
+                quiz: {
+                    title: `${topic} Fundamentals Quiz`,
+                    questions: [
+                        {
+                            question: `What is the primary principle of ${topic}?`,
+                            options: [
+                                'Fundamental concepts and systematic approach',
+                                'Random trial and error',
+                                'Following outdated methods',
+                                'Complete automation of all tasks'
+                            ],
+                            correctAnswer: 0,
+                            explanation: `${topic} emphasizes fundamental concepts and systematic approaches to problem-solving.`
+                        },
+                        {
+                            question: 'Which of the following is a best practice in this area?',
+                            options: [
+                                'Over-relying on shortcuts without understanding',
+                                'Starting with clear foundational knowledge',
+                                'Ignoring basic principles',
+                                'Avoiding structured learning'
+                            ],
+                            correctAnswer: 1,
+                            explanation: 'Starting with clear foundational knowledge helps build stronger understanding.'
+                        },
+                        {
+                            question: 'What should you do after learning the basics?',
+                            options: [
+                                'Stop learning and apply only basic techniques',
+                                'Verify and practice the concepts thoroughly',
+                                'Assume you know everything',
+                                'Ignore further development'
+                            ],
+                            correctAnswer: 1,
+                            explanation: 'It\'s essential to verify and practice concepts thoroughly before advancing.'
+                        }
+                    ]
+                }
+            };
+            
+            return content;
+        }
+
+        // Helper function to get relevant YouTube video URL based on topic
+        function getRelevantVideoUrl(topic) {
+            // Map topics to relevant educational YouTube videos
+            const topicMap = {
+                'vibe coding': '5OWurmg41tI',
+                'ai automation': 'jwG_OzHVoqo',
+                'prompt engineering': 'Z6VZYyGFco4',
+                'digital marketing': 'mIxwUbZsF_Q',
+                'facebook ads': 'uKj01Hy24A0',
+                'automation': 'P5g3ujZCp8M',
+                'development': 'PkZNo7MFNFg',
+                'coding': 'DLX62G4lc44'
+            };
+            
+            // Check for matching topic
+            for (const [key, videoId] of Object.entries(topicMap)) {
+                if (topic.includes(key)) {
+                    return `https://www.youtube.com/embed/${videoId}`;
+                }
+            }
+            
+            // Default to a general educational video if no match
+            return 'https://www.youtube.com/embed/dQw4w9WgXcQ';
         }
 
         function switchTab(tabName, event) {

@@ -7,7 +7,7 @@
     <title>Courses - Trendtactics Academy</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="icon" href="/images/Trendtactics-logo - Copy.jpg" type="image/jpeg">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://uimdbodamoeyukrghchb.supabase.co https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.google.com https://www.gstatic.com https://js.puter.com https://api.puter.com https://*.puter.com; connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co https://fonts.googleapis.com wss://*.puter.com wss://api.puter.com https://api.puter.com https://js.puter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.puter.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: https://*.puter.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://js.puter.com https://*.puter.com">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://uimdbodamoeyukrghchb.supabase.co https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.google.com https://www.gstatic.com; connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;">
     <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
     <script src="/js/env.js"></script>
     <script src="/js/supabase-client.js"></script>
@@ -207,6 +207,7 @@
     </footer>
 
     <!-- Scripts -->
+
     <script src="/js/supabase-client.js"></script>
     <script src="/js/auth.js"></script>
     <script>
@@ -322,7 +323,7 @@
                         <div class="card" style="transition: all 0.3s ease;">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                 <span class="badge badge-primary">${course.level || 'Beginner'}</span>
-                                <span class="badge" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white;">$3 / ₦5,000</span>
+                                <span class="badge" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white;">${course.price || '$3 / ₦5,000'}</span>
                             </div>
                             <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
                                 <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></div>
@@ -452,6 +453,3 @@
     </script>
 </body>
 
-</html>
-</html>
-</html>

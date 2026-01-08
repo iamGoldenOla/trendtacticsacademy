@@ -24,8 +24,8 @@ This document explains how to use the conversational course creation feature pow
 - Can initiate course creation conversations
 - Handles general inquiries about existing courses
 
-### 3. puterService Integration
-- Backend service that connects to puter.js AI capabilities
+### 3. AI Service Integration
+- Backend service that connects to AI capabilities
 - Handles course content generation
 - Manages conversation state and user feedback
 
@@ -70,15 +70,15 @@ This document explains how to use the conversational course creation feature pow
 
 ### AI Integration
 
-- **puter.js**: Cloud-based AI platform for natural language processing
+- **AI Service**: Cloud-based AI platform for natural language processing
 - **GPT Models**: Utilizes GPT-3.5 Turbo for conversational intelligence
 - **API Service**: Custom service layer for handling AI requests
 
 ### Data Flow
 
 1. User inputs course topic and preferences
-2. Frontend sends request to puterService
-3. puterService processes request with AI model
+2. Frontend sends request to aiService
+3. aiService processes request with AI model
 4. AI generates conversational responses and course content
 5. Frontend displays results and maintains conversation history
 
@@ -103,7 +103,7 @@ A dedicated test page is available at `/conversational-course-test` to demonstra
 ### Common Issues
 
 1. **AI Initialization Failed**:
-   - Ensure puter.js script is loaded in `index.html`
+   - Ensure AI service is properly initialized
    - Check network connectivity
    - Verify API credentials if required
 

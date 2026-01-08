@@ -60,7 +60,7 @@ If you still see errors:
 
 For CSP issues specifically:
 - Make sure _headers file includes proper connect-src directives
-- Verify script-src includes Supabase and puter.com domains
+- Verify script-src includes Supabase and external domains
 `);
 
 // Export for use as module

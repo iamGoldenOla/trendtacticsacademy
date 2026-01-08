@@ -1,0 +1,2235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Space - Trendtactics Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="icon" href="/images/Trendtactics-logo - Copy.jpg" type="image/jpeg">
+    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+    <script src="/js/env.js"></script>
+    <script src="/js/supabase-client.js"></script>
+
+    <style>
+        /* Embed critical CSS for learning view */
+        :root {
+            --primary: #00D9FF;
+            --primary-dark: #00B8D9;
+            --secondary: #7C3AED;
+            --bg-dark: #0B1437;
+            --bg-darker: #060D24;
+            --bg-card: rgba(15, 25, 55, 0.95);
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --success: #10B981;
+            --error: #EF4444;
+            --border: rgba(0, 217, 255, 0.2);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-darker);
+            color: var(--text-primary);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-dark);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        .course-title-header {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        /* Main Layout */
+        .main-layout {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background: var(--bg-dark);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+            z-index: 50;
+        }
+
+        .sidebar-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .progress-bar-container {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 0.75rem;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--success);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .lesson-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.5rem;
+        }
+
+        .module-header {
+            padding: 0.75rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+        }
+
+        .lesson-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 2px;
+            transition: background 0.2s;
+        }
+
+        .lesson-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .lesson-item.active {
+            background: rgba(0, 217, 255, 0.1);
+            border-left: 3px solid var(--primary);
+        }
+
+        .lesson-item.completed .status-icon {
+            color: var(--success);
+        }
+
+        .status-icon {
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--text-muted);
+            border-radius: 50%;
+            font-size: 0.6rem;
+            color: transparent;
+            flex-shrink: 0;
+        }
+
+        .lesson-item.completed .status-icon {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .lesson-item.active .status-icon {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            background: var(--bg-darker);
+            position: relative;
+        }
+
+        .content-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            width: 100%;
+        }
+
+        .lesson-content h1 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            background: black;
+            border: 1px solid var(--border);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .text-content {
+            line-height: 1.7;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .text-content h2 {
+            color: var(--text-primary);
+            margin: 2rem 0 1rem;
+            font-size: 1.25rem;
+        }
+
+        .text-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .text-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .text-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .nav-btn.primary {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+        }
+
+        .nav-btn.primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .nav-btn[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Mobile */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                transform: translateX(-100%);
+                width: 85%;
+                max-width: 320px;
+                box-shadow: 10px 0 20px rgba(0, 0, 0, 0.5);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .content-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+            <a href="/dashboard" class="back-link">← Dashboard</a>
+            <span class="course-title-header" id="courseHeaderTitle">Loading...</span>
+        </div>
+        <div>
+
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 style="font-size: 1rem; margin-bottom: 0.5rem;">Course Content</h2>
+                <div
+                    style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted);">
+                    <span id="progressText">0% Complete</span>
+                    <span id="lessonCount">0/0 Lessons</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="lesson-list" id="lessonList">
+                <!-- Populated by JS -->
+            </div>
+        </aside>
+
+        <!-- Content -->
+        <main class="content-area">
+            <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem; animation: spin 1s infinite linear;">↻</div>
+                    <p>Loading lesson...</p>
+                </div>
+            </div>
+
+            <div id="contentContainer" class="content-container" style="display: none;">
+                <div class="lesson-content">
+                    <h1 id="lessonTitle">Lesson Title</h1>
+
+                    <div id="videoContainer" class="video-wrapper" style="display: none;">
+                        <iframe id="videoPlayer" src="" allowfullscreen></iframe>
+                    </div>
+
+                    <div id="textContent" class="text-content">
+                        <!-- Content goes here -->
+                    </div>
+
+                    <div class="navigation-buttons">
+                        <button id="prevBtn" class="nav-btn" onclick="prevLesson()">Previous</button>
+                        <button id="nextBtn" class="nav-btn primary" onclick="nextLesson()">Next Lesson →</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/supabase-client.js"></script>
+    <script>
+        // Global State
+        let courseData = null;
+        let currentLessonIndex = 0;
+        let flatLessons = []; // Array of all lessons for easier navigation
+        let completedLessons = new Set();
+        let courseId = null;
+        let originalModules = null; // Store original modules structure to access full content
+
+        // Init
+        async function init() {
+            // Get course ID from URL
+            const params = new URLSearchParams(window.location.search);
+            // Support both ?course_id=UUID and /learn/UUID via rewrite
+            courseId = params.get('course_id') || params.get('id');
+
+            // Fallback for rewrite rule if query param is lost but path remains
+            // Path: /learn/UUID
+            if (!courseId) {
+                const parts = window.location.pathname.split('/');
+                if (parts.length > 2 && parts[1] === 'learn') {
+                    courseId = parts[2];
+                }
+            }
+
+            if (!courseId) {
+                alert('No course ID specified');
+                window.location.href = '/dashboard';
+                return;
+            }
+
+            // Load Course Content
+            await loadCourseContent(courseId);
+        }
+
+        async function loadCourseContent(id) {
+            try {
+                // Check Auth
+                const session = localStorage.getItem('supabase_session');
+                if (!session) {
+                    window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href);
+                    return;
+                }
+                
+                // Get user info
+                const user = JSON.parse(localStorage.getItem('supabase_user'));
+                if (!user) {
+                    window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href);
+                    return;
+                }
+                
+                // Check if user is enrolled in the course
+                const { data: enrollment, error: enrollmentError } = await window.supabaseClient
+                    .from('enrollments')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .eq('course_id', id)
+                    .single();
+                
+                if (enrollmentError || !enrollment) {
+                    alert('You must be enrolled in this course to access the content.');
+                    // Try to get course slug for redirect
+                    const { data: courseInfo, error: courseError } = await window.supabaseClient
+                        .from('courses')
+                        .select('slug')
+                        .eq('id', id)
+                        .single();
+                    const courseSlug = courseInfo?.slug || id;
+                    window.location.href = `/course/${courseSlug}`;
+                    return;
+                }
+                
+                // Fetch course details + modules
+                // Using Supabase client assuming public access to course content metadata
+                // but restricting actual content via RLS if needed.
+                // For this demo, we fetch public info.
+
+                // TODO: Replace with secure Edge Function that validates enrollment
+                // For now, we fetch public course data
+                const { data: fetchedCourseData, error } = await window.supabaseClient
+                  .from('courses')
+                  .select('id, title, description, modules, status, level, created_at, updated_at')
+                  .eq('id', id)
+                  .single();
+                
+                if (error) {
+                    throw new Error(`Failed to load course: ${error.message}`);
+                }
+                
+                // Debug: Log the raw course data structure
+                console.log('Raw course data structure:', fetchedCourseData);
+                
+                // Check what properties are available in the course data
+                console.log('Available course properties:', Object.keys(fetchedCourseData || {}));
+                
+                // Check the type and content of the modules field specifically
+                console.log('Modules field type:', typeof fetchedCourseData?.modules);
+                console.log('Modules field value:', fetchedCourseData?.modules);
+                
+                // Convert to expected format
+                const course = fetchedCourseData;
+
+
+
+                if (!course) {
+                    throw new Error('Course not found');
+                }
+
+                courseData = fetchedCourseData;
+                document.getElementById('courseHeaderTitle').textContent = course.title;
+                document.title = `${course.title} - Learning`;
+
+                // Store original modules structure to access full content later
+                originalModules = course.modules || {};
+                
+                // If modules is a string, it might be JSON containing the full structure
+                if (typeof originalModules === 'string') {
+                    try {
+                        originalModules = JSON.parse(originalModules);
+                        console.log('Parsed modules from string:', originalModules);
+                    } catch (e) {
+                        console.log('Modules is not a JSON string:', e);
+                    }
+                }
+                
+                // Make sure we have the modules array from the right place
+                if (originalModules.modules && Array.isArray(originalModules.modules)) {
+                    originalModules = originalModules.modules;
+                    console.log('Using modules.modules array:', originalModules);
+                }
+                
+                // Parse modules
+                let modules = course.modules || [];
+                if (typeof modules === 'string') {
+                    try { modules = JSON.parse(modules); } catch (e) { modules = []; }
+                }
+                
+                // Handle different possible structures of modules data
+                if (modules && typeof modules === 'object' && !Array.isArray(modules)) {
+                    // If modules is an object with a 'modules' property
+                    if (modules.modules && Array.isArray(modules.modules)) {
+                        modules = modules.modules;
+                    } else {
+                        // If it's a single module object, convert to array
+                        modules = [modules];
+                    }
+                }
+                
+                // Also check if lessons are directly in the course object
+                if (modules.length === 0 && (course.description)) {
+                    // Create a default module with direct lessons
+                    const directLessons = course.description;
+                    if (Array.isArray(directLessons)) {
+                        modules = [{
+                            title: 'Course Content',
+                            lessons: directLessons
+                        }];
+                    } else if (typeof directLessons === 'string') {
+                        try {
+                            const parsedLessons = JSON.parse(directLessons);
+                            if (Array.isArray(parsedLessons)) {
+                                modules = [{
+                                    title: 'Course Content',
+                                    lessons: parsedLessons
+                                }];
+                            }
+                        } catch (e) {
+                            console.log('Could not parse direct lessons:', e);
+                        }
+                    }
+                }
+                
+                // Ensure modules is an array
+                if (!Array.isArray(modules)) {
+                    modules = [];
+                }
+                
+                // Debug: Log the final modules structure before rendering
+                console.log('Final modules array before rendering:', modules);
+
+                // Debug: Log the modules structure
+                console.log('Modules structure:', modules);
+                
+                // Debug: Log full modules structure for better understanding
+                console.log('Full modules object:', JSON.stringify(modules, null, 2));
+                
+                // Flatten lessons and render sidebar
+                renderSidebar(modules);
+
+                // Load first lesson or saved state
+                loadLesson(0);
+
+            } catch (error) {
+                console.error('Error loading course:', error);
+                // Hide loading and show error
+                document.getElementById('loading').style.display = 'none';
+                const contentContainer = document.getElementById('contentContainer');
+                if (contentContainer) contentContainer.style.display = 'block';
+                
+                // Show error in the content area
+                const lessonContent = document.querySelector('.lesson-content');
+                if (lessonContent) {
+                    lessonContent.innerHTML = `
+                        <h1>Error Loading Course</h1>
+                        <p>We encountered an issue loading this course. Please try again later.</p>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <a href="/dashboard" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Return to Dashboard</a>
+                    `;
+                }
+            }
+        }
+
+        function renderSidebar(modules) {
+            const list = document.getElementById('lessonList');
+            list.innerHTML = '';
+            flatLessons = [];
+                    
+            // Safely check if modules is an array
+            if (!modules || !Array.isArray(modules) || modules.length === 0) {
+                console.log('No modules found or modules is not an array:', modules);
+                        
+                // Check if modules might be a single object instead of an array
+                if (modules && typeof modules === 'object' && !Array.isArray(modules)) {
+                    console.log('Modules is a single object, converting to array:', modules);
+                    modules = [modules];
+                } else {
+                    // Try to get modules from other possible fields
+                    if (courseData && courseData.description) {
+                        try {
+                            const parsedDesc = JSON.parse(courseData.description);
+                            if (Array.isArray(parsedDesc)) {
+                                modules = parsedDesc;
+                                console.log('Found modules in course description:', modules);
+                            }
+                        } catch (e) {
+                            console.log('Course description is not JSON, trying as single module');
+                            modules = [{
+                                title: 'Course Content',
+                                lessons: [{
+                                    title: 'Introduction',
+                                    content: courseData.description
+                                }]
+                            }];
+                        }
+                    }
+                }
+                        
+                // If still no modules, create a default one
+                if (!modules || modules.length === 0) {
+                    list.innerHTML = '<div style="padding: 1rem; color: var(--text-secondary); text-align: center;">No modules available for this course.</div>';
+                    updateProgress();
+                    return;
+                }
+            }
+        
+            modules.forEach((mod, mIndex) => {
+                // Module Header
+                const header = document.createElement('div');
+                header.className = 'module-header';
+                header.textContent = `Module ${mIndex + 1}: ${mod.title || 'Untitled Module'}`;
+                list.appendChild(header);
+        
+                // Lessons
+                const lessons = mod.lessons || [];
+                if (Array.isArray(lessons) && lessons.length > 0) {
+                    lessons.forEach((lesson, lIndex) => {
+                        const globalIndex = flatLessons.length;
+                        flatLessons.push({
+                            ...lesson,
+                            moduleTitle: mod.title || 'Untitled Module'
+                        });
+        
+                        const item = document.createElement('div');
+                        item.className = 'lesson-item';
+                        item.id = `lesson-nav-${globalIndex}`;
+                        item.innerHTML = `
+                            <div class="status-icon">✓</div>
+                            <div style="flex: 1; font-size: 0.9rem;">${lesson.title || 'Untitled Lesson'}</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">${lesson.duration || '10 min'}</div>
+                        `;
+                        item.onclick = () => loadLesson(globalIndex);
+                        list.appendChild(item);
+                    });
+                } else {
+                    const item = document.createElement('div');
+                    item.className = 'lesson-item';
+                    item.style.opacity = '0.6';
+                    item.innerHTML = `<div style="flex: 1; font-size: 0.9rem; color: var(--text-muted);">No lessons in this module</div>`;
+                    list.appendChild(item);
+                }
+            });
+        
+            updateProgress();
+        }
+
+        async function loadLesson(index) {
+            if (index < 0 || index >= flatLessons.length) return;
+
+            currentLessonIndex = index;
+            const lesson = flatLessons[index];
+            
+            // Debug: Log the lesson structure
+            console.log('Lesson structure:', lesson);
+            
+            // Debug: Log lesson keys to see what properties are available
+            console.log('Lesson keys:', Object.keys(lesson || {}));
+            
+            // Debug: Log the entire lesson object for better understanding
+            console.log('Full lesson object:', JSON.stringify(lesson, null, 2));
+            
+            // Try to find the full lesson content from original modules structure
+            let fullLesson = lesson;
+            console.log('Looking for lesson with title:', lesson.title);
+            
+            // originalModules might be an array of modules or an object with modules property
+            let modulesToSearch = [];
+            
+            if (Array.isArray(originalModules)) {
+                modulesToSearch = originalModules;
+            } else if (originalModules && originalModules.modules && Array.isArray(originalModules.modules)) {
+                modulesToSearch = originalModules.modules;
+            }
+            
+            if (modulesToSearch && Array.isArray(modulesToSearch) && modulesToSearch.length > 0) {
+                console.log('Searching in modules array:', modulesToSearch);
+                
+                // Look through modules to find the full lesson content
+                for (const module of modulesToSearch) {
+                    console.log('Checking module:', module.title);
+                    if (module.lessons && Array.isArray(module.lessons)) {
+                        console.log('Module lessons:', module.lessons);
+                        const foundLesson = module.lessons.find(l => l.title === lesson.title);
+                        if (foundLesson) {
+                            fullLesson = foundLesson;
+                            console.log('Found full lesson in original modules:', fullLesson);
+                            break;
+                        }
+                    }
+                }
+            } else {
+                console.log('No modules to search in original modules structure:', originalModules);
+            }
+            
+            // If we still only have the basic lesson, check if the course data has additional content
+            if (fullLesson === lesson && courseData && courseData.content) {
+                // The course might have content stored as a stringified JSON
+                try {
+                    const courseContent = JSON.parse(courseData.content);
+                    if (courseContent && courseContent.modules) {
+                        // Look for the lesson in the parsed course content
+                        for (const module of courseContent.modules) {
+                            if (module.lessons && Array.isArray(module.lessons)) {
+                                const foundLesson = module.lessons.find(l => l.title === lesson.title);
+                                if (foundLesson) {
+                                    fullLesson = foundLesson;
+                                    console.log('Found full lesson in course content:', fullLesson);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.log('Course content is not valid JSON or does not contain modules:', e);
+                }
+            }
+            
+            // UI Updates
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('contentContainer').style.display = 'block';
+
+            // Highlight active lesson
+            document.querySelectorAll('.lesson-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`lesson-nav-${index}`).classList.add('active');
+
+            // Content Population
+            document.getElementById('lessonTitle').textContent = lesson.title || 'Untitled Lesson';
+
+            // Video
+            const vidContainer = document.getElementById('videoContainer');
+            let hasVideo = false;
+            
+            // Check multiple possible video properties from the full lesson
+            const videoUrl = fullLesson.video || fullLesson.video_url || fullLesson.videoUrl || 
+                           lesson.video || lesson.video_url || lesson.videoUrl || 
+                           fullLesson.content?.video || fullLesson.resources?.video;
+            
+            if (videoUrl) {
+                let embedUrl = videoUrl;
+
+                if (typeof videoUrl === 'string' && (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be'))) {
+                    // YouTube URL parser
+                    let videoId = '';
+                    if (videoUrl.includes('v=')) {
+                        videoId = videoUrl.split('v=')[1].split('&')[0];
+                    } else if (videoUrl.includes('youtu.be/')) {
+                        videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
+                    } else {
+                        // Extract from various possible formats
+                        const regExp = /^.*(youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#&?]*).*/;
+                        const match = videoUrl.match(regExp);
+                        if (match && match[2].length === 11) {
+                            videoId = match[2];
+                        }
+                    }
+                    
+                    if (videoId) {
+                        embedUrl = `https://www.youtube.com/embed/${videoId}`;
+                        hasVideo = true;
+                    }
+                } else if (typeof videoUrl === 'string') {
+                    // For other video types, check if it's a valid URL
+                    try {
+                        new URL(videoUrl);
+                        embedUrl = videoUrl;
+                        hasVideo = true;
+                    } catch(e) {
+                        console.log('Invalid video URL:', videoUrl);
+                    }
+                }
+                
+                if (hasVideo) {
+                    document.getElementById('videoPlayer').src = embedUrl;
+                    vidContainer.style.display = 'block';
+                } else {
+                    vidContainer.style.display = 'none';
+                    document.getElementById('videoPlayer').src = '';
+                }
+            } else {
+                vidContainer.style.display = 'none';
+                document.getElementById('videoPlayer').src = '';
+            }
+
+            // Text / Content
+            const textContainer = document.getElementById('textContent');
+            textContainer.innerHTML = ''; // basic safety, in prod use sanitizer
+
+            // Check multiple possible content properties from the full lesson
+            const contentText = fullLesson.content || fullLesson.text || fullLesson.description || fullLesson.intro || fullLesson.summary || 
+                          fullLesson.content?.text || fullLesson.content?.description || fullLesson.lesson_content || fullLesson.body || fullLesson.content_html ||
+                          lesson.content || lesson.text || lesson.description || lesson.intro || lesson.summary || 
+                          lesson.content?.text || lesson.content?.description || lesson.lesson_content || lesson.body || lesson.content_html;
+            
+            if (contentText) {
+                textContainer.innerHTML += `<div>${contentText}</div>`;
+            }
+            
+            // Check for other content fields from the full lesson
+            if (fullLesson.bigIdea || fullLesson.big_idea || lesson.bigIdea || lesson.big_idea) {
+                textContainer.innerHTML += `
+                    <div style="background: rgba(0, 217, 255, 0.1); border-left: 4px solid var(--primary); padding: 1rem; border-radius: 4px; margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-top: 0; font-size: 1rem;">Big Idea</h3>
+                        <p style="margin-bottom: 0;">${fullLesson.bigIdea || fullLesson.big_idea || lesson.bigIdea || lesson.big_idea}</p>
+                    </div>
+                 `;
+            }
+            
+            // Check for steps or lesson steps from the full lesson
+            const steps = fullLesson.steps || fullLesson.lesson_steps || fullLesson.content?.steps ||
+                          lesson.steps || lesson.lesson_steps || lesson.content?.steps;
+            if (steps && Array.isArray(steps)) {
+                textContainer.innerHTML += `<h3>Key Steps</h3><ul>${steps.map(s => `<li>${typeof s === 'object' ? s.title || s.step || s.text : s}</li>`).join('')}</ul>`;
+            }
+            
+            // Check for other common content fields from the full lesson
+            if (fullLesson.objectives || lesson.objectives) {
+                const objectives = fullLesson.objectives || lesson.objectives;
+                textContainer.innerHTML += `<h3>Objectives</h3><ul>${Array.isArray(objectives) ? 
+                    objectives.map(obj => `<li>${obj}</li>`).join('') : 
+                    `<li>${objectives}</li>`}</ul>`;
+            }
+            
+            if (fullLesson.notes || lesson.notes) {
+                textContainer.innerHTML += `<h3>Notes</h3><div>${fullLesson.notes || lesson.notes}</div>`;
+            }
+            
+            if (fullLesson.code_examples || fullLesson.example_code || lesson.code_examples || lesson.example_code) {
+                textContainer.innerHTML += `<h3>Code Examples</h3><pre style="background: #000; color: #fff; padding: 1rem; border-radius: 4px; overflow-x: auto;"><code>${fullLesson.code_examples || fullLesson.example_code || lesson.code_examples || lesson.example_code}</code></pre>`;
+            }
+            
+            // Check for content in lesson properties that might contain the lesson data
+            const lessonToCheck = fullLesson || lesson;
+            if (lessonToCheck.properties) {
+                // Handle AI-generated content that might be stored in properties
+                if (lessonToCheck.properties.content) {
+                    textContainer.innerHTML += `<div>${lessonToCheck.properties.content}</div>`;
+                }
+                if (lessonToCheck.properties.video) {
+                    // Video might be stored in properties
+                    const videoUrl = lessonToCheck.properties.video;
+                    if (videoUrl && !hasVideo) { // Only set if no video was found before
+                        if (typeof videoUrl === 'string' && (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be'))) {
+                            let videoId = '';
+                            if (videoUrl.includes('v=')) {
+                                videoId = videoUrl.split('v=')[1].split('&')[0];
+                            } else if (videoUrl.includes('youtu.be/')) {
+                                videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
+                            } else {
+                                const regExp = /^.*(youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#&?]*).*/;
+                                const match = videoUrl.match(regExp);
+                                if (match && match[2].length === 11) {
+                                    videoId = match[2];
+                                }
+                            }
+                            
+                            if (videoId) {
+                                document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${videoId}`;
+                                document.getElementById('videoContainer').style.display = 'block';
+                                hasVideo = true;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Check for content in various other fields
+            if (lessonToCheck.data) {
+                // If lesson has a data property, check for content there
+                if (typeof lessonToCheck.data === 'string') {
+                    // If data is a string, it might be JSON
+                    try {
+                        const parsedData = JSON.parse(lessonToCheck.data);
+                        if (parsedData.content) {
+                            textContainer.innerHTML += `<div>${parsedData.content}</div>`;
+                        }
+                        if (parsedData.video) {
+                            const videoUrl = parsedData.video;
+                            if (typeof videoUrl === 'string' && (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be'))) {
+                                let videoId = '';
+                                if (videoUrl.includes('v=')) {
+                                    videoId = videoUrl.split('v=')[1].split('&')[0];
+                                } else if (videoUrl.includes('youtu.be/')) {
+                                    videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
+                                } else {
+                                    const regExp = /^.*(youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#&?]*).*/;
+                                    const match = videoUrl.match(regExp);
+                                    if (match && match[2].length === 11) {
+                                        videoId = match[2];
+                                    }
+                                }
+                                
+                                if (videoId) {
+                                    document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${videoId}`;
+                                    document.getElementById('videoContainer').style.display = 'block';
+                                    hasVideo = true;
+                                }
+                            }
+                        }
+                    } catch (e) {
+                        // If it's not JSON, treat as content
+                        textContainer.innerHTML += `<div>${lessonToCheck.data}</div>`;
+                    }
+                } else if (typeof lessonToCheck.data === 'object' && lessonToCheck.data.content) {
+                    textContainer.innerHTML += `<div>${lessonToCheck.data.content}</div>`;
+                }
+            }
+
+            // If no content was found, try to generate it via AI
+            if (!contentText && !fullLesson.bigIdea && !fullLesson.big_idea && !lesson.bigIdea && !lesson.big_idea && 
+                !steps && !fullLesson.objectives && !lesson.objectives && !fullLesson.notes && !lesson.notes && 
+                !fullLesson.code_examples && !fullLesson.example_code && !lesson.code_examples && !lesson.example_code && 
+                !lessonToCheck?.properties?.content && !lessonToCheck?.data?.content && !lessonToCheck?.data) {
+                
+                // Show loading message while AI generates content
+                textContainer.innerHTML = '<div class="loading-message">Generating comprehensive lesson content... Please wait.</div>';
+                
+                // For Vibe Coding lessons, use specific content and videos
+                const lessonTitleLower = lesson.title.toLowerCase();
+                
+                if (lessonTitleLower.includes('vibe coding') || lessonTitleLower.includes('what is vibe')) {
+                    // Show loading message
+                    textContainer.innerHTML = '<div class="loading-message">Generating comprehensive Vibe Coding lesson content... Please wait.</div>';
+                    
+                    // Simulate brief loading
+                    await new Promise(resolve => setTimeout(resolve, 800));
+                    
+                    // Create specific Vibe Coding content
+                    const vibeCodingContent = {
+                        title: lesson.title,
+                        moduleTitle: lesson.moduleTitle || currentModuleTitle,
+                        content: {
+                            introduction: {
+                                title: `Introduction to ${lesson.title}`,
+                                description: `In this Vibe Coding lesson, you'll learn about ${lesson.title.replace('What is ', '').replace('?', '')}. This topic is fundamental to modern AI-assisted development and will provide you with practical skills you can apply immediately.`,
+                                importance: `Understanding ${lesson.title.replace('What is ', '').replace('?', '')} is crucial because it forms the foundation for effective AI-assisted development and provides real-world applications that will enhance your coding workflow.`,
+                                learningOutcomes: [
+                                    `Understand the core principles of ${lesson.title.replace('What is ', '').replace('?', '')}`,
+                                    `Apply Vibe Coding techniques in practical scenarios`,
+                                    `Recognize when and how to use Vibe Coding effectively`
+                                ]
+                            },
+                            coreExplanation: {
+                                realWorldAnalogy: 'Think of Vibe Coding like conducting an orchestra where every tool and AI assistant plays in harmony, responding to your creative vision in real-time. Instead of writing code and waiting for results, you engage in a fluid conversation with your development environment.',
+                                technicalExplanation: `Vibe Coding represents a paradigm shift in software development where the development environment itself becomes an intuitive, responsive, and almost "magical" experience. Unlike traditional coding where you write code and wait for compilation or interpretation, Vibe Coding creates a live, breathing environment where your code responds instantly, adapts to your intentions, and flows with creative energy.`,
+                                keyPrinciples: [
+                                    'Real-time feedback loops with AI tools',
+                                    'Natural language programming interactions',
+                                    'Continuous iteration and refinement',
+                                    'Collaborative development with AI'
+                                ],
+                                commonMistakes: [
+                                    'Treating AI as a magic solution without understanding underlying concepts',
+                                    'Over-relying on AI without critical thinking',
+                                    'Ignoring the need for foundational programming knowledge'
+                                ],
+                                bestPractices: [
+                                    'Start with clear, descriptive prompts',
+                                    'Verify and test AI-generated code thoroughly',
+                                    'Combine AI assistance with traditional development skills'
+                                ]
+                            },
+                            visualExplanation: {
+                                description: 'Visual representations help clarify the Vibe Coding concepts',
+                                diagrams: [
+                                    {
+                                        type: 'flowchart',
+                                        title: 'Vibe Coding Workflow',
+                                        description: 'Shows the continuous feedback loop of AI-assisted development',
+                                        purpose: 'Explains the real-time interaction between developer and AI tools'
+                                    },
+                                    {
+                                        type: 'comparison',
+                                        title: 'Traditional vs Vibe Coding',
+                                        description: 'Visual comparison showing the difference in development approach',
+                                        purpose: 'Illustrates the value proposition of real-time AI assistance'
+                                    }
+                                ]
+                            },
+                            stepByStepBreakdown: [
+                                {
+                                    step: 1,
+                                    title: 'Setting Up Your Vibe Environment',
+                                    description: 'Configure your tools for optimal AI-assisted development',
+                                    action: 'Install and configure Cursor or similar AI-powered IDE'
+                                },
+                                {
+                                    step: 2,
+                                    title: 'Engaging with AI Assistance',
+                                    description: 'Learn to communicate effectively with AI coding assistants',
+                                    action: 'Practice describing your intentions in natural language'
+                                },
+                                {
+                                    step: 3,
+                                    title: 'Real-Time Iteration',
+                                    description: 'Embrace the continuous feedback loop of Vibe Coding',
+                                    action: 'Implement, test, and refine in small, continuous cycles'
+                                },
+                                {
+                                    step: 4,
+                                    title: 'Verification and Testing',
+                                    description: 'Ensure AI-generated code meets requirements',
+                                    action: 'Test code thoroughly and validate functionality'
+                                }
+                            ],
+                            practicalExamples: [
+                                {
+                                    title: 'Real-World Vibe Coding Example',
+                                    scenario: 'A developer uses Vibe Coding to build a React component',
+                                    implementation: 'Developer describes desired component in natural language, AI generates code, developer refines through conversation',
+                                    outcome: 'Faster development with higher quality code through AI collaboration'
+                                },
+                                {
+                                    title: 'Building a Simple API',
+                                    scenario: 'Using Vibe Coding to create a REST API',
+                                    implementation: 'Describe API endpoints and functionality in plain English, AI generates the structure and code',
+                                    outcome: 'Rapid API development with proper structure and documentation'
+                                }
+                            ],
+                            caseStudy: {
+                                title: 'Case Study: Converting Traditional Approach to Vibe Coding',
+                                scenario: 'A team transitions from traditional coding to Vibe Coding methodology',
+                                challenges: 'Initial resistance to change, learning curve for AI tools, adapting existing workflows',
+                                solution: 'Gradual adoption, training sessions, establishing best practices for AI collaboration',
+                                results: 'Increased productivity, faster development cycles, improved code quality',
+                                lessonsLearned: 'The importance of balancing AI assistance with human oversight and expertise'
+                            },
+                            summary: {
+                                keyTakeaways: [
+                                    'Vibe Coding enhances your development workflow through real-time AI assistance',
+                                    'The approach emphasizes conversation and collaboration with AI tools',
+                                    'Vibe Coding should be integrated thoughtfully with your existing workflow',
+                                    'Critical thinking remains essential even with AI assistance'
+                                ],
+                                nextSteps: [
+                                    'Practice describing code intentions in natural language',
+                                    'Explore advanced features of AI coding assistants',
+                                    'Share experiences with the Vibe Coding community',
+                                    'Build a personal toolkit of AI-assisted development strategies'
+                                ],
+                                confidenceBuilder: 'You now have a solid understanding of Vibe Coding principles. With practice, you will become proficient at leveraging AI assistance in your development workflow.'
+                            }
+                        },
+                        examples: [
+                            {
+                                title: 'Example 1: Creating a Function',
+                                code: `// Describe what you want to achieve
+// AI generates the function
+function calculateTotal(items) {
+  return items.reduce((sum, item) => sum + item.price, 0);
+}`,
+                                explanation: 'Instead of writing the function manually, describe the purpose in natural language and let AI generate the implementation.'
+                            },
+                            {
+                                title: 'Example 2: Building a Component',
+                                code: `// Create a responsive navigation bar
+// with dropdown menus and mobile menu toggle
+const Navigation = () => {
+  // AI-generated JSX with all required functionality
+};`,
+                                explanation: 'Describe UI components in plain English and let AI generate the complete implementation.'
+                            }
+                        ],
+                        exercises: [
+                            {
+                                title: 'Exercise 1: Prompt Creation',
+                                description: 'Create effective prompts for common coding tasks',
+                                instructions: 'Write a natural language prompt that would generate a JavaScript function to validate email addresses',
+                                difficulty: 'Beginner',
+                                estimatedTime: '10 minutes'
+                            },
+                            {
+                                title: 'Exercise 2: Component Design',
+                                description: 'Design a UI component using Vibe Coding principles',
+                                instructions: 'Describe in plain English a modal dialog component with overlay, header, body, and footer',
+                                difficulty: 'Intermediate',
+                                estimatedTime: '20 minutes'
+                            }
+                        ],
+                        tools: [
+                            'Cursor IDE',
+                            'GitHub Copilot',
+                            'ChatGPT for coding',
+                            'Replit AI Features',
+                            'VS Code AI Extensions'
+                        ],
+                        resources: [
+                            {
+                                title: 'Official Cursor Documentation',
+                                url: 'https://cursor.sh/docs',
+                                description: 'Comprehensive guide to using Cursor for AI-assisted coding'
+                            },
+                            {
+                                title: 'AI Coding Best Practices',
+                                url: 'https://openai.com/research/generative-models',
+                                description: 'Research and best practices for AI-assisted development'
+                            }
+                        ],
+                        quiz: {
+                            title: 'Vibe Coding Fundamentals Quiz',
+                            questions: [
+                                {
+                                    question: 'What is the primary principle of Vibe Coding?',
+                                    options: [
+                                        'Real-time feedback loops with AI tools',
+                                        'Manual code review processes',
+                                        'Strict adherence to legacy systems',
+                                        'Complete automation of all tasks'
+                                    ],
+                                    correctAnswer: 0,
+                                    explanation: 'Vibe Coding emphasizes real-time feedback loops with AI tools to enhance the development process.'
+                                },
+                                {
+                                    question: 'Which of the following is a best practice in Vibe Coding?',
+                                    options: [
+                                        'Over-relying on AI without verification',
+                                        'Starting with clear, descriptive prompts',
+                                        'Ignoring traditional programming fundamentals',
+                                        'Avoiding human oversight'
+                                    ],
+                                    correctAnswer: 1,
+                                    explanation: 'Starting with clear, descriptive prompts helps AI tools generate better code.'
+                                },
+                                {
+                                    question: 'What should you do after AI generates code?',
+                                    options: [
+                                        'Deploy immediately without testing',
+                                        'Verify and test the code thoroughly',
+                                        'Assume it is perfect',
+                                        'Ignore security concerns'
+                                    ],
+                                    correctAnswer: 1,
+                                    explanation: 'It\'s essential to verify and test AI-generated code thoroughly before deployment.'
+                                }
+                            ]
+                        },
+                        videos: [
+                            {
+                                title: 'What is vibe coding? Vibe Coding 101 with Replit',
+                                url: 'https://www.youtube.com/embed/5OWurmg41tI',
+                                embeddable: true
+                            },
+                            {
+                                title: 'Vibe Coding Fundamentals In 33 minutes',
+                                url: 'https://www.youtube.com/embed/iLCDSY2XX7E',
+                                embeddable: true
+                            },
+                            {
+                                title: 'Vibe Coding 101 Course',
+                                url: 'https://www.youtube.com/embed/r2TUTOHoYGA',
+                                embeddable: true
+                            }
+                        ]
+                    };
+                    
+                    // Display the Vibe Coding content
+                    displayGeneratedContent(vibeCodingContent, textContainer);
+                    
+                    // Show the first Vibe Coding video
+                    if (vibeCodingContent.videos && vibeCodingContent.videos.length > 0) {
+                        document.getElementById('videoPlayer').src = vibeCodingContent.videos[0].url;
+                        document.getElementById('videoContainer').style.display = 'block';
+                        hasVideo = true;
+                    }
+                } else {
+                    // For other lessons, try the AI generation endpoint
+                    try {
+                        // First, try to generate content via Supabase Edge Function
+                        // If that's not available, we'll simulate AI generation based on the lesson title
+                        console.log('Attempting to generate content for:', { course_id: courseId, course_title: courseData?.title, module_title: lesson.moduleTitle || currentModuleTitle, lesson_title: lesson.title });
+                                        
+                        // Simulate AI generation based on the lesson title and course context
+                        const generatedContent = await generateLessonContent(courseId, courseData?.title || '', lesson.moduleTitle || currentModuleTitle, lesson.title);
+                                        
+                        if (generatedContent) {
+                            // Display the generated content
+                            displayGeneratedContent(generatedContent, textContainer);
+                                            
+                            // Show generated video if available
+                            if (generatedContent.resources?.youtube_videos && generatedContent.resources.youtube_videos.length > 0) {
+                                const video = generatedContent.resources.youtube_videos[0];
+                                if (video.embeddable && video.url) {
+                                    document.getElementById('videoPlayer').src = video.url;
+                                    document.getElementById('videoContainer').style.display = 'block';
+                                    hasVideo = true;
+                                }
+                            } else if (generatedContent.videos && generatedContent.videos.length > 0) {
+                                const video = generatedContent.videos[0];
+                                if (video.embeddable && video.url) {
+                                    document.getElementById('videoPlayer').src = video.url;
+                                    document.getElementById('videoContainer').style.display = 'block';
+                                    hasVideo = true;
+                                }
+                            } else if (generatedContent.resources && generatedContent.resources.video) {
+                                // Handle video from resources object
+                                const video = generatedContent.resources.video;
+                                if (typeof video === 'string' && (video.includes('youtube.com') || video.includes('youtu.be'))) {
+                                    let videoId = '';
+                                    if (video.includes('v=')) {
+                                        videoId = video.split('v=')[1].split('&')[0];
+                                    } else if (video.includes('youtu.be/')) {
+                                        videoId = video.split('youtu.be/')[1].split('?')[0];
+                                    } else {
+                                        const regExp = /^.*(youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#&?]*).*/;
+                                        const match = video.match(regExp);
+                                        if (match && match[2].length === 11) {
+                                            videoId = match[2];
+                                        }
+                                    }
+                                                    
+                                    if (videoId) {
+                                        document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${videoId}`;
+                                        document.getElementById('videoContainer').style.display = 'block';
+                                        hasVideo = true;
+                                    }
+                                }
+                            }
+                        } else {
+                            // Fallback to placeholder content if AI generation fails
+                            showPlaceholderContent(lesson, textContainer, hasVideo);
+                        }
+                    } catch (error) {
+                        console.error('Error generating lesson:', error);
+                        // Fallback to placeholder content
+                        showPlaceholderContent(lesson, textContainer, hasVideo);
+                    }
+                }
+            }
+
+            // Nav buttons
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').textContent = index === flatLessons.length - 1 ? 'Finish Course' : 'Next Lesson →';
+
+            // Auto-close sidebar on mobile
+            if (window.innerWidth <= 900) {
+                document.getElementById('sidebar').classList.remove('open');
+            }
+        }
+        
+        function displayGeneratedContent(content, container) {
+            // Clear existing content
+            container.innerHTML = '';
+            
+            // Handle the structured JSON format from AI generation
+            // The content should follow the template from the runtime trigger prompt
+            const contentData = content.content || content;
+            
+            // Add introduction section
+            if (contentData.introduction) {
+                container.innerHTML += `
+                    <div class="lesson-intro">
+                        <h2>${contentData.introduction.title || content.title || 'Lesson Introduction'}</h2>
+                        <p>${contentData.introduction.description || contentData.core_concepts || 'This lesson covers important concepts in this topic.'}</p>
+                        <p>${contentData.introduction.importance || contentData.introduction || 'This topic is important for your learning journey.'}</p>
+                        ${contentData.introduction.learningOutcomes ? `
+                        <div style="margin-top: 1rem;">
+                            <strong>Learning Outcomes:</strong>
+                            <ul>
+                                ${contentData.introduction.learningOutcomes.map(outcome => `<li>${outcome}</li>`).join('')}
+                            </ul>
+                        </div>` : ''}
+                    </div>
+                `;
+            } else if (contentData.introduction || content.introduction) {
+                // Handle direct introduction field
+                const intro = contentData.introduction || content.introduction;
+                container.innerHTML += `
+                    <div class="lesson-intro">
+                        <h2>Introduction</h2>
+                        <p>${intro}</p>
+                    </div>
+                `;
+            }
+            
+            // Add core explanation
+            if (contentData.coreExplanation) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Core Explanation</h3>
+                        <p>${contentData.coreExplanation.technicalExplanation || 'Detailed explanation of the concept.'}</p>
+                        <p><strong>Real-world analogy:</strong> ${contentData.coreExplanation.realWorldAnalogy || 'No analogy provided.'}</p>
+                        
+                        ${contentData.coreExplanation.keyPrinciples ? `
+                        <div style="margin: 1rem 0;">
+                            <strong>Key Principles:</strong>
+                            <ul>
+                                ${contentData.coreExplanation.keyPrinciples.map(principle => `<li>${principle}</li>`).join('')}
+                            </ul>
+                        </div>` : ''}
+                        
+                        ${contentData.coreExplanation.commonMistakes ? `
+                        <div style="margin: 1rem 0;">
+                            <strong>Common Mistakes to Avoid:</strong>
+                            <ul>
+                                ${contentData.coreExplanation.commonMistakes.map(mistake => `<li>${mistake}</li>`).join('')}
+                            </ul>
+                        </div>` : ''}
+                        
+                        ${contentData.coreExplanation.bestPractices ? `
+                        <div style="margin: 1rem 0;">
+                            <strong>Best Practices:</strong>
+                            <ul>
+                                ${contentData.coreExplanation.bestPractices.map(practice => `<li>${practice}</li>`).join('')}
+                            </ul>
+                        </div>` : ''}
+                    </div>
+                `;
+            } else if (contentData.core_concepts) {
+                // Handle core_concepts from AI-generated content
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Core Concepts</h3>
+                        <p>${contentData.core_concepts}</p>
+                    </div>
+                `;
+            }
+            
+            // Add visual explanation
+            if (contentData.visualExplanation) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Visual Explanation</h3>
+                        <p>${contentData.visualExplanation.description || 'Visual representation of concepts.'}</p>
+                        ${(contentData.visualExplanation.diagrams || []).map(diag => `
+                            <div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 217, 255, 0.1); border-radius: 4px;">
+                                <strong>${diag.title || 'Diagram'}</strong>: ${diag.description || 'Diagram description'}
+                                <p><em>Purpose:</em> ${diag.purpose || 'No purpose specified'}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (contentData.visual_explanations && Array.isArray(contentData.visual_explanations)) {
+                // Handle visual_explanations from AI-generated content
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Visual Explanations</h3>
+                        ${(contentData.visual_explanations || []).map(viz => `
+                            <div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 217, 255, 0.1); border-radius: 4px;">
+                                <p>${viz}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            // Add step-by-step breakdown
+            if (contentData.stepByStepBreakdown && Array.isArray(contentData.stepByStepBreakdown)) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Step-by-Step Breakdown</h3>
+                        <ol style="line-height: 1.8;">
+                            ${contentData.stepByStepBreakdown.map(step => `
+                                <li>
+                                    <strong>Step ${step.step || 'N/A'}: ${step.title || step.description || 'Step details'}</strong>
+                                    <p>${step.description || step.action || ''}</p>
+                                    <p><em>Action:</em> ${step.action || 'No specific action'}</p>
+                                </li>
+                            `).join('')}
+                        </ol>
+                    </div>
+                `;
+            } else if (contentData.step_by_step && Array.isArray(contentData.step_by_step)) {
+                // Handle step_by_step from AI-generated content
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Step-by-Step Guide</h3>
+                        <ol style="line-height: 1.8;">
+                            ${contentData.step_by_step.map((step, index) => `
+                                <li>
+                                    <strong>Step ${index + 1}: ${typeof step === 'object' ? step.title || step.description : step}</strong>
+                                    ${typeof step === 'object' && step.description ? `<p>${step.description}</p>` : ''}
+                                </li>
+                            `).join('')}
+                        </ol>
+                    </div>
+                `;
+            }
+            
+            // Add practical examples
+            if (contentData.practicalExamples && Array.isArray(contentData.practicalExamples)) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Practical Examples</h3>
+                        ${contentData.practicalExamples.map(example => `
+                            <div style="margin: 1rem 0; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 4px;">
+                                <h4>${example.title || 'Example'}</h4>
+                                <p><strong>Scenario:</strong> ${example.scenario || 'No scenario provided'}</p>
+                                <p><strong>Implementation:</strong> ${example.implementation || 'No implementation details'}</p>
+                                <p><strong>Outcome:</strong> ${example.outcome || 'No outcome provided'}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            // Add case study
+            if (contentData.caseStudy) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Case Study</h3>
+                        <div style="padding: 1rem; background: rgba(255, 165, 0, 0.1); border-radius: 4px; border-left: 4px solid orange;">
+                            <h4>${contentData.caseStudy.title || 'Case Study'}</h4>
+                            <p><strong>Scenario:</strong> ${contentData.caseStudy.scenario || 'No scenario provided'}</p>
+                            <p><strong>Challenges:</strong> ${contentData.caseStudy.challenges || 'No challenges mentioned'}</p>
+                            <p><strong>Solution:</strong> ${contentData.caseStudy.solution || 'No solution provided'}</p>
+                            <p><strong>Results:</strong> ${contentData.caseStudy.results || 'No results mentioned'}</p>
+                            <p><strong>Lessons Learned:</strong> ${contentData.caseStudy.lessonsLearned || 'No lessons mentioned'}</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Add examples section
+            if (content.examples && Array.isArray(content.examples)) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Code Examples</h3>
+                        ${content.examples.map(example => `
+                            <div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 0, 0, 0.8); border-radius: 4px;">
+                                <h4>${example.title || 'Example'}</h4>
+                                <pre style="color: #00ff00; margin: 0.5rem 0; overflow-x: auto;"><code>${example.code || 'No code provided'}</code></pre>
+                                <p>${example.explanation || 'No explanation provided'}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            // Add exercises/assignments
+            if (content.exercises && Array.isArray(content.exercises)) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Assignments & Exercises</h3>
+                        ${content.exercises.map(exercise => `
+                            <div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 255, 255, 0.1); border-radius: 4px; border-left: 4px solid var(--primary);">
+                                <h4>${exercise.title || 'Exercise'}</h4>
+                                <p><strong>Description:</strong> ${exercise.description || 'No description provided'}</p>
+                                <p><strong>Instructions:</strong> ${exercise.instructions || 'No instructions provided'}</p>
+                                <p><strong>Difficulty:</strong> ${exercise.difficulty || 'Unknown'} | <strong>Time:</strong> ${exercise.estimatedTime || 'Not specified'}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            // Add resources
+            if (content.resources && Array.isArray(content.resources)) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Additional Resources</h3>
+                        <ul>
+                            ${content.resources.map(resource => `
+                                <li style="margin: 0.5rem 0;">
+                                    <a href="${resource.url || '#'}" target="_blank" style="color: var(--primary); text-decoration: none;">
+                                        <strong>${resource.title || 'Resource'}</strong>
+                                    </a>
+                                    <p style="margin: 0.25rem 0 0 0; font-size: 0.9em; color: var(--text-secondary);">${resource.description || 'No description'}</p>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            // Add tools recommendations
+            if (content.tools && Array.isArray(content.tools)) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Recommended Tools</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.5rem; margin-top: 0.5rem;">
+                            ${(content.tools || []).map(tool => `
+                                <div style="padding: 0.75rem; background: rgba(124, 58, 237, 0.1); border-radius: 4px; border: 1px solid rgba(124, 58, 237, 0.2);">
+                                    ${tool}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Add summary
+            if (contentData.summary) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Summary</h3>
+                        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 4px; border-left: 4px solid var(--success);">
+                            <h4>Key Takeaways</h4>
+                            <ul style="line-height: 1.8;">
+                                ${(contentData.summary.keyTakeaways || []).map(takeaway => `<li>${takeaway}</li>`).join('')}
+                            </ul>
+                            <h4>Next Steps</h4>
+                            <ul style="line-height: 1.8;">
+                                ${(contentData.summary.nextSteps || []).map(step => `<li>${step}</li>`).join('')}
+                            </ul>
+                            <p>${contentData.summary.confidenceBuilder || 'You now have a solid understanding of this concept.'}</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Add quiz if available
+            if (content.quiz) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Knowledge Check</h3>
+                        <div style="padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 4px;">
+                            <h4>${content.quiz.title || 'Quiz'}</h4>
+                            ${(content.quiz.questions || []).map(q => {
+                                let idx = content.quiz.questions.indexOf(q);
+                                let optionsHTML = (q.options || []).map((opt, optIdx) => {
+                                    return `<div style="margin: 0.25rem 0; padding: 0.25rem 0;">
+                                        <label style="display: flex; align-items: center; cursor: pointer;" onclick="checkAnswer(${idx}, ${optIdx}, ${q.correctAnswer})">
+                                            <input type="radio" name="question_${idx}" value="${optIdx}" style="margin-right: 0.5rem;" onchange="checkAnswer(${idx}, ${optIdx}, ${q.correctAnswer})">
+                                            ${opt}
+                                        </label>
+                                    </div>`;
+                                }).join('');
+                                
+                                return `<div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 0, 0, 0.3); border-radius: 4px;" id="question-${idx}-container">
+                                    <p><strong>Question ${idx + 1}:</strong> ${q.question}</p>
+                                    <div style="margin: 0.5rem 0 1rem 0;" id="question-${idx}-options">
+                                        ${optionsHTML}
+                                    </div>
+                                    <div style="font-size: 0.9em; color: var(--success); display: none;" id="question-${idx}-correct">
+                                        <strong>Correct Answer:</strong> ${q.options && q.correctAnswer !== undefined ? (q.options[q.correctAnswer] || 'Not specified') : 'Not specified'}
+                                    </div>
+                                    <div style="font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; display: none;" id="question-${idx}-explanation">
+                                        <strong>Explanation:</strong> ${q.explanation || 'No explanation provided'}
+                                    </div>
+                                    <div style="font-size: 0.9em; color: var(--error); display: none;" id="question-${idx}-incorrect">
+                                        <strong>Incorrect. Please try again.</strong>
+                                    </div>
+                                </div>`;
+                            }).join('')}
+                        </div>
+                        <div style="margin-top: 1rem; text-align: center;">
+                            <button onclick="submitQuiz(this.parentElement.parentElement)" style="background: var(--primary); color: black; border: none; padding: 0.75rem 1.5rem; border-radius: 4px; cursor: pointer; font-weight: bold;">
+                                Submit Quiz
+                            </button>
+                        </div>
+                        </div>
+                    </div>
+                `;
+            } else if (contentData.quiz && contentData.quiz.questions) {
+                // Handle quiz from AI-generated content
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Knowledge Check</h3>
+                        <div style="padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 4px;">
+                            <h4>${contentData.quiz.title || 'Quiz'}</h4>
+                            ${(contentData.quiz.questions || []).map((q, idx) => {
+                                let optionsHTML = (q.options || []).map((opt, optIdx) => {
+                                    return `<div style="margin: 0.25rem 0; padding: 0.25rem 0;">
+                                        <label style="display: flex; align-items: center; cursor: pointer;" onclick="checkAnswer(${idx}, ${optIdx}, ${q.correctAnswer})">
+                                            <input type="radio" name="question_${idx}" value="${optIdx}" style="margin-right: 0.5rem;" onchange="checkAnswer(${idx}, ${optIdx}, ${q.correctAnswer})">
+                                            ${opt}
+                                        </label>
+                                    </div>`;
+                                }).join('');
+                                
+                                return `<div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 0, 0, 0.3); border-radius: 4px;" id="question-${idx}-container">
+                                    <p><strong>Question ${idx + 1}:</strong> ${q.question}</p>
+                                    <div style="margin: 0.5rem 0 1rem 0;" id="question-${idx}-options">
+                                        ${optionsHTML}
+                                    </div>
+                                    <div style="font-size: 0.9em; color: var(--success); display: none;" id="question-${idx}-correct">
+                                        <strong>Correct Answer:</strong> ${q.correctAnswer !== undefined ? (q.options && q.options[q.correctAnswer] || 'Not specified') : 'Not specified'}
+                                    </div>
+                                    <div style="font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; display: none;" id="question-${idx}-explanation">
+                                        <strong>Explanation:</strong> ${q.explanation || 'No explanation provided'}
+                                    </div>
+                                    <div style="font-size: 0.9em; color: var(--error); display: none;" id="question-${idx}-incorrect">
+                                        <strong>Incorrect. Please try again.</strong>
+                                    </div>
+                                </div>`;
+                            }).join('')}
+                        </div>
+                        <div style="margin-top: 1rem; text-align: center;">
+                            <button onclick="submitQuiz(this.parentElement.parentElement)" style="background: var(--primary); color: black; border: none; padding: 0.75rem 1.5rem; border-radius: 4px; cursor: pointer; font-weight: bold;">
+                                Submit Quiz
+                            </button>
+                        </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Add playground section for students to test their knowledge
+            container.innerHTML += `
+                <div class="lesson-section" style="margin: 1.5rem 0;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">AI-Powered Knowledge Playground</h3>
+                    <div style="padding: 1rem; background: rgba(59, 130, 246, 0.1); border-radius: 4px; border-left: 4px solid var(--primary);">
+                        <p>Test your understanding with interactive AI assistance:</p>
+                        <div style="margin-top: 1rem;">
+                            <textarea id="playground-code" placeholder="Describe what you want to create (e.g., \"Create a singing cup\", \"Build a calculator\", \"Explain loops in Python\")" style="width: 100%; min-height: 150px; background: #000; color: #fff; padding: 1rem; border-radius: 4px; border: 1px solid var(--primary); font-family: monospace;"></textarea>
+                            <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                <button onclick="runPlaygroundCode()" style="background: var(--primary); color: black; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">
+                                    Generate with AI
+                                </button>
+                                <button onclick="resetPlayground()" style="background: var(--text-secondary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">
+                                    Reset
+                                </button>
+                                <select id="ai-model" style="background: #000; color: white; border: 1px solid var(--primary); border-radius: 4px; padding: 0.5rem;">
+                                    <option value="gpt-4.1-nano">GPT-4.1 Nano</option>
+                                    <option value="claude-sonnet-4">Claude Sonnet 4</option>
+                                    <option value="google/gemini-2.5-flash">Gemini Flash</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="playground-output" style="margin-top: 1rem; padding: 0.5rem; background: rgba(0, 0, 0, 0.5); border-radius: 4px; min-height: 100px; display: none;">
+                            <div id="playground-response" style="font-family: monospace; white-space: pre-wrap;"></div>
+                            <div id="playground-loading" style="display: none; text-align: center; padding: 1rem;">
+                                <div style="display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,.3); border-radius: 50%; border-top-color: var(--primary); animation: spin 1s ease-in-out infinite; margin-right: 10px;"></div>
+                                AI is generating your solution...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Add extra reading & downloadable resources section
+            if (content.resources && content.resources.downloads && content.resources.downloads.length > 0) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Extra Reading & Downloadable Resources</h3>
+                        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 4px; border-left: 4px solid var(--success);">
+                            <p>Supplementary materials to deepen your understanding:</p>
+                            <ul style="margin-top: 1rem;">
+                                ${content.resources.downloads.map(resource => `
+                                    <li style="margin: 0.5rem 0;">
+                                        <a href="${resource.url || '#'}" target="_blank" style="color: var(--success); text-decoration: none; display: flex; align-items: center;">
+                                            <span style="margin-right: 0.5rem;">📄</span>
+                                            <div>
+                                                <strong>${resource.title || 'Resource'}</strong>
+                                                <p style="margin: 0.25rem 0 0 0; font-size: 0.9em; color: var(--text-secondary);">${resource.description || 'Download additional material'}</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Add notes section
+            if (content.notes) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Important Notes</h3>
+                        <div style="padding: 1rem; background: rgba(255, 255, 0, 0.1); border-radius: 4px; border-left: 4px solid yellow;">
+                            ${content.notes}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        function checkAnswer(questionIdx, selectedOptionIdx, correctAnswerIdx) {
+            // Get the question container
+            const questionContainer = document.getElementById(`question-${questionIdx}-container`);
+            const optionsContainer = document.getElementById(`question-${questionIdx}-options`);
+            const correctDiv = document.getElementById(`question-${questionIdx}-correct`);
+            const incorrectDiv = document.getElementById(`question-${questionIdx}-incorrect`);
+            const explanationDiv = document.getElementById(`question-${questionIdx}-explanation`);
+            
+            // Reset previous feedback
+            correctDiv.style.display = 'none';
+            incorrectDiv.style.display = 'none';
+            explanationDiv.style.display = 'none';
+            
+            // Get all labels in the options container
+            const labels = optionsContainer.querySelectorAll('label');
+            
+            // Reset all label styles
+            labels.forEach(label => {
+                label.style.backgroundColor = 'transparent';
+                label.style.padding = '0.25rem 0';
+            });
+            
+            // Apply feedback based on answer
+            if (selectedOptionIdx == correctAnswerIdx) {
+                // Correct answer - highlight in green
+                labels[selectedOptionIdx].style.backgroundColor = 'rgba(34, 197, 94, 0.3)'; // Green
+                correctDiv.style.display = 'block';
+                explanationDiv.style.display = 'block';
+                
+                // Disable further selection for this question
+                const inputs = optionsContainer.querySelectorAll('input');
+                inputs.forEach(input => {
+                    input.disabled = true;
+                });
+                labels.forEach(label => {
+                    label.style.cursor = 'default';
+                });
+            } else {
+                // Incorrect answer - highlight in red
+                labels[selectedOptionIdx].style.backgroundColor = 'rgba(239, 68, 68, 0.3)'; // Red
+                incorrectDiv.style.display = 'block';
+                
+                // Show correct answer
+                setTimeout(() => {
+                    if (labels[correctAnswerIdx]) {
+                        labels[correctAnswerIdx].style.backgroundColor = 'rgba(34, 197, 94, 0.3)'; // Green
+                        correctDiv.style.display = 'block';
+                        explanationDiv.style.display = 'block';
+                    }
+                }, 1500);
+            }
+        }
+        
+        function submitQuiz(quizElement) {
+            const radios = quizElement.querySelectorAll('input[type="radio"]');
+            let answered = 0;
+            radios.forEach(radio => {
+                if (radio.checked) answered++;
+            });
+            
+            if (answered === 0) {
+                alert('Please answer at least one question before submitting.');
+                return;
+            }
+            
+            alert('Quiz submitted! You can now proceed to the next lesson.');
+        }
+        
+        function runPlaygroundCode() {
+            const codeInput = document.getElementById('playground-code');
+            const outputDiv = document.getElementById('playground-output');
+            const responseDiv = document.getElementById('playground-response');
+            const loadingDiv = document.getElementById('playground-loading');
+            const modelSelect = document.getElementById('ai-model');
+            
+            if (!codeInput.value.trim()) {
+                alert('Please describe what you want to create or learn about.');
+                return;
+            }
+            
+            // Show output div and loading indicator
+            outputDiv.style.display = 'block';
+            responseDiv.style.display = 'none';
+            loadingDiv.style.display = 'block';
+            
+            const prompt = codeInput.value;
+            const model = modelSelect.value;
+            
+            // Simulate AI processing
+            setTimeout(() => {
+                // Hide loading, show response
+                loadingDiv.style.display = 'none';
+                responseDiv.style.display = 'block';
+                
+                // Generate a simulated AI response based on the input
+                const promptLower = codeInput.value.toLowerCase();
+                let aiResponse = `Based on your request: "${escapeHtml(codeInput.value)}", here's a helpful response:\n\nThis is a simulated AI response demonstrating how the requested functionality would work. In a real implementation, this would connect to an AI service to generate actual code or explanations.\n\nFor example, if you're looking to build something with ${escapeHtml(promptLower.split(' ')[0])}, you would typically:\n1. Define your requirements\n2. Choose appropriate technologies\n3. Create a basic structure\n4. Implement core functionality\n5. Test and refine your solution\n\nWould you like to learn more about any specific aspect?`;
+                
+                // Display the simulated AI response
+                responseDiv.innerHTML = `<strong>AI Response:</strong><br><br>${escapeHtml(aiResponse)}`;
+                
+                // Add a success message
+                responseDiv.innerHTML += `<br><br><div style="color: var(--success);">✓ Solution generated successfully!</div>`;
+            }, 1500); // Simulate processing time
+        }
+        
+        function resetPlayground() {
+            const codeInput = document.getElementById('playground-code');
+            const outputDiv = document.getElementById('playground-output');
+            
+            codeInput.value = '';
+            outputDiv.style.display = 'none';
+            outputDiv.innerHTML = '';
+        }
+        
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/\n/g, '<br>');
+        }
+        
+        function showAnswer(idx, correctAnswer) {
+            // Placeholder function for quiz functionality
+            console.log('Quiz answer checked:', idx, correctAnswer);
+        }
+        
+        function showPlaceholderContent(lesson, container, hasVideo) {
+            // Provide sample/placeholder content for AI-generated lessons
+            container.innerHTML = `
+                <div class="lesson-intro">
+                    <h2>Welcome to: ${lesson.title || 'Lesson'}</h2>
+                    <p>This lesson covers essential concepts about ${lesson.title.replace('What is ', '').replace('?', '') || 'the topic'}.</p>
+                </div>
+                
+                <div class="lesson-section" style="margin: 1.5rem 0;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Key Learning Points</h3>
+                    <ul style="line-height: 1.8;">
+                        <li>Understand fundamental concepts</li>
+                        <li>Learn practical applications</li>
+                        <li>Apply knowledge to real-world scenarios</li>
+                    </ul>
+                </div>
+                
+                <div class="lesson-section" style="margin: 1.5rem 0;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Summary</h3>
+                    <p>In this lesson, you learned about ${lesson.title.replace('What is ', '').replace('?', '') || 'the topic'}. These concepts form an important foundation for your learning journey.</p>
+                </div>
+            `;
+            
+            // Add a sample YouTube video if no video is found
+            if (!hasVideo) {
+                // Use a relevant placeholder video based on the lesson title
+                const topic = lesson.title.toLowerCase();
+                let videoId = 'dQw4w9WgXcQ'; // Default educational video (Rick Astley - widely available)
+                
+                if (topic.includes('prompt') || topic.includes('ai')) {
+                    videoId = 'P5g3ujZCp8M'; // AI/prompt engineering video
+                } else if (topic.includes('coding') || topic.includes('code')) {
+                    videoId = 'PkZNo7MFNFg'; // Coding tutorial
+                } else if (topic.includes('vibe') || topic.includes('coding')) {
+                    videoId = 'DLX62G4lc44'; // Programming/development video
+                }
+                
+                // Use a more reliable embed URL format
+                document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${videoId}?rel=0&showinfo=0&modestbranding=1`;
+                document.getElementById('videoContainer').style.display = 'block';
+                hasVideo = true;
+            }
+        }
+
+        function nextLesson() {
+            markComplete(currentLessonIndex);
+            if (currentLessonIndex < flatLessons.length - 1) {
+                loadLesson(currentLessonIndex + 1);
+            } else {
+                alert('Congratulations! You have completed the course.');
+                window.location.href = '/dashboard';
+            }
+        }
+
+        function prevLesson() {
+            if (currentLessonIndex > 0) {
+                loadLesson(currentLessonIndex - 1);
+            }
+        }
+
+        function markComplete(index) {
+            completedLessons.add(index);
+            const navItem = document.getElementById(`lesson-nav-${index}`);
+            if (navItem) navItem.classList.add('completed');
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const total = flatLessons.length;
+            const completed = completedLessons.size;
+            const pct = total === 0 ? 0 : Math.round((completed / total) * 100);
+
+            document.getElementById('progressText').textContent = `${pct}% Complete`;
+            document.getElementById('lessonCount').textContent = `${completed}/${total} Lessons`;
+            document.getElementById('progressBar').style.width = `${pct}%`;
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+        
+        // Function to simulate AI content generation for any course/lesson
+        async function generateLessonContent(courseId, courseTitle, moduleTitle, lessonTitle) {
+            // Show loading message
+            console.log('Generating content for:', { courseTitle, moduleTitle, lessonTitle });
+            
+            // Generate content based on lesson title and course context
+            const topic = lessonTitle.toLowerCase().replace('what is ', '').replace('?', '').trim();
+            
+            // Create content structure with unique content
+            const content = {
+                course_id: courseId,
+                course_title: courseTitle,
+                module_title: moduleTitle,
+                lesson_title: lessonTitle,
+                introduction: {
+                    title: `Introduction to ${lessonTitle}`,
+                    description: `In this lesson, you'll learn about ${topic}. This topic is fundamental to the ${courseTitle} course and will provide you with practical skills you can apply immediately.`,
+                    importance: `Understanding ${topic} is crucial because it forms the foundation for advanced concepts in ${courseTitle} and provides real-world applications that will enhance your knowledge in this field.`,
+                    learningOutcomes: [
+                        `Understand the core principles of ${topic}`,
+                        `Apply ${courseTitle} techniques in practical scenarios`,
+                        `Recognize when and how to use ${topic} effectively`
+                    ]
+                },
+                        core_concepts: `The core concept of ${topic} is fundamental to understanding how modern digital systems work. This concept involves several key components that work together to create powerful and efficient solutions.
+
+First, it's important to understand that ${topic} is not just a single technique, but rather a comprehensive approach that combines multiple methodologies to achieve optimal results. The foundational principle behind ${topic} is to streamline processes, reduce complexity, and enhance productivity through systematic approaches.
+
+For beginners, think of ${topic} as a framework that helps you organize and execute tasks more efficiently. The core idea is to break down complex problems into manageable components that can be addressed systematically. This approach has several key benefits:
+
+1. **Simplicity**: Complex tasks are simplified into understandable steps
+2. **Efficiency**: Time and resources are optimized through structured approaches
+3. **Scalability**: Solutions can grow and adapt as needs change
+4. **Reliability**: Consistent methods lead to predictable and dependable outcomes
+
+The practical application of ${topic} involves understanding how different elements interact with each other. For example, in the context of ${courseTitle}, ${topic} serves as a bridge between theoretical knowledge and practical implementation. It connects abstract concepts to real-world applications, making it easier for practitioners to implement effective solutions.
+
+The underlying mechanics involve several interconnected processes that work together seamlessly. These processes have been refined over time to maximize effectiveness while minimizing complexity. Understanding these mechanics is crucial for anyone looking to master ${courseTitle} concepts.
+
+Best practices for implementing ${topic} include starting with simple applications and gradually building complexity, maintaining clear documentation of processes, and continuously evaluating and refining approaches based on results. These practices ensure that ${topic} remains effective and relevant in various contexts.
+
+In real-world scenarios, ${topic} has proven to be invaluable across multiple industries and applications. Its versatility and adaptability make it a cornerstone of modern ${courseTitle} methodologies.`,
+                        unique_aspect: `In this specific lesson about "${lessonTitle}", we'll explore the distinctive characteristics that differentiate it from other concepts in the ${courseTitle} curriculum. This lesson builds upon previous knowledge while introducing specialized applications and nuanced understanding that are unique to ${topic}.`,
+                        visual_explanations: [
+                            `Visual representations help clarify the ${topic} concepts`,
+                            `Diagrams showing the relationship between different ${topic} components`,
+                            `Interactive diagrams that show how ${topic} works step-by-step`,
+                            `Flowcharts demonstrating the ${topic} process`,
+                            `Comparative visuals showing ${topic} vs traditional approaches`
+                        ],
+                        step_by_step: [
+                            {
+                                title: 'Getting Started',
+                                description: `Begin by understanding the basics of ${topic}`
+                            },
+                            {
+                                title: 'Implementation',
+                                description: `Apply ${topic} in a practical context`
+                            },
+                            {
+                                title: 'Advanced Applications',
+                                description: `Explore advanced uses of ${topic} in ${courseTitle}`
+                            }
+                        ],
+                        practical_examples: [
+                            {
+                                title: `Example 1: Basic ${topic} Usage`,
+                                scenario: `A beginner scenario demonstrating ${topic}`,
+                                implementation: `Simple implementation showing core concepts`,
+                                outcome: `Understanding of basic ${topic} principles`
+                            },
+                            {
+                                title: `Example 2: Advanced ${topic} Application`,
+                                scenario: `A complex scenario showcasing advanced ${topic} usage`,
+                                implementation: `Sophisticated implementation with best practices`,
+                                outcome: `Mastery of advanced ${topic} concepts`
+                            }
+                        ],
+                        case_study: {
+                            title: `Case Study: Implementing ${topic} in Real Projects`,
+                            scenario: `A real-world scenario demonstrating ${topic} in action`,
+                            challenges: `Initial challenges in implementing ${topic}`,
+                            solution: `Effective solution using ${topic} principles`,
+                            results: `Successful implementation with measurable outcomes`,
+                            lessonsLearned: `Key insights about ${topic} best practices`
+                        },
+                        resources: {
+                            youtube_videos: [
+                                {
+                                    title: `${topic} Explained in Detail`,
+                                    url: getRelevantVideoUrl(topic),
+                                    embeddable: true,
+                                    why_relevant: `Provides comprehensive overview of ${topic} concepts suitable for ${courseTitle}`
+                                }
+                            ],
+                            images: [],
+                            downloads: []
+                        },
+                        summary: {
+                            keyTakeaways: [
+                                `${topic} enhances your ${courseTitle} workflow through systematic approaches`,
+                                `The approach emphasizes practical application and continuous learning`,
+                                `${topic} should be integrated thoughtfully with your existing knowledge`,
+                                `Critical thinking remains essential even with structured approaches`
+                            ],
+                            nextSteps: [
+                                `Practice applying ${topic} in different contexts`,
+                                `Explore advanced features of ${courseTitle} methodologies`,
+                                `Share experiences with the ${courseTitle} community`,
+                                `Build a personal toolkit of ${courseTitle} strategies`
+                            ],
+                            confidenceBuilder: `You now have a solid understanding of ${topic}. With practice, you will become proficient at leveraging these concepts in your work.`
+                        },
+                        quiz: {
+                            title: `${topic} Fundamentals Quiz`,
+                            questions: [
+                                {
+                                    question: `What is the primary principle of ${topic}?`,
+                                    options: [
+                                        'Fundamental concepts and systematic approach',
+                                        'Random trial and error',
+                                        'Following outdated methods',
+                                        'Complete automation of all tasks'
+                                    ],
+                                    correctAnswer: 0,
+                                    explanation: `${topic} emphasizes fundamental concepts and systematic approaches to problem-solving.`
+                                },
+                                {
+                                    question: 'Which of the following is a best practice in this area?',
+                                    options: [
+                                        'Over-relying on shortcuts without understanding',
+                                        'Starting with clear foundational knowledge',
+                                        'Ignoring basic principles',
+                                        'Avoiding structured learning'
+                                    ],
+                                    correctAnswer: 1,
+                                    explanation: 'Starting with clear foundational knowledge helps build stronger understanding.'
+                                },
+                                {
+                                    question: 'What should you do after learning the basics?',
+                                    options: [
+                                        'Stop learning and apply only basic techniques',
+                                        'Verify and practice the concepts thoroughly',
+                                        'Assume you know everything',
+                                        'Ignore further development'
+                                    ],
+                                    correctAnswer: 1,
+                                    explanation: 'It\'s essential to verify and practice concepts thoroughly before advancing.'
+                                }
+                            ]
+                        }
+
+
+                    course_id: courseId,
+                    course_title: courseTitle,
+                    module_title: moduleTitle,
+                    lesson_title: lessonTitle,
+                    introduction: {
+                        title: `Introduction to ${lessonTitle}`,
+                        description: `In this lesson, you'll learn about ${topic}. This topic is fundamental to the ${courseTitle} course and will provide you with practical skills you can apply immediately.`,
+                        importance: `Understanding ${topic} is crucial because it forms the foundation for advanced concepts in ${courseTitle} and provides real-world applications that will enhance your knowledge in this field.`,
+                        learningOutcomes: [
+                            `Understand the core principles of ${topic}`,
+                            `Apply ${courseTitle} techniques in practical scenarios`,
+                            `Recognize when and how to use ${topic} effectively`
+                        ]
+                    },
+                    core_concepts: `The core concept of ${topic} is fundamental to understanding how modern digital systems work. This concept involves several key components that work together to create powerful and efficient solutions.
+
+First, it's important to understand that ${topic} is not just a single technique, but rather a comprehensive approach that combines multiple methodologies to achieve optimal results. The foundational principle behind ${topic} is to streamline processes, reduce complexity, and enhance productivity through systematic approaches.
+
+For beginners, think of ${topic} as a framework that helps you organize and execute tasks more efficiently. The core idea is to break down complex problems into manageable components that can be addressed systematically. This approach has several key benefits:
+
+1. **Simplicity**: Complex tasks are simplified into understandable steps
+2. **Efficiency**: Time and resources are optimized through structured approaches
+3. **Scalability**: Solutions can grow and adapt as needs change
+4. **Reliability**: Consistent methods lead to predictable and dependable outcomes
+
+The practical application of ${topic} involves understanding how different elements interact with each other. For example, in the context of ${courseTitle}, ${topic} serves as a bridge between theoretical knowledge and practical implementation. It connects abstract concepts to real-world applications, making it easier for practitioners to implement effective solutions.
+
+The underlying mechanics involve several interconnected processes that work together seamlessly. These processes have been refined over time to maximize effectiveness while minimizing complexity. Understanding these mechanics is crucial for anyone looking to master ${courseTitle} concepts.
+
+Best practices for implementing ${topic} include starting with simple applications and gradually building complexity, maintaining clear documentation of processes, and continuously evaluating and refining approaches based on results. These practices ensure that ${topic} remains effective and relevant in various contexts.
+
+In real-world scenarios, ${topic} has proven to be invaluable across multiple industries and applications. Its versatility and adaptability make it a cornerstone of modern ${courseTitle} methodologies.`,
+                    unique_aspect: `In this specific lesson about "${lessonTitle}", we'll explore the distinctive characteristics that differentiate it from other concepts in the ${courseTitle} curriculum. This lesson builds upon previous knowledge while introducing specialized applications and nuanced understanding that are unique to ${topic}.`,
+                    visual_explanations: [
+                        `Visual representations help clarify the ${topic} concepts`,
+                        `Diagrams showing the relationship between different ${topic} components`,
+                        `Interactive diagrams that show how ${topic} works step-by-step`,
+                        `Flowcharts demonstrating the ${topic} process`,
+                        `Comparative visuals showing ${topic} vs traditional approaches`
+                    ],
+                    step_by_step: [
+                        {
+                            title: 'Getting Started',
+                            description: `Begin by understanding the basics of ${topic}`
+                        },
+                        {
+                            title: 'Implementation',
+                            description: `Apply ${topic} in a practical context`
+                        },
+                        {
+                            title: 'Advanced Applications',
+                            description: `Explore advanced uses of ${topic} in ${courseTitle}`
+                        }
+                    ],
+                    practical_examples: [
+                        {
+                            title: `Example 1: Basic ${topic} Usage`,
+                            scenario: `A beginner scenario demonstrating ${topic}`,
+                            implementation: `Simple implementation showing core concepts`,
+                            outcome: `Understanding of basic ${topic} principles`
+                        },
+                        {
+                            title: `Example 2: Advanced ${topic} Application`,
+                            scenario: `A complex scenario showcasing advanced ${topic} usage`,
+                            implementation: `Sophisticated implementation with best practices`,
+                            outcome: `Mastery of advanced ${topic} concepts`
+                        }
+                    ],
+                    case_study: {
+                        title: `Case Study: Implementing ${topic} in Real Projects`,
+                        scenario: `A real-world scenario demonstrating ${topic} in action`,
+                        challenges: `Initial challenges in implementing ${topic}`,
+                        solution: `Effective solution using ${topic} principles`,
+                        results: `Successful implementation with measurable outcomes`,
+                        lessonsLearned: `Key insights about ${topic} best practices`
+                    },
+                    resources: {
+                        youtube_videos: [
+                            {
+                                title: `${topic} Explained in Detail`,
+                                url: getRelevantVideoUrl(topic),
+                                embeddable: true,
+                                why_relevant: `Provides comprehensive overview of ${topic} concepts suitable for ${courseTitle}`
+                            }
+                        ],
+                        images: [],
+                        downloads: []
+                    },
+                    summary: {
+                        keyTakeaways: [
+                            `${topic} enhances your ${courseTitle} workflow through systematic approaches`,
+                            `The approach emphasizes practical application and continuous learning`,
+                            `${topic} should be integrated thoughtfully with your existing knowledge`,
+                            `Critical thinking remains essential even with structured approaches`
+                        ],
+                        nextSteps: [
+                            `Practice applying ${topic} in different contexts`,
+                            `Explore advanced features of ${courseTitle} methodologies`,
+                            `Share experiences with the ${courseTitle} community`,
+                            `Build a personal toolkit of ${courseTitle} strategies`
+                        ],
+                        confidenceBuilder: `You now have a solid understanding of ${topic}. With practice, you will become proficient at leveraging these concepts in your work.`
+                    },
+                    quiz: {
+                        title: `${topic} Fundamentals Quiz`,
+                        questions: [
+                            {
+                                question: `What is the primary principle of ${topic}?`,
+                                options: [
+                                    'Fundamental concepts and systematic approach',
+                                    'Random trial and error',
+                                    'Following outdated methods',
+                                    'Complete automation of all tasks'
+                                ],
+                                correctAnswer: 0,
+                                explanation: `${topic} emphasizes fundamental concepts and systematic approaches to problem-solving.`
+                            },
+                            {
+                                question: 'Which of the following is a best practice in this area?',
+                                options: [
+                                    'Over-relying on shortcuts without understanding',
+                                    'Starting with clear foundational knowledge',
+                                    'Ignoring basic principles',
+                                    'Avoiding structured learning'
+                                ],
+                                correctAnswer: 1,
+                                explanation: 'Starting with clear foundational knowledge helps build stronger understanding.'
+                            },
+                            {
+                                question: 'What should you do after learning the basics?',
+                                options: [
+                                    'Stop learning and apply only basic techniques',
+                                    'Verify and practice the concepts thoroughly',
+                                    'Assume you know everything',
+                                    'Ignore further development'
+                                ],
+                                correctAnswer: 1,
+                                explanation: 'It\'s essential to verify and practice concepts thoroughly before advancing.'
+                            }
+                        ]
+                    }
+                };
+                
+                return content;
+            }
+        
+        // Helper function to get relevant YouTube video URL based on topic
+        function getRelevantVideoUrl(topic) {
+            // Map topics to relevant educational YouTube videos
+            const topicMap = {
+                'vibe coding': '5OWurmg41tI',
+                'ai automation': 'jwG_OzHVoqo',
+                'prompt engineering': 'Z6VZYyGFco4',
+                'digital marketing': 'mIxwUbZsF_Q',
+                'facebook ads': 'uKj01Hy24A0',
+                'automation': 'P5g3ujZCp8M',
+                'development': 'PkZNo7MFNFg',
+                'coding': 'DLX62G4lc44'
+            };
+            
+            // Check for matching topic
+            for (const [key, videoId] of Object.entries(topicMap)) {
+                if (topic.includes(key)) {
+                    return `https://www.youtube.com/embed/${videoId}`;
+                }
+            }
+            
+            // Default to a general educational video if no match
+            return 'https://www.youtube.com/embed/dQw4w9WgXcQ';
+        }
+
+        window.addEventListener('load', init);
+    </script>
+</body>
+
+</html>

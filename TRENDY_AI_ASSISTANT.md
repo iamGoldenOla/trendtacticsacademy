@@ -1,6 +1,6 @@
 # Trendy AI Assistant Integration Guide
 
-This document explains how to use the Trendy AI Assistant with puter.js integration in your Trendtactics Academy LMS.
+This document explains how to use the Trendy AI Assistant in your Trendtactics Academy LMS.
 
 ## Features
 
@@ -16,10 +16,10 @@ Located at: `src/components/TrendyAssistant.js`
 
 This is the main chat interface that appears as a floating widget in the bottom-right corner of the screen.
 
-### 2. Puter.js Service
-Located at: `src/services/puterService.js`
+### 2. AI Service
+Located at: `src/services/aiService.js`
 
-This service handles all interactions with the puter.js AI capabilities.
+This service handles all interactions with the AI capabilities.
 
 ### 3. Course Creator Page
 Located at: `src/pages/CourseCreator.js`
@@ -28,12 +28,8 @@ A dedicated page for creating courses through conversational AI.
 
 ## Setup Instructions
 
-### 1. Include puter.js Script
-The puter.js script is already included in `public/index.html`:
-
-```html
-<script src="https://js.puter.com/v2/" defer></script>
-```
+### 1. AI Service Integration
+The AI service is already integrated in `src/services/aiService.js`.
 
 ### 2. Initialize the Service
 The service automatically initializes when the TrendyAssistant component mounts.
@@ -48,19 +44,19 @@ Navigate to `/course-creator` to access the dedicated course creation interface.
 
 ## API Methods
 
-### puterService.initialize()
-Initializes the puter.js connection.
+### aiService.initialize()
+Initializes the AI service connection.
 
-### puterService.generateCourseContent(topic, userDetails)
+### aiService.generateCourseContent(topic, userDetails)
 Generates a course outline based on a topic and user details.
 
-### puterService.createConversationalCourse(initialPrompt)
+### aiService.createConversationalCourse(initialPrompt)
 Starts a conversational course creation flow.
 
-### puterService.processFeedback(courseContent, feedback)
+### aiService.processFeedback(courseContent, feedback)
 Processes user feedback to improve course content.
 
-### puterService.getCourseRecommendations(interests, skillLevel)
+### aiService.getCourseRecommendations(interests, skillLevel)
 Gets personalized course recommendations.
 
 ## Customization
@@ -84,14 +80,14 @@ node src/demo/courseCreationDemo.js
 
 ## Troubleshooting
 
-### "Puter.js not found" Error
-Ensure the script tag is included in your HTML file.
+### "AI Service not found" Error
+Ensure the service is properly imported in your component.
 
 ### "Invalid API key" Error
-Check that your puter.js API key is properly configured.
+Check that your AI service API key is properly configured.
 
 ### Initialization Failures
-Verify network connectivity and that the puter.js service is available.
+Verify network connectivity and that the AI service is available.
 
 ## Security Notes
 
