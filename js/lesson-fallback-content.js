@@ -190,11 +190,163 @@ In real-world scenarios, ${topic} has proven to be invaluable across multiple in
                         implementation: 'Describe the desired outcome in natural language, then use AI tools to generate the code',
                         outcome: 'A functional web page without writing traditional code'
                     }
-                ]
+                ],
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'What is Vibe Coding?',
+                            url: 'https://www.youtube.com/embed/5OWurmg41tI',
+                            embeddable: true,
+                            why_relevant: 'Explains the core concepts of Vibe Coding approach and its benefits for creative developers.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
             },
             'Why Vibe Coding Exists': {
                 core_concepts: 'Traditional coding focuses on syntax and implementation details, which can be a barrier for creative people. Vibe Coding removes this barrier by focusing on the creative aspects first.',
                 unique_aspect: 'This approach recognizes that not everyone thinks in syntax, but everyone can think in ideas and concepts.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'The Problem with Traditional Coding',
+                            url: 'https://www.youtube.com/embed/PkZNo7MFNFg',
+                            embeddable: true,
+                            why_relevant: 'Discusses the challenges with traditional syntax-focused coding and why a concept-first approach is better.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Vibe Coding vs Traditional Coding': {
+                core_concepts: 'Vibe Coding differs from traditional coding in its approach to problem-solving. Instead of focusing on syntax and implementation details, it starts with the desired outcome and uses AI tools to generate the necessary code.',
+                unique_aspect: 'The key difference is in the thinking process: Vibe Coding starts with "what do I want?" while traditional coding starts with "how do I build it?".',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Vibe Coding vs Traditional Coding Comparison',
+                            url: 'https://www.youtube.com/embed/DLX62G4lc44',
+                            embeddable: true,
+                            why_relevant: 'Visual comparison of the two approaches with practical examples.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Core Principles of Vibe Coding': {
+                core_concepts: 'The core principles of Vibe Coding include focusing on ideas first, using AI tools as creative partners, and thinking in concepts rather than syntax.',
+                unique_aspect: 'These principles allow for faster prototyping and development without getting bogged down in implementation details.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Core Principles of Vibe Coding',
+                            url: 'https://www.youtube.com/embed/mIxwUbZsF_Q',
+                            embeddable: true,
+                            why_relevant: 'Detailed explanation of the fundamental principles that make Vibe Coding effective.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Vibe Coding Workflow': {
+                core_concepts: 'The Vibe Coding workflow involves describing what you want to build in natural language, using AI tools to generate the code, testing and refining the output, and iterating until you achieve the desired result.',
+                unique_aspect: 'This workflow allows for rapid prototyping and experimentation without the overhead of traditional development processes.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Vibe Coding Workflow Explained',
+                            url: 'https://www.youtube.com/embed/jwG_OzHVoqo',
+                            embeddable: true,
+                            why_relevant: 'Step-by-step guide to the Vibe Coding workflow with practical examples.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Tools for Vibe Coding': {
+                core_concepts: 'Vibe Coding leverages AI tools like ChatGPT, GitHub Copilot, Replit, and other AI-powered development environments to generate code from natural language descriptions.',
+                unique_aspect: 'The right tools can dramatically accelerate the Vibe Coding process and improve the quality of generated code.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Best Tools for Vibe Coding',
+                            url: 'https://www.youtube.com/embed/Z6VZYyGFco4',
+                            embeddable: true,
+                            why_relevant: 'Review of the most effective AI tools for Vibe Coding with practical demonstrations.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Practical Vibe Coding Examples': {
+                core_concepts: 'Practical examples demonstrate how to apply Vibe Coding to real-world problems like building web applications, creating automation scripts, and developing digital products.',
+                unique_aspect: 'These examples show how to think in concepts and translate ideas into working solutions using AI tools.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Practical Vibe Coding Examples',
+                            url: 'https://www.youtube.com/embed/uKj01Hy24A0',
+                            embeddable: true,
+                            why_relevant: 'Real-world examples of Vibe Coding in action with complete walkthroughs.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Advanced Vibe Coding Techniques': {
+                core_concepts: 'Advanced techniques include prompt engineering, iterative refinement, and combining multiple AI tools for complex projects.',
+                unique_aspect: 'These techniques allow for more sophisticated projects and better control over AI-generated outputs.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Advanced Vibe Coding Techniques',
+                            url: 'https://www.youtube.com/embed/P5g3ujZCp8M',
+                            embeddable: true,
+                            why_relevant: 'Deep dive into advanced techniques for maximizing the effectiveness of Vibe Coding.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Building Your First Vibe Coding Project': {
+                core_concepts: 'Your first Vibe Coding project should be simple but complete, allowing you to experience the full workflow from idea to working application.',
+                unique_aspect: 'Starting with a manageable project helps build confidence and understanding of the Vibe Coding approach.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Building Your First Vibe Coding Project',
+                            url: 'https://www.youtube.com/embed/5OWurmg41tI',
+                            embeddable: true,
+                            why_relevant: 'Complete walkthrough of building a first project using Vibe Coding principles.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Common Vibe Coding Mistakes': {
+                core_concepts: 'Common mistakes include being too vague in prompts, not iterating enough, and expecting perfect results on the first try.',
+                unique_aspect: 'Learning to avoid these mistakes helps improve the effectiveness of the Vibe Coding approach.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Common Vibe Coding Mistakes to Avoid',
+                            url: 'https://www.youtube.com/embed/DLX62G4lc44',
+                            embeddable: true,
+                            why_relevant: 'Practical advice on avoiding common pitfalls in Vibe Coding.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
             }
         };
 
