@@ -496,16 +496,49 @@
         // Function to save generated content back to the database
         async function saveGeneratedContent(lessonId, content) {
             try {
-                const { error } = await window.supabaseClient
+                // Check if content is significantly different before saving
+                const { data: existingLesson, error: fetchError } = await window.supabaseClient
                     .from('lessons')
-                    .update({ 
-                        lesson_json: content,
-                        content: JSON.stringify(content) // Also store as string for compatibility
-                    })
-                    .eq('id', lessonId);
+                    .select('lesson_json, content')
+                    .eq('id', lessonId)
+                    .single();
                     
-                if (error) throw error;
-                console.log('Generated content saved successfully');
+                let shouldSave = true;
+                if (existingLesson && existingLesson.lesson_json) {
+                    // Skip if the new content is too similar to existing content
+                    const existingDesc = JSON.stringify(existingLesson.lesson_json)?.substring(0, 200)?.toLowerCase();
+                    const newDesc = JSON.stringify(content)?.substring(0, 200)?.toLowerCase();
+                    
+                    // Simple check: if first 200 chars are more than 80% similar, don't update
+                    if (existingDesc && newDesc) {
+                        const commonLength = Math.min(existingDesc.length, newDesc.length);
+                        let commonChars = 0;
+                        for (let i = 0; i < commonLength; i++) {
+                            if (existingDesc[i] === newDesc[i]) commonChars++;
+                        }
+                        const similarity = commonChars / commonLength;
+                        if (similarity > 0.8) {
+                            console.log('Content is too similar to existing, skipping update');
+                            shouldSave = false;
+                        }
+                    }
+                }
+                
+                if (shouldSave) {
+                    const { error } = await window.supabaseClient
+                        .from('lessons')
+                        .update({ 
+                            lesson_json: content,
+                            content: JSON.stringify(content), // Also store as string for compatibility
+                            updated_at: new Date().toISOString()
+                        })
+                        .eq('id', lessonId);
+                        
+                    if (error) throw error;
+                    console.log('Generated content saved successfully');
+                } else {
+                    console.log('Skipped saving - content too similar to existing');
+                }
             } catch (error) {
                 console.error('Error saving generated content:', error);
             }
