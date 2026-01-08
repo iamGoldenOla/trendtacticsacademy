@@ -8,6 +8,13 @@
         // Get the requested path
         const requestedPath = location.pathname;
         
+        // Prevent redirect loops by checking if we're on the 404 page itself
+        if (requestedPath.includes('404.html')) {
+            // If somehow we're on the 404 page, redirect to home
+            location.replace('/index.html');
+            throw new Error('Redirecting from 404.html to prevent loops');
+        }
+        
         // Define the mapping of paths to HTML files
         const pathMap = {
             '/': '/index.html',
@@ -24,19 +31,6 @@
             '/blog': '/blog.html'
         };
         
-        // Handle dynamic routes
-        const path = requestedPath;
-        if (path.startsWith('/course/')) {
-            // Course detail page
-            location.replace('/course.html' + location.search + location.hash);
-        } else if (path.startsWith('/learn/')) {
-            // Learn page
-            location.replace('/learn.html' + location.search + location.hash);
-        } else if (path.startsWith('/lesson-viewer')) {
-            // Lesson viewer page
-            location.replace('/lesson-viewer.html' + location.search + location.hash);
-        }
-        
         // Check if the requested path has a corresponding HTML file
         if (pathMap[requestedPath]) {
             // Redirect to the appropriate HTML file
@@ -46,15 +40,28 @@
             const path = requestedPath;
             if (path.startsWith('/course/')) {
                 // Course detail page - preserve the slug in the URL as a query parameter
-                const slug = path.split('/')[2];
-                location.replace('/course.html?slug=' + encodeURIComponent(slug));
+                const parts = path.split('/').filter(part => part !== '');
+                if (parts.length >= 2 && parts[0] === 'course') {
+                    const slug = parts[1];
+                    location.replace('/course.html?slug=' + encodeURIComponent(slug));
+                } else {
+                    location.replace('/courses.html');
+                }
             } else if (path.startsWith('/learn/')) {
                 // Learn page - preserve the course ID in the URL as a query parameter
-                const courseId = path.split('/')[2];
-                location.replace('/learn.html?id=' + encodeURIComponent(courseId));
+                const parts = path.split('/').filter(part => part !== '');
+                if (parts.length >= 2 && parts[0] === 'learn') {
+                    const courseId = parts[1];
+                    location.replace('/learn.html?id=' + encodeURIComponent(courseId));
+                } else {
+                    location.replace('/dashboard.html');
+                }
             } else if (path.startsWith('/lesson-viewer')) {
-                // Lesson viewer page - use current search params
-                location.replace('/lesson-viewer.html' + location.search + location.hash);
+                // Lesson viewer page - redirect to learn as fallback
+                location.replace('/learn.html');
+            } else {
+                // For any other unknown paths, redirect to home
+                location.replace('/index.html');
             }
         }
     </script>
