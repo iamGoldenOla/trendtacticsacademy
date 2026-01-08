@@ -46,6 +46,3 @@ RewriteRule ^services/?$ /services.html [L,QSA]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /index.html [L,QSA]
-
-# Use a proper 404 page for missing routes
-ErrorDocument 404 /404.html
