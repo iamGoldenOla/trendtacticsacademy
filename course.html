@@ -107,9 +107,20 @@
         <!-- Scripts -->
         <script src="/js/auth.js"></script>
         <script>
-            // Get course slug from URL
-            const urlParts = window.location.pathname.split('/');
-            const courseSlug = urlParts[urlParts.length - 1];
+            // Get course slug from URL - check both path and query parameters
+            let courseSlug = null;
+            
+            // First check if there's a slug in the URL path
+            const urlParts = window.location.pathname.split('/').filter(part => part !== '');
+            if (urlParts.length > 0) {
+                courseSlug = urlParts[urlParts.length - 1];
+            }
+            
+            // If no slug in path, check query parameters
+            if (!courseSlug) {
+                const urlParams = new URLSearchParams(window.location.search);
+                courseSlug = urlParams.get('slug');
+            }
             
             // Fetch course information based on slug
             async function loadCourseBySlug(slug) {
