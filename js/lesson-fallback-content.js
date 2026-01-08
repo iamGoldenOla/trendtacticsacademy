@@ -190,158 +190,246 @@ In real-world scenarios, ${topic} has proven to be invaluable across multiple in
                         implementation: 'Describe the desired outcome in natural language, then use AI tools to generate the code',
                         outcome: 'A functional web page without writing traditional code'
                     }
-                ],
-                resources: {
-                    youtube_videos: [
-                        {
-                            title: 'What is Vibe Coding?',
-                            url: 'https://www.youtube.com/embed/5OWurmg41tI',
-                            embeddable: true,
-                            why_relevant: 'Explains the core concepts of Vibe Coding approach and its benefits for creative developers.'
-                        }
-                    ],
-                    images: [],
-                    downloads: []
-                }
+                ]
             },
             'Why Vibe Coding Exists': {
                 core_concepts: 'Traditional coding focuses on syntax and implementation details, which can be a barrier for creative people. Vibe Coding removes this barrier by focusing on the creative aspects first.',
                 unique_aspect: 'This approach recognizes that not everyone thinks in syntax, but everyone can think in ideas and concepts.',
+            },
+            'The Philosophy of Vibe Coding': {
+                core_concepts: 'The philosophy of Vibe Coding centers on the idea that programming should be approached through concepts and intentions rather than syntax. It prioritizes creative thinking and problem-solving over technical implementation details.',
+                unique_aspect: 'This philosophy shifts the focus from "how to code" to "what to create", allowing for more innovative solutions and reducing the intimidation factor for non-programmers.',
                 resources: {
                     youtube_videos: [
                         {
-                            title: 'The Problem with Traditional Coding',
+                            title: 'The Philosophy of Vibe Coding',
                             url: 'https://www.youtube.com/embed/PkZNo7MFNFg',
                             embeddable: true,
-                            why_relevant: 'Discusses the challenges with traditional syntax-focused coding and why a concept-first approach is better.'
+                            why_relevant: 'Explores the philosophical foundations that make Vibe Coding a paradigm shift in development.'
                         }
                     ],
                     images: [],
                     downloads: []
                 }
             },
-            'Vibe Coding vs Traditional Coding': {
-                core_concepts: 'Vibe Coding differs from traditional coding in its approach to problem-solving. Instead of focusing on syntax and implementation details, it starts with the desired outcome and uses AI tools to generate the necessary code.',
-                unique_aspect: 'The key difference is in the thinking process: Vibe Coding starts with "what do I want?" while traditional coding starts with "how do I build it?".',
+            'Setting Up Your Development Environment': {
+                core_concepts: 'Setting up the right development environment for Vibe Coding involves configuring AI tools, creative platforms, and flexible development frameworks that support rapid prototyping.',
+                unique_aspect: 'The environment is designed for experimentation and iteration, focusing on tools that bridge the gap between concepts and implementation.',
                 resources: {
                     youtube_videos: [
                         {
-                            title: 'Vibe Coding vs Traditional Coding Comparison',
+                            title: 'Setting Up Your Vibe Coding Environment',
                             url: 'https://www.youtube.com/embed/DLX62G4lc44',
                             embeddable: true,
-                            why_relevant: 'Visual comparison of the two approaches with practical examples.'
+                            why_relevant: 'Step-by-step guide to configuring your development environment for Vibe Coding.'
                         }
                     ],
                     images: [],
                     downloads: []
                 }
             },
-            'Core Principles of Vibe Coding': {
-                core_concepts: 'The core principles of Vibe Coding include focusing on ideas first, using AI tools as creative partners, and thinking in concepts rather than syntax.',
-                unique_aspect: 'These principles allow for faster prototyping and development without getting bogged down in implementation details.',
+            'Basic Concepts and Principles': {
+                core_concepts: 'Basic concepts include the core tenets of Vibe Coding: idea-first approach, intention-driven development, creative implementation, and guidance-based coding.',
+                unique_aspect: 'These principles form the foundation of how to approach problems in Vibe Coding, focusing on the desired outcome rather than implementation details.',
                 resources: {
                     youtube_videos: [
                         {
-                            title: 'Core Principles of Vibe Coding',
+                            title: 'Basic Concepts and Principles of Vibe Coding',
                             url: 'https://www.youtube.com/embed/mIxwUbZsF_Q',
                             embeddable: true,
-                            why_relevant: 'Detailed explanation of the fundamental principles that make Vibe Coding effective.'
+                            why_relevant: 'Detailed explanation of the foundational concepts that guide Vibe Coding practices.'
                         }
                     ],
                     images: [],
                     downloads: []
                 }
             },
-            'Vibe Coding Workflow': {
-                core_concepts: 'The Vibe Coding workflow involves describing what you want to build in natural language, using AI tools to generate the code, testing and refining the output, and iterating until you achieve the desired result.',
-                unique_aspect: 'This workflow allows for rapid prototyping and experimentation without the overhead of traditional development processes.',
+            'Creating Your First Vibe Project': {
+                core_concepts: 'Creating your first Vibe project involves defining your concept clearly, selecting appropriate AI tools, and establishing an iterative workflow for development.',
+                unique_aspect: 'The focus is on getting a working prototype quickly rather than perfecting implementation details from the start.',
                 resources: {
                     youtube_videos: [
                         {
-                            title: 'Vibe Coding Workflow Explained',
-                            url: 'https://www.youtube.com/embed/jwG_OzHVoqo',
-                            embeddable: true,
-                            why_relevant: 'Step-by-step guide to the Vibe Coding workflow with practical examples.'
-                        }
-                    ],
-                    images: [],
-                    downloads: []
-                }
-            },
-            'Tools for Vibe Coding': {
-                core_concepts: 'Vibe Coding leverages AI tools like ChatGPT, GitHub Copilot, Replit, and other AI-powered development environments to generate code from natural language descriptions.',
-                unique_aspect: 'The right tools can dramatically accelerate the Vibe Coding process and improve the quality of generated code.',
-                resources: {
-                    youtube_videos: [
-                        {
-                            title: 'Best Tools for Vibe Coding',
-                            url: 'https://www.youtube.com/embed/Z6VZYyGFco4',
-                            embeddable: true,
-                            why_relevant: 'Review of the most effective AI tools for Vibe Coding with practical demonstrations.'
-                        }
-                    ],
-                    images: [],
-                    downloads: []
-                }
-            },
-            'Practical Vibe Coding Examples': {
-                core_concepts: 'Practical examples demonstrate how to apply Vibe Coding to real-world problems like building web applications, creating automation scripts, and developing digital products.',
-                unique_aspect: 'These examples show how to think in concepts and translate ideas into working solutions using AI tools.',
-                resources: {
-                    youtube_videos: [
-                        {
-                            title: 'Practical Vibe Coding Examples',
-                            url: 'https://www.youtube.com/embed/uKj01Hy24A0',
-                            embeddable: true,
-                            why_relevant: 'Real-world examples of Vibe Coding in action with complete walkthroughs.'
-                        }
-                    ],
-                    images: [],
-                    downloads: []
-                }
-            },
-            'Advanced Vibe Coding Techniques': {
-                core_concepts: 'Advanced techniques include prompt engineering, iterative refinement, and combining multiple AI tools for complex projects.',
-                unique_aspect: 'These techniques allow for more sophisticated projects and better control over AI-generated outputs.',
-                resources: {
-                    youtube_videos: [
-                        {
-                            title: 'Advanced Vibe Coding Techniques',
-                            url: 'https://www.youtube.com/embed/P5g3ujZCp8M',
-                            embeddable: true,
-                            why_relevant: 'Deep dive into advanced techniques for maximizing the effectiveness of Vibe Coding.'
-                        }
-                    ],
-                    images: [],
-                    downloads: []
-                }
-            },
-            'Building Your First Vibe Coding Project': {
-                core_concepts: 'Your first Vibe Coding project should be simple but complete, allowing you to experience the full workflow from idea to working application.',
-                unique_aspect: 'Starting with a manageable project helps build confidence and understanding of the Vibe Coding approach.',
-                resources: {
-                    youtube_videos: [
-                        {
-                            title: 'Building Your First Vibe Coding Project',
+                            title: 'Creating Your First Vibe Coding Project',
                             url: 'https://www.youtube.com/embed/5OWurmg41tI',
                             embeddable: true,
-                            why_relevant: 'Complete walkthrough of building a first project using Vibe Coding principles.'
+                            why_relevant: 'Complete walkthrough of building your first project using Vibe Coding principles.'
                         }
                     ],
                     images: [],
                     downloads: []
                 }
             },
-            'Common Vibe Coding Mistakes': {
-                core_concepts: 'Common mistakes include being too vague in prompts, not iterating enough, and expecting perfect results on the first try.',
-                unique_aspect: 'Learning to avoid these mistakes helps improve the effectiveness of the Vibe Coding approach.',
+            'Idea Generation': {
+                core_concepts: 'Idea generation in Vibe Coding focuses on creative brainstorming techniques that generate viable development concepts without technical constraints.',
+                unique_aspect: 'This process encourages thinking beyond traditional programming limitations to find innovative solutions.',
                 resources: {
                     youtube_videos: [
                         {
-                            title: 'Common Vibe Coding Mistakes to Avoid',
+                            title: 'Effective Idea Generation in Vibe Coding',
+                            url: 'https://www.youtube.com/embed/Z6VZYyGFco4',
+                            embeddable: true,
+                            why_relevant: 'Techniques for generating creative ideas that can be implemented through Vibe Coding.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Intention Setting': {
+                core_concepts: 'Intention setting involves clearly defining what you want to achieve with your project before determining how to build it.',
+                unique_aspect: 'This step is crucial in Vibe Coding as it guides the AI tools and development process toward the desired outcome.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Setting Clear Intentions for Your Project',
+                            url: 'https://www.youtube.com/embed/jwG_OzHVoqo',
+                            embeddable: true,
+                            why_relevant: 'How to set clear intentions that guide successful Vibe Coding projects.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Creative Implementation': {
+                core_concepts: 'Creative implementation is the process of turning your ideas and intentions into reality using AI tools and flexible development approaches.',
+                unique_aspect: 'This stage emphasizes experimentation and iteration over perfection, allowing for creative solutions to emerge.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Creative Implementation Strategies',
+                            url: 'https://www.youtube.com/embed/uKj01Hy24A0',
+                            embeddable: true,
+                            why_relevant: 'Strategies for implementing creative ideas through Vibe Coding techniques.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Guidance Principles': {
+                core_concepts: 'Guidance principles are the rules and heuristics that help steer your Vibe Coding projects toward success.',
+                unique_aspect: 'These principles provide direction during the development process, especially when facing uncertainty or complexity.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Essential Guidance Principles',
+                            url: 'https://www.youtube.com/embed/P5g3ujZCp8M',
+                            embeddable: true,
+                            why_relevant: 'Key principles that guide decision-making in Vibe Coding projects.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'AI-Assisted Development': {
+                core_concepts: 'AI-assisted development leverages artificial intelligence tools to translate concepts and intentions into working code.',
+                unique_aspect: 'This approach maximizes human creativity while automating the technical implementation details.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Mastering AI-Assisted Development',
+                            url: 'https://www.youtube.com/embed/jwG_OzHVoqo',
+                            embeddable: true,
+                            why_relevant: 'Advanced techniques for using AI tools effectively in your Vibe Coding projects.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Complex Project Structures': {
+                core_concepts: 'Complex project structures in Vibe Coding involve organizing larger projects with multiple components, modules, and interdependencies.',
+                unique_aspect: 'The approach maintains the concept-first philosophy even in complex projects, focusing on high-level organization before implementation details.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Structuring Complex Vibe Coding Projects',
+                            url: 'https://www.youtube.com/embed/PkZNo7MFNFg',
+                            embeddable: true,
+                            why_relevant: 'How to organize and manage complex projects using Vibe Coding principles.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Team Collaboration': {
+                core_concepts: 'Team collaboration in Vibe Coding focuses on how multiple people can work together effectively using concept-first development approaches.',
+                unique_aspect: 'Collaboration emphasizes shared vision and intention alignment rather than division of technical tasks.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Collaboration in Vibe Coding Teams',
+                            url: 'https://www.youtube.com/embed/mIxwUbZsF_Q',
+                            embeddable: true,
+                            why_relevant: 'Best practices for collaborative Vibe Coding projects.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Performance Optimization': {
+                core_concepts: 'Performance optimization in Vibe Coding involves improving the efficiency and responsiveness of projects while maintaining the concept-first approach.',
+                unique_aspect: 'Optimization is approached strategically, focusing on the most impactful improvements first.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Performance Optimization Techniques',
                             url: 'https://www.youtube.com/embed/DLX62G4lc44',
                             embeddable: true,
-                            why_relevant: 'Practical advice on avoiding common pitfalls in Vibe Coding.'
+                            why_relevant: 'Techniques for optimizing Vibe Coding projects for better performance.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Best Practices': {
+                core_concepts: 'Best practices in Vibe Coding encompass the most effective approaches to concept development, implementation, and project management.',
+                unique_aspect: 'These practices are derived from successful implementations and focus on maintaining the creative essence while ensuring practical results.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Vibe Coding Best Practices',
+                            url: 'https://www.youtube.com/embed/Z6VZYyGFco4',
+                            embeddable: true,
+                            why_relevant: 'Compilation of the most effective practices in Vibe Coding.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Project Deployment': {
+                core_concepts: 'Project deployment in Vibe Coding involves preparing and releasing projects to production while preserving the concept-first approach.',
+                unique_aspect: 'Deployment strategies focus on maintaining the flexibility and extensibility inherent in Vibe Coding projects.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Deploying Vibe Coding Projects',
+                            url: 'https://www.youtube.com/embed/uKj01Hy24A0',
+                            embeddable: true,
+                            why_relevant: 'Process and best practices for deploying Vibe Coding projects to production.'
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                }
+            },
+            'Maintenance Strategies': {
+                core_concepts: 'Maintenance strategies for Vibe Coding projects focus on keeping projects adaptable and aligned with evolving concepts and intentions.',
+                unique_aspect: 'Maintenance emphasizes preserving the creative flexibility that makes Vibe Coding projects easy to modify and extend.',
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: 'Maintaining Vibe Coding Projects',
+                            url: 'https://www.youtube.com/embed/P5g3ujZCp8M',
+                            embeddable: true,
+                            why_relevant: 'Long-term maintenance approaches for Vibe Coding projects.'
                         }
                     ],
                     images: [],
