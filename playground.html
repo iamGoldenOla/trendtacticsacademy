@@ -6,7 +6,25 @@
     <title>AI Code Playground - Trendtactics Academy</title>
     <link rel="icon" href="/images/Trendtactics-logo - Copy.jpg" type="image/jpeg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <script src="https://js.puter.com/v2/" onload="if(window.puter && window.puter.auth) { puter.auth.autoLogin = false; }"></script>
+    <!-- Puter.js script with proper configuration to prevent popups and authentication issues -->
+    <script>
+      // Define configuration before loading Puter.js
+      window.puter = window.puter || {};
+      window.puter.config = {
+        autoload: false,
+        autoLogin: false,
+        showWelcomeModal: false,
+        preventHumanVerification: true,
+        preventPopup: true,
+        showPopup: false,
+        showWindow: false,
+        showTaskbar: false,
+        hideTaskbar: true,
+        hideWindowTitle: true,
+        hideBackdrop: true
+      };
+    </script>
+    <script src="https://js.puter.com/v2/"></script>
     <style>
         :root {
             --primary: #00D9FF;

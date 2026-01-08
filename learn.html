@@ -11,7 +11,25 @@
     <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
     <script src="/js/env.js"></script>
     <script src="/js/supabase-client.js"></script>
-    <script src="https://js.puter.com/v2/" onload="if(window.puter && window.puter.auth) { puter.auth.autoLogin = false; }"></script>
+    <!-- Puter.js script with proper configuration to prevent popups and authentication issues -->
+    <script>
+      // Define configuration before loading Puter.js
+      window.puter = window.puter || {};
+      window.puter.config = {
+        autoload: false,
+        autoLogin: false,
+        showWelcomeModal: false,
+        preventHumanVerification: true,
+        preventPopup: true,
+        showPopup: false,
+        showWindow: false,
+        showTaskbar: false,
+        hideTaskbar: true,
+        hideWindowTitle: true,
+        hideBackdrop: true
+      };
+    </script>
+    <script src="https://js.puter.com/v2/"></script>
     <style>
         /* Embed critical CSS for learning view */
         :root {
@@ -755,6 +773,40 @@
                 }
             }
             
+            // Try to fetch the full lesson content from the database
+            try {
+                const { data: dbLesson, error: lessonError } = await window.supabaseClient
+                    .from('lessons')
+                    .select('content')
+                    .eq('title', lesson.title)
+                    .single();
+                
+                if (lessonError) {
+                    console.log('No specific lesson content found in DB for:', lesson.title, lessonError.message);
+                } else if (dbLesson && dbLesson.content) {
+                    // Found lesson content in database, try to parse it
+                    try {
+                        const dbContent = JSON.parse(dbLesson.content);
+                        // Check if this is rich content from our JSON files
+                        if (dbContent.lesson_title || dbContent.introduction || dbContent.big_idea || dbContent.core_concept) {
+                            // This is rich JSON content from our course files
+                            fullLesson = { ...lesson, ...dbContent };
+                            console.log('Loaded rich lesson content from database:', fullLesson);
+                        } else {
+                            // Regular content, merge normally
+                            fullLesson = { ...lesson, ...dbContent };
+                            console.log('Loaded regular lesson content from database:', fullLesson);
+                        }
+                    } catch (parseError) {
+                        // If it's not JSON, treat as simple content
+                        fullLesson = { ...lesson, content: dbLesson.content };
+                        console.log('Loaded simple lesson content from database:', fullLesson);
+                    }
+                }
+            } catch (dbError) {
+                console.log('Database error when fetching lesson content:', dbError.message);
+            }
+            
             // UI Updates
             document.getElementById('loading').style.display = 'none';
             document.getElementById('contentContainer').style.display = 'block';
@@ -945,8 +997,31 @@
                 }
             }
 
+            // Check if the lesson content is stored as rich JSON (from our JSON files)
+            let hasRichContent = false;
+            
+            // First, try to parse the content field as JSON to see if it contains rich content
+            if (fullLesson.content || lesson.content) {
+                try {
+                    const contentStr = fullLesson.content || lesson.content;
+                    if (typeof contentStr === 'string' && contentStr.startsWith('{')) {
+                        const parsedContent = JSON.parse(contentStr);
+                        
+                        // Check if this is rich content from our JSON files
+                        if (parsedContent.lesson_title || parsedContent.introduction || parsedContent.big_idea || parsedContent.core_concept) {
+                            // This is rich JSON content from our course files
+                            hasRichContent = true;
+                            displayRichJsonContent(parsedContent, textContainer);
+                        }
+                    }
+                } catch (e) {
+                    // Not JSON, continue with regular content processing
+                    console.log('Content is not JSON, using regular processing');
+                }
+            }
+            
             // If no content was found, try to generate it via AI
-            if (!contentText && !fullLesson.bigIdea && !fullLesson.big_idea && !lesson.bigIdea && !lesson.big_idea && 
+            if (!hasRichContent && !contentText && !fullLesson.bigIdea && !fullLesson.big_idea && !lesson.bigIdea && !lesson.big_idea && 
                 !steps && !fullLesson.objectives && !lesson.objectives && !fullLesson.notes && !lesson.notes && 
                 !fullLesson.code_examples && !fullLesson.example_code && !lesson.code_examples && !lesson.example_code && 
                 !lessonToCheck?.properties?.content && !lessonToCheck?.data?.content && !lessonToCheck?.data) {
@@ -1274,6 +1349,223 @@ const Navigation = () => {
             if (window.innerWidth <= 900) {
                 document.getElementById('sidebar').classList.remove('open');
             }
+        }
+        
+        function displayRichJsonContent(jsonContent, container) {
+            // Clear existing content
+            container.innerHTML = '';
+            
+            // Add introduction section
+            if (jsonContent.introduction) {
+                container.innerHTML += `
+                    <div class="lesson-intro">
+                        <h2>${jsonContent.lesson_title || 'Lesson Introduction'}</h2>
+                        <p>${jsonContent.introduction}</p>
+                    </div>
+                `;
+            }
+            
+            // Add big idea section
+            if (jsonContent.big_idea || jsonContent.big_idea) {
+                container.innerHTML += `
+                    <div style="background: rgba(0, 217, 255, 0.1); border-left: 4px solid var(--primary); padding: 1rem; border-radius: 4px; margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-top: 0; font-size: 1rem;">Big Idea</h3>
+                        <p style="margin-bottom: 0;">${jsonContent.big_idea || jsonContent.big_idea}</p>
+                    </div>
+                `;
+            }
+            
+            // Add why it matters section
+            if (jsonContent.why_it_matters) {
+                container.innerHTML += `
+                    <div style="background: rgba(255, 165, 0, 0.1); border-left: 4px solid orange; padding: 1rem; border-radius: 4px; margin: 1.5rem 0;">
+                        <h3 style="color: orange; margin-top: 0;">Why This Matters</h3>
+                        <p>${jsonContent.why_it_matters}</p>
+                    </div>
+                `;
+            }
+            
+            // Add core concept section
+            if (jsonContent.core_concept) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Core Concept</h3>
+                        <p>${jsonContent.core_concept}</p>
+                    </div>
+                `;
+            }
+            
+            // Add key concepts if available
+            if (Array.isArray(jsonContent.key_concepts)) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Key Concepts</h3>
+                        <ul style="line-height: 1.8;">
+                            ${jsonContent.key_concepts.map(concept => `<li>${concept}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            // Add steps if available
+            if (Array.isArray(jsonContent.steps)) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Steps</h3>
+                        <ol style="line-height: 1.8;">
+                            ${jsonContent.steps.map(step => `<li>${step}</li>`).join('')}
+                        </ol>
+                    </div>
+                `;
+            }
+            
+            // Add practical examples
+            if (Array.isArray(jsonContent.practical_examples)) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Practical Examples</h3>
+                        ${jsonContent.practical_examples.map(example => `
+                            <div style="margin: 1rem 0; padding: 1rem; background: rgba(255, 255, 255, 0.05); border-radius: 4px;">
+                                <p>${example}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            // Add common mistakes
+            if (Array.isArray(jsonContent.common_mistakes)) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Common Mistakes to Avoid</h3>
+                        <ul style="line-height: 1.8;">
+                            ${jsonContent.common_mistakes.map(mistake => `<li>${mistake}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            // Add summary
+            if (jsonContent.summary) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Summary</h3>
+                        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 4px; border-left: 4px solid var(--success);">
+                            <p>${jsonContent.summary}</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Add quiz if available
+            if (jsonContent.quiz && jsonContent.quiz.questions) {
+                container.innerHTML += `
+                    <div class="lesson-section" style="margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Knowledge Check</h3>
+                        <div style="padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 4px;">
+                            ${(jsonContent.quiz.questions || []).map((q, idx) => {
+                                let options = jsonContent.quiz.options ? jsonContent.quiz.options[idx] : [];
+                                if (!options || options.length === 0) {
+                                    // Fallback if options aren't provided in the expected format
+                                    options = Array.isArray(q) ? q : [q];
+                                }
+                                
+                                let optionsHTML = options.map((opt, optIdx) => {
+                                    return `<div style="margin: 0.25rem 0; padding: 0.25rem 0;">
+                                        <label style="display: flex; align-items: center; cursor: pointer;" onclick="checkAnswer(${idx}, ${optIdx}, ${jsonContent.quiz.answers ? jsonContent.quiz.answers[idx] : 'undefined'})">
+                                            <input type="radio" name="question_${idx}" value="${optIdx}" style="margin-right: 0.5rem;" onchange="checkAnswer(${idx}, ${optIdx}, ${jsonContent.quiz.answers ? jsonContent.quiz.answers[idx] : 'undefined'})">
+                                            ${opt}
+                                        </label>
+                                    </div>`;
+                                }).join('');
+                                
+                                return `<div style="margin: 1rem 0; padding: 1rem; background: rgba(0, 0, 0, 0.3); border-radius: 4px;" id="question-${idx}-container">
+                                    <p><strong>Question ${idx + 1}:</strong> ${typeof q === 'string' ? q : (q.question || 'Question') }</p>
+                                    <div style="margin: 0.5rem 0 1rem 0;" id="question-${idx}-options">
+                                        ${optionsHTML}
+                                    </div>
+                                    <div style="font-size: 0.9em; color: var(--success); display: none;" id="question-${idx}-correct">
+                                        <strong>Correct Answer:</strong> ${jsonContent.quiz.answers && jsonContent.quiz.answers[idx] !== undefined ? (options[jsonContent.quiz.answers[idx]] || 'Not specified') : 'Not specified'}
+                                    </div>
+                                    <div style="font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; display: none;" id="question-${idx}-explanation">
+                                        <strong>Explanation:</strong> ${jsonContent.quiz.answers && jsonContent.quiz.answers[idx] !== undefined ? 'Correct!' : 'No explanation provided'}
+                                    </div>
+                                    <div style="font-size: 0.9em; color: var(--error); display: none;" id="question-${idx}-incorrect">
+                                        <strong>Incorrect. Please try again.</strong>
+                                    </div>
+                                </div>`;
+                            }).join('')}
+                        </div>
+                        <div style="margin-top: 1rem; text-align: center;">
+                            <button onclick="submitQuiz(this.parentElement.parentElement)" style="background: var(--primary); color: black; border: none; padding: 0.75rem 1.5rem; border-radius: 4px; cursor: pointer; font-weight: bold;">
+                                Submit Quiz
+                            </button>
+                        </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Add resources if available
+            if (jsonContent.resources) {
+                if (jsonContent.resources && jsonContent.resources.video) {
+                    const video = jsonContent.resources.video;
+                    if (video.url && video.embed) {
+                        document.getElementById('videoPlayer').src = video.url;
+                        document.getElementById('videoContainer').style.display = 'block';
+                    }
+                }
+                
+                if (jsonContent.resources.extra_reading && Array.isArray(jsonContent.resources.extra_reading)) {
+                    container.innerHTML += `
+                        <div class="lesson-section" style="margin: 1.5rem 0;">
+                            <h3 style="color: var(--primary); margin-bottom: 1rem;">Additional Resources</h3>
+                            <ul>
+                                ${jsonContent.resources.extra_reading.map(resource => `
+                                    <li style="margin: 0.5rem 0;">
+                                        <a href="${resource}" target="_blank" style="color: var(--primary); text-decoration: none;">
+                                            ${resource}
+                                        </a>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Add playground section
+            container.innerHTML += `
+                <div class="lesson-section" style="margin: 1.5rem 0;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">AI-Powered Knowledge Playground</h3>
+                    <div style="padding: 1rem; background: rgba(59, 130, 246, 0.1); border-radius: 4px; border-left: 4px solid var(--primary);">
+                        <p>Test your understanding with interactive AI assistance:</p>
+                        <div style="margin-top: 1rem;">
+                            <textarea id="playground-code" placeholder="Describe what you want to create (e.g., \"Create a singing cup\", \"Build a calculator\", \"Explain loops in Python\")" style="width: 100%; min-height: 150px; background: #000; color: #fff; padding: 1rem; border-radius: 4px; border: 1px solid var(--primary); font-family: monospace;"></textarea>
+                            <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                <button onclick="runPlaygroundCode()" style="background: var(--primary); color: black; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">
+                                    Generate with AI
+                                </button>
+                                <button onclick="resetPlayground()" style="background: var(--text-secondary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">
+                                    Reset
+                                </button>
+                                <select id="ai-model" style="background: #000; color: white; border: 1px solid var(--primary); border-radius: 4px; padding: 0.5rem;">
+                                    <option value="gpt-4.1-nano">GPT-4.1 Nano</option>
+                                    <option value="claude-sonnet-4">Claude Sonnet 4</option>
+                                    <option value="google/gemini-2.5-flash">Gemini Flash</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="playground-output" style="margin-top: 1rem; padding: 0.5rem; background: rgba(0, 0, 0, 0.5); border-radius: 4px; min-height: 100px; display: none;">
+                            <div id="playground-response" style="font-family: monospace; white-space: pre-wrap;"></div>
+                            <div id="playground-loading" style="display: none; text-align: center; padding: 1rem;">
+                                <div style="display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,.3); border-radius: 50%; border-top-color: var(--primary); animation: spin 1s ease-in-out infinite; margin-right: 10px;"></div>
+                                AI is generating your solution...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
         
         function displayGeneratedContent(content, container) {
@@ -1964,29 +2256,31 @@ const Navigation = () => {
                     await new Promise(resolve => setTimeout(resolve, 500));
                     
                     // Create a detailed prompt for the AI to generate unique lesson content
-                    const aiPrompt = `Create comprehensive educational content for a lesson titled "${lessonTitle}" in the course "${courseTitle}". The module is "${moduleTitle}".
+                    const aiPrompt = `Create comprehensive, unique educational content for a lesson titled "${lessonTitle}" in the course "${courseTitle}". The module is "${moduleTitle}". This is lesson number ${currentLessonIndex + 1} out of ${flatLessons.length} total lessons in the course.
+
+Context for uniqueness: This lesson should build on previous lessons and prepare for upcoming lessons in the course sequence. The content should be specific to this exact lesson title and not generic.
 
 Provide the content in the following structured format:
 
-INTRODUCTION: Write an introduction that explains the lesson topic in context.
+INTRODUCTION: Write an introduction that explains the lesson topic in context, referencing how it connects to previous lessons if applicable.
 
-CORE_CONCEPTS: Explain the core concepts of ${topic} in detail, making sure this content is unique and specific to this lesson title.
+CORE_CONCEPTS: Explain the core concepts of ${topic} in detail, making sure this content is unique and specific to this lesson title. Avoid repeating content from other lessons in the course.
 
-VISUAL_EXPLANATIONS: Provide ideas for visual representations.
+VISUAL_EXPLANATIONS: Provide ideas for visual representations that are specific to this lesson's content.
 
-STEP_BY_STEP_GUIDE: Give a step-by-step guide for understanding this topic.
+STEP_BY_STEP_GUIDE: Give a step-by-step guide for understanding this topic, with specific examples relevant to this lesson.
 
-PRACTICAL_EXAMPLES: Create 2 practical examples that are specific to this lesson.
+PRACTICAL_EXAMPLES: Create 2 practical examples that are specific to this lesson and clearly connected to the lesson title.
 
-CASE_STUDY: Develop a case study relevant to this specific lesson.
+CASE_STUDY: Develop a case study relevant to this specific lesson that demonstrates real-world application.
 
-QUIZ_QUESTIONS: Generate 3 quiz questions that test understanding of this specific lesson content.
+QUIZ_QUESTIONS: Generate 3 quiz questions that test understanding of this specific lesson content, with answers and explanations.
 
-SUMMARY_POINTS: List key takeaways specific to this lesson.
+SUMMARY_POINTS: List key takeaways specific to this lesson that distinguish it from other lessons in the course.
 
-NEXT_STEPS: Suggest next steps that build on this specific lesson.
+NEXT_STEPS: Suggest next steps that build on this specific lesson and connect to subsequent lessons in the course.
 
-Make sure the content is unique, detailed, educational, and specifically tailored to this lesson title rather than generic content.`;
+Make sure the content is completely unique, detailed, educational, and specifically tailored to this lesson title rather than generic content. Each concept, example, and explanation should be original and specific to this lesson's focus.`;
                     
                     // Get AI-generated content using Puter.js
                     const aiResponse = await puter.ai.chat(aiPrompt, { model: 'gpt-4.1-nano' });
@@ -2003,83 +2297,83 @@ Make sure the content is unique, detailed, educational, and specifically tailore
                         lesson_title: lessonTitle,
                         introduction: {
                             title: `Introduction to ${lessonTitle}`,
-                            description: `In this lesson, you'll learn about ${topic}. This topic is fundamental to the ${courseTitle} course and will provide you with practical skills you can apply immediately.`,
-                            importance: `Understanding ${topic} is crucial because it forms the foundation for advanced concepts in ${courseTitle} and provides real-world applications that will enhance your knowledge in this field.`,
+                            description: `In this lesson, you'll learn about ${lessonTitle}. This topic is fundamental to the ${courseTitle} course and will provide you with practical skills you can apply immediately.`,
+                            importance: `Understanding ${lessonTitle} is crucial because it forms the foundation for advanced concepts in ${courseTitle} and provides real-world applications that will enhance your knowledge in this field.`,
                             learningOutcomes: [
-                                `Understand the core principles of ${topic}`,
+                                `Understand the core principles of ${lessonTitle}`,
                                 `Apply ${courseTitle} techniques in practical scenarios`,
-                                `Recognize when and how to use ${topic} effectively`
+                                `Recognize when and how to use ${lessonTitle} effectively`
                             ]
                         },
-                        core_concepts: `The core concept of ${topic} is fundamental to understanding how modern digital systems work. This concept involves several key components that work together to create powerful and efficient solutions.
+                        core_concepts: `The core concept of ${lessonTitle} is fundamental to understanding how modern digital systems work. This concept involves several key components that work together to create powerful and efficient solutions.
 
-First, it's important to understand that ${topic} is not just a single technique, but rather a comprehensive approach that combines multiple methodologies to achieve optimal results. The foundational principle behind ${topic} is to streamline processes, reduce complexity, and enhance productivity through systematic approaches.
+First, it's important to understand that ${lessonTitle} is not just a single technique, but rather a comprehensive approach that combines multiple methodologies to achieve optimal results. The foundational principle behind ${lessonTitle} is to streamline processes, reduce complexity, and enhance productivity through systematic approaches.
 
-For beginners, think of ${topic} as a framework that helps you organize and execute tasks more efficiently. The core idea is to break down complex problems into manageable components that can be addressed systematically. This approach has several key benefits:
+For beginners, think of ${lessonTitle} as a framework that helps you organize and execute tasks more efficiently. The core idea is to break down complex problems into manageable components that can be addressed systematically. This approach has several key benefits:
 
 1. **Simplicity**: Complex tasks are simplified into understandable steps
 2. **Efficiency**: Time and resources are optimized through structured approaches
 3. **Scalability**: Solutions can grow and adapt as needs change
 4. **Reliability**: Consistent methods lead to predictable and dependable outcomes
 
-The practical application of ${topic} involves understanding how different elements interact with each other. For example, in the context of ${courseTitle}, ${topic} serves as a bridge between theoretical knowledge and practical implementation. It connects abstract concepts to real-world applications, making it easier for practitioners to implement effective solutions.
+The practical application of ${lessonTitle} involves understanding how different elements interact with each other. For example, in the context of ${courseTitle}, ${lessonTitle} serves as a bridge between theoretical knowledge and practical implementation. It connects abstract concepts to real-world applications, making it easier for practitioners to implement effective solutions.
 
 The underlying mechanics involve several interconnected processes that work together seamlessly. These processes have been refined over time to maximize effectiveness while minimizing complexity. Understanding these mechanics is crucial for anyone looking to master ${courseTitle} concepts.
 
-Best practices for implementing ${topic} include starting with simple applications and gradually building complexity, maintaining clear documentation of processes, and continuously evaluating and refining approaches based on results. These practices ensure that ${topic} remains effective and relevant in various contexts.
+Best practices for implementing ${lessonTitle} include starting with simple applications and gradually building complexity, maintaining clear documentation of processes, and continuously evaluating and refining approaches based on results. These practices ensure that ${lessonTitle} remains effective and relevant in various contexts.
 
-In real-world scenarios, ${topic} has proven to be invaluable across multiple industries and applications. Its versatility and adaptability make it a cornerstone of modern ${courseTitle} methodologies.`,
-                        unique_aspect: `In this specific lesson about "${lessonTitle}", we'll explore the distinctive characteristics that differentiate it from other concepts in the ${courseTitle} curriculum. This lesson builds upon previous knowledge while introducing specialized applications and nuanced understanding that are unique to ${topic}.`,
+In real-world scenarios, ${lessonTitle} has proven to be invaluable across multiple industries and applications. Its versatility and adaptability make it a cornerstone of modern ${courseTitle} methodologies.`,
+                        unique_aspect: `In this specific lesson about "${lessonTitle}", we'll explore the distinctive characteristics that differentiate it from other concepts in the ${courseTitle} curriculum. This lesson builds upon previous knowledge while introducing specialized applications and nuanced understanding that are unique to ${lessonTitle}.`,
                         visual_explanations: [
-                            `Visual representations help clarify the ${topic} concepts`,
-                            `Diagrams showing the relationship between different ${topic} components`,
-                            `Interactive diagrams that show how ${topic} works step-by-step`,
-                            `Flowcharts demonstrating the ${topic} process`,
-                            `Comparative visuals showing ${topic} vs traditional approaches`
+                            `Visual representations help clarify the ${lessonTitle} concepts`,
+                            `Diagrams showing the relationship between different ${lessonTitle} components`,
+                            `Interactive diagrams that show how ${lessonTitle} works step-by-step`,
+                            `Flowcharts demonstrating the ${lessonTitle} process`,
+                            `Comparative visuals showing ${lessonTitle} vs traditional approaches`
                         ],
                         step_by_step: [
                             {
                                 title: 'Getting Started',
-                                description: `Begin by understanding the basics of ${topic}`
+                                description: `Begin by understanding the basics of ${lessonTitle}`
                             },
                             {
                                 title: 'Implementation',
-                                description: `Apply ${topic} in a practical context`
+                                description: `Apply ${lessonTitle} in a practical context`
                             },
                             {
                                 title: 'Advanced Applications',
-                                description: `Explore advanced uses of ${topic} in ${courseTitle}`
+                                description: `Explore advanced uses of ${lessonTitle} in ${courseTitle}`
                             }
                         ],
                         practical_examples: [
                             {
-                                title: `Example 1: Basic ${topic} Usage`,
-                                scenario: `A beginner scenario demonstrating ${topic}`,
+                                title: `Example 1: Basic ${lessonTitle} Usage`,
+                                scenario: `A beginner scenario demonstrating ${lessonTitle}`,
                                 implementation: `Simple implementation showing core concepts`,
-                                outcome: `Understanding of basic ${topic} principles`
+                                outcome: `Understanding of basic ${lessonTitle} principles`
                             },
                             {
-                                title: `Example 2: Advanced ${topic} Application`,
-                                scenario: `A complex scenario showcasing advanced ${topic} usage`,
+                                title: `Example 2: Advanced ${lessonTitle} Application`,
+                                scenario: `A complex scenario showcasing advanced ${lessonTitle} usage`,
                                 implementation: `Sophisticated implementation with best practices`,
-                                outcome: `Mastery of advanced ${topic} concepts`
+                                outcome: `Mastery of advanced ${lessonTitle} concepts`
                             }
                         ],
                         case_study: {
-                            title: `Case Study: Implementing ${topic} in Real Projects`,
-                            scenario: `A real-world scenario demonstrating ${topic} in action`,
-                            challenges: `Initial challenges in implementing ${topic}`,
-                            solution: `Effective solution using ${topic} principles`,
+                            title: `Case Study: Implementing ${lessonTitle} in Real Projects`,
+                            scenario: `A real-world scenario demonstrating ${lessonTitle} in action`,
+                            challenges: `Initial challenges in implementing ${lessonTitle}`,
+                            solution: `Effective solution using ${lessonTitle} principles`,
                             results: `Successful implementation with measurable outcomes`,
-                            lessonsLearned: `Key insights about ${topic} best practices`
+                            lessonsLearned: `Key insights about ${lessonTitle} best practices`
                         },
                         resources: {
                             youtube_videos: [
                                 {
-                                    title: `${topic} Explained in Detail`,
+                                    title: `${lessonTitle} Explained in Detail`,
                                     url: getRelevantVideoUrl(topic),
                                     embeddable: true,
-                                    why_relevant: `Provides comprehensive overview of ${topic} concepts suitable for ${courseTitle}`
+                                    why_relevant: `Provides comprehensive overview of ${lessonTitle} concepts suitable for ${courseTitle}`
                                 }
                             ],
                             images: [],
@@ -2087,24 +2381,24 @@ In real-world scenarios, ${topic} has proven to be invaluable across multiple in
                         },
                         summary: {
                             keyTakeaways: [
-                                `${topic} enhances your ${courseTitle} workflow through systematic approaches`,
+                                `${lessonTitle} enhances your ${courseTitle} workflow through systematic approaches`,
                                 `The approach emphasizes practical application and continuous learning`,
-                                `${topic} should be integrated thoughtfully with your existing knowledge`,
+                                `${lessonTitle} should be integrated thoughtfully with your existing knowledge`,
                                 `Critical thinking remains essential even with structured approaches`
                             ],
                             nextSteps: [
-                                `Practice applying ${topic} in different contexts`,
+                                `Practice applying ${lessonTitle} in different contexts`,
                                 `Explore advanced features of ${courseTitle} methodologies`,
                                 `Share experiences with the ${courseTitle} community`,
                                 `Build a personal toolkit of ${courseTitle} strategies`
                             ],
-                            confidenceBuilder: `You now have a solid understanding of ${topic}. With practice, you will become proficient at leveraging these concepts in your work.`
+                            confidenceBuilder: `You now have a solid understanding of ${lessonTitle}. With practice, you will become proficient at leveraging these concepts in your work.`
                         },
                         quiz: {
-                            title: `${topic} Fundamentals Quiz`,
+                            title: `${lessonTitle} Fundamentals Quiz`,
                             questions: [
                                 {
-                                    question: `What is the primary principle of ${topic}?`,
+                                    question: `What is the primary principle of ${lessonTitle}?`,
                                     options: [
                                         'Fundamental concepts and systematic approach',
                                         'Random trial and error',
@@ -2112,7 +2406,7 @@ In real-world scenarios, ${topic} has proven to be invaluable across multiple in
                                         'Complete automation of all tasks'
                                     ],
                                     correctAnswer: 0,
-                                    explanation: `${topic} emphasizes fundamental concepts and systematic approaches to problem-solving.`
+                                    explanation: `${lessonTitle} emphasizes fundamental concepts and systematic approaches to problem-solving.`
                                 },
                                 {
                                     question: 'Which of the following is a best practice in this area?',
@@ -2155,83 +2449,83 @@ In real-world scenarios, ${topic} has proven to be invaluable across multiple in
                     lesson_title: lessonTitle,
                     introduction: {
                         title: `Introduction to ${lessonTitle}`,
-                        description: `In this lesson, you'll learn about ${topic}. This topic is fundamental to the ${courseTitle} course and will provide you with practical skills you can apply immediately.`,
-                        importance: `Understanding ${topic} is crucial because it forms the foundation for advanced concepts in ${courseTitle} and provides real-world applications that will enhance your knowledge in this field.`,
+                        description: `In this lesson, you'll learn about ${lessonTitle}. This topic is fundamental to the ${courseTitle} course and will provide you with practical skills you can apply immediately.`,
+                        importance: `Understanding ${lessonTitle} is crucial because it forms the foundation for advanced concepts in ${courseTitle} and provides real-world applications that will enhance your knowledge in this field.`,
                         learningOutcomes: [
-                            `Understand the core principles of ${topic}`,
+                            `Understand the core principles of ${lessonTitle}`,
                             `Apply ${courseTitle} techniques in practical scenarios`,
-                            `Recognize when and how to use ${topic} effectively`
+                            `Recognize when and how to use ${lessonTitle} effectively`
                         ]
                     },
-                    core_concepts: `The core concept of ${topic} is fundamental to understanding how modern digital systems work. This concept involves several key components that work together to create powerful and efficient solutions.
+                    core_concepts: `The core concept of ${lessonTitle} is fundamental to understanding how modern digital systems work. This concept involves several key components that work together to create powerful and efficient solutions.
 
-First, it's important to understand that ${topic} is not just a single technique, but rather a comprehensive approach that combines multiple methodologies to achieve optimal results. The foundational principle behind ${topic} is to streamline processes, reduce complexity, and enhance productivity through systematic approaches.
+First, it's important to understand that ${lessonTitle} is not just a single technique, but rather a comprehensive approach that combines multiple methodologies to achieve optimal results. The foundational principle behind ${lessonTitle} is to streamline processes, reduce complexity, and enhance productivity through systematic approaches.
 
-For beginners, think of ${topic} as a framework that helps you organize and execute tasks more efficiently. The core idea is to break down complex problems into manageable components that can be addressed systematically. This approach has several key benefits:
+For beginners, think of ${lessonTitle} as a framework that helps you organize and execute tasks more efficiently. The core idea is to break down complex problems into manageable components that can be addressed systematically. This approach has several key benefits:
 
 1. **Simplicity**: Complex tasks are simplified into understandable steps
 2. **Efficiency**: Time and resources are optimized through structured approaches
 3. **Scalability**: Solutions can grow and adapt as needs change
 4. **Reliability**: Consistent methods lead to predictable and dependable outcomes
 
-The practical application of ${topic} involves understanding how different elements interact with each other. For example, in the context of ${courseTitle}, ${topic} serves as a bridge between theoretical knowledge and practical implementation. It connects abstract concepts to real-world applications, making it easier for practitioners to implement effective solutions.
+The practical application of ${lessonTitle} involves understanding how different elements interact with each other. For example, in the context of ${courseTitle}, ${lessonTitle} serves as a bridge between theoretical knowledge and practical implementation. It connects abstract concepts to real-world applications, making it easier for practitioners to implement effective solutions.
 
 The underlying mechanics involve several interconnected processes that work together seamlessly. These processes have been refined over time to maximize effectiveness while minimizing complexity. Understanding these mechanics is crucial for anyone looking to master ${courseTitle} concepts.
 
-Best practices for implementing ${topic} include starting with simple applications and gradually building complexity, maintaining clear documentation of processes, and continuously evaluating and refining approaches based on results. These practices ensure that ${topic} remains effective and relevant in various contexts.
+Best practices for implementing ${lessonTitle} include starting with simple applications and gradually building complexity, maintaining clear documentation of processes, and continuously evaluating and refining approaches based on results. These practices ensure that ${lessonTitle} remains effective and relevant in various contexts.
 
-In real-world scenarios, ${topic} has proven to be invaluable across multiple industries and applications. Its versatility and adaptability make it a cornerstone of modern ${courseTitle} methodologies.`,
-                    unique_aspect: `In this specific lesson about "${lessonTitle}", we'll explore the distinctive characteristics that differentiate it from other concepts in the ${courseTitle} curriculum. This lesson builds upon previous knowledge while introducing specialized applications and nuanced understanding that are unique to ${topic}.`,
+In real-world scenarios, ${lessonTitle} has proven to be invaluable across multiple industries and applications. Its versatility and adaptability make it a cornerstone of modern ${courseTitle} methodologies.`,
+                    unique_aspect: `In this specific lesson about "${lessonTitle}", we'll explore the distinctive characteristics that differentiate it from other concepts in the ${courseTitle} curriculum. This lesson builds upon previous knowledge while introducing specialized applications and nuanced understanding that are unique to ${lessonTitle}.`,
                     visual_explanations: [
-                        `Visual representations help clarify the ${topic} concepts`,
-                        `Diagrams showing the relationship between different ${topic} components`,
-                        `Interactive diagrams that show how ${topic} works step-by-step`,
-                        `Flowcharts demonstrating the ${topic} process`,
-                        `Comparative visuals showing ${topic} vs traditional approaches`
+                        `Visual representations help clarify the ${lessonTitle} concepts`,
+                        `Diagrams showing the relationship between different ${lessonTitle} components`,
+                        `Interactive diagrams that show how ${lessonTitle} works step-by-step`,
+                        `Flowcharts demonstrating the ${lessonTitle} process`,
+                        `Comparative visuals showing ${lessonTitle} vs traditional approaches`
                     ],
                     step_by_step: [
                         {
                             title: 'Getting Started',
-                            description: `Begin by understanding the basics of ${topic}`
+                            description: `Begin by understanding the basics of ${lessonTitle}`
                         },
                         {
                             title: 'Implementation',
-                            description: `Apply ${topic} in a practical context`
+                            description: `Apply ${lessonTitle} in a practical context`
                         },
                         {
                             title: 'Advanced Applications',
-                            description: `Explore advanced uses of ${topic} in ${courseTitle}`
+                            description: `Explore advanced uses of ${lessonTitle} in ${courseTitle}`
                         }
                     ],
                     practical_examples: [
                         {
-                            title: `Example 1: Basic ${topic} Usage`,
-                            scenario: `A beginner scenario demonstrating ${topic}`,
+                            title: `Example 1: Basic ${lessonTitle} Usage`,
+                            scenario: `A beginner scenario demonstrating ${lessonTitle}`,
                             implementation: `Simple implementation showing core concepts`,
-                            outcome: `Understanding of basic ${topic} principles`
+                            outcome: `Understanding of basic ${lessonTitle} principles`
                         },
                         {
-                            title: `Example 2: Advanced ${topic} Application`,
-                            scenario: `A complex scenario showcasing advanced ${topic} usage`,
+                            title: `Example 2: Advanced ${lessonTitle} Application`,
+                            scenario: `A complex scenario showcasing advanced ${lessonTitle} usage`,
                             implementation: `Sophisticated implementation with best practices`,
-                            outcome: `Mastery of advanced ${topic} concepts`
+                            outcome: `Mastery of advanced ${lessonTitle} concepts`
                         }
                     ],
                     case_study: {
-                        title: `Case Study: Implementing ${topic} in Real Projects`,
-                        scenario: `A real-world scenario demonstrating ${topic} in action`,
-                        challenges: `Initial challenges in implementing ${topic}`,
-                        solution: `Effective solution using ${topic} principles`,
+                        title: `Case Study: Implementing ${lessonTitle} in Real Projects`,
+                        scenario: `A real-world scenario demonstrating ${lessonTitle} in action`,
+                        challenges: `Initial challenges in implementing ${lessonTitle}`,
+                        solution: `Effective solution using ${lessonTitle} principles`,
                         results: `Successful implementation with measurable outcomes`,
-                        lessonsLearned: `Key insights about ${topic} best practices`
+                        lessonsLearned: `Key insights about ${lessonTitle} best practices`
                     },
                     resources: {
                         youtube_videos: [
                             {
-                                title: `${topic} Explained in Detail`,
+                                title: `${lessonTitle} Explained in Detail`,
                                 url: getRelevantVideoUrl(topic),
                                 embeddable: true,
-                                why_relevant: `Provides comprehensive overview of ${topic} concepts suitable for ${courseTitle}`
+                                why_relevant: `Provides comprehensive overview of ${lessonTitle} concepts suitable for ${courseTitle}`
                             }
                         ],
                         images: [],
@@ -2239,24 +2533,24 @@ In real-world scenarios, ${topic} has proven to be invaluable across multiple in
                     },
                     summary: {
                         keyTakeaways: [
-                            `${topic} enhances your ${courseTitle} workflow through systematic approaches`,
+                            `${lessonTitle} enhances your ${courseTitle} workflow through systematic approaches`,
                             `The approach emphasizes practical application and continuous learning`,
-                            `${topic} should be integrated thoughtfully with your existing knowledge`,
+                            `${lessonTitle} should be integrated thoughtfully with your existing knowledge`,
                             `Critical thinking remains essential even with structured approaches`
                         ],
                         nextSteps: [
-                            `Practice applying ${topic} in different contexts`,
+                            `Practice applying ${lessonTitle} in different contexts`,
                             `Explore advanced features of ${courseTitle} methodologies`,
                             `Share experiences with the ${courseTitle} community`,
                             `Build a personal toolkit of ${courseTitle} strategies`
                         ],
-                        confidenceBuilder: `You now have a solid understanding of ${topic}. With practice, you will become proficient at leveraging these concepts in your work.`
+                        confidenceBuilder: `You now have a solid understanding of ${lessonTitle}. With practice, you will become proficient at leveraging these concepts in your work.`
                     },
                     quiz: {
-                        title: `${topic} Fundamentals Quiz`,
+                        title: `${lessonTitle} Fundamentals Quiz`,
                         questions: [
                             {
-                                question: `What is the primary principle of ${topic}?`,
+                                question: `What is the primary principle of ${lessonTitle}?`,
                                 options: [
                                     'Fundamental concepts and systematic approach',
                                     'Random trial and error',
@@ -2264,7 +2558,7 @@ In real-world scenarios, ${topic} has proven to be invaluable across multiple in
                                     'Complete automation of all tasks'
                                 ],
                                 correctAnswer: 0,
-                                explanation: `${topic} emphasizes fundamental concepts and systematic approaches to problem-solving.`
+                                explanation: `${lessonTitle} emphasizes fundamental concepts and systematic approaches to problem-solving.`
                             },
                             {
                                 question: 'Which of the following is a best practice in this area?',
