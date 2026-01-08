@@ -1,42 +1,37 @@
-# Content Security Policy Fix Summary
+# CSP Fix Summary
 
-## Issue Identified
+## Issue
+The website https://academy.trendtacticsdigital.com was showing a white blank page due to Content Security Policy (CSP) blocking the Puter.js script from loading.
 
-After implementing the Supabase Anon Key fix, users were still experiencing authentication issues. The browser console showed:
-
+## Error Message
 ```
-Connecting to 'https://uimdbodamoeyukrghchb.supabase.co/auth/v1/signup' violates the following Content Security Policy directive: "connect-src 'self'". The action has been blocked.
+Loading the script 'https://js.puter.com/v2/' violates the following Content Security Policy directive: "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.google.com https://www.gstatic.com"
 ```
 
 ## Root Cause
+1. The main `.htaccess` file had a CSP policy that didn't include Puter.js domains
+2. The `courses.html` file had a separate CSP meta tag that could conflict with the main CSP policy
 
-The server was enforcing a Content Security Policy (CSP) that only allowed connections to 'self' (the same domain), blocking connections to the Supabase API endpoints.
+## Solution Applied
 
-## Solution Implemented
+### 1. Updated .htaccess file
+- Added all necessary Puter.js domains to the CSP policy:
+  - `https://js.puter.com` (for the script)
+  - `https://api.puter.com` (for API connections)
+  - `https://puter.com` (for general connections)
+  - `https://iframe.puter.com` (for iframe connections)
 
-Updated the `.htaccess` file to include proper CSP headers that allow connections to Supabase:
+### 2. Removed conflicting CSP in courses.html
+- Removed the CSP meta tag from `courses.html` to prevent conflicts with the main CSP policy in `.htaccess`
 
-```apache
-# Content Security Policy to allow Supabase connections
-<IfModule mod_headers.c>
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com; connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co; img-src 'self' data: https://; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com;"
-</IfModule>
+### 3. Verified lesson-viewer.html
+- Confirmed that `lesson-viewer.html` already had the Puter.js script tag
+- Confirmed that the JavaScript code properly checks for Puter.js availability before using it
+
+## Final CSP Policy in .htaccess
+```
+Header set Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.google.com https://www.gstatic.com https://js.puter.com https://api.puter.com https://puter.com https://iframe.puter.com; connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co https://fonts.googleapis.com https://api.puter.com https://puter.com https://js.puter.com https://iframe.puter.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://js.puter.com https://api.puter.com; font-src 'self' https://fonts.gstatic.com https://js.puter.com; img-src 'self' data: https: https://puter.com https://api.puter.com; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://iframe.puter.com https://puter.com; upgrade-insecure-requests"
 ```
 
-## Changes Made
-
-1. **Updated .htaccess file** with proper CSP directives
-2. **Added connect-src directive** to allow connections to the Supabase domain
-3. **Maintained security** by keeping other restrictions in place
-4. **Deployed to GitHub** on the master branch
-
 ## Result
-
-- ✅ Authentication requests can now connect to Supabase API
-- ✅ Signup and login functionality works properly
-- ✅ No more CSP violations in the browser console
-- ✅ Secure connection policy maintained for other resources
-
-## Deployment
-
-The fix has been deployed to the master branch and is live at https://academy.trendtacticsdigital.com
+The website should now properly load the Puter.js script and eliminate the white page issue, allowing the AI-powered lesson content generation to work correctly.
