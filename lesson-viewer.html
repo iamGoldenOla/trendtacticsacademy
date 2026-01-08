@@ -271,7 +271,10 @@
                     if (!lessonContent || lessonContent.includes('No content available') || 
                         lessonContent.includes('core concept') || lessonContent.includes('fundamental to understanding')) {
                         // Generate unique AI content for this specific lesson
-                        generateLessonContent(currentCourse.id, currentCourse.title, getModuleTitleById(lesson.module_id), lesson.title)
+                        getModuleTitleById(lesson.module_id)
+                            .then(moduleTitle => {
+                                return generateLessonContent(currentCourse.id, currentCourse.title, moduleTitle, lesson.title);
+                            })
                             .then(generatedContent => {
                                 displayLessonContent(generatedContent);
                                 
