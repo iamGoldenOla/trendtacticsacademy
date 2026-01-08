@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="/images/Trendtactics-logo - Copy.jpg" type="image/jpeg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -10,12 +10,12 @@
       content="Trendtactics Academy - Learn Web Development, App Development, and Digital Marketing"
     />
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' https:; connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co https://*.supabase.co wss://*.puter.com wss://api.puter.com https://api.puter.com https://js.puter.com https://fonts.googleapis.com; script-src * 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://www.google.com https://www.gstatic.com https://js.puter.com https://api.puter.com https://*.puter.com; frame-src * https://js.puter.com https://*.puter.com; img-src * data: https: https://*.puter.com; style-src * 'unsafe-inline' https://fonts.googleapis.com https://*.puter.com; font-src *; worker-src * blob:; child-src *;" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="apple-touch-icon" href="/images/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="manifest" href="/manifest.json" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -41,6 +41,6 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <!-- Puter.js for AI capabilities -->
-    <script src="https://js.puter.com/v2/" defer></script>
+    <script src="https://js.puter.com/v2/" defer onload="if(window.puter && window.puter.auth) { puter.auth.autoLogin = false; }"></script>
   </body>
 </html>
