@@ -100,7 +100,7 @@
                 <a href="/blog">Blog</a>
                 <a href="https://trendtacticsdigital.com" target="_blank">Digital Services</a>
                 <a href="/contact">Contact</a>
-                <button class="btn btn-secondary" onclick="Auth.logout()">Logout</button>
+                <button class="btn btn-secondary" onclick="logout()">Logout</button>
             </nav>
         </div>
     </header>
@@ -155,6 +155,7 @@
     </main>
 
     <!-- Scripts -->
+    <script src="https://js.puter.com/v2/"></script>
     <script src="js/supabase-client.js"></script>
     <script src="js/auth.js"></script>
     <script>
@@ -163,9 +164,24 @@
         let allLessons = [];
 
         async function initLessonViewer() {
-            // Require authentication
-            const isAuth = await Auth.requireAuth();
-            if (!isAuth) return;
+            // Check if user is authenticated using localStorage
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (!user || !user.access_token) {
+                window.location.href = '/login';
+                return;
+            }
+            
+            // Set the access token for Supabase client
+            if (user.access_token) {
+                window.supabaseClient.auth.setSession({
+                    access_token: user.access_token,
+                    refresh_token: user.refresh_token
+                }).then(() => {
+                    console.log('Session set successfully');
+                }).catch(error => {
+                    console.error('Error setting session:', error);
+                });
+            }
 
             // Get course ID from URL
             const urlParams = new URLSearchParams(window.location.search);
@@ -274,45 +290,133 @@
             try {
                 const data = typeof lessonJson === 'string' ? JSON.parse(lessonJson) : lessonJson;
 
-                // Introduction
+                // Introduction with title and description
                 if (data.introduction) {
-                    content += `<h2>Introduction</h2><p>${data.introduction}</p>`;
+                    content += `<h1>${data.introduction.title || 'Introduction'}</h1>`;
+                    content += `<p>${data.introduction.description || data.introduction}</p>`;
+                    
+                    if (data.introduction.importance) {
+                        content += `<h3>Why This Matters</h3><p>${data.introduction.importance}</p>`;
+                    }
+                    
+                    if (data.introduction.learningOutcomes && data.introduction.learningOutcomes.length > 0) {
+                        content += `<h3>Learning Outcomes</h3><ul>`;
+                        data.introduction.learningOutcomes.forEach(outcome => {
+                            content += `<li>${outcome}</li>`;
+                        });
+                        content += `</ul>`;
+                    }
                 }
 
-                // Learning Objectives
-                if (data.learning_objectives && data.learning_objectives.length > 0) {
-                    content += `<h2>What You'll Learn</h2><ul>`;
-                    data.learning_objectives.forEach(obj => {
-                        content += `<li>${obj}</li>`;
+                // Core Concepts
+                if (data.core_concepts) {
+                    content += `<h2>Core Concepts</h2><p>${data.core_concepts}</p>`;
+                }
+                
+                // Unique aspect
+                if (data.unique_aspect) {
+                    content += `<h3>Unique Aspects</h3><p>${data.unique_aspect}</p>`;
+                }
+
+                // Visual Explanations
+                if (data.visual_explanations && data.visual_explanations.length > 0) {
+                    content += `<h2>Visual Explanations</h2><ul>`;
+                    data.visual_explanations.forEach(viz => {
+                        content += `<li>${viz}</li>`;
                     });
                     content += `</ul>`;
                 }
 
-                // Main Content Sections
-                if (data.content_sections && data.content_sections.length > 0) {
-                    data.content_sections.forEach(section => {
-                        content += `<h2>${section.title}</h2>`;
-                        content += `<p>${section.content}</p>`;
+                // Step by Step Guide
+                if (data.step_by_step && data.step_by_step.length > 0) {
+                    content += `<h2>Step-by-Step Guide</h2>`;
+                    data.step_by_step.forEach(step => {
+                        content += `<h3>${step.title}</h3><p>${step.description}</p>`;
+                    });
+                }
 
-                        if (section.examples && section.examples.length > 0) {
-                            content += `<h3>Examples</h3>`;
-                            section.examples.forEach(example => {
-                                content += `<p><strong>${example.title}:</strong> ${example.description}</p>`;
-                            });
+                // Practical Examples
+                if (data.practical_examples && data.practical_examples.length > 0) {
+                    content += `<h2>Practical Examples</h2>`;
+                    data.practical_examples.forEach(example => {
+                        content += `<h3>${example.title}</h3>`;
+                        content += `<p><strong>Scenario:</strong> ${example.scenario}</p>`;
+                        content += `<p><strong>Implementation:</strong> ${example.implementation}</p>`;
+                        content += `<p><strong>Outcome:</strong> ${example.outcome}</p>`;
+                    });
+                }
+
+                // Case Study
+                if (data.case_study) {
+                    content += `<h2>Case Study</h2>`;
+                    content += `<h3>${data.case_study.title}</h3>`;
+                    content += `<p><strong>Scenario:</strong> ${data.case_study.scenario}</p>`;
+                    content += `<p><strong>Challenges:</strong> ${data.case_study.challenges}</p>`;
+                    content += `<p><strong>Solution:</strong> ${data.case_study.solution}</p>`;
+                    content += `<p><strong>Results:</strong> ${data.case_study.results}</p>`;
+                    content += `<p><strong>Lessons Learned:</strong> ${data.case_study.lessonsLearned}</p>`;
+                }
+
+                // Resources (YouTube videos)
+                if (data.resources && data.resources.youtube_videos && data.resources.youtube_videos.length > 0) {
+                    content += `<h2>Recommended Videos</h2>`;
+                    data.resources.youtube_videos.forEach(video => {
+                        if (video.embeddable && video.url) {
+                            content += `<div class="video-wrapper" style="margin: 2rem 0;"><iframe width="100%" height="400" src="${video.url}" frameborder="0" allowfullscreen></iframe></div>`;
+                            content += `<p>${video.title}</p>`;
+                            if (video.why_relevant) {
+                                content += `<small>${video.why_relevant}</small>`;
+                            }
                         }
                     });
                 }
 
                 // Summary
                 if (data.summary) {
-                    content += `<h2>Summary</h2><p>${data.summary}</p>`;
+                    content += `<h2>Summary</h2>`;
+                    
+                    if (data.summary.keyTakeaways && data.summary.keyTakeaways.length > 0) {
+                        content += `<h3>Key Takeaways</h3><ul>`;
+                        data.summary.keyTakeaways.forEach(takeaway => {
+                            content += `<li>${takeaway}</li>`;
+                        });
+                        content += `</ul>`;
+                    }
+                    
+                    if (data.summary.nextSteps && data.summary.nextSteps.length > 0) {
+                        content += `<h3>Next Steps</h3><ul>`;
+                        data.summary.nextSteps.forEach(step => {
+                            content += `<li>${step}</li>`;
+                        });
+                        content += `</ul>`;
+                    }
+                    
+                    if (data.summary.confidenceBuilder) {
+                        content += `<p>${data.summary.confidenceBuilder}</p>`;
+                    }
+                }
+
+                // Quiz
+                if (data.quiz && data.quiz.questions && data.quiz.questions.length > 0) {
+                    content += `<h2>Knowledge Check</h2>`;
+                    data.quiz.questions.forEach((question, index) => {
+                        content += `<h3>Question ${index + 1}: ${question.question}</h3>`;
+                        content += `<ul style="list-style-type: none;">`;
+                        question.options.forEach((option, optIndex) => {
+                            content += `<li><label><input type="radio" name="quiz-${index}" value="${optIndex}"> ${option}</label></li>`;
+                        });
+                        content += `</ul>`;
+                        if (question.explanation) {
+                            content += `<small>Explanation: ${question.explanation}</small>`;
+                        }
+                    });
                 }
 
                 contentDiv.innerHTML = content;
 
             } catch (error) {
                 console.error('Error parsing lesson JSON:', error);
-                contentDiv.innerHTML = `<p>Error displaying lesson content.</p>`;
+                contentDiv.innerHTML = `<p>Error displaying lesson content: ${error.message}</p>`;
             }
         }
 
@@ -337,22 +441,39 @@
 
             if (newIndex !== currentIndex) {
                 const newLesson = allLessons[newIndex];
-                window.location.href = `/learn/${currentCourse.id}?lesson=${newLesson.id}`;
+                window.location.href = `?course=${currentCourse.id}&lesson=${newLesson.id}`;
             }
         }
 
-        function switchTab(tabName) {
+        function switchTab(tabName, event) {
             // Update tab buttons
             document.querySelectorAll('.tool-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
 
             // Update panels
             document.querySelectorAll('.tool-panel').forEach(panel => {
                 panel.classList.remove('active');
             });
             document.getElementById(tabName + '-panel').classList.add('active');
+        }
+
+        async function logout() {
+            // Clear user data from localStorage
+            localStorage.removeItem('user');
+            
+            // Sign out from Supabase
+            try {
+                await window.supabaseClient.auth.signOut();
+            } catch (error) {
+                console.error('Error signing out:', error);
+            }
+            
+            // Redirect to login page
+            window.location.href = '/login';
         }
 
         // Initialize
