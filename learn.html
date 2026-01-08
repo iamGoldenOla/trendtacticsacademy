@@ -11,25 +11,7 @@
     <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
     <script src="/js/env.js"></script>
     <script src="/js/supabase-client.js"></script>
-    <!-- Puter.js script with proper configuration to prevent popups and authentication issues -->
-    <script>
-      // Define configuration before loading Puter.js
-      window.puter = window.puter || {};
-      window.puter.config = {
-        autoload: false,
-        autoLogin: false,
-        showWelcomeModal: false,
-        preventHumanVerification: true,
-        preventPopup: true,
-        showPopup: false,
-        showWindow: false,
-        showTaskbar: false,
-        hideTaskbar: true,
-        hideWindowTitle: true,
-        hideBackdrop: true
-      };
-    </script>
-    <script src="https://js.puter.com/v2/"></script>
+    
     <style>
         /* Embed critical CSS for learning view */
         :root {
@@ -2067,72 +2049,27 @@ const Navigation = () => {
                 return;
             }
             
-            // Check if Puter.js is available
-            const isPuterAvailable = typeof puter !== 'undefined' && puter && puter.ai;
-            
-            if (!isPuterAvailable) {
-                // Fallback when Puter.js is not available
-                loadingDiv.style.display = 'none';
-                responseDiv.style.display = 'block';
-                responseDiv.innerHTML = `<strong>Note:</strong><br><br>Puter.js is not currently loaded. The playground requires the Puter.js library to function properly. Please ensure the script is loaded from https://js.puter.com/v2/.<br><br>Your input: ${escapeHtml(codeInput.value)}<br><br>✓ Processing completed!`;                
-                return;
-            }
-            
             // Show output div and loading indicator
             outputDiv.style.display = 'block';
             responseDiv.style.display = 'none';
             loadingDiv.style.display = 'block';
             
-            const prompt = codeInput.value;
-            const model = modelSelect.value;
-            
-            // Call Puter.js AI with the selected model
-            puter.ai.chat(prompt, { model: model })
-                .then(response => {
-                    // Hide loading, show response
-                    loadingDiv.style.display = 'none';
-                    responseDiv.style.display = 'block';
-                    
-                    // Handle different response structures
-                    let aiResponse = response;
-                    
-                    // Check if response is an object with content
-                    if (typeof response === 'object' && response !== null) {
-                        if (response.choices && response.choices[0]) {
-                            aiResponse = response.choices[0].message?.content || response.choices[0].text || JSON.stringify(response);
-                        } else if (response.message) {
-                            // Handle Claude-style response
-                            if (typeof response.message === 'string') {
-                                aiResponse = response.message;
-                            } else if (response.message.content) {
-                                if (Array.isArray(response.message.content)) {
-                                    // Handle array of content objects
-                                    aiResponse = response.message.content.map(item => 
-                                        item.text || item.content || JSON.stringify(item)
-                                    ).join('\n');
-                                } else {
-                                    aiResponse = response.message.content;
-                                }
-                            }
-                        } else {
-                            // Fallback to stringifying the response
-                            aiResponse = JSON.stringify(response, null, 2);
-                        }
-                    }
-                    
-                    // Display the AI response
-                    responseDiv.innerHTML = `<strong>AI Response:</strong><br><br>${escapeHtml(aiResponse)}`;
-                    
-                    // Add a success message
-                    responseDiv.innerHTML += `<br><br><div style="color: var(--success);">✓ Solution generated successfully!</div>`;
-                })
-                .catch(error => {
-                    // Hide loading, show error
-                    loadingDiv.style.display = 'none';
-                    responseDiv.style.display = 'block';
-                    
-                    responseDiv.innerHTML = `<strong>Error:</strong><br><br>${escapeHtml(error.message || error)}<br><br>Please try again with a different prompt.`;
-                });
+            // Simulate AI processing
+            setTimeout(() => {
+                // Hide loading, show response
+                loadingDiv.style.display = 'none';
+                responseDiv.style.display = 'block';
+                
+                // Generate a simulated AI response based on the input
+                const prompt = codeInput.value.toLowerCase();
+                let aiResponse = `Based on your request: "${escapeHtml(codeInput.value)}", here's a helpful response:\n\nThis is a simulated AI response demonstrating how the requested functionality would work. In a real implementation, this would connect to an AI service to generate actual code or explanations.\n\nFor example, if you're looking to build something with ${escapeHtml(prompt.split(' ')[0])}, you would typically:\n1. Define your requirements\n2. Choose appropriate technologies\n3. Create a basic structure\n4. Implement core functionality\n5. Test and refine your solution\n\nWould you like to learn more about any specific aspect?`;
+                
+                // Display the simulated AI response
+                responseDiv.innerHTML = `<strong>AI Response:</strong><br><br>${escapeHtml(aiResponse)}`;
+                
+                // Add a success message
+                responseDiv.innerHTML += `<br><br><div style="color: var(--success);">✓ Solution generated successfully!</div>`;
+            }, 1500); // Simulate processing time
         }
         
         function resetPlayground() {
@@ -2238,226 +2175,35 @@ const Navigation = () => {
             document.getElementById('sidebar').classList.toggle('open');
         }
         
-        // Function to simulate AI content generation for any course/lesson
+// Function to simulate AI content generation for any course/lesson
         async function generateLessonContent(courseId, courseTitle, moduleTitle, lessonTitle) {
             // Show loading message
             console.log('Generating content for:', { courseTitle, moduleTitle, lessonTitle });
             
-            // Check if Puter.js is available
-            const isPuterAvailable = typeof puter !== 'undefined' && puter && puter.ai;
-            
             // Generate content based on lesson title and course context
             const topic = lessonTitle.toLowerCase().replace('what is ', '').replace('?', '').trim();
             
-            // If Puter.js is available, try to use it
-            if (isPuterAvailable) {
-                try {
-                    // Simulate AI processing delay
-                    await new Promise(resolve => setTimeout(resolve, 500));
-                    
-                    // Create a detailed prompt for the AI to generate unique lesson content
-                    const aiPrompt = `Create comprehensive, unique educational content for a lesson titled "${lessonTitle}" in the course "${courseTitle}". The module is "${moduleTitle}". This is lesson number ${currentLessonIndex + 1} out of ${flatLessons.length} total lessons in the course.
-
-Context for uniqueness: This lesson should build on previous lessons and prepare for upcoming lessons in the course sequence. The content should be specific to this exact lesson title and not generic.
-
-Provide the content in the following structured format:
-
-INTRODUCTION: Write an introduction that explains the lesson topic in context, referencing how it connects to previous lessons if applicable.
-
-CORE_CONCEPTS: Explain the core concepts of ${topic} in detail, making sure this content is unique and specific to this lesson title. Avoid repeating content from other lessons in the course.
-
-VISUAL_EXPLANATIONS: Provide ideas for visual representations that are specific to this lesson's content.
-
-STEP_BY_STEP_GUIDE: Give a step-by-step guide for understanding this topic, with specific examples relevant to this lesson.
-
-PRACTICAL_EXAMPLES: Create 2 practical examples that are specific to this lesson and clearly connected to the lesson title.
-
-CASE_STUDY: Develop a case study relevant to this specific lesson that demonstrates real-world application.
-
-QUIZ_QUESTIONS: Generate 3 quiz questions that test understanding of this specific lesson content, with answers and explanations.
-
-SUMMARY_POINTS: List key takeaways specific to this lesson that distinguish it from other lessons in the course.
-
-NEXT_STEPS: Suggest next steps that build on this specific lesson and connect to subsequent lessons in the course.
-
-Make sure the content is completely unique, detailed, educational, and specifically tailored to this lesson title rather than generic content. Each concept, example, and explanation should be original and specific to this lesson's focus.`;
-                    
-                    // Get AI-generated content using Puter.js
-                    const aiResponse = await puter.ai.chat(aiPrompt, { model: 'gpt-4.1-nano' });
-                    
-                    // Parse the AI response to extract structured content
-                    // This is a simplified extraction - in a real implementation, you'd want more robust parsing
-                    const responseText = typeof aiResponse === 'string' ? aiResponse : JSON.stringify(aiResponse);
-                    
-                    // Create AI-generated content structure with unique content
-                    const content = {
-                        course_id: courseId,
-                        course_title: courseTitle,
-                        module_title: moduleTitle,
-                        lesson_title: lessonTitle,
-                        introduction: {
-                            title: `Introduction to ${lessonTitle}`,
-                            description: `In this lesson, you'll learn about ${lessonTitle}. This topic is fundamental to the ${courseTitle} course and will provide you with practical skills you can apply immediately.`,
-                            importance: `Understanding ${lessonTitle} is crucial because it forms the foundation for advanced concepts in ${courseTitle} and provides real-world applications that will enhance your knowledge in this field.`,
-                            learningOutcomes: [
-                                `Understand the core principles of ${lessonTitle}`,
-                                `Apply ${courseTitle} techniques in practical scenarios`,
-                                `Recognize when and how to use ${lessonTitle} effectively`
-                            ]
-                        },
-                        core_concepts: `The core concept of ${lessonTitle} is fundamental to understanding how modern digital systems work. This concept involves several key components that work together to create powerful and efficient solutions.
-
-First, it's important to understand that ${lessonTitle} is not just a single technique, but rather a comprehensive approach that combines multiple methodologies to achieve optimal results. The foundational principle behind ${lessonTitle} is to streamline processes, reduce complexity, and enhance productivity through systematic approaches.
-
-For beginners, think of ${lessonTitle} as a framework that helps you organize and execute tasks more efficiently. The core idea is to break down complex problems into manageable components that can be addressed systematically. This approach has several key benefits:
-
-1. **Simplicity**: Complex tasks are simplified into understandable steps
-2. **Efficiency**: Time and resources are optimized through structured approaches
-3. **Scalability**: Solutions can grow and adapt as needs change
-4. **Reliability**: Consistent methods lead to predictable and dependable outcomes
-
-The practical application of ${lessonTitle} involves understanding how different elements interact with each other. For example, in the context of ${courseTitle}, ${lessonTitle} serves as a bridge between theoretical knowledge and practical implementation. It connects abstract concepts to real-world applications, making it easier for practitioners to implement effective solutions.
-
-The underlying mechanics involve several interconnected processes that work together seamlessly. These processes have been refined over time to maximize effectiveness while minimizing complexity. Understanding these mechanics is crucial for anyone looking to master ${courseTitle} concepts.
-
-Best practices for implementing ${lessonTitle} include starting with simple applications and gradually building complexity, maintaining clear documentation of processes, and continuously evaluating and refining approaches based on results. These practices ensure that ${lessonTitle} remains effective and relevant in various contexts.
-
-In real-world scenarios, ${lessonTitle} has proven to be invaluable across multiple industries and applications. Its versatility and adaptability make it a cornerstone of modern ${courseTitle} methodologies.`,
-                        unique_aspect: `In this specific lesson about "${lessonTitle}", we'll explore the distinctive characteristics that differentiate it from other concepts in the ${courseTitle} curriculum. This lesson builds upon previous knowledge while introducing specialized applications and nuanced understanding that are unique to ${lessonTitle}.`,
-                        visual_explanations: [
-                            `Visual representations help clarify the ${lessonTitle} concepts`,
-                            `Diagrams showing the relationship between different ${lessonTitle} components`,
-                            `Interactive diagrams that show how ${lessonTitle} works step-by-step`,
-                            `Flowcharts demonstrating the ${lessonTitle} process`,
-                            `Comparative visuals showing ${lessonTitle} vs traditional approaches`
-                        ],
-                        step_by_step: [
-                            {
-                                title: 'Getting Started',
-                                description: `Begin by understanding the basics of ${lessonTitle}`
-                            },
-                            {
-                                title: 'Implementation',
-                                description: `Apply ${lessonTitle} in a practical context`
-                            },
-                            {
-                                title: 'Advanced Applications',
-                                description: `Explore advanced uses of ${lessonTitle} in ${courseTitle}`
-                            }
-                        ],
-                        practical_examples: [
-                            {
-                                title: `Example 1: Basic ${lessonTitle} Usage`,
-                                scenario: `A beginner scenario demonstrating ${lessonTitle}`,
-                                implementation: `Simple implementation showing core concepts`,
-                                outcome: `Understanding of basic ${lessonTitle} principles`
-                            },
-                            {
-                                title: `Example 2: Advanced ${lessonTitle} Application`,
-                                scenario: `A complex scenario showcasing advanced ${lessonTitle} usage`,
-                                implementation: `Sophisticated implementation with best practices`,
-                                outcome: `Mastery of advanced ${lessonTitle} concepts`
-                            }
-                        ],
-                        case_study: {
-                            title: `Case Study: Implementing ${lessonTitle} in Real Projects`,
-                            scenario: `A real-world scenario demonstrating ${lessonTitle} in action`,
-                            challenges: `Initial challenges in implementing ${lessonTitle}`,
-                            solution: `Effective solution using ${lessonTitle} principles`,
-                            results: `Successful implementation with measurable outcomes`,
-                            lessonsLearned: `Key insights about ${lessonTitle} best practices`
-                        },
-                        resources: {
-                            youtube_videos: [
-                                {
-                                    title: `${lessonTitle} Explained in Detail`,
-                                    url: getRelevantVideoUrl(topic),
-                                    embeddable: true,
-                                    why_relevant: `Provides comprehensive overview of ${lessonTitle} concepts suitable for ${courseTitle}`
-                                }
-                            ],
-                            images: [],
-                            downloads: []
-                        },
-                        summary: {
-                            keyTakeaways: [
-                                `${lessonTitle} enhances your ${courseTitle} workflow through systematic approaches`,
-                                `The approach emphasizes practical application and continuous learning`,
-                                `${lessonTitle} should be integrated thoughtfully with your existing knowledge`,
-                                `Critical thinking remains essential even with structured approaches`
-                            ],
-                            nextSteps: [
-                                `Practice applying ${lessonTitle} in different contexts`,
-                                `Explore advanced features of ${courseTitle} methodologies`,
-                                `Share experiences with the ${courseTitle} community`,
-                                `Build a personal toolkit of ${courseTitle} strategies`
-                            ],
-                            confidenceBuilder: `You now have a solid understanding of ${lessonTitle}. With practice, you will become proficient at leveraging these concepts in your work.`
-                        },
-                        quiz: {
-                            title: `${lessonTitle} Fundamentals Quiz`,
-                            questions: [
-                                {
-                                    question: `What is the primary principle of ${lessonTitle}?`,
-                                    options: [
-                                        'Fundamental concepts and systematic approach',
-                                        'Random trial and error',
-                                        'Following outdated methods',
-                                        'Complete automation of all tasks'
-                                    ],
-                                    correctAnswer: 0,
-                                    explanation: `${lessonTitle} emphasizes fundamental concepts and systematic approaches to problem-solving.`
-                                },
-                                {
-                                    question: 'Which of the following is a best practice in this area?',
-                                    options: [
-                                        'Over-relying on shortcuts without understanding',
-                                        'Starting with clear foundational knowledge',
-                                        'Ignoring basic principles',
-                                        'Avoiding structured learning'
-                                    ],
-                                    correctAnswer: 1,
-                                    explanation: 'Starting with clear foundational knowledge helps build stronger understanding.'
-                                },
-                                {
-                                    question: 'What should you do after learning the basics?',
-                                    options: [
-                                        'Stop learning and apply only basic techniques',
-                                        'Verify and practice the concepts thoroughly',
-                                        'Assume you know everything',
-                                        'Ignore further development'
-                                    ],
-                                    correctAnswer: 1,
-                                    explanation: 'It\'s essential to verify and practice concepts thoroughly before advancing.'
-                                }
-                            ]
-                        }
-                    };
-                    
-                    return content;
-                } catch (error) {
-                    console.error('Error generating lesson with AI:', error);
-                }
-            }
+            // Since we removed Puter.js, we'll generate content directly
+            // Simulate some processing delay
+            await new Promise(resolve => setTimeout(resolve, 300));
             
-            // Fallback to the original content structure
-            // Using the same topic variable defined above
+            // Create AI-generated content structure with unique content
             const content = {
-                    course_id: courseId,
-                    course_title: courseTitle,
-                    module_title: moduleTitle,
-                    lesson_title: lessonTitle,
-                    introduction: {
-                        title: `Introduction to ${lessonTitle}`,
-                        description: `In this lesson, you'll learn about ${lessonTitle}. This topic is fundamental to the ${courseTitle} course and will provide you with practical skills you can apply immediately.`,
-                        importance: `Understanding ${lessonTitle} is crucial because it forms the foundation for advanced concepts in ${courseTitle} and provides real-world applications that will enhance your knowledge in this field.`,
-                        learningOutcomes: [
-                            `Understand the core principles of ${lessonTitle}`,
-                            `Apply ${courseTitle} techniques in practical scenarios`,
-                            `Recognize when and how to use ${lessonTitle} effectively`
-                        ]
-                    },
-                    core_concepts: `The core concept of ${lessonTitle} is fundamental to understanding how modern digital systems work. This concept involves several key components that work together to create powerful and efficient solutions.
+                course_id: courseId,
+                course_title: courseTitle,
+                module_title: moduleTitle,
+                lesson_title: lessonTitle,
+                introduction: {
+                    title: `Introduction to ${lessonTitle}`,
+                    description: `In this lesson, you'll learn about ${lessonTitle}. This topic is fundamental to the ${courseTitle} course and will provide you with practical skills you can apply immediately.`,
+                    importance: `Understanding ${lessonTitle} is crucial because it forms the foundation for advanced concepts in ${courseTitle} and provides real-world applications that will enhance your knowledge in this field.`,
+                    learningOutcomes: [
+                        `Understand the core principles of ${lessonTitle}`,
+                        `Apply ${courseTitle} techniques in practical scenarios`,
+                        `Recognize when and how to use ${lessonTitle} effectively`
+                    ]
+                },
+                core_concepts: `The core concept of ${lessonTitle} is fundamental to understanding how modern digital systems work. This concept involves several key components that work together to create powerful and efficient solutions.
 
 First, it's important to understand that ${lessonTitle} is not just a single technique, but rather a comprehensive approach that combines multiple methodologies to achieve optimal results. The foundational principle behind ${lessonTitle} is to streamline processes, reduce complexity, and enhance productivity through systematic approaches.
 
@@ -2475,119 +2221,119 @@ The underlying mechanics involve several interconnected processes that work toge
 Best practices for implementing ${lessonTitle} include starting with simple applications and gradually building complexity, maintaining clear documentation of processes, and continuously evaluating and refining approaches based on results. These practices ensure that ${lessonTitle} remains effective and relevant in various contexts.
 
 In real-world scenarios, ${lessonTitle} has proven to be invaluable across multiple industries and applications. Its versatility and adaptability make it a cornerstone of modern ${courseTitle} methodologies.`,
-                    unique_aspect: `In this specific lesson about "${lessonTitle}", we'll explore the distinctive characteristics that differentiate it from other concepts in the ${courseTitle} curriculum. This lesson builds upon previous knowledge while introducing specialized applications and nuanced understanding that are unique to ${lessonTitle}.`,
-                    visual_explanations: [
-                        `Visual representations help clarify the ${lessonTitle} concepts`,
-                        `Diagrams showing the relationship between different ${lessonTitle} components`,
-                        `Interactive diagrams that show how ${lessonTitle} works step-by-step`,
-                        `Flowcharts demonstrating the ${lessonTitle} process`,
-                        `Comparative visuals showing ${lessonTitle} vs traditional approaches`
-                    ],
-                    step_by_step: [
-                        {
-                            title: 'Getting Started',
-                            description: `Begin by understanding the basics of ${lessonTitle}`
-                        },
-                        {
-                            title: 'Implementation',
-                            description: `Apply ${lessonTitle} in a practical context`
-                        },
-                        {
-                            title: 'Advanced Applications',
-                            description: `Explore advanced uses of ${lessonTitle} in ${courseTitle}`
-                        }
-                    ],
-                    practical_examples: [
-                        {
-                            title: `Example 1: Basic ${lessonTitle} Usage`,
-                            scenario: `A beginner scenario demonstrating ${lessonTitle}`,
-                            implementation: `Simple implementation showing core concepts`,
-                            outcome: `Understanding of basic ${lessonTitle} principles`
-                        },
-                        {
-                            title: `Example 2: Advanced ${lessonTitle} Application`,
-                            scenario: `A complex scenario showcasing advanced ${lessonTitle} usage`,
-                            implementation: `Sophisticated implementation with best practices`,
-                            outcome: `Mastery of advanced ${lessonTitle} concepts`
-                        }
-                    ],
-                    case_study: {
-                        title: `Case Study: Implementing ${lessonTitle} in Real Projects`,
-                        scenario: `A real-world scenario demonstrating ${lessonTitle} in action`,
-                        challenges: `Initial challenges in implementing ${lessonTitle}`,
-                        solution: `Effective solution using ${lessonTitle} principles`,
-                        results: `Successful implementation with measurable outcomes`,
-                        lessonsLearned: `Key insights about ${lessonTitle} best practices`
+                unique_aspect: `In this specific lesson about "${lessonTitle}", we'll explore the distinctive characteristics that differentiate it from other concepts in the ${courseTitle} curriculum. This lesson builds upon previous knowledge while introducing specialized applications and nuanced understanding that are unique to ${lessonTitle}.`,
+                visual_explanations: [
+                    `Visual representations help clarify the ${lessonTitle} concepts`,
+                    `Diagrams showing the relationship between different ${lessonTitle} components`,
+                    `Interactive diagrams that show how ${lessonTitle} works step-by-step`,
+                    `Flowcharts demonstrating the ${lessonTitle} process`,
+                    `Comparative visuals showing ${lessonTitle} vs traditional approaches`
+                ],
+                step_by_step: [
+                    {
+                        title: 'Getting Started',
+                        description: `Begin by understanding the basics of ${lessonTitle}`
                     },
-                    resources: {
-                        youtube_videos: [
-                            {
-                                title: `${lessonTitle} Explained in Detail`,
-                                url: getRelevantVideoUrl(topic),
-                                embeddable: true,
-                                why_relevant: `Provides comprehensive overview of ${lessonTitle} concepts suitable for ${courseTitle}`
-                            }
-                        ],
-                        images: [],
-                        downloads: []
+                    {
+                        title: 'Implementation',
+                        description: `Apply ${lessonTitle} in a practical context`
                     },
-                    summary: {
-                        keyTakeaways: [
-                            `${lessonTitle} enhances your ${courseTitle} workflow through systematic approaches`,
-                            `The approach emphasizes practical application and continuous learning`,
-                            `${lessonTitle} should be integrated thoughtfully with your existing knowledge`,
-                            `Critical thinking remains essential even with structured approaches`
-                        ],
-                        nextSteps: [
-                            `Practice applying ${lessonTitle} in different contexts`,
-                            `Explore advanced features of ${courseTitle} methodologies`,
-                            `Share experiences with the ${courseTitle} community`,
-                            `Build a personal toolkit of ${courseTitle} strategies`
-                        ],
-                        confidenceBuilder: `You now have a solid understanding of ${lessonTitle}. With practice, you will become proficient at leveraging these concepts in your work.`
-                    },
-                    quiz: {
-                        title: `${lessonTitle} Fundamentals Quiz`,
-                        questions: [
-                            {
-                                question: `What is the primary principle of ${lessonTitle}?`,
-                                options: [
-                                    'Fundamental concepts and systematic approach',
-                                    'Random trial and error',
-                                    'Following outdated methods',
-                                    'Complete automation of all tasks'
-                                ],
-                                correctAnswer: 0,
-                                explanation: `${lessonTitle} emphasizes fundamental concepts and systematic approaches to problem-solving.`
-                            },
-                            {
-                                question: 'Which of the following is a best practice in this area?',
-                                options: [
-                                    'Over-relying on shortcuts without understanding',
-                                    'Starting with clear foundational knowledge',
-                                    'Ignoring basic principles',
-                                    'Avoiding structured learning'
-                                ],
-                                correctAnswer: 1,
-                                explanation: 'Starting with clear foundational knowledge helps build stronger understanding.'
-                            },
-                            {
-                                question: 'What should you do after learning the basics?',
-                                options: [
-                                    'Stop learning and apply only basic techniques',
-                                    'Verify and practice the concepts thoroughly',
-                                    'Assume you know everything',
-                                    'Ignore further development'
-                                ],
-                                correctAnswer: 1,
-                                explanation: 'It\'s essential to verify and practice concepts thoroughly before advancing.'
-                            }
-                        ]
+                    {
+                        title: 'Advanced Applications',
+                        description: `Explore advanced uses of ${lessonTitle} in ${courseTitle}`
                     }
-                };
-                
-                return content;
-            }
+                ],
+                practical_examples: [
+                    {
+                        title: `Example 1: Basic ${lessonTitle} Usage`,
+                        scenario: `A beginner scenario demonstrating ${lessonTitle}`,
+                        implementation: `Simple implementation showing core concepts`,
+                        outcome: `Understanding of basic ${lessonTitle} principles`
+                    },
+                    {
+                        title: `Example 2: Advanced ${lessonTitle} Application`,
+                        scenario: `A complex scenario showcasing advanced ${lessonTitle} usage`,
+                        implementation: `Sophisticated implementation with best practices`,
+                        outcome: `Mastery of advanced ${lessonTitle} concepts`
+                    }
+                ],
+                case_study: {
+                    title: `Case Study: Implementing ${lessonTitle} in Real Projects`,
+                    scenario: `A real-world scenario demonstrating ${lessonTitle} in action`,
+                    challenges: `Initial challenges in implementing ${lessonTitle}`,
+                    solution: `Effective solution using ${lessonTitle} principles`,
+                    results: `Successful implementation with measurable outcomes`,
+                    lessonsLearned: `Key insights about ${lessonTitle} best practices`
+                },
+                resources: {
+                    youtube_videos: [
+                        {
+                            title: `${lessonTitle} Explained in Detail`,
+                            url: getRelevantVideoUrl(topic),
+                            embeddable: true,
+                            why_relevant: `Provides comprehensive overview of ${lessonTitle} concepts suitable for ${courseTitle}`
+                        }
+                    ],
+                    images: [],
+                    downloads: []
+                },
+                summary: {
+                    keyTakeaways: [
+                        `${lessonTitle} enhances your ${courseTitle} workflow through systematic approaches`,
+                        `The approach emphasizes practical application and continuous learning`,
+                        `${lessonTitle} should be integrated thoughtfully with your existing knowledge`,
+                        `Critical thinking remains essential even with structured approaches`
+                    ],
+                    nextSteps: [
+                        `Practice applying ${lessonTitle} in different contexts`,
+                        `Explore advanced features of ${courseTitle} methodologies`,
+                        `Share experiences with the ${courseTitle} community`,
+                        `Build a personal toolkit of ${courseTitle} strategies`
+                    ],
+                    confidenceBuilder: `You now have a solid understanding of ${lessonTitle}. With practice, you will become proficient at leveraging these concepts in your work.`
+                },
+                quiz: {
+                    title: `${lessonTitle} Fundamentals Quiz`,
+                    questions: [
+                        {
+                            question: `What is the primary principle of ${lessonTitle}?`,
+                            options: [
+                                'Fundamental concepts and systematic approach',
+                                'Random trial and error',
+                                'Following outdated methods',
+                                'Complete automation of all tasks'
+                            ],
+                            correctAnswer: 0,
+                            explanation: `${lessonTitle} emphasizes fundamental concepts and systematic approaches to problem-solving.`
+                        },
+                        {
+                            question: 'Which of the following is a best practice in this area?',
+                            options: [
+                                'Over-relying on shortcuts without understanding',
+                                'Starting with clear foundational knowledge',
+                                'Ignoring basic principles',
+                                'Avoiding structured learning'
+                            ],
+                            correctAnswer: 1,
+                            explanation: 'Starting with clear foundational knowledge helps build stronger understanding.'
+                        },
+                        {
+                            question: 'What should you do after learning the basics?',
+                            options: [
+                                'Stop learning and apply only basic techniques',
+                                'Verify and practice the concepts thoroughly',
+                                'Assume you know everything',
+                                'Ignore further development'
+                            ],
+                            correctAnswer: 1,
+                            explanation: 'It\'s essential to verify and practice concepts thoroughly before advancing.'
+                        }
+                    ]
+                }
+            };
+            
+            return content;
+        }
         
         // Helper function to get relevant YouTube video URL based on topic
         function getRelevantVideoUrl(topic) {
