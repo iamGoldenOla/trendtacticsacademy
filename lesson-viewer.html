@@ -510,14 +510,22 @@
         async function generateLessonContent(courseId, courseTitle, moduleTitle, lessonTitle) {
             console.log('Generating unique content for:', { courseTitle, moduleTitle, lessonTitle });
             
-            // Check if Puter.js is available
-            const isPuterAvailable = typeof puter !== 'undefined' && puter && puter.ai;
-            
             // Generate content based on lesson title and course context
             const topic = lessonTitle.toLowerCase().replace('what is ', '').replace('?', '').trim();
             
+            // Check if Puter.js is available and wait for it if needed
+            let isPuterAvailable = typeof puter !== 'undefined' && puter && puter.ai;
+            
+            // If Puter.js is not immediately available, wait a bit for it to initialize
+            if (!isPuterAvailable) {
+                console.log('Puter.js not immediately available, waiting for initialization...');
+                await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds
+                isPuterAvailable = typeof puter !== 'undefined' && puter && puter.ai;
+            }
+            
             // If Puter.js is available, try to use it
             if (isPuterAvailable) {
+                console.log('Puter.js is available, attempting to generate content');
                 try {
                     // Create a detailed prompt for the AI to generate unique lesson content
                     const aiPrompt = `Create comprehensive educational content for a lesson titled "${lessonTitle}" in the course "${courseTitle}". The module is "${moduleTitle}".
