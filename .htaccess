@@ -12,8 +12,7 @@
 
 # Serve static multi-page HTML; disable SPA rewrites
 # Let Apache serve files and directories as-is; no catch-all to index.html
-# Use a proper 404 page for missing routes
-ErrorDocument 404 /404.html
+
 
 # Proper routing for dynamic pages - exclude static assets
 RewriteEngine On
@@ -42,3 +41,11 @@ RewriteRule ^signup/?$ /signup.html [L,QSA]
 RewriteRule ^login/?$ /login.html [L,QSA]
 RewriteRule ^lesson-viewer/?$ /lesson-viewer.html [L,QSA]
 RewriteRule ^services/?$ /services.html [L,QSA]
+
+# Catch-all rule for frontend routes that don't match existing files
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.html [L,QSA]
+
+# Use a proper 404 page for missing routes
+ErrorDocument 404 /404.html

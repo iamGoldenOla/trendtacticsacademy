@@ -4,7 +4,22 @@
     <meta charset="utf-8">
     <title>Page Not Found</title>
     <script>
-        // Routing fix implemented: 2025-12-28
+        // Prevent redirect loops by adding a timestamp to avoid repeated redirects
+        if (!sessionStorage.getItem('last404Redirect')) {
+            sessionStorage.setItem('last404Redirect', Date.now());
+        } else {
+            const lastRedirect = parseInt(sessionStorage.getItem('last404Redirect'));
+            const now = Date.now();
+            
+            // If another redirect is attempted within 2 seconds, go to home
+            if (now - lastRedirect < 2000) {
+                location.replace('/index.html');
+                throw new Error('Preventing redirect loop');
+            }
+            
+            sessionStorage.setItem('last404Redirect', now);
+        }
+        
         // Get the requested path
         const requestedPath = location.pathname;
         
