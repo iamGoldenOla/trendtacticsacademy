@@ -1,48 +1,64 @@
 #!/bin/bash
-# GitHub Deployment Script for Trendtactics Academy
 
-echo "🚀 Starting Trendtactics Academy GitHub Deployment Setup"
+# Deployment script for Trendtactics Academy
+# This script automates the process of deploying to GitHub
+
+echo "Starting deployment process for Trendtactics Academy..."
 
 # Check if git is installed
 if ! command -v git &> /dev/null; then
-    echo "❌ Git is not installed. Please install Git first."
+    echo "Git is not installed. Please install Git before proceeding."
     exit 1
 fi
 
 # Check if we're in a git repository
-if [ ! -d .git ]; then
-    echo "📦 Initializing new Git repository..."
+if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    echo "Not in a git repository. Initializing new repository..."
     git init
+    git remote add origin https://github.com/your-username/trendtactics-academy.git
 fi
 
-# Add all files to git
-echo "📝 Adding files to Git..."
+# Add all changes
+echo "Adding all files to staging..."
 git add .
 
 # Check for changes
-if git diff --staged --quiet; then
-    echo "✅ No changes to commit"
+if [[ -z $(git status -s) ]]; then
+    echo "No changes to commit. Deployment skipped."
+    exit 0
 else
-    echo " committing changes..."
-    git commit -m " feat: Add GitHub Actions deployment workflow
-
-- Add GitHub Actions workflow for automated deployments
-- Create package.json for Node.js project
-- Add .gitignore file
-- Update README with deployment instructions
-- Prepare project for GitHub deployment"
+    echo "Files have been staged for commit."
 fi
 
-echo "✅ GitHub deployment setup complete!"
-echo ""
-echo "📋 Next steps:"
-echo "1. Create a GitHub repository at https://github.com"
-echo "2. Push this code to your repository:"
-echo "   git remote add origin <your-repository-url>"
-echo "   git branch -M main"
-echo "   git push -u origin main"
-echo "3. Configure the following secrets in your GitHub repository:"
-echo "   - FTP_SERVER: Your FTP server address"
-echo "   - FTP_USERNAME: Your FTP username" 
-echo "   - FTP_PASSWORD: Your FTP password"
-echo "4. The deployment will happen automatically on pushes to main/master"
+# Create commit message with timestamp
+timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+commit_message="Deploy: Updates made on ${timestamp}"
+
+echo "Creating commit with message: ${commit_message}"
+git commit -m "${commit_message}"
+
+# Get current branch
+current_branch=$(git branch --show-current)
+
+if [[ -z "$current_branch" ]]; then
+    # If no branch exists, create master branch
+    echo "No branch detected, creating master branch..."
+    git checkout -b master
+    current_branch="master"
+fi
+
+# Push to GitHub
+echo "Pushing changes to GitHub on branch: ${current_branch}"
+git push origin "${current_branch}" --force-with-lease
+
+if [[ $? -eq 0 ]]; then
+    echo "Successfully deployed to GitHub!"
+    echo "Repository: $(git remote get-url origin)"
+    echo "Branch: ${current_branch}"
+    echo "Latest commit: $(git log -1 --format='%h - %s (%cr)' HEAD)"
+else
+    echo "Deployment failed. Please check your Git configuration and remote repository."
+    exit 1
+fi
+
+echo "Deployment process completed successfully!"
