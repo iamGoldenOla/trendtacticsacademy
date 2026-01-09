@@ -12,7 +12,9 @@
     "dev": "live-server",
     "optimize": "node implement-optimizations.js",
     "analyze": "node optimize-performance.js",
-    "compress-images": "node image-compressor.js"
+    "compress-images": "node image-compressor.js",
+    "auto-compress": "node auto-compress.js",
+    "auto-compress-watch": "node auto-compress.js --watch"
   },
   "keywords": [
     "education",
