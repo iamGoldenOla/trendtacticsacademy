@@ -9,7 +9,10 @@
     "predeploy": "npm run build",
     "build": "echo \"Build process completed\"",
     "start": "serve .",
-    "dev": "live-server"
+    "dev": "live-server",
+    "optimize": "node implement-optimizations.js",
+    "analyze": "node optimize-performance.js",
+    "compress-images": "node image-compressor.js"
   },
   "keywords": [
     "education",
@@ -31,5 +34,8 @@
   "bugs": {
     "url": "https://github.com/your-username/trendtactics-academy/issues"
   },
-  "homepage": "https://github.com/your-username/trendtactics-academy#readme"
+  "homepage": "https://github.com/your-username/trendtactics-academy#readme",
+  "dependencies": {
+    "sharp": "^0.34.5"
+  }
 }

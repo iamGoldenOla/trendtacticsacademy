@@ -1,0 +1,71 @@
+{
+  "optimizationStatus": "Partially Implemented",
+  "date": "2026-01-09T19:18:27.230Z",
+  "criticalFilesRemoved": [
+    "node.exe",
+    "T's Kitchen Advert.mp4"
+  ],
+  "largeImagesFlagged": [
+    {
+      "name": "parrallexpage1.jpg",
+      "instances": 6,
+      "totalSizeKB": 6042,
+      "needsCompression": true
+    },
+    {
+      "name": "studentparallex3.jpg",
+      "instances": 6,
+      "totalSizeKB": 11778,
+      "needsCompression": true
+    },
+    {
+      "name": "contactpage-parallex.jpg",
+      "instances": 4,
+      "totalSizeKB": 9264,
+      "needsCompression": true
+    },
+    {
+      "name": "parallexpage4.jpg",
+      "instances": 6,
+      "totalSizeKB": 13896,
+      "needsCompression": true
+    },
+    {
+      "name": "homepage.jpg",
+      "instances": 6,
+      "totalSizeKB": 1080,
+      "needsCompression": false
+    },
+    {
+      "name": "coursespage.jpg",
+      "instances": 6,
+      "totalSizeKB": 2184,
+      "needsCompression": false
+    },
+    {
+      "name": "websiteparallexpage.jpg",
+      "instances": 6,
+      "totalSizeKB": 828,
+      "needsCompression": false
+    },
+    {
+      "name": "servicespage.jpg",
+      "instances": 6,
+      "totalSizeKB": 774,
+      "needsCompression": false
+    },
+    {
+      "name": "aboutpage.jpg",
+      "instances": 6,
+      "totalSizeKB": 828,
+      "needsCompression": false
+    }
+  ],
+  "recommendations": [
+    "Continue compressing large images",
+    "Implement WebP format with fallbacks",
+    "Optimize JSON data loading",
+    "Minify CSS and JavaScript files",
+    "Consider using a CDN"
+  ]
+}

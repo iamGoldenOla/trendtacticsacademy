@@ -1,0 +1,347 @@
+{
+  "optimizationSummary": {
+    "filesRemoved": 0,
+    "largeImagesDetected": 52,
+    "potentialSavingsMB": 101,
+    "optimizationDate": "2026-01-09T19:02:19.792Z"
+  },
+  "imageOptimizationRecommendations": [
+    {
+      "file": "docs\\images\\parrallexpage1.jpg",
+      "sizeKB": 5723,
+      "recommendedTargetKB": 1717,
+      "compressionNeeded": true
+    },
+    {
+      "file": "images\\parrallexpage1.jpg",
+      "sizeKB": 5723,
+      "recommendedTargetKB": 1717,
+      "compressionNeeded": true
+    },
+    {
+      "file": "lms-frontend\\public\\images\\parrallexpage1.jpg",
+      "sizeKB": 5723,
+      "recommendedTargetKB": 1717,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\docs\\images\\parrallexpage1.jpg",
+      "sizeKB": 5723,
+      "recommendedTargetKB": 1717,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\images\\parrallexpage1.jpg",
+      "sizeKB": 5723,
+      "recommendedTargetKB": 1717,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\lms-frontend\\public\\images\\parrallexpage1.jpg",
+      "sizeKB": 5723,
+      "recommendedTargetKB": 1717,
+      "compressionNeeded": true
+    },
+    {
+      "file": "docs\\images\\studentparallex3.jpg",
+      "sizeKB": 5411,
+      "recommendedTargetKB": 1623,
+      "compressionNeeded": true
+    },
+    {
+      "file": "images\\studentparallex3.jpg",
+      "sizeKB": 5411,
+      "recommendedTargetKB": 1623,
+      "compressionNeeded": true
+    },
+    {
+      "file": "lms-frontend\\public\\images\\studentparallex3.jpg",
+      "sizeKB": 5411,
+      "recommendedTargetKB": 1623,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\docs\\images\\studentparallex3.jpg",
+      "sizeKB": 5411,
+      "recommendedTargetKB": 1623,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\images\\studentparallex3.jpg",
+      "sizeKB": 5411,
+      "recommendedTargetKB": 1623,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\lms-frontend\\public\\images\\studentparallex3.jpg",
+      "sizeKB": 5411,
+      "recommendedTargetKB": 1623,
+      "compressionNeeded": true
+    },
+    {
+      "file": "lms-frontend\\images\\contactpage-parallex.jpg",
+      "sizeKB": 4693,
+      "recommendedTargetKB": 1408,
+      "compressionNeeded": true
+    },
+    {
+      "file": "lms-frontend\\public\\images\\contactpage-parallex.jpg",
+      "sizeKB": 4693,
+      "recommendedTargetKB": 1408,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\lms-frontend\\images\\contactpage-parallex.jpg",
+      "sizeKB": 4693,
+      "recommendedTargetKB": 1408,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\lms-frontend\\public\\images\\contactpage-parallex.jpg",
+      "sizeKB": 4693,
+      "recommendedTargetKB": 1408,
+      "compressionNeeded": true
+    },
+    {
+      "file": "docs\\images\\parallexpage4.jpg",
+      "sizeKB": 4693,
+      "recommendedTargetKB": 1408,
+      "compressionNeeded": true
+    },
+    {
+      "file": "images\\parallexpage4.jpg",
+      "sizeKB": 4693,
+      "recommendedTargetKB": 1408,
+      "compressionNeeded": true
+    },
+    {
+      "file": "lms-frontend\\public\\images\\parallexpage4.jpg",
+      "sizeKB": 4693,
+      "recommendedTargetKB": 1408,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\docs\\images\\parallexpage4.jpg",
+      "sizeKB": 4693,
+      "recommendedTargetKB": 1408,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\images\\parallexpage4.jpg",
+      "sizeKB": 4693,
+      "recommendedTargetKB": 1408,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\lms-frontend\\public\\images\\parallexpage4.jpg",
+      "sizeKB": 4693,
+      "recommendedTargetKB": 1408,
+      "compressionNeeded": true
+    },
+    {
+      "file": "docs\\images\\homepage.jpg",
+      "sizeKB": 1661,
+      "recommendedTargetKB": 498,
+      "compressionNeeded": true
+    },
+    {
+      "file": "images\\homepage.jpg",
+      "sizeKB": 1661,
+      "recommendedTargetKB": 498,
+      "compressionNeeded": true
+    },
+    {
+      "file": "lms-frontend\\public\\images\\homepage.jpg",
+      "sizeKB": 1661,
+      "recommendedTargetKB": 498,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\docs\\images\\homepage.jpg",
+      "sizeKB": 1661,
+      "recommendedTargetKB": 498,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\images\\homepage.jpg",
+      "sizeKB": 1661,
+      "recommendedTargetKB": 498,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\lms-frontend\\public\\images\\homepage.jpg",
+      "sizeKB": 1661,
+      "recommendedTargetKB": 498,
+      "compressionNeeded": true
+    },
+    {
+      "file": "docs\\images\\coursespage.jpg",
+      "sizeKB": 1217,
+      "recommendedTargetKB": 365,
+      "compressionNeeded": true
+    },
+    {
+      "file": "images\\coursespage.jpg",
+      "sizeKB": 1217,
+      "recommendedTargetKB": 365,
+      "compressionNeeded": true
+    },
+    {
+      "file": "lms-frontend\\public\\images\\coursespage.jpg",
+      "sizeKB": 1217,
+      "recommendedTargetKB": 365,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\docs\\images\\coursespage.jpg",
+      "sizeKB": 1217,
+      "recommendedTargetKB": 365,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\images\\coursespage.jpg",
+      "sizeKB": 1217,
+      "recommendedTargetKB": 365,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\lms-frontend\\public\\images\\coursespage.jpg",
+      "sizeKB": 1217,
+      "recommendedTargetKB": 365,
+      "compressionNeeded": true
+    },
+    {
+      "file": "docs\\images\\websiteparallexpage.jpg",
+      "sizeKB": 1198,
+      "recommendedTargetKB": 359,
+      "compressionNeeded": true
+    },
+    {
+      "file": "images\\websiteparallexpage.jpg",
+      "sizeKB": 1198,
+      "recommendedTargetKB": 359,
+      "compressionNeeded": true
+    },
+    {
+      "file": "lms-frontend\\public\\images\\websiteparallexpage.jpg",
+      "sizeKB": 1198,
+      "recommendedTargetKB": 359,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\docs\\images\\websiteparallexpage.jpg",
+      "sizeKB": 1198,
+      "recommendedTargetKB": 359,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\images\\websiteparallexpage.jpg",
+      "sizeKB": 1198,
+      "recommendedTargetKB": 359,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\lms-frontend\\public\\images\\websiteparallexpage.jpg",
+      "sizeKB": 1198,
+      "recommendedTargetKB": 359,
+      "compressionNeeded": true
+    },
+    {
+      "file": "docs\\images\\servicespage.jpg",
+      "sizeKB": 1052,
+      "recommendedTargetKB": 316,
+      "compressionNeeded": true
+    },
+    {
+      "file": "images\\servicespage.jpg",
+      "sizeKB": 1052,
+      "recommendedTargetKB": 316,
+      "compressionNeeded": true
+    },
+    {
+      "file": "lms-frontend\\public\\images\\servicespage.jpg",
+      "sizeKB": 1052,
+      "recommendedTargetKB": 316,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\docs\\images\\servicespage.jpg",
+      "sizeKB": 1052,
+      "recommendedTargetKB": 316,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\images\\servicespage.jpg",
+      "sizeKB": 1052,
+      "recommendedTargetKB": 316,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\lms-frontend\\public\\images\\servicespage.jpg",
+      "sizeKB": 1052,
+      "recommendedTargetKB": 316,
+      "compressionNeeded": true
+    },
+    {
+      "file": "docs\\images\\aboutpage.jpg",
+      "sizeKB": 655,
+      "recommendedTargetKB": 197,
+      "compressionNeeded": true
+    },
+    {
+      "file": "images\\aboutpage.jpg",
+      "sizeKB": 655,
+      "recommendedTargetKB": 197,
+      "compressionNeeded": true
+    },
+    {
+      "file": "lms-frontend\\public\\images\\aboutpage.jpg",
+      "sizeKB": 655,
+      "recommendedTargetKB": 197,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\docs\\images\\aboutpage.jpg",
+      "sizeKB": 655,
+      "recommendedTargetKB": 197,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\images\\aboutpage.jpg",
+      "sizeKB": 655,
+      "recommendedTargetKB": 197,
+      "compressionNeeded": true
+    },
+    {
+      "file": "trendtacticsacademy\\lms-frontend\\public\\images\\aboutpage.jpg",
+      "sizeKB": 655,
+      "recommendedTargetKB": 197,
+      "compressionNeeded": true
+    }
+  ],
+  "additionalOptimizations": [
+    "Convert large JPG images to WebP format for 25-35% size reduction",
+    "Implement responsive images with srcset for different screen sizes",
+    "Add lazy loading to images that are below the fold",
+    "Consider hosting large media files on a CDN or external service",
+    "Minify CSS and JavaScript files",
+    "Enable GZIP compression on the web server"
+  ],
+  "implementationGuide": {
+    "immediateActions": [
+      "Remove remaining large files identified in this analysis",
+      "Compress images using online tools like TinyPNG or Squoosh",
+      "Replace large images with optimized versions"
+    ],
+    "shortTermGoals": [
+      "Implement WebP format with fallbacks",
+      "Add image lazy loading",
+      "Optimize JSON data loading"
+    ],
+    "longTermGoals": [
+      "Set up automated image optimization in build process",
+      "Implement CDN for static assets",
+      "Add advanced caching strategies"
+    ]
+  }
+}
