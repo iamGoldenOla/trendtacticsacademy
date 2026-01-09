@@ -95,3 +95,11 @@ coverage/
 ehthumbs.db
 Icon?
 Thumbs.db
+
+# Problematic directories to exclude
+node.exe
+*.exe
+*.mp4
+trendtacticsacademy/
+lms-frontend/
+v18.*/
