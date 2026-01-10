@@ -848,9 +848,9 @@ DECLARE
   pe_lessons INTEGER;
 BEGIN
   SELECT COUNT(*) INTO lesson_count FROM lessons;
-  SELECT COUNT(*) INTO vc_lessons FROM lessons WHERE id LIKE '10000000%';
-  SELECT COUNT(*) INTO fb_lessons FROM lessons WHERE id LIKE '20000000%';
-  SELECT COUNT(*) INTO pe_lessons FROM lessons WHERE id LIKE '30000000%';
+  SELECT COUNT(*) INTO vc_lessons FROM lessons WHERE id::text LIKE '10000000%';
+  SELECT COUNT(*) INTO fb_lessons FROM lessons WHERE id::text LIKE '20000000%';
+  SELECT COUNT(*) INTO pe_lessons FROM lessons WHERE id::text LIKE '30000000%';
 
   RAISE NOTICE '';
   RAISE NOTICE '========================================';
