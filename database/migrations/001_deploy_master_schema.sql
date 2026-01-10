@@ -438,10 +438,10 @@ BEGIN
             c.category,
             c.thumbnail_url,
             COALESCE(c.total_lessons, 0),
-            COUNT(DISTINCT up.lesson_id) FILTER (WHERE up.completed = TRUE)::INTEGER as completed_lessons,
+            COUNT(DISTINCT CASE WHEN up.completed = TRUE THEN up.lesson_id END)::INTEGER as completed_lessons,
             CASE
                 WHEN COALESCE(c.total_lessons, 0) > 0 THEN
-                    (COUNT(DISTINCT up.lesson_id) FILTER (WHERE up.completed = TRUE)::DECIMAL / c.total_lessons * 100)
+                    (COUNT(DISTINCT CASE WHEN up.completed = TRUE THEN up.lesson_id END)::DECIMAL / c.total_lessons * 100)
                 ELSE 0
             END as progress_percentage,
             sca.purchase_date,
@@ -467,10 +467,10 @@ BEGIN
             c.category,
             c.thumbnail_url,
             COUNT(DISTINCT l.id)::INTEGER as total_lessons,
-            COUNT(DISTINCT up.lesson_id) FILTER (WHERE up.completed = TRUE)::INTEGER as completed_lessons,
+            COUNT(DISTINCT CASE WHEN up.completed = TRUE THEN up.lesson_id END)::INTEGER as completed_lessons,
             CASE
                 WHEN COUNT(DISTINCT l.id) > 0 THEN
-                    (COUNT(DISTINCT up.lesson_id) FILTER (WHERE up.completed = TRUE)::DECIMAL / COUNT(DISTINCT l.id) * 100)
+                    (COUNT(DISTINCT CASE WHEN up.completed = TRUE THEN up.lesson_id END)::DECIMAL / COUNT(DISTINCT l.id) * 100)
                 ELSE 0
             END as progress_percentage,
             sca.purchase_date,
