@@ -195,7 +195,17 @@ CREATE INDEX IF NOT EXISTS idx_modules_ordering ON modules(course_id, ordering);
 -- Lessons indexes
 CREATE INDEX IF NOT EXISTS idx_lessons_module ON lessons(module_id);
 CREATE INDEX IF NOT EXISTS idx_lessons_ordering ON lessons(module_id, ordering);
-CREATE INDEX IF NOT EXISTS idx_lessons_ai_generated ON lessons(ai_generated);
+
+-- Create ai_generated index only if column exists
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_name = 'lessons' AND column_name = 'ai_generated'
+  ) THEN
+    CREATE INDEX IF NOT EXISTS idx_lessons_ai_generated ON lessons(ai_generated);
+  END IF;
+END $$;
 
 -- Create content_hash index only if column exists
 DO $$
