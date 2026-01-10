@@ -98,7 +98,7 @@ function generateLessonInsert(lesson, coursePrefix, lessonNumber) {
   // Video URL (if available in resources)
   const videoUrl = lesson.resources?.video?.url || '';
 
-  return `('${lessonId}', '${moduleId}', '${escapeSql(lesson.lesson_title)}', '${description}', '${content}', ${lesson.lesson_number}, '30 minutes', '${videoUrl}', '', '${resources}', NOW(), NOW())`;
+  return `('${lessonId}', '${moduleId}', '${escapeSql(lesson.lesson_title)}', '${description}', '${content}', ${lesson.lesson_number}, '30 minutes', '${videoUrl}', '${resources}', NOW(), NOW())`;
 }
 
 // Generate SQL file
@@ -109,7 +109,7 @@ let sql = `-- ==================================================================
 -- Run this AFTER 002_seed_modules.sql
 -- Generated automatically from course JSON files
 -- Schema: id, module_id, title, description, content, ordering, duration,
---         video_url, video_transcript, resources, created_at, updated_at
+--         video_url, resources, created_at, updated_at
 -- ============================================================================
 
 `;
@@ -121,7 +121,7 @@ sql += `-- =====================================================================
 
 INSERT INTO lessons (
   id, module_id, title, description, content, ordering, duration,
-  video_url, video_transcript, resources, created_at, updated_at
+  video_url, resources, created_at, updated_at
 ) VALUES\n`;
 
 const vibeInserts = vibeCourse.map((lesson, idx) => generateLessonInsert(lesson, '1', idx + 1)).filter(Boolean);
@@ -141,7 +141,7 @@ sql += `-- =====================================================================
 
 INSERT INTO lessons (
   id, module_id, title, description, content, ordering, duration,
-  video_url, video_transcript, resources, created_at, updated_at
+  video_url, resources, created_at, updated_at
 ) VALUES\n`;
 
 const fbInserts = fbCourse.map((lesson, idx) => generateLessonInsert(lesson, '2', idx + 1)).filter(Boolean);
@@ -161,7 +161,7 @@ sql += `-- =====================================================================
 
 INSERT INTO lessons (
   id, module_id, title, description, content, ordering, duration,
-  video_url, video_transcript, resources, created_at, updated_at
+  video_url, resources, created_at, updated_at
 ) VALUES\n`;
 
 const peInserts = promptCourse.map((lesson, idx) => generateLessonInsert(lesson, '3', idx + 1)).filter(Boolean);

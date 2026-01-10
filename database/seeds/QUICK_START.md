@@ -6,6 +6,16 @@
 
 ---
 
+## ⚠️ IMPORTANT: Check Your Schema First
+
+Before seeding, run this to verify your database structure:
+
+**File:** `database/seeds/000_check_schema.sql`
+
+This will show you what columns exist in your database. If the schema doesn't match, you may need to redeploy it.
+
+---
+
 ## 📝 Step-by-Step Instructions
 
 ### **Step 1: Open Supabase SQL Editor**
@@ -14,10 +24,12 @@
 3. Click **New Query**
 
 ### **Step 2: Seed Courses**
-1. Open `database/seeds/001_seed_courses.sql`
+1. Open `database/seeds/001_seed_courses_simple.sql` (simplified version)
 2. Copy the entire contents
 3. Paste into Supabase SQL Editor
 4. Click **Run** (or press Ctrl+Enter)
+
+**Note:** This will DELETE existing courses, modules, and lessons first!
 
 **Expected Output:**
 ```
