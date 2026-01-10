@@ -416,34 +416,76 @@ RETURNS TABLE(
     enrollment_date TIMESTAMPTZ,
     access_status TEXT
 ) AS $$
+DECLARE
+    has_total_lessons BOOLEAN;
 BEGIN
-    RETURN QUERY
-    SELECT
-        c.id,
-        c.title,
-        c.description,
-        c.level,
-        c.category,
-        c.thumbnail_url,
-        COALESCE(c.total_lessons, 0),
-        COUNT(DISTINCT up.lesson_id) FILTER (WHERE up.completed = TRUE)::INTEGER as completed_lessons,
-        CASE
-            WHEN COALESCE(c.total_lessons, 0) > 0 THEN
-                (COUNT(DISTINCT up.lesson_id) FILTER (WHERE up.completed = TRUE)::DECIMAL / c.total_lessons * 100)
-            ELSE 0
-        END as progress_percentage,
-        sca.purchase_date,
-        sca.access_status
-    FROM courses c
-    INNER JOIN student_course_access sca ON c.id = sca.course_id
-    LEFT JOIN modules m ON m.course_id = c.id
-    LEFT JOIN lessons l ON l.module_id = m.id
-    LEFT JOIN user_progress up ON up.lesson_id = l.id AND up.user_id = p_user_id
-    WHERE sca.user_id = p_user_id
-      AND sca.access_status = 'active'
-    GROUP BY c.id, c.title, c.description, c.level, c.category, c.thumbnail_url,
-             c.total_lessons, sca.purchase_date, sca.access_status
-    ORDER BY sca.purchase_date DESC;
+    -- Check if total_lessons column exists
+    SELECT EXISTS (
+        SELECT 1 FROM information_schema.columns
+        WHERE table_schema = 'public'
+        AND table_name = 'courses'
+        AND column_name = 'total_lessons'
+    ) INTO has_total_lessons;
+
+    IF has_total_lessons THEN
+        -- Use total_lessons column if it exists
+        RETURN QUERY
+        SELECT
+            c.id,
+            c.title,
+            c.description,
+            c.level,
+            c.category,
+            c.thumbnail_url,
+            COALESCE(c.total_lessons, 0),
+            COUNT(DISTINCT up.lesson_id) FILTER (WHERE up.completed = TRUE)::INTEGER as completed_lessons,
+            CASE
+                WHEN COALESCE(c.total_lessons, 0) > 0 THEN
+                    (COUNT(DISTINCT up.lesson_id) FILTER (WHERE up.completed = TRUE)::DECIMAL / c.total_lessons * 100)
+                ELSE 0
+            END as progress_percentage,
+            sca.purchase_date,
+            sca.access_status
+        FROM courses c
+        INNER JOIN student_course_access sca ON c.id = sca.course_id
+        LEFT JOIN modules m ON m.course_id = c.id
+        LEFT JOIN lessons l ON l.module_id = m.id
+        LEFT JOIN user_progress up ON up.lesson_id = l.id AND up.user_id = p_user_id
+        WHERE sca.user_id = p_user_id
+          AND sca.access_status = 'active'
+        GROUP BY c.id, c.title, c.description, c.level, c.category, c.thumbnail_url,
+                 c.total_lessons, sca.purchase_date, sca.access_status
+        ORDER BY sca.purchase_date DESC;
+    ELSE
+        -- Calculate total_lessons on the fly if column doesn't exist
+        RETURN QUERY
+        SELECT
+            c.id,
+            c.title,
+            c.description,
+            c.level,
+            c.category,
+            c.thumbnail_url,
+            COUNT(DISTINCT l.id)::INTEGER as total_lessons,
+            COUNT(DISTINCT up.lesson_id) FILTER (WHERE up.completed = TRUE)::INTEGER as completed_lessons,
+            CASE
+                WHEN COUNT(DISTINCT l.id) > 0 THEN
+                    (COUNT(DISTINCT up.lesson_id) FILTER (WHERE up.completed = TRUE)::DECIMAL / COUNT(DISTINCT l.id) * 100)
+                ELSE 0
+            END as progress_percentage,
+            sca.purchase_date,
+            sca.access_status
+        FROM courses c
+        INNER JOIN student_course_access sca ON c.id = sca.course_id
+        LEFT JOIN modules m ON m.course_id = c.id
+        LEFT JOIN lessons l ON l.module_id = m.id
+        LEFT JOIN user_progress up ON up.lesson_id = l.id AND up.user_id = p_user_id
+        WHERE sca.user_id = p_user_id
+          AND sca.access_status = 'active'
+        GROUP BY c.id, c.title, c.description, c.level, c.category, c.thumbnail_url,
+                 sca.purchase_date, sca.access_status
+        ORDER BY sca.purchase_date DESC;
+    END IF;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -451,15 +493,25 @@ $$ LANGUAGE plpgsql;
 -- STEP 5: Update existing data (if needed)
 -- ============================================================================
 
--- Calculate total_lessons for existing courses
-UPDATE courses c
-SET total_lessons = (
-  SELECT COUNT(*)
-  FROM lessons l
-  JOIN modules m ON m.id = l.module_id
-  WHERE m.course_id = c.id
-)
-WHERE total_lessons = 0 OR total_lessons IS NULL;
+-- Calculate total_lessons for existing courses (only if column exists)
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema = 'public' AND table_name = 'courses' AND column_name = 'total_lessons'
+  ) THEN
+    UPDATE courses c
+    SET total_lessons = (
+      SELECT COUNT(*)
+      FROM lessons l
+      JOIN modules m ON m.id = l.module_id
+      WHERE m.course_id = c.id
+    )
+    WHERE total_lessons = 0 OR total_lessons IS NULL;
+
+    RAISE NOTICE 'Updated total_lessons for existing courses';
+  END IF;
+END $$;
 
 -- ============================================================================
 -- STEP 6: Verification
@@ -482,17 +534,17 @@ BEGIN
   FROM pg_proc p
   JOIN pg_namespace n ON p.pronamespace = n.oid
   WHERE n.nspname = 'public'
-  AND p.proname IN ('get_student_courses', 'get_course_structure', 
+  AND p.proname IN ('get_student_courses', 'update_updated_at_column',
                     'generate_content_hash', 'check_content_uniqueness');
-  
+
   RAISE NOTICE '✅ Migration complete!';
   RAISE NOTICE 'Tables created/updated: %', table_count;
   RAISE NOTICE 'Functions created: %', function_count;
-  
+
   IF table_count < 7 THEN
     RAISE WARNING 'Expected 7 tables, found %', table_count;
   END IF;
-  
+
   IF function_count < 4 THEN
     RAISE WARNING 'Expected 4 functions, found %', function_count;
   END IF;
