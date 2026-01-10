@@ -34,6 +34,7 @@ jobs:
         publish_branch: gh-pages
         force_orphan: true
         enable_jekyll: false
+        allow_empty_commit: false
 
   sync-main-branch:
     runs-on: ubuntu-latest

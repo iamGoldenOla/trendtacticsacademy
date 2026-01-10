@@ -461,16 +461,10 @@
                     return;
                 }
                 
-                // Fetch course details + modules
-                // Using Supabase client assuming public access to course content metadata
-                // but restricting actual content via RLS if needed.
-                // For this demo, we fetch public info.
-
-                // TODO: Replace with secure Edge Function that validates enrollment
-                // For now, we fetch public course data
+                // Fetch course details
                 const { data: fetchedCourseData, error } = await window.supabaseClient
                   .from('courses')
-                  .select('id, title, description, modules, status, level, created_at, updated_at')
+                  .select('id, title, description, status, level, created_at, updated_at')
                   .eq('id', id)
                   .single();
                 
@@ -478,102 +472,79 @@
                     throw new Error(`Failed to load course: ${error.message}`);
                 }
                 
-                // Debug: Log the raw course data structure
-                console.log('Raw course data structure:', fetchedCourseData);
-                
-                // Check what properties are available in the course data
-                console.log('Available course properties:', Object.keys(fetchedCourseData || {}));
-                
-                // Check the type and content of the modules field specifically
-                console.log('Modules field type:', typeof fetchedCourseData?.modules);
-                console.log('Modules field value:', fetchedCourseData?.modules);
-                
-                // Convert to expected format
-                const course = fetchedCourseData;
-
-
-
-                if (!course) {
+                if (!fetchedCourseData) {
                     throw new Error('Course not found');
                 }
 
                 courseData = fetchedCourseData;
-                document.getElementById('courseHeaderTitle').textContent = course.title;
-                document.title = `${course.title} - Learning`;
-
-                // Store original modules structure to access full content later
-                originalModules = course.modules || {};
+                document.getElementById('courseHeaderTitle').textContent = fetchedCourseData.title;
+                document.title = `${fetchedCourseData.title} - Learning`;
                 
-                // If modules is a string, it might be JSON containing the full structure
-                if (typeof originalModules === 'string') {
-                    try {
-                        originalModules = JSON.parse(originalModules);
-                        console.log('Parsed modules from string:', originalModules);
-                    } catch (e) {
-                        console.log('Modules is not a JSON string:', e);
-                    }
+                // Now fetch the modules for this course
+                const { data: modulesData, error: modulesError } = await window.supabaseClient
+                    .from('modules')
+                    .select('*')
+                    .eq('course_id', id)
+                    .order('ordering', { ascending: true });
+                
+                if (modulesError) {
+                    console.error('Error fetching modules:', modulesError);
+                    throw new Error(`Failed to load course modules: ${modulesError.message}`);
                 }
                 
-                // Make sure we have the modules array from the right place
-                if (originalModules.modules && Array.isArray(originalModules.modules)) {
-                    originalModules = originalModules.modules;
-                    console.log('Using modules.modules array:', originalModules);
-                }
+                console.log('Fetched modules:', modulesData);
                 
-                // Parse modules
-                let modules = course.modules || [];
-                if (typeof modules === 'string') {
-                    try { modules = JSON.parse(modules); } catch (e) { modules = []; }
-                }
-                
-                // Handle different possible structures of modules data
-                if (modules && typeof modules === 'object' && !Array.isArray(modules)) {
-                    // If modules is an object with a 'modules' property
-                    if (modules.modules && Array.isArray(modules.modules)) {
-                        modules = modules.modules;
-                    } else {
-                        // If it's a single module object, convert to array
-                        modules = [modules];
-                    }
-                }
-                
-                // Also check if lessons are directly in the course object
-                if (modules.length === 0 && (course.description)) {
-                    // Create a default module with direct lessons
-                    const directLessons = course.description;
-                    if (Array.isArray(directLessons)) {
-                        modules = [{
-                            title: 'Course Content',
-                            lessons: directLessons
-                        }];
-                    } else if (typeof directLessons === 'string') {
-                        try {
-                            const parsedLessons = JSON.parse(directLessons);
-                            if (Array.isArray(parsedLessons)) {
-                                modules = [{
-                                    title: 'Course Content',
-                                    lessons: parsedLessons
-                                }];
-                            }
-                        } catch (e) {
-                            console.log('Could not parse direct lessons:', e);
+                // For each module, fetch the associated lessons
+                let modules = [];
+                if (modulesData && Array.isArray(modulesData)) {
+                    for (const module of modulesData) {
+                        const { data: lessonsData, error: lessonsError } = await window.supabaseClient
+                            .from('lessons')
+                            .select('*')
+                            .eq('module_id', module.id)
+                            .order('ordering', { ascending: true });
+                            
+                        if (lessonsError) {
+                            console.error('Error fetching lessons for module:', module.id, lessonsError);
+                            // Continue with empty lessons array
                         }
+                        
+                        // Process lessons to handle JSON content
+                        const processedLessons = [];
+                        if (lessonsData && Array.isArray(lessonsData)) {
+                            for (const lesson of lessonsData) {
+                                let lessonContent = lesson;
+                                
+                                // If lesson has lesson_json (from newer schema) or content field, use it
+                                if (lesson.lesson_json) {
+                                    // Merge the JSON content with basic lesson info
+                                    lessonContent = { ...lesson, ...lesson.lesson_json };
+                                } else if (lesson.content) {
+                                    try {
+                                        // Check if content is a JSON string
+                                        const parsedContent = JSON.parse(lesson.content);
+                                        lessonContent = { ...lesson, ...parsedContent };
+                                    } catch (e) {
+                                        // If not JSON, use as-is
+                                        lessonContent = lesson;
+                                    }
+                                }
+                                
+                                processedLessons.push(lessonContent);
+                            }
+                        }
+                        
+                        modules.push({
+                            ...module,
+                            lessons: processedLessons
+                        });
                     }
                 }
                 
-                // Ensure modules is an array
-                if (!Array.isArray(modules)) {
-                    modules = [];
-                }
+                console.log('Processed modules with lessons:', modules);
                 
-                // Debug: Log the final modules structure before rendering
-                console.log('Final modules array before rendering:', modules);
-
-                // Debug: Log the modules structure
-                console.log('Modules structure:', modules);
-                
-                // Debug: Log full modules structure for better understanding
-                console.log('Full modules object:', JSON.stringify(modules, null, 2));
+                // Store original modules structure to access full content later
+                originalModules = modules;
                 
                 // Flatten lessons and render sidebar
                 renderSidebar(modules);
