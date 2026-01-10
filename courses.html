@@ -225,7 +225,7 @@
                     const user = JSON.parse(u)?.user;
                     if (authBtn) {
                         authBtn.textContent = user?.user_metadata?.name || user?.email || 'Account';
-                        authBtn.onclick = () => window.location.href = '/dashboard';
+                        authBtn.onclick = () => window.location.href = '/new-dashboard';
                     }
                     if (dashboardLink) {
                         dashboardLink.style.display = 'block';
@@ -408,7 +408,7 @@
 
             if (loggedIn) {
                 // If logged in, go to dashboard
-                window.location.href = '/dashboard';
+                window.location.href = '/new-dashboard';
             } else {
                 // If not logged in, go to signup/login
                 window.location.href = '/signup';

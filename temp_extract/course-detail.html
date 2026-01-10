@@ -168,7 +168,7 @@
                     const enrollBtn = document.getElementById('enrollBtn');
                     const enrollBtnText = document.getElementById('enrollBtnText');
                     enrollBtnText.textContent = 'Continue Learning';
-                    enrollBtn.onclick = () => window.location.href = '/dashboard';
+                    enrollBtn.onclick = () => window.location.href = '/new-dashboard';
                 }
             } catch (error) {
                 console.log('Not enrolled yet');
@@ -221,7 +221,7 @@
                         enrollMessage.textContent = '✅ You are already enrolled!';
 
                         setTimeout(() => {
-                            window.location.href = '/dashboard';
+                            window.location.href = '/new-dashboard';
                         }, 1500);
                     } else {
                         throw error;
@@ -233,7 +233,7 @@
                     enrollMessage.textContent = '✅ Enrollment successful! Redirecting...';
 
                     setTimeout(() => {
-                        window.location.href = '/dashboard';
+                        window.location.href = '/new-dashboard';
                     }, 1500);
                 }
             } catch (error) {

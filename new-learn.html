@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Space - Trendtactics Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="icon" href="/images/Trendtactics-logo - Copy.jpg" type="image/jpeg">
+    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+    <script src="/js/env.js"></script>
+    <script src="/js/supabase-client.js"></script>
+    
+    <style>
+        :root {
+            --primary: #00D9FF;
+            --primary-dark: #00B8D9;
+            --secondary: #7C3AED;
+            --bg-dark: #0B1437;
+            --bg-darker: #060D24;
+            --bg-card: rgba(15, 25, 55, 0.95);
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --success: #10B981;
+            --error: #EF4444;
+            --border: rgba(0, 217, 255, 0.2);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-darker);
+            color: var(--text-primary);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-dark);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        .course-title-header {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        /* Main Layout */
+        .main-layout {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 320px;
+            background: var(--bg-dark);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+            z-index: 50;
+        }
+
+        .sidebar-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .progress-bar-container {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 0.75rem;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--success);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .lesson-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.5rem;
+        }
+
+        .module-header {
+            padding: 0.75rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+        }
+
+        .lesson-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 2px;
+            transition: background 0.2s;
+        }
+
+        .lesson-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .lesson-item.active {
+            background: rgba(0, 217, 255, 0.1);
+            border-left: 3px solid var(--primary);
+        }
+
+        .lesson-item.completed .status-icon {
+            color: var(--success);
+        }
+
+        .status-icon {
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--text-muted);
+            border-radius: 50%;
+            font-size: 0.6rem;
+            color: transparent;
+            flex-shrink: 0;
+        }
+
+        .lesson-item.completed .status-icon {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .lesson-item.active .status-icon {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            background: var(--bg-darker);
+            position: relative;
+        }
+
+        .content-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            width: 100%;
+        }
+
+        .lesson-content h1 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            background: black;
+            border: 1px solid var(--border);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .text-content {
+            line-height: 1.7;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .text-content h2 {
+            color: var(--text-primary);
+            margin: 2rem 0 1rem;
+            font-size: 1.25rem;
+        }
+
+        .text-content h3 {
+            color: var(--text-primary);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.1rem;
+        }
+
+        .text-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .text-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .text-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .nav-btn.primary {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+        }
+
+        .nav-btn.primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .nav-btn[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Mobile */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                transform: translateX(-100%);
+                width: 85%;
+                max-width: 320px;
+                box-shadow: 10px 0 20px rgba(0, 0, 0, 0.5);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .content-container {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Quiz styles */
+        .quiz-container {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--error);
+        }
+
+        .quiz-question {
+            margin-bottom: 1rem;
+        }
+
+        .quiz-options {
+            margin: 1rem 0;
+        }
+
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .quiz-option:hover {
+            background: rgba(0, 217, 255, 0.1);
+        }
+
+        .quiz-option.selected {
+            background: rgba(0, 217, 255, 0.2);
+            border: 1px solid var(--primary);
+        }
+
+        /* Playground section */
+        .playground-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .playground-input {
+            width: 100%;
+            min-height: 100px;
+            padding: 1rem;
+            background: #000;
+            color: white;
+            border: 1px solid var(--primary);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-family: monospace;
+        }
+
+        .playground-output {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            min-height: 100px;
+        }
+
+        /* Resources section */
+        .resources-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--success);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+            <a href="/new-dashboard" class="back-link">← Dashboard</a>
+            <span class="course-title-header" id="courseHeaderTitle">Loading...</span>
+        </div>
+        <div>
+            <span id="lessonCounter">Lesson 0 of 0</span>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 style="font-size: 1rem; margin-bottom: 0.5rem;">Course Content</h2>
+                <div
+                    style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted);">
+                    <span id="progressText">0% Complete</span>
+                    <span id="lessonCount">0/0 Lessons</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="lesson-list" id="lessonList">
+                <!-- Populated by JS -->
+            </div>
+        </aside>
+
+        <!-- Content -->
+        <main class="content-area">
+            <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem; animation: spin 1s infinite linear;">↻</div>
+                    <p>Loading lesson...</p>
+                </div>
+            </div>
+
+            <div id="contentContainer" class="content-container" style="display: none;">
+                <div class="lesson-content">
+                    <h1 id="lessonTitle">Lesson Title</h1>
+
+                    <div id="videoContainer" class="video-wrapper" style="display: none;">
+                        <iframe id="videoPlayer" src="" allowfullscreen></iframe>
+                    </div>
+
+                    <div id="textContent" class="text-content">
+                        <!-- Content goes here -->
+                    </div>
+
+                    <div id="resourcesSection" class="resources-section" style="display: none;">
+                        <h3>📚 Resources</h3>
+                        <div id="resourcesContent"></div>
+                    </div>
+
+                    <div id="quizSection" class="quiz-container" style="display: none;">
+                        <h3>📝 Knowledge Check</h3>
+                        <div id="quizContent"></div>
+                        <button id="submitQuizBtn" class="nav-btn primary" style="margin-top: 1rem;">Submit Quiz</button>
+                    </div>
+
+                    <div id="playgroundSection" class="playground-section" style="display: none;">
+                        <h3>🎮 AI-Powered Playground</h3>
+                        <textarea id="playgroundInput" class="playground-input" placeholder="Describe what you want to create or learn..."></textarea>
+                        <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                            <button id="generateBtn" class="nav-btn primary">Generate with AI</button>
+                            <button id="resetBtn" class="nav-btn">Reset</button>
+                        </div>
+                        <div id="playgroundOutput" class="playground-output" style="display: none;"></div>
+                    </div>
+
+                    <div class="navigation-buttons">
+                        <button id="prevBtn" class="nav-btn" onclick="prevLesson()">← Previous</button>
+                        <button id="nextBtn" class="nav-btn primary" onclick="nextLesson()">Next Lesson →</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/supabase-client.js"></script>
+    <script>
+        // Global State
+        let courseData = null;
+        let currentLessonIndex = 0;
+        let flatLessons = []; // Array of all lessons for easier navigation
+        let completedLessons = new Set();
+        let courseId = null;
+        let originalModules = null; // Store original modules structure to access full content
+
+        // Vibe Coding course data (26 lessons)
+        const vibeCodingCourse = [
+            {
+                "lesson_number": 1,
+                "lesson_title": "What is Vibe Coding?",
+                "introduction": "Welcome to the future of software development. In this lesson, you will discover Vibe Coding—a revolutionary approach where humans focus on intent, systems, and outcomes while AI handles the execution.",
+                "big_idea": "Vibe Coding is the modern paradigm of software development where you describe what you want in plain language, and AI tools translate your intent into working code.",
+                "why_it_matters": "Traditional coding required years of learning syntax, debugging cryptic errors, and understanding low-level implementation details. Vibe Coding removes these barriers.",
+                "key_concepts": ["Intent-driven development: Focus on what you want, not how to code it", "AI as execution partner: AI writes and debugs code based on your descriptions", "Outcome-first thinking: Start with the end result and work backward"],
+                "summary": "Vibe Coding is the modern approach to building software where you focus on describing what you want rather than how to code it.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What is the main focus of Vibe Coding?",
+                            "options": ["Describing intent and outcomes while AI handles code execution", "Memorizing programming syntax", "Debugging errors", "Writing complex algorithms"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 2,
+                "lesson_title": "Why Vibe Coding is the Future",
+                "introduction": "In our first lesson, you learned what Vibe Coding is. Now let's explore why it represents the inevitable future of software development.",
+                "big_idea": "The software industry is undergoing its most significant transformation since the invention of high-level programming languages.",
+                "why_it_matters": "Companies are already hiring based on Vibe Coding skills. Startups are being built entirely with AI tools.",
+                "key_concepts": ["The productivity multiplier: Vibe Coders ship 10x faster than traditional developers", "Democratized creation: Non-technical founders can now build their own MVPs"],
+                "summary": "Vibe Coding is not just a new technique—it represents a fundamental shift in how software gets built.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "Why is Vibe Coding considered an irreversible shift?",
+                            "options": ["AI models have become sophisticated enough to reliably produce code from natural language", "It's a temporary trend", "Traditional coding is banned", "Only experts can use it"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 3,
+                "lesson_title": "Overview of Vibe Coding Tools",
+                "introduction": "Now that you understand what Vibe Coding is and why it matters, it's time to explore the tools that make it possible.",
+                "big_idea": "The Vibe Coding ecosystem consists of three main categories of tools: Full-Stack AI Builders, AI-First IDEs, and Agentic Tools.",
+                "why_it_matters": "Choosing the wrong tool for your project can waste hours or even days.",
+                "key_concepts": ["Full-Stack AI Builders: Generate complete apps from text descriptions", "AI-First IDEs: Traditional coding supercharged with AI"],
+                "summary": "The Vibe Coding ecosystem includes Full-Stack AI Builders for rapid app generation, AI-First IDEs for enhanced traditional coding.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What are the three main categories of Vibe Coding tools?",
+                            "options": ["Full-Stack AI Builders, AI-First IDEs, and Agentic Tools", "Compilers, Editors, and Debuggers", "Python, Java, and C++", "Servers, Clients, and Databases"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 4,
+                "lesson_title": "AI-First Development Workflow",
+                "introduction": "Understanding tools is important, but knowing how to use them together in an effective workflow is what separates productive Vibe Coders from those who struggle.",
+                "big_idea": "The AI-First development workflow follows a clear pattern: Describe, Generate, Evaluate, Refine, Deploy.",
+                "why_it_matters": "Without a structured workflow, Vibe Coding can feel chaotic.",
+                "key_concepts": ["Describe: Write clear, specific descriptions of what you want", "Generate: Use AI tools to produce code or applications"],
+                "summary": "The AI-First development workflow—Describe, Generate, Evaluate, Refine, Deploy—provides a repeatable process for building software with AI.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What are the five steps of the AI-First development workflow?",
+                            "options": ["Describe, Generate, Evaluate, Refine, Deploy", "Plan, Code, Test, Deploy, Maintain", "Design, Build, Launch, Scale, Optimize", "Idea, Research, Develop, Market, Sell"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 5,
+                "lesson_title": "Bolt.new and Lovable Deep Dive",
+                "introduction": "It's time to get hands-on with the most powerful Full-Stack AI Builders available today.",
+                "big_idea": "Bolt.new and Lovable represent the cutting edge of Full-Stack AI Builders.",
+                "why_it_matters": "These tools eliminate the biggest bottleneck in software development: the gap between idea and prototype.",
+                "key_concepts": ["Bolt.new: Browser-based, React/Vue/Svelte, instant preview and deployment", "Lovable: Production-focused, built-in auth/database/payments"],
+                "summary": "Bolt.new and Lovable are Full-Stack AI Builders that generate complete web applications from text descriptions.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What technology does Bolt.new primarily generate?",
+                            "options": ["React, Vue, and Svelte applications", "Android apps", "Desktop software", "Machine learning models"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 6,
+                "lesson_title": "Replit Agent and V0 Walkthrough",
+                "introduction": "Continuing our exploration of Full-Stack AI Builders, this lesson covers two additional powerful tools: Replit Agent and V0 by Vercel.",
+                "big_idea": "Replit Agent is an autonomous coding assistant that can plan, build, and debug entire applications.",
+                "why_it_matters": "Different projects have different needs. A complex backend system might benefit from Replit Agent's reasoning capabilities.",
+                "key_concepts": ["Replit Agent: Autonomous, can plan and execute multi-step projects", "V0: UI-focused, generates React/Tailwind components"],
+                "summary": "Replit Agent provides autonomous reasoning for complex projects, while V0 excels at generating beautiful UI components.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What makes Replit Agent different from simpler code generators?",
+                            "options": ["It can reason about multi-step projects and make architectural decisions", "It's free", "It has a better interface", "It supports more languages"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 7,
+                "lesson_title": "Cursor IDE Mastery",
+                "introduction": "While Full-Stack AI Builders are powerful for generating complete applications, sometimes you need more precise control.",
+                "big_idea": "Cursor is VS Code rebuilt from the ground up for AI-first development.",
+                "why_it_matters": "Full-Stack Builders are great for starting projects, but real-world software requires ongoing maintenance and customization.",
+                "key_concepts": ["Cmd+K (Ctrl+K): Generate or edit code from natural language", "Cmd+L (Ctrl+L): Chat with AI about your codebase"],
+                "summary": "Cursor is an AI-first IDE that combines traditional coding precision with powerful AI capabilities.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What keyboard shortcut generates or edits code in Cursor?",
+                            "options": ["Cmd+K (or Ctrl+K on Windows)", "Ctrl+S", "Alt+F4", "Shift+Enter"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 8,
+                "lesson_title": "Windsurf, Qoder, and Other AI IDEs",
+                "introduction": "Cursor isn't the only AI-first IDE. This lesson explores the alternatives—Windsurf, Qoder, and others.",
+                "big_idea": "The AI-first IDE market is rapidly evolving. Windsurf emphasizes 'flows'—multi-step AI actions that can be chained together.",
+                "why_it_matters": "Tool familiarity creates productivity. Investing time to understand multiple options helps you select the one that matches how you think and work.",
+                "key_concepts": ["Windsurf: Emphasizes flows (multi-step AI actions)", "Qoder: Deep project understanding and intelligent suggestions"],
+                "summary": "The AI-first IDE landscape includes Cursor, Windsurf, Qoder, and GitHub Copilot, each with different strengths.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What is Windsurf's distinguishing feature?",
+                            "options": ["Flows—multi-step AI actions that can be chained together", "It's the cheapest", "It has the most languages", "It works offline"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 9,
+                "lesson_title": "Devin, OpenHands, and Claude Computer Use",
+                "introduction": "Welcome to the frontier of Vibe Coding: Agentic Tools. These are AI systems that don't just respond to prompts—they autonomously plan, execute, and iterate on complex development tasks.",
+                "big_idea": "Agentic coding tools represent a fundamental shift from AI assistance to AI autonomy.",
+                "why_it_matters": "Agentic tools handle the repetitive, time-consuming parts of development that previously required human attention.",
+                "key_concepts": ["Autonomous execution: Agents complete multi-step tasks without constant guidance", "Devin: Commercial AI software engineer for complex projects"],
+                "summary": "Agentic coding tools like Devin, OpenHands, and Claude Computer Use represent the shift from AI assistance to AI autonomy.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What distinguishes agentic tools from regular AI coding assistants?",
+                            "options": ["They autonomously plan, execute, and iterate rather than just responding to prompts", "They cost more", "They're slower", "They're harder to use"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 10,
+                "lesson_title": "Real-World Agentic Workflows",
+                "introduction": "Understanding agentic tools is one thing; integrating them effectively into real-world workflows is another.",
+                "big_idea": "Effective agentic workflows require clear task definition, appropriate guardrails, and systematic review processes.",
+                "why_it_matters": "Poorly implemented agentic workflows can create more problems than they solve.",
+                "key_concepts": ["Task specification: Clear, detailed requirements reduce agent errors", "Guardrails: Automated checks that catch common issues"],
+                "summary": "Effective agentic workflows combine clear task definition, appropriate guardrails, and human review.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What three elements do effective agentic workflows require?",
+                            "options": ["Clear task definition, appropriate guardrails, and systematic review processes", "Money, time, and effort", "Hardware, software, and internet", "Skills, knowledge, and experience"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 11,
+                "lesson_title": "From Prototype to Production with Vercel and Supabase",
+                "introduction": "Building software is only valuable if people can use it. This lesson teaches you how to deploy your Vibe-coded projects to production.",
+                "big_idea": "The Vibe Coding stack increasingly standardizes on Vercel (for frontend deployment and serverless functions) and Supabase (for backend services).",
+                "why_it_matters": "A prototype sitting on your laptop doesn't prove anything. Shipping to production lets you get real user feedback.",
+                "key_concepts": ["Vercel: Frontend hosting, automatic deployments from Git", "Supabase: PostgreSQL database, authentication, storage, realtime subscriptions"],
+                "summary": "The Vercel + Supabase stack enables rapid deployment from prototype to production.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What does Vercel provide for Vibe Coding projects?",
+                            "options": ["Frontend hosting and automatic deployments from Git", "Database hosting", "Payment processing", "Marketing tools"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 12,
+                "lesson_title": "Prompt Engineering for Code",
+                "introduction": "The quality of your prompts directly determines the quality of AI-generated code.",
+                "big_idea": "Prompt engineering for code differs from general prompt engineering. Code prompts need to specify technology stack, handle edge cases, define error handling.",
+                "why_it_matters": "Poor prompting is the main reason people get frustrated with AI coding tools.",
+                "key_concepts": ["Specificity: Name technologies, versions, and expected behavior explicitly", "Structure: Break complex prompts into clear sections"],
+                "summary": "Effective code prompts are specific, structured, and contextual.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "Why does prompt engineering for code differ from general prompting?",
+                            "options": ["Code prompts need technology stack, edge cases, error handling, and output formats", "It's more expensive", "It requires special hardware", "It's only for experts"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 13,
+                "lesson_title": "Advanced Prompting Strategies",
+                "introduction": "Building on basic prompt engineering, this lesson covers advanced strategies for complex development scenarios.",
+                "big_idea": "Complex projects require complex prompting strategies. Multi-step prompting breaks large tasks into manageable pieces.",
+                "why_it_matters": "Basic prompting works for simple tasks. But real-world projects involve interdependent components and evolving requirements.",
+                "key_concepts": ["Multi-step prompting: Break large tasks into sequential prompts", "Prompt chaining: Use output of one prompt as input to next"],
+                "summary": "Advanced prompting strategies enable complex development that would be impossible with basic approaches.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What is multi-step prompting?",
+                            "options": ["Breaking large tasks into sequential prompts", "Using multiple monitors", "Typing faster", "Copying and pasting"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 14,
+                "lesson_title": "AI-First Careers and Emerging Tools",
+                "introduction": "As we conclude this course, let's look ahead. What does the future hold for Vibe Coding?",
+                "big_idea": "Vibe Coding skills are becoming as essential as traditional computer literacy.",
+                "why_it_matters": "The software industry is at an inflection point. In five years, building software without AI assistance will seem unusual.",
+                "key_concepts": ["Emerging roles: AI engineer, prompt engineer, AI product manager", "Skill premium: Vibe Coders can command higher rates"],
+                "summary": "Vibe Coding is creating new career opportunities and reshaping existing roles.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What new roles are emerging around AI development?",
+                            "options": ["AI engineer, prompt engineer, AI product manager", "Driver, cook, cleaner", "Teacher, doctor, lawyer", "Athlete, artist, musician"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 15,
+                "lesson_title": "Common Vibe Coding Mistakes",
+                "introduction": "Even experienced practitioners can fall into common traps when using Vibe Coding approaches.",
+                "big_idea": "Awareness of common mistakes significantly improves success rates with Vibe Coding tools.",
+                "why_it_matters": "Prevention is always better than cure. Understanding common pitfalls helps you avoid them from the start.",
+                "key_concepts": ["Being too vague in prompts", "Not iterating enough", "Expecting perfect results on the first try"],
+                "summary": "Avoiding common mistakes is crucial for success in Vibe Coding.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What is a common mistake in Vibe Coding?",
+                            "options": ["Being too vague in prompts", "Using too many tools", "Working too fast", "Reading too much documentation"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 16,
+                "lesson_title": "The Philosophy of Vibe Coding",
+                "introduction": "Understanding the philosophy behind Vibe Coding helps you use it more effectively.",
+                "big_idea": "Vibe Coding is not just a set of tools but a different approach to problem-solving.",
+                "why_it_matters": "Philosophy drives practice. Understanding the 'why' helps you make better decisions in the 'how'.",
+                "key_concepts": ["Idea-first approach", "Intention-driven development", "Creative implementation"],
+                "summary": "The philosophy of Vibe Coding centers on ideas and intentions over implementation details.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What is the core philosophy of Vibe Coding?",
+                            "options": ["Idea-first approach over implementation details", "Technical perfection", "Speed over quality", "Individual work over teamwork"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 17,
+                "lesson_title": "Setting Up Your Development Environment",
+                "introduction": "A proper development environment is crucial for effective Vibe Coding.",
+                "big_idea": "Your environment shapes your behavior and effectiveness.",
+                "why_it_matters": "A well-configured environment removes friction and enables you to focus on creative work.",
+                "key_concepts": ["AI tools configuration", "Creative platforms setup", "Flexible development frameworks"],
+                "summary": "Setting up the right environment optimizes your Vibe Coding workflow.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "Why is environment setup important for Vibe Coding?",
+                            "options": ["It removes friction and enables focus on creative work", "It looks professional", "It impresses employers", "It makes you work harder"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 18,
+                "lesson_title": "Basic Concepts and Principles",
+                "introduction": "Foundation concepts form the basis of all advanced Vibe Coding techniques.",
+                "big_idea": "Strong foundations enable higher achievements.",
+                "why_it_matters": "Understanding fundamentals helps you apply advanced techniques more effectively.",
+                "key_concepts": ["Idea-first approach", "Intention-driven development", "Creative implementation"],
+                "summary": "Mastering basic concepts is essential for advanced Vibe Coding.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What is a basic principle of Vibe Coding?",
+                            "options": ["Idea-first approach", "Syntax-first approach", "Technology-first approach", "Framework-first approach"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 19,
+                "lesson_title": "Creating Your First Vibe Project",
+                "introduction": "Let's put theory into practice by creating your first complete Vibe Coding project.",
+                "big_idea": "The best learning comes from doing.",
+                "why_it_matters": "Practical experience solidifies theoretical understanding.",
+                "key_concepts": ["Concept definition", "Tool selection", "Iterative development"],
+                "summary": "Creating your first project applies all the concepts you've learned.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What should you do first when starting a Vibe Coding project?",
+                            "options": ["Clearly define your concept", "Start coding immediately", "Choose the fanciest tools", "Hire a team"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 20,
+                "lesson_title": "Idea Generation",
+                "introduction": "The starting point of any Vibe Coding project is a good idea.",
+                "big_idea": "Creativity begins with imagination.",
+                "why_it_matters": "Quality inputs lead to quality outputs. Good ideas lead to good projects.",
+                "key_concepts": ["Creative brainstorming", "Feasibility assessment", "Value identification"],
+                "summary": "Effective idea generation is the foundation of successful projects.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What is important when generating ideas for Vibe Coding projects?",
+                            "options": ["Creative brainstorming and feasibility assessment", "Copying others exactly", "Avoiding all research", "Choosing the hardest possible ideas"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 21,
+                "lesson_title": "Intention Setting",
+                "introduction": "Clear intentions guide your entire Vibe Coding process.",
+                "big_idea": "Purpose drives action.",
+                "why_it_matters": "Clear intentions help you make consistent decisions throughout development.",
+                "key_concepts": ["Goal definition", "Success metrics", "Scope boundaries"],
+                "summary": "Well-defined intentions provide direction for your project.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "Why is intention setting important in Vibe Coding?",
+                            "options": ["It provides direction and helps make consistent decisions", "It makes the project shorter", "It eliminates all errors", "It guarantees success"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 22,
+                "lesson_title": "Creative Implementation",
+                "introduction": "Implementation is where ideas become reality.",
+                "big_idea": "Creativity extends beyond ideation to implementation.",
+                "why_it_matters": "The best ideas are worthless without effective implementation.",
+                "key_concepts": ["Adaptive approaches", "Iterative refinement", "Creative problem-solving"],
+                "summary": "Creative implementation turns ideas into working solutions.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What characterizes creative implementation in Vibe Coding?",
+                            "options": ["Adaptive approaches and iterative refinement", "Strict adherence to plans", "Avoiding all changes", "Working alone at all times"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 23,
+                "lesson_title": "Guidance Principles",
+                "introduction": "Guidance principles help you navigate complex Vibe Coding scenarios.",
+                "big_idea": "Principles guide decisions when specific rules don't apply.",
+                "why_it_matters": "Principles provide stability in changing circumstances.",
+                "key_concepts": ["User-centric design", "Iterative improvement", "Simplicity focus"],
+                "summary": "Strong guidance principles lead to better outcomes.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What do guidance principles help you do?",
+                            "options": ["Navigate complex scenarios and make decisions", "Memorize syntax", "Write documentation", "Attend meetings"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 24,
+                "lesson_title": "AI-Assisted Development",
+                "introduction": "AI tools amplify human creativity when used correctly.",
+                "big_idea": "AI is a tool to augment, not replace, human creativity.",
+                "why_it_matters": "Understanding the human-AI collaboration dynamic is key to success.",
+                "key_concepts": ["AI as partner", "Human oversight", "Quality assurance"],
+                "summary": "AI-assisted development leverages both human creativity and AI efficiency.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "How should you view AI in Vibe Coding?",
+                            "options": ["As a partner that augments human creativity", "As a replacement for human thinking", "As a toy to play with", "As a threat to jobs"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 25,
+                "lesson_title": "Complex Project Structures",
+                "introduction": "Large projects require special consideration in Vibe Coding.",
+                "big_idea": "Complexity requires systematic approaches.",
+                "why_it_matters": "Without proper structure, complex projects become unmanageable.",
+                "key_concepts": ["Modular design", "Dependency management", "Scalability planning"],
+                "summary": "Complex projects need structured approaches to remain manageable.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "What is important for complex Vibe Coding projects?",
+                            "options": ["Modular design and scalability planning", "Using only one tool", "Avoiding documentation", "Working as fast as possible"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            },
+            {
+                "lesson_number": 26,
+                "lesson_title": "Project Completion and Deployment",
+                "introduction": "Completion is the final, crucial step in the Vibe Coding process.",
+                "big_idea": "A project is only valuable when it reaches users.",
+                "why_it_matters": "Many projects fail at the final step of deployment and delivery.",
+                "key_concepts": ["Testing procedures", "Deployment strategies", "User feedback collection"],
+                "summary": "Successful completion and deployment deliver value to users.",
+                "quiz": {
+                    "questions": [
+                        {
+                            "question": "Why is deployment important in Vibe Coding?",
+                            "options": ["A project is only valuable when it reaches users", "It's required by law", "It impresses teachers", "It makes the computer run faster"],
+                            "answer": 0
+                        }
+                    ]
+                }
+            }
+        ];
+
+        // Init
+        async function init() {
+            // Get course ID from URL
+            const params = new URLSearchParams(window.location.search);
+            courseId = params.get('course_id') || params.get('id');
+
+            // Fallback for rewrite rule if query param is lost but path remains
+            // Path: /learn/UUID
+            if (!courseId) {
+                const parts = window.location.pathname.split('/');
+                if (parts.length > 2 && parts[1] === 'learn') {
+                    courseId = parts[2];
+                }
+            }
+
+            if (!courseId) {
+                alert('No course ID specified');
+                window.location.href = '/new-dashboard';
+                return;
+            }
+
+            // Load Course Content
+            await loadCourseContent(courseId);
+        }
+
+        async function loadCourseContent(id) {
+            try {
+                // Check Auth
+                const session = localStorage.getItem('supabase_session');
+                if (!session) {
+                    window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href);
+                    return;
+                }
+                
+                // Get user info
+                const user = JSON.parse(localStorage.getItem('supabase_user'));
+                if (!user) {
+                    window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href);
+                    return;
+                }
+                
+                // Check if user is enrolled in the course
+                const { data: enrollment, error: enrollmentError } = await window.supabaseClient
+                    .from('enrollments')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .eq('course_id', id)
+                    .single();
+                
+                if (enrollmentError || !enrollment) {
+                    alert('You must be enrolled in this course to access the content.');
+                    window.location.href = `/new-dashboard`;
+                    return;
+                }
+                
+                // For this new implementation, we'll use the hardcoded Vibe Coding course data
+                courseData = {
+                    id: id,
+                    title: "Vibe Coding: Building Real Software with AI",
+                    description: "Learn to create digital products by focusing on ideas, intention, creativity, and guidance — often with the help of AI — instead of memorizing code syntax or complex technical rules."
+                };
+                
+                document.getElementById('courseHeaderTitle').textContent = courseData.title;
+                document.title = `${courseData.title} - Learning`;
+
+                // Create modules structure from the 26 lessons
+                const modules = [
+                    {
+                        title: "Module 1: Vibe Coding Foundations",
+                        lessons: vibeCodingCourse.slice(0, 6) // Lessons 1-6
+                    },
+                    {
+                        title: "Module 2: The Vibe Coding Ecosystem", 
+                        lessons: vibeCodingCourse.slice(6, 12) // Lessons 7-12
+                    },
+                    {
+                        title: "Module 3: Full-Stack AI Builders",
+                        lessons: vibeCodingCourse.slice(12, 18) // Lessons 13-18
+                    },
+                    {
+                        title: "Module 4: AI-First IDEs",
+                        lessons: vibeCodingCourse.slice(18, 24) // Lessons 19-24
+                    },
+                    {
+                        title: "Module 5: Advanced Topics",
+                        lessons: vibeCodingCourse.slice(24, 26) // Lessons 25-26
+                    }
+                ];
+                
+                // Flatten lessons for navigation
+                flatLessons = [];
+                modules.forEach((module, mIndex) => {
+                    if (module.lessons && Array.isArray(module.lessons)) {
+                        module.lessons.forEach((lesson, lIndex) => {
+                            flatLessons.push({
+                                ...lesson,
+                                moduleTitle: module.title || 'Untitled Module'
+                            });
+                        });
+                    }
+                });
+
+                // Render sidebar with all 26 lessons
+                renderSidebar(modules);
+
+                // Load first lesson
+                loadLesson(0);
+
+            } catch (error) {
+                console.error('Error loading course:', error);
+                // Hide loading and show error
+                document.getElementById('loading').style.display = 'none';
+                const contentContainer = document.getElementById('contentContainer');
+                if (contentContainer) contentContainer.style.display = 'block';
+                
+                // Show error in the content area
+                const lessonContent = document.querySelector('.lesson-content');
+                if (lessonContent) {
+                    lessonContent.innerHTML = `
+                        <h1>Error Loading Course</h1>
+                        <p>We encountered an issue loading this course. Please try again later.</p>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <a href="/new-dashboard" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Return to Dashboard</a>
+                    `;
+                }
+            }
+        }
+
+        function renderSidebar(modules) {
+            const list = document.getElementById('lessonList');
+            list.innerHTML = '';
+                    
+            // Safely check if modules is an array
+            if (!modules || !Array.isArray(modules) || modules.length === 0) {
+                console.log('No modules found or modules is not an array:', modules);
+                list.innerHTML = '<div style="padding: 1rem; color: var(--text-secondary); text-align: center;">No modules available for this course.</div>';
+                updateProgress();
+                return;
+            }
+        
+            modules.forEach((mod, mIndex) => {
+                // Module Header
+                const header = document.createElement('div');
+                header.className = 'module-header';
+                header.textContent = `Module ${mIndex + 1}: ${mod.title || 'Untitled Module'}`;
+                list.appendChild(header);
+        
+                // Lessons
+                const lessons = mod.lessons || [];
+                if (Array.isArray(lessons) && lessons.length > 0) {
+                    lessons.forEach((lesson, lIndex) => {
+                        const globalIndex = flatLessons.findIndex(fl => fl.lesson_number === lesson.lesson_number);
+                        if (globalIndex === -1) return; // Skip if not found
+                        
+                        const item = document.createElement('div');
+                        item.className = 'lesson-item';
+                        item.id = `lesson-nav-${globalIndex}`;
+                        item.innerHTML = `
+                            <div class="status-icon">✓</div>
+                            <div style="flex: 1; font-size: 0.9rem;">${lesson.lesson_title || 'Untitled Lesson'}</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Lesson ${lesson.lesson_number || lIndex + 1}</div>
+                        `;
+                        item.onclick = () => loadLesson(globalIndex);
+                        list.appendChild(item);
+                    });
+                } else {
+                    const item = document.createElement('div');
+                    item.className = 'lesson-item';
+                    item.style.opacity = '0.6';
+                    item.innerHTML = `<div style="flex: 1; font-size: 0.9rem; color: var(--text-muted);">No lessons in this module</div>`;
+                    list.appendChild(item);
+                }
+            });
+        
+            updateProgress();
+        }
+
+        async function loadLesson(index) {
+            if (index < 0 || index >= flatLessons.length) return;
+
+            currentLessonIndex = index;
+            const lesson = flatLessons[index];
+            
+            // UI Updates
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('contentContainer').style.display = 'block';
+
+            // Update lesson counter
+            document.getElementById('lessonCounter').textContent = `Lesson ${index + 1} of ${flatLessons.length}`;
+
+            // Highlight active lesson
+            document.querySelectorAll('.lesson-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`lesson-nav-${index}`).classList.add('active');
+
+            // Content Population
+            document.getElementById('lessonTitle').textContent = lesson.lesson_title || 'Untitled Lesson';
+
+            // Video
+            const vidContainer = document.getElementById('videoContainer');
+            vidContainer.style.display = 'none';
+            document.getElementById('videoPlayer').src = '';
+
+            // Text / Content
+            const textContainer = document.getElementById('textContent');
+            textContainer.innerHTML = ''; // clear previous content
+
+            // Add introduction if available
+            if (lesson.introduction) {
+                textContainer.innerHTML += `<h2>Introduction</h2><p>${lesson.introduction}</p>`;
+            }
+            
+            // Add big idea if available
+            if (lesson.big_idea) {
+                textContainer.innerHTML += `
+                    <div style="background: rgba(0, 217, 255, 0.1); border-left: 4px solid var(--primary); padding: 1rem; border-radius: 4px; margin: 1.5rem 0;">
+                        <h3 style="color: var(--primary); margin-top: 0; font-size: 1rem;">Big Idea</h3>
+                        <p style="margin-bottom: 0;">${lesson.big_idea}</p>
+                    </div>
+                `;
+            }
+            
+            // Add why it matters if available
+            if (lesson.why_it_matters) {
+                textContainer.innerHTML += `
+                    <div style="background: rgba(255, 165, 0, 0.1); border-left: 4px solid orange; padding: 1rem; border-radius: 4px; margin: 1.5rem 0;">
+                        <h3 style="color: orange; margin-top: 0;">Why This Matters</h3>
+                        <p>${lesson.why_it_matters}</p>
+                    </div>
+                `;
+            }
+            
+            // Add key concepts if available
+            if (Array.isArray(lesson.key_concepts)) {
+                textContainer.innerHTML += `
+                    <h3>Key Concepts</h3>
+                    <ul>
+                        ${lesson.key_concepts.map(concept => `<li>${concept}</li>`).join('')}
+                    </ul>
+                `;
+            }
+            
+            // Add summary if available
+            if (lesson.summary) {
+                textContainer.innerHTML += `
+                    <div style="background: rgba(16, 185, 129, 0.1); border-radius: 4px; border-left: 4px solid var(--success); padding: 1rem; margin: 1.5rem 0;">
+                        <h3>Summary</h3>
+                        <p>${lesson.summary}</p>
+                    </div>
+                `;
+            }
+
+            // Show resources section if available
+            const resourcesSection = document.getElementById('resourcesSection');
+            const resourcesContent = document.getElementById('resourcesContent');
+            resourcesContent.innerHTML = '';
+            if (lesson.resources && Array.isArray(lesson.resources.extra_reading)) {
+                resourcesContent.innerHTML = `
+                    <ul>
+                        ${lesson.resources.extra_reading.map(resource => `
+                            <li><a href="${resource}" target="_blank" style="color: var(--primary);">${resource}</a></li>
+                        `).join('')}
+                    </ul>
+                `;
+                resourcesSection.style.display = 'block';
+            } else {
+                resourcesSection.style.display = 'none';
+            }
+
+            // Show quiz section if available
+            const quizSection = document.getElementById('quizSection');
+            const quizContent = document.getElementById('quizContent');
+            quizContent.innerHTML = '';
+            if (lesson.quiz && Array.isArray(lesson.quiz.questions)) {
+                lesson.quiz.questions.forEach((q, qIdx) => {
+                    quizContent.innerHTML += `
+                        <div class="quiz-question">
+                            <h4>Question ${qIdx + 1}: ${q.question}</h4>
+                            <div class="quiz-options">
+                                ${q.options.map((opt, optIdx) => `
+                                    <div class="quiz-option" data-question="${qIdx}" data-option="${optIdx}">
+                                        <input type="radio" name="question_${qIdx}" value="${optIdx}" style="margin-right: 0.5rem;">
+                                        ${opt}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                // Add event listeners to quiz options
+                document.querySelectorAll('.quiz-option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        const question = this.getAttribute('data-question');
+                        const optionValue = this.getAttribute('data-option');
+                        
+                        // Update the radio button
+                        const radio = this.querySelector('input[type="radio"]');
+                        radio.checked = true;
+                        
+                        // Update classes
+                        document.querySelectorAll(`[data-question="${question}"]`).forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        this.classList.add('selected');
+                    });
+                });
+                
+                quizSection.style.display = 'block';
+            } else {
+                quizSection.style.display = 'none';
+            }
+
+            // Show playground section
+            const playgroundSection = document.getElementById('playgroundSection');
+            playgroundSection.style.display = 'block';
+            
+            // Set up playground event listeners
+            document.getElementById('generateBtn').onclick = function() {
+                const input = document.getElementById('playgroundInput').value;
+                const output = document.getElementById('playgroundOutput');
+                output.style.display = 'block';
+                
+                if (input.trim()) {
+                    output.innerHTML = `
+                        <p>AI Response to: "${input}"</p>
+                        <p>This is a simulation of AI-generated content. In a real implementation, this would connect to an AI service to generate actual code or explanations.</p>
+                        <p>For lesson "${lesson.lesson_title}", the AI might generate relevant code examples, explanations, or exercises based on your input.</p>
+                    `;
+                } else {
+                    output.innerHTML = '<p>Please enter a description of what you want to create or learn about.</p>';
+                }
+            };
+            
+            document.getElementById('resetBtn').onclick = function() {
+                document.getElementById('playgroundInput').value = '';
+                document.getElementById('playgroundOutput').style.display = 'none';
+            };
+
+            // Nav buttons
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').textContent = index === flatLessons.length - 1 ? 'Finish Course' : 'Next Lesson →';
+            document.getElementById('nextBtn').disabled = false;
+
+            // Auto-close sidebar on mobile
+            if (window.innerWidth <= 900) {
+                document.getElementById('sidebar').classList.remove('open');
+            }
+        }
+
+        function nextLesson() {
+            markComplete(currentLessonIndex);
+            if (currentLessonIndex < flatLessons.length - 1) {
+                loadLesson(currentLessonIndex + 1);
+            } else {
+                alert('Congratulations! You have completed the course.');
+                window.location.href = '/new-dashboard';
+            }
+        }
+
+        function prevLesson() {
+            if (currentLessonIndex > 0) {
+                loadLesson(currentLessonIndex - 1);
+            }
+        }
+
+        function markComplete(index) {
+            completedLessons.add(index);
+            const navItem = document.getElementById(`lesson-nav-${index}`);
+            if (navItem) navItem.classList.add('completed');
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const total = flatLessons.length;
+            const completed = completedLessons.size;
+            const pct = total === 0 ? 0 : Math.round((completed / total) * 100);
+
+            document.getElementById('progressText').textContent = `${pct}% Complete`;
+            document.getElementById('lessonCount').textContent = `${completed}/${total} Lessons`;
+            document.getElementById('progressBar').style.width = `${pct}%`;
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>

@@ -155,7 +155,7 @@
                 <div class="footer-section">
                     <h3>Learning</h3>
                     <ul>
-                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/new-dashboard">Dashboard</a></li>
                         <li><a href="/playground">Code Playground</a></li>
                         <li><a href="/ai-assistant">AI Assistant</a></li>
                     </ul>
@@ -201,7 +201,7 @@
                 if (loggedIn) {
                     const user = await Auth.getCurrentUser();
                     authBtn.textContent = user?.name || 'Dashboard';
-                    authBtn.onclick = () => window.location.href = '/dashboard';
+                    authBtn.onclick = () => window.location.href = '/new-dashboard';
                 }
             } catch (error) {
                 console.error('Auth initialization error:', error);

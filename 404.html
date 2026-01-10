@@ -37,7 +37,7 @@
             '/services': '/services.html',
             '/courses': '/courses.html',
             '/contact': '/contact.html',
-            '/dashboard': '/dashboard.html',
+            '/dashboard': '/new-dashboard',
             '/playground': '/playground.html',
             '/whiteboard': '/whiteboard.html',
             '/ai-assistant': '/ai-assistant.html',
@@ -69,11 +69,11 @@
                     const courseId = parts[1];
                     location.replace('/learn.html?id=' + encodeURIComponent(courseId));
                 } else {
-                    location.replace('/dashboard.html');
+                    location.replace('/new-dashboard');
                 }
             } else if (path.startsWith('/lesson-viewer')) {
                 // Lesson viewer page - redirect to learn as fallback
-                location.replace('/learn.html');
+                location.replace('/new-learn');
             } else {
                 // For any other unknown paths, redirect to home
                 location.replace('/index.html');

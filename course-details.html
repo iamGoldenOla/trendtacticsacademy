@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Details - Trendtactics Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="icon" href="/images/Trendtactics-logo - Copy.jpg" type="image/jpeg">
+    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+    <script src="/js/env.js"></script>
+    <script src="/js/supabase-client.js"></script>
+    
+    <style>
+        :root {
+            --primary: #00D9FF;
+            --primary-dark: #00B8D9;
+            --secondary: #7C3AED;
+            --bg-dark: #0B1437;
+            --bg-darker: #060D24;
+            --bg-card: rgba(15, 25, 55, 0.95);
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --success: #10B981;
+            --error: #EF4444;
+            --border: rgba(0, 217, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-darker);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        .course-hero {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .hero-image {
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .hero-content {
+            padding: 2rem;
+        }
+
+        .course-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .course-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .course-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .course-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .course-curriculum {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .curriculum-header {
+            padding: 1.5rem;
+            background: rgba(0, 217, 255, 0.1);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .curriculum-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .modules-list {
+            padding: 1rem;
+        }
+
+        .module-item {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .module-header {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .module-title {
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .module-lessons {
+            padding: 1rem;
+            display: none;
+        }
+
+        .lesson-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .lesson-title {
+            font-size: 0.95rem;
+        }
+
+        .lesson-duration {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .expanded .module-lessons {
+            display: block;
+        }
+
+        .expanded .expand-icon::after {
+            content: '−';
+        }
+
+        .expand-icon::after {
+            content: '+';
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .course-title {
+                font-size: 2rem;
+            }
+            
+            .hero-image {
+                height: 200px;
+            }
+            
+            .course-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .course-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/new-dashboard" class="back-link">← Back to Dashboard</a>
+        </div>
+
+        <div class="course-hero">
+            <div class="hero-image">🚀</div>
+            <div class="hero-content">
+                <h1 class="course-title" id="courseTitle">Vibe Coding: Building Real Software with AI</h1>
+                
+                <div class="course-meta">
+                    <div class="course-level">Level: <span id="courseLevel">Beginner</span></div>
+                    <div class="course-duration">Duration: <span id="courseDuration">6 weeks</span></div>
+                    <div class="course-lessons">Lessons: <span id="courseLessons">26</span></div>
+                    <div class="course-instructor">Instructor: <span id="courseInstructor">AI Instructor</span></div>
+                </div>
+                
+                <p class="course-description" id="courseDescription">
+                    Learn to create digital products by focusing on ideas, intention, creativity, and guidance — often with the help of AI — instead of memorizing code syntax or complex technical rules. This comprehensive course covers everything from basic concepts to advanced agentic tools.
+                </p>
+                
+                <div class="course-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalLessons">26</div>
+                        <div class="stat-label">Total Lessons</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalModules">5</div>
+                        <div class="stat-label">Modules</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="difficultyLevel">★ ★ ★</div>
+                        <div class="stat-label">Difficulty</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="estimatedTime">40+</div>
+                        <div class="stat-label">Hours</div>
+                    </div>
+                </div>
+                
+                <div class="course-actions">
+                    <a href="/new-learn?course_id=e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d" class="btn btn-primary" onclick="startCourse(event)">Start Learning</a>
+                    <a href="/new-dashboard" class="btn btn-outline">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="course-curriculum">
+            <div class="curriculum-header">
+                <h2 class="curriculum-title">Course Curriculum</h2>
+            </div>
+            <div class="modules-list" id="modulesList">
+                <!-- Modules will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Vibe Coding course curriculum data (26 lessons in 5 modules)
+        const courseCurriculum = [
+            {
+                title: "Module 1: Vibe Coding Foundations",
+                lessons: [
+                    { number: 1, title: "What is Vibe Coding?", duration: "15 min" },
+                    { number: 2, title: "Why Vibe Coding is the Future", duration: "20 min" },
+                    { number: 3, title: "Overview of Vibe Coding Tools", duration: "25 min" },
+                    { number: 4, title: "AI-First Development Workflow", duration: "30 min" },
+                    { number: 5, title: "Bolt.new and Lovable Deep Dive", duration: "35 min" },
+                    { number: 6, title: "Replit Agent and V0 Walkthrough", duration: "30 min" }
+                ]
+            },
+            {
+                title: "Module 2: The Vibe Coding Ecosystem",
+                lessons: [
+                    { number: 7, title: "Cursor IDE Mastery", duration: "40 min" },
+                    { number: 8, title: "Windsurf, Qoder, and Other AI IDEs", duration: "35 min" },
+                    { number: 9, title: "Devin, OpenHands, and Claude Computer Use", duration: "45 min" },
+                    { number: 10, title: "Real-World Agentic Workflows", duration: "40 min" },
+                    { number: 11, title: "From Prototype to Production with Vercel and Supabase", duration: "50 min" },
+                    { number: 12, title: "Prompt Engineering for Code", duration: "35 min" }
+                ]
+            },
+            {
+                title: "Module 3: Full-Stack AI Builders",
+                lessons: [
+                    { number: 13, title: "Advanced Prompting Strategies", duration: "40 min" },
+                    { number: 14, title: "AI-First Careers and Emerging Tools", duration: "30 min" },
+                    { number: 15, title: "Common Vibe Coding Mistakes", duration: "25 min" },
+                    { number: 16, title: "The Philosophy of Vibe Coding", duration: "30 min" },
+                    { number: 17, title: "Setting Up Your Development Environment", duration: "35 min" },
+                    { number: 18, title: "Basic Concepts and Principles", duration: "25 min" }
+                ]
+            },
+            {
+                title: "Module 4: AI-First IDEs",
+                lessons: [
+                    { number: 19, title: "Creating Your First Vibe Project", duration: "45 min" },
+                    { number: 20, title: "Idea Generation", duration: "30 min" },
+                    { number: 21, title: "Intention Setting", duration: "25 min" },
+                    { number: 22, title: "Creative Implementation", duration: "40 min" },
+                    { number: 23, title: "Guidance Principles", duration: "30 min" },
+                    { number: 24, title: "AI-Assisted Development", duration: "35 min" }
+                ]
+            },
+            {
+                title: "Module 5: Advanced Topics",
+                lessons: [
+                    { number: 25, title: "Complex Project Structures", duration: "45 min" },
+                    { number: 26, title: "Project Completion and Deployment", duration: "40 min" }
+                ]
+            }
+        ];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Populate course details
+            document.getElementById('courseTitle').textContent = 'Vibe Coding: Building Real Software with AI';
+            document.getElementById('courseLevel').textContent = 'Beginner';
+            document.getElementById('courseDuration').textContent = '6 weeks';
+            document.getElementById('courseLessons').textContent = '26';
+            document.getElementById('courseInstructor').textContent = 'AI Instructor';
+            document.getElementById('totalLessons').textContent = '26';
+            document.getElementById('totalModules').textContent = '5';
+            
+            // Render curriculum
+            renderCurriculum();
+        });
+
+        function renderCurriculum() {
+            const modulesList = document.getElementById('modulesList');
+            modulesList.innerHTML = '';
+
+            courseCurriculum.forEach((module, index) => {
+                const moduleItem = document.createElement('div');
+                moduleItem.className = 'module-item';
+                
+                moduleItem.innerHTML = `
+                    <div class="module-header" onclick="toggleModule(this)">
+                        <div class="module-title">${module.title}</div>
+                        <div class="expand-icon"></div>
+                    </div>
+                    <div class="module-lessons">
+                        ${module.lessons.map(lesson => `
+                            <div class="lesson-item">
+                                <div class="lesson-title">Lesson ${lesson.number}: ${lesson.title}</div>
+                                <div class="lesson-duration">${lesson.duration}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+                modulesList.appendChild(moduleItem);
+            });
+        }
+
+        function toggleModule(element) {
+            element.parentElement.classList.toggle('expanded');
+        }
+
+        function startCourse(event) {
+            event.preventDefault();
+            // Navigate to the new learn page with the course ID
+            window.location.href = '/new-learn?course_id=e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d';
+        }
+    </script>
+</body>
+</html>

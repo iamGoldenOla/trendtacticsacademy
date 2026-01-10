@@ -416,7 +416,7 @@
 
             if (!courseId) {
                 alert('No course ID specified');
-                window.location.href = '/dashboard';
+                window.location.href = '/new-dashboard';
                 return;
             }
 
@@ -1873,7 +1873,7 @@ const Navigation = () => {
                 loadLesson(currentLessonIndex + 1);
             } else {
                 alert('Congratulations! You have completed the course.');
-                window.location.href = '/dashboard';
+                window.location.href = '/new-dashboard';
             }
         }
 
@@ -2057,20 +2057,7 @@ In real-world scenarios, ${topic} has proven to be invaluable across multiple in
                         }
 
 
-                    course_id: courseId,
-                    course_title: courseTitle,
-                    module_title: moduleTitle,
-                    lesson_title: lessonTitle,
-                    introduction: {
-                        title: `Introduction to ${lessonTitle}`,
-                        description: `In this lesson, you'll learn about ${topic}. This topic is fundamental to the ${courseTitle} course and will provide you with practical skills you can apply immediately.`,
-                        importance: `Understanding ${topic} is crucial because it forms the foundation for advanced concepts in ${courseTitle} and provides real-world applications that will enhance your knowledge in this field.`,
-                        learningOutcomes: [
-                            `Understand the core principles of ${topic}`,
-                            `Apply ${courseTitle} techniques in practical scenarios`,
-                            `Recognize when and how to use ${topic} effectively`
-                        ]
-                    },
+
                     core_concepts: `The core concept of ${topic} is fundamental to understanding how modern digital systems work. This concept involves several key components that work together to create powerful and efficient solutions.
 
 First, it's important to understand that ${topic} is not just a single technique, but rather a comprehensive approach that combines multiple methodologies to achieve optimal results. The foundational principle behind ${topic} is to streamline processes, reduce complexity, and enhance productivity through systematic approaches.

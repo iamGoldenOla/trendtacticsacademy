@@ -585,7 +585,7 @@
                         email: session.user.email,
                         role: 'student'
                     }));
-                    window.location.replace('/dashboard');
+                    window.location.replace('/new-dashboard');
                 }
             } catch (err) {
                 console.error('Error checking auth session:', err);
@@ -715,7 +715,7 @@
 
                     showMessage('✅ Welcome back! Redirecting...', 'success');
                     setTimeout(() => {
-                        window.location.replace('/dashboard');
+                        window.location.replace('/new-dashboard');
                     }, 1000);
 
                 } else {
@@ -756,7 +756,7 @@
 
                         showMessage('✅ Account created successfully! Redirecting...', 'success');
                         setTimeout(() => {
-                            window.location.replace('/dashboard');
+                            window.location.replace('/new-dashboard');
                         }, 1000);
                     } else {
                         // Email confirmation required

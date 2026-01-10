@@ -67,7 +67,7 @@
                         5 Modules • 6 Weeks • Certificate
                     </p>
                 </div>
-                <a href="https://academy.trendtacticsdigital.com/course" class="btn btn-primary"
+                <a href="/course-details" class="btn btn-primary"
                     style="width: 100%; text-align: center;">
                     View Course
                 </a>
@@ -146,25 +146,39 @@
     <!-- Scripts -->
     <script src="/js/supabase-client.js" async></script>
     <script src="/js/auth.js" async></script>
+    <script src="/health-check.js" async></script>
     <script>
         async function initHomepage() {
-            const loggedIn = await Auth.isLoggedIn();
-            const authBtn = document.getElementById('authBtn');
-            const dashboardLink = document.getElementById('dashboardLink');
+            try {
+                const loggedIn = await Auth.isLoggedIn();
+                const authBtn = document.getElementById('authBtn');
 
-            if (loggedIn) {
-                const user = await Auth.getCurrentUser();
-                authBtn.textContent = user?.name || 'Account';
-                authBtn.onclick = () => window.location.href = '/dashboard';
-                dashboardLink.style.display = 'block';
+                if (loggedIn) {
+                    const user = await Auth.getCurrentUser();
+                    authBtn.textContent = user?.email?.split('@')[0] || 'Account';
+                    authBtn.onclick = () => window.location.href = '/new-dashboard';
+                    authBtn.classList.add('btn-primary');
+                    authBtn.classList.remove('btn-secondary');
+                } else {
+                    authBtn.textContent = 'Sign In';
+                    authBtn.onclick = () => window.location.href = '/signup';
+                    authBtn.classList.add('btn-secondary');
+                    authBtn.classList.remove('btn-primary');
+                }
+            } catch (error) {
+                console.error('Error initializing homepage:', error);
+                const authBtn = document.getElementById('authBtn');
+                authBtn.textContent = 'Sign In';
+                authBtn.onclick = () => window.location.href = '/signup';
             }
         }
 
         function handleAuth() {
-            window.location.href = 'https://academy.trendtacticsdigital.com/signup.html';
+            window.location.href = '/signup';
         }
 
-        initHomepage();
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initHomepage);
     </script>
 </body>
 

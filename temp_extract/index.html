@@ -154,7 +154,7 @@
             if (loggedIn) {
                 const user = await Auth.getCurrentUser();
                 authBtn.textContent = user?.name || 'Account';
-                authBtn.onclick = () => window.location.href = '/dashboard';
+                authBtn.onclick = () => window.location.href = '/new-dashboard';
                 dashboardLink.style.display = 'block';
             }
         }

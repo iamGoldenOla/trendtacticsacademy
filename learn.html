@@ -331,7 +331,7 @@
     <header class="header">
         <div style="display: flex; align-items: center; gap: 1rem;">
             <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
-            <a href="/dashboard" class="back-link">← Dashboard</a>
+            <a href="/new-dashboard" class="back-link">← Dashboard</a>
             <span class="course-title-header" id="courseHeaderTitle">Loading...</span>
         </div>
         <div>
@@ -416,7 +416,7 @@
 
             if (!courseId) {
                 alert('No course ID specified');
-                window.location.href = '/dashboard';
+                window.location.href = '/new-dashboard';
                 return;
             }
 
@@ -566,7 +566,7 @@
                         <h1>Error Loading Course</h1>
                         <p>We encountered an issue loading this course. Please try again later.</p>
                         <p><strong>Error:</strong> ${error.message}</p>
-                        <a href="/dashboard" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Return to Dashboard</a>
+                        <a href="/new-dashboard" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Return to Dashboard</a>
                     `;
                 }
             }
@@ -2115,7 +2115,7 @@ const Navigation = () => {
                 loadLesson(currentLessonIndex + 1);
             } else {
                 alert('Congratulations! You have completed the course.');
-                window.location.href = '/dashboard';
+                window.location.href = '/new-dashboard';
             }
         }
 
