@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { courseService } from '../services';
-import { Course } from '../services/types';
+import * as supabaseCourseService from '../services/supabaseCourseService';
+import { Course } from '../services/supabaseCourseService';
 
 const Courses: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -20,14 +20,14 @@ const Courses: React.FC = () => {
     { value: 'rating', label: 'Highest Rated' }
   ];
 
-  // Fetch courses from API
+  // Fetch courses from Supabase
   useEffect(() => {
     const fetchCourses = async () => {
       try {
         setIsLoading(true);
         setError(null);
-        const data = await courseService.getAllCourses();
-        setCourses(data);
+        const data = await supabaseCourseService.getAllCourses();
+        setCourses(data as any);
       } catch (err) {
         console.error('Error fetching courses:', err);
         setError('Failed to load courses. Please try again later.');

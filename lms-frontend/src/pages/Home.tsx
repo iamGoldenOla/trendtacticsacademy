@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Course } from '../types';
-import { courseService } from '../services';
+import * as supabaseCourseService from '../services/supabaseCourseService';
 
 /*
 <style jsx global>{`
@@ -43,8 +43,8 @@ const Home: React.FC = () => {
     const fetchFeaturedCourses = async () => {
       try {
         setLoading(true);
-        // Fetch only the Vibe Coding course
-        const courses = await courseService.getAllCourses();
+        // Fetch courses from Supabase
+        const courses = await supabaseCourseService.getAllCourses();
         setFeaturedCourses(courses);
       } catch (error) {
         console.error('Error fetching featured courses:', error);
