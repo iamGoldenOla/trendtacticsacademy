@@ -101,5 +101,9 @@ node.exe
 *.exe
 *.mp4
 trendtacticsacademy/
-lms-frontend/
 v18.*/
+
+# Frontend specific ignores (but track source code)
+lms-frontend/node_modules/
+lms-frontend/build/
+lms-frontend/.env.local
