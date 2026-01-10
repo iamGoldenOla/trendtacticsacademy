@@ -821,5 +821,833 @@
       ]
     },
     "summary": "Vibe Coding is creating new career opportunities and reshaping existing roles. The core skills transfer across tools and remain valuable as specific platforms evolve. Combining Vibe Coding with domain expertise unlocks unique opportunities. Congratulations on completing this course—you now have the foundation to build real software with AI. Continue practicing, stay curious, and ship projects. The best way to learn is by doing."
+  },
+  {
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 6: Real-World Workflows",
+    "lesson_number": 15,
+    "lesson_title": "Building a SaaS Product with AI Tools",
+    "introduction": "Welcome to Building a SaaS Product with AI Tools. In this lesson, you will learn essential skills and techniques that will help you master Vibe Coding and build real-world applications with AI assistance.",
+    "big_idea": "Building a SaaS Product with AI Tools represents a crucial skill in modern software development. Understanding this concept will enable you to leverage AI tools more effectively and build better applications faster.",
+    "why_it_matters": "This lesson matters because it bridges the gap between theoretical knowledge and practical application. By mastering these concepts, you'll be able to tackle real-world projects with confidence and efficiency.",
+    "key_concepts": [
+      "Understanding the fundamentals of building a saas product with ai tools",
+      "Practical application in real-world scenarios",
+      "Best practices and common pitfalls to avoid",
+      "Integration with AI-powered development tools",
+      "Hands-on techniques you can apply immediately"
+    ],
+    "real_world_example": "Consider a scenario where you need to implement building a saas product with ai tools in a production environment. Using AI tools like Cursor or Bolt.new, you can describe your requirements in plain language and let the AI generate the implementation. You then refine and test the output, ensuring it meets your specific needs.",
+    "practical_application": "By the end of this lesson, you will be able to apply building a saas product with ai tools concepts to your own projects. You'll understand when and how to use these techniques, and how to leverage AI tools to implement them efficiently.",
+    "reflection_question": "How can you apply the concepts from building a saas product with ai tools to a project you're currently working on or planning to build?",
+    "quiz": {
+      "questions": [
+        "What is the main purpose of building a saas product with ai tools?",
+        "How do AI tools help with this concept?",
+        "What are the key benefits of this approach?",
+        "What common mistakes should you avoid?",
+        "How does this integrate with other Vibe Coding concepts?"
+      ],
+      "answers": [
+        "To enable efficient and effective implementation of building a saas product with ai tools in modern software development",
+        "AI tools automate repetitive tasks and provide intelligent suggestions based on context",
+        "Faster development, fewer errors, and better code quality",
+        "Over-relying on AI without understanding the underlying concepts",
+        "It complements other Vibe Coding techniques to create a comprehensive development workflow"
+      ]
+    },
+    "resources": {
+      "images": [
+        {
+          "title": "Building a SaaS Product with AI Tools Concept Diagram",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual representation of building a saas product with ai tools in practice",
+          "purpose": "Explains the core concept visually"
+        },
+        {
+          "title": "Building a SaaS Product with AI Tools Workflow",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Step-by-step workflow for implementing building a saas product with ai tools",
+          "purpose": "Illustrates the practical application"
+        }
+      ],
+      "video": {
+        "title": "Building a SaaS Product with AI Tools in Action",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "embed": true,
+        "reason": "Watch how building a saas product with ai tools is applied in real projects"
+      },
+      "links": [
+        {
+          "title": "Official Documentation",
+          "url": "https://docs.example.com",
+          "reason": "Comprehensive reference for this topic"
+        },
+        {
+          "title": "Community Examples",
+          "url": "https://github.com/examples",
+          "reason": "Real-world implementations and code samples"
+        }
+      ]
+    }
+  },
+  {
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 6: Real-World Workflows",
+    "lesson_number": 16,
+    "lesson_title": "Deploying and Scaling AI-Built Applications",
+    "introduction": "Welcome to Deploying and Scaling AI-Built Applications. In this lesson, you will learn essential skills and techniques that will help you master Vibe Coding and build real-world applications with AI assistance.",
+    "big_idea": "Deploying and Scaling AI-Built Applications represents a crucial skill in modern software development. Understanding this concept will enable you to leverage AI tools more effectively and build better applications faster.",
+    "why_it_matters": "This lesson matters because it bridges the gap between theoretical knowledge and practical application. By mastering these concepts, you'll be able to tackle real-world projects with confidence and efficiency.",
+    "key_concepts": [
+      "Understanding the fundamentals of deploying and scaling ai-built applications",
+      "Practical application in real-world scenarios",
+      "Best practices and common pitfalls to avoid",
+      "Integration with AI-powered development tools",
+      "Hands-on techniques you can apply immediately"
+    ],
+    "real_world_example": "Consider a scenario where you need to implement deploying and scaling ai-built applications in a production environment. Using AI tools like Cursor or Bolt.new, you can describe your requirements in plain language and let the AI generate the implementation. You then refine and test the output, ensuring it meets your specific needs.",
+    "practical_application": "By the end of this lesson, you will be able to apply deploying and scaling ai-built applications concepts to your own projects. You'll understand when and how to use these techniques, and how to leverage AI tools to implement them efficiently.",
+    "reflection_question": "How can you apply the concepts from deploying and scaling ai-built applications to a project you're currently working on or planning to build?",
+    "quiz": {
+      "questions": [
+        "What is the main purpose of deploying and scaling ai-built applications?",
+        "How do AI tools help with this concept?",
+        "What are the key benefits of this approach?",
+        "What common mistakes should you avoid?",
+        "How does this integrate with other Vibe Coding concepts?"
+      ],
+      "answers": [
+        "To enable efficient and effective implementation of deploying and scaling ai-built applications in modern software development",
+        "AI tools automate repetitive tasks and provide intelligent suggestions based on context",
+        "Faster development, fewer errors, and better code quality",
+        "Over-relying on AI without understanding the underlying concepts",
+        "It complements other Vibe Coding techniques to create a comprehensive development workflow"
+      ]
+    },
+    "resources": {
+      "images": [
+        {
+          "title": "Deploying and Scaling AI-Built Applications Concept Diagram",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual representation of deploying and scaling ai-built applications in practice",
+          "purpose": "Explains the core concept visually"
+        },
+        {
+          "title": "Deploying and Scaling AI-Built Applications Workflow",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Step-by-step workflow for implementing deploying and scaling ai-built applications",
+          "purpose": "Illustrates the practical application"
+        }
+      ],
+      "video": {
+        "title": "Deploying and Scaling AI-Built Applications in Action",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "embed": true,
+        "reason": "Watch how deploying and scaling ai-built applications is applied in real projects"
+      },
+      "links": [
+        {
+          "title": "Official Documentation",
+          "url": "https://docs.example.com",
+          "reason": "Comprehensive reference for this topic"
+        },
+        {
+          "title": "Community Examples",
+          "url": "https://github.com/examples",
+          "reason": "Real-world implementations and code samples"
+        }
+      ]
+    }
+  },
+  {
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 9: Testing and Debugging with AI",
+    "lesson_number": 17,
+    "lesson_title": "AI-Powered Testing Strategies",
+    "introduction": "Welcome to AI-Powered Testing Strategies. In this lesson, you will learn essential skills and techniques that will help you master Vibe Coding and build real-world applications with AI assistance.",
+    "big_idea": "AI-Powered Testing Strategies represents a crucial skill in modern software development. Understanding this concept will enable you to leverage AI tools more effectively and build better applications faster.",
+    "why_it_matters": "This lesson matters because it bridges the gap between theoretical knowledge and practical application. By mastering these concepts, you'll be able to tackle real-world projects with confidence and efficiency.",
+    "key_concepts": [
+      "Understanding the fundamentals of ai-powered testing strategies",
+      "Practical application in real-world scenarios",
+      "Best practices and common pitfalls to avoid",
+      "Integration with AI-powered development tools",
+      "Hands-on techniques you can apply immediately"
+    ],
+    "real_world_example": "Consider a scenario where you need to implement ai-powered testing strategies in a production environment. Using AI tools like Cursor or Bolt.new, you can describe your requirements in plain language and let the AI generate the implementation. You then refine and test the output, ensuring it meets your specific needs.",
+    "practical_application": "By the end of this lesson, you will be able to apply ai-powered testing strategies concepts to your own projects. You'll understand when and how to use these techniques, and how to leverage AI tools to implement them efficiently.",
+    "reflection_question": "How can you apply the concepts from ai-powered testing strategies to a project you're currently working on or planning to build?",
+    "quiz": {
+      "questions": [
+        "What is the main purpose of ai-powered testing strategies?",
+        "How do AI tools help with this concept?",
+        "What are the key benefits of this approach?",
+        "What common mistakes should you avoid?",
+        "How does this integrate with other Vibe Coding concepts?"
+      ],
+      "answers": [
+        "To enable efficient and effective implementation of ai-powered testing strategies in modern software development",
+        "AI tools automate repetitive tasks and provide intelligent suggestions based on context",
+        "Faster development, fewer errors, and better code quality",
+        "Over-relying on AI without understanding the underlying concepts",
+        "It complements other Vibe Coding techniques to create a comprehensive development workflow"
+      ]
+    },
+    "resources": {
+      "images": [
+        {
+          "title": "AI-Powered Testing Strategies Concept Diagram",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual representation of ai-powered testing strategies in practice",
+          "purpose": "Explains the core concept visually"
+        },
+        {
+          "title": "AI-Powered Testing Strategies Workflow",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Step-by-step workflow for implementing ai-powered testing strategies",
+          "purpose": "Illustrates the practical application"
+        }
+      ],
+      "video": {
+        "title": "AI-Powered Testing Strategies in Action",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "embed": true,
+        "reason": "Watch how ai-powered testing strategies is applied in real projects"
+      },
+      "links": [
+        {
+          "title": "Official Documentation",
+          "url": "https://docs.example.com",
+          "reason": "Comprehensive reference for this topic"
+        },
+        {
+          "title": "Community Examples",
+          "url": "https://github.com/examples",
+          "reason": "Real-world implementations and code samples"
+        }
+      ]
+    }
+  },
+  {
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 9: Testing and Debugging with AI",
+    "lesson_number": 18,
+    "lesson_title": "Debugging with AI Assistance",
+    "introduction": "Welcome to Debugging with AI Assistance. In this lesson, you will learn essential skills and techniques that will help you master Vibe Coding and build real-world applications with AI assistance.",
+    "big_idea": "Debugging with AI Assistance represents a crucial skill in modern software development. Understanding this concept will enable you to leverage AI tools more effectively and build better applications faster.",
+    "why_it_matters": "This lesson matters because it bridges the gap between theoretical knowledge and practical application. By mastering these concepts, you'll be able to tackle real-world projects with confidence and efficiency.",
+    "key_concepts": [
+      "Understanding the fundamentals of debugging with ai assistance",
+      "Practical application in real-world scenarios",
+      "Best practices and common pitfalls to avoid",
+      "Integration with AI-powered development tools",
+      "Hands-on techniques you can apply immediately"
+    ],
+    "real_world_example": "Consider a scenario where you need to implement debugging with ai assistance in a production environment. Using AI tools like Cursor or Bolt.new, you can describe your requirements in plain language and let the AI generate the implementation. You then refine and test the output, ensuring it meets your specific needs.",
+    "practical_application": "By the end of this lesson, you will be able to apply debugging with ai assistance concepts to your own projects. You'll understand when and how to use these techniques, and how to leverage AI tools to implement them efficiently.",
+    "reflection_question": "How can you apply the concepts from debugging with ai assistance to a project you're currently working on or planning to build?",
+    "quiz": {
+      "questions": [
+        "What is the main purpose of debugging with ai assistance?",
+        "How do AI tools help with this concept?",
+        "What are the key benefits of this approach?",
+        "What common mistakes should you avoid?",
+        "How does this integrate with other Vibe Coding concepts?"
+      ],
+      "answers": [
+        "To enable efficient and effective implementation of debugging with ai assistance in modern software development",
+        "AI tools automate repetitive tasks and provide intelligent suggestions based on context",
+        "Faster development, fewer errors, and better code quality",
+        "Over-relying on AI without understanding the underlying concepts",
+        "It complements other Vibe Coding techniques to create a comprehensive development workflow"
+      ]
+    },
+    "resources": {
+      "images": [
+        {
+          "title": "Debugging with AI Assistance Concept Diagram",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual representation of debugging with ai assistance in practice",
+          "purpose": "Explains the core concept visually"
+        },
+        {
+          "title": "Debugging with AI Assistance Workflow",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Step-by-step workflow for implementing debugging with ai assistance",
+          "purpose": "Illustrates the practical application"
+        }
+      ],
+      "video": {
+        "title": "Debugging with AI Assistance in Action",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "embed": true,
+        "reason": "Watch how debugging with ai assistance is applied in real projects"
+      },
+      "links": [
+        {
+          "title": "Official Documentation",
+          "url": "https://docs.example.com",
+          "reason": "Comprehensive reference for this topic"
+        },
+        {
+          "title": "Community Examples",
+          "url": "https://github.com/examples",
+          "reason": "Real-world implementations and code samples"
+        }
+      ]
+    }
+  },
+  {
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 10: Version Control and Collaboration",
+    "lesson_number": 19,
+    "lesson_title": "Git and GitHub in the AI Era",
+    "introduction": "Welcome to Git and GitHub in the AI Era. In this lesson, you will learn essential skills and techniques that will help you master Vibe Coding and build real-world applications with AI assistance.",
+    "big_idea": "Git and GitHub in the AI Era represents a crucial skill in modern software development. Understanding this concept will enable you to leverage AI tools more effectively and build better applications faster.",
+    "why_it_matters": "This lesson matters because it bridges the gap between theoretical knowledge and practical application. By mastering these concepts, you'll be able to tackle real-world projects with confidence and efficiency.",
+    "key_concepts": [
+      "Understanding the fundamentals of git and github in the ai era",
+      "Practical application in real-world scenarios",
+      "Best practices and common pitfalls to avoid",
+      "Integration with AI-powered development tools",
+      "Hands-on techniques you can apply immediately"
+    ],
+    "real_world_example": "Consider a scenario where you need to implement git and github in the ai era in a production environment. Using AI tools like Cursor or Bolt.new, you can describe your requirements in plain language and let the AI generate the implementation. You then refine and test the output, ensuring it meets your specific needs.",
+    "practical_application": "By the end of this lesson, you will be able to apply git and github in the ai era concepts to your own projects. You'll understand when and how to use these techniques, and how to leverage AI tools to implement them efficiently.",
+    "reflection_question": "How can you apply the concepts from git and github in the ai era to a project you're currently working on or planning to build?",
+    "quiz": {
+      "questions": [
+        "What is the main purpose of git and github in the ai era?",
+        "How do AI tools help with this concept?",
+        "What are the key benefits of this approach?",
+        "What common mistakes should you avoid?",
+        "How does this integrate with other Vibe Coding concepts?"
+      ],
+      "answers": [
+        "To enable efficient and effective implementation of git and github in the ai era in modern software development",
+        "AI tools automate repetitive tasks and provide intelligent suggestions based on context",
+        "Faster development, fewer errors, and better code quality",
+        "Over-relying on AI without understanding the underlying concepts",
+        "It complements other Vibe Coding techniques to create a comprehensive development workflow"
+      ]
+    },
+    "resources": {
+      "images": [
+        {
+          "title": "Git and GitHub in the AI Era Concept Diagram",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual representation of git and github in the ai era in practice",
+          "purpose": "Explains the core concept visually"
+        },
+        {
+          "title": "Git and GitHub in the AI Era Workflow",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Step-by-step workflow for implementing git and github in the ai era",
+          "purpose": "Illustrates the practical application"
+        }
+      ],
+      "video": {
+        "title": "Git and GitHub in the AI Era in Action",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "embed": true,
+        "reason": "Watch how git and github in the ai era is applied in real projects"
+      },
+      "links": [
+        {
+          "title": "Official Documentation",
+          "url": "https://docs.example.com",
+          "reason": "Comprehensive reference for this topic"
+        },
+        {
+          "title": "Community Examples",
+          "url": "https://github.com/examples",
+          "reason": "Real-world implementations and code samples"
+        }
+      ]
+    }
+  },
+  {
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 10: Version Control and Collaboration",
+    "lesson_number": 20,
+    "lesson_title": "Collaborative Vibe Coding Workflows",
+    "introduction": "Welcome to Collaborative Vibe Coding Workflows. In this lesson, you will learn essential skills and techniques that will help you master Vibe Coding and build real-world applications with AI assistance.",
+    "big_idea": "Collaborative Vibe Coding Workflows represents a crucial skill in modern software development. Understanding this concept will enable you to leverage AI tools more effectively and build better applications faster.",
+    "why_it_matters": "This lesson matters because it bridges the gap between theoretical knowledge and practical application. By mastering these concepts, you'll be able to tackle real-world projects with confidence and efficiency.",
+    "key_concepts": [
+      "Understanding the fundamentals of collaborative vibe coding workflows",
+      "Practical application in real-world scenarios",
+      "Best practices and common pitfalls to avoid",
+      "Integration with AI-powered development tools",
+      "Hands-on techniques you can apply immediately"
+    ],
+    "real_world_example": "Consider a scenario where you need to implement collaborative vibe coding workflows in a production environment. Using AI tools like Cursor or Bolt.new, you can describe your requirements in plain language and let the AI generate the implementation. You then refine and test the output, ensuring it meets your specific needs.",
+    "practical_application": "By the end of this lesson, you will be able to apply collaborative vibe coding workflows concepts to your own projects. You'll understand when and how to use these techniques, and how to leverage AI tools to implement them efficiently.",
+    "reflection_question": "How can you apply the concepts from collaborative vibe coding workflows to a project you're currently working on or planning to build?",
+    "quiz": {
+      "questions": [
+        "What is the main purpose of collaborative vibe coding workflows?",
+        "How do AI tools help with this concept?",
+        "What are the key benefits of this approach?",
+        "What common mistakes should you avoid?",
+        "How does this integrate with other Vibe Coding concepts?"
+      ],
+      "answers": [
+        "To enable efficient and effective implementation of collaborative vibe coding workflows in modern software development",
+        "AI tools automate repetitive tasks and provide intelligent suggestions based on context",
+        "Faster development, fewer errors, and better code quality",
+        "Over-relying on AI without understanding the underlying concepts",
+        "It complements other Vibe Coding techniques to create a comprehensive development workflow"
+      ]
+    },
+    "resources": {
+      "images": [
+        {
+          "title": "Collaborative Vibe Coding Workflows Concept Diagram",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual representation of collaborative vibe coding workflows in practice",
+          "purpose": "Explains the core concept visually"
+        },
+        {
+          "title": "Collaborative Vibe Coding Workflows Workflow",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Step-by-step workflow for implementing collaborative vibe coding workflows",
+          "purpose": "Illustrates the practical application"
+        }
+      ],
+      "video": {
+        "title": "Collaborative Vibe Coding Workflows in Action",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "embed": true,
+        "reason": "Watch how collaborative vibe coding workflows is applied in real projects"
+      },
+      "links": [
+        {
+          "title": "Official Documentation",
+          "url": "https://docs.example.com",
+          "reason": "Comprehensive reference for this topic"
+        },
+        {
+          "title": "Community Examples",
+          "url": "https://github.com/examples",
+          "reason": "Real-world implementations and code samples"
+        }
+      ]
+    }
+  },
+  {
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 11: Building Real Projects",
+    "lesson_number": 21,
+    "lesson_title": "Project 1: AI-Powered Landing Page",
+    "introduction": "Welcome to Project 1: AI-Powered Landing Page. In this lesson, you will learn essential skills and techniques that will help you master Vibe Coding and build real-world applications with AI assistance.",
+    "big_idea": "Project 1: AI-Powered Landing Page represents a crucial skill in modern software development. Understanding this concept will enable you to leverage AI tools more effectively and build better applications faster.",
+    "why_it_matters": "This lesson matters because it bridges the gap between theoretical knowledge and practical application. By mastering these concepts, you'll be able to tackle real-world projects with confidence and efficiency.",
+    "key_concepts": [
+      "Understanding the fundamentals of project 1: ai-powered landing page",
+      "Practical application in real-world scenarios",
+      "Best practices and common pitfalls to avoid",
+      "Integration with AI-powered development tools",
+      "Hands-on techniques you can apply immediately"
+    ],
+    "real_world_example": "Consider a scenario where you need to implement project 1: ai-powered landing page in a production environment. Using AI tools like Cursor or Bolt.new, you can describe your requirements in plain language and let the AI generate the implementation. You then refine and test the output, ensuring it meets your specific needs.",
+    "practical_application": "By the end of this lesson, you will be able to apply project 1: ai-powered landing page concepts to your own projects. You'll understand when and how to use these techniques, and how to leverage AI tools to implement them efficiently.",
+    "reflection_question": "How can you apply the concepts from project 1: ai-powered landing page to a project you're currently working on or planning to build?",
+    "quiz": {
+      "questions": [
+        "What is the main purpose of project 1: ai-powered landing page?",
+        "How do AI tools help with this concept?",
+        "What are the key benefits of this approach?",
+        "What common mistakes should you avoid?",
+        "How does this integrate with other Vibe Coding concepts?"
+      ],
+      "answers": [
+        "To enable efficient and effective implementation of project 1: ai-powered landing page in modern software development",
+        "AI tools automate repetitive tasks and provide intelligent suggestions based on context",
+        "Faster development, fewer errors, and better code quality",
+        "Over-relying on AI without understanding the underlying concepts",
+        "It complements other Vibe Coding techniques to create a comprehensive development workflow"
+      ]
+    },
+    "resources": {
+      "images": [
+        {
+          "title": "Project 1: AI-Powered Landing Page Concept Diagram",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual representation of project 1: ai-powered landing page in practice",
+          "purpose": "Explains the core concept visually"
+        },
+        {
+          "title": "Project 1: AI-Powered Landing Page Workflow",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Step-by-step workflow for implementing project 1: ai-powered landing page",
+          "purpose": "Illustrates the practical application"
+        }
+      ],
+      "video": {
+        "title": "Project 1: AI-Powered Landing Page in Action",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "embed": true,
+        "reason": "Watch how project 1: ai-powered landing page is applied in real projects"
+      },
+      "links": [
+        {
+          "title": "Official Documentation",
+          "url": "https://docs.example.com",
+          "reason": "Comprehensive reference for this topic"
+        },
+        {
+          "title": "Community Examples",
+          "url": "https://github.com/examples",
+          "reason": "Real-world implementations and code samples"
+        }
+      ]
+    }
+  },
+  {
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 11: Building Real Projects",
+    "lesson_number": 22,
+    "lesson_title": "Project 2: Full-Stack Web Application",
+    "introduction": "Welcome to Project 2: Full-Stack Web Application. In this lesson, you will learn essential skills and techniques that will help you master Vibe Coding and build real-world applications with AI assistance.",
+    "big_idea": "Project 2: Full-Stack Web Application represents a crucial skill in modern software development. Understanding this concept will enable you to leverage AI tools more effectively and build better applications faster.",
+    "why_it_matters": "This lesson matters because it bridges the gap between theoretical knowledge and practical application. By mastering these concepts, you'll be able to tackle real-world projects with confidence and efficiency.",
+    "key_concepts": [
+      "Understanding the fundamentals of project 2: full-stack web application",
+      "Practical application in real-world scenarios",
+      "Best practices and common pitfalls to avoid",
+      "Integration with AI-powered development tools",
+      "Hands-on techniques you can apply immediately"
+    ],
+    "real_world_example": "Consider a scenario where you need to implement project 2: full-stack web application in a production environment. Using AI tools like Cursor or Bolt.new, you can describe your requirements in plain language and let the AI generate the implementation. You then refine and test the output, ensuring it meets your specific needs.",
+    "practical_application": "By the end of this lesson, you will be able to apply project 2: full-stack web application concepts to your own projects. You'll understand when and how to use these techniques, and how to leverage AI tools to implement them efficiently.",
+    "reflection_question": "How can you apply the concepts from project 2: full-stack web application to a project you're currently working on or planning to build?",
+    "quiz": {
+      "questions": [
+        "What is the main purpose of project 2: full-stack web application?",
+        "How do AI tools help with this concept?",
+        "What are the key benefits of this approach?",
+        "What common mistakes should you avoid?",
+        "How does this integrate with other Vibe Coding concepts?"
+      ],
+      "answers": [
+        "To enable efficient and effective implementation of project 2: full-stack web application in modern software development",
+        "AI tools automate repetitive tasks and provide intelligent suggestions based on context",
+        "Faster development, fewer errors, and better code quality",
+        "Over-relying on AI without understanding the underlying concepts",
+        "It complements other Vibe Coding techniques to create a comprehensive development workflow"
+      ]
+    },
+    "resources": {
+      "images": [
+        {
+          "title": "Project 2: Full-Stack Web Application Concept Diagram",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual representation of project 2: full-stack web application in practice",
+          "purpose": "Explains the core concept visually"
+        },
+        {
+          "title": "Project 2: Full-Stack Web Application Workflow",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Step-by-step workflow for implementing project 2: full-stack web application",
+          "purpose": "Illustrates the practical application"
+        }
+      ],
+      "video": {
+        "title": "Project 2: Full-Stack Web Application in Action",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "embed": true,
+        "reason": "Watch how project 2: full-stack web application is applied in real projects"
+      },
+      "links": [
+        {
+          "title": "Official Documentation",
+          "url": "https://docs.example.com",
+          "reason": "Comprehensive reference for this topic"
+        },
+        {
+          "title": "Community Examples",
+          "url": "https://github.com/examples",
+          "reason": "Real-world implementations and code samples"
+        }
+      ]
+    }
+  },
+  {
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 11: Building Real Projects",
+    "lesson_number": 23,
+    "lesson_title": "Project 3: Mobile-Responsive Dashboard",
+    "introduction": "Welcome to Project 3: Mobile-Responsive Dashboard. In this lesson, you will learn essential skills and techniques that will help you master Vibe Coding and build real-world applications with AI assistance.",
+    "big_idea": "Project 3: Mobile-Responsive Dashboard represents a crucial skill in modern software development. Understanding this concept will enable you to leverage AI tools more effectively and build better applications faster.",
+    "why_it_matters": "This lesson matters because it bridges the gap between theoretical knowledge and practical application. By mastering these concepts, you'll be able to tackle real-world projects with confidence and efficiency.",
+    "key_concepts": [
+      "Understanding the fundamentals of project 3: mobile-responsive dashboard",
+      "Practical application in real-world scenarios",
+      "Best practices and common pitfalls to avoid",
+      "Integration with AI-powered development tools",
+      "Hands-on techniques you can apply immediately"
+    ],
+    "real_world_example": "Consider a scenario where you need to implement project 3: mobile-responsive dashboard in a production environment. Using AI tools like Cursor or Bolt.new, you can describe your requirements in plain language and let the AI generate the implementation. You then refine and test the output, ensuring it meets your specific needs.",
+    "practical_application": "By the end of this lesson, you will be able to apply project 3: mobile-responsive dashboard concepts to your own projects. You'll understand when and how to use these techniques, and how to leverage AI tools to implement them efficiently.",
+    "reflection_question": "How can you apply the concepts from project 3: mobile-responsive dashboard to a project you're currently working on or planning to build?",
+    "quiz": {
+      "questions": [
+        "What is the main purpose of project 3: mobile-responsive dashboard?",
+        "How do AI tools help with this concept?",
+        "What are the key benefits of this approach?",
+        "What common mistakes should you avoid?",
+        "How does this integrate with other Vibe Coding concepts?"
+      ],
+      "answers": [
+        "To enable efficient and effective implementation of project 3: mobile-responsive dashboard in modern software development",
+        "AI tools automate repetitive tasks and provide intelligent suggestions based on context",
+        "Faster development, fewer errors, and better code quality",
+        "Over-relying on AI without understanding the underlying concepts",
+        "It complements other Vibe Coding techniques to create a comprehensive development workflow"
+      ]
+    },
+    "resources": {
+      "images": [
+        {
+          "title": "Project 3: Mobile-Responsive Dashboard Concept Diagram",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual representation of project 3: mobile-responsive dashboard in practice",
+          "purpose": "Explains the core concept visually"
+        },
+        {
+          "title": "Project 3: Mobile-Responsive Dashboard Workflow",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Step-by-step workflow for implementing project 3: mobile-responsive dashboard",
+          "purpose": "Illustrates the practical application"
+        }
+      ],
+      "video": {
+        "title": "Project 3: Mobile-Responsive Dashboard in Action",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "embed": true,
+        "reason": "Watch how project 3: mobile-responsive dashboard is applied in real projects"
+      },
+      "links": [
+        {
+          "title": "Official Documentation",
+          "url": "https://docs.example.com",
+          "reason": "Comprehensive reference for this topic"
+        },
+        {
+          "title": "Community Examples",
+          "url": "https://github.com/examples",
+          "reason": "Real-world implementations and code samples"
+        }
+      ]
+    }
+  },
+  {
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 12: Advanced Vibe Coding Techniques",
+    "lesson_number": 24,
+    "lesson_title": "Integrating APIs and Third-Party Services",
+    "introduction": "Welcome to Integrating APIs and Third-Party Services. In this lesson, you will learn essential skills and techniques that will help you master Vibe Coding and build real-world applications with AI assistance.",
+    "big_idea": "Integrating APIs and Third-Party Services represents a crucial skill in modern software development. Understanding this concept will enable you to leverage AI tools more effectively and build better applications faster.",
+    "why_it_matters": "This lesson matters because it bridges the gap between theoretical knowledge and practical application. By mastering these concepts, you'll be able to tackle real-world projects with confidence and efficiency.",
+    "key_concepts": [
+      "Understanding the fundamentals of integrating apis and third-party services",
+      "Practical application in real-world scenarios",
+      "Best practices and common pitfalls to avoid",
+      "Integration with AI-powered development tools",
+      "Hands-on techniques you can apply immediately"
+    ],
+    "real_world_example": "Consider a scenario where you need to implement integrating apis and third-party services in a production environment. Using AI tools like Cursor or Bolt.new, you can describe your requirements in plain language and let the AI generate the implementation. You then refine and test the output, ensuring it meets your specific needs.",
+    "practical_application": "By the end of this lesson, you will be able to apply integrating apis and third-party services concepts to your own projects. You'll understand when and how to use these techniques, and how to leverage AI tools to implement them efficiently.",
+    "reflection_question": "How can you apply the concepts from integrating apis and third-party services to a project you're currently working on or planning to build?",
+    "quiz": {
+      "questions": [
+        "What is the main purpose of integrating apis and third-party services?",
+        "How do AI tools help with this concept?",
+        "What are the key benefits of this approach?",
+        "What common mistakes should you avoid?",
+        "How does this integrate with other Vibe Coding concepts?"
+      ],
+      "answers": [
+        "To enable efficient and effective implementation of integrating apis and third-party services in modern software development",
+        "AI tools automate repetitive tasks and provide intelligent suggestions based on context",
+        "Faster development, fewer errors, and better code quality",
+        "Over-relying on AI without understanding the underlying concepts",
+        "It complements other Vibe Coding techniques to create a comprehensive development workflow"
+      ]
+    },
+    "resources": {
+      "images": [
+        {
+          "title": "Integrating APIs and Third-Party Services Concept Diagram",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual representation of integrating apis and third-party services in practice",
+          "purpose": "Explains the core concept visually"
+        },
+        {
+          "title": "Integrating APIs and Third-Party Services Workflow",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Step-by-step workflow for implementing integrating apis and third-party services",
+          "purpose": "Illustrates the practical application"
+        }
+      ],
+      "video": {
+        "title": "Integrating APIs and Third-Party Services in Action",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "embed": true,
+        "reason": "Watch how integrating apis and third-party services is applied in real projects"
+      },
+      "links": [
+        {
+          "title": "Official Documentation",
+          "url": "https://docs.example.com",
+          "reason": "Comprehensive reference for this topic"
+        },
+        {
+          "title": "Community Examples",
+          "url": "https://github.com/examples",
+          "reason": "Real-world implementations and code samples"
+        }
+      ]
+    }
+  },
+  {
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 12: Advanced Vibe Coding Techniques",
+    "lesson_number": 25,
+    "lesson_title": "Performance Optimization with AI",
+    "introduction": "Welcome to Performance Optimization with AI. In this lesson, you will learn essential skills and techniques that will help you master Vibe Coding and build real-world applications with AI assistance.",
+    "big_idea": "Performance Optimization with AI represents a crucial skill in modern software development. Understanding this concept will enable you to leverage AI tools more effectively and build better applications faster.",
+    "why_it_matters": "This lesson matters because it bridges the gap between theoretical knowledge and practical application. By mastering these concepts, you'll be able to tackle real-world projects with confidence and efficiency.",
+    "key_concepts": [
+      "Understanding the fundamentals of performance optimization with ai",
+      "Practical application in real-world scenarios",
+      "Best practices and common pitfalls to avoid",
+      "Integration with AI-powered development tools",
+      "Hands-on techniques you can apply immediately"
+    ],
+    "real_world_example": "Consider a scenario where you need to implement performance optimization with ai in a production environment. Using AI tools like Cursor or Bolt.new, you can describe your requirements in plain language and let the AI generate the implementation. You then refine and test the output, ensuring it meets your specific needs.",
+    "practical_application": "By the end of this lesson, you will be able to apply performance optimization with ai concepts to your own projects. You'll understand when and how to use these techniques, and how to leverage AI tools to implement them efficiently.",
+    "reflection_question": "How can you apply the concepts from performance optimization with ai to a project you're currently working on or planning to build?",
+    "quiz": {
+      "questions": [
+        "What is the main purpose of performance optimization with ai?",
+        "How do AI tools help with this concept?",
+        "What are the key benefits of this approach?",
+        "What common mistakes should you avoid?",
+        "How does this integrate with other Vibe Coding concepts?"
+      ],
+      "answers": [
+        "To enable efficient and effective implementation of performance optimization with ai in modern software development",
+        "AI tools automate repetitive tasks and provide intelligent suggestions based on context",
+        "Faster development, fewer errors, and better code quality",
+        "Over-relying on AI without understanding the underlying concepts",
+        "It complements other Vibe Coding techniques to create a comprehensive development workflow"
+      ]
+    },
+    "resources": {
+      "images": [
+        {
+          "title": "Performance Optimization with AI Concept Diagram",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual representation of performance optimization with ai in practice",
+          "purpose": "Explains the core concept visually"
+        },
+        {
+          "title": "Performance Optimization with AI Workflow",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Step-by-step workflow for implementing performance optimization with ai",
+          "purpose": "Illustrates the practical application"
+        }
+      ],
+      "video": {
+        "title": "Performance Optimization with AI in Action",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "embed": true,
+        "reason": "Watch how performance optimization with ai is applied in real projects"
+      },
+      "links": [
+        {
+          "title": "Official Documentation",
+          "url": "https://docs.example.com",
+          "reason": "Comprehensive reference for this topic"
+        },
+        {
+          "title": "Community Examples",
+          "url": "https://github.com/examples",
+          "reason": "Real-world implementations and code samples"
+        }
+      ]
+    }
+  },
+  {
+    "course_title": "Vibe Coding: Building Real Software with AI",
+    "module_title": "Module 13: Course Conclusion",
+    "lesson_number": 26,
+    "lesson_title": "Your Vibe Coding Journey: Next Steps and Career Paths",
+    "introduction": "Welcome to Your Vibe Coding Journey: Next Steps and Career Paths. In this lesson, you will learn essential skills and techniques that will help you master Vibe Coding and build real-world applications with AI assistance.",
+    "big_idea": "Your Vibe Coding Journey: Next Steps and Career Paths represents a crucial skill in modern software development. Understanding this concept will enable you to leverage AI tools more effectively and build better applications faster.",
+    "why_it_matters": "This lesson matters because it bridges the gap between theoretical knowledge and practical application. By mastering these concepts, you'll be able to tackle real-world projects with confidence and efficiency.",
+    "key_concepts": [
+      "Understanding the fundamentals of your vibe coding journey: next steps and career paths",
+      "Practical application in real-world scenarios",
+      "Best practices and common pitfalls to avoid",
+      "Integration with AI-powered development tools",
+      "Hands-on techniques you can apply immediately"
+    ],
+    "real_world_example": "Consider a scenario where you need to implement your vibe coding journey: next steps and career paths in a production environment. Using AI tools like Cursor or Bolt.new, you can describe your requirements in plain language and let the AI generate the implementation. You then refine and test the output, ensuring it meets your specific needs.",
+    "practical_application": "By the end of this lesson, you will be able to apply your vibe coding journey: next steps and career paths concepts to your own projects. You'll understand when and how to use these techniques, and how to leverage AI tools to implement them efficiently.",
+    "reflection_question": "How can you apply the concepts from your vibe coding journey: next steps and career paths to a project you're currently working on or planning to build?",
+    "quiz": {
+      "questions": [
+        "What is the main purpose of your vibe coding journey: next steps and career paths?",
+        "How do AI tools help with this concept?",
+        "What are the key benefits of this approach?",
+        "What common mistakes should you avoid?",
+        "How does this integrate with other Vibe Coding concepts?"
+      ],
+      "answers": [
+        "To enable efficient and effective implementation of your vibe coding journey: next steps and career paths in modern software development",
+        "AI tools automate repetitive tasks and provide intelligent suggestions based on context",
+        "Faster development, fewer errors, and better code quality",
+        "Over-relying on AI without understanding the underlying concepts",
+        "It complements other Vibe Coding techniques to create a comprehensive development workflow"
+      ]
+    },
+    "resources": {
+      "images": [
+        {
+          "title": "Your Vibe Coding Journey: Next Steps and Career Paths Concept Diagram",
+          "url": "https://cdn.pixabay.com/photo/2016/11/14/23/50/analytics-1824981_1280.jpg",
+          "caption": "Visual representation of your vibe coding journey: next steps and career paths in practice",
+          "purpose": "Explains the core concept visually"
+        },
+        {
+          "title": "Your Vibe Coding Journey: Next Steps and Career Paths Workflow",
+          "url": "https://cdn.pixabay.com/photo/2018/03/11/10/24/web-3216232_1280.png",
+          "caption": "Step-by-step workflow for implementing your vibe coding journey: next steps and career paths",
+          "purpose": "Illustrates the practical application"
+        }
+      ],
+      "video": {
+        "title": "Your Vibe Coding Journey: Next Steps and Career Paths in Action",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "embed": true,
+        "reason": "Watch how your vibe coding journey: next steps and career paths is applied in real projects"
+      },
+      "links": [
+        {
+          "title": "Official Documentation",
+          "url": "https://docs.example.com",
+          "reason": "Comprehensive reference for this topic"
+        },
+        {
+          "title": "Community Examples",
+          "url": "https://github.com/examples",
+          "reason": "Real-world implementations and code samples"
+        }
+      ]
+    }
   }
 ]
