@@ -73,23 +73,33 @@ CREATE TABLE IF NOT EXISTS lessons (
   video_url TEXT, -- YouTube or other video URL
   video_transcript TEXT, -- For accessibility and search
   resources JSONB, -- Array of additional resources (links, files, etc.)
-  
+
   -- AI Generation Tracking
   ai_generated BOOLEAN DEFAULT FALSE,
   ai_prompt_used TEXT, -- The prompt hierarchy used to generate this lesson
   ai_model TEXT, -- e.g., "gpt-4", "claude-3"
   ai_generation_date TIMESTAMPTZ,
-  content_hash TEXT, -- SHA-256 hash for uniqueness checking
-  
+
   -- Interactive Features
   has_whiteboard BOOLEAN DEFAULT FALSE,
   has_code_playground BOOLEAN DEFAULT FALSE,
   has_quiz BOOLEAN DEFAULT FALSE,
-  
+
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW(),
   UNIQUE(module_id, ordering) -- Ensure no duplicate ordering within a module
 );
+
+-- Add content_hash column if it doesn't exist (for existing databases)
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_name = 'lessons' AND column_name = 'content_hash'
+  ) THEN
+    ALTER TABLE lessons ADD COLUMN content_hash TEXT;
+  END IF;
+END $$;
 
 -- ============================================================================
 -- TABLE: assessments
@@ -185,8 +195,18 @@ CREATE INDEX IF NOT EXISTS idx_modules_ordering ON modules(course_id, ordering);
 -- Lessons indexes
 CREATE INDEX IF NOT EXISTS idx_lessons_module ON lessons(module_id);
 CREATE INDEX IF NOT EXISTS idx_lessons_ordering ON lessons(module_id, ordering);
-CREATE INDEX IF NOT EXISTS idx_lessons_content_hash ON lessons(content_hash);
 CREATE INDEX IF NOT EXISTS idx_lessons_ai_generated ON lessons(ai_generated);
+
+-- Create content_hash index only if column exists
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_name = 'lessons' AND column_name = 'content_hash'
+  ) THEN
+    CREATE INDEX IF NOT EXISTS idx_lessons_content_hash ON lessons(content_hash);
+  END IF;
+END $$;
 
 -- Assessments indexes
 CREATE INDEX IF NOT EXISTS idx_assessments_module ON assessments(module_id);
