@@ -4,6 +4,7 @@ import Profile from "./Profile";
 import { Link, useNavigate } from 'react-router-dom';
 // Removed digitalMarketingCourses import to use real course data
 import { isAuthenticated } from '../services/authService';
+import { courseService } from '../services';
 import TodoList from "../components/TodoList";
 import PlannerPage from "./PlannerPage";
 import Calendar from "../components/Calendar";
@@ -12,10 +13,10 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [activeSection, setActiveSection] = useState("dashboard");
+  const [enrolledCourses, setEnrolledCourses] = useState([]);
+  const [isLoadingCourses, setIsLoadingCourses] = useState(true);
   // Use real user and course data
   const user = { name: userName || "John Doe" };
-  // TODO: Replace with real enrolled courses data
-  const enrolledCourses = [];
   const assignments = [
     { title: "UI Design", status: "Upcoming" },
     { title: "Node.js Project", status: "In Progress" },
@@ -42,6 +43,26 @@ const Dashboard = () => {
       } catch {
         setUserName("");
       }
+    }
+  }, []);
+
+  // Fetch enrolled courses
+  useEffect(() => {
+    const fetchEnrolledCourses = async () => {
+      try {
+        setIsLoadingCourses(true);
+        const courses = await courseService.getEnrolledCourses();
+        setEnrolledCourses(courses || []);
+      } catch (error) {
+        console.error('Error fetching enrolled courses:', error);
+        setEnrolledCourses([]);
+      } finally {
+        setIsLoadingCourses(false);
+      }
+    };
+
+    if (isAuthenticated()) {
+      fetchEnrolledCourses();
     }
   }, []);
 
@@ -75,7 +96,7 @@ const Dashboard = () => {
             {/* Bento Grid Layout */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bento-grid">
               {/* Welcome + Continue Learning (Parallax Card) */}
-              <div className="col-span-1 md:col-span-2 row-span-1 relative overflow-hidden rounded-2xl shadow-xl bg-white bento-card parallax-card flex flex-col justify-between p-8" style={{minHeight:'220px'}}>
+              <div className="col-span-1 md:col-span-2 row-span-1 relative overflow-hidden rounded-2xl shadow-xl bg-white bento-card parallax-card flex flex-col justify-between p-8" style={{ minHeight: '220px' }}>
                 <div className="z-10">
                   <h1 className="text-3xl font-bold mb-1">Welcome back, {user.name}!</h1>
                   <p className="text-gray-600 mb-4">Continue your learning journey and track your progress.</p>
@@ -91,7 +112,7 @@ const Dashboard = () => {
                 </div>
                 <div className="absolute right-0 bottom-0 w-40 h-40 bg-gradient-to-tr from-blue-200 to-purple-200 opacity-40 rounded-full blur-2xl z-0"></div>
               </div>
-  
+
               {/* Progress Bar */}
               <div className="col-span-1 row-span-1 rounded-2xl shadow-xl bg-white bento-card flex flex-col justify-center items-center p-6">
                 <h2 className="text-lg font-semibold mb-2">Overall Progress</h2>
@@ -100,7 +121,7 @@ const Dashboard = () => {
                 </div>
                 <div className="text-right text-sm text-gray-600">{overallProgress}% complete</div>
               </div>
-  
+
               {/* Your Courses */}
               <div className="col-span-1 md:col-span-1 row-span-1 rounded-2xl shadow-xl bg-white bento-card flex flex-col p-6">
                 <h2 className="text-lg font-semibold mb-2">Your Courses</h2>
@@ -115,7 +136,7 @@ const Dashboard = () => {
                   ))}
                 </div>
               </div>
-  
+
               {/* Upcoming Event Card */}
               <div className="col-span-1 md:col-span-1 row-span-1 rounded-2xl shadow-xl bg-yellow-50 bento-card flex flex-col p-6">
                 <h2 className="text-lg font-semibold mb-2 text-yellow-700">Upcoming Events</h2>
@@ -130,14 +151,14 @@ const Dashboard = () => {
                   <div className="text-sm text-gray-600">October 29, 2025</div>
                 </div>
               </div>
-  
+
               {/* Motivation Video - Assignment Card Shape, full width */}
               <div className="col-span-1 md:col-span-2 row-span-1">
                 <div className="rounded-2xl shadow-2xl bg-gradient-to-br from-pink-100 via-white to-blue-100 bento-card p-8 flex flex-col justify-between min-h-[220px] md:min-h-[260px]">
                   <h2 className="text-2xl font-bold mb-2 text-brand-cyan drop-shadow">Motivation of the Week</h2>
                   <p className="mb-4 text-gray-700 text-base font-medium">Kickstart your week with a dose of inspiration! Watch this motivational video to boost your learning journey.</p>
                   <div className="w-full flex-1 flex items-center justify-center">
-                    <iframe width="100%" height="100%" style={{aspectRatio:'16/9', borderRadius:'0.75rem', minHeight:'140px', maxHeight:'220px', boxShadow:'0 8px 32px rgba(80,80,180,0.10)'}} src="https://www.youtube.com/embed/ZXsQAXx_ao0" title="Motivational Video" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                    <iframe width="100%" height="100%" style={{ aspectRatio: '16/9', borderRadius: '0.75rem', minHeight: '140px', maxHeight: '220px', boxShadow: '0 8px 32px rgba(80,80,180,0.10)' }} src="https://www.youtube.com/embed/ZXsQAXx_ao0" title="Motivational Video" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                   </div>
                 </div>
               </div>
@@ -178,7 +199,7 @@ const Dashboard = () => {
                 <ul className="list-disc pl-6">
                   {enrolledCourses.map((course) => (
                     <li key={course.id} className="mb-3">
-                      <div className="p-4 bg-gradient-to-br from-blue-900 via-cyan-700 to-cyan-400 rounded-2xl shadow-2xl flex flex-col md:flex-row md:items-center md:justify-between transform hover:scale-105 transition-transform duration-300 border-4 border-cyan-200" style={{boxShadow:'0 8px 32px rgba(0,40,120,0.18), 0 1.5px 8px rgba(0,255,255,0.08)'}}>
+                      <div className="p-4 bg-gradient-to-br from-blue-900 via-cyan-700 to-cyan-400 rounded-2xl shadow-2xl flex flex-col md:flex-row md:items-center md:justify-between transform hover:scale-105 transition-transform duration-300 border-4 border-cyan-200" style={{ boxShadow: '0 8px 32px rgba(0,40,120,0.18), 0 1.5px 8px rgba(0,255,255,0.08)' }}>
                         <div>
                           <span className="font-semibold text-lg text-white drop-shadow">{course.title}</span>
                           <span className="block text-cyan-100">Progress: {course.progress}%</span>

@@ -11,27 +11,27 @@ export const login = async (credentials) => {
         if (!credentials.email || !credentials.password) {
             throw new Error('Email and password are required');
         }
-        
+
         const { data, error } = await supabase.auth.signInWithPassword({
             email: credentials.email,
             password: credentials.password,
         });
-        
+
         if (error) {
             throw new Error(error.message || 'Login failed. Please try again.');
         }
-        
+
         if (!data || !data.user) {
             throw new Error('Invalid response from server: Missing user data');
         }
-        
+
         // Get user profile from the users table
         const { data: profileData, error: profileError } = await supabase
             .from('users')
             .select('*')
             .eq('id', data.user.id)
             .single();
-        
+
         // If no profile exists, create one
         if (profileError) {
             const { error: insertError } = await supabase
@@ -44,28 +44,30 @@ export const login = async (credentials) => {
                     created_at: new Date().toISOString(),
                     updated_at: new Date().toISOString(),
                 });
-            
+
             if (insertError) {
                 console.error('Error creating user profile:', insertError);
             }
-            
+
             // Fetch the created profile
             const { data: newProfile, error: newProfileError } = await supabase
                 .from('users')
                 .select('*')
                 .eq('id', data.user.id)
                 .single();
-                
+
             if (!newProfileError) {
                 profileData = newProfile;
             }
         }
-        
-        // Create complete user object
+
+        // Create complete user object with guaranteed name field
+        const userName = profileData?.name || data.user.user_metadata?.name || (data.user.email ? data.user.email.split('@')[0] : 'User');
+
         const completeUser = {
             _id: data.user.id,
-            name: profileData?.name || data.user.user_metadata?.name || data.user.email.split('@')[0],
-            email: data.user.email,
+            name: userName, // Guaranteed to have a value
+            email: data.user.email || '',
             role: profileData?.role || 'student',
             avatar: profileData?.avatar || data.user.user_metadata?.avatar || '',
             bio: profileData?.bio || '',
@@ -77,13 +79,13 @@ export const login = async (credentials) => {
             badges: profileData?.badges || [],
             dashboardPreferences: profileData?.dashboard_preferences || {},
         };
-        
+
         // Store session in localStorage for consistency
         if (data.session) {
             localStorage.setItem('token', data.session.access_token);
         }
         localStorage.setItem('user', JSON.stringify(completeUser));
-        
+
         return { token: data.session?.access_token, user: completeUser };
     }
     catch (error) {
@@ -110,7 +112,7 @@ export const signup = async (userData) => {
         if (userData.password.length < 8) {
             throw new Error('Password must be at least 8 characters long');
         }
-        
+
         const { data, error } = await supabase.auth.signUp({
             email: userData.email,
             password: userData.password,
@@ -121,15 +123,15 @@ export const signup = async (userData) => {
                 }
             }
         });
-        
+
         if (error) {
             throw new Error(error.message || 'Signup failed. Please try again.');
         }
-        
+
         if (!data || !data.user) {
             throw new Error('Invalid response from server: Missing user data');
         }
-        
+
         // Create user profile in the users table
         const { error: profileError } = await supabase
             .from('users')
@@ -141,12 +143,12 @@ export const signup = async (userData) => {
                 created_at: new Date().toISOString(),
                 updated_at: new Date().toISOString(),
             });
-        
+
         if (profileError) {
             console.error('Error creating user profile:', profileError);
             // Don't throw error here as the user is already created in auth
         }
-        
+
         // Create complete user object
         const completeUser = {
             _id: data.user.id,
@@ -163,13 +165,13 @@ export const signup = async (userData) => {
             badges: [],
             dashboardPreferences: {},
         };
-        
+
         // Store session in localStorage for consistency
         if (data.session) {
             localStorage.setItem('token', data.session.access_token);
         }
         localStorage.setItem('user', JSON.stringify(completeUser));
-        
+
         // Send welcome email after successful registration
         try {
             const emailResponse = await fetch('/api/emails/welcome', {
@@ -182,7 +184,7 @@ export const signup = async (userData) => {
                     name: completeUser.name
                 }),
             });
-            
+
             const emailResult = await emailResponse.json();
             if (!emailResult.success) {
                 console.error('Error sending welcome email:', emailResult.error);
@@ -190,7 +192,7 @@ export const signup = async (userData) => {
         } catch (emailError) {
             console.error('Error sending welcome email:', emailError);
         }
-        
+
         return { token: data.session?.access_token, user: completeUser };
     }
     catch (error) {
@@ -206,11 +208,11 @@ export const logout = async () => {
     try {
         // Sign out from Supabase
         const { error } = await supabase.auth.signOut();
-        
+
         if (error) {
             console.error('Supabase logout error:', error);
         }
-        
+
         // Clear token and user from localStorage
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -230,33 +232,35 @@ export const getCurrentUser = async () => {
     try {
         // Get session from Supabase
         const { data: { session } } = await supabase.auth.getSession();
-        
+
         if (!session) {
             // No active session, clear local storage
             localStorage.removeItem('token');
             localStorage.removeItem('user');
             return null;
         }
-        
+
         // Get current user from Supabase auth
         const { data: { user }, error: userError } = await supabase.auth.getUser();
-        
+
         if (userError || !user) {
             throw new Error('Unable to get user data');
         }
-        
+
         // Get user profile from the users table
         const { data: profileData, error: profileError } = await supabase
             .from('users')
             .select('*')
             .eq('id', user.id)
             .single();
-        
-        // Create complete user object
+
+        // Create complete user object with guaranteed name field
+        const userName = profileData?.name || user.user_metadata?.name || (user.email ? user.email.split('@')[0] : 'User');
+
         const completeUser = {
             _id: user.id,
-            name: profileData?.name || user.user_metadata?.name || user.email?.split('@')[0] || 'User',
-            email: user.email,
+            name: userName, // Guaranteed to have a value
+            email: user.email || '',
             role: profileData?.role || user.user_metadata?.role || 'student',
             avatar: profileData?.avatar || user.user_metadata?.avatar || '',
             bio: profileData?.bio || user.user_metadata?.bio || '',
@@ -268,10 +272,10 @@ export const getCurrentUser = async () => {
             badges: profileData?.badges || user.user_metadata?.badges || [],
             dashboardPreferences: profileData?.dashboard_preferences || user.user_metadata?.dashboardPreferences || {},
         };
-        
+
         // Update localStorage with the latest user data
         localStorage.setItem('user', JSON.stringify(completeUser));
-        
+
         return completeUser;
     }
     catch (error) {
@@ -310,7 +314,7 @@ export const updateProfile = async (profileData) => {
         if (!currentUser) {
             throw new Error('User not authenticated');
         }
-        
+
         // Update user profile in the database
         const { error: updateError } = await supabase
             .from('users')
@@ -323,30 +327,30 @@ export const updateProfile = async (profileData) => {
                 updated_at: new Date().toISOString(),
             })
             .eq('id', currentUser._id);
-        
+
         if (updateError) {
             throw new Error(updateError.message || 'Profile update failed');
         }
-        
+
         // Update user metadata in Supabase auth if needed
         if (profileData.name) {
             const { error: metadataError } = await supabase.auth.updateUser({
                 data: { name: profileData.name }
             });
-            
+
             if (metadataError) {
                 console.error('Error updating user metadata:', metadataError);
                 // Don't throw error here as profile was updated in DB
             }
         }
-        
+
         // Fetch updated user data
         const updatedUser = await getCurrentUser();
-        
+
         if (!updatedUser) {
             throw new Error('Unable to fetch updated user data');
         }
-        
+
         return updatedUser;
     }
     catch (error) {

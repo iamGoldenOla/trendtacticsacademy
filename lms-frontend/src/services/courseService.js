@@ -36,7 +36,7 @@ class CourseService {
           )
         `)
         .eq('is_published', true)
-        .eq('id', 'a1b2c3d4-e5f6-7890-abcd-ef1234567890') // Only fetch Vibe Coding course
+        // Removed hardcoded course ID filter - now shows ALL published courses
         .order('created_at', { ascending: false });
 
       if (error) {
@@ -78,18 +78,14 @@ class CourseService {
   async getCourseById(courseId) {
     try {
       console.log('Fetching course by ID from Supabase:', courseId);
-      
+
       // Validate input
       if (!courseId) {
         throw new Error('Course ID is required');
       }
-      
-      // Only allow Vibe Coding course
-      if (courseId !== 'a1b2c3d4-e5f6-7890-abcd-ef1234567890') {
-        console.warn('Access denied to course ID:', courseId);
-        throw new Error('Course not found');
-      }
-      
+
+      // Removed hardcoded course ID restriction - now allows all published courses
+
       const { data: courseData, error } = await supabase
         .from('courses')
         .select(`
@@ -110,7 +106,7 @@ class CourseService {
         `)
         .eq('id', courseId)
         .single();
-      
+
       if (error) {
         console.error('Error fetching course from Supabase:', error.message);
         throw new Error('Course not found');
@@ -141,11 +137,11 @@ class CourseService {
     try {
       // Get current user
       const { data: { user }, error: authError } = await supabase.auth.getUser();
-      
+
       if (authError || !user) {
         throw new Error('User not authenticated');
       }
-      
+
       // Check if user is already enrolled
       const { data: existingEnrollment, error: checkError } = await supabase
         .from('enrollments')
@@ -153,53 +149,53 @@ class CourseService {
         .eq('user_id', user.id)
         .eq('course_id', courseId)
         .single();
-      
+
       if (!checkError && existingEnrollment) {
         // Already enrolled
         return { success: true, message: 'Already enrolled in this course' };
       }
-      
+
       // Create enrollment record
       const { data: enrollment, error: enrollError } = await supabase
         .from('enrollments')
-        .insert([{ 
-          user_id: user.id, 
-          course_id: courseId, 
+        .insert([{
+          user_id: user.id,
+          course_id: courseId,
           enrolled_at: new Date().toISOString(),
           status: 'active'
         }]);
-      
+
       if (enrollError) {
         console.error('Error enrolling in course:', enrollError.message);
         throw new Error(enrollError.message);
       }
-      
+
       // Update user's enrolled courses in the users table
       const { data: userData, error: userError } = await supabase
         .from('users')
         .select('enrolled_courses')
         .eq('id', user.id)
         .single();
-      
+
       if (!userError && userData) {
         const enrolledCourses = userData.enrolled_courses || [];
         if (!enrolledCourses.includes(courseId)) {
           enrolledCourses.push(courseId);
-          
+
           await supabase
             .from('users')
             .update({ enrolled_courses: enrolledCourses, updated_at: new Date().toISOString() })
             .eq('id', user.id);
         }
       }
-      
+
       // Get course details for the email
       const { data: courseData, error: courseError } = await supabase
         .from('courses')
         .select('title')
         .eq('id', courseId)
         .single();
-      
+
       // Send enrollment confirmation email
       if (courseData && courseData.title) {
         try {
@@ -214,7 +210,7 @@ class CourseService {
               courseTitle: courseData.title
             }),
           });
-          
+
           const emailResult = await emailResponse.json();
           if (!emailResult.success) {
             console.error('Error sending enrollment confirmation email:', emailResult.error);
@@ -223,7 +219,7 @@ class CourseService {
           console.error('Error sending enrollment confirmation email:', emailError);
         }
       }
-      
+
       return { success: true, message: 'Successfully enrolled in course' };
     } catch (error) {
       console.error('Error enrolling in course:', error);
@@ -236,11 +232,11 @@ class CourseService {
     try {
       // Get current user
       const { data: { user }, error: authError } = await supabase.auth.getUser();
-      
+
       if (authError || !user) {
         throw new Error('User not authenticated');
       }
-      
+
       // Prepare course data with user ID and defaults
       const newCourse = {
         ...courseData,
@@ -250,18 +246,18 @@ class CourseService {
         is_published: courseData.is_published ?? false,
         is_featured: courseData.is_featured ?? false,
       };
-      
+
       const { data: course, error: courseError } = await supabase
         .from('courses')
         .insert([newCourse])
         .select()
         .single();
-      
+
       if (courseError) {
         console.error('Error creating course:', courseError.message);
         throw new Error(courseError.message);
       }
-      
+
       return course;
     } catch (error) {
       console.error('Error creating course:', error);
@@ -274,11 +270,11 @@ class CourseService {
     try {
       // Get current user
       const { data: { user }, error: authError } = await supabase.auth.getUser();
-      
+
       if (authError || !user) {
         throw new Error('User not authenticated');
       }
-      
+
       // Update the course
       const { data: updatedCourse, error: courseError } = await supabase
         .from('courses')
@@ -290,12 +286,12 @@ class CourseService {
         .eq('instructor_id', user.id) // Ensure user owns the course
         .select()
         .single();
-      
+
       if (courseError) {
         console.error('Error updating course:', courseError.message);
         throw new Error(courseError.message);
       }
-      
+
       return updatedCourse;
     } catch (error) {
       console.error('Error updating course:', error);
@@ -308,23 +304,23 @@ class CourseService {
     try {
       // Get current user
       const { data: { user }, error: authError } = await supabase.auth.getUser();
-      
+
       if (authError || !user) {
         throw new Error('User not authenticated');
       }
-      
+
       // Delete the course
       const { error: courseError } = await supabase
         .from('courses')
         .delete()
         .eq('id', courseId)
         .eq('instructor_id', user.id); // Ensure user owns the course
-      
+
       if (courseError) {
         console.error('Error deleting course:', courseError.message);
         throw new Error(courseError.message);
       }
-      
+
       return { success: true, message: 'Course deleted successfully' };
     } catch (error) {
       console.error('Error deleting course:', error);
@@ -358,7 +354,7 @@ class CourseService {
           duration: '5 weeks'
         }
       ];
-      
+
       return templates;
     } catch (error) {
       console.error('Error getting templates:', error);
@@ -371,22 +367,22 @@ class CourseService {
     try {
       // Get current user
       const { data: { user }, error: authError } = await supabase.auth.getUser();
-      
+
       if (authError || !user) {
         throw new Error('User not authenticated');
       }
-      
+
       const { data: courses, error: courseError } = await supabase
         .from('courses')
         .select('*')
         .eq('instructor_id', user.id)
         .order('created_at', { ascending: false });
-      
+
       if (courseError) {
         console.error('Error fetching instructor courses:', courseError.message);
         throw new Error(courseError.message);
       }
-      
+
       return courses || [];
     } catch (error) {
       console.error('Error fetching instructor courses:', error);
@@ -399,11 +395,11 @@ class CourseService {
     try {
       // Get current user
       const { data: { user }, error: authError } = await supabase.auth.getUser();
-      
+
       if (authError || !user) {
         throw new Error('User not authenticated');
       }
-      
+
       // Get enrolled courses by joining enrollments and courses tables
       const { data: enrolledCourses, error: courseError } = await supabase
         .from('enrollments')
@@ -426,12 +422,12 @@ class CourseService {
         `)
         .eq('user_id', user.id)
         .eq('courses.is_published', true);
-      
+
       if (courseError) {
         console.error('Error fetching enrolled courses:', courseError.message);
         throw new Error(courseError.message);
       }
-      
+
       // Return the course data from the joined result
       return enrolledCourses.map(item => ({
         ...item.courses,
@@ -449,11 +445,11 @@ class CourseService {
     try {
       // Get current user
       const { data: { user }, error: authError } = await supabase.auth.getUser();
-      
+
       if (authError || !user) {
         throw new Error('User not authenticated');
       }
-      
+
       // Verify user owns the course
       const { data: course, error: courseCheckError } = await supabase
         .from('courses')
@@ -461,11 +457,11 @@ class CourseService {
         .eq('id', courseId)
         .eq('instructor_id', user.id)
         .single();
-      
+
       if (courseCheckError || !course) {
         throw new Error('Course not found or you do not have permission to add lessons');
       }
-      
+
       // Prepare lesson data
       const newLesson = {
         ...lessonData,
@@ -473,18 +469,18 @@ class CourseService {
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       };
-      
+
       const { data: lesson, error: lessonError } = await supabase
         .from('lessons')
         .insert([newLesson])
         .select()
         .single();
-      
+
       if (lessonError) {
         console.error('Error adding lesson:', lessonError.message);
         throw new Error(lessonError.message);
       }
-      
+
       return lesson;
     } catch (error) {
       console.error('Error adding lesson:', error);
@@ -497,11 +493,11 @@ class CourseService {
     try {
       // Get current user
       const { data: { user }, error: authError } = await supabase.auth.getUser();
-      
+
       if (authError || !user) {
         throw new Error('User not authenticated');
       }
-      
+
       // Verify user owns the course
       const { data: course, error: courseCheckError } = await supabase
         .from('courses')
@@ -509,11 +505,11 @@ class CourseService {
         .eq('id', courseId)
         .eq('instructor_id', user.id)
         .single();
-      
+
       if (courseCheckError || !course) {
         throw new Error('Course not found or you do not have permission to update lessons');
       }
-      
+
       // Update the lesson
       const { data: updatedLesson, error: lessonError } = await supabase
         .from('lessons')
@@ -525,12 +521,12 @@ class CourseService {
         .eq('course_id', courseId)
         .select()
         .single();
-      
+
       if (lessonError) {
         console.error('Error updating lesson:', lessonError.message);
         throw new Error(lessonError.message);
       }
-      
+
       return updatedLesson;
     } catch (error) {
       console.error('Error updating lesson:', error);
@@ -543,11 +539,11 @@ class CourseService {
     try {
       // Get current user
       const { data: { user }, error: authError } = await supabase.auth.getUser();
-      
+
       if (authError || !user) {
         throw new Error('User not authenticated');
       }
-      
+
       // Check if user is enrolled in the course
       const { data: enrollment, error: enrollmentError } = await supabase
         .from('enrollments')
@@ -555,31 +551,31 @@ class CourseService {
         .eq('user_id', user.id)
         .eq('course_id', courseId)
         .single();
-      
+
       if (enrollmentError || !enrollment) {
         throw new Error('User is not enrolled in this course');
       }
-      
+
       // Create or update lesson completion record
       const { data: completion, error: completionError } = await supabase
         .from('lesson_progress')
         .upsert([
-          { 
-            user_id: user.id, 
-            course_id: courseId, 
-            lesson_id: lessonId, 
-            completed: true, 
+          {
+            user_id: user.id,
+            course_id: courseId,
+            lesson_id: lessonId,
+            completed: true,
             completed_at: new Date().toISOString()
           }
         ])
         .select()
         .single();
-      
+
       if (completionError) {
         console.error('Error marking lesson complete:', completionError.message);
         throw new Error(completionError.message);
       }
-      
+
       return completion;
     } catch (error) {
       console.error('Error marking lesson complete:', error);
