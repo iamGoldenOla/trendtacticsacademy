@@ -2,7 +2,7 @@ name: Deploy Frontend to Academy Subdomain
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   workflow_dispatch:
 jobs:
   build-and-deploy:
