@@ -4,29 +4,65 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  build-and-deploy:
+    name: 🎉 Build & Deploy React App
     runs-on: ubuntu-latest
+
+    env:
+      REACT_APP_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      REACT_APP_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+
     steps:
-      - name: 🚚 Get latest code
+      - name: 🚚 Checkout repository
         uses: actions/checkout@v4
 
-      - name: 📂 Sync files (Deploy)
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'lms-frontend/package-lock.json'
+
+      - name: 📥 Install dependencies
+        working-directory: lms-frontend
+        run: npm ci
+
+      - name: 🔨 Build React app
+        working-directory: lms-frontend
+        run: npm run build
+        env:
+          CI: false
+
+      - name: ✅ Verify build
+        working-directory: lms-frontend
+        run: |
+          echo "📁 Build directory contents:"
+          ls -la build/
+          if [ -f "build/index.html" ]; then
+            echo "✅ index.html found"
+          else
+            echo "❌ index.html NOT found"
+            exit 1
+          fi
+
+      - name: 🚀 Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ./
+          local-dir: lms-frontend/build/
           security: loose
-          # Matches your user request: upload to 'master' branch content to the FTP root
-          # The FTP user should point specifically to the academy folder on the server
-          # Exclude git files and node_modules if any
           exclude: |
             **/.git*
             **/.git*/**
-            **/node_modules/**
-            **/README.md
-            **/.github/**
+
+      - name: 🎊 Deployment Success
+        run: |
+          echo "✅ Deployment completed successfully!"
+          echo "🌐 Website: https://academy.trendtacticsdigital.com"
+          echo "⏱️ Changes may take a few minutes to appear"
