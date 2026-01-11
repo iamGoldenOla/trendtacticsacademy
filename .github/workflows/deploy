@@ -1,0 +1,10 @@
+      - name: 🚀 Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /public_html/academy.trendtacticsdigital.com/
+          local-dir: lms-frontend/build/
+          protocol: ftp
+          port: 21
