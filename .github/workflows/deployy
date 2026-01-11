@@ -1,0 +1,70 @@
+name: Deploy Academy to FTP
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    name: 🎉 Build & Deploy React App
+    runs-on: ubuntu-latest
+
+    env:
+      REACT_APP_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      REACT_APP_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+
+    steps:
+      - name: 🚚 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'lms-frontend/package-lock.json'
+
+      - name: 📥 Install dependencies
+        working-directory: lms-frontend
+        run: npm ci
+
+      - name: 🔨 Build React app
+        working-directory: lms-frontend
+        run: npm run build
+        env:
+          CI: false
+
+      - name: ✅ Verify build
+        working-directory: lms-frontend
+        run: |
+          echo "📁 Build directory contents:"
+          ls -la build/
+          if [ -f "build/index.html" ]; then
+            echo "✅ index.html found"
+          else
+            echo "❌ index.html NOT found"
+            exit 1
+          fi
+
+      - name: 🚀 Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /home/trendta1/public_html/academy.trendtacticsdigital.com/
+          local-dir: lms-frontend/build/
+          protocol: ftp
+          port: 21
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+
+      - name: 🎊 Deployment Success
+        run: |
+          echo "✅ Deployment completed successfully!"
+          echo "🌐 Website: https://academy.trendtacticsdigital.com"
+          echo "⏱️ Changes may take a few minutes to appear"
