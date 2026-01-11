@@ -3,13 +3,6 @@
 
 import { supabase } from './supabaseClient';
 
-<<<<<<< HEAD
-// Initialize Supabase client (using anon key for now - in production, use backend API)
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL || 'https://uimdbodamoeyukrghchb.supabase.co';
-const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc';
-=======
->>>>>>> 73219f9bdc90257c2cd625b139c3939bc21645a3
-
 // Use Supabase tables directly instead of backend API
 
 class CourseService {
@@ -23,12 +16,8 @@ class CourseService {
   async getAllCourses() {
     try {
       console.log('Fetching courses from Supabase...');
-      
-<<<<<<< HEAD
-      const { data, error } = await supabase
-=======
+
       const { data: courses, error } = await supabase
->>>>>>> 73219f9bdc90257c2cd625b139c3939bc21645a3
         .from('courses')
         .select(`
           *,
@@ -49,20 +38,20 @@ class CourseService {
         .eq('is_published', true)
         .eq('id', 'a1b2c3d4-e5f6-7890-abcd-ef1234567890') // Only fetch Vibe Coding course
         .order('created_at', { ascending: false });
-<<<<<<< HEAD
 
       if (error) {
-        console.error('Supabase query error:', error);
-        throw error;
+        console.error('Error fetching courses from Supabase:', error.message);
+        // Even if there's an error, we should not break the app - return empty array
+        return [];
       }
-      
+
       // Process the data to ensure proper structure
-      if (data && Array.isArray(data)) {
-        const processedData = data.map(course => {
+      if (courses && Array.isArray(courses)) {
+        const processedData = courses.map(course => {
           // Ensure modules exist and are sorted
           if (course.modules && Array.isArray(course.modules)) {
             course.modules.sort((a, b) => (a.ordering || 0) - (b.ordering || 0));
-            
+
             // Ensure lessons within each module are sorted
             course.modules.forEach(module => {
               if (module.lessons && Array.isArray(module.lessons)) {
@@ -72,24 +61,13 @@ class CourseService {
           }
           return course;
         });
-        
+
         console.log('Successfully fetched courses:', processedData.length);
         return processedData;
       }
-      
+
       console.log('No courses found');
       return [];
-=======
-      
-      if (error) {
-        console.error('Error fetching courses from Supabase:', error.message);
-        // Even if there's an error, we should not break the app - return empty array
-        return [];
-      }
-      
-      console.log('Successfully fetched courses:', courses?.length || 0);
-      return courses || [];
->>>>>>> 73219f9bdc90257c2cd625b139c3939bc21645a3
     } catch (error) {
       console.error('Error fetching courses:', error);
       throw error;
@@ -137,12 +115,11 @@ class CourseService {
         console.error('Error fetching course from Supabase:', error.message);
         throw new Error('Course not found');
       }
-<<<<<<< HEAD
 
       // Ensure modules are sorted by ordering
       if (courseData.modules && Array.isArray(courseData.modules)) {
         courseData.modules.sort((a, b) => (a.ordering || 0) - (b.ordering || 0));
-        
+
         // Ensure lessons within each module are sorted by ordering
         courseData.modules.forEach(module => {
           if (module.lessons && Array.isArray(module.lessons)) {
@@ -151,9 +128,6 @@ class CourseService {
         });
       }
 
-=======
-      
->>>>>>> 73219f9bdc90257c2cd625b139c3939bc21645a3
       console.log('Successfully fetched course:', courseData.title);
       return courseData;
     } catch (error) {
