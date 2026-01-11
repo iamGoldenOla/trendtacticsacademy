@@ -48,7 +48,7 @@ const Courses: React.FC = () => {
       
       return matchesSearch && matchesLevel;
     })
-    .sort((a, b) => {
+    .sort((a: any, b: any) => {
       switch (sortBy) {
         case 'popular':
           return (b.lessons?.length || 0) - (a.lessons?.length || 0);
@@ -177,7 +177,7 @@ const Courses: React.FC = () => {
           {/* Courses Grid */}
           {!isLoading && !error && filteredCourses.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredCourses.map((course) => (
+              {filteredCourses.map((course: any) => (
                 <div
                   key={course._id}
                   className="stats-card bg-white rounded-lg shadow-md p-6 flex flex-col hover:shadow-xl transition-shadow border border-gray-100"

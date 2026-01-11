@@ -64,13 +64,13 @@ function App() {
   const handleLoginSubmit = async (email: string, password: string) => {
     try {
       const response = await login({ email, password });
-      if (!response || !response.user) {
+      if (!response || !response.user || !response.user.email) {
         // Clear localStorage on failed login
         localStorage.removeItem("user");
         localStorage.removeItem("token");
         throw new Error('Invalid response from server');
       }
-      setUser(response.user);
+      setUser(response.user as any);
       setIsLoginModalOpen(false);
       // Use navigate instead of window.location.href
       if (response.user.role === 'admin') {
@@ -91,13 +91,13 @@ function App() {
   const handleSignupSubmit = async (name: string, email: string, password: string) => {
     try {
       const response = await signup({ name, email, password });
-      if (!response || !response.user) {
+      if (!response || !response.user || !response.user.email) {
         // Clear localStorage on failed signup
         localStorage.removeItem("user");
         localStorage.removeItem("token");
         throw new Error('Invalid response from server');
       }
-      setUser(response.user);
+      setUser(response.user as any);
       setIsSignupModalOpen(false);
       // Use navigate instead of window.location.href
       if (response.user.role === 'admin') {
@@ -132,7 +132,7 @@ function App() {
         setIsLoading(true);
 
         const currentUser = await getCurrentUser();
-        setUser(currentUser); // Keep as User | null
+        setUser(currentUser as any); // Keep as User | null
         // Redirect admin to /admin if on /dashboard or /
         if (currentUser && currentUser.role === 'admin') {
           const currentPath = window.location.pathname;

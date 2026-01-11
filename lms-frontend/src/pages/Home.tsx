@@ -230,13 +230,14 @@ const Home: React.FC = () => {
                   <h3 className="text-xl font-semibold text-primary-navy mb-2">{feature.title}</h3>
                   <p className="text-gray-600">{feature.description}</p>
                 </motion.div>
-              ))}
-            </div>
+              );
+            })}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Featured Courses Section */}
-        <section className="py-20 bg-gray-50">
+      {/* Featured Courses Section */}
+      <section className="py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-primary-navy mb-4">
@@ -307,14 +308,13 @@ const Home: React.FC = () => {
                             View Course
                           </Link>
                         </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </motion.div>
-        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </div>
       </section>
 
       {/* CTA Section */}
