@@ -6,9 +6,9 @@ Go to: https://github.com/iamGoldenOla/trendtacticsacademy/settings/secrets/acti
 
 Click "New repository secret" and add each of these:
 
-### 1. FTP_SERVER
+### 1. FTP_HOST
 ```
-Name: FTP_SERVER
+Name: FTP_HOST
 Value: 193.227.129.17
 ```
 
