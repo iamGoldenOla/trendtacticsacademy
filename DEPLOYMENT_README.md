@@ -1,90 +1,42 @@
-# 🚀 FINAL DEPLOYMENT PACKAGE
+# Deployment Package - Fixed Routing Issue
 
-## What's Included
+## What's Fixed
+- **Dashboard Navigation Bug**: Changed `/courses/{id}` to `/course/{id}` to match the correct routing in App.tsx
+- This fixes the "No course ID provided" error when clicking course cards from the dashboard
 
-This zip contains your complete HTML-based LMS:
+## Deployment Instructions
 
-```
-academy-deploy/
-├── index.html              ← New homepage
-├── .htaccess              ← Updated for static HTML
-├── css/
-│   └── main.css           ← Design system
-├── js/
-│   ├── auth.js            ← Authentication utilities
-│   └── supabase-client.js ← Supabase connection
-├── course-detail.html     ← Course page with Enroll button
-├── dashboard.html         ← Student dashboard
-└── lesson-viewer.html     ← Lesson viewer with whiteboard/playground
-```
+### 1. Extract the Zip
+Extract `DEPLOYMENT_FIXED_ROUTING.zip` to a temporary folder.
 
-## 📤 Upload Instructions
+### 2. Upload to Server
+Upload **ALL contents** of the extracted folder to your `public_html` directory on your server.
 
-### Step 1: Backup Current Site
-1. Log into cPanel File Manager
-2. Navigate to `/public_html/academy.trendtacticsdigital.com/`
-3. Select all files → Download (creates backup)
+**IMPORTANT**: 
+- Make sure to upload the **contents** of the folder, not the folder itself
+- Overwrite existing files when prompted
+- The `.htaccess` file is already included in the build
 
-### Step 2: Clean Up Old Files
-Delete these React/build files:
-- `static/` folder
-- `asset-manifest.json`
-- `manifest.json`
-- Old `.htaccess` (we have a new one)
+### 3. Verify Deployment
+1. Visit: `https://academy.trendtacticsdigital.com/dashboard`
+2. Click on any course card
+3. You should now navigate to the course detail page without errors
 
-### Step 3: Upload New Files
-1. Upload `academy-final-deploy.zip`
-2. Right-click → Extract
-3. Move contents of `html-lms/` to root directory
+## Files Included
+- `index.html` - Main React app entry point
+- `static/` - All JS, CSS, and media files
+- `.htaccess` - Server configuration (with CSP headers for OpenAI/Supabase)
+- `manifest.json`, `robots.txt`, etc.
 
-### Step 4: Final Structure
-Your directory should look like:
-```
-academy.trendtacticsdigital.com/
-├── index.html          ← NEW homepage
-├── .htaccess           ← NEW (no React routing)
-├── signup.html         ← EXISTING (keep this!)
-├── whiteboard.html     ← EXISTING (keep this!)
-├── playground.html     ← EXISTING (keep this!)
-├── css/
-├── js/
-├── course-detail.html
-├── dashboard.html
-├── lesson-viewer.html
-├── courses/            ← EXISTING folders
-├── partners/
-├── payments/
-└── videos/
-```
+## Troubleshooting
+If you still see issues:
+1. **Hard refresh**: Ctrl + Shift + R (or Cmd + Shift + R on Mac)
+2. **Clear browser cache**: Settings → Privacy → Clear browsing data
+3. **Check server**: Ensure all files uploaded correctly
 
-## ✅ Test After Upload
-
-1. **Homepage:** `https://academy.trendtacticsdigital.com/`
-2. **Course Detail:** Click "View Course" on Vibe Coding
-3. **Signup:** Click "Enroll Now" → should redirect to signup.html
-4. **Dashboard:** After signup, should show enrolled courses
-
-## 🔧 GitHub Workflow (Optional)
-
-If you want GitHub to auto-deploy, delete the old workflow file:
-`.github/workflows/deploy.yml`
-
-The HTML files don't need a build process - they work as-is!
-
-## 🆘 Troubleshooting
-
-**If signup doesn't work:**
-- Make sure `signup.html` is in the root directory
-- Check browser console for errors
-
-**If whiteboard/playground don't load:**
-- Make sure `whiteboard.html` and `playground.html` are in root
-- Check file permissions (should be 644)
-
-**If styles don't load:**
-- Make sure `css/main.css` exists
-- Check browser console for 404 errors
-
-## 📞 Support
-
-Everything is configured and tested. Just upload and it should work!
+## Next Steps
+After deployment, you can:
+- Access the dashboard at `/dashboard`
+- Browse courses at `/courses`
+- View individual courses at `/course/{id}`
+- Use the AI Playground in lessons with your OpenAI API key

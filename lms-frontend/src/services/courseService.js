@@ -2,6 +2,7 @@
 // This service handles course operations through Supabase directly
 
 import { supabase } from './supabaseClient';
+import { post } from './api';
 
 // Use Supabase tables directly instead of backend API
 
@@ -17,119 +18,154 @@ class CourseService {
     try {
       console.log('Fetching courses from Supabase...');
 
+      // Fetch courses without embedded relationships to avoid relationship ambiguity
       const { data: courses, error } = await supabase
         .from('courses')
-        .select(`
-          *,
-          modules!modules_course_id_fkey (
-            id,
-            title,
-            description,
-            ordering,
-            duration,
-            lessons!lessons_module_id_fkey (
-              id,
-              title,
-              ordering,
-              duration
-            )
-          )
-        `)
+        .select('*')
         .eq('is_published', true)
-        // Removed hardcoded course ID filter - now shows ALL published courses
         .order('created_at', { ascending: false });
 
       if (error) {
         console.error('Error fetching courses from Supabase:', error.message);
-        // Even if there's an error, we should not break the app - return empty array
         return [];
       }
 
-      // Process the data to ensure proper structure
-      if (courses && Array.isArray(courses)) {
-        const processedData = courses.map(course => {
-          // Ensure modules exist and are sorted
-          if (course.modules && Array.isArray(course.modules)) {
-            course.modules.sort((a, b) => (a.ordering || 0) - (b.ordering || 0));
-
-            // Ensure lessons within each module are sorted
-            course.modules.forEach(module => {
-              if (module.lessons && Array.isArray(module.lessons)) {
-                module.lessons.sort((a, b) => (a.ordering || 0) - (b.ordering || 0));
-              }
-            });
-          }
-          return course;
-        });
-
-        console.log('Successfully fetched courses:', processedData.length);
-        return processedData;
+      if (!courses || !Array.isArray(courses)) {
+        console.log('No courses found');
+        return [];
       }
 
-      console.log('No courses found');
-      return [];
+      // Fetch modules separately for each course to avoid relationship ambiguity
+      const processedData = await Promise.all(courses.map(async (course) => {
+        const { data: modules, error: modulesError } = await supabase
+          .from('modules')
+          .select('*')
+          .eq('course_id', course.id)
+          .order('ordering', { ascending: true });
+
+        if (!modulesError && modules && Array.isArray(modules)) {
+          // Fetch lessons separately for each module
+          const modulesWithLessons = await Promise.all(modules.map(async (module) => {
+            const { data: lessons, error: lessonsError } = await supabase
+              .from('lessons')
+              .select('*')
+              .eq('module_id', module.id)
+              .order('ordering', { ascending: true });
+
+            return {
+              ...module,
+              lessons: lessons && Array.isArray(lessons) ? lessons : []
+            };
+          }));
+
+          return {
+            ...course,
+            modules: modulesWithLessons
+          };
+        }
+
+        return {
+          ...course,
+          modules: []
+        };
+      }));
+
+      console.log('Successfully fetched courses:', processedData.length);
+      return processedData;
     } catch (error) {
       console.error('Error fetching courses:', error);
-      throw error;
+      return [];
     }
   }
 
-  // Get course by ID (for course detail page) - Only allow Vibe Coding course
+  // Get a single course by ID with its modules and lessons (uses direct Supabase queries)
   async getCourseById(courseId) {
     try {
       console.log('Fetching course by ID from Supabase:', courseId);
 
-      // Validate input
-      if (!courseId) {
-        throw new Error('Course ID is required');
-      }
-
-      // Removed hardcoded course ID restriction - now allows all published courses
-
-      const { data: courseData, error } = await supabase
+      // Fetch course without embedded relationships to avoid relationship ambiguity
+      const { data: course, error: courseError } = await supabase
         .from('courses')
-        .select(`
-          *,
-          modules!modules_course_id_fkey (
-            id,
-            title,
-            description,
-            ordering,
-            duration,
-            lessons!lessons_module_id_fkey (
-              id,
-              title,
-              ordering,
-              duration
-            )
-          )
-        `)
+        .select('*')
         .eq('id', courseId)
         .single();
 
-      if (error) {
-        console.error('Error fetching course from Supabase:', error.message);
-        throw new Error('Course not found');
+      if (courseError || !course) {
+        console.error('Error fetching course:', courseError);
+        throw new Error(courseError?.message || 'Course not found');
       }
 
-      // Ensure modules are sorted by ordering
-      if (courseData.modules && Array.isArray(courseData.modules)) {
-        courseData.modules.sort((a, b) => (a.ordering || 0) - (b.ordering || 0));
+      // Fetch modules separately
+      const { data: modules, error: modulesError } = await supabase
+        .from('modules')
+        .select('*')
+        .eq('course_id', courseId)
+        .order('ordering', { ascending: true });
 
-        // Ensure lessons within each module are sorted by ordering
-        courseData.modules.forEach(module => {
-          if (module.lessons && Array.isArray(module.lessons)) {
-            module.lessons.sort((a, b) => (a.ordering || 0) - (b.ordering || 0));
+      if (modulesError) {
+        console.error('Error fetching modules:', modulesError);
+        // Continue even if modules fail - return course without modules
+      }
+
+      // Fetch lessons separately for each module
+      const modulesWithLessons = [];
+      if (modules && Array.isArray(modules)) {
+        for (const module of modules) {
+          const { data: lessons, error: lessonsError } = await supabase
+            .from('lessons')
+            .select('*')
+            .eq('module_id', module.id)
+            .order('ordering', { ascending: true });
+
+          // Fetch quiz questions for each lesson
+          const lessonsWithQuizzes = [];
+          if (lessons && Array.isArray(lessons)) {
+            for (const lesson of lessons) {
+              const { data: quizzes, error: quizzesError } = await supabase
+                .from('quizzes')  // Fixed: Changed from 'quiz_questions' to 'quizzes'
+                .select('*')
+                .eq('lesson_id', lesson.id)
+                .order('created_at', { ascending: true });
+
+              // Transform quiz data to match frontend expectations
+              const transformedQuizzes = quizzes && Array.isArray(quizzes)
+                ? quizzes.map(q => ({
+                  question: q.question,
+                  options: Array.isArray(q.options) ? q.options : JSON.parse(q.options || '[]'),
+                  correctAnswer: Array.isArray(q.options)
+                    ? q.options.indexOf(q.correct_answer)
+                    : JSON.parse(q.options || '[]').indexOf(q.correct_answer)
+                }))
+                : [];
+
+              lessonsWithQuizzes.push({
+                ...lesson,
+                quiz: transformedQuizzes,  // Frontend expects 'quiz' array
+                quiz_questions: transformedQuizzes // Fallback for compatibility
+              });
+            }
           }
-        });
+
+          modulesWithLessons.push({
+            ...module,
+            lessons: lessonsWithQuizzes
+          });
+        }
       }
 
-      console.log('Successfully fetched course:', courseData.title);
-      return courseData;
+      return {
+        ...course,
+        modules: modulesWithLessons
+      };
     } catch (error) {
-      console.error('Error fetching course by ID', courseId, ':', error);
+      console.error('Error in getCourseById:', error);
       throw error;
     }
+  }
+
+  // Resolve course content: Wrapper for standardized API
+  async resolveCourseContent(courseId) {
+    return this.getCourseById(courseId);
   }
 
   // Enroll user in course
@@ -160,9 +196,8 @@ class CourseService {
         .from('enrollments')
         .insert([{
           user_id: user.id,
-          course_id: courseId,
-          enrolled_at: new Date().toISOString(),
-          status: 'active'
+          course_id: courseId
+          // removed status and enrolled_at - let Supabase defaults handle these
         }]);
 
       if (enrollError) {
@@ -404,21 +439,7 @@ class CourseService {
       const { data: enrolledCourses, error: courseError } = await supabase
         .from('enrollments')
         .select(`
-          courses!inner(
-            id,
-            title,
-            description,
-            thumbnail_url,
-            duration,
-            level,
-            price,
-            is_featured,
-            is_published,
-            created_at,
-            updated_at
-          ),
-          enrolled_at,
-          status
+          courses!inner(*)
         `)
         .eq('user_id', user.id)
         .eq('courses.is_published', true);
@@ -431,7 +452,7 @@ class CourseService {
       // Return the course data from the joined result
       return enrolledCourses.map(item => ({
         ...item.courses,
-        enrolled_at: item.enrolled_at,
+        enrolled_at: item.created_at,
         enrollment_status: item.status
       })) || [];
     } catch (error) {
@@ -600,5 +621,6 @@ export const getEnrolledCourses = courseService.getEnrolledCourses.bind(courseSe
 export const addLesson = courseService.addLesson.bind(courseService);
 export const updateLesson = courseService.updateLesson.bind(courseService);
 export const markLessonComplete = courseService.markLessonComplete.bind(courseService);
+export const resolveCourseContent = courseService.resolveCourseContent.bind(courseService);
 
 export default courseService;

@@ -16,17 +16,17 @@ const InteractiveCourseDetail = ({ user, onLogin, onSignup }) => {
             try {
                 setLoading(true);
                 setError(null);
-                
+
                 if (!id) {
                     setError('Course ID is missing');
                     setLoading(false);
                     return;
                 }
-                
+
                 // Fetch course details
                 const courseData = await courseService.getCourseById(id);
                 setCourse(courseData);
-                
+
                 // Check if user is enrolled (simplified check)
                 if (user && user.enrolledCourses && user.enrolledCourses.includes(id)) {
                     setIsEnrolled(true);
@@ -41,7 +41,7 @@ const InteractiveCourseDetail = ({ user, onLogin, onSignup }) => {
                 setLoading(false);
             }
         };
-        
+
         fetchCourseData();
     }, [id, user]);
 
@@ -50,7 +50,7 @@ const InteractiveCourseDetail = ({ user, onLogin, onSignup }) => {
             if (onLogin) onLogin();
             return;
         }
-        
+
         // If the course is free, enroll directly
         if (course.price === 0) {
             try {
@@ -90,7 +90,7 @@ const InteractiveCourseDetail = ({ user, onLogin, onSignup }) => {
                     </div>
                     <h3 className="text-lg font-medium text-gray-900 mb-2">Error Loading Course</h3>
                     <p className="text-gray-600 mb-4">{error}</p>
-                    <button 
+                    <button
                         onClick={() => window.location.reload()}
                         className="btn-primary"
                     >
@@ -110,24 +110,24 @@ const InteractiveCourseDetail = ({ user, onLogin, onSignup }) => {
                         <div className="p-8">
                             <h1 className="text-3xl font-bold text-gray-900 mb-4">{course.title}</h1>
                             <p className="text-gray-600 mb-6">{course.description}</p>
-                            
+
                             <div className="flex items-center justify-between mb-8">
-                                <div className="text-3xl font-bold text-gray-900">${course.price}</div>
-                                <button 
+                                <div className="text-3xl font-bold text-gray-900">₦{course.price ? Number(course.price).toLocaleString() : '5,000'}</div>
+                                <button
                                     onClick={handleEnroll}
                                     className="btn-primary"
                                 >
                                     Enroll Now
                                 </button>
                             </div>
-                            
+
                             <div className="border-t border-gray-200 pt-6">
                                 <h2 className="text-xl font-semibold text-gray-900 mb-4">What you'll learn</h2>
                                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                     {course.modules && course.modules.slice(0, 6).map((module, index) => (
                                         <li key={index} className="flex items-start">
                                             <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                             </svg>
                                             <span className="text-gray-700">{module.title}</span>
                                         </li>
@@ -143,7 +143,7 @@ const InteractiveCourseDetail = ({ user, onLogin, onSignup }) => {
 
     // If enrolled or course is free, show the interactive learning board
     return (
-        <CourseLearningBoard 
+        <CourseLearningBoard
             course={course}
             onComplete={handleCourseComplete}
         />

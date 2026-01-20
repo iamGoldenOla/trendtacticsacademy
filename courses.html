@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses - Trendtactics Academy</title>
+    <title>Courses - Trendtactics Academy (v2.1)</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="icon" href="/images/Trendtactics-logo - Copy.jpg" type="image/jpeg">
 
@@ -274,10 +274,10 @@
                     .select('*')
                     .eq('status', 'published')
                     .order('created_at', { ascending: false });
-                
+
                 if (error) throw error;
-                
-                const courses = data || [];
+
+                const courses = (data || []);
 
                 if (courses.length > 0) {
                     // Show personalized courses
@@ -300,11 +300,13 @@
                     .from("courses")
                     .select("*")
                     .order("created_at", { ascending: false });
-                
+
                 if (error) throw error;
-                
-                const courses = data || [];
-                
+
+                console.log("Raw Supabase Data:", data);
+                const courses = (data || []);
+                console.log("Filtered Courses:", courses);
+
                 if (courses.length === 0) {
                     document.getElementById('coursesGrid').innerHTML = `
                         <div style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
@@ -313,12 +315,10 @@
                     `;
                     return;
                 }
-                
+
                 // Generate HTML for each course
                 const coursesHTML = courses.map(course => {
-                    // Use the course's slug if available, otherwise generate from title
-                    const slug = course.slug || course.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-                    
+                    // Use course.html?id=ID for robust linking
                     return `
                         <div class="card" style="transition: all 0.3s ease;">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
@@ -346,13 +346,13 @@
                                     <span style="color: var(--primary); margin-right: 0.5rem; font-weight: bold;">4.</span> Real-World Projects
                                 </p>
                             </div>
-                            <a href="/course/${slug}" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">
+                            <a href="/course.html?id=${course.id}" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">
                                 View Course
                             </a>
                         </div>
                     `;
                 }).join('');
-                
+
                 document.getElementById('coursesGrid').innerHTML = coursesHTML;
             } catch (err) {
                 console.error('❌ Error loading courses:', err);
@@ -452,4 +452,3 @@
         initPage();
     </script>
 </body>
-

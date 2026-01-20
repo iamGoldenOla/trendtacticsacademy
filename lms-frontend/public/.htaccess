@@ -1,13 +1,17 @@
+<IfModule mod_headers.c>
+    # Critical: Allow connections to Supabase and other external resources
+    Header set Content-Security-Policy "default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https: blob:; font-src 'self' data: https:; connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co https://*.supabase.co https://api.openai.com https://fonts.googleapis.com https://*.puter.com wss://*.puter.com; frame-src 'self' https:;"
+    
+    # Enable CORS
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
-
-  # Don't rewrite files or directories
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
-  RewriteRule ^ - [L]
-
-  # Rewrite everything else to index.html to allow React Router to handle routing
-  RewriteRule ^ index.html [L]
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteRule . /index.html [L]
 </IfModule>
-

@@ -2,6 +2,7 @@
 
 // Import the lesson retrieval functions
 const getLesson = require('./get-lesson');
+const resolveCourse = require('./resolve-course');
 
 /**
  * Main API handler
@@ -38,25 +39,33 @@ module.exports = async function handler(req, res) {
         lessonNumber: params.get('lessonNumber'),
         courseTitle: params.get('courseTitle')
       };
-      
+
       await getLesson(req, res);
-    } 
+    }
     else if (path === '/api/module-lessons' || path === '/api/get-module-lessons') {
       // Get all lessons for a specific module
       req.query = {
         moduleTitle: params.get('moduleTitle')
       };
-      
+
       await getLesson.getAllModuleLessons(req, res);
-    } 
+    }
     else if (path === '/api/course-modules' || path === '/api/get-course-modules') {
       // Get all modules for a specific course
       req.query = {
         courseTitle: params.get('courseTitle')
       };
-      
+
       await getLesson.getAllCourseModules(req, res);
-    } 
+    }
+    else if (path === '/api/courses/resolve' || path === '/api/resolve-course') {
+      // Resolve a course (fetch or generate)
+      req.query = {
+        id: params.get('id')
+      };
+
+      await resolveCourse(req, res);
+    }
     else {
       // Unknown endpoint
       res.status(404).json({ error: 'Endpoint not found' });

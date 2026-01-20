@@ -1,0 +1,61 @@
+-- ==========================================
+-- PROMPT ENGINEERING - ALL 27 LESSONS COMPLETE
+-- Comprehensive expansion for all 6 modules
+-- ~1200 words per lesson, compact HTML
+-- ==========================================
+-- 
+-- This master file contains references to all lesson IDs
+-- Use this to create individual module update scripts
+--
+-- MODULE 1: Foundations & Behavior Architecture (5 lessons)
+-- Lesson IDs:
+-- 696e80aa-cdf1-48bf-b533-a58669ef3db7 - The Death of the Single Prompt
+-- fd786a68-b151-4805-9577-3db02bb2fd53 - Understanding AI Models  
+-- 94ed494a-af0d-420d-b913-4a345b054770 - What Prompt Engineering Really Is
+-- a2e92811-e82e-44d5-9384-a2ff956f9e11 - How AI Interprets Instructions
+-- d36a0a98-f8a7-4cc1-8623-6f5876fac23a - Prompt Engineering vs Traditional Instructions
+--
+-- MODULE 2: Core Techniques & Orchestration (6 lessons)
+-- Lesson IDs:
+-- e04cad79-95d0-4388-bddc-bf5f3ec21b38 - Context Management
+-- dab898e7-0865-46d1-8d72-a3aa74a0a72f - Chain-of-Thought Prompting
+-- 48ec3816-6454-47fa-82c1-324ed414763a - Few-Shot Learning
+-- 9c6b9ec3-cfcf-44b1-8f5b-2de661b1299c - Core Prompt Components
+-- ca5cd4e9-f050-4a5c-8b8e-d6e2e931d2a8 - Context Layering
+-- 6cad937f-3f2f-451e-95f7-9e0b264cfeb4 - Constraints & Guardrails
+--
+-- MODULE 3: Advanced Workflows & Meta-Prompting (6 lessons)
+-- Lesson IDs:
+-- 8267fbba-4489-43db-9b9e-7a929027e874 - Designing The Swarm
+-- 66aa2859-2f02-4025-a602-ee55dc21ec28 - Agent Control Planes
+-- e6bd72c3-6bb6-426c-a43b-e09d1f218e7d - Dynamic Prompting
+-- 725f4c44-2f43-4caa-8f7d-06455a2b54f7 - Prompt Chaining
+-- ea2bda0e-356e-46d6-934a-d150c10a3ff7 - Iterative Refinement and Prompt Chaining
+-- b86a0941-2155-4204-a8fa-a654954888c8 - Few-Shot Learning and Examples
+--
+-- MODULE 4: Professional Mastery & Ethics (6 lessons)
+-- Lesson IDs:
+-- 03566822-4d1b-426d-8a27-a1c9481c38fc - Constitutional AI & Alignment
+-- d7b6cc5c-d758-4eba-9d31-0cfbc3b5d4cc - Production Deployment
+-- 1ee9a8e9-db56-4ccf-a935-72ff12859f35 - Recursive Prompts
+-- 3318d5e9-03c1-4ab0-a1b8-87d3a7e3efca - Industry Applications & Case Studies
+-- 8f0ae954-d667-4c8a-b269-7d6dd78057ec - Temperature and Creativity Control
+-- d810a1f2-a653-4e77-bd57-eeb2c499d51f - Zero-Shot and Self-Consistency Techniques
+--
+-- MODULE 5: Real-World Applications (3 lessons)
+-- Lesson IDs:
+-- 541047ab-4271-4079-9e47-99906475d094 - Prompt Engineering for Content Creation
+-- 059f53ab-1f9e-4c99-87a5-0499dc8957ed - Prompt Engineering for Code Generation
+-- 9caa0061-6296-430d-8907-7868f160e683 - Prompt Engineering for Data Analysis
+--
+-- MODULE 6: Course Conclusion (3 lessons)
+-- Lesson IDs:
+-- f1334fe9-24c4-4da0-bc80-dc3e252e543b - Common Prompt Engineering Mistakes
+-- e4411545-1cc2-4ac0-85af-7efac6a24b4c - Testing and Validating Prompts
+-- 2a73b3a3-e5a3-4681-aee5-b2a13849364f - Final Projects & Advanced Strategy
+--
+-- ==========================================
+
+SELECT 'Prompt Engineering Mastery - Lesson ID Reference' as info;
+SELECT '27 lessons ready for comprehensive expansion' as status;
+SELECT 'Creating individual module SQL files now...' as next_step;

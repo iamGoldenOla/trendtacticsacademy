@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# 1. Allow existing files/dirs to be served directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# 2. Redirects for old routes (optional, but good to keep)
+RewriteRule ^dashboard/?$ /new-dashboard [R=301,L]
+RewriteRule ^learn/?$ /new-learn [R=301,L]
+
+# 3. Handle React Router (SPA Fallback)
+# If the request is NOT a file or directory, serve index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]

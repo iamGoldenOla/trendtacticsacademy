@@ -1,0 +1,30 @@
+
+RewriteEngine On
+
+# 1. Handle actual files/directories first (standard optimization)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# 2. Redirect dashboard/learn paths to their HTML files if they exist
+RewriteRule ^dashboard/?$ /new-dashboard.html [L]
+RewriteRule ^learn/?$ /new-learn.html [L]
+
+# 3. Handle course details routing
+# Matches /course/some-slug -> /course.html?id=some-slug (or however you handle it)
+# Wait, looking at your setup, it seems you have specific html files or SPA.
+# But simply: if it's not a file, let's look at the implementation.
+# The user's system likely serves .html files.
+
+# Fix mime types if needed
+<IfModule mod_mime.c>
+  AddType text/javascript .js
+  AddType text/css .css
+</IfModule>
+
+# Handle HTML extension removal (optional, but good for clean URLs)
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^/]+)/?$ $1.html [L]
+
+# Fallback for errors
+ErrorDocument 404 /404.html

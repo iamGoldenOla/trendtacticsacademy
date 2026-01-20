@@ -1,0 +1,274 @@
+{
+    "image_guide": {
+        "free_stock_sources": [
+            {
+                "name": "Unsplash",
+                "url": "https://unsplash.com",
+                "best_for": "High-quality tech, business, and abstract images",
+                "license": "Free for commercial use"
+            },
+            {
+                "name": "Pexels",
+                "url": "https://pexels.com",
+                "best_for": "Diverse collection, good for people and workspace shots",
+                "license": "Free for commercial use"
+            },
+            {
+                "name": "Pixabay",
+                "url": "https://pixabay.com",
+                "best_for": "Large collection, illustrations available",
+                "license": "Free for commercial use"
+            },
+            {
+                "name": "StockSnap",
+                "url": "https://stocksnap.io",
+                "best_for": "Modern, trendy images",
+                "license": "Free for commercial use"
+            }
+        ],
+        "courses": {
+            "vibe_coding": {
+                "course_title": "Vibe Coding 3.0",
+                "theme_colors": [
+                    "#00D9FF",
+                    "#050B18"
+                ],
+                "search_keywords": [
+                    "AI coding",
+                    "programming abstract",
+                    "developer workspace",
+                    "code on screen",
+                    "futuristic technology",
+                    "artificial intelligence",
+                    "software development"
+                ],
+                "lessons": [
+                    {
+                        "title": "Intent Is the New Programming Language",
+                        "suggested_search": "person thinking + laptop OR abstract brain technology",
+                        "image_type": "Hero image showing contemplation/planning",
+                        "alt_text": "Developer planning with AI assistance"
+                    },
+                    {
+                        "title": "What Is Vibe Coding (Deep)",
+                        "suggested_search": "AI robot coding OR futuristic programming",
+                        "image_type": "Conceptual AI/coding fusion",
+                        "alt_text": "AI-powered software development concept"
+                    },
+                    {
+                        "title": "From Writing Code to Directing Systems",
+                        "suggested_search": "conductor orchestra OR director film",
+                        "image_type": "Leadership/direction metaphor",
+                        "alt_text": "Directing systems like conducting an orchestra"
+                    },
+                    {
+                        "title": "The Vibe Coding Loop",
+                        "suggested_search": "circular workflow OR continuous cycle",
+                        "image_type": "Circular/loop visualization",
+                        "alt_text": "Iterative development workflow"
+                    },
+                    {
+                        "title": "How AI Thinks (and Why It Breaks)",
+                        "suggested_search": "broken circuit OR glitch art",
+                        "image_type": "Technical failure/debugging concept",
+                        "alt_text": "Understanding AI limitations"
+                    },
+                    {
+                        "title": "Context, Memory, and Constraints",
+                        "suggested_search": "memory chips OR data storage",
+                        "image_type": "Technical/memory concept",
+                        "alt_text": "AI memory and context management"
+                    },
+                    {
+                        "title": "Debugging AI Systems",
+                        "suggested_search": "debugging code OR magnifying glass code",
+                        "image_type": "Problem-solving/investigation",
+                        "alt_text": "Debugging AI-generated code"
+                    },
+                    {
+                        "title": "Building a SaaS with AI",
+                        "suggested_search": "cloud computing OR SaaS dashboard",
+                        "image_type": "Cloud/SaaS visualization",
+                        "alt_text": "Building SaaS applications with AI"
+                    }
+                ]
+            },
+            "prompt_engineering": {
+                "course_title": "Prompt Engineering Mastery",
+                "theme_colors": [
+                    "#00D9FF",
+                    "#050B18"
+                ],
+                "search_keywords": [
+                    "AI communication",
+                    "writing code",
+                    "chat interface",
+                    "artificial intelligence",
+                    "digital communication",
+                    "text editor",
+                    "creative writing"
+                ],
+                "lessons": [
+                    {
+                        "title": "The Death of the Single Prompt",
+                        "suggested_search": "evolution timeline OR transformation",
+                        "image_type": "Evolution/change concept",
+                        "alt_text": "Evolution of prompt engineering"
+                    },
+                    {
+                        "title": "What Prompt Engineering Really Is",
+                        "suggested_search": "blueprint OR architectural design",
+                        "image_type": "Planning/design concept",
+                        "alt_text": "Prompt engineering fundamentals"
+                    },
+                    {
+                        "title": "Chain-of-Thought Prompting",
+                        "suggested_search": "chain links OR connected dots",
+                        "image_type": "Connection/sequence visualization",
+                        "alt_text": "Chain-of-thought reasoning process"
+                    },
+                    {
+                        "title": "Few-Shot Learning",
+                        "suggested_search": "learning examples OR teaching",
+                        "image_type": "Education/learning concept",
+                        "alt_text": "Few-shot learning examples"
+                    },
+                    {
+                        "title": "Prompt Templates",
+                        "suggested_search": "template design OR framework",
+                        "image_type": "Structure/framework visualization",
+                        "alt_text": "Reusable prompt templates"
+                    },
+                    {
+                        "title": "Testing and Iteration",
+                        "suggested_search": "A/B testing OR experiment",
+                        "image_type": "Testing/experimentation",
+                        "alt_text": "Iterative prompt refinement"
+                    }
+                ]
+            },
+            "facebook_ads_foundation": {
+                "course_title": "Facebook Ads Foundation",
+                "theme_colors": [
+                    "#1877F2",
+                    "#050B18"
+                ],
+                "search_keywords": [
+                    "social media marketing",
+                    "digital advertising",
+                    "mobile phone ads",
+                    "marketing strategy",
+                    "business growth",
+                    "analytics dashboard",
+                    "target audience"
+                ],
+                "lessons": [
+                    {
+                        "title": "Meta Ads Manager Simulator",
+                        "suggested_search": "dashboard interface OR analytics screen",
+                        "image_type": "Dashboard/interface visualization",
+                        "alt_text": "Meta Ads Manager interface"
+                    },
+                    {
+                        "title": "Choosing the Right Campaign Objective",
+                        "suggested_search": "target goal OR bullseye",
+                        "image_type": "Goal/targeting concept",
+                        "alt_text": "Setting campaign objectives"
+                    },
+                    {
+                        "title": "Audience Targeting Basics",
+                        "suggested_search": "diverse people OR target audience",
+                        "image_type": "Audience/people diversity",
+                        "alt_text": "Understanding your target audience"
+                    },
+                    {
+                        "title": "Ad Creative Best Practices",
+                        "suggested_search": "creative design OR advertising poster",
+                        "image_type": "Creative/design concept",
+                        "alt_text": "Creating compelling ad creatives"
+                    },
+                    {
+                        "title": "Budget and Bidding",
+                        "suggested_search": "money management OR budget planning",
+                        "image_type": "Financial planning",
+                        "alt_text": "Managing ad budgets effectively"
+                    },
+                    {
+                        "title": "Funnel Mapping with Facebook Ads",
+                        "suggested_search": "sales funnel OR conversion path",
+                        "image_type": "Funnel/journey visualization",
+                        "alt_text": "Customer journey funnel"
+                    }
+                ]
+            },
+            "facebook_ads_mastery": {
+                "course_title": "Facebook Ads Mastery",
+                "theme_colors": [
+                    "#1877F2",
+                    "#050B18"
+                ],
+                "search_keywords": [
+                    "advanced analytics",
+                    "ROI growth",
+                    "scaling business",
+                    "data visualization",
+                    "professional marketing",
+                    "automation",
+                    "AI technology"
+                ],
+                "lessons": [
+                    {
+                        "title": "Introduction to AI-First Advertising",
+                        "suggested_search": "AI automation OR machine learning",
+                        "image_type": "AI/automation concept",
+                        "alt_text": "AI-powered advertising"
+                    },
+                    {
+                        "title": "Advantage+ Pro & Autonomous Campaigns",
+                        "suggested_search": "autopilot OR autonomous system",
+                        "image_type": "Automation/autonomous concept",
+                        "alt_text": "Automated campaign management"
+                    },
+                    {
+                        "title": "Scaling Strategies",
+                        "suggested_search": "growth chart OR scaling up",
+                        "image_type": "Growth/scaling visualization",
+                        "alt_text": "Scaling advertising campaigns"
+                    },
+                    {
+                        "title": "Advanced Bidding Strategies",
+                        "suggested_search": "auction OR competitive bidding",
+                        "image_type": "Competition/strategy concept",
+                        "alt_text": "Advanced bidding techniques"
+                    },
+                    {
+                        "title": "Retargeting with Dynamic Ads",
+                        "suggested_search": "returning customer OR remarketing",
+                        "image_type": "Return/cycle concept",
+                        "alt_text": "Dynamic retargeting strategies"
+                    },
+                    {
+                        "title": "E-commerce Funnel Build",
+                        "suggested_search": "online shopping OR e-commerce",
+                        "image_type": "E-commerce/shopping concept",
+                        "alt_text": "Building e-commerce funnels"
+                    },
+                    {
+                        "title": "Agency Client Campaign Audit",
+                        "suggested_search": "business analysis OR audit checklist",
+                        "image_type": "Analysis/review concept",
+                        "alt_text": "Professional campaign auditing"
+                    }
+                ]
+            }
+        }
+    },
+    "implementation_guide": {
+        "step_1": "Search for images using suggested keywords on Unsplash/Pexels",
+        "step_2": "Download high-resolution images (1920x1080 or larger)",
+        "step_3": "Upload to Supabase Storage or use direct URLs",
+        "step_4": "Add to lesson content using SQL or manually",
+        "image_html_template": "<img src='IMAGE_URL' alt='ALT_TEXT' style='width:100%; max-width:800px; border-radius:12px; margin:20px 0; box-shadow: 0 4px 6px rgba(0,217,255,0.1);'>"
+    },
+    "sql_template": "UPDATE lessons SET content = '<img src=\"YOUR_IMAGE_URL\" alt=\"DESCRIPTION\" style=\"width:100%; max-width:800px; border-radius:12px; margin:20px 0;\">' || content WHERE title = 'LESSON_TITLE';"
+}

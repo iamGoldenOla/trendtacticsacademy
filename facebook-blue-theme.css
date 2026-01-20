@@ -1,0 +1,101 @@
+/* Facebook Blue Theme Override for Meta Ads Simulators */
+/* Add this to both simulator HTML files in the <head> section */
+
+<style>
+
+/* Replace all purple gradients with Facebook blue */
+body {
+    background: #f0f2f5 !important;
+}
+
+.ai-coach-header,
+.campaign-wizard {
+    background: #fff !important;
+    backdrop-filter: none !important;
+    border: none !important;
+}
+
+.avatar-icon {
+    background: #1877f2 !important;
+    animation: none !important;
+}
+
+.ai-message-box {
+    background: #1877f2 !important;
+}
+
+.ai-message-box::before,
+.ai-hint::before {
+    display: none !important;
+}
+
+.progress-bar {
+    background: #e4e6eb !important;
+}
+
+.progress-fill {
+    background: #1877f2 !important;
+}
+
+.ai-hint {
+    border-left-color: #1877f2 !important;
+}
+
+.objective-card::before {
+    background: linear-gradient(90deg, transparent, rgba(24, 119, 242, 0.1), transparent) !important;
+}
+
+.objective-card:hover {
+    border-color: #1877f2 !important;
+    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.2) !important;
+}
+
+.objective-card.selected {
+    border-color: #1877f2 !important;
+    background: rgba(24, 119, 242, 0.05) !important;
+}
+
+.objective-card.ai-recommended::after {
+    content: 'AI Recommended' !important;
+}
+
+.ai-score {
+    background: #1877f2 !important;
+    animation: none !important;
+}
+
+.btn-primary {
+    background: #1877f2 !important;
+}
+
+.btn-primary:hover {
+    background: #166fe5 !important;
+    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3) !important;
+}
+
+.ai-analysis {
+    background: #1877f2 !important;
+}
+
+.gamification-badge {
+    background: #1877f2 !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(24, 119, 242, 0.3) !important;
+}
+
+.simulator-header h1 {
+    color: #1877f2 !important;
+}
+
+.estimated-reach {
+    background: #1877f2 !important;
+}
+
+/* Remove all emojis from content */
+h1::before,
+h2::before,
+h3::before {
+    content: '' !important;
+}
+
+</style>

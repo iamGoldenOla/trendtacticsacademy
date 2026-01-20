@@ -54,7 +54,6 @@ export const getAllCourses = async (): Promise<Course[]> => {
     const { data, error } = await supabase
       .from('courses')
       .select('*')
-      .eq('status', 'published')
       .order('created_at', { ascending: false });
 
     if (error) {

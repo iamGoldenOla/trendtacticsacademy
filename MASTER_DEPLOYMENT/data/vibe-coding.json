@@ -1,0 +1,617 @@
+[
+    {
+        "title": "Module 1: Foundations",
+        "lessons": [
+            {
+                "title": "What is Vibe Coding?",
+                "description": "<h3><b>The Shift from Syntax to Intent</b></h3><p>Coined by Andrej Karpathy in 2025, 'Vibe Coding' is a paradigm shift where the developer focuses on <b>intent</b> and <b>design</b>, while AI agents handle implementation.</p><blockquote>'I fully give in to the vibes, embrace exponentials, and forget that the code even exists.' - Andrej Karpathy</blockquote><h3><b>Core Principles</b></h3><ul><li><b>Intent over Syntax:</b> Describe <i>what</i> you want, not <i>how</i> to write it.</li><li><b>Review over Write:</b> The developer's role shifts to Editor-in-Chief.</li><li><b>Speed as a Feature:</b> Rapid prototyping allows for more experimentation.</li></ul>",
+                "video_url": "https://www.youtube.com/embed/yO7-wV7pPZQ",
+                "summary": "Vibe Coding is a role reversal: You are the Architect, AI is the Coder. Success requires strong system design skills.",
+                "resources": [
+                    {
+                        "url": "https://karpathy.ai",
+                        "title": "Andrej Karpathy's Blog"
+                    },
+                    {
+                        "url": "https://cursor.sh",
+                        "title": "Cursor AI Home"
+                    }
+                ],
+                "quiz_questions": [
+                    {
+                        "question": "Who coined 'Vibe Coding'?",
+                        "options": [
+                            "Sam Altman",
+                            "Andrej Karpathy",
+                            "Satya Nadella",
+                            "Linus Torvalds"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "What is the primary human role?",
+                        "options": [
+                            "Syntax writing",
+                            "Memory management",
+                            "High-level intent & review",
+                            "Debugging"
+                        ],
+                        "correctAnswer": 2
+                    },
+                    {
+                        "question": "What happens to the thought-execution barrier?",
+                        "options": [
+                            "It dissolves",
+                            "It increases",
+                            "It stays the same",
+                            "It becomes red tape"
+                        ],
+                        "correctAnswer": 0
+                    },
+                    {
+                        "question": "The AI acts as:",
+                        "options": [
+                            "Manager",
+                            "Junior Developer",
+                            "CEO",
+                            "Tester"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "What is prioritized?",
+                        "options": [
+                            "Perfect syntax",
+                            "Speed & Experimentation",
+                            "Slow typing",
+                            "Manual docs"
+                        ],
+                        "correctAnswer": 1
+                    }
+                ]
+            },
+            {
+                "title": "The Agentic Shift",
+                "description": "<h3><b>From Co-Pilot to Auto-Pilot</b></h3><p>The 2026 era is defined by <b>Agentic Workflows</b>. An 'Agent' can plan, execute, debug, and iterate autonomously.</p><h3><b>Agent Characteristics</b></h3><ul><li><b>Autonomy:</b> Can break down high-level goals.</li><li><b>Tool Use:</b> Can run terminal commands and access the web.</li><li><b>Self-Correction:</b> Fixes its own errors.</li></ul><h3><b>Orchestration</b></h3><p>Your job becomes conducting a symphony of agents—one for backend, one for frontend, one for testing.</p>",
+                "video_url": "https://www.youtube.com/embed/Sal7cz3T40M",
+                "summary": "Moving from 'doing' to 'managing'. Agents leverage tools to solve problems autonomously.",
+                "quiz_questions": [
+                    {
+                        "question": "What distinguishes an Agent from a Co-pilot?",
+                        "options": [
+                            "Agents are faster",
+                            "Agents can plan & self-correct",
+                            "Agents are cheaper",
+                            "Co-pilots draw"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "What is a key agent capability?",
+                        "options": [
+                            "Drawing",
+                            "Tool Use (Terminal/Web)",
+                            "Cooking",
+                            "Walking"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "If an agent errors, it should:",
+                        "options": [
+                            "Give up",
+                            "Delete project",
+                            "Hypothesize & Fix",
+                            "Panic"
+                        ],
+                        "correctAnswer": 2
+                    },
+                    {
+                        "question": "The new human role is:",
+                        "options": [
+                            "Typist",
+                            "Orchestrator",
+                            "Spectator",
+                            "Data Entry"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "The shift is from ______ to ______.",
+                        "options": [
+                            "Co-pilot to Auto-pilot",
+                            "Java to C#",
+                            "Cloud to On-prem",
+                            "Mouse to Touch"
+                        ],
+                        "correctAnswer": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Module 2: The Workbench",
+        "lessons": [
+            {
+                "title": "Setting Up Cursor AI",
+                "description": "<h3><b>Installation & Config</b></h3><p>1. Download Cursor from <a href='https://cursor.sh'>cursor.sh</a>.<br>2. <b>Import Extensions:</b> Cursor can import your VS Code extensions in one click.<br>3. <b>Privacy Mode:</b> Go to Settings > General > Privacy. Choose strictly local mode if working on sensitive IP.</p><h3><b>Connecting Models</b></h3><p>Navigate to Settings > Models. In 2026, the standard stack is:</p><ul><li><b>Code Generation:</b> Claude 3.7 Sonnet (or equivalent)</li><li><b>Quick Edit:</b> Cursor Small (Local model)</li><li><b>Vision:</b> GPT-4o for screenshot analysis</li></ul>",
+                "video_url": "https://www.youtube.com/embed/uGgCqV7G8_0",
+                "summary": "Your environment is your temple. Configuring Cursor correctly—especially privacy and model selection—is the first step to success.",
+                "quiz_questions": [
+                    {
+                        "question": "Where do you download Cursor?",
+                        "options": [
+                            "vscode.com",
+                            "cursor.sh",
+                            "github.com",
+                            "google.com"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "What allows you to keep your data private?",
+                        "options": [
+                            "Privacy Mode",
+                            "Incognito Tab",
+                            "Disconnect Internet",
+                            "Wearing a mask"
+                        ],
+                        "correctAnswer": 0
+                    },
+                    {
+                        "question": "Cursor can import extensions from:",
+                        "options": [
+                            "Atom",
+                            "VS Code",
+                            "Sublime",
+                            "Notepad"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "Which model is typically best for complex logic?",
+                        "options": [
+                            "Cursor Small",
+                            "Claude 3.7 Sonnet / GPT-4",
+                            "Llama 1",
+                            "BERT"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "Where are model settings found?",
+                        "options": [
+                            "File > Exit",
+                            "Settings > Models",
+                            "Help > About",
+                            "View > Zoom"
+                        ],
+                        "correctAnswer": 1
+                    }
+                ]
+            },
+            {
+                "title": "Your First 'Vibe' Project",
+                "description": "<h3><b>Hello World, AI Style</b></h3><p>We won't write `console.log('hello')`. We will ask for a full app.</p><h3><b>Step-by-Step</b></h3><ol><li><b>CMD+K (Generate):</b> Open a new folder. Type `CMD+K`.</li><li><b>Prompt:</b> 'Create a Next.js landing page for a coffee shop with a dark theme and a hero section.'</li><li><b>Iterate:</b> 'Make the button orange.' 'Add a contact form.'</li></ol><p>This loop—<i>Prompt, Review, Refine</i>—is the core feedback loop of Vibe Coding.</p>",
+                "video_url": "https://www.youtube.com/embed/sFkS-XJb6jo",
+                "summary": "Your first project demonstrates the power of 'Outcome-Based' development. You didn't write HTML; you requested a result.",
+                "quiz_questions": [
+                    {
+                        "question": "What is the shortcut to start generation in Cursor?",
+                        "options": [
+                            "CMD+S",
+                            "CMD+K",
+                            "ALT+F4",
+                            "CTRL+P"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "Instead of writing 'console.log', you:",
+                        "options": [
+                            "Quit",
+                            "Ask for a full feature/app",
+                            "Write assembly",
+                            "Draw a diagram"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "The core loop is:",
+                        "options": [
+                            "Write, Compile, Debug",
+                            "Prompt, Review, Refine",
+                            "Plan, Sleep, Eat",
+                            "Copy, Paste, Pray"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "What framework did we use in the example?",
+                        "options": [
+                            "Django",
+                            "Next.js",
+                            "Ruby on Rails",
+                            "jQuery"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "This style of development is called:",
+                        "options": [
+                            "Outcome-Based",
+                            "Syntax-Based",
+                            "Memory-Based",
+                            "Luck-Based"
+                        ],
+                        "correctAnswer": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Module 3: Core Workflow",
+        "lessons": [
+            {
+                "title": "Mastering Composer",
+                "description": "<h3><b>Multi-File Editing</b></h3><p><b>Composer (CMD+I)</b> is the engine that edits multiple files at once.</p><code>Prompt: 'Change the primary color to purple across global.css, tailwind.config.ts, and all button components.'</code><p>Composer scans, plans, and executes these changes in parallel. In a traditional IDE, this is 15 minutes of work. In Cursor, it is 15 seconds.</p>",
+                "video_url": "https://www.youtube.com/embed/uGgCqV7G8_0",
+                "summary": "Composer turns the IDE into an active participant. It is the tool for large-scale refactors and feature implementation.",
+                "quiz_questions": [
+                    {
+                        "question": "What shortcut opens Composer?",
+                        "options": [
+                            "CMD+I",
+                            "CMD+P",
+                            "CMD+S",
+                            "CMD+Q"
+                        ],
+                        "correctAnswer": 0
+                    },
+                    {
+                        "question": "What is Composer's superpower?",
+                        "options": [
+                            "Multi-file editing",
+                            "Playing music",
+                            "Sending emails",
+                            "Mining crypto"
+                        ],
+                        "correctAnswer": 0
+                    },
+                    {
+                        "question": "How long does a multi-file refactor take with Composer?",
+                        "options": [
+                            "Hours",
+                            "Seconds",
+                            "Days",
+                            "Weeks"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "Composer acts as a:",
+                        "options": [
+                            "Spell checker",
+                            "Senior Engineer / Implementation Engine",
+                            "File browser",
+                            "Linter"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "What happens after Composer edits files?",
+                        "options": [
+                            "You manually save",
+                            "You review the diffs",
+                            "You delete them",
+                            "You print them"
+                        ],
+                        "correctAnswer": 1
+                    }
+                ]
+            },
+            {
+                "title": "Context is King (.cursorignore)",
+                "description": "<h3><b>Managing the Context Window</b></h3><p>AI has a limited attention span (context window). Feeding it garbage leads to garbage output.</p><h3><b>.cursorignore</b></h3><p>Use `.cursorignore` to hide files from the AI:</p><ul><li>`node_modules`</li><li>`package-lock.json`</li><li>Large assets/images</li></ul><p><b>High Signal = High Intelligence.</b></p>",
+                "video_url": "https://www.youtube.com/embed/FdbBgZp33W0",
+                "summary": "You are the curator of context. Use `.cursorignore` to keep the AI focused on the code that matters.",
+                "quiz_questions": [
+                    {
+                        "question": "Why use `.cursorignore`?",
+                        "options": [
+                            "To save disk space",
+                            "To improve AI focus/reduce noise",
+                            "To hide secrets",
+                            "To speed up internet"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "What should be ignored?",
+                        "options": [
+                            "Source code",
+                            "Lock files & node_modules",
+                            "Documentation",
+                            "Config files"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "Garbage In = ______",
+                        "options": [
+                            "Garbage Out",
+                            "Gold Out",
+                            "Faster Speed",
+                            "Better Code"
+                        ],
+                        "correctAnswer": 0
+                    },
+                    {
+                        "question": "The AI's attention span is called:",
+                        "options": [
+                            "RAM",
+                            "Context Window",
+                            "Hard Drive",
+                            "Cache"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "What is the goal of context management?",
+                        "options": [
+                            "High Signal-to-Noise Ratio",
+                            "Low Signal",
+                            "More noise",
+                            "Empty context"
+                        ],
+                        "correctAnswer": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Module 4: Advanced Patterns",
+        "lessons": [
+            {
+                "title": "Model Context Protocol (MCP)",
+                "description": "<h3><b>Connecting to the World</b></h3><p>MCP allows your AI to talk to external tools (GitHub, Slack, PostgreSQL).</p><h3><b>Architecture</b></h3><ol><li><b>Host:</b> Cursor</li><li><b>Client:</b> The AI</li><li><b>Server:</b> The Tool (e.g., GitHub)</li></ol><p>This turns your AI from a chatbot into a System Admin.</p>",
+                "video_url": "https://www.youtube.com/embed/1PHk_g8gWbU",
+                "summary": "MCP standardizes tool use. It is the bridge between the AI brain and the real-world data it needs to act on.",
+                "quiz_questions": [
+                    {
+                        "question": "What does MCP stand for?",
+                        "options": [
+                            "Model Context Protocol",
+                            "Master Control Program",
+                            "My Computer Program",
+                            "Meta Code Platform"
+                        ],
+                        "correctAnswer": 0
+                    },
+                    {
+                        "question": "What does MCP allow?",
+                        "options": [
+                            "Drawing",
+                            "Connecting to external tools/data",
+                            "Faster typing",
+                            "Better colors"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "Which is NOT a part of MCP?",
+                        "options": [
+                            "Host",
+                            "Client",
+                            "Server",
+                            "Keyboard"
+                        ],
+                        "correctAnswer": 3
+                    },
+                    {
+                        "question": "MCP turns a chatbot into a:",
+                        "options": [
+                            "System Admin / Agent",
+                            "Video Game",
+                            "Calculator",
+                            "Search Engine"
+                        ],
+                        "correctAnswer": 0
+                    },
+                    {
+                        "question": "Before MCP, connecting tools required:",
+                        "options": [
+                            "Custom glue code",
+                            "Easy buttons",
+                            "Nothing",
+                            "Bluetooth"
+                        ],
+                        "correctAnswer": 0
+                    }
+                ]
+            },
+            {
+                "title": "Guardrails (.cursorrules)",
+                "description": "<h3><b>The Project Constitution</b></h3><p>`.cursorrules` is a file where you define the laws of your project.</p><ul><li>'Always use TypeScript.'</li><li>'Use Arrow Functions.'</li><li>'Never leave TODOs.'</li></ul><p>The AI reads this before <i>every</i> response, ensuring consistency.</p>",
+                "video_url": "https://www.youtube.com/embed/5EFd0n_n7bU",
+                "summary": "Scale your seniority. Encode your best practices into `.cursorrules` so the AI never makes a junior mistake.",
+                "quiz_questions": [
+                    {
+                        "question": "What is `.cursorrules`?",
+                        "options": [
+                            "A virus",
+                            "Project Constitution/Rules",
+                            "A theme",
+                            "A backup"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "The AI reads `.cursorrules`: ",
+                        "options": [
+                            "Once a year",
+                            "Before every response",
+                            "Never",
+                            "On Sundays"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "What is a good rule?",
+                        "options": [
+                            "'Be funny'",
+                            "'Always use TypeScript'",
+                            "'Delete files'",
+                            "'Ignore me'"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "This file helps ensure:",
+                        "options": [
+                            "Inconsistency",
+                            "Consistency & Quality",
+                            "Slower builds",
+                            "More bugs"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "It allows you to scale your:",
+                        "options": [
+                            "Seniority / Standards",
+                            "Hardware",
+                            "Internet",
+                            "Monitor"
+                        ],
+                        "correctAnswer": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Module 5: Shipping",
+        "lessons": [
+            {
+                "title": "Deployment 101",
+                "description": "<h3><b>From Localhost to the World</b></h3><p>Vibe Coding doesn't stop at `localhost:3000`. We use AI to deploy.</p><h3><b>Vercel Deployment</b></h3><ol><li><b>Prompt:</b> 'Help me deploy this Next.js app to Vercel.'</li><li>The AI will guide you to install the Vercel CLI (`npm i -g vercel`).</li><li>It will run the `vercel` command and handle the configuration prompt.</li></ol>",
+                "video_url": "https://www.youtube.com/embed/6qg5iI_n8m0",
+                "summary": "Shipping is the final step. Learn to use AI to configure your production environment and CI/CD pipelines.",
+                "quiz_questions": [
+                    {
+                        "question": "What platform is commonly used for Next.js deployment?",
+                        "options": [
+                            "Vercel",
+                            "WinAmp",
+                            "Notepad",
+                            "Floppy Disk"
+                        ],
+                        "correctAnswer": 0
+                    },
+                    {
+                        "question": "What CLI tool handles deployment?",
+                        "options": [
+                            "npm start",
+                            "vercel",
+                            "git commit",
+                            "cd .."
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "Deployment moves code from ______ to ______.",
+                        "options": [
+                            "Localhost to Production",
+                            "Folder to Folder",
+                            "RAM to ROM",
+                            "Screen to Printer"
+                        ],
+                        "correctAnswer": 0
+                    },
+                    {
+                        "question": "Can AI help with deployment config?",
+                        "options": [
+                            "Yes, it can guide and run commands",
+                            "No, it's impossible",
+                            "Only on Tuesdays",
+                            "Maybe"
+                        ],
+                        "correctAnswer": 0
+                    },
+                    {
+                        "question": "What is the URL for local development usually?",
+                        "options": [
+                            "google.com",
+                            "localhost:3000",
+                            "amazon.com",
+                            "example.com"
+                        ],
+                        "correctAnswer": 1
+                    }
+                ]
+            },
+            {
+                "title": "The Infinite Loop",
+                "description": "<h3><b>Continuous Improvement</b></h3><p>Software is never one. The Vibe Coding loop is infinite:</p><p><i>Idea -> Prompt -> Review -> Ship -> Feedback -> Idea</i></p><h3><b>Self-Healing Apps</b></h3><p>Advanced Vibe Coders build 'Self-Healing' loops where runtime errors in production trigger an AI agent to read the log, write a fix, and open a Pull Request automatically.</p>",
+                "video_url": "https://www.youtube.com/embed/pU72h2Zbc5c",
+                "summary": "You are now a Vibe Coder. The limit is no longer your typing speed; it is your imagination.",
+                "quiz_questions": [
+                    {
+                        "question": "The software lifecycle is:",
+                        "options": [
+                            "A straight line",
+                            "An infinite loop",
+                            "A square",
+                            "A stop sign"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "What triggers a 'Self-Healing' agent?",
+                        "options": [
+                            "Runtime errors/Logs",
+                            "A button press",
+                            "The weather",
+                            "Time of day"
+                        ],
+                        "correctAnswer": 0
+                    },
+                    {
+                        "question": "The limit in Vibe Coding is primarily:",
+                        "options": [
+                            "Typing speed",
+                            "Imagination / Intent",
+                            "CPU speed",
+                            "Keyboard quality"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "What does the agent do after fixing a bug?",
+                        "options": [
+                            "Deletes the app",
+                            "Opens a Pull Request",
+                            "Goes to sleep",
+                            "Plays a sound"
+                        ],
+                        "correctAnswer": 1
+                    },
+                    {
+                        "question": "What is the sequence?",
+                        "options": [
+                            "Idea > Prompt > Ship",
+                            "Ship > Prompt > Idea",
+                            "Delete > Write > Save",
+                            "None of the above"
+                        ],
+                        "correctAnswer": 0
+                    }
+                ]
+            }
+        ]
+    }
+]

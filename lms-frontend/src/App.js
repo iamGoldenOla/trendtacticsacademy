@@ -12,6 +12,8 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import LessonViewer from "./components/LessonViewer";
+import SmartLessonViewer from "./components/SmartLessonViewer";
+import CourseRedirect from "./components/CourseRedirect";
 import ModuleQuiz from "./pages/ModuleQuiz";
 import Contact from "./pages/Contact";
 import MyCourses from "./pages/MyCourses";
@@ -37,6 +39,8 @@ import CertificatePreview from "./pages/CertificatePreview";
 import NotificationBell from "./components/NotificationBell";
 import TrendyAssistant from "./components/TrendyAssistant";
 import CourseCreator from "./pages/CourseCreator";
+import CookieBanner from "./components/CookieBanner";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function App() {
     const [user, setUser] = useState(null);
@@ -179,9 +183,8 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/courses" element={<Courses />} />
-                    <Route path="/course/:id" element={<CourseDetail user={user} onLogin={handleLogin} onSignup={handleSignup} />} />
-                    <Route path="/course/:id/*" element={<InteractiveCourseDetail user={user} onLogin={handleLogin} onSignup={handleSignup} />} />
-                    <Route path="/course/:id/lesson/:lessonId" element={<LessonViewerWrapper />} />
+                    <Route path="/course/:id" element={<CourseRedirect />} />
+                    <Route path="/course/:id/lesson/:lessonId" element={<SmartLessonViewer />} />
                     <Route path="/course/:id/module-quiz" element={<ModuleQuiz />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/profile" element={<Profile user={user} />} />
@@ -205,6 +208,7 @@ function App() {
                     <Route path="/conversational-demo" element={<ConversationalDemo />} />
                     <Route path="/super-intelligent-demo" element={<SuperIntelligentTrendyDemo />} />
                     <Route path="/function-calling-demo" element={<FunctionCallingDemo />} />
+                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>
@@ -225,13 +229,18 @@ function App() {
                     if (userData.role === 'admin') {
                         navigate('/admin');
                     } else {
-                        navigate('/dashboard');
+                        // Redirect to courses browse page instead of dashboard
+                        // Users should select and pay for courses before accessing dashboard
+                        navigate('/courses');
                     }
                 }}
             />
 
             {/* Trendy AI Assistant */}
             <TrendyAssistant />
+
+            {/* Cookie Consent Banner */}
+            <CookieBanner />
         </div>
     );
 }

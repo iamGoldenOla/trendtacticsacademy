@@ -1,0 +1,44 @@
+<!-- Language Selector -->
+<div id="google_translate_element" style="margin-top: 10px;"></div>
+
+<!-- Currency Selector -->
+<div
+    style="margin-top: 10px; background: rgba(255, 255, 255, 0.05); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border); display: flex; align-items: center; gap: 8px;">
+    <span style="font-size: 0.85rem; color: var(--text-dim);">💰</span>
+    <select id="currencySelect" onchange="changeCurrency(this.value)"
+        style="background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border); padding: 5px 10px; border-radius: 4px; font-size: 0.85rem; cursor: pointer; outline: none;">
+        <option value="USD">$ USD</option>
+        <option value="NGN">₦ NGN</option>
+        <option value="EUR">€ EUR</option>
+        <option value="GBP">£ GBP</option>
+        <option value="CAD">C$ CAD</option>
+        <option value="AUD">A$ AUD</option>
+    </select>
+</div>
+
+<script>
+    const CURRENCY_RATES = {
+        'USD': { symbol: '$', rate: 1.00, name: 'US Dollar' },
+        'NGN': { symbol: '₦', rate: 1500, name: 'Nigerian Naira' },
+        'EUR': { symbol: '€', rate: 0.92, name: 'Euro' },
+        'GBP': { symbol: '£', rate: 0.79, name: 'British Pound' },
+        'CAD': { symbol: 'C$', rate: 1.35, name: 'Canadian Dollar' },
+        'AUD': { symbol: 'A$', rate: 1.52, name: 'Australian Dollar' }
+    };
+
+    function changeCurrency(currency) {
+        localStorage.setItem('preferred_currency', currency);
+        const currencyData = CURRENCY_RATES[currency];
+        const notification = document.createElement('div');
+        notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: var(--primary); color: var(--bg-deep); padding: 12px 20px; border-radius: 6px; font-weight: 600; z-index: 10000;';
+        notification.textContent = `Currency: ${currencyData.name} (${currencyData.symbol})`;
+        document.body.appendChild(notification);
+        setTimeout(() => notification.remove(), 2000);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedCurrency = localStorage.getItem('preferred_currency') || 'USD';
+        const select = document.getElementById('currencySelect');
+        if (select) select.value = savedCurrency;
+    });
+</script>

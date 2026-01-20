@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; connect-src 'self' https://*.supabase.co https://api.openai.com https://api.deepseek.com https://*.youtube.com; img-src 'self' data: https:; frame-src 'self' https://*.youtube.com https://www.youtube.com;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Learner - Trendtactics Academy</title>
+    <!-- Use the existing CSS from the build if possible, but let's add some clean standalone styles for reliability -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --primary: #00D9FF;
+            --primary-dark: #0096AF;
+            --bg-deep: #050B18;
+            --bg-card: #0A1628;
+            --text-main: #FFFFFF;
+            --text-dim: #A0AEC0;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .layout {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 350px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .back-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .course-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .module-group {
+            margin-bottom: 15px;
+        }
+
+        .module-title {
+            padding: 10px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .lesson-item {
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+            font-size: 0.95rem;
+            color: var(--text-dim);
+        }
+
+        .lesson-item:hover {
+            background: rgba(0, 217, 255, 0.05);
+            color: white;
+        }
+
+        .lesson-item.active {
+            background: var(--primary);
+            color: var(--bg-deep);
+            font-weight: 600;
+        }
+
+        .lesson-item.completed {
+            color: #4ADE80;
+        }
+
+        /* Content Area */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .content-container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: black;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .lesson-header {
+            margin-bottom: 25px;
+        }
+
+        .lesson-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .lesson-desc {
+            color: var(--text-dim);
+            white-space: pre-wrap;
+        }
+
+        /* Quiz UI */
+        .quiz-section {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        .quiz-opt {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: white;
+            text-align: left;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .quiz-opt:hover {
+            background: rgba(0, 217, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .quiz-opt.correct {
+            background: #064e3b;
+            border-color: #059669;
+        }
+
+        .quiz-opt.wrong {
+            background: #7f1d1d;
+            border-color: #dc2626;
+        }
+
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-deep);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 217, 255, 0.2);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: 300px;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+        }
+
+        /* Extended Styles for New Sections */
+        .section-header {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .summary-box {
+            background: rgba(0, 217, 255, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: var(--text-dim);
+        }
+
+        .takeaway-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .takeaway-list li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .takeaway-list li::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: #4ADE80;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 6px;
+        }
+
+        .case-study-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .case-study-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .playground-box {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .playground-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .playground-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .code-block {
+            background: #000;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            color: #4ADE80;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .resource-link {
+            display: block;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            color: var(--primary);
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .resource-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        /* Improved existing styles */
+        .lesson-desc {
+            line-height: 1.8;
+            /* Increased line spacing */
+            font-size: 1.05rem;
+            margin-bottom: 40px;
+        }
+
+        .lesson-desc p {
+            margin-bottom: 1.5em;
+        }
+
+        .lesson-desc h2 {
+            margin-top: 2em;
+            margin-bottom: 1em;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .lesson-desc h3 {
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            font-size: 1.25rem;
+            color: var(--text-main);
+        }
+
+        .lesson-desc ul,
+        .lesson-desc ol {
+            margin-bottom: 1.5em;
+            padding-left: 20px;
+        }
+
+        .lesson-desc li {
+            margin-bottom: 0.5em;
+        }
+
+        /* AI IDE Styles */
+        .ide-container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 0;
+            height: 600px;
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 30px;
+            display: none;
+            /* Hidden by default */
+        }
+
+        /* Left Panel: Chat */
+        .ide-sidebar {
+            background: #1e293b;
+            border-right: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ide-header {
+            padding: 15px;
+            border-bottom: 1px solid #334155;
+            background: #0f172a;
+            color: white;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-area {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+
+        .chat-msg {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            line-height: 1.5;
+        }
+
+        .chat-msg.user {
+            background: rgba(0, 217, 255, 0.1);
+            color: white;
+            border: 1px solid var(--primary);
+        }
+
+        .chat-msg.ai {
+            background: #334155;
+            color: #e2e8f0;
+        }
+
+        .input-area {
+            padding: 15px;
+            border-top: 1px solid #334155;
+            background: #0f172a;
+        }
+
+        .ide-input {
+            width: 100%;
+            background: #1e293b;
+            border: 1px solid #334155;
+            padding: 10px;
+            border-radius: 6px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            resize: none;
+            height: 80px;
+        }
+
+        .ide-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .ide-btn {
+            margin-top: 10px;
+            width: 100%;
+            padding: 8px;
+            background: var(--primary);
+            color: var(--bg-deep);
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .ide-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Right Panel: Preview */
+        .ide-main {
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .ide-toolbar {
+            height: 40px;
+            background: #f1f5f9;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .preview-frame {
+            flex: 1;
+            width: 100%;
+            border: none;
+            background: white;
+        }
+
+        .empty-state {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            background: #f8fafc;
+        }
+
+        .api-key-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            z-index: 2000;
+            width: 400px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="loading" class="loading-screen">
+        <div style="text-align:center">
+            <div class="spinner"></div>
+            <p style="margin-top:15px; color:var(--text-dim)">Loading Course Content...</p>
+        </div>
+    </div>
+
+    <div class="layout" id="appLayout" style="display:none">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="/" class="back-link">← Back to Dashboard</a>
+                <h1 class="course-title" id="sidebarCourseTitle">Course Title</h1>
+                <div
+                    style="margin-top:15px; background:rgba(255,255,255,0.1); height:6px; border-radius:3px; overflow:hidden">
+                    <div id="progressBar"
+                        style="width:0%; height:100%; background:var(--primary); transition:width 0.5s"></div>
+                </div>
+                <div
+                    style="font-size:0.8rem; color:var(--text-dim); margin-top:5px; display:flex; justify-content:space-between">
+                    <span>Progress</span>
+                    <span id="progressText">0%</span>
+                </div>
+            </div>
+            <div class="sidebar-content" id="sidebarContent">
+                <!-- Populated via JS -->
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main-content">
+            <div class="content-container">
+                <div class="video-wrapper" id="videoArea">
+                    <!-- Video Player -->
+                </div>
+
+                <!-- 1. Objectives (Immediately after video) -->
+                <div id="keyTakeawaysArea"></div>
+
+                <div class="lesson-header">
+                    <h1 class="lesson-title" id="lessonTitle">Lesson Title</h1>
+
+                    <!-- 2. Main Content -->
+                    <div class="lesson-desc" id="lessonDesc"></div>
+
+                    <!-- 3. Summary (Before Case Studies) -->
+                    <div id="summaryArea"></div>
+                </div>
+
+                <!-- 4. Case Studies -->
+                <div id="caseStudiesArea"></div>
+
+                <!-- 5. Playground -->
+                <div id="playgroundArea"></div>
+
+                <!-- AI IDE -->
+                <div id="aiIde" class="ide-container">
+                    <div class="ide-sidebar">
+                        <div class="ide-header">
+                            <span>Vibe Coding AI</span>
+                            <button onclick="toggleSettings()"
+                                style="background:none; border:none; color:#94a3b8; cursor:pointer; font-size:0.8rem; font-weight:600">SETTINGS</button>
+                        </div>
+                        <div class="chat-area" id="chatArea"></div>
+                        <div class="input-area">
+                            <textarea id="aiPrompt" class="ide-input"
+                                placeholder="Type instructions... (e.g., 'Build a landing page for a coffee shop')"></textarea>
+                            <button onclick="handleAIRequest()" id="generateBtn" class="ide-btn">Generate Code</button>
+                        </div>
+                    </div>
+
+                    <div class="ide-main">
+                        <div class="ide-toolbar">
+                            <span>Live Preview</span>
+                            <div style="flex:1"></div>
+                            <button onclick="resetPreview()"
+                                style="border:none; background:none; color:#64748b; cursor:pointer; font-size:0.8rem">RESET</button>
+                        </div>
+                        <iframe id="previewFrame" class="preview-frame"></iframe>
+                        <div id="emptyState" class="empty-state">
+                            <p>Enter a prompt to generate a web page</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Resources -->
+                <div id="resourcesArea"></div>
+
+                <div id="quizArea" style="display:none" class="quiz-section">
+                    <!-- Quiz populated via JS -->
+                </div>
+
+                <!-- API Key Modal -->
+                <div id="apiKeyModal" class="api-key-modal">
+                    <h3 style="color:white; margin-bottom:15px">Configure AI Settings</h3>
+                    <p style="color:var(--text-dim); font-size:0.9rem; margin-bottom:20px">
+                        To use the AI generator, please enter your API Key. This is stored locally in your browser and
+                        never sent to our servers.
+                    </p>
+
+                    <label style="color:white; display:block; margin-bottom:8px">OpenAI / DeepSeek Key</label>
+                    <input type="password" id="userApiKey"
+                        style="width:100%; padding:10px; background:#1e293b; border:1px solid #334155; color:white; border-radius:6px; margin-bottom:20px"
+                        placeholder="sk-...">
+
+                    <div style="display:flex; justify-content:flex-end; gap:10px">
+                        <button onclick="document.getElementById('apiKeyModal').style.display='none'"
+                            style="padding:8px 15px; background:transparent; border:1px solid #334155; color:white; border-radius:6px; cursor:pointer">Cancel</button>
+                        <button onclick="saveApiKey()"
+                            style="padding:8px 15px; background:var(--primary); border:none; color:var(--bg-deep); border-radius:6px; cursor:pointer; font-weight:600">Save
+                            Key</button>
+                    </div>
+                </div>
+
+                <div style="margin-top:40px; display:flex; justify-content:space-between">
+                    <button id="prevBtn" class="quiz-opt" style="width:auto; padding: 10px 25px">Previous</button>
+                    <button id="nextBtn" class="quiz-opt"
+                        style="width:auto; padding: 10px 25px; background: var(--primary); color:var(--bg-deep); border:none">Next
+                        Lesson</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Configuration
+        const SUPABASE_URL = 'https://uimdbodamoeyukrghchb.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let state = {
+            course: null,
+            lessons: [],
+            currentLessonId: null,
+            user: null
+        };
+
+        async function init() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = urlParams.get('id');
+            const lessonId = urlParams.get('lesson');
+
+            if (!courseId) {
+                // Prevent loop if this file is loaded at / or /dashboard mistakenly
+                document.body.innerHTML = `
+                    <div style="height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#050B18; color:white; font-family:sans-serif">
+                        <h1>⚠️ No Course Selected</h1>
+                        <p style="color:#A0AEC0; margin:10px 0 30px">Please select a course from the main menu.</p>
+                        <a href="/" style="padding:12px 24px; background:#00D9FF; color:#050B18; text-decoration:none; border-radius:6px; font-weight:bold">Go to Home</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // 1. Check Auth 
+            const { data: { user } } = await supabaseClient.auth.getUser();
+            if (!user) {
+                window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href);
+                return;
+            }
+            state.user = user;
+
+            try {
+                // 2. Fetch Course Data (Full Tree)
+                console.log('Fetching course:', courseId);
+                const { data: course, error } = await supabaseClient
+                    .from('courses')
+                    .select('*, modules!modules_course_id_fkey(*, lessons!lessons_module_id_fkey(*))')
+                    .eq('id', courseId)
+                    .single();
+
+                if (error) {
+                    console.error('Supabase error:', error);
+                    throw new Error(`Data fetch failed: ${error.message}`);
+                }
+                if (!course) throw new Error('Course not found');
+
+                state.course = course;
+
+                // 3. Normalize & Sort Lessons
+                let flatLessons = [];
+                if (course.modules) {
+                    course.modules.sort((a, b) => a.ordering - b.ordering).forEach(mod => {
+                        if (mod.lessons) {
+                            mod.lessons.sort((a, b) => a.ordering - b.ordering).forEach(less => {
+                                flatLessons.push({ ...less, moduleTitle: mod.title });
+                            });
+                        }
+                    });
+                }
+                if (flatLessons.length === 0) throw new Error('No lessons in this course');
+
+                state.lessons = flatLessons;
+
+                // 4. Set Initial Lesson
+                state.currentLessonId = lessonId || flatLessons[0].id;
+
+                renderSidebar();
+                renderLesson(state.currentLessonId);
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('appLayout').style.display = 'flex';
+                document.getElementById('sidebarCourseTitle').textContent = course.title;
+
+            } catch (err) {
+                console.error(err);
+                alert('Error loading course: ' + err.message);
+                window.location.href = '/dashboard';
+            }
+        }
+
+        function renderSidebar() {
+            const container = document.getElementById('sidebarContent');
+            container.innerHTML = '';
+
+            // Calculate Progress (basic based on current index for now, usually would be from user_progress table)
+            const currentIndex = state.lessons.findIndex(l => l.id === state.currentLessonId);
+            const progressPercent = Math.round(((currentIndex + 1) / state.lessons.length) * 100);
+
+            document.getElementById('progressBar').style.width = `${progressPercent}%`;
+            document.getElementById('progressText').textContent = `${progressPercent}% Complete`;
+
+            let currentModule = null;
+            state.lessons.forEach(lesson => {
+                if (lesson.moduleTitle !== currentModule) {
+                    currentModule = lesson.moduleTitle;
+                    const modDiv = document.createElement('div');
+                    modDiv.className = 'module-title';
+                    modDiv.textContent = currentModule;
+                    container.appendChild(modDiv);
+                }
+
+                const item = document.createElement('div');
+                item.className = `lesson-item ${lesson.id === state.currentLessonId ? 'active' : ''}`;
+                item.innerHTML = `<span style="margin-right:10px">▶</span> ${lesson.title}`;
+                item.onclick = () => renderLesson(lesson.id);
+                container.appendChild(item);
+            });
+        }
+
+        function parseJSON(data) {
+            if (!data) return null;
+            if (typeof data === 'object') return data;
+            try { return JSON.parse(data); } catch (e) { return null; }
+        }
+
+        function renderLesson(id) {
+            const lesson = state.lessons.find(l => l.id === id);
+            if (!lesson) return;
+            state.currentLessonId = id;
+
+            // URL
+            const url = new URL(window.location);
+            url.searchParams.set('lesson', id);
+            window.history.pushState({}, '', url);
+
+            // 1. Basic Info
+            document.getElementById('lessonTitle').textContent = lesson.title;
+            document.getElementById('lessonDesc').innerHTML = lesson.content || '<p>No content available.</p>';
+
+            // 2. Summary
+            const summaryArea = document.getElementById('summaryArea');
+            if (lesson.summary) {
+                summaryArea.innerHTML = `<div class="summary-box"><strong>Summary: </strong>${lesson.summary}</div>`;
+            } else {
+                summaryArea.innerHTML = '';
+            }
+
+            // 3. Video
+            const videoArea = document.getElementById('videoArea');
+            let videoUrl = lesson.video_url;
+            const videos = parseJSON(lesson.videos);
+
+            // Fallback to first video in JSON list if main url empty
+            if (!videoUrl && videos && videos.length > 0) {
+                videoUrl = videos[0].url;
+            }
+
+            if (videoUrl) {
+                videoArea.style.display = 'block';
+                let embedUrl = videoUrl;
+                if (embedUrl.includes('youtube.com/watch?v=')) embedUrl = embedUrl.replace('watch?v=', 'embed/');
+                else if (embedUrl.includes('youtu.be/')) embedUrl = embedUrl.replace('youtu.be/', 'youtube.com/embed/');
+
+                videoArea.innerHTML = `<iframe src="${embedUrl}" allowfullscreen></iframe>`;
+            } else {
+                videoArea.style.display = 'none';
+            }
+
+            // 4. Key Takeaways / Objectives
+            const takeawaysArea = document.getElementById('keyTakeawaysArea');
+            const takeaways = parseJSON(lesson.key_takeaways);
+            if (takeaways && takeaways.length > 0) {
+                takeawaysArea.innerHTML = `
+                    <div class="section-header">Learning Objectives</div>
+                    <ul class="takeaway-list">
+                        ${takeaways.map(t => `<li>${t}</li>`).join('')}
+                    </ul>
+                `;
+            } else {
+                takeawaysArea.innerHTML = '';
+            }
+
+            // 5. Case Studies
+            const caseStudiesArea = document.getElementById('caseStudiesArea');
+            const cases = parseJSON(lesson.case_studies);
+            if (cases && cases.length > 0) {
+                caseStudiesArea.innerHTML = `<div class="section-header">Real-World Case Studies</div>`;
+                cases.forEach(c => {
+                    caseStudiesArea.innerHTML += `
+                        <div class="case-study-card">
+                            <div class="case-study-title">${c.title}</div>
+                            <p style="color:var(--text-dim); margin-bottom:10px"><strong>Scenario:</strong> ${c.scenario}</p>
+                            <p style="color:var(--primary); margin-bottom:10px"><strong>Analysis:</strong> ${c.analysis}</p>
+                            <p style="color:#4ADE80"><strong>Outcome:</strong> ${c.outcome}</p>
+                        </div>
+                    `;
+                });
+            } else {
+                caseStudiesArea.innerHTML = '';
+            }
+
+            // 6. Playground
+            const playgroundArea = document.getElementById('playgroundArea');
+            const aiIde = document.getElementById('aiIde');
+            const play = parseJSON(lesson.playground);
+
+            if (play) {
+                // Show Static Instructions
+                playgroundArea.innerHTML = `
+                    <div class="playground-box">
+                        <div class="playground-header">
+                            <span class="playground-icon"></span>
+                            <div>
+                                <h3 style="color:white; margin-bottom:5px">Vibe Coding Playground</h3>
+                                <p style="color:var(--text-dim); font-size:0.9rem">Put this lesson into practice immediately.</p>
+                            </div>
+                        </div>
+                        <p style="margin-bottom:15px; color:var(--text-main)"><strong>Objective:</strong> ${play.objective}</p>
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px">
+                             <div>
+                                <strong style="color:var(--text-main)">Guided Steps:</strong>
+                                <ul style="margin-top:10px; padding-left:20px; color:var(--text-dim)">
+                                    ${(play.guided_steps || []).map(s => `<li>${s}</li>`).join('')}
+                                </ul>
+                             </div>
+                             <div>
+                                <strong style="color:#F472B6">Advanced Challenge:</strong>
+                                <p style="margin-top:5px; color:var(--text-dim)">${play.advanced_challenge || 'None'}</p>
+                             </div>
+                        </div>
+                    </div>
+                `;
+
+                // Init AI IDE
+                aiIde.style.display = 'grid';
+                document.getElementById('aiPrompt').value = play.starter_prompt || '';
+
+                // Clear previous chat/preview
+                document.getElementById('chatArea').innerHTML = '';
+                addChatMessage('ai', 'Ready to code. I have pre-loaded the starter prompt for you. Click Generate to build it.');
+                resetPreview();
+
+            } else {
+                playgroundArea.innerHTML = '';
+                aiIde.style.display = 'none';
+            }
+
+            // 7. Extra Resources (Videos + External Links)
+            const resourcesArea = document.getElementById('resourcesArea');
+            const extraResources = parseJSON(lesson.extra_resources) || [];
+
+            let hasResources = false;
+            let resourcesHTML = `<div class="section-header">Extra Resources</div>`;
+
+            // Videos
+            if (videos && videos.length > 0) {
+                videos.forEach((v, idx) => {
+                    if (v.url === videoUrl && idx === 0) return; // Skip main video
+                    hasResources = true;
+                    resourcesHTML += `
+                        <a href="${v.url}" target="_blank" class="resource-link">
+                            Video: ${v.title} <span style="font-size:0.8rem; opacity:0.7">- ${v.why_this_video || 'Watch this'}</span>
+                        </a>
+                    `;
+                });
+            }
+
+            // External Links
+            if (extraResources && extraResources.length > 0) {
+                extraResources.forEach(r => {
+                    hasResources = true;
+                    let icon = '🔗';
+                    if (r.type === 'article') icon = '📄';
+                    if (r.type === 'docs') icon = '📚';
+
+                    resourcesHTML += `
+                        <a href="${r.url}" target="_blank" class="resource-link">
+                            ${icon} ${r.title} <span style="font-size:0.8rem; opacity:0.7">- ${r.type || 'Link'}</span>
+                        </a>
+                    `;
+                });
+            }
+
+            if (hasResources) {
+                resourcesArea.innerHTML = resourcesHTML;
+            } else {
+                resourcesArea.innerHTML = '';
+            }
+
+            // 8. Quiz
+            const quizArea = document.getElementById('quizArea');
+            const quizzes = parseJSON(lesson.quizzes) || parseJSON(lesson.quiz_questions);
+            if (quizzes && quizzes.length > 0) {
+                quizArea.style.display = 'block';
+                renderFullQuiz(quizzes);
+            } else {
+                quizArea.style.display = 'none';
+            }
+
+            // Navigation
+            const currentIndex = state.lessons.findIndex(l => l.id === id);
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            prevBtn.style.visibility = currentIndex > 0 ? 'visible' : 'hidden';
+            prevBtn.onclick = () => renderLesson(state.lessons[currentIndex - 1].id);
+
+            if (currentIndex < state.lessons.length - 1) {
+                nextBtn.textContent = 'Next Lesson →';
+                nextBtn.onclick = () => renderLesson(state.lessons[currentIndex + 1].id);
+            } else {
+                nextBtn.textContent = 'Finish Course 🎉';
+                nextBtn.onclick = () => window.location.href = '/dashboard';
+            }
+
+            renderSidebar();
+            window.scrollTo(0, 0);
+        }
+
+        // --- AI IDE LOGIC ---
+        function toggleSettings() {
+            const modal = document.getElementById('apiKeyModal');
+            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+            document.getElementById('userApiKey').value = localStorage.getItem('vibe_api_key') || '';
+        }
+
+        function saveApiKey() {
+            const key = document.getElementById('userApiKey').value;
+            if (key) {
+                localStorage.setItem('vibe_api_key', key);
+                alert('API Key saved securely in your browser!');
+                toggleSettings();
+            }
+        }
+
+        function resetPreview() {
+            document.getElementById('previewFrame').srcdoc = '';
+            document.getElementById('emptyState').style.display = 'flex';
+        }
+
+        async function handleAIRequest() {
+            const prompt = document.getElementById('aiPrompt').value;
+            if (!prompt) return alert('Please enter a prompt');
+
+            const apiKey = localStorage.getItem('vibe_api_key');
+            if (!apiKey) {
+                toggleSettings();
+                return alert('Please enter your API Key first');
+            }
+
+            const btn = document.getElementById('generateBtn');
+            const originalText = btn.textContent;
+            btn.textContent = 'Generating... ⏳';
+            btn.disabled = true;
+
+            addChatMessage('user', prompt);
+
+            try {
+                // Determine API provider based on key format (Basic heuristic)
+                const isOpenAI = apiKey.startsWith('sk-');
+
+                let generatedCode = '';
+
+                if (isOpenAI) {
+                    const res = await fetch('https://api.openai.com/v1/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${apiKey}`
+                        },
+                        body: JSON.stringify({
+                            model: "gpt-4o-mini", // Cost effective
+                            messages: [
+                                { role: "system", content: "You are an expert web developer. specialized in Vibe Coding. Generate a SINGLE HTML file containing all necessary CSS (in <style>) and JS (in <script>) to fulfill the user request. The code must be production-ready, beautiful, and responsive. Do NOT output markdown backticks. Just the raw HTML code." },
+                                { role: "user", content: prompt }
+                            ]
+                        })
+                    });
+                    const data = await res.json();
+                    if (data.error) throw new Error(data.error.message);
+                    generatedCode = data.choices[0].message.content;
+                } else {
+                    // Fallback or other providers - for now assume OpenAI compatible or alert
+                    throw new Error('Currently only OpenAI keys (sk-...) are supported in this demo.');
+                }
+
+                // clean up markdown if present
+                generatedCode = generatedCode.replace(/```html/g, '').replace(/```/g, '');
+
+                addChatMessage('ai', 'Code generated! Checking preview...');
+
+                // Render
+                const frame = document.getElementById('previewFrame');
+                frame.srcdoc = generatedCode;
+                document.getElementById('emptyState').style.display = 'none';
+
+            } catch (err) {
+                addChatMessage('ai', `Error: ${err.message} 🛑`);
+                console.error(err);
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        function addChatMessage(role, text) {
+            const chatArea = document.getElementById('chatArea');
+            const div = document.createElement('div');
+            div.className = `chat-msg ${role}`;
+            div.textContent = text;
+            chatArea.appendChild(div);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+        // ---------------------
+
+        function renderFullQuiz(questions) {
+            const area = document.getElementById('quizArea');
+            area.innerHTML = `<div class="section-header">Knowledge Check</div>`;
+
+            questions.forEach((q, qIdx) => {
+                const qDiv = document.createElement('div');
+                qDiv.style.marginBottom = '30px';
+                qDiv.innerHTML = `<p style="margin-bottom:15px; font-weight:600; color:white">${qIdx + 1}. ${q.question}</p>`;
+
+                const optContainer = document.createElement('div');
+                q.options.forEach((opt, oIdx) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'quiz-opt';
+                    btn.textContent = opt;
+                    btn.onclick = () => {
+                        const allBtns = optContainer.querySelectorAll('.quiz-opt');
+                        allBtns.forEach(b => b.disabled = true);
+                        if (oIdx === q.correctAnswer) {
+                            btn.classList.add('correct');
+                            btn.innerHTML += ' <br><span style="font-size:0.9rem; opacity:0.9">Correct! ${q.explanation || ""}</span>';
+                        } else {
+                            btn.classList.add('wrong');
+                            // Highlight correct one
+                            allBtns[q.correctAnswer].classList.add('correct');
+                            allBtns[q.correctAnswer].innerHTML += ' <br><span style="font-size:0.9rem; opacity:0.9">Correct Answer. ${q.explanation || ""}</span>';
+                        }
+                    };
+                    optContainer.appendChild(btn);
+                });
+
+                qDiv.appendChild(optContainer);
+                area.appendChild(qDiv);
+            });
+        }
+
+        init();
+    </script>
+</body>
+
+</html>

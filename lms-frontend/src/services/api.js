@@ -14,6 +14,7 @@ const apiClient = axios.create({
 
 // Request interceptor for adding auth token
 apiClient.interceptors.request.use((config) => {
+    console.log(`API Request: ${config.method.toUpperCase()} ${config.baseURL}${config.url}`);
     const token = localStorage.getItem('token');
     if (token) {
         config.headers = config.headers || {};
@@ -52,7 +53,8 @@ apiClient.interceptors.response.use((response) => {
         case 500:
             throw new Error('Server error: Please try again later');
         default:
-            throw new Error(error.response.data?.message || 'An unexpected error occurred');
+            console.error('API Error Response:', error.response);
+            throw new Error(error.response.data?.message || error.response.data?.error || `Error ${error.response.status}: ${error.response.statusText || 'An unexpected error occurred'}`);
     }
 });
 

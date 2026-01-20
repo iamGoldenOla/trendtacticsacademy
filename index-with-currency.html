@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/images/Trendtactics-logo - Copy.jpg" type="image/jpeg" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description"
+        content="Trendtactics Academy - Master Web Development, App Development, and Digital Marketing with our comprehensive, project-based courses. Start your tech journey today." />
+    <meta name="keywords"
+        content="web development, app development, digital marketing, coding bootcamp, learn to code, frontend development, backend development, full stack, react, python, javascript" />
+    <meta name="author" content="Trendtactics Academy" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://academy.trendtacticsdigital.com/" />
+    <meta property="og:title" content="Trendtactics Academy - Learn Tech Skills" />
+    <meta property="og:description"
+        content="Master Web Development, App Development, and Digital Marketing with our comprehensive, project-based courses." />
+    <meta property="og:image" content="https://academy.trendtacticsdigital.com/images/og-image.jpg" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://academy.trendtacticsdigital.com/" />
+    <meta property="twitter:title" content="Trendtactics Academy - Learn Tech Skills" />
+    <meta property="twitter:description"
+        content="Master Web Development, App Development, and Digital Marketing with our comprehensive, project-based courses." />
+    <meta property="twitter:image" content="https://academy.trendtacticsdigital.com/images/og-image.jpg" />
+    <script type="application/ld+json">{
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Trendtactics Academy",
+      "url": "https://academy.trendtacticsdigital.com",
+      "logo": "https://academy.trendtacticsdigital.com/images/Trendtactics-logo%20-%20Copy.jpg",
+      "sameAs": [
+        "https://www.facebook.com/trendtactics",
+        "https://twitter.com/trendtactics",
+        "https://www.linkedin.com/company/trendtactics"
+      ],
+      "description": "Trendtactics Academy offers comprehensive courses in Web Development, App Development, and Digital Marketing."
+    }</script>
+    <title>Trendtactics Academy - Master Tech Skills</title>
+    <script>
+        // Scroll-to-top functionality for React app
+        (function () {
+            function scrollToTop() {
+                try {
+                    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                    if (document.documentElement) document.documentElement.scrollTop = 0;
+                    if (document.body) document.body.scrollTop = 0;
+                } catch (e) { }
+            }
+            window.addEventListener('load', scrollToTop);
+            document.addEventListener('DOMContentLoaded', scrollToTop);
+            window.addEventListener('popstate', function () { setTimeout(scrollToTop, 0); });
+            setTimeout(scrollToTop, 0);
+        })();
+
+        // Currency Selector - Inject into React app
+        (function () {
+            const CURRENCY_RATES = {
+                'USD': { symbol: '$', rate: 1.00, name: 'US Dollar' },
+                'NGN': { symbol: '₦', rate: 1500, name: 'Nigerian Naira' },
+                'EUR': { symbol: '€', rate: 0.92, name: 'Euro' },
+                'GBP': { symbol: '£', rate: 0.79, name: 'British Pound' },
+                'CAD': { symbol: 'C$', rate: 1.35, name: 'Canadian Dollar' },
+                'AUD': { symbol: 'A$', rate: 1.52, name: 'Australian Dollar' }
+            };
+
+            const BASE_PRICE = 3.00;
+
+            function getCurrency() {
+                return localStorage.getItem('preferred_currency') || 'USD';
+            }
+
+            function formatPrice(priceUSD = BASE_PRICE) {
+                const currency = getCurrency();
+                const currencyData = CURRENCY_RATES[currency];
+                const convertedAmount = priceUSD * currencyData.rate;
+
+                if (currency === 'NGN') {
+                    return `${currencyData.symbol}${convertedAmount.toLocaleString('en-NG', { maximumFractionDigits: 0 })}`;
+                }
+                return `${currencyData.symbol}${convertedAmount.toFixed(2)}`;
+            }
+
+            function updatePrices() {
+                // Method 1: Update elements with data-price attribute
+                document.querySelectorAll('[data-price]').forEach(el => {
+                    const basePrice = parseFloat(el.getAttribute('data-price')) || BASE_PRICE;
+                    el.textContent = formatPrice(basePrice);
+                });
+
+                // Method 2: Update React-rendered prices in course cards
+                setTimeout(() => {
+                    // Find all price elements (they contain $ symbol)
+                    const allElements = document.querySelectorAll('*');
+                    allElements.forEach(el => {
+                        // Only process text nodes that contain prices
+                        if (el.children.length === 0 && el.textContent.trim().match(/^\$\d+/)) {
+                            const match = el.textContent.match(/\$(\d+\.?\d*)/);
+                            if (match) {
+                                let price = parseFloat(match[1]);
+                                // If price is 0, use base price of $3
+                                if (price === 0) price = BASE_PRICE;
+                                el.textContent = formatPrice(price);
+                            }
+                        }
+
+                        // Also check for "Price: $X" format
+                        if (el.textContent.includes('Price:')) {
+                            const match = el.textContent.match(/Price:\s*\$(\d+\.?\d*)/);
+                            if (match) {
+                                let price = parseFloat(match[1]);
+                                if (price === 0) price = BASE_PRICE;
+                                el.textContent = `Price: ${formatPrice(price)}`;
+                            }
+                        }
+                    });
+                }, 1000);
+            }
+
+            function createCurrencySelector() {
+                const container = document.createElement('div');
+                container.style.cssText = 'position: fixed; top: 80px; right: 20px; z-index: 9999; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);';
+
+                const label = document.createElement('div');
+                label.textContent = '💰 Currency:';
+                label.style.cssText = 'font-size: 0.85rem; margin-bottom: 5px; font-weight: 600;';
+
+                const select = document.createElement('select');
+                select.style.cssText = 'width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;';
+
+                Object.entries(CURRENCY_RATES).forEach(([code, data]) => {
+                    const option = document.createElement('option');
+                    option.value = code;
+                    option.textContent = `${data.symbol} ${code}`;
+                    if (code === getCurrency()) option.selected = true;
+                    select.appendChild(option);
+                });
+
+                select.addEventListener('change', (e) => {
+                    localStorage.setItem('preferred_currency', e.target.value);
+                    updatePrices();
+
+                    // Show notification
+                    const notif = document.createElement('div');
+                    notif.textContent = `Currency changed to ${CURRENCY_RATES[e.target.value].name}`;
+                    notif.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #00D9FF; color: #000; padding: 12px 20px; border-radius: 6px; z-index: 10000; font-weight: 600;';
+                    document.body.appendChild(notif);
+                    setTimeout(() => notif.remove(), 2000);
+                });
+
+                container.appendChild(label);
+                container.appendChild(select);
+                document.body.appendChild(container);
+            }
+
+            // Initialize when page loads
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    createCurrencySelector();
+                    updatePrices();
+
+                    // Re-update prices when React renders
+                    const observer = new MutationObserver(() => updatePrices());
+                    observer.observe(document.body, { childList: true, subtree: true });
+                }, 1000);
+            });
+        })();
+    </script>
+    <script defer="defer" src="/static/js/main.d3663c93.js"></script>
+    <link href="/static/css/main.87756b56.css" rel="stylesheet">
+</head>
+
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+</body>
+
+</html>

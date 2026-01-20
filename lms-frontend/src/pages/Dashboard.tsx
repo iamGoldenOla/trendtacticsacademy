@@ -40,18 +40,21 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
   const fetchDashboardData = async () => {
     try {
       setLoading(true);
-      // TODO: Fetch enrolled courses and progress from API
-      // For now, using mock data
+      // Fetch all published courses
       const courses = await courseService.getAllCourses();
-      setEnrolledCourses(courses.slice(0, 3)); // Mock: first 3 courses
-      
+      setEnrolledCourses(courses); // Show all published courses
+
+      // Calculate stats from actual course data
       setStats({
-        totalCourses: 12,
-        completedCourses: 5,
-        inProgressCourses: 3,
-        totalHours: 48,
-        certificates: 5,
-        currentStreak: 7,
+        totalCourses: courses.length,
+        completedCourses: 0, // TODO: Calculate from progress data
+        inProgressCourses: courses.length,
+        totalHours: courses.reduce((acc, course) => {
+          const duration = parseInt(course.duration || '0') || 0;
+          return acc + duration;
+        }, 0),
+        certificates: 0, // TODO: Fetch from certificates table
+        currentStreak: 7, // TODO: Calculate from user activity
       });
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
@@ -83,12 +86,12 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
 
   const CourseCard = ({ course }: { course: Course }) => {
     const progress = Math.floor(Math.random() * 100); // Mock progress
-    
+
     return (
       <motion.div
         whileHover={{ scale: 1.02 }}
         className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 cursor-pointer"
-        onClick={() => navigate(`/courses/${course.id}`)}
+        onClick={() => navigate(`/course/${course.id}`)}
       >
         <div className="aspect-video bg-gradient-to-br from-primary-cyan to-primary-purple relative">
           {course.thumbnail_url ? (
@@ -106,7 +109,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
             <span className="text-sm font-semibold text-gray-900">{progress}%</span>
           </div>
         </div>
-        
+
         <div className="p-6">
           <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2">
             {course.title}
@@ -114,7 +117,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
           <p className="text-gray-600 text-sm mb-4 line-clamp-2">
             {course.description}
           </p>
-          
+
           {/* Progress Bar */}
           <div className="mb-4">
             <div className="w-full bg-gray-200 rounded-full h-2">
@@ -124,7 +127,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
               ></div>
             </div>
           </div>
-          
+
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center text-gray-600">
               <Clock className="w-4 h-4 mr-1" />
@@ -289,11 +292,10 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
               <motion.div
                 key={index}
                 whileHover={{ scale: 1.05 }}
-                className={`p-4 rounded-lg text-center ${
-                  achievement.unlocked
-                    ? 'bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-300'
-                    : 'bg-gray-100 opacity-50'
-                }`}
+                className={`p-4 rounded-lg text-center ${achievement.unlocked
+                  ? 'bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-300'
+                  : 'bg-gray-100 opacity-50'
+                  }`}
               >
                 <div className="text-4xl mb-2">{achievement.icon}</div>
                 <p className="font-semibold text-gray-900 text-sm">{achievement.name}</p>

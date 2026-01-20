@@ -1,0 +1,86 @@
+[
+    {
+        "title": "Prompt Engineering to Behavior Architecture",
+        "lessons": [
+            {
+                "title": "The Death of the Single Prompt",
+                "description": "Why 2026 is about workflows, not prompts.",
+                "video_url": "https://www.youtube.com/embed/jC4v5AS4RIM",
+                "summary": "Prompt engineering has evolved into 'Behavior Architecture'. Learn how to design entire systems of interaction rather than single-shot queries.",
+                "resources": [
+                    {
+                        "url": "https://www.promptingguide.ai/2026",
+                        "title": "Advanced Agentic Guide"
+                    },
+                    {
+                        "url": "https://anthropic.com/research",
+                        "title": "Constitutional AI 2026"
+                    }
+                ],
+                "quiz_questions": [
+                    {
+                        "question": "What has replaced the 'Prompt Engineer' role?",
+                        "options": [
+                            "AI Workflow Architect",
+                            "Typist",
+                            "Search Engine Optimizer",
+                            "Data Entry"
+                        ],
+                        "correctAnswer": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Multi-Agent Orchestration",
+        "lessons": [
+            {
+                "title": "Designing The Swarm",
+                "description": "Coordinating multiple AI agents.",
+                "video_url": "https://www.youtube.com/embed/wBOYE9J02o0",
+                "summary": "How to use frameworks like LangGraph 2.0 and CrewAI to manage a 'swarm' of specialized agents (Researcher, Writer, Editor) to accomplish complex tasks.",
+                "quiz_questions": [
+                    {
+                        "question": "What is a 'swarm' in AI terms?",
+                        "options": [
+                            "A bug in the code",
+                            "A group of specialized agents working together",
+                            "A new virus",
+                            "A type of database"
+                        ],
+                        "correctAnswer": 1
+                    }
+                ]
+            },
+            {
+                "title": "Agent Control Planes",
+                "description": "Governing autonomous systems.",
+                "video_url": "https://www.youtube.com/embed/5EFd0n_n7bU",
+                "summary": "Implementing an 'Agent Control Plane' to monitor, audit, and limit the actions of your autonomous agents to ensure safety and compliance."
+            }
+        ]
+    },
+    {
+        "title": "Meta-Prompting & Self-Optimization",
+        "lessons": [
+            {
+                "title": "Recursive Prompts",
+                "description": "Prompts that improve themselves.",
+                "video_url": "https://www.youtube.com/embed/C2jS2b9F4T0",
+                "summary": "Techniques for setting up recursive loops where the AI analyzes its own output performance and rewrites its own system prompt for better results next time."
+            }
+        ]
+    },
+    {
+        "title": "AI Ethics & Governance 2026",
+        "lessons": [
+            {
+                "title": "Constitutional AI & Alignment",
+                "description": "Hard-coding ethics into agents.",
+                "video_url": "https://www.youtube.com/embed/Z80B7b8H-q0",
+                "summary": "Navigating the 2026 regulatory landscape. How to implement 'Constitutional AI' principles to ensure your agents act ethically without constant human oversight."
+            }
+        ]
+    }
+]

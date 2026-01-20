@@ -2,46 +2,88 @@ import React, { useState, useEffect } from "react";
 import StudentDashboardLayout from "../components/StudentDashboardLayout";
 import Profile from "./Profile";
 import { Link, useNavigate } from 'react-router-dom';
-// Removed digitalMarketingCourses import to use real course data
-import { isAuthenticated } from '../services/authService';
+import { isAuthenticated, logout } from '../services/authService';
 import { courseService } from '../services';
 import TodoList from "../components/TodoList";
 import PlannerPage from "./PlannerPage";
 import Calendar from "../components/Calendar";
+import CertificateTemplate from "../components/CertificateTemplate";
+import {
+  BarChart3,
+  Clock,
+  BookOpen,
+  Award,
+  ArrowRight,
+  TrendingUp,
+  PlayCircle,
+  Calendar as CalendarIcon,
+  MessageSquare
+} from 'lucide-react';
+import { AIDashboard } from "../components/AIDashboard";
+
+const StatCard = ({ icon, label, value, color }) => (
+  <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between hover:shadow-md transition-shadow">
+    <div>
+      <p className="text-sm font-medium text-gray-500">{label}</p>
+      <h3 className="text-2xl font-bold text-gray-900 mt-1">{value}</h3>
+    </div>
+    <div className={`p-3 rounded-xl ${color} shadow-lg shadow-opacity-20`}>
+      {icon}
+    </div>
+  </div>
+);
+
+const SectionHeader = ({ title, icon }) => (
+  <div className="flex items-center gap-2 mb-6">
+    <div className="p-2 bg-brand-cyan/10 rounded-lg text-brand-cyan">
+      {icon}
+    </div>
+    <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+  </div>
+);
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [userName, setUserName] = useState("");
+  const [userData, setUserData] = useState(null);
   const [activeSection, setActiveSection] = useState("dashboard");
   const [enrolledCourses, setEnrolledCourses] = useState([]);
   const [isLoadingCourses, setIsLoadingCourses] = useState(true);
-  // Use real user and course data
-  const user = { name: userName || "John Doe" };
+  const [certificates, setCertificates] = useState([]);
+
+
   const assignments = [
-    { title: "UI Design", status: "Upcoming" },
-    { title: "Node.js Project", status: "In Progress" },
-    { title: "React Quiz", status: "Completed" }
-  ];
-  const recentActivity = [
-    { type: "lesson_completed", detail: "Completed React Hooks", time: "2 hours ago" },
-    { type: "assignment_submitted", detail: "Submitted Node.js Project", time: "1 day ago" },
-    { type: "course_enrolled", detail: "Enrolled in UI Design", time: "3 days ago" }
+    { title: "UI Design Principles", status: "Upcoming", date: "Oct 25" },
+    { title: "React Components", status: "In Progress", date: "Oct 28" },
+    { title: "API Integration", status: "Completed", date: "Oct 20" }
   ];
 
+  // Auth check
   useEffect(() => {
     if (!isAuthenticated()) {
       navigate('/login', { replace: true });
     }
   }, [navigate]);
 
+  // Sync with URL query param
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const section = params.get("section");
+    if (section) {
+      setActiveSection(section);
+    }
+  }, []);
+
+  // Auth check
+
+  // Load User
   useEffect(() => {
     const userStr = localStorage.getItem("user");
     if (userStr) {
       try {
-        const user = JSON.parse(userStr);
-        setUserName(user.name || "");
-      } catch {
-        setUserName("");
+        const parsedUser = JSON.parse(userStr);
+        setUserData(parsedUser);
+      } catch (err) {
+        console.error("Error parsing user data:", err);
       }
     }
   }, []);
@@ -66,171 +108,215 @@ const Dashboard = () => {
     }
   }, []);
 
-  // Calculate overall progress
-  const overallProgress = enrolledCourses.length ? Math.round(enrolledCourses.reduce((acc, c) => acc + c.progress, 0) / enrolledCourses.length) : 0;
+  // Safe checks
+  const safeEnrolledCourses = Array.isArray(enrolledCourses) ? enrolledCourses : [];
+  const overallProgress = safeEnrolledCourses.length
+    ? Math.round(safeEnrolledCourses.reduce((acc, c) => acc + (c.progress || 0), 0) / safeEnrolledCourses.length)
+    : 0;
 
-  // TodoList state and handlers
+  // Recent Course (Resume Learning)
+  const recentCourse = safeEnrolledCourses.length > 0 ? safeEnrolledCourses[0] : null;
+
+  // Simple Weekly Activity Chart (Mock Data for Visuals)
+  const weeklyActivity = [30, 45, 20, 60, 50, 80, 40];
+  const maxActivity = Math.max(...weeklyActivity);
+
+  // Todo Handling
   const [tasks, setTasks] = useState([]);
-
-  const handleTaskAdd = (task) => {
-    setTasks(prev => [
-      { ...task, id: Date.now().toString(), createdAt: new Date(), status: task.status || "pending" },
-      ...prev
-    ]);
-  };
-
-  const handleTaskUpdate = (updatedTask) => {
-    setTasks(prev => prev.map(task => task.id === updatedTask.id ? updatedTask : task));
-  };
-
-  const handleTaskDelete = (taskId) => {
-    setTasks(prev => prev.filter(task => task.id !== taskId));
-  };
+  const handleTaskAdd = (task) => setTasks(prev => [{ ...task, id: Date.now().toString(), status: "pending" }, ...prev]);
+  const handleTaskUpdate = (updated) => setTasks(prev => prev.map(t => t.id === updated.id ? updated : t));
+  const handleTaskDelete = (id) => setTasks(prev => prev.filter(t => t.id !== id));
 
   return (
     <>
-      <StudentDashboardLayout activeSection={activeSection} setActiveSection={setActiveSection}>
+      <StudentDashboardLayout
+        activeSection={activeSection}
+        setActiveSection={(section) => {
+          console.log('Dashboard received activeSection update:', section);
+          if (section === 'signout') {
+            logout().then(() => {
+              localStorage.removeItem("user");
+              localStorage.removeItem("token");
+              window.location.href = "/login";
+            }).catch(err => {
+              console.error('Logout error:', err);
+              window.location.href = "/login";
+            });
+            return;
+          }
+          setActiveSection(section);
+        }}
+      >
         {activeSection === "dashboard" && (
-          <>
-            {/* End Certificates Section */}
-            {/* Bento Grid Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bento-grid">
-              {/* Welcome + Continue Learning (Parallax Card) */}
-              <div className="col-span-1 md:col-span-2 row-span-1 relative overflow-hidden rounded-2xl shadow-xl bg-white bento-card parallax-card flex flex-col justify-between p-8" style={{ minHeight: '220px' }}>
-                <div className="z-10">
-                  <h1 className="text-3xl font-bold mb-1">Welcome back, {user.name}!</h1>
-                  <p className="text-gray-600 mb-4">Continue your learning journey and track your progress.</p>
-                  {enrolledCourses.length > 0 ? (
-                    <div className="flex items-center gap-4">
-                      <div>
-                        <div className="font-semibold">{enrolledCourses[0].title}</div>
-                        <div className="text-sm text-gray-500">Next lesson: {enrolledCourses[0].nextLesson}</div>
+          <div className="space-y-8">
+            {/* Welcome Section */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <h1 className="text-3xl font-heading font-bold text-gray-900">
+                  Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-navy to-brand-cyan">{userData?.name || 'Student'}</span> 👋
+                </h1>
+                <p className="text-gray-600 mt-1">You're making great progress! Keep it up.</p>
+              </div>
+              <div className="flex gap-3">
+                <Link to="/courses" className="btn-secondary flex items-center gap-2">
+                  <BookOpen size={18} />
+                  Browse Courses
+                </Link>
+                {recentCourse && (
+                  <button
+                    onClick={() => window.location.href = `/course.html?id=${recentCourse.id}`}
+                    className="btn-primary flex items-center gap-2 shadow-lg hover:shadow-cyan-500/20"
+                  >
+                    <PlayCircle size={18} />
+                    Resume Learning
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <StatCard
+                icon={<BookOpen className="text-white" size={24} />}
+                label="Courses in Progress"
+                value={safeEnrolledCourses.filter(c => c.progress > 0 && c.progress < 100).length}
+                color="bg-brand-navy"
+              />
+              <StatCard
+                icon={<TrendingUp className="text-white" size={24} />}
+                label="Overall Progress"
+                value={`${overallProgress}%`}
+                color="bg-brand-cyan"
+              />
+              <StatCard
+                icon={<Clock className="text-white" size={24} />}
+                label="Hours Learned"
+                value="12.5"
+                color="bg-purple-500"
+              />
+              <StatCard
+                icon={<Award className="text-white" size={24} />}
+                label="Certificates"
+                value="0"
+                color="bg-orange-500"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            </div>
+
+            {safeEnrolledCourses.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {safeEnrolledCourses.map((course) => (
+                  <div key={course.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md transition-shadow">
+                    <div className="h-32 bg-gray-200 relative overflow-hidden">
+                      <img
+                        src={course.thumbnail || course.thumbnail_url || 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500'}
+                        alt={course.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                    </div>
+                    <div className="p-5">
+                      <h3 className="font-bold text-gray-900 mb-2 line-clamp-1">{course.title}</h3>
+                      <div className="flex items-center gap-2 mb-4">
+                        <div className="flex-1 bg-gray-100 rounded-full h-1.5">
+                          <div className="bg-brand-navy h-1.5 rounded-full" style={{ width: `${course.progress || 0}%` }}></div>
+                        </div>
+                        <span className="text-xs font-medium text-gray-500">{course.progress || 0}%</span>
                       </div>
-                      <Link to={`/course/${enrolledCourses[0].id}/lesson/l1`} className="btn-primary" state={{ fromDashboard: true }} onClick={() => { sessionStorage.setItem('fromDashboard', 'true'); }}>Resume</Link>
+                      <a
+                        href={`/course.html?id=${course.id}`}
+                        onClick={() => { sessionStorage.setItem('fromDashboard', 'true'); }}
+                        className="w-full block text-center py-2.5 rounded-xl bg-gray-50 text-gray-900 font-medium text-sm hover:bg-brand-navy hover:text-white transition-all duration-200"
+                      >
+                        Continue
+                      </a>
                     </div>
-                  ) : <div>No courses to resume.</div>}
-                </div>
-                <div className="absolute right-0 bottom-0 w-40 h-40 bg-gradient-to-tr from-blue-200 to-purple-200 opacity-40 rounded-full blur-2xl z-0"></div>
-              </div>
-
-              {/* Progress Bar */}
-              <div className="col-span-1 row-span-1 rounded-2xl shadow-xl bg-white bento-card flex flex-col justify-center items-center p-6">
-                <h2 className="text-lg font-semibold mb-2">Overall Progress</h2>
-                <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
-                  <div className="bg-brand-cyan h-3 rounded-full transition-all duration-300" style={{ width: `${overallProgress}%` }}></div>
-                </div>
-                <div className="text-right text-sm text-gray-600">{overallProgress}% complete</div>
-              </div>
-
-              {/* Your Courses */}
-              <div className="col-span-1 md:col-span-1 row-span-1 rounded-2xl shadow-xl bg-white bento-card flex flex-col p-6">
-                <h2 className="text-lg font-semibold mb-2">Your Courses</h2>
-                <div className="flex flex-col gap-3">
-                  {enrolledCourses.map(course => (
-                    <div key={course.id} className="bg-blue-50 rounded-lg p-3 flex flex-col shadow-sm">
-                      <div className="font-semibold mb-1">{course.title}</div>
-                      <div className="text-xs text-gray-500 mb-2">Progress: {course.progress}%</div>
-                      {/* Only show the working Go to Course link */}
-                      <Link to={`/course/${course.id}/lesson/${course.id === 'dm-2' ? 'l2' : 'l1'}`} className="btn-primary w-full text-center" state={{ fromDashboard: true }} onClick={() => { sessionStorage.setItem('fromDashboard', 'true'); }}>Go to Course</Link>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Upcoming Event Card */}
-              <div className="col-span-1 md:col-span-1 row-span-1 rounded-2xl shadow-xl bg-yellow-50 bento-card flex flex-col p-6">
-                <h2 className="text-lg font-semibold mb-2 text-yellow-700">Upcoming Events</h2>
-                <div className="flex flex-col gap-2">
-                  <div className="font-semibold">Webinar: Career in Tech</div>
-                  <div className="text-sm text-gray-600 mb-2">August 20, 2025 &middot; 4:00 PM</div>
-                  <div className="font-semibold">Digital marketing for the 4th Generation</div>
-                  <div className="text-sm text-gray-600 mb-2">November 15, 2025</div>
-                  <div className="font-semibold">Through the eyes of Ai</div>
-                  <div className="text-sm text-gray-600 mb-2">September 18, 2025</div>
-                  <div className="font-semibold">Vibe Coding</div>
-                  <div className="text-sm text-gray-600">October 29, 2025</div>
-                </div>
-              </div>
-
-              {/* Motivation Video - Assignment Card Shape, full width */}
-              <div className="col-span-1 md:col-span-2 row-span-1">
-                <div className="rounded-2xl shadow-2xl bg-gradient-to-br from-pink-100 via-white to-blue-100 bento-card p-8 flex flex-col justify-between min-h-[220px] md:min-h-[260px]">
-                  <h2 className="text-2xl font-bold mb-2 text-brand-cyan drop-shadow">Motivation of the Week</h2>
-                  <p className="mb-4 text-gray-700 text-base font-medium">Kickstart your week with a dose of inspiration! Watch this motivational video to boost your learning journey.</p>
-                  <div className="w-full flex-1 flex items-center justify-center">
-                    <iframe width="100%" height="100%" style={{ aspectRatio: '16/9', borderRadius: '0.75rem', minHeight: '140px', maxHeight: '220px', boxShadow: '0 8px 32px rgba(80,80,180,0.10)' }} src="https://www.youtube.com/embed/ZXsQAXx_ao0" title="Motivational Video" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                   </div>
-                </div>
+                ))}
               </div>
-              {/* Assignments */}
-              <div className="col-span-1 md:col-span-2 row-span-1 rounded-2xl shadow-xl bg-white bento-card flex flex-col p-6">
-                <h2 className="text-lg font-semibold mb-2">Assignments</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {assignments.map((a, i) => (
-                    <div key={i} className="bg-purple-50 rounded-lg shadow p-4">
-                      <div className="font-semibold">{a.title}</div>
-                      <div className={`text-xs mt-2 px-2 py-1 rounded-full ${a.status === 'Upcoming' ? 'bg-yellow-100 text-yellow-800' : a.status === 'In Progress' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800'}`}>{a.status}</div>
-                    </div>
-                  ))}
+            ) : (
+              <div className="bg-gray-50 rounded-2xl p-8 text-center border border-dashed border-gray-200">
+                <div className="mx-auto w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-4">
+                  <BookOpen size={24} className="text-gray-400" />
                 </div>
+                <h3 className="text-lg font-medium text-gray-900 mb-1">No courses yet</h3>
+                <p className="text-gray-500 max-w-md mx-auto mb-6">Start your journey by enrolling in one of our expert-led courses.</p>
+                <Link to="/courses" className="btn-primary inline-flex items-center gap-2">
+                  Browse Courses <ArrowRight size={16} />
+                </Link>
               </div>
-              {/* Community Card */}
-              <div className="col-span-1 md:col-span-1 row-span-1 rounded-2xl shadow-xl bg-pink-50 bento-card flex flex-col p-6">
-                <h2 className="text-lg font-semibold mb-2 text-pink-700">Community</h2>
-                <div className="flex flex-col gap-2">
-                  <div className="font-semibold">Join the Conversation!</div>
-                  <div className="text-sm text-gray-600">Connect with peers, ask questions, and share your progress in our student community forum.</div>
-                  <a href="#" className="btn-primary mt-2 w-max">Go to Forum</a>
-                </div>
-              </div>
-            </div> {/* End of bento grid */}
-          </>
+            )}
+          </div>
         )}
-        {activeSection === "profile" && (
-          <Profile user={user} />
-        )}
+
+        {activeSection === "profile" && <Profile user={userData} />}
         {activeSection === "courses" && (
           <div className="container mx-auto py-8">
-            <h2 className="text-2xl font-bold mb-4">My Courses</h2>
-            <div className="bg-white rounded shadow p-6">
-              {enrolledCourses.length === 0 ? (
-                <p>You are not enrolled in any courses yet.</p>
-              ) : (
-                <ul className="list-disc pl-6">
-                  {enrolledCourses.map((course) => (
-                    <li key={course.id} className="mb-3">
-                      <div className="p-4 bg-gradient-to-br from-blue-900 via-cyan-700 to-cyan-400 rounded-2xl shadow-2xl flex flex-col md:flex-row md:items-center md:justify-between transform hover:scale-105 transition-transform duration-300 border-4 border-cyan-200" style={{ boxShadow: '0 8px 32px rgba(0,40,120,0.18), 0 1.5px 8px rgba(0,255,255,0.08)' }}>
-                        <div>
-                          <span className="font-semibold text-lg text-white drop-shadow">{course.title}</span>
-                          <span className="block text-cyan-100">Progress: {course.progress}%</span>
-                          <span className="block text-cyan-100">Next lesson: {course.nextLesson}</span>
-                        </div>
-                        <Link to={`/course/${course.id}/lesson/${course.id === 'dm-2' ? 'l2' : 'l1'}`} className="btn-primary mt-2 md:mt-0 shadow-lg" state={{ fromDashboard: true }} onClick={() => { sessionStorage.setItem('fromDashboard', 'true'); }}>Go to Course</Link>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              )}
+            <h2 className="text-2xl font-bold mb-6">My Courses</h2>
+            {/* Reusing the card grid from dashboard for consistency */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {safeEnrolledCourses.map((course) => (
+                <div key={course.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                  {/* Simplified card for this view */}
+                  <div className="p-6">
+                    <h3 className="font-bold text-lg mb-2">{course.title}</h3>
+                    <a href={`/course.html?id=${course.id}`} className="btn-primary w-full text-center block">Go to Course</a>
+                  </div>
+                </div>
+              ))}
+              {safeEnrolledCourses.length === 0 && <p className="text-gray-500">No courses found.</p>}
             </div>
           </div>
         )}
+
         {activeSection === "todo" && (
-          <div className="p-6 min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-100">
-            <TodoList
-              tasks={tasks}
-              onTaskAdd={handleTaskAdd}
-              onTaskUpdate={handleTaskUpdate}
-              onTaskDelete={handleTaskDelete}
-            />
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl font-bold mb-6">My Tasks</h2>
+            <TodoList tasks={tasks} onTaskAdd={handleTaskAdd} onTaskUpdate={handleTaskUpdate} onTaskDelete={handleTaskDelete} />
           </div>
         )}
-        {activeSection === "planner" && (
-          <PlannerPage user={user} />
+
+        {activeSection === "planner" && <PlannerPage user={userData} />}
+        {activeSection === "ai-tutor" && <AIDashboard userId={userData?._id} onBack={() => setActiveSection('dashboard')} />}
+        {activeSection === "calendar" && <Calendar events={[]} />}
+        {activeSection === "certificates" && (
+          <div className="max-w-4xl mx-auto py-8">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">My Certificates</h2>
+            <div className="space-y-6">
+              {safeEnrolledCourses.filter(c => c.progress === 100).length > 0 ? (
+                safeEnrolledCourses.filter(c => c.progress === 100).map(course => (
+                  <div key={course.id} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900">{course.title}</h3>
+                      <p className="text-gray-500">Completed on {course.enrolled_at ? new Date(course.enrolled_at).toLocaleDateString() : 'N/A'}</p>
+                    </div>
+                    <button className="btn-primary">Download Certificate</button>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-12 bg-white rounded-2xl border border-dashed border-gray-200">
+                  <Award size={48} className="mx-auto text-gray-300 mb-4" />
+                  <h3 className="text-lg font-medium text-gray-900">No certificates yet</h3>
+                  <p className="text-gray-500">Finish all lessons in a course to earn your certificate.</p>
+                </div>
+              )}
+            </div>
+
+            {/* Template Preview */}
+            <div className="mt-12 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all">
+              <p className="text-center text-sm text-gray-400 mb-4">Preview of your future certificate</p>
+              <CertificateTemplate
+                studentName={userData?.name || "Student Name"}
+                courseTitle="Example Digital Excellence"
+                date={new Date().toLocaleDateString()}
+                certificateId="TT-XXXX-XXXX"
+              />
+            </div>
+          </div>
         )}
-        {activeSection === "calendar" && (
-          <Calendar events={[]} />
-        )}
-      </StudentDashboardLayout>
+      </StudentDashboardLayout >
     </>
   );
 };

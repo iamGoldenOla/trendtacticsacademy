@@ -10,40 +10,68 @@ const Home = () => {
 
     useEffect(() => {
         const fetchRealCourses = async () => {
+            // Set a timeout to prevent infinite loading
+            const timeoutId = setTimeout(() => {
+                if (loading) {
+                    console.error('Course loading timeout after 10 seconds');
+                    setError('Loading timeout - please check your connection and try again');
+                    setLoading(false);
+                }
+            }, 10000); // 10 second timeout
+
             try {
                 setLoading(true);
                 setError(null);
-                
+
+                console.log('Fetching courses from Supabase...');
+
                 // Always try to fetch real courses first
                 const courses = await courseService.getAllCourses();
-                
+
+                console.log('Courses fetched:', courses?.length || 0, 'courses');
+
                 // Validate that we got real courses with proper UUIDs
                 if (courses && Array.isArray(courses) && courses.length > 0) {
                     // Filter out any courses without proper UUIDs
                     const validCourses = courses.filter(course => {
                         // Check if course.id looks like a UUID
-                        return course.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(course.id);
+                        const isValid = course.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(course.id);
+                        if (!isValid) {
+                            console.warn('Invalid course ID:', course.id, course.title);
+                        }
+                        return isValid;
                     });
-                    
+
+                    console.log('Valid courses:', validCourses.length);
+
                     // Prioritize featured courses if they exist, otherwise take first 3 valid courses
                     const featuredCourses = validCourses.filter(course => course.featured || course.is_featured || course.category === 'featured');
-                    
+
                     if (featuredCourses.length > 0) {
                         // If we have featured courses, show up to 3 of them
+                        console.log('Showing', featuredCourses.length, 'featured courses');
                         setRealCourses(featuredCourses.slice(0, 3));
                     } else {
                         // Otherwise, show first 3 valid courses
+                        console.log('Showing first 3 of', validCourses.length, 'courses');
                         setRealCourses(validCourses.slice(0, 3));
                     }
                 } else {
                     console.warn('No valid courses found in Supabase');
+                    setError('No courses available at the moment. Please check back soon!');
                     setRealCourses([]); // Show empty state instead of mock data
                 }
             } catch (error) {
                 console.error('Error fetching real courses from Supabase:', error);
-                setError(error.message);
+                console.error('Error details:', {
+                    message: error.message,
+                    stack: error.stack,
+                    name: error.name
+                });
+                setError(`Failed to load courses: ${error.message}`);
                 setRealCourses([]); // Show empty state instead of mock data
             } finally {
+                clearTimeout(timeoutId);
                 setLoading(false);
             }
         };
@@ -98,7 +126,35 @@ const Home = () => {
             <div className="min-h-screen bg-white flex items-center justify-center">
                 <div className="text-center">
                     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-cyan mx-auto mb-4"></div>
-                    <p className="text-gray-600">Loading courses...</p>
+                    <p className="text-gray-600 font-medium">Loading courses...</p>
+                    <p className="text-sm text-gray-400 mt-2">This should only take a moment</p>
+                </div>
+            </div>
+        );
+    }
+
+    // Show error state if courses failed to load
+    if (error && realCourses.length === 0) {
+        return (
+            <div className="min-h-screen bg-white flex items-center justify-center">
+                <div className="text-center max-w-md px-4">
+                    <div className="text-6xl mb-4">⚠️</div>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Unable to Load Courses</h2>
+                    <p className="text-gray-600 mb-6">{error}</p>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                        <button
+                            onClick={() => window.location.reload()}
+                            className="btn-primary"
+                        >
+                            Try Again
+                        </button>
+                        <Link to="/courses" className="btn-secondary">
+                            View All Courses
+                        </Link>
+                    </div>
+                    <p className="text-sm text-gray-500 mt-6">
+                        If the problem persists, please contact support
+                    </p>
                 </div>
             </div>
         );
@@ -108,9 +164,9 @@ const Home = () => {
         <div className="min-h-screen bg-white">
             {/* Hero Section with Parallax */}
             <section className="relative h-screen flex items-center justify-center overflow-hidden">
-                <div 
+                <div
                     className="absolute inset-0 bg-cover bg-center bg-fixed"
-                    style={{ 
+                    style={{
                         backgroundImage: "url('/images/homepage-parallex.jpg')",
                         backgroundAttachment: 'fixed'
                     }}
@@ -122,7 +178,7 @@ const Home = () => {
                         <span className="text-brand-cyan block">Digital Excellence</span>
                     </h1>
                     <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
-                        Master in-demand digital skills with expert-led courses designed for the modern workforce. 
+                        Master in-demand digital skills with expert-led courses designed for the modern workforce.
                         Start your journey to success today.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -190,45 +246,56 @@ const Home = () => {
                             Start with our most popular courses and build your digital skills
                         </p>
                     </div>
-                    
+
                     {coursesToShow.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {coursesToShow.map((course) => (
-                                <div key={course.id} className="card hover:shadow-xl transition-shadow duration-300">
+                                <div key={course.id} className="card hover:shadow-xl transition-shadow duration-300 flex flex-col">
                                     <div className="relative mb-4">
-                                        <img 
-                                            src={course.thumbnail || course.thumbnail_url || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop'} 
-                                            alt={course.title} 
-                                            className="w-full h-48 object-cover rounded-lg"
-                                        />
-                                        <div className="absolute top-3 right-3 bg-brand-cyan text-white px-2 py-1 rounded text-sm font-medium">
-                                            {course.level}
+                                        <div className="relative overflow-hidden rounded-t-xl h-48 bg-gradient-to-br from-brand-cyan to-brand-navy">
+                                            {course.thumbnail || (course.title?.includes('Facebook Ads') ? '/images/facebook-ads-cover.jpg' : course.title?.includes('Vibe Coding') ? '/images/vibe-coding-cover.jpg' : null) ? (
+                                                <img
+                                                    src={course.thumbnail || (course.title?.includes('Facebook Ads') ? '/images/facebook-ads-cover.jpg' : course.title?.includes('Vibe Coding') ? '/images/vibe-coding-cover.jpg' : '')}
+                                                    alt={course.title}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            ) : (
+                                                <div className="w-full h-full flex items-center justify-center text-white">
+                                                    <div className="text-center">
+                                                        <div className="text-4xl mb-2">📚</div>
+                                                        <div className="text-sm font-medium">{course.title}</div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                            <div className="absolute top-3 right-3 bg-brand-cyan text-white px-2 py-1 rounded text-sm font-medium">
+                                                {course.level}
+                                            </div>
                                         </div>
                                     </div>
-                                    
-                                    <div className="mb-4">
+
+                                    <div className="flex-1 mb-4">
                                         <h3 className="text-xl font-heading font-semibold text-gray-900 mb-2">
                                             {course.title}
                                         </h3>
                                         <p className="text-gray-600 text-sm mb-3">
                                             {course.description}
                                         </p>
-                                        
+
                                         <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                                             <span>By {course.instructor?.name || 'Instructor'}</span>
                                             <span>{course.duration}</span>
                                         </div>
-                                        
+
                                         <div className="flex items-center justify-between mb-4">
                                             <div className="flex items-center">
                                                 <div className="flex text-yellow-400">
                                                     {[...Array(5)].map((_, i) => (
-                                                        <svg 
-                                                            key={i} 
-                                                            className={`w-4 h-4 ${i < Math.floor(course.rating || 4.5) ? 'fill-current' : 'fill-gray-300'}`} 
+                                                        <svg
+                                                            key={i}
+                                                            className={`w-4 h-4 ${i < Math.floor(course.rating || 4.5) ? 'fill-current' : 'fill-gray-300'}`}
                                                             viewBox="0 0 20 20"
                                                         >
-                                                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                                                         </svg>
                                                     ))}
                                                 </div>
@@ -239,17 +306,19 @@ const Home = () => {
                                             </span>
                                         </div>
                                     </div>
-                                    
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-2xl font-heading font-bold text-brand-navy">
-                                            ${course.price || 0}
-                                        </span>
-                                        <Link 
-                                            to={`/course/${course.id}/overview`} 
-                                            className="btn-primary"
-                                        >
-                                            View Course
-                                        </Link>
+
+                                    <div className="mt-auto">
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-2xl font-bold text-gray-900">
+                                                ₦{course.price ? Number(course.price).toLocaleString() : '5,000'}
+                                            </span>
+                                            <a
+                                                href={`/course.html?id=${course.id}`}
+                                                className="btn-primary"
+                                            >
+                                                View Course
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
@@ -261,7 +330,7 @@ const Home = () => {
                             <p className="text-gray-600">We're working on adding new courses. Please check back soon!</p>
                         </div>
                     )}
-                    
+
                     <div className="text-center mt-12">
                         <Link to="/courses" className="btn-secondary">
                             View All Courses
@@ -280,42 +349,52 @@ const Home = () => {
                     }}>
                         {[...Array(2)].flatMap((_, repeatIdx) => [
                             <div key={`t1-${repeatIdx}`} className="stats-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center min-w-[320px] max-w-[320px] h-[260px]">
-                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Testimonial 1" className="w-14 h-14 rounded-full mb-2"/>
+                                <div className="w-14 h-14 rounded-full mb-2 bg-gradient-to-br from-brand-cyan to-brand-navy flex items-center justify-center">
+                                    <span className="text-white font-bold text-xl">AB</span>
+                                </div>
                                 <p className="text-gray-700 text-center mb-2 text-sm">"This platform transformed my career! The courses are practical and the instructors are top-notch."</p>
                                 <div className="flex items-center mb-1">{[...Array(5)].map((_, i) => <span key={i} className="text-yellow-400 text-base">★</span>)}</div>
                                 <span className="font-semibold text-xs text-blue-700">Aisha Bello</span>
                                 <span className="text-xs text-gray-500">Digital Marketer</span>
                             </div>,
                             <div key={`t2-${repeatIdx}`} className="stats-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center min-w-[320px] max-w-[320px] h-[260px]">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Testimonial 2" className="w-14 h-14 rounded-full mb-2"/>
+                                <div className="w-14 h-14 rounded-full mb-2 bg-gradient-to-br from-brand-cyan to-brand-navy flex items-center justify-center">
+                                    <span className="text-white font-bold text-xl">JO</span>
+                                </div>
                                 <p className="text-gray-700 text-center mb-2 text-sm">"I landed my dream job after completing the advanced courses. Highly recommended!"</p>
                                 <div className="flex items-center mb-1">{[...Array(5)].map((_, i) => <span key={i} className="text-yellow-400 text-base">★</span>)}</div>
                                 <span className="font-semibold text-xs text-blue-700">James Okoro</span>
                                 <span className="text-xs text-gray-500">SEO Specialist</span>
                             </div>,
                             <div key={`t3-${repeatIdx}`} className="stats-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center min-w-[320px] max-w-[320px] h-[260px]">
-                                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Testimonial 3" className="w-14 h-14 rounded-full mb-2"/>
+                                <div className="w-14 h-14 rounded-full mb-2 bg-gradient-to-br from-brand-cyan to-brand-navy flex items-center justify-center">
+                                    <span className="text-white font-bold text-xl">ML</span>
+                                </div>
                                 <p className="text-gray-700 text-center mb-2 text-sm">"The community and support are amazing. I never felt lost, even as a beginner."</p>
                                 <div className="flex items-center mb-1">{[...Array(5)].map((_, i) => <span key={i} className="text-yellow-400 text-base">★</span>)}</div>
                                 <span className="font-semibold text-xs text-blue-700">Maria Lopez</span>
                                 <span className="text-xs text-gray-500">Content Creator</span>
                             </div>,
                             <div key={`t4-${repeatIdx}`} className="stats-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center min-w-[320px] max-w-[320px] h-[260px]">
-                                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Testimonial 4" className="w-14 h-14 rounded-full mb-2"/>
+                                <div className="w-14 h-14 rounded-full mb-2 bg-gradient-to-br from-brand-cyan to-brand-navy flex items-center justify-center">
+                                    <span className="text-white font-bold text-xl">SG</span>
+                                </div>
                                 <p className="text-gray-700 text-center mb-2 text-sm">"The hands-on projects made all the difference. I could apply what I learned right away."</p>
                                 <div className="flex items-center mb-1">{[...Array(5)].map((_, i) => <span key={i} className="text-yellow-400 text-base">★</span>)}</div>
                                 <span className="font-semibold text-xs text-blue-700">Samuel Green</span>
                                 <span className="text-xs text-gray-500">PPC Specialist</span>
                             </div>,
                             <div key={`t5-${repeatIdx}`} className="stats-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center min-w-[320px] max-w-[320px] h-[260px]">
-                                <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Testimonial 5" className="w-14 h-14 rounded-full mb-2"/>
+                                <div className="w-14 h-14 rounded-full mb-2 bg-gradient-to-br from-brand-cyan to-brand-navy flex items-center justify-center">
+                                    <span className="text-white font-bold text-xl">EN</span>
+                                </div>
                                 <p className="text-gray-700 text-center mb-2 text-sm">"I loved the mobile learning experience. I could study on the go!"</p>
                                 <div className="flex items-center mb-1">{[...Array(5)].map((_, i) => <span key={i} className="text-yellow-400 text-base">★</span>)}</div>
                                 <span className="font-semibold text-xs text-blue-700">Fatima Musa</span>
                                 <span className="text-xs text-gray-500">Content Strategist</span>
                             </div>,
                             <div key={`t6-${repeatIdx}`} className="stats-card bg-white rounded-xl shadow-lg p-6 flex flex-col items-center min-w-[320px] max-w-[320px] h-[260px]">
-                                <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Testimonial 6" className="w-14 h-14 rounded-full mb-2"/>
+                                <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Testimonial 6" className="w-14 h-14 rounded-full mb-2" />
                                 <p className="text-gray-700 text-center mb-2 text-sm">"Certification from Trendtactics helped me get a promotion at work!"</p>
                                 <div className="flex items-center mb-1">{[...Array(5)].map((_, i) => <span key={i} className="text-yellow-400 text-base">★</span>)}</div>
                                 <span className="font-semibold text-xs text-blue-700">David Chen</span>
@@ -349,7 +428,7 @@ const Home = () => {
                         <h3 className="text-lg font-semibold mb-2">Subscribe to our Newsletter</h3>
                         <p className="text-sm text-gray-200 mb-4 text-center max-w-md">Get updates on new courses, exclusive offers, and digital marketing tips delivered to your inbox.</p>
                         <form className="flex flex-col sm:flex-row gap-2 w-full max-w-md" onSubmit={e => { e.preventDefault(); alert('Thank you for subscribing!'); }}>
-                            <input type="email" required placeholder="Enter your email" className="rounded-l-md rounded-r-md sm:rounded-r-none px-4 py-2 w-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-cyan-400"/>
+                            <input type="email" required placeholder="Enter your email" className="rounded-l-md rounded-r-md sm:rounded-r-none px-4 py-2 w-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-cyan-400" />
                             <button type="submit" className="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold px-6 py-2 rounded-md sm:rounded-l-none transition-colors">
                                 Subscribe
                             </button>

@@ -26,7 +26,7 @@ export const login = async (credentials) => {
         }
 
         // Get user profile from the users table
-        const { data: profileData, error: profileError } = await supabase
+        let { data: profileData, error: profileError } = await supabase
             .from('users')
             .select('*')
             .eq('id', data.user.id)

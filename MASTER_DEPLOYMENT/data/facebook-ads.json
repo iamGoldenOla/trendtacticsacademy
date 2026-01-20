@@ -1,0 +1,133 @@
+[
+    {
+        "title": "Facebook Ads in 2026: The AI Era",
+        "lessons": [
+            {
+                "title": "Introduction to AI-First Advertising",
+                "description": "How Agentic AI has redefined the ad landscape in 2026.",
+                "video_url": "https://www.youtube.com/embed/1I2j4b3Bk4g",
+                "summary": "In 2026, Facebook Ads are no longer just about manual targeting. This lesson covers the shift to 'Operating Layer' marketing where AI agents manage bid strategies, creative variations, and cross-platform orchestration autonomously.",
+                "resources": [
+                    {
+                        "url": "https://www.facebook.com/business/ads",
+                        "title": "Meta 2026 Ads Guide"
+                    },
+                    {
+                        "url": "https://futureweek.com/marketing-2026",
+                        "title": "Future of Marketing 2026 Report"
+                    }
+                ],
+                "quiz_questions": [
+                    {
+                        "question": "What is the primary role of AI in 2026 advertising?",
+                        "options": [
+                            "Just writing copy",
+                            "Operating Layer & Orchestration",
+                            "Deleting comments",
+                            "None"
+                        ],
+                        "correctAnswer": 1
+                    }
+                ]
+            },
+            {
+                "title": "Advantage+ Pro & Autonomous Campaigns",
+                "description": "Setting up fully autonomous campaigns.",
+                "video_url": "https://www.youtube.com/embed/5D2c2s4w4qU",
+                "summary": "Deep dive into Meta's Advantage+ Pro suite. Learn how to set goals and let the AI handle the rest, from budget allocation to creative swapping in real-time.",
+                "quiz_questions": [
+                    {
+                        "question": "What replaces manual targeting in Advantage+ Pro?",
+                        "options": [
+                            "Keyword stuffing",
+                            "AI Predictive Behavioral Analysis",
+                            "Manual demographics",
+                            "Guesswork"
+                        ],
+                        "correctAnswer": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Next-Gen Campaign Setup",
+        "lessons": [
+            {
+                "title": "Objective-Driven Workflows",
+                "description": "The 2026 Outcome-Based Framework.",
+                "video_url": "https://www.youtube.com/embed/xLXfJvR5J8M",
+                "summary": "Moving beyond 'Traffic' and 'Sales'. We explore new 2026 objectives like 'Brand Resonance', 'Agentic Handover', and 'Immersive Conversion'.",
+                "resources": [
+                    {
+                        "url": "https://www.facebook.com/business/help/",
+                        "title": "Meta Objectives 2026"
+                    }
+                ]
+            },
+            {
+                "title": "Zero-Click Commerce",
+                "description": "Optimizing for AI-mediated purchases.",
+                "video_url": "https://www.youtube.com/embed/qOx1jG7F7yM",
+                "summary": "How to structure campaigns when the 'buyer' might be a personal AI assistant. Optimizing data feeds for machine readability.",
+                "quiz_questions": [
+                    {
+                        "question": "Who is the new 'gatekeeper' consumer in 2026?",
+                        "options": [
+                            "Social Media Influencers",
+                            "Personal AI Assistants",
+                            "Email newsletters",
+                            "TV Ads"
+                        ],
+                        "correctAnswer": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Immersive & AR Targeting",
+        "lessons": [
+            {
+                "title": "Metaverse & AR Placements",
+                "description": "Advertising in spatial computing.",
+                "video_url": "https://www.youtube.com/embed/O8dskc2E2wM",
+                "summary": "Strategies for placing non-intrusive, interactive 3D ads within Horizon Worlds and Apple Vision Pro environments.",
+                "quiz_questions": [
+                    {
+                        "question": "What is 'Spatial Advertising'?",
+                        "options": [
+                            "Billboards in space",
+                            "Ads placed in 3D AR/VR environments",
+                            "Ads on maps",
+                            "Radio ads"
+                        ],
+                        "correctAnswer": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Generative Creative Studio",
+        "lessons": [
+            {
+                "title": "Text-to-Video Ad Generation",
+                "description": "Creating high-fidelity video ads in minutes.",
+                "video_url": "https://www.youtube.com/embed/Hq4NlI-O8wI",
+                "summary": "Using Meta's internal GenAI tools to produce thousands of creative variations from a single product link. Best practices for prompting the ad creative engine."
+            }
+        ]
+    },
+    {
+        "title": "Predictive Analytics",
+        "lessons": [
+            {
+                "title": "Predicting Churn with AI",
+                "description": "Stopping customer loss before it happens.",
+                "video_url": "https://www.youtube.com/embed/0GkC8rN8a5c",
+                "summary": "How 2026 analytics dashboards use predictive modeling to flag at-risk customers and automatically trigger retention ad campaigns."
+            }
+        ]
+    }
+]

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
           <div className="col-span-1 md:col-span-1">
             <h3 className="text-xl font-heading font-bold mb-4">Trendtactics Academy</h3>
             <p className="text-gray-300 text-sm leading-relaxed mb-6">
-              Empowering learners worldwide with cutting-edge digital skills and knowledge. 
+              Empowering learners worldwide with cutting-edge digital skills and knowledge.
               Transform your career with our expert-led courses.
             </p>
             <div className="flex space-x-4">
@@ -62,12 +62,12 @@ const Footer: React.FC = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -81,12 +81,12 @@ const Footer: React.FC = () => {
             <ul className="space-y-3">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -100,12 +100,12 @@ const Footer: React.FC = () => {
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-gray-300 hover:text-white transition-colors text-sm"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

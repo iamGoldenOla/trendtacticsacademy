@@ -12,9 +12,16 @@ class PuterService {
   // Initialize Puter.js with multiple models
   async initialize() {
     try {
-      // Check if puter.js is already loaded
+      // Wait for puter.js to be available (up to 5 seconds)
+      let retries = 0;
+      while (typeof window !== 'undefined' && typeof window.puter === 'undefined' && retries < 10) {
+        console.log('Waiting for Puter.js to load...');
+        await new Promise(resolve => setTimeout(resolve, 500));
+        retries++;
+      }
+
       if (typeof window !== 'undefined' && typeof window.puter === 'undefined') {
-        console.warn('Puter.js not found. Please include the script in your HTML.');
+        console.warn('Puter.js not found after waiting. Please include the script in your HTML.');
         return false;
       }
 
@@ -64,7 +71,7 @@ class PuterService {
 
     try {
       // Build conversation context
-      const conversationContext = conversationHistory.map(msg => 
+      const conversationContext = conversationHistory.map(msg =>
         `${msg.role === 'user' ? 'Customer' : 'Trendy'}: ${msg.content}`
       ).join('\n');
 

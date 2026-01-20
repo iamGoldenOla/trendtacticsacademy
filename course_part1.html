@@ -1,0 +1,546 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trendtactics Academy | Vibe Coding & Prompt Mastery</title>
+
+    <!-- SEO Meta Tags -->
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Master the Future of Code with Vibe Coding. Learn to orchestrate AI agents, automate workflows, and build software at the speed of thought. The ultimate premium academy for modern developers.">
+    <meta name="keywords"
+        content="Vibe Coding, Prompt Engineering, AI Agents, Software Development, TrendTactics, LLM, OpenAI, Cursor, Future of Work">
+    <meta name="author" content="Trendtactics Academy">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src * 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://uimdbodamoeyukrghchb.supabase.co https://*.supabase.co https://js.puter.com https://*.puter.com https://translate.google.com https://translate.googleapis.com; script-src * 'unsafe-inline' 'unsafe-eval' https://js.puter.com https://translate.google.com https://translate.googleapis.com; frame-src *; img-src * data: https:; style-src * 'unsafe-inline'; font-src *; worker-src * blob:; child-src *;">
+    <link rel="canonical" href="https://academy.trendtacticsdigital.com/course.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://academy.trendtacticsdigital.com/">
+    <meta property="og:title" content="Trendtactics Academy | Vibe Coding & Prompt Mastery">
+    <meta property="og:description"
+        content="Master the art of AI communication and Vibe Coding. Learn to build software at the speed of thought.">
+    <meta property="og:image" content="https://academy.trendtacticsdigital.com/assets/images/og-social-share.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://academy.trendtacticsdigital.com/">
+    <meta property="twitter:title" content="Trendtactics Academy | Vibe Coding & Prompt Mastery">
+    <meta property="twitter:description"
+        content="Master the art of AI communication and Vibe Coding. Learn to build software at the speed of thought.">
+    <meta property="twitter:image" content="https://academy.trendtacticsdigital.com/assets/images/og-social-share.jpg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Trendtactics Academy",
+          "url": "https://academy.trendtacticsdigital.com/",
+          "logo": "https://academy.trendtacticsdigital.com/assets/images/logo-icon.png",
+          "sameAs": [
+            "https://twitter.com/trendtactics",
+            "https://linkedin.com/company/trendtactics"
+          ]
+        },
+        {
+          "@type": "Course",
+          "name": "Prompt Engineering Mastery",
+          "description": "A deep dive into advanced prompt engineering techniques for professionals.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Trendtactics Academy"
+          }
+        },
+        {
+          "@type": "Course",
+          "name": "Vibe Coding 3.0",
+          "description": "Learn to write software effectively using AI agents and Natural Language.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Trendtactics Academy"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="/js/scroll-to-top.js"></script>
+    <script src="/js/currency.js"></script>
+
+    <!-- Mermaid.js for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#00D9FF',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#00D9FF',
+                lineColor: '#00D9FF',
+                secondaryColor: '#0A1628',
+                tertiaryColor: '#050B18'
+            }
+        });
+    </script>
+
+    <!-- Google Translate -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,fr,de,pt,ar,zh-CN,hi,yo,ig,ha,sw',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <style>
+        :root {
+            --primary: #00D9FF;
+            --primary-dark: #0096AF;
+            --bg-deep: #050B18;
+            --bg-card: #0A1628;
+            --text-main: #FFFFFF;
+            --text-dim: #A0AEC0;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .layout {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 350px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .back-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .course-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .module-group {
+            margin-bottom: 15px;
+        }
+
+        .module-title {
+            padding: 10px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .lesson-item {
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+            font-size: 0.95rem;
+            color: var(--text-dim);
+        }
+
+        .lesson-item:hover {
+            background: rgba(0, 217, 255, 0.05);
+            color: white;
+        }
+
+        .lesson-item.active {
+            background: var(--primary);
+            color: var(--bg-deep);
+            font-weight: 600;
+        }
+
+        .lesson-item.completed {
+            color: #4ADE80;
+        }
+
+        /* Content Area */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .content-container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: black;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .lesson-header {
+            margin-bottom: 2px;
+        }
+
+        .lesson-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .lesson-desc {
+            color: var(--text-dim);
+            white-space: pre-wrap;
+            /* Restored pre-wrap as requested */
+        }
+
+        /* Quiz UI */
+        .quiz-section {
+            background: var(--bg-card);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-top: 2px;
+        }
+
+        .quiz-opt {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: white;
+            text-align: left;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .quiz-opt:hover {
+            background: rgba(0, 217, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .quiz-opt.correct {
+            background: #064e3b;
+            border-color: #059669;
+        }
+
+        .quiz-opt.wrong {
+            background: #7f1d1d;
+            border-color: #dc2626;
+        }
+
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-deep);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 217, 255, 0.2);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: 300px;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+        }
+
+        /* Extended Styles for New Sections (Summary, Case Studies, etc) */
+        .section-header {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .summary-box {
+            background: rgba(0, 217, 255, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: var(--text-dim);
+        }
+
+        .takeaway-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .takeaway-list li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .takeaway-list li::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: #4ADE80;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 6px;
+        }
+
+        .case-study-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .case-study-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .playground-box {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .playground-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .playground-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .code-block {
+            background: #000;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            color: #4ADE80;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .resource-link {
+            display: block;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            color: var(--primary);
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .resource-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        /* Improved existing styles */
+        .lesson-desc {
+            line-height: 1.6;
+            font-size: 1.05rem;
+            margin-bottom: 2px;
+        }
+
+        .lesson-desc p {
+            margin-bottom: 0.5em;
+        }
+
+        .lesson-desc h2 {
+            margin-top: 0.5em;
+            margin-bottom: 0.3em;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .lesson-desc h3 {
+            margin-top: 0.4em;
+            margin-bottom: 0.25em;
+            font-size: 1.25rem;
+            color: var(--text-main);
+        }
+
+        .lesson-desc ul,
+        .lesson-desc ol {
+            margin-bottom: 0.5em;
+            padding-left: 20px;
+        }
+
+        .lesson-desc li {
+            margin-bottom: 0.2em;
+        }
+
+        /* Google Translate Styling */
+        #google_translate_element {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        #google_translate_element select {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        #google_translate_element select:hover {
+            border-color: var(--primary);
+        }
+
+        /* Hide Google Translate branding */
+        .goog-te-banner-frame,
+        .goog-te-balloon-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
+
+        /* Mermaid Diagram Styling */
+        .mermaid {
+            background: rgba(0, 217, 255, 0.03);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="loading" class="loading-screen">
+        <div style="text-align:center">
+            <div class="spinner"></div>
+            <p style="margin-top:15px; color:var(--text-dim)">Loading Course Content...</p>
+        </div>
+    </div>
+
+    <div class="layout" id="appLayout" style="display:none">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="/" class="back-link">â† Back to Dashboard</a>
+                <h1 class="course-title" id="sidebarCourseTitle">Course Title</h1>
+
+                <!-- Language Selector -->
+                <div id="google_translate_element" style="margin-top: 10px;"></div>
+
+                <!-- Currency Selector -->
+                <div id="currencySelector" style="margin-top: 10px;"></div>

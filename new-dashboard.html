@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
     <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
     <script src="/js/env.js"></script>
     <script src="/js/supabase-client.js"></script>
-    
+
     <style>
         :root {
             --primary: #00D9FF;
@@ -289,23 +290,24 @@
             body {
                 padding: 1rem;
             }
-            
+
             .header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1rem;
             }
-            
+
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .course-actions {
                 flex-direction: column;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="dashboard-container">
         <div class="header">
@@ -314,7 +316,8 @@
                 <p>Continue your learning journey and explore new courses</p>
             </div>
             <div class="user-info">
-                <div class="avatar" style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">
+                <div class="avatar"
+                    style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">
                     S
                 </div>
             </div>
@@ -390,13 +393,13 @@
 
                 // Load dashboard data
                 await loadDashboardData();
-                
+
                 // Load courses
                 await loadCourses();
-                
+
                 // Load recent activity
                 await loadRecentActivity();
-                
+
             } catch (error) {
                 console.error('Error initializing dashboard:', error);
                 showError('Failed to load dashboard. Please refresh the page.');
@@ -417,25 +420,38 @@
 
         async function loadCourses() {
             try {
-                // For now, let's create a mock course with 26 lessons to test
-                const mockCourses = [
-                    {
-                        id: 'e9e58e4a-2f3b-4c9a-8a3d-1e5f6a7b8c9d',
-                        title: 'Vibe Coding: Building Real Software with AI',
-                        description: 'Learn to create digital products by focusing on ideas, intention, creativity, and guidance — often with the help of AI — instead of memorizing code syntax or complex technical rules.',
-                        thumbnail_url: '/images/vibe-coding-thumb.jpg',
-                        level: 'Beginner',
-                        progress: 15, // Showing 15% as an example
-                        lessons_completed: 4,
-                        total_lessons: 26, // This is the important part - 26 lessons
-                        instructor: 'AI Instructor',
-                        duration: '6 weeks',
-                        last_accessed: '2024-01-08'
-                    }
-                ];
+                // Fetch real courses from Supabase
+                const { data: coursesData, error } = await window.supabaseClient
+                    .from('courses')
+                    .select('*')
+                    .eq('status', 'published')
+                    .order('created_at', { ascending: false });
 
-                courses = mockCourses;
+                if (error) throw error;
+
+                // Filter out the deleted/duplicate Facebook course if it still exists
+                const validCourses = (coursesData || []);
+
+                // Map database fields to dashboard display format
+                courses = validCourses.map(course => ({
+                    id: course.id,
+                    title: course.title,
+                    description: course.description || 'No description available',
+                    thumbnail_url: course.image_url || '/images/default-course.jpg',
+                    level: course.level || 'All Levels',
+                    progress: 0, // Default to 0 until we implement real progress tracking
+                    lessons_completed: 0,
+                    total_lessons: course.lessons_count || 10,
+                    instructor: 'Trendtactics Team',
+                    duration: course.duration || 'Self-Paced'
+                }));
+
                 renderCourses(courses);
+
+                // Update stats
+                document.getElementById('totalCourses').textContent = courses.length;
+                document.getElementById('inProgress').textContent = courses.length; // Assuming all are available
+
             } catch (error) {
                 console.error('Error loading courses:', error);
                 showError('Failed to load courses. Please try again.');
@@ -449,7 +465,7 @@
             courses.forEach(course => {
                 const card = document.createElement('div');
                 card.className = 'course-card';
-                
+
                 card.innerHTML = `
                     <div class="course-image">🚀</div>
                     <div class="course-content">
@@ -469,20 +485,19 @@
                         </div>
                         
                         <div class="course-actions">
-                            <a href="/learn?id=${course.id}" class="btn btn-primary" onclick="navigateToCourse('${course.id}')">Continue Learning</a>
-                            <a href="/course/${course.id}" class="btn btn-outline">View Details</a>
+                            <a href="/course.html?id=${course.id}" class="btn btn-primary">Continue Learning</a>
+                            <a href="/course.html?id=${course.id}" class="btn btn-outline">View Details</a>
                         </div>
                     </div>
                 `;
-                
+
                 grid.appendChild(card);
             });
         }
 
         function navigateToCourse(courseId) {
             // Prevent default behavior and properly navigate
-            event.preventDefault();
-            window.location.href = `/learn?id=${courseId}`;
+            window.location.href = `/course.html?id=${courseId}`;
         }
 
         async function loadRecentActivity() {
@@ -555,4 +570,5 @@
         }
     </script>
 </body>
+
 </html>

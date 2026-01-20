@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Ads Manager - AI Campaign Coach</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+            color: #1c1e21;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #1877f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            font-weight: 700;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #1c1e21;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            color: #65676b;
+            font-size: 15px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e4e6eb;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #1877f2;
+            transition: width 0.5s ease;
+        }
+
+        .ai-message {
+            background: #1877f2;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .ai-message h3 {
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .wizard {
+            background: #fff;
+            border-radius: 8px;
+            padding: 32px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hint {
+            background: #e7f3ff;
+            border-left: 4px solid #1877f2;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .hint strong {
+            color: #1877f2;
+        }
+
+        .objective-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .objective-card {
+            border: 2px solid #e4e6eb;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .objective-card:hover {
+            border-color: #1877f2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(24, 119, 242, 0.2);
+        }
+
+        .objective-card.selected {
+            border-color: #1877f2;
+            background: rgba(24, 119, 242, 0.05);
+        }
+
+        .objective-card.recommended {
+            border-color: #42b72a;
+            background: rgba(66, 183, 42, 0.05);
+        }
+
+        .objective-card.recommended::after {
+            content: 'AI Recommended';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #42b72a;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .objective-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #1c1e21;
+        }
+
+        .objective-card p {
+            font-size: 14px;
+            color: #65676b;
+        }
+
+        .ai-score {
+            display: inline-block;
+            background: #1877f2;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-weight: 600;
+            margin-top: 12px;
+            font-size: 13px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1c1e21;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd0d5;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: border-color 0.2s;
+        }
+
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: #1877f2;
+        }
+
+        .hint-text {
+            font-size: 13px;
+            color: #65676b;
+            margin-top: 8px;
+        }
+
+        .feedback-box {
+            margin-top: 12px;
+            padding: 12px;
+            background: #e7f3ff;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .analysis-box {
+            background: #1877f2;
+            color: white;
+            padding: 24px;
+            border-radius: 8px;
+            margin-top: 24px;
+        }
+
+        .analysis-box h3 {
+            margin-bottom: 16px;
+        }
+
+        .analysis-box ul {
+            line-height: 2;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-card h4 {
+            font-size: 14px;
+            color: #65676b;
+            margin-bottom: 8px;
+        }
+
+        .metric-card .value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1877f2;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #1877f2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #166fe5;
+        }
+
+        .btn-secondary {
+            background: #e4e6eb;
+            color: #1c1e21;
+        }
+
+        .btn-secondary:hover {
+            background: #d8dadf;
+        }
+
+        .wizard-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e4e6eb;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #1877f2;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 8px 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="avatar">AI</div>
+                <div>
+                    <h1>Meta Ads Campaign Coach</h1>
+                    <p>AI-powered guidance for creating high-performing Facebook ad campaigns</p>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 25%"></div>
+            </div>
+        </div>
+
+        <div id="aiMessage" class="ai-message">
+            <h3>Welcome to AI-Powered Advertising</h3>
+            <p>I'm your AI coach. I'll analyze your choices in real-time and give you personalized recommendations based
+                on billions of data points. Let's start with choosing your campaign objective...</p>
+        </div>
+
+        <div class="wizard">
+            <!-- Step 1: Objective -->
+            <div class="step-content active" id="step1">
+                <h2>Step 1: Choose Your Campaign Objective</h2>
+
+                <div class="hint">
+                    <strong>AI Insight:</strong> Your objective determines how Facebook's AI optimizes your campaign.
+                    Choose based on your business goal.
+                </div>
+
+                <div class="objective-grid">
+                    <div class="objective-card recommended" data-objective="sales" data-score="95">
+                        <h3>Sales</h3>
+                        <p>Drive purchases and conversions</p>
+                        <div class="ai-score">AI Score: 95/100</div>
+                        <p class="hint-text">Best for: E-commerce, online stores</p>
+                    </div>
+                    <div class="objective-card" data-objective="leads" data-score="88">
+                        <h3>Leads</h3>
+                        <p>Collect contact information</p>
+                        <div class="ai-score">AI Score: 88/100</div>
+                        <p class="hint-text">Best for: B2B, service businesses</p>
+                    </div>
+                    <div class="objective-card" data-objective="traffic" data-score="75">
+                        <h3>Traffic</h3>
+                        <p>Send people to your website</p>
+                        <div class="ai-score">AI Score: 75/100</div>
+                        <p class="hint-text">Best for: Content sites, blogs</p>
+                    </div>
+                    <div class="objective-card" data-objective="engagement" data-score="70">
+                        <h3>Engagement</h3>
+                        <p>Get likes, comments, shares</p>
+                        <div class="ai-score">AI Score: 70/100</div>
+                        <p class="hint-text">Best for: Brand building</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Audience -->
+            <div class="step-content" id="step2">
+                <h2>Step 2: AI Audience Targeting</h2>
+
+                <div class="hint">
+                    <strong>AI Recommendation:</strong> Facebook's AI is incredibly smart. Give it broad parameters and
+                    let it find your ideal customers automatically.
+                </div>
+
+                <div class="form-group">
+                    <label>AI Targeting Mode</label>
+                    <select id="aiMode">
+                        <option value="advantage">Advantage+ (Fully Automated - Recommended)</option>
+                        <option value="broad">Broad Targeting (AI-Assisted)</option>
+                        <option value="manual">Manual (You Control)</option>
+                    </select>
+                    <p class="hint-text"><strong>AI Tip:</strong> Advantage+ typically performs 30% better!</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <select id="location">
+                        <option value="nigeria">Nigeria</option>
+                        <option value="lagos">Lagos, Nigeria</option>
+                        <option value="us">United States</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Daily Budget (₦)</label>
+                    <input type="number" id="budget" value="10000" min="1000" step="1000">
+                    <div id="budgetFeedback" class="feedback-box">
+                        <strong>AI Analysis:</strong> <span id="budgetAnalysis"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Creative -->
+            <div class="step-content" id="step3">
+                <h2>Step 3: AI-Powered Creative Strategy</h2>
+
+                <div class="hint">
+                    <strong>AI Insight:</strong> I've analyzed millions of successful ads. Here's what works best for
+                    your objective...
+                </div>
+
+                <div class="analysis-box">
+                    <h3>AI Creative Recommendations</h3>
+                    <ul>
+                        <li>Use video content - 67% higher engagement</li>
+                        <li>Include faces in images - 38% more clicks</li>
+                        <li>Keep text under 20% of image - better delivery</li>
+                        <li>Test 3-5 variations - AI will optimize automatically</li>
+                        <li>Use bright colors - stops the scroll</li>
+                    </ul>
+                </div>
+
+                <div class="form-group" style="margin-top: 24px;">
+                    <label>Ad Headline</label>
+                    <input type="text" id="headline" placeholder="e.g., Get 50% Off Today Only!">
+                </div>
+
+                <div class="form-group">
+                    <label>Primary Text</label>
+                    <input type="text" id="primaryText" placeholder="Describe your offer...">
+                </div>
+            </div>
+
+            <!-- Step 4: Review -->
+            <div class="step-content" id="step4">
+                <h2>AI Campaign Analysis</h2>
+
+                <div class="analysis-box">
+                    <h3>AI Performance Prediction</h3>
+                    <div id="aiPrediction"></div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h4>Predicted Reach</h4>
+                        <div class="value" id="predReach">0</div>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Expected CTR</h4>
+                        <div class="value" id="predCTR">0%</div>
+                    </div>
+                    <div class="metric-card">
+                        <h4>AI Confidence</h4>
+                        <div class="value" id="aiConfidence">0%</div>
+                    </div>
+                </div>
+
+                <div id="badges" style="margin-top: 24px; text-align: center;"></div>
+            </div>
+
+            <div class="wizard-actions">
+                <button class="btn btn-secondary" id="prevBtn" style="display: none;">Previous</button>
+                <button class="btn btn-primary" id="nextBtn">Next Step</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+        let campaignData = {
+            objective: '',
+            aiMode: 'advantage',
+            location: 'nigeria',
+            budget: 10000,
+            headline: '',
+            primaryText: ''
+        };
+
+        // Objective selection
+        document.querySelectorAll('.objective-card').forEach(card => {
+            card.addEventListener('click', function () {
+                document.querySelectorAll('.objective-card').forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                campaignData.objective = this.dataset.objective;
+
+                const score = this.dataset.score;
+                updateAIMessage(`Great choice! The ${this.querySelector('h3').textContent} objective has an AI score of ${score}/100. Facebook's AI is highly confident it can deliver results for this goal.`);
+            });
+        });
+
+        // Budget feedback
+        document.getElementById('budget').addEventListener('input', function () {
+            const budget = parseInt(this.value);
+            campaignData.budget = budget;
+            const feedback = document.getElementById('budgetFeedback');
+            const analysis = document.getElementById('budgetAnalysis');
+
+            feedback.style.display = 'block';
+
+            if (budget < 5000) {
+                analysis.textContent = 'Budget is below recommended minimum. AI learning phase may take longer. Consider ₦5,000+ for faster results.';
+            } else if (budget >= 5000 && budget < 20000) {
+                analysis.textContent = 'Good budget! AI will have enough data to optimize effectively within 3-5 days.';
+            } else {
+                analysis.textContent = 'Excellent budget! AI will optimize aggressively and deliver results faster. Expect to exit learning phase in 2-3 days.';
+            }
+        });
+
+        // Navigation
+        document.getElementById('nextBtn').addEventListener('click', function () {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateStepDisplay();
+                if (currentStep === 4) {
+                    generateAIPrediction();
+                }
+            } else {
+                showCompletionBadges();
+            }
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', function () {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepDisplay();
+            }
+        });
+
+        function updateStepDisplay() {
+            document.querySelectorAll('.step-content').forEach(step => {
+                step.classList.remove('active');
+            });
+
+            document.getElementById(`step${currentStep}`).classList.add('active');
+
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+
+            document.getElementById('prevBtn').style.display = currentStep > 1 ? 'block' : 'none';
+            document.getElementById('nextBtn').textContent = currentStep === totalSteps ? 'Launch Campaign' : 'Next Step';
+
+            const messages = {
+                1: 'Choose the objective that matches your business goal. I\'ll help you optimize for maximum results.',
+                2: 'Let me help you find the perfect audience. Trust the AI - it knows what works!',
+                3: 'Creative is king! Follow my recommendations for best performance.',
+                4: 'Here\'s my AI analysis of your campaign. Looking good!'
+            };
+            updateAIMessage(messages[currentStep]);
+        }
+
+        function updateAIMessage(message) {
+            const messageBox = document.getElementById('aiMessage');
+            messageBox.innerHTML = `<h3>AI Coach</h3><p>${message}</p>`;
+        }
+
+        function generateAIPrediction() {
+            const budget = campaignData.budget;
+            const reach = Math.floor(budget * 15);
+            const ctr = (Math.random() * 2 + 3).toFixed(2);
+            const confidence = Math.floor(Math.random() * 15 + 85);
+
+            document.getElementById('predReach').textContent = reach.toLocaleString();
+            document.getElementById('predCTR').textContent = ctr + '%';
+            document.getElementById('aiConfidence').textContent = confidence + '%';
+
+            const prediction = `
+                <p style="margin-bottom: 12px;">Based on my analysis of ${reach.toLocaleString()} similar campaigns, here's what I predict:</p>
+                <ul style="line-height: 2;">
+                    <li>Expected daily reach: ${(reach * 0.8).toLocaleString()} - ${(reach * 1.2).toLocaleString()} people</li>
+                    <li>Predicted CTR: ${ctr}% (above industry average of 2.1%)</li>
+                    <li>Estimated cost per click: ₦${Math.floor(budget / (reach * parseFloat(ctr) / 100))}</li>
+                    <li>AI confidence level: ${confidence}% - Very confident this will perform well!</li>
+                </ul>
+                <p style="margin-top: 16px;"><strong>Pro Tip:</strong> Let the campaign run for at least 7 days before making changes. AI needs time to learn!</p>
+            `;
+
+            document.getElementById('aiPrediction').innerHTML = prediction;
+        }
+
+        function showCompletionBadges() {
+            const badges = ['Campaign Master', 'AI Expert', 'Targeting Pro', 'Creative Genius'];
+
+            const badgesHTML = badges.map(badge =>
+                `<div class="badge">${badge}</div>`
+            ).join('');
+
+            document.getElementById('badges').innerHTML = '<h3 style="margin-bottom: 16px;">Achievements Unlocked!</h3>' + badgesHTML;
+
+            updateAIMessage('Congratulations! You\'ve created an AI-optimized campaign. You\'re ready to run real ads now!');
+
+            document.getElementById('nextBtn').textContent = 'Start New Campaign';
+            document.getElementById('nextBtn').onclick = () => location.reload();
+        }
+
+        // Initialize
+        document.getElementById('budget').dispatchEvent(new Event('input'));
+    </script>
+</body>
+
+</html>

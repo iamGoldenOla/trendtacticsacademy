@@ -68,9 +68,8 @@ export const endpoints = {
         refresh: '/api/auth/refresh',
     },
 
-    // Courses
     courses: {
-        list: '/api/courses',
+        resolve: (id) => `/resolve.php?id=${id}`,
         detail: (id) => `/api/courses/${id}`,
         enroll: (id) => `/api/courses/${id}/enroll`,
         lessons: (courseId) => `/api/courses/${courseId}/lessons`,

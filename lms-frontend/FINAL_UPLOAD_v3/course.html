@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Use Timestamp: 2026-01-16 13:00 FORCE UPDATE -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trendtactics Academy | Vibe Coding & Prompt Mastery</title>
+
+    <!-- SEO Meta Tags -->
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Master the Future of Code with Vibe Coding. Learn to orchestrate AI agents, automate workflows, and build software at the speed of thought. The ultimate premium academy for modern developers.">
+    <meta name="keywords"
+        content="Vibe Coding, Prompt Engineering, AI Agents, Software Development, TrendTactics, LLM, OpenAI, Cursor, Future of Work">
+    <meta name="author" content="Trendtactics Academy">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://academy.trendtacticsdigital.com/course.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://academy.trendtacticsdigital.com/">
+    <meta property="og:title" content="Trendtactics Academy | Vibe Coding & Prompt Mastery">
+    <meta property="og:description"
+        content="Master the art of AI communication and Vibe Coding. Learn to build software at the speed of thought.">
+    <meta property="og:image" content="https://academy.trendtacticsdigital.com/assets/images/og-social-share.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://academy.trendtacticsdigital.com/">
+    <meta property="twitter:title" content="Trendtactics Academy | Vibe Coding & Prompt Mastery">
+    <meta property="twitter:description"
+        content="Master the art of AI communication and Vibe Coding. Learn to build software at the speed of thought.">
+    <meta property="twitter:image" content="https://academy.trendtacticsdigital.com/assets/images/og-social-share.jpg">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Trendtactics Academy",
+          "url": "https://academy.trendtacticsdigital.com/",
+          "logo": "https://academy.trendtacticsdigital.com/assets/images/logo-icon.png",
+          "sameAs": [
+            "https://twitter.com/trendtactics",
+            "https://linkedin.com/company/trendtactics"
+          ]
+        },
+        {
+          "@type": "Course",
+          "name": "Prompt Engineering Mastery",
+          "description": "A deep dive into advanced prompt engineering techniques for professionals.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Trendtactics Academy"
+          }
+        },
+        {
+          "@type": "Course",
+          "name": "Vibe Coding 3.0",
+          "description": "Learn to write software effectively using AI agents and Natural Language.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Trendtactics Academy"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --primary: #00D9FF;
+            --primary-dark: #0096AF;
+            --bg-deep: #050B18;
+            --bg-card: #0A1628;
+            --text-main: #FFFFFF;
+            --text-dim: #A0AEC0;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .layout {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 350px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .back-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .course-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .module-group {
+            margin-bottom: 15px;
+        }
+
+        .module-title {
+            padding: 10px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .lesson-item {
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+            font-size: 0.95rem;
+            color: var(--text-dim);
+        }
+
+        .lesson-item:hover {
+            background: rgba(0, 217, 255, 0.05);
+            color: white;
+        }
+
+        .lesson-item.active {
+            background: var(--primary);
+            color: var(--bg-deep);
+            font-weight: 600;
+        }
+
+        .lesson-item.completed {
+            color: #4ADE80;
+        }
+
+        /* Content Area */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .content-container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: black;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .lesson-header {
+            margin-bottom: 2px;
+        }
+
+        .lesson-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .lesson-desc {
+            color: var(--text-dim);
+            white-space: pre-wrap;
+            /* Restored pre-wrap as requested */
+        }
+
+        /* Quiz UI */
+        .quiz-section {
+            background: var(--bg-card);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-top: 2px;
+        }
+
+        .quiz-opt {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: white;
+            text-align: left;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .quiz-opt:hover {
+            background: rgba(0, 217, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .quiz-opt.correct {
+            background: #064e3b;
+            border-color: #059669;
+        }
+
+        .quiz-opt.wrong {
+            background: #7f1d1d;
+            border-color: #dc2626;
+        }
+
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-deep);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 217, 255, 0.2);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: 300px;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+        }
+
+        /* Extended Styles for New Sections (Summary, Case Studies, etc) */
+        .section-header {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .summary-box {
+            background: rgba(0, 217, 255, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: var(--text-dim);
+        }
+
+        .takeaway-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .takeaway-list li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .takeaway-list li::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: #4ADE80;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 6px;
+        }
+
+        .case-study-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .case-study-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .playground-box {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .playground-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .playground-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .code-block {
+            background: #000;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            color: #4ADE80;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .resource-link {
+            display: block;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            color: var(--primary);
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .resource-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        /* Improved existing styles */
+        .lesson-desc {
+            line-height: 1.6;
+            font-size: 1.05rem;
+            margin-bottom: 2px;
+        }
+
+        .lesson-desc p {
+            margin-bottom: 0.5em;
+        }
+
+        .lesson-desc h2 {
+            margin-top: 0.5em;
+            margin-bottom: 0.3em;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .lesson-desc h3 {
+            margin-top: 0.4em;
+            margin-bottom: 0.25em;
+            font-size: 1.25rem;
+            color: var(--text-main);
+        }
+
+        .lesson-desc ul,
+        .lesson-desc ol {
+            margin-bottom: 0.5em;
+            padding-left: 20px;
+        }
+
+        .lesson-desc li {
+            margin-bottom: 0.2em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="loading" class="loading-screen">
+        <div style="text-align:center">
+            <div class="spinner"></div>
+            <p style="margin-top:15px; color:var(--text-dim)">Loading Course Content...</p>
+        </div>
+    </div>
+
+    <div class="layout" id="appLayout" style="display:none">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="/" class="back-link">← Back to Dashboard</a>
+                <h1 class="course-title" id="sidebarCourseTitle">Course Title</h1>
+                <div
+                    style="margin-top:15px; background:rgba(255,255,255,0.1); height:6px; border-radius:3px; overflow:hidden">
+                    <div id="progressBar"
+                        style="width:0%; height:100%; background:var(--primary); transition:width 0.5s"></div>
+                </div>
+                <div
+                    style="font-size:0.8rem; color:var(--text-dim); margin-top:5px; display:flex; justify-content:space-between">
+                    <span>Progress</span>
+                    <span id="progressText">0%</span>
+                </div>
+            </div>
+            <div class="sidebar-content" id="sidebarContent">
+                <!-- Populated via JS -->
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main-content">
+            <div class="content-container">
+                <div class="video-wrapper" id="videoArea">
+                    <!-- Video Player -->
+                </div>
+
+                <!-- 1. Objectives (Immediately after video) -->
+                <div id="keyTakeawaysArea"></div>
+
+                <div class="lesson-header">
+                    <h1 class="lesson-title" id="lessonTitle">Lesson Title</h1>
+
+                    <!-- 2. Main Content -->
+                    <div class="lesson-desc" id="lessonDesc"></div>
+
+                    <!-- 3. Summary (Before Case Studies) -->
+                    <div id="summaryArea"></div>
+                </div>
+
+                <!-- 4. Case Studies -->
+                <div id="caseStudiesArea"></div>
+
+                <!-- 5. Playground -->
+                <div id="playgroundArea"></div>
+
+                <!-- 6. Resources -->
+                <div id="resourcesArea"></div>
+
+                <div id="quizArea" style="display:none" class="quiz-section">
+                    <!-- Quiz populated via JS -->
+                </div>
+
+                <div style="margin-top:2px; display:flex; justify-content:space-between">
+                    <button id="prevBtn" class="quiz-opt" style="width:auto; padding: 10px 25px">Previous</button>
+                    <button id="nextBtn" class="quiz-opt"
+                        style="width:auto; padding: 10px 25px; background: var(--primary); color:var(--bg-deep); border:none">Next
+                        Lesson</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Configuration
+        const SUPABASE_URL = 'https://uimdbodamoeyukrghchb.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let state = {
+            course: null,
+            lessons: [],
+            currentLessonId: null,
+            user: null,
+            currentQuizIndex: 0,
+            currentQuizData: null
+        };
+
+        async function init() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = urlParams.get('id');
+            const lessonId = urlParams.get('lesson');
+
+            if (!courseId) {
+                // Prevent loop
+                document.body.innerHTML = `
+                    <div style="height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#050B18; color:white; font-family:sans-serif">
+                        <h1>⚠️ No Course Selected</h1>
+                        <p style="color:#A0AEC0; margin:10px 0 30px">Please select a course from the main menu.</p>
+                        <a href="/" style="padding:12px 24px; background:#00D9FF; color:#050B18; text-decoration:none; border-radius:6px; font-weight:bold">Go to Home</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // 1. Check Auth 
+            const { data: { user } } = await supabaseClient.auth.getUser();
+            if (!user) {
+                window.location.href = '/login?redirect=' + encodeURIComponent(window.location.href);
+                return;
+            }
+            state.user = user;
+
+            try {
+                // 2. Fetch Course Data (Full Tree)
+                console.log('Fetching course:', courseId);
+                // Updated query to use specific relationship if needed, or rely on auto-detection. 
+                // Given the ambiguous relationship error seen in diagnosis, we use explicit syntax if possible,
+                // BUT supabase-js v2 often auto-resolves if we are specific. 
+                // However, to be safe due to "ambiguous embedding" error, we use the explicit FK if known.
+                // The error said: 'lessons_module_id_fkey'.
+
+                const { data: course, error } = await supabaseClient
+                    .from('courses')
+                    .select('*, modules!modules_course_id_fkey(*, lessons!lessons_module_id_fkey(*))')
+                    .eq('id', courseId)
+                    .single();
+
+                if (error) {
+                    console.error('Supabase error:', error);
+                    throw new Error(`Data fetch failed: ${error.message}`);
+                }
+                if (!course) throw new Error('Course not found');
+
+                state.course = course;
+
+                // 3. Normalize & Sort Lessons
+                let flatLessons = [];
+                if (course.modules) {
+                    course.modules.sort((a, b) => a.ordering - b.ordering).forEach(mod => {
+                        if (mod.lessons) {
+                            mod.lessons.sort((a, b) => a.ordering - b.ordering).forEach(less => {
+                                flatLessons.push({ ...less, moduleTitle: mod.title });
+                            });
+                        }
+                    });
+                }
+
+                state.lessons = flatLessons;
+                state.currentLessonId = lessonId || (flatLessons.length > 0 ? flatLessons[0].id : null);
+
+                if (!state.currentLessonId) {
+                    document.getElementById('lessonTitle').textContent = "No Lessons Available";
+                    return;
+                }
+
+                renderSidebar();
+                renderLesson(state.currentLessonId);
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('appLayout').style.display = 'flex';
+                document.getElementById('sidebarCourseTitle').textContent = course.title;
+
+            } catch (err) {
+                console.error(err);
+                alert('Error loading course: ' + err.message);
+                window.location.href = '/dashboard';
+            }
+        }
+
+        function renderSidebar() {
+            const container = document.getElementById('sidebarContent');
+            container.innerHTML = '';
+
+            // Calculate Progress (basic based on current index for now, usually would be from user_progress table)
+            const currentIndex = state.lessons.findIndex(l => l.id === state.currentLessonId);
+            const progressPercent = state.lessons.length ? Math.round(((currentIndex + 1) / state.lessons.length) * 100) : 0;
+
+            document.getElementById('progressBar').style.width = `${progressPercent}%`;
+            document.getElementById('progressText').textContent = `${progressPercent}% Complete`;
+
+            let currentModule = null;
+            state.lessons.forEach(lesson => {
+                if (lesson.moduleTitle !== currentModule) {
+                    currentModule = lesson.moduleTitle;
+                    const modDiv = document.createElement('div');
+                    modDiv.className = 'module-title';
+                    modDiv.textContent = currentModule;
+                    container.appendChild(modDiv);
+                }
+
+                const item = document.createElement('div');
+                item.className = `lesson-item ${lesson.id === state.currentLessonId ? 'active' : ''}`;
+                item.innerHTML = `<span style="margin-right:10px">▶</span> ${lesson.title}`;
+                item.onclick = () => renderLesson(lesson.id);
+                container.appendChild(item);
+            });
+        }
+
+        function parseJSON(data) {
+            if (!data) return null;
+            if (typeof data === 'object') return data;
+            try { return JSON.parse(data); } catch (e) { return null; }
+        }
+
+        function renderLesson(id) {
+            const lesson = state.lessons.find(l => l.id === id);
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (!lesson) return;
+            state.currentLessonId = id;
+            state.currentQuizIndex = 0; // Reset quiz index when lesson changes
+            state.currentQuizData = null; // Clear quiz data
+
+            // URL
+            const url = new URL(window.location);
+            url.searchParams.set('lesson', id);
+            window.history.pushState({}, '', url);
+
+            // 1. Basic Info
+            document.getElementById('lessonTitle').textContent = lesson.title;
+            document.getElementById('lessonDesc').innerHTML = lesson.content || '<p>No content available.</p>';
+
+            // 2. Summary
+            const summaryArea = document.getElementById('summaryArea');
+            if (lesson.summary) {
+                summaryArea.innerHTML = `<div class="summary-box"><strong>Summary: </strong>${lesson.summary}</div>`;
+            } else {
+                summaryArea.innerHTML = '';
+            }
+
+            // 3. Key Takeaways (replacing objectives)
+            const takeawaysArea = document.getElementById('keyTakeawaysArea');
+            // Try key_takeaways first, then objectives as fallback
+            const takeaways = parseJSON(lesson.key_takeaways || lesson.objectives);
+
+            if (takeaways && Array.isArray(takeaways) && takeaways.length > 0) {
+                let html = '<ul class="takeaway-list">';
+                takeaways.forEach(t => html += `<li>${t}</li>`);
+                html += '</ul>';
+                takeawaysArea.innerHTML = html;
+            } else {
+                takeawaysArea.innerHTML = '';
+            }
+
+            // 4. Case Studies
+            const caseStudiesArea = document.getElementById('caseStudiesArea');
+            const cases = parseJSON(lesson.case_studies);
+            if (cases && Array.isArray(cases) && cases.length > 0) {
+                let html = '<div class="section-header">Case Studies</div>';
+                cases.forEach(c => {
+                    html += `
+                        <div class="case-study-card">
+                            <div class="case-study-title">📝 ${c.title || 'Case Study'}</div>
+                            <div style="color:var(--text-dim); font-size:0.95rem">${c.scenario || c.description || ''}</div>
+                        </div>
+                    `;
+                });
+                caseStudiesArea.innerHTML = html;
+            } else {
+                caseStudiesArea.innerHTML = '';
+            }
+
+            // 5. INTERACTIVE PLAYGROUND
+            const playgroundArea = document.getElementById('playgroundArea');
+            const playground = parseJSON(lesson.playground);
+            const fallbackPrompt = lesson.playground_prompt;
+
+            if (playground || fallbackPrompt) {
+                // Check if this is an embedded external simulator (like Meta Ads)
+                if (playground && playground.url && playground.embedded) {
+                    // Render embedded external simulator
+                    const simulatorUrl = playground.url;
+                    const objective = playground.objective || 'Interactive Simulator';
+                    const simulatorType = playground.type || 'simulator';
+
+                    playgroundArea.innerHTML = `
+                        <div style="margin-top:30px; border:1px solid #1e293b; border-radius:12px; overflow:hidden; background:#0f172a;">
+                            <div style="padding:15px; background:#1e293b; display:flex; justify-content:space-between; align-items:center;">
+                                <div style="font-weight:bold; display:flex; align-items:center; gap:8px;">
+                                    <span>🎮</span> ${objective}
+                                </div>
+                                <div style="font-size:0.8rem; color:#94a3b8;">Interactive Simulator</div>
+                            </div>
+                            
+                            <div style="position: relative; width: 100%; height: 800px; background: white;">
+                                <iframe 
+                                    src="${simulatorUrl}" 
+                                    style="width: 100%; height: 100%; border: none;"
+                                    title="${objective}"
+                                    allow="fullscreen"
+                                ></iframe>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Render standard AI playground
+                    let promptText = '';
+                    let objective = 'Vibe Coding Playground';
+
+                    if (playground && typeof playground === 'object') {
+                        promptText = playground.starter_prompt || playground.playground_prompt || '';
+                        objective = playground.objective || objective;
+                    } else if (typeof playground === 'string') {
+                        promptText = playground;
+                    } else if (fallbackPrompt) {
+                        promptText = fallbackPrompt;
+                    }
+
+                    // Render the Full Interactive IDE
+                    playgroundArea.innerHTML = `
+                        <div style="margin-top:30px; border:1px solid #1e293b; border-radius:12px; overflow:hidden; background:#0f172a;">
+                            <div style="padding:15px; background:#1e293b; display:flex; justify-content:space-between; align-items:center;">
+                                <div style="font-weight:bold; display:flex; align-items:center; gap:8px;">
+                                    <span>⚡</span> ${objective}
+                                </div>
+                                <div style="font-size:0.8rem; color:#94a3b8;">AI Playground</div>
+                            </div>
+                            
+                            <div style="display:grid; grid-template-columns: 1fr 1fr; height:500px;">
+                                <!-- Input Side -->
+                                <div style="border-right:1px solid #1e293b; display:flex; flex-direction:column;">
+                                    <div style="padding:10px; background:#0f172a; border-bottom:1px solid #1e293b; font-size:0.8rem; color:#94a3b8;">
+                                        PROMPT INPUT
+                                    </div>
+                                    <textarea id="playgroundInput" style="flex:1; background:#020617; color:#e2e8f0; border:none; padding:15px; resize:none; font-family:monospace; line-height:1.5; outline:none;" placeholder="Describe what you want to build...">${promptText}</textarea>
+                                    <div style="padding:15px; border-top:1px solid #1e293b; background:#0f172a; display:flex; justify-content:flex-end;">
+                                        <button onclick="runPlayground()" style="background:var(--primary); color:#050B18; border:none; padding:8px 20px; border-radius:6px; font-weight:bold; cursor:pointer; display:flex; align-items:center; gap:8px;">
+                                            <span>▶</span> Generate
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Output Side -->
+                                <div style="display:flex; flex-direction:column; background:#1e293b;">
+                                    <div style="padding:10px; background:#1e293b; border-bottom:1px solid #334155; font-size:0.8rem; color:#94a3b8; display:flex; justify-content:space-between;">
+                                        <span>LIVE PREVIEW</span>
+                                        <button onclick="document.getElementById('playgroundFrame').srcdoc=''" style="background:none; border:none; color:#64748b; cursor:pointer; font-size:0.7rem;">RESET</button>
+                                    </div>
+                                    <div style="flex:1; background:white; position:relative;">
+                                        <iframe id="playgroundFrame" style="width:100%; height:100%; border:none;"></iframe>
+                                        <div id="playgroundLoader" style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:none; align-items:center; justify-content:center; color:white; flex-direction:column;">
+                                            <div class="loader"></div>
+                                            <div style="margin-top:10px; font-size:0.9rem;">Generating with AI...</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            } else {
+                playgroundArea.innerHTML = '';
+            }
+
+
+            // 6. Resources
+            const resourcesArea = document.getElementById('resourcesArea');
+            const resources = parseJSON(lesson.resources) || (lesson.content && lesson.content.includes("###") ? null : null);
+            // NOTE: For standard lessons, resources is JSON. For the special "Recommended Resources" lesson, 
+            // the content IS the resources, so it's handled in lessonDesc. 
+            // BUT if we want to support a separate resources JSON, we keep this.
+
+            // However, the user specifically mentioned the "Resources" lesson has the markup. 
+            // That lesson's content field contains the markdown tables.
+            // So we need to parse the MAIN CONTENT too if it contains tables?
+            // Actually, the user said "remove this from the recommended resources".
+            // The "Recommended Resources" lesson has its content in `lesson.content`.
+            // So we should verify where `lessonDesc` is rendered.
+
+            // Let's enhance the Main Content renderer to support tables too.
+            const content = lesson.content || '';
+            const isResourcesLesson = lesson.title.includes('Resources');
+
+            if (isResourcesLesson || content.includes('|')) {
+                // Use our new parser for the main content
+                document.getElementById('lessonDesc').innerHTML = parseResources(content);
+            } else {
+                document.getElementById('lessonDesc').innerHTML = content;
+            }
+
+            resourcesArea.innerHTML = ''; // Clear separate resources area as we don't use it for this lesson type
+
+
+
+            // Video
+            const videoArea = document.getElementById('videoArea');
+            if (lesson.video_url) {
+                let embedUrl = lesson.video_url;
+                if (embedUrl.includes('youtube.com/watch?v=')) {
+                    embedUrl = embedUrl.replace('watch?v=', 'embed/');
+                } else if (embedUrl.includes('youtu.be/')) {
+                    embedUrl = embedUrl.replace('youtu.be/', 'youtube.com/embed/');
+                }
+                videoArea.innerHTML = `<iframe src="${embedUrl}" allowfullscreen></iframe>`;
+            } else {
+                videoArea.innerHTML = `<div style="display:flex; height:100%; align-items:center; justify-content:center; color:var(--text-dim); flex-direction:column; text-align:center; padding:20px;">
+                    <div style="font-size:2rem; margin-bottom:10px;">📺</div>
+                    <div>No video available for this lesson</div>
+                </div>`;
+            }
+
+            // Quiz (using 'quizzes' column)
+            const quizArea = document.getElementById('quizArea');
+            let quizData = parseJSON(lesson.quizzes || lesson.quiz_questions);
+
+            // Normalize quiz data
+            let normalizedQuiz = [];
+            if (Array.isArray(quizData)) {
+                normalizedQuiz = quizData;
+            } else if (quizData && quizData.questions && Array.isArray(quizData.questions)) {
+                // If questions are objects, use them directly
+                if (typeof quizData.questions[0] === 'object' && quizData.questions[0] !== null) {
+                    normalizedQuiz = quizData.questions;
+                } else {
+                    // Fallback for simpler formats if needed, though current schema is array of objects
+                    normalizedQuiz = quizData.questions.map((q, i) => ({
+                        question: q,
+                        options: quizData.options && quizData.options[i] ? quizData.options[i] : ["True", "False"],
+                        correctAnswer: quizData.answers && quizData.answers[i] ? quizData.options[i].indexOf(quizData.answers[i]) : 0, // Assuming answer is text
+                        explanation: quizData.explanations && quizData.explanations[i] ? quizData.explanations[i] : ''
+                    }));
+                }
+            }
+
+            if (normalizedQuiz.length > 0) {
+                quizArea.style.display = 'block';
+                state.currentQuizData = normalizedQuiz;
+                renderQuizQuestion(state.currentQuizIndex);
+            } else {
+                quizArea.style.display = 'none';
+            }
+
+            // Nav Buttons
+            const currentIndex = state.lessons.findIndex(l => l.id === id);
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            prevBtn.style.visibility = currentIndex > 0 ? 'visible' : 'hidden';
+            prevBtn.onclick = () => renderLesson(state.lessons[currentIndex - 1].id);
+
+            if (currentIndex < state.lessons.length - 1) {
+                nextBtn.textContent = 'Next Lesson →';
+                nextBtn.onclick = () => renderLesson(state.lessons[currentIndex + 1].id);
+            } else {
+                nextBtn.textContent = 'Finish Course 🎉';
+                nextBtn.onclick = () => window.location.href = '/dashboard';
+            }
+
+            renderSidebar();
+            window.scrollTo(0, 0);
+        }
+
+        function renderQuizQuestion(index) {
+            const area = document.getElementById('quizArea');
+            const questions = state.currentQuizData;
+
+            if (index >= questions.length) {
+                area.innerHTML = `
+                    <div style="text-align:center; padding:20px;">
+                        <h3>🎉 Quiz Completed!</h3>
+                        <p style="color:#A0AEC0; margin-top:10px;">Great job reviewing the concepts.</p>
+                        <button onclick="renderQuizQuestion(0)" style="margin-top:20px; background:transparent; border:1px solid var(--primary); color:var(--primary); padding:8px 16px; border-radius:6px; cursor:pointer;">Restart Quiz</button>
+                    </div>
+                `;
+                return;
+            }
+
+            state.currentQuizIndex = index;
+            const q = questions[index];
+            const qNum = index + 1;
+            const total = questions.length;
+
+            // Normalize options if missing (fallback)
+            const options = q.options || ["Yes", "No"];
+
+            let html = `
+                <div style="display:flex; justify-content:space-between; margin-bottom:15px; color:#64748b; font-size:0.9rem; font-weight:600;">
+                    <span>QUESTION ${qNum} OF ${total}</span>
+                    <div style="display:flex; gap:10px;">
+                        ${index > 0 ? `<button onclick="renderQuizQuestion(${index - 1})" style="background:none; border:none; color:#64748b; cursor:pointer; font-size:0.9rem;">← Previous</button>` : ''}
+                        ${index < total - 1 ? `<button onclick="renderQuizQuestion(${index + 1})" style="background:none; border:none; color:#64748b; cursor:pointer; font-size:0.9rem;">Next →</button>` : ''}
+                    </div>
+                </div>
+                <h3 style="margin-bottom:20px; font-size:1.2rem;">${q.question}</h3>
+                <div id="quizOptions"></div>
+                <div id="quizFeedback" style="margin-top:20px; display:none;"></div>
+                <div style="margin-top:20px; display:flex; justify-content:flex-end;">
+                     <button id="nextQBtn" style="background:#1e293b; color:white; border:none; padding:8px 16px; border-radius:6px; cursor:not-allowed; opacity:0.5;" disabled>Next Question →</button>
+                </div>
+            `;
+
+            area.innerHTML = html;
+
+            const optsContainer = document.getElementById('quizOptions');
+            const nextBtn = document.getElementById('nextQBtn');
+            const fbDiv = document.getElementById('quizFeedback');
+
+            // Correct Answer Logic
+            // If correctAnswer is an index (number) vs string
+            let correctIdx = q.correctAnswer;
+            if (typeof correctIdx === 'undefined' && q.answer) {
+                // Try to find the answer string in options
+                correctIdx = options.findIndex(o => o === q.answer);
+            }
+
+            options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-opt';
+                btn.textContent = opt;
+                btn.onclick = () => {
+                    // Disable all
+                    const all = optsContainer.querySelectorAll('.quiz-opt');
+                    all.forEach(b => { b.onclick = null; b.style.cursor = 'default'; });
+
+                    const isCorrect = (idx == correctIdx);
+
+                    if (isCorrect) {
+                        btn.classList.add('correct');
+                        fbDiv.innerHTML = `<div style="color:#4ade80; font-weight:bold;">✅ Correct!</div><div style="color:#94a3b8; font-size:0.9rem; margin-top:5px;">${q.explanation || ''}</div>`;
+                    } else {
+                        btn.classList.add('wrong');
+                        if (correctIdx !== undefined && correctIdx !== -1 && all[correctIdx]) {
+                            all[correctIdx].classList.add('correct');
+                        }
+                        fbDiv.innerHTML = `<div style="color:#f87171; font-weight:bold;">❌ Incorrect</div><div style="color:#94a3b8; font-size:0.9rem; margin-top:5px;">${q.explanation || ''}</div>`;
+                    }
+
+                    fbDiv.style.display = 'block';
+                    nextBtn.disabled = false;
+                    nextBtn.style.cursor = 'pointer';
+                    nextBtn.style.opacity = '1';
+                    nextBtn.style.background = 'var(--primary)';
+                    nextBtn.style.color = '#050B18';
+                };
+                optsContainer.appendChild(btn);
+            });
+        }
+
+
+        function parseResources(resourcesPart) {
+            let html = '';
+            // Simple parser for basic Markdown Tables
+            // converting | Header | Header | to <table>...
+            const lines = resourcesPart.split('\n');
+            let inTable = false;
+
+            lines.forEach(line => {
+                const trimmed = line.trim();
+
+                // Detect Table Row
+                if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+                    const cols = trimmed.split('|').map(c => c.trim()).filter(c => c !== '');
+
+                    // Helper to detect separator row |---|---|
+                    const isSeparator = cols.every(c => c.match(/^[\-:]+$/));
+
+                    if (!inTable) {
+                        html += '<div style="overflow-x:auto; margin-bottom:20px"><table style="width:100%; border-collapse:collapse; border:1px solid #334155; border-radius:8px; overflow:hidden">';
+                        inTable = true;
+                        // First row is header
+                        html += `<thead style="background:#1e293b; color:white"><tr>${cols.map(c => `<th style="padding:12px; text-align:left; border-bottom:1px solid #334155">${linkify(c)}</th>`).join('')}</tr></thead><tbody>`;
+                    } else if (isSeparator) {
+                        // Skip separator
+                    } else {
+                        html += `<tr style="border-bottom:1px solid #334155; background:rgba(255,255,255,0.02)">${cols.map(c => `<td style="padding:12px; color:#cbd5e1">${linkify(c)}</td>`).join('')}</tr>`;
+                    }
+                } else {
+                    if (inTable) {
+                        html += '</tbody></table></div>';
+                        inTable = false;
+                    }
+                    // Normal line processing
+                    if (trimmed.startsWith('## ')) html += `<h2 style="color:var(--primary); margin-top:30px; margin-bottom:15px; border-bottom:1px solid #334155; padding-bottom:10px">${trimmed.replace('## ', '')}</h2>`;
+                    else if (trimmed.startsWith('### ')) html += `<h3 style="color:white; margin-top:25px; margin-bottom:10px">${trimmed.replace('### ', '')}</h3>`;
+                    else if (trimmed.startsWith('* ')) html += `<li style="margin-bottom:8px; margin-left:20px">${linkify(trimmed.replace('* ', ''))}</li>`;
+                    else if (trimmed.length > 0) html += `<p style="margin-bottom:15px; color:#94a3b8">${linkify(trimmed)}</p>`;
+                }
+            });
+
+            if (inTable) html += '</tbody></table></div>';
+            return html;
+        }
+
+        function linkify(text) {
+            // Convert [text](url) to <a href="url">text</a>
+            return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color:var(--primary); text-decoration:none">$1</a>');
+        }
+
+        async function runPlayground() {
+            const input = document.getElementById('playgroundInput').value;
+            if (!input) { alert('Please enter a prompt'); return; }
+
+            const loader = document.getElementById('playgroundLoader');
+            const frame = document.getElementById('playgroundFrame');
+
+            loader.style.display = 'flex';
+
+            try {
+                // SECURE CALL TO SUPABASE EDGE FUNCTION
+                // No client-side key required. Authenticated user token is sent automatically.
+                const { data, error } = await supabaseClient.functions.invoke('supabase-edge-function-ai-playground', {
+                    body: { prompt: input, model: 'gpt-4o-mini' }
+                });
+
+                if (error) throw new Error(error.message || 'Function invocation failed');
+                if (data.error) throw new Error(data.error);
+
+                const code = data.code;
+                frame.srcdoc = code;
+
+            } catch (err) {
+                console.error(err);
+                alert('Generation Failed: ' + err.message);
+                frame.srcdoc = `<body style="color:white; background:#0f172a; font-family:sans-serif; padding:20px"><h3>⚠️ Error</h3><p>${err.message}</p></body>`;
+            } finally {
+                loader.style.display = 'none';
+            }
+        }
+
+
+        init();
+    </script>
+</body>
+
+</html>

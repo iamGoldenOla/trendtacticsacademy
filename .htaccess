@@ -1,18 +1,164 @@
+# ==========================================
+# SECURITY CONFIGURATION FOR APACHE/CPANEL
+# Add this to your .htaccess file
+# ==========================================
+
+# ==========================================
+# 1. FORCE HTTPS (SSL)
+# ==========================================
 RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Redirect old dashboard to new dashboard
-RewriteRule ^dashboard$ /new-dashboard [R=301,L]
-RewriteRule ^dashboard/$ /new-dashboard [R=301,L]
+# ==========================================
+# 2. SECURITY HEADERS
+# ==========================================
 
-# Redirect old learn to new learn
-RewriteRule ^learn$ /new-learn [R=301,L]
-RewriteRule ^learn/([^/]+)$ /new-learn?course_id=$1 [R=301,L]
+# Content Security Policy (CSP)
+# Prevents XSS attacks by controlling which resources can be loaded
+<IfModule mod_headers.c>
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.flutterwave.com https://*.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://*.supabase.co https://api.flutterwave.com wss://*.supabase.co; frame-src 'self' https://checkout.flutterwave.com; object-src 'none'; base-uri 'self'; form-action 'self';"
+</IfModule>
 
-# Ensure course details page works
-RewriteRule ^course-details$ /course-details.html [L]
-RewriteRule ^course/([^/]+)/?$ /course-details.html [L]
+# X-Frame-Options
+# Prevents clickjacking attacks
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
 
-# Pass through existing files and directories
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.+)$ /$1 [L,QSA]
+# X-Content-Type-Options
+# Prevents MIME type sniffing
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+</IfModule>
+
+# X-XSS-Protection
+# Enables browser XSS protection
+<IfModule mod_headers.c>
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Referrer-Policy
+# Controls how much referrer information is shared
+<IfModule mod_headers.c>
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Permissions-Policy
+# Controls which browser features can be used
+<IfModule mod_headers.c>
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(self)"
+</IfModule>
+
+# Strict-Transport-Security (HSTS)
+# Forces HTTPS for 1 year
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</IfModule>
+
+# ==========================================
+# 3. DISABLE DIRECTORY BROWSING
+# ==========================================
+Options -Indexes
+
+# ==========================================
+# 4. PROTECT SENSITIVE FILES
+# ==========================================
+
+# Protect .env files
+<FilesMatch "^\.env">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protect .git directory
+<DirectoryMatch "\.git">
+    Order allow,deny
+    Deny from all
+</DirectoryMatch>
+
+# Protect package files
+<FilesMatch "(package\.json|package-lock\.json|composer\.json|composer\.lock)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ==========================================
+# 5. BLOCK BAD BOTS & SCRAPERS
+# ==========================================
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP_USER_AGENT} (libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} (;|<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} (bot|spider|crawler|scraper) [NC]
+    RewriteCond %{HTTP_USER_AGENT} !(googlebot|bingbot|msnbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|facebot|ia_archiver) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# ==========================================
+# 6. PREVENT SQL INJECTION
+# ==========================================
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} (;|<|>|'|"|\)|%0A|%0D|%22|%27|%3C|%3E|%00).*(/\*|union|select|insert|drop|delete|update|cast|create|char|convert|alter|declare|order|script|set|md5|benchmark|encode) [NC,OR]
+    RewriteCond %{QUERY_STRING} (sp_executesql) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# ==========================================
+# 7. RATE LIMITING (Basic)
+# ==========================================
+<IfModule mod_evasive24.c>
+    DOSHashTableSize 3097
+    DOSPageCount 5
+    DOSSiteCount 50
+    DOSPageInterval 1
+    DOSSiteInterval 1
+    DOSBlockingPeriod 10
+</IfModule>
+
+# ==========================================
+# 8. ENABLE GZIP COMPRESSION
+# ==========================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# ==========================================
+# 9. BROWSER CACHING
+# ==========================================
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# ==========================================
+# 10. CORS CONFIGURATION
+# ==========================================
+<IfModule mod_headers.c>
+    # Allow only your domain
+    Header set Access-Control-Allow-Origin "https://academy.trendtacticsdigital.com"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With, X-CSRF-Token"
+    Header set Access-Control-Allow-Credentials "true"
+</IfModule>
+
+# ==========================================
+# VERIFICATION
+# ==========================================
+# After uploading this file:
+# 1. Test HTTPS: https://www.ssllabs.com/ssltest/
+# 2. Test Headers: https://securityheaders.com/
+# 3. Test CSP: https://csp-evaluator.withgoogle.com/
+# ==========================================

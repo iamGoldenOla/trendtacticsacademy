@@ -1,185 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trendtactics Academy - Learn Digital Skills</title>
-    <link rel="icon" href="/images/Trendtactics-logo - Copy.jpg" type="image/jpeg">
-    <link rel="stylesheet" href="/css/main.css">
-    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js" async></script>
-  <link rel="preload" href="/css/main.css" as="style">
-  </head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/images/Trendtactics-logo - Copy.jpg" type="image/jpeg" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description"
+        content="Trendtactics Academy - Master Web Development, App Development, and Digital Marketing with our comprehensive, project-based courses. Start your tech journey today." />
+    <meta name="keywords"
+        content="web development, app development, digital marketing, coding bootcamp, learn to code, frontend development, backend development, full stack, react, python, javascript" />
+    <meta name="author" content="Trendtactics Academy" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://academy.trendtacticsdigital.com/" />
+    <meta property="og:title" content="Trendtactics Academy - Learn Tech Skills" />
+    <meta property="og:description"
+        content="Master Web Development, App Development, and Digital Marketing with our comprehensive, project-based courses." />
+    <meta property="og:image" content="https://academy.trendtacticsdigital.com/images/og-image.jpg" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://academy.trendtacticsdigital.com/" />
+    <meta property="twitter:title" content="Trendtactics Academy - Learn Tech Skills" />
+    <meta property="twitter:description"
+        content="Master Web Development, App Development, and Digital Marketing with our comprehensive, project-based courses." />
+    <meta property="twitter:image" content="https://academy.trendtacticsdigital.com/images/og-image.jpg" />
+    <script type="application/ld+json">{
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Trendtactics Academy",
+      "url": "https://academy.trendtacticsdigital.com",
+      "logo": "https://academy.trendtacticsdigital.com/images/Trendtactics-logo%20-%20Copy.jpg",
+      "sameAs": [
+        "https://www.facebook.com/trendtactics",
+        "https://twitter.com/trendtactics",
+        "https://www.linkedin.com/company/trendtactics"
+      ],
+      "description": "Trendtactics Academy offers comprehensive courses in Web Development, App Development, and Digital Marketing."
+    }</script>
+    <title>Trendtactics Academy - Master Tech Skills</title>
+    <script>
+        // Scroll-to-top functionality for React app
+        (function () {
+            function scrollToTop() {
+                try {
+                    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                    if (document.documentElement) document.documentElement.scrollTop = 0;
+                    if (document.body) document.body.scrollTop = 0;
+                } catch (e) { }
+            }
+            window.addEventListener('load', scrollToTop);
+            document.addEventListener('DOMContentLoaded', scrollToTop);
+            window.addEventListener('popstate', function () { setTimeout(scrollToTop, 0); });
+            setTimeout(scrollToTop, 0);
+        })();
+    </script>
+    <script defer="defer" src="/static/js/main.d3663c93.js"></script>
+    <link href="/static/css/main.87756b56.css" rel="stylesheet">
+</head>
 
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container header-content">
-            <div class="logo">Trendtactics Academy</div>
-            <nav class="nav">
-                <a href="/">Home</a>
-                <a href="/about">About</a>
-                <a href="/services">Services</a>
-                <a href="/courses">Courses</a>
-                <a href="/blog">Blog</a>
-                <a href="https://trendtacticsdigital.com" target="_blank">Digital Services</a>
-                <a href="/contact">Contact</a>
-                <button class="btn btn-secondary" id="authBtn" onclick="handleAuth()">Sign In</button>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero"
-        style="background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary)); padding: 6rem 0;">
-        <div class="container" style="text-align: center;">
-            <h1 class="hero-title"
-                style="font-size: 3.5rem; margin-bottom: 1.5rem; background: linear-gradient(135deg, var(--primary), #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                Master Digital Skills</h1>
-            <p class="hero-subtitle" style="font-size: 1.25rem; max-width: 600px; margin: 0 auto 2rem;">Learn coding,
-                design, and digital marketing with expert-led courses. Build real projects with AI as your creative
-                partner.</p>
-            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
-                <a href="#courses" class="btn btn-primary btn-lg">Browse Courses</a>
-                <a href="https://academy.trendtacticsdigital.com/signup.html" class="btn btn-secondary btn-lg">Get
-                    Started Free</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Courses Section -->
-    <section id="courses" class="container" style="padding: 4rem 0;">
-        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">Featured Courses</h2>
-
-        <div class="grid grid-2">
-            <!-- Vibe Coding Course -->
-            <div class="card">
-                <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 1rem;">
-                    <span class="badge badge-primary">Beginner</span>
-                </div>
-                <h3 class="card-title">Vibe Coding</h3>
-                <p class="card-description">
-                    Learn to create digital products by focusing on ideas, intention, creativity, and guidance.
-                    Perfect for beginners who want to build without getting lost in syntax.
-                </p>
-                <div style="margin: 1.5rem 0;">
-                    <p style="color: var(--text-muted); font-size: 0.875rem;">
-                        5 Modules • 6 Weeks • Certificate
-                    </p>
-                </div>
-                <a href="/course-details" class="btn btn-primary"
-                    style="width: 100%; text-align: center;">
-                    View Course
-                </a>
-            </div>
-
-            <!-- Placeholder for more courses -->
-            <div class="card" style="background: var(--bg-tertiary); border-style: dashed;">
-                <div style="text-align: center; padding: 2rem 0;">
-                    <h3 class="card-title">More Courses Coming Soon</h3>
-                    <p class="card-description">
-                        We're constantly adding new courses to help you master digital skills.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="container" style="padding: 4rem 0;">
-        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem;">Why Choose Us?</h2>
-
-        <div class="grid grid-3">
-            <div style="text-align: center; padding: 2rem;">
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Interactive Learning</h3>
-                <p style="color: var(--text-secondary);">
-                    Whiteboard, code playground, and hands-on projects
-                </p>
-            </div>
-
-            <div style="text-align: center; padding: 2rem;">
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">AI-Powered</h3>
-                <p style="color: var(--text-secondary);">
-                    Learn to work with AI as your creative partner
-                </p>
-            </div>
-
-            <div style="text-align: center; padding: 2rem;">
-                <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Certificates</h3>
-                <p style="color: var(--text-secondary);">
-                    Earn certificates to showcase your skills
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="container" style="padding: 4rem 0;">
-        <div class="card"
-            style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border: none; text-align: center;">
-            <h2 style="font-size: 2rem; color: white; margin-bottom: 1rem;">Ready to Start Learning?</h2>
-            <p style="color: rgba(255,255,255,0.9); margin-bottom: 2rem; font-size: 1.125rem;">
-                Join thousands of students mastering digital skills
-            </p>
-            <a href="/signup" class="btn btn-lg" style="background: white; color: var(--primary);">
-                Create Free Account
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer
-        style="background: var(--bg-secondary); border-top: 1px solid var(--border); padding: 3rem 0; margin-top: 4rem;">
-        <div class="container" style="text-align: center;">
-            <div class="logo" style="margin-bottom: 1rem;">Trendtactics Academy</div>
-            <p style="color: var(--text-muted);">Empowering learners worldwide with cutting-edge digital skills</p>
-            <p style="color: var(--text-muted); margin-top: 1rem;">
-                <a href="https://trendtacticsdigital.com"
-                    style="color: var(--primary); text-decoration: none;">Trendtactics Digital Services</a>
-            </p>
-            <p style="color: var(--text-muted); margin-top: 2rem; font-size: 0.875rem;">
-                © 2025 Trendtactics Academy. All rights reserved.
-            </p>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="/js/supabase-client.js" async></script>
-    <script src="/js/auth.js" async></script>
-    <script src="/health-check.js" async></script>
-    <script>
-        async function initHomepage() {
-            try {
-                const loggedIn = await Auth.isLoggedIn();
-                const authBtn = document.getElementById('authBtn');
-
-                if (loggedIn) {
-                    const user = await Auth.getCurrentUser();
-                    authBtn.textContent = user?.email?.split('@')[0] || 'Account';
-                    authBtn.onclick = () => window.location.href = '/new-dashboard';
-                    authBtn.classList.add('btn-primary');
-                    authBtn.classList.remove('btn-secondary');
-                } else {
-                    authBtn.textContent = 'Sign In';
-                    authBtn.onclick = () => window.location.href = '/signup';
-                    authBtn.classList.add('btn-secondary');
-                    authBtn.classList.remove('btn-primary');
-                }
-            } catch (error) {
-                console.error('Error initializing homepage:', error);
-                const authBtn = document.getElementById('authBtn');
-                authBtn.textContent = 'Sign In';
-                authBtn.onclick = () => window.location.href = '/signup';
-            }
-        }
-
-        function handleAuth() {
-            window.location.href = '/signup';
-        }
-
-        // Initialize when DOM is loaded
-        document.addEventListener('DOMContentLoaded', initHomepage);
-    </script>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
 </body>
 
 </html>

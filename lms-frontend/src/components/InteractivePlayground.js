@@ -8,26 +8,38 @@ const InteractivePlayground = ({ activeTab, onTabChange, lesson }) => {
 
   const handleGenerate = async () => {
     if (!prompt.trim()) return;
-    
+
     setIsGenerating(true);
     setOutput('Generating response...');
-    
-    // Simulate AI response
-    setTimeout(() => {
-      setOutput(`AI Response to: "${prompt}"
 
-This is a simulated response. In a real implementation, this would connect to an AI service to generate code or content based on your prompt.
+    try {
+      // Call Supabase Edge Function for AI Playground
+      const response = await fetch('https://uimdbodamoeyukrghchb.supabase.co/functions/v1/ai-playground', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWRib2RhbW9leXVrcmdoY2hiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NTYwMzksImV4cCI6MjA4MTAzMjAzOX0.kMFpnaZN04ac94u0wcXJFsS58lX88h8RCM2de3rwYIc'
+        },
+        body: JSON.stringify({
+          prompt: prompt,
+          model: 'openai/gpt-4o-mini'
+        })
+      });
 
-For example, if you asked for a function to calculate factorial, it might generate:
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to generate AI response');
+      }
 
-function factorial(n) {
-  if (n <= 1) return 1;
-  return n * factorial(n - 1);
-}
+      const data = await response.json();
+      setOutput(data.response || 'No response generated');
 
-console.log(factorial(5)); // Output: 120`);
+    } catch (error) {
+      console.error('AI Generation Error:', error);
+      setOutput(`Error: ${error.message}\n\nPlease try again or contact support if the issue persists.`);
+    } finally {
       setIsGenerating(false);
-    }, 1500);
+    }
   };
 
   const handleRunCode = () => {
@@ -39,31 +51,28 @@ console.log(factorial(5)); // Output: 120`);
       <div className="flex border-b border-gray-200">
         <button
           onClick={() => onTabChange('code')}
-          className={`px-4 py-2 font-medium text-sm ${
-            activeTab === 'code'
+          className={`px-4 py-2 font-medium text-sm ${activeTab === 'code'
               ? 'text-brand-cyan border-b-2 border-brand-cyan'
               : 'text-gray-500 hover:text-gray-700'
-          }`}
+            }`}
         >
           Code Editor
         </button>
         <button
           onClick={() => onTabChange('ai')}
-          className={`px-4 py-2 font-medium text-sm ${
-            activeTab === 'ai'
+          className={`px-4 py-2 font-medium text-sm ${activeTab === 'ai'
               ? 'text-brand-cyan border-b-2 border-brand-cyan'
               : 'text-gray-500 hover:text-gray-700'
-          }`}
+            }`}
         >
           AI Prompt Playground
         </button>
         <button
           onClick={() => onTabChange('output')}
-          className={`px-4 py-2 font-medium text-sm ${
-            activeTab === 'output'
+          className={`px-4 py-2 font-medium text-sm ${activeTab === 'output'
               ? 'text-brand-cyan border-b-2 border-brand-cyan'
               : 'text-gray-500 hover:text-gray-700'
-          }`}
+            }`}
         >
           Output
         </button>

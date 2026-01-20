@@ -17,6 +17,8 @@ import Contact from './pages/Contact';
 import MyCourses from './pages/MyCourses';
 import CourseDashboard from './pages/CourseDashboard';
 import PlannerPage from './pages/PlannerPage';
+import CourseRedirect from './components/CourseRedirect';
+import SmartLessonViewer from './components/SmartLessonViewer';
 import Diagnostic from './pages/Diagnostic';
 import SimpleTest from './pages/SimpleTest';
 import NetworkTest from './pages/NetworkTest';
@@ -34,6 +36,8 @@ import { Navigate } from 'react-router-dom';
 import CertificateDashboard from './pages/CertificateDashboard';
 import CertificatePreview from "./pages/CertificatePreview";
 import NotificationBell from './components/NotificationBell';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -167,11 +171,11 @@ function App() {
 
   return (
     <div className="App min-h-screen flex flex-col">
-      <Header 
-        user={user} 
+      <Header
+        user={user}
         onLogin={handleLogin}
         onSignup={handleSignup}
-        onLogout={handleLogout} 
+        onLogout={handleLogout}
       />
       {user && (
         <div className="absolute top-4 right-8 z-50">
@@ -183,8 +187,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/courses" element={<Courses />} />
-          <Route path="/course/:id/*" element={<CourseDetail user={user} onLogin={handleLogin} onSignup={handleSignup} />} />
-          <Route path="/course/:id/lesson/:lessonId" element={<LessonViewerWrapper />} />
+          <Route path="/course/:id" element={<CourseRedirect />} />
+          <Route path="/course/:id/lesson/:lessonId" element={<SmartLessonViewer />} />
           <Route path="/course/:id/module-quiz" element={<ModuleQuiz />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile user={user} />} />
@@ -200,7 +204,7 @@ function App() {
             )
           } />
           <Route path="/test-ai" element={<TestAI />} />
-          <Route path="/test-planner" element={<div style={{padding: '20px', textAlign: 'center'}}><h1>Test Planner Route Works!</h1><p>This is a simple test to verify routing is working.</p></div>} />
+          <Route path="/test-planner" element={<div style={{ padding: '20px', textAlign: 'center' }}><h1>Test Planner Route Works!</h1><p>This is a simple test to verify routing is working.</p></div>} />
           <Route path="/diagnostic" element={<Diagnostic />} />
           <Route path="/simple-test" element={<SimpleTest />} />
           <Route path="/network-test" element={<NetworkTest />} />
@@ -211,6 +215,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/certificates" element={<CertificateDashboard />} />
           <Route path="/certificate-preview" element={<CertificatePreview />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfService />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
@@ -223,7 +229,7 @@ function App() {
         onLogin={handleLoginSubmit}
         onSwitchToSignup={switchToSignup}
       />
-      
+
       <SignupModal
         isOpen={isSignupModalOpen}
         onClose={() => setIsSignupModalOpen(false)}

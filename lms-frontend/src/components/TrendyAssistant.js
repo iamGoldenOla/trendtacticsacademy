@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import puterService from '../services/puterService';
+import { aiService } from '../services/aiService';
 
 const TrendyAssistant = () => {
   const [messages, setMessages] = useState([
@@ -19,7 +19,7 @@ const TrendyAssistant = () => {
 
   const courses = [
     "Web Development",
-    "App Development", 
+    "App Development",
     "Digital Marketing (Content Creation, Email Marketing, Social Media, and Facebook Ads)"
   ];
 
@@ -31,21 +31,11 @@ const TrendyAssistant = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Initialize Puter.js when component mounts
+  // Initialize AI Service
   useEffect(() => {
-    const initPuter = async () => {
-      try {
-        const success = await puterService.initialize();
-        setIsPuterInitialized(success);
-        if (success) {
-          addBotMessage("I'm now powered by advanced AI! I can help answer your questions about our courses and services.");
-        }
-      } catch (error) {
-        console.error('Failed to initialize Puter.js:', error);
-      }
-    };
-
-    initPuter();
+    // aiService is stateless for initialization, but we can set a flag
+    setIsPuterInitialized(true);
+    addBotMessage("I'm powered by TrendyAI! Ask me anything about the courses.");
   }, []);
 
   const addBotMessage = (text) => {
@@ -87,70 +77,49 @@ const TrendyAssistant = () => {
     setIsLoading(true);
 
     try {
-      // Use Puter.js for ALL queries if available - this makes it truly intelligent
-      if (isPuterInitialized) {
-        try {
-          // Pass the entire conversation history for context-aware responses
-          const botResponse = await puterService.processConversation(conversationHistory, userInput);
-          const botMessage = {
-            id: Date.now() + 1,
-            text: botResponse,
-            sender: 'bot',
-            timestamp: new Date()
-          };
-          setMessages(prev => [...prev, botMessage]);
-          setConversationHistory(prev => [...prev, { role: 'assistant', content: botResponse }]);
-        } catch (error) {
-          console.error('AI processing error:', error);
-          addErrorMessage("Sorry, I'm having trouble processing that right now. Please try again.");
-        }
-      } else {
-        // Fallback responses for when AI isn't available
-        const lowerInput = userInput.toLowerCase();
-        let botResponse = "";
-        
-        if (lowerInput.includes('hello') || lowerInput.includes('hi') || lowerInput.includes('hey')) {
-          botResponse = "Hello there! I'm Trendy, your customer service assistant. How can I help you today?";
-        } else if (lowerInput.includes('course') || lowerInput.includes('learn')) {
-          const courseList = courses.map((course, index) => `${index + 1}. ${course}`).join('\n');
-          botResponse = `We offer these amazing courses:
-${courseList}
-You can browse all courses on our Courses page. Would you like me to tell you more about any specific course?`;
-        } else if (lowerInput.includes('web development')) {
-          botResponse = "Our Web Development course covers HTML, CSS, JavaScript, React, and more. You can find it on our Courses page. Would you like me to direct you there?";
-        } else if (lowerInput.includes('app development')) {
-          botResponse = "Our App Development course teaches you to build mobile apps for iOS and Android using React Native. You can find it on our Courses page. Would you like me to direct you there?";
-        } else if (lowerInput.includes('digital marketing')) {
-          botResponse = "Our Digital Marketing course covers Content Creation, Email Marketing, Social Media, and Facebook Ads. You can find it on our Courses page. Would you like me to direct you there?";
-        } else if (lowerInput.includes('price') || lowerInput.includes('cost') || lowerInput.includes('fee')) {
-          botResponse = "Our courses start at $99. Premium packages are available for $199. You can view all pricing options on our Courses page.";
-        } else if (lowerInput.includes('thank')) {
-          botResponse = "You're welcome! Is there anything else I can help you with?";
-        } else if (lowerInput.includes('contact') || lowerInput.includes('support')) {
-          botResponse = "You can reach our support team at support@trendtactics.com or call us at (555) 123-4567. We're available Monday-Friday, 9 AM to 5 PM EST.";
-        } else {
-          botResponse = "I'm here to help! You can ask me about our courses:\n- Web Development\n- App Development\n- Digital Marketing\n\nOr I can help you navigate our platform. What would you like to know?";
-        }
+      // Use aiService (Edge Function)
+      // Create a temporary session ID or reuse one
+      const sessionId = 'trendy-assistant-' + Date.now();
 
-        const botMessage = {
-          id: Date.now() + 1,
-          text: botResponse,
-          sender: 'bot',
-          timestamp: new Date()
-        };
+      const response = await aiService.sendMessage(sessionId, userInput, {
+        courseId: 'General',
+        lessonId: 'General',
+        history: conversationHistory
+      });
 
-        setMessages(prev => [...prev, botMessage]);
-        setConversationHistory(prev => [...prev, { role: 'assistant', content: botResponse }]);
-      }
+      const botMessage = {
+        id: Date.now() + 1,
+        text: response.content,
+        sender: 'bot',
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, botMessage]);
+      setConversationHistory(prev => [...prev, { role: 'assistant', content: response.content }]);
+
     } catch (error) {
-      console.error('Error processing message:', error);
-      addErrorMessage("Sorry, I encountered an error processing your request. Please try again.");
+      console.error('AI processing error:', error);
+      // Fallback to local logic if AI fails
+      fallbackResponse(userInput);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleKeyPress = (e) => {
+  const fallbackResponse = (text) => {
+    const lowerInput = text.toLowerCase();
+    let botResponse = "I'm having trouble connecting to the AI, but I can still help!";
+
+    if (lowerInput.includes('hello') || lowerInput.includes('hi')) {
+      botResponse = "Hello! How can I help you today?";
+    } else if (lowerInput.includes('course')) {
+      const courseList = courses.map((c, i) => `${i + 1}. ${c}`).join('\n');
+      botResponse = `We offer:\n${courseList}\nCheck the Courses page for more!`;
+    }
+    addErrorMessage(botResponse);
+  };
+
+  const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
@@ -207,7 +176,7 @@ You can browse all courses on our Courses page. Would you like me to tell you mo
             </div>
           </div>
           <div className="flex space-x-2">
-            <button 
+            <button
               onClick={clearConversation}
               className="text-cyan-100 hover:text-white transition-colors"
               aria-label="Clear conversation"
@@ -216,7 +185,7 @@ You can browse all courses on our Courses page. Would you like me to tell you mo
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
             </button>
-            <button 
+            <button
               onClick={toggleVisibility}
               className="text-cyan-100 hover:text-white transition-colors"
               aria-label="Minimize chat"
@@ -236,13 +205,12 @@ You can browse all courses on our Courses page. Would you like me to tell you mo
               className={`mb-3 flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div
-                className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                  message.sender === 'user'
-                    ? 'bg-brand-cyan text-white rounded-br-none'
-                    : message.sender === 'error'
+                className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${message.sender === 'user'
+                  ? 'bg-brand-cyan text-white rounded-br-none'
+                  : message.sender === 'error'
                     ? 'bg-red-100 text-red-800 border border-red-200 rounded-bl-none'
                     : 'bg-white text-gray-800 border border-gray-200 rounded-bl-none'
-                }`}
+                  }`}
               >
                 <p className="text-sm whitespace-pre-wrap">{message.text}</p>
                 <p className={`text-xs mt-1 ${message.sender === 'user' ? 'text-cyan-100' : message.sender === 'error' ? 'text-red-600' : 'text-gray-500'}`}>
@@ -251,7 +219,7 @@ You can browse all courses on our Courses page. Would you like me to tell you mo
               </div>
             </div>
           ))}
-          
+
           {isLoading && (
             <div className="flex justify-start mb-3">
               <div className="bg-white text-gray-800 border border-gray-200 rounded-lg rounded-bl-none px-4 py-2">
@@ -263,7 +231,7 @@ You can browse all courses on our Courses page. Would you like me to tell you mo
               </div>
             </div>
           )}
-          
+
           <div ref={messagesEndRef} />
         </div>
 
@@ -273,7 +241,7 @@ You can browse all courses on our Courses page. Would you like me to tell you mo
             <textarea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyDown}
               placeholder="Ask me about our courses or services..."
               className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-brand-cyan focus:border-transparent"
               rows="2"

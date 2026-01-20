@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!-- FORCE UPDATE: 2026-01-16 13:10 PM - VERSION 3.0 -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - Trendtactics Academy (v2.1)</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="icon" href="/images/Trendtactics-logo - Copy.jpg" type="image/jpeg">
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+    <script src="/js/env.js"></script>
+    <script src="/js/supabase-client.js"></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">Trendtactics Academy</div>
+            <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰ Menu</button>
+            <nav class="nav">
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/services">Services</a>
+                <a href="/courses" class="active" style="color: var(--primary);">Courses</a>
+                <a href="/blog">Blog</a>
+                <a href="https://trendtacticsdigital.com" target="_blank">Digital Services</a>
+                <a href="/contact">Contact</a>
+                <button class="btn btn-secondary" id="authBtn" onclick="handleAuth()">Sign In</button>
+                <a href="/dashboard" id="dashboardLink"
+                    style="display: none; margin-left: 1rem; color: var(--primary); text-decoration: none;">Dashboard</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero hero-courses">
+        <div class="container" style="text-align: center; position: relative; z-index: 1;">
+            <h1 class="hero-title">Our Courses</h1>
+            <p class="hero-subtitle">Discover expert-led courses designed to accelerate your career in the digital
+                economy.</p>
+        </div>
+    </section>
+
+    <!-- Welcome Section -->
+    <section class="container" style="padding: 4rem 0;">
+        <div class="card"
+            style="text-align: center; background: linear-gradient(135deg, rgba(22, 32, 68, 0.9), rgba(11, 20, 55, 0.9)); border: 1px solid rgba(0, 217, 255, 0.2); margin-bottom: 3rem;">
+            <h2 class="card-title" style="color: var(--primary); font-size: 2rem; margin-bottom: 1rem;">Explore Our
+                Courses</h2>
+            <p class="card-description" style="font-size: 1.2rem; line-height: 1.8; max-width: 800px; margin: 0 auto;">
+                Discover expert-led courses designed to accelerate your career in the digital economy. Learn from
+                industry experts and build real-world projects that showcase your skills.
+            </p>
+        </div>
+    </section>
+
+    <!-- Courses Grid -->
+    <section class="container" style="padding: 4rem 0;">
+        <h2 style="font-size: 2.5rem; text-align: center; margin-bottom: 3rem; color: var(--primary);">Available Courses
+        </h2>
+
+        <div id="coursesGrid" class="grid grid-2">
+            <!-- Courses will be loaded dynamically here -->
+            <div style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+                <div class="loading-spinner"></div>
+                <p>Loading courses...</p>
+            </div>
+        </div>
+
+        <!-- Coming Soon Courses -->
+        <h3 style="font-size: 1.75rem; text-align: center; margin: 4rem 0 2rem; color: var(--text-secondary);">Coming
+            Soon</h3>
+        <div class="grid grid-3">
+            <div class="card"
+                style="background: linear-gradient(135deg, rgba(22, 32, 68, 0.6), rgba(11, 20, 55, 0.6)); border: 1px dashed var(--border-light); text-align: center; padding: 2rem;">
+                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">AI Automation</h4>
+                <p style="color: var(--text-muted); font-size: 0.875rem;">Automate workflows with AI agents and tools
+                </p>
+            </div>
+            <div class="card"
+                style="background: linear-gradient(135deg, rgba(22, 32, 68, 0.6), rgba(11, 20, 55, 0.6)); border: 1px dashed var(--border-light); text-align: center; padding: 2rem;">
+                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">Digital Marketing</h4>
+                <p style="color: var(--text-muted); font-size: 0.875rem;">Full-stack digital marketing with AI tools</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2025 Trendtactics Academy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/supabase-client.js"></script>
+    <script src="/js/auth.js"></script>
+    <script>
+        async function initPage() {
+            try {
+                // Check if user is logged in
+                const s = localStorage.getItem('supabase_session');
+                const u = localStorage.getItem('supabase_user');
+                const loggedIn = !!(s && u);
+
+                const authBtn = document.getElementById('authBtn');
+                const dashboardLink = document.getElementById('dashboardLink');
+
+                if (loggedIn) {
+                    const user = JSON.parse(u)?.user;
+                    if (authBtn) {
+                        authBtn.textContent = user?.user_metadata?.name || user?.email || 'Account';
+                        authBtn.onclick = () => window.location.href = '/new-dashboard';
+                    }
+                    if (dashboardLink) dashboardLink.style.display = 'block';
+                    await loadPersonalizedCourses(user.id);
+                } else {
+                    if (authBtn) {
+                        authBtn.textContent = 'Sign In';
+                        authBtn.onclick = () => window.location.href = '/signup';
+                    }
+                    if (dashboardLink) dashboardLink.style.display = 'none';
+                    await loadAllCourses();
+                }
+            } catch (error) {
+                console.error('Auth initialization error:', error);
+                await loadAllCourses();
+            }
+        }
+
+        async function loadPersonalizedCourses(userId) {
+            try {
+                const { data, error } = await window.supabaseClient
+                    .from('courses')
+                    .select('*')
+                    .eq('status', 'published')
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+                if (data && data.length > 0) displayPersonalizedCourses(data);
+                else await loadAllCourses();
+            } catch (error) {
+                await loadAllCourses();
+            }
+        }
+
+        async function loadAllCourses() {
+            try {
+                const { data, error } = await window.supabaseClient
+                    .from("courses")
+                    .select("*")
+                    .order("created_at", { ascending: false });
+
+                if (error) throw error;
+
+                const courses = data || [];
+                if (courses.length === 0) {
+                    document.getElementById('coursesGrid').innerHTML = '<p style="text-align:center">No courses available.</p>';
+                    return;
+                }
+
+                const coursesHTML = courses.map(course => `
+                    <div class="card" style="transition: all 0.3s ease;">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                            <span class="badge badge-primary">${course.level || 'Beginner'}</span>
+                            <span class="badge" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white;">${course.price || '$3 / ₦5,000'}</span>
+                        </div>
+                        <h3 class="card-title" style="margin: 0; color: var(--primary);">${course.title}</h3>
+                        <p class="card-description" style="line-height: 1.7; margin-bottom: 1.5rem;">
+                            ${course.description || 'No description available'}
+                        </p>
+                        <a href="/course.html?id=${course.id}" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">
+                            View Course
+                        </a>
+                    </div>
+                `).join('');
+
+                document.getElementById('coursesGrid').innerHTML = coursesHTML;
+            } catch (err) {
+                document.getElementById('coursesGrid').innerHTML = '<p style="text-align:center">Failed to load courses.</p>';
+            }
+        }
+
+        function displayPersonalizedCourses(courses) {
+            const coursesHTML = courses.map(course => `
+                <div class="card" style="transition: all 0.3s ease;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                         <span class="badge badge-primary">${course.level || 'Beginner'}</span>
+                         <span class="badge" style="background: linear-gradient(135deg, var(--success), var(--primary)); color: white;">Access Granted</span>
+                    </div>
+                    <h3 class="card-title" style="margin: 0; color: var(--primary);">${course.title}</h3>
+                    <p class="card-description" style="line-height: 1.7; margin-bottom: 1.5rem;">
+                        ${course.description || 'No description available'}
+                    </p>
+                    <a href="/course.html?id=${course.id}" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">
+                        Continue Learning
+                    </a>
+                </div>
+            `).join('');
+            document.getElementById('coursesGrid').innerHTML = coursesHTML;
+        }
+
+        function handleAuth() {
+            const s = localStorage.getItem('supabase_session');
+            if (s) window.location.href = '/new-dashboard';
+            // Fallback if that rewrite fails:
+            // window.location.href = '/student-dashboard.html'; 
+            // but let's stick to consistent routing first.
+            else window.location.href = '/signup';
+        }
+
+        function toggleMobileNav() {
+            document.querySelector('.nav').classList.toggle('active');
+        }
+
+        initPage();
+    </script>
+</body>
+
+</html>
