@@ -368,7 +368,7 @@ INSERT INTO courses (
 -- ============================================================================
 
 -- Vibe Coding Modules (13)
-INSERT INTO modules (id, course_id, title, description, ordering) VALUES
+INSERT INTO modules (id, course_id, title, description, order_index) VALUES
 ('10000000-0000-0000-0000-000000000001', 'a1b2c3d4-e5f6-7890-abcd-ef1234567890', 'Module 1: Vibe Coding Foundations', 'Learn the fundamentals of Vibe Coding and why it represents the future of software development', 1),
 ('10000000-0000-0000-0000-000000000002', 'a1b2c3d4-e5f6-7890-abcd-ef1234567890', 'Module 2: The Vibe Coding Ecosystem', 'Explore the tools and workflows that make Vibe Coding possible', 2),
 ('10000000-0000-0000-0000-000000000003', 'a1b2c3d4-e5f6-7890-abcd-ef1234567890', 'Module 3: Full-Stack AI Builders', 'Master full-stack AI tools like Bolt.new, Lovable, Replit Agent, and V0', 3),
@@ -384,7 +384,7 @@ INSERT INTO modules (id, course_id, title, description, ordering) VALUES
 ('10000000-0000-0000-0000-000000000013', 'a1b2c3d4-e5f6-7890-abcd-ef1234567890', 'Module 13: Course Conclusion', 'Review your journey and explore next steps in your Vibe Coding career', 13);
 
 -- Facebook Ads Modules (10)
-INSERT INTO modules (id, course_id, title, description, ordering) VALUES
+INSERT INTO modules (id, course_id, title, description, order_index) VALUES
 ('20000000-0000-0000-0000-000000000001', 'b2c3d4e5-f6a7-8901-bcde-f01234567891', 'Module 1: Facebook Ads Foundations', 'Understand how Facebook Ads work under the hood and the ecosystem structure', 1),
 ('20000000-0000-0000-0000-000000000002', 'b2c3d4e5-f6a7-8901-bcde-f01234567891', 'Module 2: Account & Campaign Structure', 'Master account setup, campaign structure, and strategic planning', 2),
 ('20000000-0000-0000-0000-000000000003', 'b2c3d4e5-f6a7-8901-bcde-f01234567891', 'Module 3: Audiences & Targeting (The Right Way in 2025)', 'Learn modern targeting strategies, custom audiences, and lookalike audiences', 3),
@@ -397,7 +397,7 @@ INSERT INTO modules (id, course_id, title, description, ordering) VALUES
 ('20000000-0000-0000-0000-000000000010', 'b2c3d4e5-f6a7-8901-bcde-f01234567891', 'Final Module: Long-Term Mastery', 'Develop long-term mastery and sustainable Facebook Ads success', 10);
 
 -- Prompt Engineering Modules (6)
-INSERT INTO modules (id, course_id, title, description, ordering) VALUES
+INSERT INTO modules (id, course_id, title, description, order_index) VALUES
 ('30000000-0000-0000-0000-000000000001', 'c3d4e5f6-a7b8-9012-cdef-012345678912', 'Module 1: Prompt Engineering Foundations', 'Learn what prompt engineering is and how AI interprets instructions', 1),
 ('30000000-0000-0000-0000-000000000002', 'c3d4e5f6-a7b8-9012-cdef-012345678912', 'Module 2: Prompt Structure & Control', 'Master core prompt components, context layering, and constraints', 2),
 ('30000000-0000-0000-0000-000000000003', 'c3d4e5f6-a7b8-9012-cdef-012345678912', 'Module 3: Intermediate Prompt Techniques', 'Learn few-shot learning, iterative refinement, and prompt chaining', 3),
@@ -444,7 +444,7 @@ END $$;
 -- ============================================================================
 
 INSERT INTO lessons (
-  id, module_id, title, description, content, ordering, duration,
+  id, module_id, title, description, content, order_index, duration,
   video_url, resources, created_at, updated_at
 ) VALUES
 ('10000000-0000-0000-0000-000000000001', '10000000-0000-0000-0000-000000000001', 'What is Vibe Coding?', 'Welcome to the future of software development. In this lesson, you will discover Vibe Codingâ€”a revolutionary approach where humans focus on intent, systems, and outcomes while AI handles the execution. This is not about learning to write code the old way. This is about learning to build software the way it''s actually done in 2025.
@@ -953,7 +953,7 @@ ON CONFLICT (id) DO UPDATE SET
 -- ============================================================================
 
 INSERT INTO lessons (
-  id, module_id, title, description, content, ordering, duration,
+  id, module_id, title, description, content, order_index, duration,
   video_url, resources, created_at, updated_at
 ) VALUES
 ('20000000-0000-0000-0000-000000000001', '20000000-0000-0000-0000-000000000001', 'How Facebook Ads Really Work (Under the Hood)', 'Welcome to the future of Facebook Ads. In this lesson, you will discover how Facebook Ads actually work behind the scenes - not the surface-level tactics that change constantly, but the fundamental systems that remain consistent. This foundational understanding will help you build campaigns that work in 2025 and beyond.
@@ -1045,7 +1045,7 @@ ON CONFLICT (id) DO UPDATE SET
 -- ============================================================================
 
 INSERT INTO lessons (
-  id, module_id, title, description, content, ordering, duration,
+  id, module_id, title, description, content, order_index, duration,
   video_url, resources, created_at, updated_at
 ) VALUES
 ('30000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', 'What Prompt Engineering Really Is', 'Prompt engineering is the systematic practice of designing and refining instructions that guide AI systems to produce specific, desired outputs. In this foundational lesson, we''ll explore what prompt engineering truly means in 2025, why it matters more than ever, and how it differs from casual AI interaction. This skill has evolved from simple ''prompt tricks'' to a systematic discipline used by AI builders, product teams, automation engineers, marketers, educators, and founders to create reliable, scalable AI interactions.
