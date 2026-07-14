@@ -18,10 +18,26 @@ const COURSE_ENDPOINTS = {
  */
 export const getAllCourses = async (): Promise<Course[]> => {
   try {
+    // Fetch courses from backend to get live prices
+    const response = await get<ApiResponse<Course[]>>(COURSE_ENDPOINTS.GET_ALL);
+    if (response.success && response.data) {
+      // Merge live prices into static realCourses
+      return realCourses.map(staticCourse => {
+        const liveCourse = response.data.find((c: any) => 
+          c.slug === staticCourse.id || 
+          c.id === staticCourse.id || 
+          c.title.toLowerCase() === staticCourse.title.toLowerCase()
+        );
+        return {
+          ...staticCourse,
+          price: liveCourse ? Number(liveCourse.price) : staticCourse.price
+        };
+      }) as any;
+    }
     return realCourses as any;
   } catch (error) {
     console.error('Error fetching courses:', error);
-    return [];
+    return realCourses as any;
   }
 };
 
@@ -30,11 +46,22 @@ export const getAllCourses = async (): Promise<Course[]> => {
  */
 export const getCourseById = async (id: string): Promise<Course | null> => {
   try {
-    const course = realCourses.find(c => c.id === id);
-    return course as any || null;
+    const staticCourse = realCourses.find(c => c.id === id);
+    if (!staticCourse) return null;
+    
+    // Fetch live course from backend to get live price
+    const response = await get<ApiResponse<any>>(COURSE_ENDPOINTS.GET_BY_ID(id));
+    if (response.success && response.data) {
+      return {
+        ...staticCourse,
+        price: response.data.price !== undefined && response.data.price !== null ? Number(response.data.price) : staticCourse.price
+      } as any;
+    }
+    return staticCourse as any;
   } catch (error) {
     console.error(`Error fetching course with ID ${id}:`, error);
-    return null;
+    const staticCourse = realCourses.find(c => c.id === id);
+    return staticCourse as any || null;
   }
 };
 
