@@ -1,4 +1,4 @@
-﻿-- ============================================================================
+-- ============================================================================
 -- 1. DATABASE SCHEMA SETUP FOR NEW SUPABASE INSTANCE
 -- ============================================================================
 
@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS public.courses (
   level TEXT CHECK (level IN ('beginner', 'intermediate', 'advanced')) DEFAULT 'beginner',
   category TEXT,
   rating NUMERIC DEFAULT 0,
-  topics TEXT[],
-  slug TEXT UNIQUE
+  slug TEXT UNIQUE,
+  status TEXT DEFAULT 'draft' CHECK (status IN ('draft', 'published', 'archived'))
 );
 
 -- Create public.modules table
@@ -328,6 +328,8 @@ INSERT INTO courses (
   description,
   category,
   level,
+  price,
+  slug,
   status
 ) VALUES 
 (
@@ -336,6 +338,8 @@ INSERT INTO courses (
   'Learn to build real software using AI tools like Cursor, Bolt.new, and Replit Agent. Master the art of describing what you want and letting AI handle the implementation. Perfect for entrepreneurs, designers, and anyone who wants to build without traditional coding.',
   'Programming',
   'beginner',
+  10.00,
+  'vibe-coding',
   'published'
 ),
 (
@@ -344,6 +348,8 @@ INSERT INTO courses (
   'Master Facebook advertising with a systems-based approach. Learn campaign structure, targeting, creative strategy, optimization, and scaling. Build profitable ad campaigns that work consistently and predictably.',
   'Marketing',
   'intermediate',
+  8.00,
+  'facebook-ads',
   'published'
 ),
 (
@@ -352,6 +358,8 @@ INSERT INTO courses (
   'Learn to design effective prompts that control AI systems. Master prompt structure, context layering, constraints, and advanced techniques. Apply prompt engineering to content creation, code generation, and data analysis.',
   'AI & Technology',
   'beginner',
+  10.00,
+  'prompt-engineering',
   'published'
 );
 
