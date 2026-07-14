@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS public.lessons (
   description TEXT,
   content TEXT,
   video_url TEXT,
+  duration TEXT,
   order_index INTEGER NOT NULL,
   is_preview BOOLEAN DEFAULT FALSE,
   resources JSONB DEFAULT '[]'::jsonb
