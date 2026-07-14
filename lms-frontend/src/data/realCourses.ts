@@ -14,7 +14,7 @@ export const realCourses: Course[] = [
       "updatedAt": "2026-01-10T12:00:00Z"
     },
     "thumbnail": "https://images.unsplash.com/photo-1618401471353-b98aedd07871?w=800&auto=format&fit=crop&q=60",
-    "price": 150,
+    "price": 10,
     "duration": "8 weeks",
     "level": "beginner",
     "category": "AI & Software Development",
@@ -195,7 +195,7 @@ export const realCourses: Course[] = [
       "updatedAt": "2026-01-10T12:00:00Z"
     },
     "thumbnail": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&auto=format&fit=crop&q=60",
-    "price": 120,
+    "price": 8,
     "duration": "6 weeks",
     "level": "intermediate",
     "category": "Digital Marketing",
@@ -622,7 +622,7 @@ export const realCourses: Course[] = [
       "updatedAt": "2026-01-10T12:00:00Z"
     },
     "thumbnail": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&auto=format&fit=crop&q=60",
-    "price": 180,
+    "price": 10,
     "duration": "6 weeks",
     "level": "beginner",
     "category": "AI & Machine Learning",
