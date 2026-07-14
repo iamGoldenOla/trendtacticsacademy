@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { digitalMarketingCourses } from "../data/digitalMarketingCourses";
+import { realCourses } from "../data/realCourses";
 import { useNavigate } from "react-router-dom";
 import StudentDashboardLayout from "../components/StudentDashboardLayout";
 import { Section } from "../types/Section";
@@ -21,7 +21,7 @@ const CertificateDashboard: React.FC = () => {
   useEffect(() => {
     // Simulate fetching progress data for enrolled courses
     // In real app, replace with API call
-    const enrolledCourses = digitalMarketingCourses.filter(course => ["dm-1", "dm-2"].includes(course.id));
+    const enrolledCourses = realCourses.filter(course => ["vibe-coding", "facebook-ads", "prompt-engineering"].includes(course.id));
     const progressData = enrolledCourses.map(course => {
       // Remove score property since it's not present in course data
       const totalLessons = course.lessons ? course.lessons.length : 0;

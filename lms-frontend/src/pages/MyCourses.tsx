@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { digitalMarketingCourses } from '../data/digitalMarketingCourses';
+import { realCourses } from '../data/realCourses';
 
 // Mock enrolled courses data
-const enrolledCourses = digitalMarketingCourses.filter(course => ["dm-1", "dm-2"].includes(course.id));
+const enrolledCourses = realCourses.filter(course => ["vibe-coding", "facebook-ads", "prompt-engineering"].includes(course.id));
 
 const MyCourses: React.FC = () => (
   <div className="min-h-screen flex flex-col items-center bg-gray-50 py-12 px-4">
@@ -33,7 +33,7 @@ const MyCourses: React.FC = () => (
             </div>
             <div className="flex gap-2 mt-auto">
               <Link
-                to={`/course/${course.id}/lesson/l1`}
+                to={`/course/${course.id}/lesson/${course.lessons[0]?.id || '1'}`}
                 className="btn-primary flex-1 text-center text-sm"
               >
                 Continue

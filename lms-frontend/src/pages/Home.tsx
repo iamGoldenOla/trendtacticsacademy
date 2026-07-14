@@ -16,8 +16,8 @@ import {
   Target,
   Shield
 } from 'lucide-react';
-import * as supabaseCourseService from '../services/supabaseCourseService';
-import { Course } from '../services/supabaseCourseService';
+import * as courseService from '../services/courseService';
+import { Course } from '../types';
 
 const Home: React.FC = () => {
   const [featuredCourses, setFeaturedCourses] = useState<Course[]>([]);
@@ -33,8 +33,8 @@ const Home: React.FC = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const courses = await supabaseCourseService.getAllCourses();
-        setFeaturedCourses(courses);
+        const courses = await courseService.getAllCourses();
+        setFeaturedCourses(courses as any);
         
         // Animate stats
         animateStats();
@@ -266,9 +266,9 @@ const Home: React.FC = () => {
                       <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-glow-strong transition-all duration-300 transform hover:-translate-y-2">
                         {/* Course Image */}
                         <div className="relative h-48 bg-gradient-to-br from-primary-navy to-primary-navyLight overflow-hidden">
-                          {course.thumbnail_url ? (
+                          {course.thumbnail ? (
                             <img
-                              src={course.thumbnail_url}
+                              src={course.thumbnail}
                               alt={course.title}
                               className="w-full h-full object-cover"
                             />

@@ -1,6 +1,6 @@
 import { get, post, put, del } from './api';
 import { ApiResponse, Course } from './types';
-import { digitalMarketingCourses } from '../data/digitalMarketingCourses';
+import { realCourses } from '../data/realCourses';
 
 const COURSE_ENDPOINTS = {
   GET_ALL: '/courses',
@@ -18,8 +18,7 @@ const COURSE_ENDPOINTS = {
  */
 export const getAllCourses = async (): Promise<Course[]> => {
   try {
-    // Use local data for demo purposes to show games functionality
-    return digitalMarketingCourses as any[];
+    return realCourses as any;
   } catch (error) {
     console.error('Error fetching courses:', error);
     return [];
@@ -31,8 +30,7 @@ export const getAllCourses = async (): Promise<Course[]> => {
  */
 export const getCourseById = async (id: string): Promise<Course | null> => {
   try {
-    // Use local data for demo purposes to show games functionality
-    const course = digitalMarketingCourses.find(c => c.id === id);
+    const course = realCourses.find(c => c.id === id);
     return course as any || null;
   } catch (error) {
     console.error(`Error fetching course with ID ${id}:`, error);
@@ -104,9 +102,9 @@ export const deleteCourse = async (id: string): Promise<boolean> => {
 /**
  * Enroll in a course
  */
-export const enrollInCourse = async (courseId: string): Promise<boolean> => {
+export const enrollInCourse = async (courseId: string, reference?: string, paymentGateway?: string): Promise<boolean> => {
   try {
-    const response = await post<ApiResponse<any>>(COURSE_ENDPOINTS.ENROLL(courseId));
+    const response = await post<ApiResponse<any>>(COURSE_ENDPOINTS.ENROLL(courseId), { reference, paymentGateway });
     return response.success || false;
   } catch (error) {
     console.error(`Error enrolling in course with ID ${courseId}:`, error);

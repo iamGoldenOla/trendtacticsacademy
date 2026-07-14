@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { digitalMarketingCourses } from '../data/digitalMarketingCourses';
+import { realCourses } from '../data/realCourses';
 
 // Mock course data (should match MyCourses mock data)
 const mockCourses = [
@@ -35,7 +35,7 @@ const mockCourses = [
 
 const CourseDashboard: React.FC = () => {
   const { courseId } = useParams<{ courseId: string }>();
-  const course = digitalMarketingCourses.find((c) => c.id === courseId);
+  const course = realCourses.find((c) => c.id === courseId);
 
   if (!course) {
     return (

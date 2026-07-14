@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { digitalMarketingCourses } from '../data/digitalMarketingCourses';
+import { realCourses } from '../data/realCourses';
 import { QuizQuestion } from '../types';
 
 const ModuleQuiz: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const course = digitalMarketingCourses.find(c => c.id === id);
+  const course = realCourses.find(c => c.id === id);
   const questions: QuizQuestion[] = course?.moduleQuiz || [];
 
   const [quizStep, setQuizStep] = useState(0);
