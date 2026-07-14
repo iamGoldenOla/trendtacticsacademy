@@ -21,9 +21,10 @@ export const getAllCourses = async (): Promise<Course[]> => {
     // Fetch courses from backend to get live prices
     const response = await get<ApiResponse<Course[]>>(COURSE_ENDPOINTS.GET_ALL);
     if (response.success && response.data) {
+      const liveCoursesList = response.data as any[];
       // Merge live prices into static realCourses
       return realCourses.map(staticCourse => {
-        const liveCourse = response.data.find((c: any) => 
+        const liveCourse = liveCoursesList.find((c: any) => 
           c.slug === staticCourse.id || 
           c.id === staticCourse.id || 
           c.title.toLowerCase() === staticCourse.title.toLowerCase()
