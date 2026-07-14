@@ -140,11 +140,26 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ user, onLogin, onSignup }) 
     }
   };
 
-  const handlePaymentSuccess = async (paymentId: string) => {
+  const handlePaymentSuccess = async (paymentResponse: any) => {
     try {
-      // Call API to enroll in the course after payment
-      // The enrollInCourse function only takes one parameter
-      await courseService.enrollInCourse(course.id);
+      let reference = '';
+      let gateway: 'paystack' | 'flutterwave' = 'paystack';
+
+      if (paymentResponse && typeof paymentResponse === 'object') {
+        if (paymentResponse.reference) {
+          reference = paymentResponse.reference;
+          gateway = 'paystack';
+        } else if (paymentResponse.tx_ref || paymentResponse.transaction_id) {
+          reference = paymentResponse.transaction_id ? String(paymentResponse.transaction_id) : paymentResponse.tx_ref;
+          gateway = 'flutterwave';
+        }
+      } else if (typeof paymentResponse === 'string') {
+        reference = paymentResponse;
+        gateway = paymentResponse.startsWith('pay_') ? 'paystack' : 'flutterwave';
+      }
+
+      // Call API to enroll in the course after payment with verification reference and gateway
+      await courseService.enrollInCourse(course.id, reference, gateway);
       
       setIsEnrolled(true);
       setShowSuccessMessage(true);
@@ -159,7 +174,7 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ user, onLogin, onSignup }) 
         await authService.getCurrentUser();
       }
       
-      console.log('Payment successful:', paymentId);
+      console.log('Payment successful:', reference);
     } catch (err) {
       console.error('Error enrolling after payment:', err);
     }

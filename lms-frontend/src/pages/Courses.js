@@ -121,11 +121,27 @@ const Courses = () => {
 
   const handlePaymentSuccess = async (paymentResponse) => {
     try {
-      // Enroll user after successful payment
-      await courseService.enrollInCourse(selectedCourse.id);
+      let reference = '';
+      let gateway = 'paystack';
+
+      if (paymentResponse && typeof paymentResponse === 'object') {
+        if (paymentResponse.reference) {
+          reference = paymentResponse.reference;
+          gateway = 'paystack';
+        } else if (paymentResponse.tx_ref || paymentResponse.transaction_id) {
+          reference = paymentResponse.transaction_id ? String(paymentResponse.transaction_id) : paymentResponse.tx_ref;
+          gateway = 'flutterwave';
+        }
+      } else if (typeof paymentResponse === 'string') {
+        reference = paymentResponse;
+        gateway = paymentResponse.startsWith('pay_') ? 'paystack' : 'flutterwave';
+      }
+
+      // Enroll user after successful payment with verification reference and gateway
+      await courseService.enrollInCourse(selectedCourse.id, reference, gateway);
 
       // Store payment record (you can create a Supabase table for this)
-      console.log('Payment successful:', paymentResponse);
+      console.log('Payment successful:', reference);
 
       // Update enrolled courses
       setEnrolledCourseIds(prev => new Set([...prev, selectedCourse.id]));
@@ -146,7 +162,7 @@ const Courses = () => {
       <div
         className="absolute inset-0 bg-cover bg-center bg-fixed"
         style={{
-          backgroundImage: "url('/images/coursespage-parallex.jpg')",
+          backgroundImage: "url('/images/courses-hero.png')",
           backgroundAttachment: 'fixed'
         }}
       ></div>
@@ -228,9 +244,24 @@ const Courses = () => {
           {filteredCourses.map((course) => {
             return (<div key={course.id} className="stats-card bg-white rounded-lg shadow-md p-6 flex flex-col hover:shadow-xl transition-shadow border border-gray-100">
               <div className="relative mb-4">
-                <img src={course.thumbnail || 'https://placehold.co/400x200'} alt={course.title} className="w-full h-48 object-cover rounded-lg" />
-                <div className="absolute top-3 right-3 bg-brand-cyan text-white px-2 py-1 rounded text-sm font-medium">
-                  {course.level}
+                <div className="relative overflow-hidden rounded-lg h-48 bg-gradient-to-br from-brand-cyan to-brand-navy">
+                  {course.thumbnail || (course.title?.includes('Facebook Ads') ? '/images/facebook-ads-cover.jpg' : course.title?.includes('Vibe Coding') ? '/images/vibe-coding-cover.jpg' : null) ? (
+                    <img
+                      src={course.thumbnail || (course.title?.includes('Facebook Ads') ? '/images/facebook-ads-cover.jpg' : course.title?.includes('Vibe Coding') ? '/images/vibe-coding-cover.jpg' : 'https://placehold.co/400x200')}
+                      alt={course.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-white">
+                      <div className="text-center">
+                        <div className="text-4xl mb-2">📚</div>
+                        <div className="text-sm font-medium">{course.title}</div>
+                      </div>
+                    </div>
+                  )}
+                  <div className="absolute top-3 right-3 bg-brand-cyan text-white px-2 py-1 rounded text-sm font-medium">
+                    {course.level}
+                  </div>
                 </div>
               </div>
 
@@ -243,7 +274,7 @@ const Courses = () => {
                 </p>
 
                 <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                  <span className="font-semibold text-brand-cyan text-lg">{formatPrice(course.price || 3)}</span>
+                  <span className="font-semibold text-brand-cyan text-lg">₦{course.price ? Number(course.price).toLocaleString() : '5,000'}</span>
                   <span>Duration: {course.duration}</span>
                 </div>
               </div>
