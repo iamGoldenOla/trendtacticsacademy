@@ -172,7 +172,7 @@ export const realCourses: Course[] = [
     ],
     "enrolledStudents": 0,
     "rating": 0,
-    "createdAt": "2026-01-10T12:00:00Z",
+    "createdAt": new Date("2026-01-10T12:00:00Z"),
     "topics": [
       "AI Software Builders",
       "Cursor & Windsurf",
@@ -599,7 +599,7 @@ export const realCourses: Course[] = [
     ],
     "enrolledStudents": 0,
     "rating": 0,
-    "createdAt": "2026-01-10T12:00:00Z",
+    "createdAt": new Date("2026-01-10T12:00:00Z"),
     "topics": [
       "Ad Auction Mechanics",
       "Account Architecture",
@@ -1686,7 +1686,7 @@ export const realCourses: Course[] = [
     ],
     "enrolledStudents": 0,
     "rating": 0,
-    "createdAt": "2026-01-10T12:00:00Z",
+    "createdAt": new Date("2026-01-10T12:00:00Z"),
     "topics": [
       "Prompt Structures",
       "Context Layering",
