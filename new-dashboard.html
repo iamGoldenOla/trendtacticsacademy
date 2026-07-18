@@ -437,7 +437,7 @@
                     id: course.id,
                     title: course.title,
                     description: course.description || 'No description available',
-                    thumbnail_url: course.thumbnail_url || course.image_url || '/images/default-course.jpg',
+                    thumbnail_url: course.thumbnail || course.thumbnail_url || course.image_url || '/images/default-course.jpg',
                     level: course.level || 'All Levels',
                     progress: 0, // Default to 0 until we implement real progress tracking
                     lessons_completed: 0,
