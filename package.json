@@ -38,7 +38,8 @@
   },
   "homepage": "https://github.com/your-username/trendtactics-academy#readme",
   "dependencies": {
-    "@supabase/supabase-js": "^2.90.1",
+    "@supabase/supabase-js": "^2.110.5",
+    "pg": "^8.22.0",
     "sharp": "^0.34.5"
   }
 }

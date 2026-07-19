@@ -1,76 +1,169 @@
-# Deployment Instructions
+# 📦 Complete Deployment Package - Ready to Upload
 
-## 🎯 What We've Fixed
+## ✅ **Package Details**
 
-1. **Created Interactive Learning Components**:
-   - CourseNavigationPanel.js
-   - LessonReadingBoard.js
-   - InteractivePlayground.js
-   - CourseLearningBoard.js
-   - InteractiveCourseDetail.js
+**File:** `COMPLETE_DEPLOYMENT_FINAL.zip`  
+**Size:** ~42-45 MB  
+**Status:** Ready for cPanel upload ✅
 
-2. **Updated Routing**:
-   - Changed course detail route to use InteractiveCourseDetail instead of CourseDetail
+---
 
-3. **Built Frontend**:
-   - Successfully built the React application with interactive components
+## 🎯 **What's Included**
 
-## 🚀 Deployment Steps
+### **All Latest Fixes:**
+1. ✅ **Payment Currency** - All prices show ₦ (Naira)
+2. ✅ **Testimonials** - Show initials (AB, JO, ML, SG, EN)
+3. ✅ **Course Cards** - Aligned "View Course" buttons
+4. ✅ **Course Images** - Facebook Ads & Vibe Coding covers
+5. ✅ **About Page** - 2026 date, team initials
+6. ✅ **All Previous Fixes** - Quizzes, Mermaid, etc.
 
-### Step 1: Deploy Frontend Changes
+---
 
-1. **Copy the built files to your hosting platform**:
-   - Copy contents of `lms-frontend/build/` folder to your web host
-   - If using Netlify/Vercel/GitHub Pages, push the changes to your repository
+## 🚀 **Deployment Steps**
 
-### Step 2: Run Database Scripts in Supabase
+### **Step 1: Upload to cPanel**
 
-Run these SQL scripts in your Supabase SQL Editor in this exact order:
+1. Login to cPanel
+2. Go to File Manager
+3. Navigate to: `/public_html/academy.trendtacticsdigital.com/`
+4. **Delete old files:**
+   - Delete `static/` folder
+   - Delete `index.html`
+   - Delete `asset-manifest.json`
+   - Delete all other files in directory
 
-#### Script 1: `keep-only-vibe-coding.sql`
-Purpose: Remove all courses except Vibe Coding
-Location: `c:\Users\Akinola Olujobi\Documents\Trendtactics Academy\keep-only-vibe-coding.sql`
+### **Step 2: Extract ZIP**
 
-#### Script 2: `diagnose-and-fix-lessons.sql`
-Purpose: Add all 15 lessons to Vibe Coding course modules
-Location: `c:\Users\Akinola Olujobi\Documents\Trendtactics Academy\diagnose-and-fix-lessons.sql`
+1. Upload `COMPLETE_DEPLOYMENT_FINAL.zip`
+2. Right-click → Extract
+3. Extract to current directory
+4. Delete the ZIP file after extraction
 
-#### Script 3: `update-lesson-content.sql`
-Purpose: Populate detailed content for all 15 lessons
-Location: `c:\Users\Akinola Olujobi\Documents\Trendtactics Academy\update-lesson-content.sql`
+### **Step 3: Verify Files**
 
-#### Script 4: `verify-full-setup.sql`
-Purpose: Verify everything is properly configured
-Location: `c:\Users\Akinola Olujobi\Documents\Trendtactics Academy\verify-full-setup.sql`
+Check that you have:
+- `index.html`
+- `static/` folder
+- `images/` folder (with facebook-ads-cover.jpg, vibe-coding-cover.jpg)
+- `asset-manifest.json`
 
-### Step 3: Test the Deployment
+### **Step 4: Clear Cache**
 
-1. Visit your deployed site
-2. Navigate to Courses page
-3. Click on "Vibe Coding" course
-4. You should see:
-   - Interactive three-panel workspace (navigation, reading, playground)
-   - All 15 lessons accessible in the navigation panel
-   - Rich content with quizzes, activities, and resources
-   - Working AI playground and code editor
-   - Progress tracking
+1. Press `Ctrl + Shift + Delete`
+2. Clear cached images and files
+3. Close browser
+4. Reopen and visit site
 
-## 🎉 Expected Results
+---
 
-After completing these steps, students will see:
-- Interactive learning workspace instead of static enrollment page
-- Three-panel layout with course navigation, lesson content, and playground
-- All 15 Vibe Coding lessons with rich interactive content
-- Ability to navigate between lessons
-- Functional AI playground and code editor
-- Progress tracking for completed lessons
+## 🧪 **Testing After Upload**
 
-## 🆘 Troubleshooting
+### **Home Page:**
+- [ ] Testimonials show initials (not photos)
+- [ ] Course cards aligned properly
+- [ ] Facebook Ads shows cover image
+- [ ] Vibe Coding shows cover image
+- [ ] Prices show ₦5,000
 
-If you still see the old static enrollment page:
-1. Clear browser cache
-2. Verify frontend files were deployed correctly
-3. Check that all SQL scripts ran successfully
-4. Confirm course has lessons (should show 15 lessons total)
+### **About Page:**
+- [ ] Timeline shows 2026 (not 2025)
+- [ ] Team members show initials (except Akinola)
+- [ ] Testimonials show initials
 
-If you have any issues, please share the results of running `verify-full-setup.sql` script.
+### **Course Detail:**
+- [ ] Price shows ₦5,000 (not $5000)
+- [ ] Cover images display correctly
+
+### **Payment:**
+- [ ] Modal shows NGN currency
+- [ ] Amount shows ₦5,000
+- [ ] No "currency not supported" error
+
+---
+
+## 📋 **Database Updates Required**
+
+**After uploading, run these in Supabase SQL Editor:**
+
+### **1. Add Currency Column:**
+```sql
+ALTER TABLE courses 
+ADD COLUMN IF NOT EXISTS currency VARCHAR(3) DEFAULT 'NGN';
+
+UPDATE courses 
+SET currency = 'NGN' 
+WHERE currency IS NULL;
+```
+
+### **2. Set Prices to Naira:**
+```sql
+UPDATE courses SET price = '5000';
+```
+
+### **3. Verify:**
+```sql
+SELECT title, price, currency 
+FROM courses 
+ORDER BY title;
+```
+
+**Expected Result:**
+```
+title                    | price | currency
+-------------------------|-------|----------
+Facebook Ads Foundation  | 5000  | NGN
+Facebook Ads Mastery     | 5000  | NGN
+Vibe Coding             | 5000  | NGN
+```
+
+---
+
+## ⚠️ **Important Notes**
+
+### **File Size:**
+- Build folder: ~42-45 MB
+- ZIP file: ~42-45 MB
+- This is normal for React apps
+
+### **GitHub Deployment:**
+- Changes already pushed to GitHub ✅
+- GitHub Actions may auto-deploy
+- Manual upload ensures immediate update
+
+### **Cache Issues:**
+If you still see old version:
+1. Clear browser cache completely
+2. Try incognito/private window
+3. Try different browser
+4. Check file timestamps in cPanel
+
+---
+
+## ✅ **Deployment Checklist**
+
+- [ ] Download `COMPLETE_DEPLOYMENT_FINAL.zip`
+- [ ] Login to cPanel
+- [ ] Navigate to correct directory
+- [ ] Delete old files
+- [ ] Upload ZIP
+- [ ] Extract ZIP
+- [ ] Verify files extracted
+- [ ] Run SQL scripts in Supabase
+- [ ] Clear browser cache
+- [ ] Test all features
+- [ ] Verify payments work
+
+---
+
+## 🎯 **Expected Results**
+
+**After deployment:**
+- ✅ All prices in Naira (₦)
+- ✅ Testimonials show initials
+- ✅ Course cards aligned
+- ✅ Course images display
+- ✅ About page shows 2026
+- ✅ Payments work in NGN
+
+**Deploy now - everything is ready!** 🚀
