@@ -101,6 +101,8 @@ node.exe
 *.exe
 *.mp4
 trendtacticsacademy/
+trendtactics-academy-1/
+lms-backend-temp/
 v18.*/
 
 # Frontend specific ignores (but track source code)
